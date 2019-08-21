@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
+import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {MatModule} from './material.theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -23,6 +25,7 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     ProfileComponent,
     SidebarComponent,
     HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -30,7 +33,8 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     HttpClientModule,
     FormsModule,
     NgFlashMessagesModule,
- 
+    MatModule,
+    BrowserAnimationsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
