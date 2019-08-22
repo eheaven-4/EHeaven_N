@@ -5,13 +5,16 @@ import { ProfileComponent } from './component/profile/profile.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { HomeComponent } from './component/home/home.component';
 import { RegisterComponent } from './component/register/register.component';
+import { ContactusComponent } from './component/contactus/contactus.component';
 
 const routes: Routes = [
+  {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile', component: ProfileComponent},
   {path: 'sidebar', component: SidebarComponent},
-  {path: 'home', component: HomeComponent},
+  {path: 'contactus', component: ContactusComponent},
+
 ];
 
 @NgModule({

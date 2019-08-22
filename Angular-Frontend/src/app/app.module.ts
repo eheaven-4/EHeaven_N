@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {MatModule} from './material.theme';
+import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -15,6 +16,8 @@ import { RegisterComponent } from './component/register/register.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { FooterComponent } from './component/footer/footer.component';
+import { ContactusComponent } from './component/contactus/contactus.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +28,8 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     ProfileComponent,
     SidebarComponent,
     HomeComponent,
+    FooterComponent,
+    ContactusComponent,
     
   ],
   imports: [
@@ -34,7 +39,8 @@ import { SidebarComponent } from './component/sidebar/sidebar.component';
     FormsModule,
     NgFlashMessagesModule,
     MatModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    AngularFontAwesomeModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
