@@ -6,38 +6,37 @@
         url("../../../assets/backgrounds/marketing-books.jpg");
     height: 700px;
     width: 100%;
-    // position: absolute;
     background-size: cover;
     background-repeat: no-repeat;
- }
- .logo_img{
-     padding-top:30px;
-     width:100px;
- }
- .scl_name{
-     padding-top: 20px;
-     color:aliceblue;
-     text-align: center;
-     font-size: 100px;
-     font-family: "Calibari";
-     font-weight: bold;
- }
- .school_des{
+}
+.logo_img{
+    padding-top:30px;
+    width:100px;
+}
+.scl_name{
+    padding-top: 20px;
+    color:aliceblue;
+    text-align: center;
+    font-size: 100px;
+    font-family: "Calibari";
+    font-weight: bold;
+}
+.school_des{
     color: #ffffff;
     font-family: "Calibari";
     font-size: 20px;
     text-align: justify;
- }
- .school_map{
+}
+.school_map{
     color: #ffffff;
     font-family: "Calibari";
     font-size: 20px;
     text-align: justify;
     padding-left: 30px;
- }
- .map{
-     padding-left: 30px;
-     width: 500px;
+}
+.map{
+    padding-left: 30px;
+    width: 500px;
 }
  
 .news-card {
@@ -46,18 +45,18 @@
     max-height: 500px;
 }
   
-  .example-header-image {
+.example-header-image {
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
-  }
+}
 
-  .news_feeds{
-      padding-top:20px;
-      padding-bottom: 20px;
-  }
+.news_feeds{
+    padding-top:20px;
+    padding-bottom: 20px;
+}
 
-  .news_view_btn{
-      background-color :#2bb5f5;
-      color: #ffffff;
-      width:100px;
-    }
+.news_view_btn{
+    background-color :#2bb5f5;
+    color: #ffffff;
+    width:100px;
+}

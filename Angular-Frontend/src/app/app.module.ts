@@ -3,9 +3,9 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {MatModule} from './material.theme';
-import { AngularFontAwesomeModule } from 'angular-font-awesome';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatModule } from './material.theme';
+// import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -40,7 +40,7 @@ import { ContactusComponent } from './component/contactus/contactus.component';
     NgFlashMessagesModule,
     MatModule,
     BrowserAnimationsModule,
-    AngularFontAwesomeModule
+    // AngularFontAwesomeModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
