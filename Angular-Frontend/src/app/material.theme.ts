@@ -15,32 +15,34 @@ import {MatBadgeModule} from '@angular/material/badge';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule } from '@angular/material';
 
 
 @NgModule({
     imports: [
         MatButtonModule,
-    MatCheckboxModule,
-    MatIconModule,
-    MatToolbarModule,
-    MatSidenavModule,
-    MatListModule,
-    MatStepperModule,   
-    FormsModule,
-    ReactiveFormsModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatRadioModule,
-    MatCardModule,
-    MatGridListModule,
-    MatTabsModule,
-    MatDividerModule,
-    MatBadgeModule,
-    MatDialogModule,
-    MatSelectModule,
-    MatAutocompleteModule
-
-    
+        MatCheckboxModule,
+        MatIconModule,
+        MatToolbarModule,
+        MatSidenavModule,
+        MatListModule,
+        MatStepperModule,   
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormFieldModule,
+        MatInputModule,
+        MatRadioModule,
+        MatCardModule,
+        MatGridListModule,
+        MatTabsModule,
+        MatDividerModule,
+        MatBadgeModule,
+        MatDialogModule,
+        MatSelectModule,
+        MatAutocompleteModule,
+        MatDatepickerModule,
+        MatNativeDateModule
   ],
 
   declarations:[
@@ -66,7 +68,9 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
     MatBadgeModule,
     MatDialogModule,
     MatSelectModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatDatepickerModule,
+    MatNativeDateModule
     ],
   
   })
