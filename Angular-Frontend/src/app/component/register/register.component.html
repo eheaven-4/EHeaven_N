@@ -15,21 +15,23 @@
     
                     <div class="form-row mb-4">
                         <div class="col">
-                            <select class="browser-default custom-select mb-4 box_border">
+                            <select class="browser-default custom-select mb-4 box_border" name="usertype" [(ngModel)]="usertype">
                                     <option value="" disabled>User type</option>
-                                    <option value="1">Student</option>
-                                    <option value="2">Parent</option>
-                                    <option value="3">Teacher</option>
-                                    <option value="4">Principal</option>
-                                    <option value="5">Administer</option>
+                                    <option value="Student">Student</option>
+                                    <option value="Parent">Parent</option>
+                                    <option value="Teacher">Teacher</option>
+                                    <option value="Principal">Principal</option>
+                                    <option value="Administrator">Administrator</option>
                             </select>
+                            <small class="form-text text-muted mb-4" style="margin-top:-20px">Usertype</small>
+
                         </div>
                         <div class="col">
                             <input type="text" class="form-control box_border" placeholder="User ID"  name="userid" [(ngModel)]="userid">
                         </div>
                     </div>
     
-                    <input type="text" class="form-control box_border" placeholder="Full name"  name="fullname" [(ngModel)]="fullname">   
+                    <input type="text" class="form-control box_border" placeholder="Full name"  name="name" [(ngModel)]="name" style="margin-top:-30px">   
                    
                     <div class="form-row mb-4">
                     </div>
@@ -42,7 +44,8 @@
                     </small>
                     <div class="form-row mb-4">
                             <div class="col">
-                                <input type="date" class="form-control box_border" placeholder="Date of birth"  name="birthday" [(ngModel)]="birthday">
+                                <small class="form-text text-muted mb-4" style="margin-top:-20px">Birthday</small>
+                                <input type="date" class="form-control box_border" placeholder="Date of birth"  name="birthday" [(ngModel)]="birthday" style="margin-top:-22px">
                             </div>
                             <div class="col">
                                 <input type="number" class="form-control box_border" placeholder="Home Number"  name="homenumber" [(ngModel)]="homenumber">
@@ -53,19 +56,19 @@
                     </div>
                     <div class="form-row mb-4">
                             <div class="col ">
-                                <select class="browser-default custom-select mb-4 box_border">
+                                <select class="browser-default custom-select mb-4 box_border" name="gender" [(ngModel)]="gender">
                                     <option value="" disabled>Gender</option>
-                                    <option value="1">Male</option>
-                                    <option value="2">Female</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
                                 </select>
                             </div>
                             <div class="col ">
-                                    <select class="browser-default custom-select mb-4 box_border">
+                                    <select class="browser-default custom-select mb-4 box_border" name="nationality" [(ngModel)]="nationality">
                                             <option value="" disabled>Nationality</option>
-                                            <option value="1">Sinhala</option>
-                                            <option value="2">Tamil</option>
-                                            <option value="1">Muslim</option>
-                                            <option value="2">Cristian</option>
+                                            <option value="Sinhala">Sinhala</option>
+                                            <option value="Tamil">Tamil</option>
+                                            <option value="Muslim">Muslim</option>
+                                            <option value="Cristian">Cristian</option>
                                         </select>
                             </div>
                             <div class="col">
@@ -73,12 +76,12 @@
                             </div>
                     </div>
     
-                    <input type="text" class="form-control box_border" placeholder="Father Name"  name="fathername" [(ngModel)]="fathername">
+                    <input type="text" class="form-control box_border" placeholder="Father Name"  name="father" [(ngModel)]="father" style="margin-top:-20px">
                    
                     <div class="form-row mb-4">
                     </div>
                    
-                    <input type="text" class="form-control box_border" placeholder="Mother Name"  name="mothername" [(ngModel)]="mothername">
+                    <input type="text" class="form-control box_border" placeholder="Mother Name"  name="mother" [(ngModel)]="mother">
                     
                     <div class="form-row mb-4">
                     </div>

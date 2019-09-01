@@ -5,10 +5,20 @@ import { Observable } from 'rxjs';
 // import { tokenNotExpired } from 'angular2-jwt';
 
 interface Task{
-  name:String,
-  username: String,
-  email: String,
-  password:String
+  usertype:String,
+  userid:String,
+  name: String,
+  email:String,
+  password:String,
+  birthday:String,
+  mobilenumber:String,
+  homenumber:String,
+  gender:String,
+  nationality:String,
+  nicnumber:String,
+  father:String,
+  mother:String,
+  address:String
 }
 
 interface LoginResponse{
