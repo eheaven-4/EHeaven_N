@@ -93,6 +93,7 @@
                         style="display: none" 
                         name="profilepic" 
                         accept="image/*"
+                        (change)="onFileSelected($event)"
                         #fileInput>
                     <button 
                         class="btn btn-outline-primary my-4 btn-block box_border pick_btn" 
