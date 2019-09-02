@@ -73,17 +73,11 @@ export class AuthService {
 
   getProfile(){
     this.fetchToken();
-    this.fetchUserData();
-   
+
     let headers = new HttpHeaders();
     headers.append('Authorization', this.authtoken);
     headers.append('Content-Type', 'application/json');
-    return this.http.get<UserData[]>
-          ("http://localhost:3000/users/profile",{headers:headers})
-          .pipe(map(res => {
-            this.fetchUserData()
-            return res;
-          }));
+    // return this.http.get("http://localhost:3000/users/profile",{headers:headers}).map(res => {res.json()});
   }
 
   fetchToken(){

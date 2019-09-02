@@ -1,7 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
-import { AuthService } from '../../service/auth.service';
+// import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+interface LoginResponse{
+  state: boolean,
+  token: string,
+  user: any
+}
 
 @Component({
   selector: 'app-login',
@@ -10,50 +17,56 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  email:String;
+  userid:String;
   password:String;
 
+  user: any;
+  authtoken: any;
+  
   constructor(
-    private authService:AuthService,
     private flashMessage: NgFlashMessageService,
-    private router: Router
+    private router: Router,
+    private http:HttpClient
   ) { }
 
   ngOnInit() {
   }
+  
+  userLogin(){
+    const user = {
+      userid:this.userid,
+      password:this.password
+    };
 
-  loginUser(){
-      const user = {
-        email:this.email,
-        password:this.password
-      };
-    
-      this.authService.loginUser(user).subscribe( res=> {
+    var url = "http://localhost:3000/users/login";
+
+    this.http.post<any>(url,user).subscribe(res => {
         console.log(JSON.stringify(res));
-        // if(res.state){
+        console.log(res.state);
+        if(res.state){
+          this.storeData(res.token, res.user);
+          this.flashMessage.showFlashMessage({
+            messages: ["Login Successfully"],
+            dismissible: true, 
+            timeout: 2000,
+            type: 'success'
+          });
+          this.router.navigate(['/profile']);
+        }
+        else{
+          console.log(res.msg);
+          alert("Username or password incorrect .. !");
+          this.router.navigate(['/login']);
+        }
+      }
+    )
+  }
 
-        //   this.authService.storeData(res.token, res.user);
+  storeData(token, userData){
+    localStorage.setItem("tokenId", token);
+    localStorage.setItem("user", JSON.stringify(userData));
 
-        //   this.flashMessage.showFlashMessage({
-        //   messages: ["Login Successfully"],
-        //   dismissible: true, 
-        //   timeout: 2000,
-        //   type: 'success'
-        // });
-        // this.router.navigate(['/profile']);
-        
-        // }
-        // else{
-        //   this.authService.loginUser(user).subscribe(res => {
-        //     this.flashMessage.showFlashMessage({
-        //     messages: ["Login Unsccessful"],
-        //     dismissible: true, 
-        //     timeout: 2000,
-        //     type: 'warning'
-        //   });
-        //   this.router.navigate(['/login']);
-        //   });
-        // }
-    });
+    this.authtoken = token;
+    this.user = userData;
   }
 }

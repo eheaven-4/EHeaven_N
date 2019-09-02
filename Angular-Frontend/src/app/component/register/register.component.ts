@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
-import { AuthService } from '../../service/auth.service';
+// import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-register',
@@ -26,56 +28,51 @@ export class RegisterComponent implements OnInit {
   address:String;
 
   constructor(
-    private authService: AuthService, 
+    // private authService: AuthService, 
     private ngFlashMessageService: NgFlashMessageService,
-    private router: Router
+    private router: Router,
+    private http:HttpClient
     ) { }
 
   ngOnInit() {
   }
 
-  registerData(){
-    const user = {
-      usertype: this.usertype,
-      userid: this.userid,
-      name: this.name,
-      email: this.email,
-      password: this.password,
-      birthday: this.birthday,
-      mobilenumber: this.mobilenumber,
-      homenumber: this.homenumber,
-      gender: this.gender,
-      nationality: this.nationality,
-      nicnumber: this.nicnumber,
-      father: this.father,
-      mother: this.mother,
-      address: this.address,
-    };
-    console.log(user);
-
-    this.authService.registerUser(user).subscribe(res=> {
-        if(!undefined){
-          this.ngFlashMessageService.showFlashMessage({
-            // Array of messages each will be displayed in new line
-          messages: ["You are Registerd"], 
-          // Whether the flash can be dismissed by the user defaults to false
-          dismissible: true, 
-          // Time after which the flash disappears defaults to 2000ms
-          timeout: 2000,
-          // Type of flash message, it defaults to info and success, warning, danger types can also be used
-          type: 'success'
-        });
-        this.router.navigate(['/login']);
-      } 
-      else{
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["You are not Registerd"],
-          dismissible: true, 
-          timeout: 2000,
-          type: 'warning'
-        });
-        this.router.navigate(['/register']);
+    registerUser(){
+      const user = {
+        usertype: this.usertype,
+        userid: this.userid,
+        name: this.name,
+        email: this.email,
+        password: this.password,
+        birthday: this.birthday,
+        mobilenumber: this.mobilenumber,
+        homenumber: this.homenumber,
+        gender: this.gender,
+        nationality: this.nationality,
+        nicnumber: this.nicnumber,
+        father: this.father,
+        mother: this.mother,
+        address: this.address,
       }
-    });
+
+        var url = "http://localhost:3000/users/register";
+        this.http.post<any>(url,user).subscribe(res => {
+          if(res.state){
+            console.log(res.msg);
+            alert("Successfully registerd");
+            this.router.navigate(['/login']);
+          }
+          else{
+            // this.ngFlashMessageService.showFlashMessage({
+            //   messages: ["You are not Registerd"],
+            //   dismissible: true, 
+            //   timeout: 2000,
+            //   type: 'warning'
+            // });
+            console.log(res.msg);
+            alert("Successfully registerd");
+            this.router.navigate(['/register']);
+          }
+      });
   }
 }

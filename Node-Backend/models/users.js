@@ -3,10 +3,20 @@ const bcrypt = require('bcryptjs');
 const Schema = mongoose.schema;
 
 const userSchema = mongoose.Schema({
-    username:{type:String, require:true},
-    name:{type:String, require:true},
+    usertype:{type:String, require:true},
+    userid:{type:String, require:true},
+    name: {type:String, require:true},
     email:{type:String, require:true},
-    password:{type:String, require:true}
+    password:{type:String, require:true},
+    birthday:{type:String, require:true},
+    mobilenumber:{type:String, require:true},
+    homenumber:{type:String, require:true},
+    gender:{type:String, require:true},
+    nationality:{type:String, require:true},
+    nicnumber:{type:String, require:true},
+    father:{type:String, require:true},
+    mother:{type:String, require:true},
+    address:{type:String, require:true},
 });
 
 const Users = module.exports = mongoose.model("Users", userSchema);  
@@ -28,15 +38,14 @@ module.exports.saveUser = function(newUser, callback) {
     }); 
 };
 
-module.exports.findByEmail = function(email,callback){
-    const query = {email:email};
+module.exports.findByUserid = function(userid,callback){
+    const query = {userid:userid};
 
     Users.findOne(query, callback);
 };
 
 module.exports.passwordCheck = function(plainpassword, hash,callback){
     bcrypt.compare(plainpassword, hash, function(err, res) {
-       console.log(res);
        if(err) throw err;
 
        if(res){

@@ -12,38 +12,53 @@ router.get("/",function(req,res) {
 
 router.post("/register", function(req,res){
     const newUser = new User({
-        username:req.body.username,
+        usertype:req.body.usertype,
+        userid:req.body.userid,
         name: req.body.name,
-        email: req.body.email,
-        password: req.body.password
+        email:req.body.email,
+        password:req.body.password,
+        birthday:req.body.birthday,
+        mobilenumber:req.body.mobilenumber,
+        homenumber:req.body.homenumber,
+        gender:req.body.gender,
+        nationality:req.body.nationality,
+        nicnumber:req.body.nicnumber,
+        father:req.body.father,
+        mother:req.body.mother,
+        address:req.body.address,
     });
     console.log(newUser);
     
     User.saveUser(newUser, function(err,user){
         if(err){
-            res.json({state : false, msg: "Data not inserted"});
+            res.json({state : false, msg: "Data inserting Unsuccessfull..!"});
         }
         if(user){
-            res.json({state : true, msg: "Data inserted"});
+            res.json({state : true, msg: "Data inserted Successfully..!"});
         }
     });
 });
 
 router.post("/login", function(req,res){
-    const email = req.body.email;
+    const userid = req.body.userid;
     const password = req.body.password;
 
-    User.findByEmail(email, function(err, user){
+    User.findByUserid(userid, function(err, user){
         if(err) throw err;
         if(!user){
-            res.json({state: false , msg: "No user found"});
+            res.json({
+                state: false, 
+                msg: "No user found"
+            });
         }
         User.passwordCheck(password, user.password, function(err,match){
-            console.log(email,password);
-            if(err) throw err;
-
+            console.log(userid,password);
+            if(err){
+                throw err;
+            }
+            
             if(match){
-                console.log("Email and Password match!");
+                console.log("Userid and Password match!");
                 const token = jwt.sign(user.toJSON(), config.secret, {expiresIn: 86400});
                 res.json({
                     state: true,
@@ -51,20 +66,30 @@ router.post("/login", function(req,res){
                     user: {
                         id: user._id,
                         name: user.name,
-                        username: user.username,
-                        email: user.email,
+                        userid: user.userid,
+                        email:user.email,
                     }
+                });
+            }
+            else{
+                res.json({
+                    state: false, 
+                    msg: "Password Incorrect..!"
                 });
             }
         });
     });
 });
 
-router.get('/profile', passport.authenticate('jwt', {session: false}),
-    function(req,res){
-        res.json({user : req.user});
-        console.log(user);
-    }
-)
-
+// router.get('/profile',function(req,res){
+//         console.log("hello world");
+//         res.json({user : req.user});
+//         console.log(user);
+// });
+router.get('profile/:id', function(req, res, next) {
+    User.findById(req.params.id, function (err, post) {
+      if (err) return next(err);
+      res.json(post);
+    });
+  });
 module.exports = router;  

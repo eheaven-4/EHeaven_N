@@ -14,13 +14,13 @@
 
                     <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">                
                     
-                    <input type="text" class="form-control mb-4 box_border" placeholder="User ID"  name="email" [(ngModel)]="email">
+                    <input type="text" class="form-control mb-4 box_border" placeholder="User ID"  name="userid" [(ngModel)]="userid">
                     <p style="text-align: left; margin-top: -20px; font-size:10px; font-weight: bold; color: rgb(182, 182, 182)"> &nbsp;&nbsp;&nbsp; i.e : 17001112</p>
                     
                     <input type="password" class="form-control mb-4 box_border" placeholder="Password" name="password" [(ngModel)]="password">
                     <p style="text-align: left; margin-top: -20px; margin-bottom: 30px;font-size:10px; font-weight: bold; color: rgb(182, 182, 182)"> &nbsp;&nbsp;&nbsp;i.e : abc@123</p>
                     
-                    <button mat-button class="btn btn-info btn-block login_btn box_border" type="submit" (click)="loginUser()">Sign in</button>         
+                    <button mat-button class="btn btn-info btn-block login_btn box_border" type="submit" (click)="userLogin()">Sign in</button>         
                     <p style="padding: 20px">Not a Member? <a routerLink="/">Contact_Admin</a> </p>
 
                 </form>
