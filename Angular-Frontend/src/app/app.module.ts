@@ -9,15 +9,15 @@ import { MatModule } from './material.theme';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { AuthService } from './service/auth.service';
-import { NavbarComponent } from './component/navbar/navbar.component';
-import { LoginComponent } from './component/login/login.component';
-import { RegisterComponent } from './component/register/register.component';
-import { ProfileComponent } from './component/profile/profile.component';
+import { NavbarComponent } from './component/Auth/navbar/navbar.component';
+import { LoginComponent } from './component/Auth/login/login.component';
+import { RegisterComponent } from './component/Admin/register/register.component';
+import { ProfileComponent } from './component/Auth/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
-import { SidebarComponent } from './component/sidebar/sidebar.component';
-import { FooterComponent } from './component/footer/footer.component';
-import { ContactusComponent } from './component/contactus/contactus.component';
+import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
+import { FooterComponent } from './component/Auth/footer/footer.component';
+import { ContactusComponent } from './component/Admin/contactus/contactus.component';
+import { NotificationComponent } from './component/Admin/notification/notification.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +30,7 @@ import { ContactusComponent } from './component/contactus/contactus.component';
     HomeComponent,
     FooterComponent,
     ContactusComponent,
+    NotificationComponent,
     
   ],
   imports: [
@@ -42,7 +43,7 @@ import { ContactusComponent } from './component/contactus/contactus.component';
     BrowserAnimationsModule,
     // AngularFontAwesomeModule
   ],
-  providers: [AuthService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
@@ -10,8 +9,10 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 })
 export class NavbarComponent implements OnInit {
 
+  user: any;
+  authtoken: any;
+
   constructor(
-    private authservice : AuthService,
     private router: Router,
     private flashmessage: NgFlashMessageService
   ) { }
@@ -20,7 +21,7 @@ export class NavbarComponent implements OnInit {
     
   }
   logoutUser(){
-     this.authservice.logout();
+     this.logout();
      this.flashmessage.showFlashMessage({
       messages: ["Logout Successfully"],
       dismissible: true, 
@@ -28,7 +29,11 @@ export class NavbarComponent implements OnInit {
       type: 'success'
      });
      this.router.navigate(['/login']);
-     return false;
   }
+  logout(){
+    this.authtoken = null;
+    this.user = null;
+    localStorage.clear();
+ }
 
 }
