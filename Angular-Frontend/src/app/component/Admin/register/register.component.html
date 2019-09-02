@@ -88,7 +88,16 @@
                    
                     <textarea type="text" class="form-control box_border" placeholder="Address"  name="address" [(ngModel)]="address"></textarea>
                    
-                    <input type="file" class="file_upload" style="padding-top: 30px; margin-left:-380px;" name="profilepic" accept="image/*">
+                    <input  
+                        type="file" class="file_upload" 
+                        style="display: none" 
+                        name="profilepic" 
+                        accept="image/*"
+                        #fileInput>
+                    <button 
+                        class="btn btn-outline-primary my-4 btn-block box_border pick_btn" 
+                        type="button" 
+                        (click)="fileInput.click()">Choose Profile Picture</button>
                     
                     <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit" (click)="registerUser()">Register Now</button>
                 </form>
