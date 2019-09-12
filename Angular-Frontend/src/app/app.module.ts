@@ -18,6 +18,7 @@ import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { FooterComponent } from './component/Auth/footer/footer.component';
 import { ContactusComponent } from './component/Admin/contactus/contactus.component';
 import { NotificationComponent } from './component/Admin/notification/notification.component';
+import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { NotificationComponent } from './component/Admin/notification/notificati
     FooterComponent,
     ContactusComponent,
     NotificationComponent,
-    
+    AcademicsComponent,    
   ],
   imports: [
     BrowserModule,
