@@ -25,6 +25,8 @@ interface profile{
 })
 export class ProfileComponent implements OnInit {
 
+  profiledata : profile [] = [];
+
   authtoken: any;
   user : any;
 
@@ -33,31 +35,20 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {       
-    
-    // console.log(this.fetchUserData());
-      var url = "http://localhost:3000/users/profile";  
-
-
-      
-      // this.http.get<any>(url,{headers:headers}).subscribe(res => {
-      //   console.log(res);
-      //   this.user = res.user;
-      // });
-      // .map(res => {
-      //   res.json()
-      // });
+    this.fetchUserData();
+      var url = "http://localhost:3000/users/profile";        
 
       var id = this.fetchUserData();
-      console.log( this.fetchUserData());
-      this.http.get(url+id).subscribe(res => {
-          console.log(res);              
+      console.log(id);
+      this.http.get<any>(url+'/'+id).subscribe(res => {
+          console.log(res);
+          this.profiledata = res;
+          // JSON.stringify(res);
           }, (err) => {
             console.log(err);
-          });
-      
+          });   
   }
   
-
   fetchToken(){
     const token = localStorage.getItem("tokenId");
     this.authtoken = token;
@@ -66,7 +57,8 @@ export class ProfileComponent implements OnInit {
   fetchUserData(){
     const user = localStorage.getItem("user");
     this.user = user;
-    return user;  
+    // console.log(JSON.parse(user).userid);
+    return JSON.parse(user).userid; 
   }
 
 

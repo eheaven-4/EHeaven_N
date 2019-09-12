@@ -6,6 +6,7 @@ import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { HomeComponent } from './component/home/home.component';
 import { RegisterComponent } from './component/Admin/register/register.component';
 import { ContactusComponent } from './component/Admin/contactus/contactus.component';
+import { NotificationComponent } from './component/Admin/notification/notification.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'profile', component: ProfileComponent},
   {path: 'sidebar', component: SidebarComponent},
   {path: 'contactus', component: ContactusComponent},
+  {path: 'notifications', component:NotificationComponent}
 
 ];
 

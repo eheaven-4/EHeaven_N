@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
-// import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-
 
 @Component({
   selector: 'app-register',
@@ -37,11 +35,8 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-  selectedFile: File = null;
-  onFileSelected(event){
-    this.selectedFile = <File>event.target.files[0];
-  }
-
+  
+    /**************************************************** */
   registerUser(){
     const user = {
       usertype: this.usertype,
@@ -59,6 +54,9 @@ export class RegisterComponent implements OnInit {
       mother: this.mother,
       address: this.address,
     }
+
+    /****************************************************** */
+    
 
       var url = "http://localhost:3000/users/register";
       this.http.post<any>(url,user).subscribe(res => {

@@ -4,12 +4,6 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
-interface LoginResponse{
-  state: boolean,
-  token: string,
-  user: any
-}
-
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',

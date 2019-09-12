@@ -4,11 +4,52 @@ const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const passport = require('passport');
+const multer = require('multer');
 
 router.get("/",function(req,res) {
     res.send("Hello users");
     console.log("hello");
 })
+
+// configuring File Upload
+// const storage = multer.diskStorage({
+//     // set uploads folder
+//     destination: (req, file, cb) => {
+//         cb(null, 'ng-src/src/assets/uploads');
+//     },
+//     // set default filename
+//     filename: (req, file, cb) => {
+//         cb(null, file.originalname); // overwrites current file with same name!!!
+//     }
+// });
+
+// const upload = multer({ storage: storage })
+
+
+// // Add New Media File
+// router.post('/upload', upload.single('file'), (req, res, next) => {
+//     console.log('post file with content:');
+//     console.log(req.file);
+//     // Initializing Media Info
+//     let newFile = new Media({
+//         filePath: 'assets\/uploads\/' + req.file.filename,
+//         fileName: req.file.filename,
+//         imageTitle: req.file.filename,
+//         imageAlt: req.file.filename,
+//         fileType: req.file.mimetype,
+//         fileSize: req.file.size,
+//         // imageDimension: fileDimension,
+//         fileUploadDate: Date.now()
+//     });
+//     // Add File to DB
+//     Media.addNewFile(newFile, (err, result) => {
+//         if (err) {
+//             res.status(500).json({ success: false, msg: 'Image Not added to DB. Error: ' + err });
+//         } else {
+//             res.status(200).json({ success: true, msg: 'Image Added to DB! ' + result });
+//         }
+//     });
+// });
 
 router.post("/register", function(req,res){
     const newUser = new User({
@@ -81,15 +122,11 @@ router.post("/login", function(req,res){
     });
 });
 
-// router.get('/profile',function(req,res){
-//         console.log("hello world");
-//         res.json({user : req.user});
-//         console.log(user);
-// });
-router.get('profile/:id', function(req, res, next) {
-    User.findById(req.params.id, function (err, post) {
-      if (err) return next(err);
-      res.json(post);
+router.get("/profile/:id", function(req, res) {
+    User.findByUserid(req.params.id, function (err, data) {
+      if (err) 
+        return next(err);
+      res.json(data);
     });
   });
 module.exports = router;  

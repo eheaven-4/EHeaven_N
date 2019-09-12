@@ -14,10 +14,10 @@
                     <mat-card ><img src="../../../assets/backgrounds/sample-profile.png" class="profile_matcard"></mat-card>
                 </div>
                 <div class="profile_data">
-                    <mat-card  *ngIf="user">
+                    <mat-card  *ngIf="profiledata">
                         <div>
                             <label class="profile_attributes">Full Name  </label>
-                            <p class="profile_attributes_data" >{{user.name}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.name}}</p>
                         </div>
                         <!-- <div>
                             <label class="profile_attributes">Address </label>
@@ -26,34 +26,34 @@
                         </div> -->
                         <div>
                             <label class="profile_attributes">User ID  </label>
-                            <p class="profile_attributes_data" >{{user.userid}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.userid}}</p>
 
                         </div>
                         <div>
                             <label class="profile_attributes">E-mail  </label>
-                            <p class="profile_attributes_data" >{{user.email}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.email}}</p>
 
                         </div>
-                        <!-- <div>
+                        <div>
                             <label class="profile_attributes">Mobile No  </label>
-                            <p class="profile_attributes_data" >{{user.mobilenumber}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.mobilenumber}}</p>
 
                         </div>
                         <div>
                             <label class="profile_attributes">NIC No </label>
-                            <p class="profile_attributes_data" >{{user.nicnumber}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.nicnumber}}</p>
 
                         </div>
                         <div>
                             <label class="profile_attributes">Father's Name  </label>
-                            <p class="profile_attributes_data" >{{user.father}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.father}}</p>
 
                         </div>
                         <div>
                             <label class="profile_attributes">Mother's Name  </label>
-                            <p class="profile_attributes_data" >{{user.mother}}</p>
+                            <p class="profile_attributes_data" >{{profiledata.mother}}</p>
 
-                        </div> -->
+                        </div>
                     </mat-card>
                 </div>
             </div>
