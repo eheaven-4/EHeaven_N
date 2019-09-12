@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 
 interface profile{
   usertype:String;
@@ -36,14 +36,13 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {       
     this.fetchUserData();
+      var id = this.fetchUserData();
       var url = "http://localhost:3000/users/profile";        
 
-      var id = this.fetchUserData();
       console.log(id);
       this.http.get<any>(url+'/'+id).subscribe(res => {
           console.log(res);
           this.profiledata = res;
-          // JSON.stringify(res);
           }, (err) => {
             console.log(err);
           });   
@@ -57,7 +56,6 @@ export class ProfileComponent implements OnInit {
   fetchUserData(){
     const user = localStorage.getItem("user");
     this.user = user;
-    // console.log(JSON.parse(user).userid);
     return JSON.parse(user).userid; 
   }
 
