@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'profile/:id', component: ProfileComponent},
   {path: 'contactus', component: ContactusComponent},
   {path: 'notifications', component: NotificationComponent},
-  {path: 'academics', component: AcademicsComponent }
+  {path: 'academics/:id', component: AcademicsComponent }
 ];
 
 @NgModule({

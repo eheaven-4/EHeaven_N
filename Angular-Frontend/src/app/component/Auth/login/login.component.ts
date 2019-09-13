@@ -34,21 +34,23 @@ export class LoginComponent implements OnInit {
     };
 
     var url = "http://localhost:3000/users/login";
-    var id = this.fetchUserData();
-
+    
     this.http.post<any>(url,user).subscribe(res => {
-        console.log(JSON.stringify(res));
-        console.log(res.state);
-        if(res.state){
-          this.storeData(res.token, res.user);
-
-          this.flashMessage.showFlashMessage({
-            messages: ["Login Successfully"],
-            dismissible: true, 
-            timeout: 2000,
-            type: 'success'
-          });
-          this.router.navigate(['/profile'+'/'+id]);
+      console.log(JSON.stringify(res));
+      console.log(res.state);
+      if(res.state){
+        this.storeData(res.token, res.user);
+        
+        this.flashMessage.showFlashMessage({
+          messages: ["Login Successfully"],
+          dismissible: true, 
+          timeout: 2000,
+          type: 'success'
+        });
+        
+        var id = this.fetchUserData();
+        
+        this.router.navigate(['/academics'+'/'+id]);
         }
         else{
           console.log(res.msg);
@@ -70,7 +72,6 @@ export class LoginComponent implements OnInit {
   fetchUserData(){
     const user = localStorage.getItem("user");
     this.user_id = user;
-    // console.log(JSON.parse(user).userid);
     return JSON.parse(this.user_id).userid; 
   }
 }
