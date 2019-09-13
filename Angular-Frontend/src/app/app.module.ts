@@ -5,6 +5,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
+import { FlexLayoutModule } from '@angular/flex-layout';
 // import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,7 @@ import { FooterComponent } from './component/Auth/footer/footer.component';
 import { ContactusComponent } from './component/Admin/contactus/contactus.component';
 import { NotificationComponent } from './component/Admin/notification/notification.component';
 import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
+import { FileExplorerComponent } from './component/file-explorer/file-explorer.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,8 @@ import { AcademicsComponent } from './component/Base_Components/academics/academ
     FooterComponent,
     ContactusComponent,
     NotificationComponent,
-    AcademicsComponent,    
+    AcademicsComponent,
+    FileExplorerComponent,    
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { AcademicsComponent } from './component/Base_Components/academics/academ
     NgFlashMessagesModule,
     MatModule,
     BrowserAnimationsModule,
+    FlexLayoutModule,
     // AngularFontAwesomeModule
   ],
   providers: [],
