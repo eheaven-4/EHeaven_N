@@ -9,10 +9,10 @@
                 <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Register</h2>
                 <hr>
             </div>
-            <div style="padding-top: 50px">               
+            <div style="padding-top: 50px">
                 <form class="text-center border p-5 reg-frm">
-                    <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">                
-    
+                    <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+
                     <div class="form-row mb-4">
                         <div class="col">
                             <select class="browser-default custom-select mb-4 box_border" name="usertype" [(ngModel)]="usertype">
@@ -30,14 +30,14 @@
                             <input type="text" class="form-control box_border" placeholder="User ID"  name="userid" [(ngModel)]="userid">
                         </div>
                     </div>
-    
-                    <input type="text" class="form-control box_border" placeholder="Full name"  name="name" [(ngModel)]="name" style="margin-top:-30px">   
-                   
+
+                    <input type="text" class="form-control box_border" placeholder="Full name"  name="name" [(ngModel)]="name" style="margin-top:-30px">
+
                     <div class="form-row mb-4">
                     </div>
-    
+
                     <input type="email" class="form-control mb-4 box_border" placeholder="E-mail" name="email" [(ngModel)]="email">
-                    
+
                     <input type="text" class="form-control box_border" placeholder="Password" name="password" [(ngModel)]="password">
                     <small class="form-text text-muted mb-4">
                         At least 8 characters and 1 digit
@@ -75,31 +75,31 @@
                                     <input type="text" class="form-control box_border" placeholder="NIC Number"  name="nicnumber" [(ngModel)]="nicnumber">
                             </div>
                     </div>
-    
+
                     <input type="text" class="form-control box_border" placeholder="Father Name"  name="father" [(ngModel)]="father" style="margin-top:-20px">
-                   
+
                     <div class="form-row mb-4">
                     </div>
-                   
+
                     <input type="text" class="form-control box_border" placeholder="Mother Name"  name="mother" [(ngModel)]="mother">
-                    
+
                     <div class="form-row mb-4">
                     </div>
-                   
+
                     <textarea type="text" class="form-control box_border" placeholder="Address"  name="address" [(ngModel)]="address"></textarea>
-                   
-                    <input  
-                        type="file" class="file_upload" 
-                        style="display: none" 
-                        name="profilepic" 
+
+                    <input
+                        type="file" class="file_upload"
+                        style="display: none"
+                        name="profilepic"
                         accept="image/*"
                         (change)="onFileSelected($event)"
                         #fileInput>
-                    <button 
-                        class="btn btn-outline-primary my-4 btn-block box_border pick_btn" 
-                        type="button" 
+                    <button
+                        class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
+                        type="button"
                         (click)="fileInput.click()">Choose Profile Picture</button>
-                    
+
                     <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit" (click)="registerUser()">Register Now</button>
                 </form>
             </div>
