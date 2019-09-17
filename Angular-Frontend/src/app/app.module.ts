@@ -18,11 +18,12 @@ import { HomeComponent } from './component/home/home.component';
 import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { FooterComponent } from './component/Auth/footer/footer.component';
 import { ContactusComponent } from './component/Admin/contactus/contactus.component';
-import { NotificationComponent } from './component/Admin/notification/notification.component';
 import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
 import { FileExplorerComponent } from './component/file-explorer/file-explorer.component';
 import { NewFolderDialogComponent } from './component/file-explorer/modals/new-folder-dialog/new-folder-dialog.component';
 import { RenameDialogComponent } from './component/file-explorer/modals/rename-dialog/rename-dialog.component';
+import { NotificationComponent } from './component/Base_Components/notification/notification.component';
+import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { RenameDialogComponent } from './component/file-explorer/modals/rename-d
     AcademicsComponent,
     FileExplorerComponent,
     NewFolderDialogComponent,
-    RenameDialogComponent,    
+    RenameDialogComponent,
+    AddNotificationComponent,    
   ],
   imports: [
     BrowserModule,
