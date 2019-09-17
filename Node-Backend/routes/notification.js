@@ -10,7 +10,8 @@ router.post("/add",function(req,res) {
         userid:req.body.userid,
         subject:req.body.subject,
         message:req.body.message,
-        date:req.body.date
+        date:req.body.date,
+        state:req.body.state
     });
     console.log(newNotice);
     Notification.saveNotice(newNotice, function(err,user){
