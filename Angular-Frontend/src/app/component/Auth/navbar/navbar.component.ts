@@ -9,6 +9,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 })
 export class NavbarComponent implements OnInit {
 
+  // userid : id [] = [];
   user: any;
   authtoken: any;
 
@@ -18,7 +19,7 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    
+    // this.userid = this.fetchUserData();
   }
   logoutUser(){
      this.logout();
@@ -34,6 +35,18 @@ export class NavbarComponent implements OnInit {
     this.authtoken = null;
     this.user = null;
     localStorage.clear();
- }
+  }
+
+  fetchUserData(){
+    const user = localStorage.getItem("user");
+    this.user = user;
+    return JSON.parse(user).userid; 
+  }
+
+  userProfile(){
+    var id = this.fetchUserData();
+        
+    this.router.navigate(['/profile'+'/'+id]);
+  }
 
 }
