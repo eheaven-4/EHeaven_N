@@ -8,6 +8,8 @@ const cors = require('cors');
 
 const config = require('./config/database');
 const users = require('./routes/users');
+const notification = require('./routes/notification');
+
 app.use(cors());
 
 const connection = mongoose.connect(config.database);
@@ -26,7 +28,8 @@ require('./config/passport')(passport);
 
 app.use(express.static(path.join(__dirname,"public")));
 
-app.use('/users', users); 
+app.use('/users', users);
+app.use('/notification', notification);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");

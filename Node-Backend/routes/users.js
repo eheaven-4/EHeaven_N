@@ -9,7 +9,7 @@ const multer = require('multer');
 router.get("/",function(req,res) {
     res.send("Hello users");
     console.log("hello");
-})
+});
 
 // configuring File Upload
 // const storage = multer.diskStorage({
