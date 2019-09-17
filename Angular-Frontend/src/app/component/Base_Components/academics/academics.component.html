@@ -4,14 +4,30 @@
             <app-sidebar></app-sidebar>
         </div>
 
-        <div class="container-fluid col-md-10 ac-form"  style="background-color: white">
+        <div class="container-fluid col-md-10 ac-form" style="background-color: white">
             <div class="container">
                 <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Academics</h2>
                 <hr>
             </div>
-        </div>             
+            <div>
+                <div style="padding: 100px; height: 100%; box-sizing: border-box;">
+                    <mat-card style="height: 100%; box-sizing: border-box; padding:0">
+                        <app-file-explorer 
+                            [fileElements]="fileElements | async" 
+                            [path]="currentPath"
+                            [canNavigateUp]="canNavigateUp" 
+                            (folderAdded)="addFolder($event)"
+                            (elementRemoved)="removeElement($event)" 
+                            (navigatedDown)="navigateToFolder($event)"
+                            (navigatedUp)="navigateUp()" 
+                            (elementRenamed)="renameElement($event)"
+                            (elementMoved)="moveElement($event)">
+                        </app-file-explorer>
+                    </mat-card>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- <div class="col-md-1"  style="background-color: white"></div> -->
 </div>
-    
