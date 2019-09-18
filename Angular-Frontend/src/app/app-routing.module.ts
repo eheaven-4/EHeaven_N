@@ -13,6 +13,8 @@ import { AcademicsComponent } from './component/Base_Components/academics/academ
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 
+import { CertificationComponent } from './component/Base_Components/certification/certification.component';
+
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
@@ -21,7 +23,8 @@ const routes: Routes = [
   {path: 'contactus', component: ContactusComponent},
   {path: 'notifications', component: NotificationComponent},
   {path: 'academics/:id', component: AcademicsComponent },
-  {path: 'add_notification', component: AddNotificationComponent}
+  {path: 'add_notification', component: AddNotificationComponent},
+  {path: 'certification', component: CertificationComponent}
 ];
 
 @NgModule({
