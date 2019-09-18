@@ -16,24 +16,24 @@
 
                   <div class="form-row mb-4">
                     <label>Subject :</label>
-                    <input type="text"class="form-control box_border" aria-describedby="textHelp">
+                    <input type="text"class="form-control box_border" aria-describedby="textHelp" name="subject" [(ngModel)]="subject">
                   </div>
   
                   <div class="form-row mb-4">
                       <label>Message :</label>
-                      <textarea type="text" class="form-control box_border" placeholder="Write a message here" id="textbox"></textarea>
+                      <textarea type="text" class="form-control box_border" placeholder="Write a message here" id="textbox" name="message" [(ngModel)]="message"></textarea>
                     </div>
   
                   <div class="form-row mb-4">
                         <label>Date :</label>
-                          <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy">
+                          <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy" name="date" [(ngModel)]="date">
                      </div>
                      <button
                      class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
                      type="button"
                      (click)="fileInput.click()">Attach a file</button>
   
-                  <button type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Send to approvel</button>
+                  <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Send to approvel</button>
             </form>
   
           </div>
