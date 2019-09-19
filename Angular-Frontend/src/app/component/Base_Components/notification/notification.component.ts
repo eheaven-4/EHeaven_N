@@ -23,11 +23,9 @@ export class NotificationComponent implements OnInit {
   notices: notification[] = [];
 
   noticeId: any;
-  mySubscription: any;
 
   notice_id: String;
-  private cedula:string;
-  
+
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -54,12 +52,26 @@ export class NotificationComponent implements OnInit {
       alert("Successfully Deleted..!");
       window.location.reload();
       // this.router.navigate(['/notifications']);
-     
+
     }, (err) => {
       console.log(err);
     });
   }
 
+  approve(event, notice_id) {
+    var mybtnId = notice_id;
+    console.log(mybtnId);
+
+    var url = "http://localhost:3000/notification/approve";
+
+    this.http.get(url + '/' +mybtnId).subscribe(res => {
+      console.log(res);
+      alert("Successfully Approved..!");
+
+    },(err) => {
+      console.log(err);
+    });
+  }
 }
 
 

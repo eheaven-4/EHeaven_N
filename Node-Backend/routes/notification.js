@@ -59,5 +59,27 @@ router.delete('/delete/:_id', (req, res, next) => {
         });
 });
 
+//Approve botton status update 
+router.get('/approve/:_id', (req, res, next) => {
+    console.log("Hello world");
+    const id = req.params._id;
+    const updateOps = {};
+    for (const ops of req.body) {
+      updateOps[ops.propName] = ops.value;
+    }
+    Notification.update({ _id: id }, { $set: updateOps })
+      .exec()
+      .then(result => {
+        console.log(result);
+        res.status(200).json(result);
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({
+          error: error
+        });
+      });
+  });
+  
 
 module.exports = router;  
