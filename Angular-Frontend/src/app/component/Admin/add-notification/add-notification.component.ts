@@ -35,7 +35,7 @@ export class AddNotificationComponent implements OnInit {
       subject: this.subject,
       message: this.message,
       date: this.date,
-      state: "false"
+      state: "Pending"
     }
 
     var url = "http://localhost:3000/notification/add";

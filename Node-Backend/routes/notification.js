@@ -23,9 +23,10 @@ router.post("/add", function (req, res) {
         }
     });
 });
+
 //GET all notices
 router.get("/view", (req, res, next) => {
-    Notification.find().sort({date: -1})
+    Notification.find().sort({ date: -1 })
         .select('userid subject message date state')
         .exec()
         .then(docs => {
@@ -63,23 +64,24 @@ router.delete('/delete/:_id', (req, res, next) => {
 router.get('/approve/:_id', (req, res, next) => {
     console.log("Hello world");
     const id = req.params._id;
-    const updateOps = {};
-    for (const ops of req.body) {
-      updateOps[ops.propName] = ops.value;
-    }
-    Notification.update({ _id: id }, { $set: updateOps })
-      .exec()
-      .then(result => {
-        console.log(result);
-        res.status(200).json(result);
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(500).json({
-          error: error
+    console.log(id);
+    Notification.update({ _id: id }, {
+        $set: {
+            state: "Approved"
+        }
+    })
+        .exec()
+        .then(result => {
+            console.log(result);
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
         });
-      });
-  });
-  
+});
+
 
 module.exports = router;  

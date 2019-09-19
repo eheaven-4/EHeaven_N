@@ -30,9 +30,13 @@
                         <p>{{notice.message}}</p>
                     </mat-card-content>
                     <mat-card-actions style="text-align: right">
-                        <button mat-raised-button class="approve_btn" (click)="approve($event, notice_id)">Approve</button>
-                        <button mat-raised-button color="warn" style="width:100px;" (click)="disapprove($event,notice._id)">Disapprove</button>
-                        <button mat-raised-button class="news_view_btn">View</button>
+                        <mat-card-subtitle style="padding-right: 20px">status : {{notice.state}}</mat-card-subtitle>
+
+                        <button mat-raised-button class="approve_btn"
+                            (click)="approve($event, notice._id)">Approve</button>
+                        <button mat-raised-button color="warn" style="width:100px;"
+                            (click)="disapprove($event,notice._id)">Disapprove</button>
+                        <!-- <button mat-raised-button class="news_view_btn">View</button> -->
                     </mat-card-actions>
                 </mat-card>
             </div>

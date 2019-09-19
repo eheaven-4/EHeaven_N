@@ -52,7 +52,6 @@ export class NotificationComponent implements OnInit {
       alert("Successfully Deleted..!");
       window.location.reload();
       // this.router.navigate(['/notifications']);
-
     }, (err) => {
       console.log(err);
     });
@@ -67,7 +66,7 @@ export class NotificationComponent implements OnInit {
     this.http.get(url + '/' +mybtnId).subscribe(res => {
       console.log(res);
       alert("Successfully Approved..!");
-
+      window.location.reload();
     },(err) => {
       console.log(err);
     });
