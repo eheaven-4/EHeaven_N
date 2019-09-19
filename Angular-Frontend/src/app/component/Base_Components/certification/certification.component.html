@@ -1,1 +1,74 @@
-<p>certification works!</p>
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <app-sidebar></app-sidebar>
+      </div>
+
+      <div class="container-fluid col-md-9 reg-form" style="background-color:white">
+          <div class="container">
+            <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">CERTIFICATION FORM</h2>
+            <hr>
+          </div>
+          <div style="padding-top:50px">
+            <form class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
+                <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+
+                  <div class="form-row mb-4">
+                    <label>Name :</label>
+                    <input formControlName="certName" type="text"class="form-control box_border" >
+                    <small>Name to be appeared in the Certificate*</small>
+                  </div>
+
+                  <!-- {{CertificationForm.value | json}} -->
+
+                  <mat-form-field>
+                    <label>Certification Required :</label>
+                      <mat-select [(value)]="selected">
+                          <mat-option>None</mat-option>
+                          <mat-option value="option1">Studentship Confirmation Certificate</mat-option>
+                          <mat-option value="option2">Character Certificate</mat-option>
+                          <mat-option value="option3">Leaving Certificate</mat-option>
+                          <mat-option value="option4">Educational Certificate</mat-option>
+                      </mat-select>
+                  </mat-form-field>
+
+                    <!-- set conditional logic for this based on previous selection -->
+                  <div *ngIf="true">
+                      <mat-form-field>
+                          <mat-label>Examination</mat-label>
+                          <mat-select>
+                              <mat-option value="option1">Grade 05 Scholarship Examination</mat-option>
+                              <mat-option value="option2">Ordinary Level ( G.C.E. O/L ) Examination</mat-option>
+                              <mat-option value="option3">Advanced Level ( G.C.E. A/L ) Examination</mat-option>
+                          </mat-select>
+                        </mat-form-field>
+
+                      <mat-form-field>
+                          <label>Select Year of Examination :</label>
+                            <mat-select [(value)]="selected">
+                                <mat-option value="2018">2018</mat-option>
+                                <mat-option value="2017">2017</mat-option>
+                                <mat-option value="2016">2016</mat-option>
+                                <mat-option value="2015">2015</mat-option>
+                                <mat-option value="2014">2014</mat-option>
+                                <mat-option value="2013">2013</mat-option>
+                                <mat-option value="2012">2012</mat-option>
+                                <mat-option value="2011">2011</mat-option>
+                                <mat-option value="2010">2010</mat-option>
+                            </mat-select>
+                      </mat-form-field>
+
+                      <mat-form-field>
+                          <label>Examination Index Number :</label>
+                          <input matInput >
+                      </mat-form-field>
+                </div>
+
+                  <button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
+            </form>
+
+          </div>
+      </div>
+      <div class="col-md-1"  style="background-color: white"></div>
+    </div>
+  </div>

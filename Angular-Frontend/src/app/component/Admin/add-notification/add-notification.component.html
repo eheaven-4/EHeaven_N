@@ -4,7 +4,7 @@
       <div class="col-md-2">
         <app-sidebar></app-sidebar>
       </div>
-  
+
       <div class="container-fluid col-md-9 reg-form" style="background-color:white">
           <div class="container">
             <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">New Notification</h2>
@@ -18,12 +18,12 @@
                     <label>Subject :</label>
                     <input type="text"class="form-control box_border" aria-describedby="textHelp" name="subject" [(ngModel)]="subject">
                   </div>
-  
+
                   <div class="form-row mb-4">
                       <label>Message :</label>
                       <textarea type="text" class="form-control box_border" placeholder="Write a message here" id="textbox" name="message" [(ngModel)]="message"></textarea>
                     </div>
-  
+
                   <div class="form-row mb-4">
                         <label>Date :</label>
                           <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy" name="date" [(ngModel)]="date">
@@ -32,13 +32,12 @@
                      class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
                      type="button"
                      (click)="fileInput.click()">Attach a file</button>
-  
-                  <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Send to approvel</button>
+
+                  <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
             </form>
-  
+
           </div>
       </div>
       <div class="col-md-1"  style="background-color: white"></div>
     </div>
   </div>
-  
