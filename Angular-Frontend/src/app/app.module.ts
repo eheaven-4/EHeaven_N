@@ -24,6 +24,7 @@ import { NewFolderDialogComponent } from './component/file-explorer/modals/new-f
 import { RenameDialogComponent } from './component/file-explorer/modals/rename-dialog/rename-dialog.component';
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
+import { CertificationComponent } from './component/Base_Components/certification/certification.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { AddNotificationComponent } from './component/Admin/add-notification/add
     FileExplorerComponent,
     NewFolderDialogComponent,
     RenameDialogComponent,
-    AddNotificationComponent,    
+    AddNotificationComponent,
+    CertificationComponent,    
   ],
   imports: [
     BrowserModule,
