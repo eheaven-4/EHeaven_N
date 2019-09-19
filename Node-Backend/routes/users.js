@@ -109,6 +109,7 @@ router.post("/login", function(req,res){
                         name: user.name,
                         userid: user.userid,
                         email:user.email,
+                        usertype:user.usertype
                     }
                 });
             }

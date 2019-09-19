@@ -29,7 +29,7 @@ router.get("/view", (req, res, next) => {
         .select('userid subject message date state')
         .exec()
         .then(docs => {
-            console.log(docs);
+            console.log("Data Transfer Success.!");
             res.status(200).json(docs);
         })
         .catch(error => {
@@ -40,9 +40,24 @@ router.get("/view", (req, res, next) => {
         });
 });
 
-
-router.delete("/delete", function (req, res) {
-
+//Delete a user by ID
+router.delete('/delete/:_id', (req, res, next) => {
+    // console.log("Hello");
+    const id = req.params._id;
+    Notification.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
 });
+
 
 module.exports = router;  
