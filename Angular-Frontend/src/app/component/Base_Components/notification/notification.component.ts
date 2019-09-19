@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import * as $ from 'jquery';
-import { Router } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 
-interface notification{
-  _id:String;
-  userid:String;
-  subject:String;
+interface notification {
+  _id: String;
+  userid: String;
+  subject: String;
   message: String;
-  date:String;
-  state:String;
+  date: String;
+  state: String;
 }
 
 
@@ -20,42 +20,46 @@ interface notification{
 })
 export class NotificationComponent implements OnInit {
 
-  notices : notification [] = [];
+  notices: notification[] = [];
 
-  noticeId:any;
+  noticeId: any;
+  mySubscription: any;
 
-  notice_id:String;
-
+  notice_id: String;
+  private cedula:string;
+  
   constructor(
     private http: HttpClient,
-    private router: Router, 
-    ) { }
+    private router: Router,
+  ) { }
 
   ngOnInit() {
-    var url = "http://localhost:3000/notification/view";        
+    var url = "http://localhost:3000/notification/view";
 
-      this.http.get<any>(url).subscribe(res => {
-          console.log(res);
-          this.notices = res;
-          }, (err) => {
-            console.log(err);
-          });   
-  }
-
-  disapprove(){
-    var noticeId = $('.noticeClass').html();
-    console.log(noticeId);
-    
-    var url = "http://localhost:3000/notification/delete";
-
-    this.http.delete(url+'/'+noticeId).subscribe(res => {
-      alert("Successfully Deleted..!");
-      this.router.navigate(['/notifications']);
+    this.http.get<any>(url).subscribe(res => {
       console.log(res);
+      this.notices = res;
     }, (err) => {
       console.log(err);
     });
   }
+
+  disapprove(event, notice_id) {
+    var mybtnId = notice_id;
+    console.log(mybtnId);
+    var url = "http://localhost:3000/notification/delete";
+
+    this.http.delete(url + '/' + mybtnId).subscribe(res => {
+      console.log(res);
+      alert("Successfully Deleted..!");
+      window.location.reload();
+      // this.router.navigate(['/notifications']);
+     
+    }, (err) => {
+      console.log(err);
+    });
+  }
+
 }
 
 

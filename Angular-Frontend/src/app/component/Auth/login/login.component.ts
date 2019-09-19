@@ -21,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private flashMessage: NgFlashMessageService,
     private router: Router,
-    private http: HttpClient
+    private http: HttpClient,
+
   ) { }
 
   ngOnInit() {
