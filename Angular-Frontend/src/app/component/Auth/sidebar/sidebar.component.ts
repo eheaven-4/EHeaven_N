@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
   fetchUserData(){
     const user = localStorage.getItem("user");
     this.user = user;
-    return JSON.parse(user).userid; 
+    return JSON.parse(user).userid;
   }
 
   userAcademics(){
