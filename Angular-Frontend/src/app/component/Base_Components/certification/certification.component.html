@@ -19,22 +19,21 @@
 
                           <div class="form-row mb-4">
                             <label>Name :</label>
-                            <input formControlName="certName" type="text"class="form-control box_border" >
+                            <input formControlName="certName" type="text" class="form-control box_border" >
                             <small>Name to be appeared in the Certificate*</small>
                           </div>
 
-                          <!-- {{CertificationForm.value | json}} -->
 
-                          <mat-form-field>
+
+                          <!-- <mat-form-field>
                             <label>Certification Required :</label>
-                              <mat-select>
+                              <mat-select >
                                   <mat-option selected >None</mat-option>
-                                  <mat-option *ngFor="let cert of certificates" [value]="cert">{{ cert }}</mat-option>
+                                  <mat-option  *ngFor="let cert of certificates" [value]="cert">{{ cert }}</mat-option>
                               </mat-select>
                           </mat-form-field>
 
-                            <!-- set conditional logic for this based on previous selection -->
-                          <div *ngIf="true">
+                          <div>
                               <mat-form-field>
                                   <label>Examination :</label>
                                   <mat-select>
@@ -53,8 +52,43 @@
                                   <label>Examination Index Number :</label>
                                   <input matInput >
                               </mat-form-field>
+                        </div> -->
+
+                            <!-- test fields -->
+
+                        <div class="form-row mb-4">
+                          <label>Certification Required :</label>
+                          <select class="browser-default custom-select mb-4 box_border" formControlName="certType">
+                                  <option value="None" selected></option>
+                                  <option *ngFor="let cert of certificates" [value]="cert">{{ cert }}</option>
+                          </select>
                         </div>
-                          <button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
+
+                        <div formGroupName='exam'>
+                        <div class="form-row mb-4">
+                          <label>Examination :</label>
+                          <select class="browser-default custom-select mb-4 box_border" formControlName="examName">
+                                  <option value="None" selected></option>
+                                  <option *ngFor="let exams of exams" [value]="exams">{{ exams }}</option>
+                          </select>
+                        </div>
+
+                        <div class="form-row mb-4">
+                          <label>Select Year of Examination :</label>
+                          <select class="browser-default custom-select mb-4 box_border" formControlName="examYear" >
+                                  <option value="None" selected></option>
+                                  <option *ngFor="let yoe of yearofExam" [value]="yoe">{{ yoe }}</option>
+                          </select>
+                        </div>
+
+                        <div class="form-row mb-4">
+                            <label>Examination Index Number :</label>
+                            <input formControlName="examIndex" type="text" class="form-control box_border" >
+                        </div>
+                      </div>
+
+                        {{CertificationForm.value | json}}
+                          <button mat-raised-button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
                     </form>
                   </mat-tab>
                   <mat-tab label="APPROVED CERTIFICATES"> Content 2 </mat-tab>
@@ -65,3 +99,4 @@
       <div class="col-md-1"  style="background-color: white"></div>
     </div>
   </div>
+
