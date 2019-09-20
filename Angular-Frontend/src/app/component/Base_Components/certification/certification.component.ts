@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 
 
 @Component({
@@ -9,18 +9,28 @@ import { FormGroup, FormControl } from '@angular/forms';
 })
 export class CertificationComponent implements OnInit {
 
-  constructor() { }
+  constructor(private fb: FormBuilder) { }
 
-  CertificationForm = new FormGroup({
-    certName: new FormControl(''),
-    certType: new FormControl(''),
-    exam:     new FormGroup({
-      examName: new FormControl(''),
-      examYear: new FormControl(''),
-      examIndex: new FormControl('')
+  CertificationForm = this.fb.group({
+    certName: ['', Validators.required],
+    certType: ['', Validators.required],
+    exam: this.fb.group({
+       examName: ['', Validators.required],
+       examYear: ['', Validators.required],
+       examIndex: ['', Validators.required]
     })
   });
-          // add function to get logged username by default 
+
+  // CertificationForm = new FormGroup({
+  //   certName: new FormControl(''),
+  //   certType: new FormControl(''),
+  //   exam:     new FormGroup({
+  //     examName: new FormControl(''),
+  //     examYear: new FormControl(''),
+  //     examIndex: new FormControl('')
+  //   })
+  // });
+          // add function to get logged username by default
 
   // certificate types
   certificates = ['Studentship Confirmation Certificate','Character Certificate','Leaving Certificate','Educational Certificate'];

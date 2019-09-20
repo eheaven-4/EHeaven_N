@@ -18,9 +18,9 @@
                         <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
                           <div class="form-row mb-4">
-                            <label>Name :</label>
-                            <input formControlName="certName" type="text" class="form-control box_border" >
-                            <small>Name to be appeared in the Certificate*</small>
+                            <label>Name to be appeared in the Certificate :</label>
+                            <input [class.is-invalid]="CertificationForm.get('certName').invalid && CertificationForm.get('certName').touched" formControlName="certName" type="text" class="form-control box_border" >
+                            <small [class.d-none]="CertificationForm.get('certName').valid || CertificationForm.get('certName').untouched" class="text-danger">Name is required *</small>
                           </div>
 
 
