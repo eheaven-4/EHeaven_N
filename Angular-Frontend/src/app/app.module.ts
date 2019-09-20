@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -44,13 +44,14 @@ import { CertificationComponent } from './component/Base_Components/certificatio
     NewFolderDialogComponent,
     RenameDialogComponent,
     AddNotificationComponent,
-    CertificationComponent,    
+    CertificationComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
     NgFlashMessagesModule,
     MatModule,
     BrowserAnimationsModule,
