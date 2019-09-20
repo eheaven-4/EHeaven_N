@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,12 +16,13 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private flashmessage: NgFlashMessageService
+    private flashmessage: NgFlashMessageService,
+    private cookieService : CookieService,
   ) { }
 
   ngOnInit() {
-    // this.userid = this.fetchUserData();
   }
+
   logoutUser(){
      this.logout();
      this.flashmessage.showFlashMessage({
@@ -35,6 +37,8 @@ export class NavbarComponent implements OnInit {
     this.authtoken = null;
     this.user = null;
     localStorage.clear();
+    
+    this.cookieService.deleteAll();
   }
 
   fetchUserData(){

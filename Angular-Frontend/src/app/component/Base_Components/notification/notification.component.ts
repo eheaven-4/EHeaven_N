@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import * as $ from 'jquery';
+import { MycookiesService } from '../../Admin/mycookies.service';
 import { Router, NavigationEnd } from '@angular/router';
 
 interface notification {
@@ -29,9 +29,12 @@ export class NotificationComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private router: Router,
+    private cookies: MycookiesService,
   ) { }
 
   ngOnInit() {
+    console.log(this.cookies.getCookie("Sachin"));
+
     var url = "http://localhost:3000/notification/view";
 
     this.http.get<any>(url).subscribe(res => {

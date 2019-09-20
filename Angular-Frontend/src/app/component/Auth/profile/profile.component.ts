@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { MycookiesService } from '../../Admin/mycookies.service';
 
 interface profile{
   usertype:String;
@@ -32,9 +33,11 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private http: HttpClient,  
+    private cookies: MycookiesService
   ) { }
 
-  ngOnInit() {       
+  ngOnInit() {     
+    console.log(this.cookies.getCookie("Sachin"));
     this.fetchUserData();
       var id = this.fetchUserData();
       var url = "http://localhost:3000/users/profile";        
