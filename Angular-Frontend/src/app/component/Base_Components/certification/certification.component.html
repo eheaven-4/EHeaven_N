@@ -10,7 +10,7 @@
             <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">CERTIFICATION</h2>
             <hr>
           </div>
-          <div style="padding-top:50px">
+          <div>
               <mat-tab-group>
                   <mat-tab label="APPLY CERTIFICATES">
                     <br>
@@ -26,16 +26,17 @@
 
                         <div class="form-row mb-4">
                           <label>Certification Required :</label>
-                          <mat-select class="browser-default custom-select mb-4 box_border" formControlName="certType">
+                          <mat-select #t class="browser-default custom-select mb-4 box_border" formControlName="certType" (selectionChange)="testfunction(t.value)">
                                   <mat-option value="None" selected></mat-option>
                                   <mat-option *ngFor="let cert of certificates" [value]="cert">{{ cert }}</mat-option>
                           </mat-select>
+                          <!-- {{t.value}} -->
                         </div>
 
-                        <div formGroupName='exam'>
+                        <div *ngIf="flag" formGroupName='exam'>
                           <div class="form-row mb-4">
                             <label>Examination :</label>
-                            <mat-select class="browser-default custom-select mb-4 box_border" formControlName="examName">
+                            <mat-select  class="browser-default custom-select mb-4 box_border" formControlName="examName">
                                     <mat-option value="None" selected></mat-option>
                                     <mat-option *ngFor="let exams of exams" [value]="exams">{{ exams }}</mat-option>
                             </mat-select>
@@ -55,16 +56,18 @@
                           </div>
                       </div>
 
-                        {{CertificationForm.value | json}}
+                        <!-- {{CertificationForm.value | json}} -->
+
                           <button mat-raised-button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
                     </form>
                   </mat-tab>
-                  <mat-tab label="APPROVED CERTIFICATES"> Content 2 </mat-tab>
-                  <mat-tab label="PENDING CERTIFICATES"> Content 3 </mat-tab>
+                  <mat-tab label="PENDING CERTIFICATES"> Content 2 </mat-tab>
+                  <mat-tab label="APPROVED CERTIFICATES"> Content 3 </mat-tab>
               </mat-tab-group>
           </div>
-      </div>
-      <div class="col-md-1"  style="background-color: white"></div>
-    </div>
+
+
+
+        </div>
   </div>
 

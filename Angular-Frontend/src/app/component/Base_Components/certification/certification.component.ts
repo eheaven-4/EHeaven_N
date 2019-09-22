@@ -8,8 +8,11 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./certification.component.scss']
 })
 export class CertificationComponent implements OnInit {
+  value: String = '';
+  flag = false;
+  constructor(private fb: FormBuilder) {
 
-  constructor(private fb: FormBuilder) { }
+  }
 
   CertificationForm = this.fb.group({
     certName: ['', Validators.required],
@@ -48,5 +51,19 @@ export class CertificationComponent implements OnInit {
   // test
   hello(){
     console.log('hello world');
+  }
+
+  //used to show/hide form fields
+
+  testfunction(value) {
+    if(value == "Educational Certificate"){
+       this.flag = true;
+
+    }
+    else{
+       this.flag = false;
+
+    }
+
   }
 }
