@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { Router, NavigationEnd } from '@angular/router';
 
-interface notification {
+interface notification {  //decalare interface class for load notification attributes. 
   _id: String;
   userid: String;
   subject: String;
