@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { CookieService } from 'ngx-cookie-service';
+import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
 @Component({
@@ -20,45 +18,37 @@ export class LoginComponent implements OnInit {
   authtoken: any;
 
   constructor(
-    private flashMessage: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
-    private cookieService: CookieService,
     private cookies: MycookiesService
   ) { }
 
-  ngOnInit() {
-
-  }
+  ngOnInit() { }
 
   userLogin() {
     const user = {
       userid: this.userid,
       password: this.password
     };
-    // console.log(user.userid);
+
     var url = "http://localhost:3000/users/login";
 
     this.http.post<any>(url, user).subscribe(res => {
-      // console.log(JSON.stringify(res));
-      // console.log(res.state);
+      
       if (res.state == true) {
-        this.storeData(res.token, res.user);
-        this.cookies.setCookie("Sachin", JSON.stringify(res.user), 1);
-        console.log(this.cookies.getCookie("Sachin"));
-        var myCookie = JSON.stringify(this.cookies.getCookie("Sachin"));
+        // this.storeData(res.token, res.user);
+        this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
+        var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+        console.log(myCookie.userid);
+        var id = myCookie.userid;
 
+        if(id){
+          this.router.navigate(['/academics' + '/' + id]);
+        }
+        else{
+          this.router.navigate(['/login']);
+        }
 
-        // this.flashMessage.showFlashMessage({
-        //   messages: ["Login Successfully"],
-        //   dismissible: true, 
-        //   timeout: 2000,
-        //   type: 'success'
-        // });
-
-        var id = this.fetchUserData();
-
-        this.router.navigate(['/academics' + '/' + id]);
       }
       else {
         console.log(res.msg);
@@ -68,18 +58,18 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  storeData(token, userData) {
-    localStorage.setItem("tokenId", token);
-    localStorage.setItem("user", JSON.stringify(userData));
+  // storeData(token, userData) {
+  //   localStorage.setItem("tokenId", token);
+  //   localStorage.setItem("user", JSON.stringify(userData));
 
-    this.authtoken = token;
-    this.user = userData;
-  }
+  //   this.authtoken = token;
+  //   this.user = userData;
+  // }
 
-  fetchUserData() {
-    const user = localStorage.getItem("user");
-    this.user_id = user;
-    return JSON.parse(this.user_id).userid;
-  }
+  // fetchUserData() {
+  //   const user = localStorage.getItem("user");
+  //   this.user_id = user;
+  //   return JSON.parse(this.user_id).userid;
+  // }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { CookieService } from 'ngx-cookie-service';
+import { MycookiesService } from '../../Admin/mycookies.service';
 
 @Component({
   selector: 'app-navbar',
@@ -10,47 +11,57 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class NavbarComponent implements OnInit {
 
-  // userid : id [] = [];
   user: any;
   authtoken: any;
+  userid: String;
 
   constructor(
     private router: Router,
     private flashmessage: NgFlashMessageService,
-    private cookieService : CookieService,
+    private cookieService: CookieService,
+    private cookies: MycookiesService
   ) { }
 
   ngOnInit() {
   }
 
-  logoutUser(){
-     this.logout();
-     this.flashmessage.showFlashMessage({
+  logoutUser() {
+    this.logout();
+    this.flashmessage.showFlashMessage({
       messages: ["Logout Successfully"],
-      dismissible: true, 
+      dismissible: true,
       timeout: 2000,
       type: 'success'
-     });
-     this.router.navigate(['/login']);
+    });
+    this.router.navigate(['/login']);
   }
-  logout(){
+  logout() {
     this.authtoken = null;
     this.user = null;
     localStorage.clear();
-    
+
     this.cookieService.deleteAll();
   }
 
-  fetchUserData(){
-    const user = localStorage.getItem("user");
-    this.user = user;
-    return JSON.parse(user).userid; 
-  }
+  // fetchUserData(){
+  //   const user = localStorage.getItem("user");
+  //   this.user = user;
+  //   return JSON.parse(user).userid; 
+  // }
 
-  userProfile(){
-    var id = this.fetchUserData();
-        
-    this.router.navigate(['/profile'+'/'+id]);
+  userProfile() {
+    var myCookie = this.cookies.getCookie("userAuth");
+    // console.log(myCookie);
+    if (myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      // console.log(id);
+      this.router.navigate(['/profile' + '/' + id]);
+    }
+    else {
+      alert("Please Login First..!");
+      this.router.navigate(['/login']);
+    }
   }
 
 }

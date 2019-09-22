@@ -12,7 +12,6 @@ interface notification {
   state: String;
 }
 
-
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -21,10 +20,9 @@ interface notification {
 export class NotificationComponent implements OnInit {
 
   notices: notification[] = [];
-
   noticeId: any;
-
   notice_id: String;
+  show: boolean = true;
 
   constructor(
     private http: HttpClient,
@@ -33,13 +31,17 @@ export class NotificationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    console.log(this.cookies.getCookie("Sachin"));
+    // console.log(this.cookies.getCookie("userAuth"));
 
     var url = "http://localhost:3000/notification/view";
 
     this.http.get<any>(url).subscribe(res => {
-      console.log(res);
       this.notices = res;
+      console.log(res[1].state)
+
+      // for(var i =0; i<10; i++){
+      //   console.log(res[i].state)
+      // }
     }, (err) => {
       console.log(err);
     });
@@ -66,11 +68,11 @@ export class NotificationComponent implements OnInit {
 
     var url = "http://localhost:3000/notification/approve";
 
-    this.http.get(url + '/' +mybtnId).subscribe(res => {
+    this.http.get(url + '/' + mybtnId).subscribe(res => {
       console.log(res);
       alert("Successfully Approved..!");
       window.location.reload();
-    },(err) => {
+    }, (err) => {
       console.log(err);
     });
   }
