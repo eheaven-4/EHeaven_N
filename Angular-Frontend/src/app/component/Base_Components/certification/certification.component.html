@@ -18,43 +18,45 @@
                         <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
                           <div class="form-row mb-4">
-                            <label>Name :</label>
-                            <input formControlName="certName" type="text"class="form-control box_border" >
-                            <small>Name to be appeared in the Certificate*</small>
+                            <label>Name to be appeared in the Certificate :</label>
+                            <input [class.is-invalid]="CertificationForm.get('certName').invalid && CertificationForm.get('certName').touched" formControlName="certName" type="text" class="form-control box_border" >
+                            <small [class.d-none]="CertificationForm.get('certName').valid || CertificationForm.get('certName').untouched" class="text-danger">Name is required *</small>
                           </div>
 
-                          <!-- {{CertificationForm.value | json}} -->
 
-                          <mat-form-field>
-                            <label>Certification Required :</label>
-                              <mat-select>
-                                  <mat-option selected >None</mat-option>
+                        <div class="form-row mb-4">
+                          <label>Certification Required :</label>
+                          <mat-select class="browser-default custom-select mb-4 box_border" formControlName="certType">
+                                  <mat-option value="None" selected></mat-option>
                                   <mat-option *ngFor="let cert of certificates" [value]="cert">{{ cert }}</mat-option>
-                              </mat-select>
-                          </mat-form-field>
-
-                            <!-- set conditional logic for this based on previous selection -->
-                          <div *ngIf="true">
-                              <mat-form-field>
-                                  <label>Examination :</label>
-                                  <mat-select>
-                                      <mat-option *ngFor="let exams of exams" [value]="exams">{{ exams }}</mat-option>
-                                  </mat-select>
-                                </mat-form-field>
-
-                              <mat-form-field>
-                                  <label>Select Year of Examination :</label>
-                                    <mat-select>
-                                        <mat-option *ngFor="let yoe of yearofExam" [value]="yoe">{{ yoe }}</mat-option>
-                                    </mat-select>
-                              </mat-form-field>
-
-                              <mat-form-field>
-                                  <label>Examination Index Number :</label>
-                                  <input matInput >
-                              </mat-form-field>
+                          </mat-select>
                         </div>
-                          <button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
+
+                        <div formGroupName='exam'>
+                          <div class="form-row mb-4">
+                            <label>Examination :</label>
+                            <mat-select class="browser-default custom-select mb-4 box_border" formControlName="examName">
+                                    <mat-option value="None" selected></mat-option>
+                                    <mat-option *ngFor="let exams of exams" [value]="exams">{{ exams }}</mat-option>
+                            </mat-select>
+                          </div>
+
+                          <div class="form-row mb-4">
+                            <label>Select Year of Examination :</label>
+                            <mat-select class="browser-default custom-select mb-4 box_border" formControlName="examYear" >
+                                    <mat-option value="None" selected></mat-option>
+                                    <mat-option *ngFor="let yoe of yearofExam" [value]="yoe">{{ yoe }}</mat-option>
+                            </mat-select>
+                          </div>
+
+                          <div class="form-row mb-4">
+                              <label>Examination Index Number :</label>
+                              <input formControlName="examIndex" type="text" class="form-control box_border" >
+                          </div>
+                      </div>
+
+                        {{CertificationForm.value | json}}
+                          <button mat-raised-button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
                     </form>
                   </mat-tab>
                   <mat-tab label="APPROVED CERTIFICATES"> Content 2 </mat-tab>
@@ -65,3 +67,4 @@
       <div class="col-md-1"  style="background-color: white"></div>
     </div>
   </div>
+
