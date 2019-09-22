@@ -47,31 +47,31 @@ export class NotificationComponent implements OnInit {
     });
   }
 
-  disapprove(event, notice_id) {
+  disapprove(event, notice_id) {  //disapprove button action
     var mybtnId = notice_id;
     console.log(mybtnId);
     var url = "http://localhost:3000/notification/delete";
 
-    this.http.delete(url + '/' + mybtnId).subscribe(res => {
+    this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
       console.log(res);
       alert("Successfully Deleted..!");
-      window.location.reload();
+      window.location.reload();     //reload the page
       // this.router.navigate(['/notifications']);
     }, (err) => {
       console.log(err);
     });
   }
 
-  approve(event, notice_id) {
+  approve(event, notice_id) {     //approve button action
     var mybtnId = notice_id;
     console.log(mybtnId);
 
     var url = "http://localhost:3000/notification/approve";
 
-    this.http.get(url + '/' + mybtnId).subscribe(res => {
+    this.http.get(url + '/' + mybtnId).subscribe(res => {  ////send add a notification request to the server
       console.log(res);
       alert("Successfully Approved..!");
-      window.location.reload();
+      window.location.reload();   //realod window
     }, (err) => {
       console.log(err);
     });
