@@ -14,7 +14,7 @@
               <mat-tab-group>
                   <mat-tab label="APPLY CERTIFICATES">
                     <br>
-                    <form class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
+                    <form class="border text-center p-5 reg-frm" [formGroup]="CertificationForm" (ngSubmit)="applyCertificates()">
                         <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
                           <div class="form-row mb-4">
@@ -58,7 +58,7 @@
 
                         <!-- {{CertificationForm.value | json}} -->
 
-                          <button mat-raised-button (click)="hello()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
+                          <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
                     </form>
                   </mat-tab>
                   <mat-tab label="PENDING CERTIFICATES"> Content 2 </mat-tab>

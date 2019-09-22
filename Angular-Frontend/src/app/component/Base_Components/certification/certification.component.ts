@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
+
 
 
 @Component({
@@ -10,9 +13,14 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
-  constructor(private fb: FormBuilder) {
 
-  }
+  constructor(
+    private fb: FormBuilder,
+    private router: Router,
+    private http: HttpClient
+
+
+    ) { }
 
   CertificationForm = this.fb.group({
     certName: ['', Validators.required],
@@ -48,12 +56,16 @@ export class CertificationComponent implements OnInit {
   ngOnInit() {
   }
 
-  // test
-  hello(){
-    console.log('hello world');
+  // on submit
+
+  applyCertificates(){
+    console.log(this.CertificationForm.value);
+    alert('Applied Sucessfully');
+    this.CertificationForm.reset();
+    //  this.router.navigate(['certification']);
   }
 
-  //used to show/hide form fields
+  // used to show/hide form fields
 
   testfunction(value) {
     if(value == "Educational Certificate"){
