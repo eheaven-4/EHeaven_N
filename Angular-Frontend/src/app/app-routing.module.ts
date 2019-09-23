@@ -14,6 +14,7 @@ import { NotificationComponent } from './component/Base_Components/notification/
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
+import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -24,7 +25,8 @@ const routes: Routes = [
   {path: 'notifications', component: NotificationComponent},
   {path: 'academics/:id', component: AcademicsComponent },
   {path: 'add_notification', component: AddNotificationComponent},
-  {path: 'certification', component: CertificationComponent}
+  {path: 'certification', component: CertificationComponent},
+  {path: 'prepare_certification', component: PrepareCertificationComponent}
 ];
 
 @NgModule({

@@ -26,6 +26,7 @@ import { RenameDialogComponent } from './component/file-explorer/modals/rename-d
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
+import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +46,7 @@ import { CertificationComponent } from './component/Base_Components/certificatio
     RenameDialogComponent,
     AddNotificationComponent,
     CertificationComponent,
+    PrepareCertificationComponent,
   ],
   imports: [
     BrowserModule,
