@@ -8,18 +8,18 @@
       <div class="container-fluid col-md-10 reg-form" style="background-color:white">
           <div class="container">
             <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">CERTIFICATION</h2>
-            <hr>
+            <!-- <hr> -->
           </div>
-          <div>
+          <div style="padding-left: 50px; padding-right: 50px">
               <mat-tab-group>
                   <mat-tab label="APPLY CERTIFICATES">
                     <br>
-                    <form class="border text-center p-5 reg-frm" [formGroup]="CertificationForm" (ngSubmit)="applyCertificates()">
+                    <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm" (ngSubmit)="applyCertificates()">
                         <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
                           <div class="form-row mb-4">
                             <label>Name to be appeared in the Certificate :</label>
-                            <input [class.is-invalid]="CertificationForm.get('certName').invalid && CertificationForm.get('certName').touched" formControlName="certName" type="text" class="form-control box_border" >
+                            <input [class.is-invalid]="CertificationForm.get('certName').invalid && CertificationForm.get('certName').touched" formControlName="certName"  type="text" class="form-control box_border" >
                             <small [class.d-none]="CertificationForm.get('certName').valid || CertificationForm.get('certName').untouched" class="text-danger">Name is required *</small>
                           </div>
 
@@ -58,9 +58,10 @@
 
                         <!-- {{CertificationForm.value | json}} -->
 
-                          <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit for Approval</button>
-                    </form>
+                          <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitToApproval()">Submit for Approval</button>
+                    </mat-card>
                   </mat-tab>
+                  <!-- /*****************************************************************************************************************************/ -->
                   <mat-tab label="PENDING CERTIFICATES"> Content 2 </mat-tab>
                   <mat-tab label="APPROVED CERTIFICATES"> Content 3 </mat-tab>
               </mat-tab-group>
