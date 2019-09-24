@@ -44,7 +44,7 @@ export class CertificationComponent implements OnInit {
           // add function to get logged username by default
 
   // certificate types
-  certificates = ['Studentship Confirmation Certificate','Character Certificate','Leaving Certificate','Educational Certificate'];
+  certificates = ['Student Status Verification Certificate','Character Certificate','Leaving Certificate','Educational Certificate'];
 
   // examinations
   exams = ['Grade 05 Scholarship Examination','Ordinary Level ( G.C.E. O/L ) Examination','Advanced Level ( G.C.E. A/L ) Examination'];
