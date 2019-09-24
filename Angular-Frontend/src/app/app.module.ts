@@ -5,6 +5,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
+import { MatExpansionModule } from '@angular/material/expansion';
+
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -56,6 +58,7 @@ import { PrepareCertificationComponent } from './component/Admin/prepare-certifi
     ReactiveFormsModule,
     NgFlashMessagesModule,
     MatModule,
+    MatExpansionModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
   ],
