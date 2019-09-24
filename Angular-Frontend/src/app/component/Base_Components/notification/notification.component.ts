@@ -22,7 +22,8 @@ export class NotificationComponent implements OnInit {
   notices: notification[] = [];
   noticeId: any;
   notice_id: String;
-  show: boolean = true;
+  public approve_show: boolean = false;
+  public disapprove_show: boolean = false;
 
   constructor(
     private http: HttpClient,
@@ -37,11 +38,26 @@ export class NotificationComponent implements OnInit {
 
     this.http.get<any>(url).subscribe(res => {
       this.notices = res;
-      console.log(res[1].state)
+      // var i = 0;
 
-      // for(var i =0; i<10; i++){
-      //   console.log(res[i].state)
+      // for (var prop in res) {
+      //   if (res.hasOwnProperty(prop)) {
+      //     // console.log(res[i].state)          
+      //     if (res[i].state == 'Approved') {
+      //       console.log(res[i].state)
+      //       this.disapprove_show = true
+      //     }
+      //     else {
+      //       this.approve_show = true
+        
+      //     }
+      //     i++;
+      //   }
+      //   else {
+      //     break
+      //   }
       // }
+
     }, (err) => {
       console.log(err);
     });
