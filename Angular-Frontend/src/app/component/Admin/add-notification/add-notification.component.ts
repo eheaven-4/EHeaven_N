@@ -10,6 +10,7 @@ import { MycookiesService } from '../mycookies.service';
 })
 export class AddNotificationComponent implements OnInit {
 
+  usertype: String;
   userid: String;
   subject: String;
   message: String;
@@ -28,11 +29,13 @@ export class AddNotificationComponent implements OnInit {
   
   addNotice() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  
-    console.log(myCookie.userid);
+    // console.log(myCookie.userid);
     this.userid = myCookie.userid;
+    this.usertype = myCookie.usertype;
 
     if(this.userid){  //fetch user data cookies 
       const notice = {
+        usertype: this.usertype,
         userid: this.userid,
         subject: this.subject,
         message: this.message,

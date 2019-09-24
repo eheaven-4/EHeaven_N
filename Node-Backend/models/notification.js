@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
 const noticeSchema = mongoose.Schema({
+    usertype:{type:String, require:true},
     userid:{type:String, require:true},
     subject:{type:String, require:true},
     message: {type:String, require:true},

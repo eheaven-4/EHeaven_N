@@ -7,6 +7,7 @@ const config = require('../config/database');
 router.post("/add", function (req, res) {
     console.log("hello");
     const newNotice = new Notification({
+        usertype: req.body.usertype,
         userid: req.body.userid,
         subject: req.body.subject,
         message: req.body.message,
@@ -27,7 +28,7 @@ router.post("/add", function (req, res) {
 //GET all notices
 router.get("/view", (req, res, next) => {
     Notification.find().sort({ date: -1 })
-        .select('userid subject message date state')
+        .select('userid subject message date state usertype')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");

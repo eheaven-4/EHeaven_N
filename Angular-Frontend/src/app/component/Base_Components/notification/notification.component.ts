@@ -32,12 +32,16 @@ export class NotificationComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    // console.log(this.cookies.getCookie("userAuth"));
+    console.log(this.cookies.getCookie("userAuth"));
+    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
+    var userType = myCookie.usertype;
+    console.log(userType)
 
     var url = "http://localhost:3000/notification/view";
 
     this.http.get<any>(url).subscribe(res => {
       this.notices = res;
+      console.log(res)
       // var i = 0;
 
       // for (var prop in res) {
@@ -49,7 +53,7 @@ export class NotificationComponent implements OnInit {
       //     }
       //     else {
       //       this.approve_show = true
-        
+
       //     }
       //     i++;
       //   }
@@ -72,7 +76,6 @@ export class NotificationComponent implements OnInit {
       console.log(res);
       alert("Successfully Deleted..!");
       window.location.reload();     //reload the page
-      // this.router.navigate(['/notifications']);
     }, (err) => {
       console.log(err);
     });
@@ -84,7 +87,7 @@ export class NotificationComponent implements OnInit {
 
     var url = "http://localhost:3000/notification/approve";
 
-    this.http.get(url + '/' + mybtnId).subscribe(res => {  ////send add a notification request to the server
+    this.http.get(url + '/' + mybtnId).subscribe(res => {  //send add a notification request to the server
       console.log(res);
       alert("Successfully Approved..!");
       window.location.reload();   //realod window
