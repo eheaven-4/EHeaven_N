@@ -9,6 +9,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
+
 export class NavbarComponent implements OnInit {
 
   user: any;
@@ -40,14 +41,8 @@ export class NavbarComponent implements OnInit {
     this.user = null;
     localStorage.clear();
 
-    this.cookieService.deleteAll();
+    this.cookieService.delete('userAuth');
   }
-
-  // fetchUserData(){
-  //   const user = localStorage.getItem("user");
-  //   this.user = user;
-  //   return JSON.parse(user).userid; 
-  // }
 
   userProfile() {
     var myCookie = this.cookies.getCookie("userAuth");
