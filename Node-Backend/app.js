@@ -9,6 +9,7 @@ const cors = require('cors');
 const config = require('./config/database');
 const users = require('./routes/users');
 const notification = require('./routes/notification');
+const certification = require('./routes/certification');
 
 app.use(cors());
 
@@ -30,6 +31,7 @@ app.use(express.static(path.join(__dirname,"public")));
 
 app.use('/users', users);
 app.use('/notification', notification);
+app.use('/certification', certification);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
