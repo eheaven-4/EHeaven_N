@@ -25,10 +25,12 @@ router.post("/requestCert", function (req, res) {
     });
 });
 
-//get pending certificate to issued
-router.get("/pendingCert", function(req, res){
+//get pending certificate to issued  by specific user
+router.get("/pendingCert/:id", function (req, res) {
     console.log("Hello");
-    requestCertification.find({ state: "Pending" })
+    const id = req.params.id;
+    requestCertification.find({ state: "Pending" , userid: id})
+        .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex state')
         .exec()
         .then(docs => {
@@ -43,10 +45,12 @@ router.get("/pendingCert", function(req, res){
         });
 })
 
-//get issued all certificates 
-router.get("/issuedCert", function(req, res){
+//get issued all certificates by specific user
+router.get("/issuedCert/:id", function (req, res) {
     console.log("Hello");
-    requestCertification.find({ state: "Issued" })
+    const id = req.param.id;
+    requestCertification.find({ state: "Issued", userid: id })
+        .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex state')
         .exec()
         .then(docs => {

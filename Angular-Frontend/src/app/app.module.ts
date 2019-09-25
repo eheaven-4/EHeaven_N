@@ -24,9 +24,6 @@ import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { FooterComponent } from './component/Auth/footer/footer.component';
 import { ContactusComponent } from './component/Admin/contactus/contactus.component';
 import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
-import { FileExplorerComponent } from './component/file-explorer/file-explorer.component';
-import { NewFolderDialogComponent } from './component/file-explorer/modals/new-folder-dialog/new-folder-dialog.component';
-import { RenameDialogComponent } from './component/file-explorer/modals/rename-dialog/rename-dialog.component';
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
@@ -45,9 +42,6 @@ import { PrepareCertificationComponent } from './component/Admin/prepare-certifi
     ContactusComponent,
     NotificationComponent,
     AcademicsComponent,
-    FileExplorerComponent,
-    NewFolderDialogComponent,
-    RenameDialogComponent,
     AddNotificationComponent,
     CertificationComponent,
     PrepareCertificationComponent,
