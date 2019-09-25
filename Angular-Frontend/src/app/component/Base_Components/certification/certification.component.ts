@@ -10,7 +10,6 @@ import { MycookiesService } from '../../Admin/mycookies.service';
   styleUrls: ['./certification.component.scss']
 })
 
-
 export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
@@ -34,7 +33,7 @@ export class CertificationComponent implements OnInit {
     })
   });
 
-  // certificate types
+  // certificate types 
   certificates = [
     'Student Status Verification Certificate',
     'Character Certificate',
@@ -48,17 +47,18 @@ export class CertificationComponent implements OnInit {
     'Ordinary Level ( G.C.E. O/L ) Examination',
     'Advanced Level ( G.C.E. A/L ) Examination'
   ];
-
+  // examinations years
   yearofExam = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
   ngOnInit() {
   }
 
   submitToApproval() {
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    this.userid = myCookie.userid;
+    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
+    this.userid = myCookie.userid;     //tke userid from cookies
     // console.log(this.CertificationForm.value , myCookie.usertype)
-    if(this.userid){  
+    if (this.userid) {
+      //create certificateApproval JSON object
       const certificateApproval = {
         userid: myCookie.userid,
         certName: this.CertificationForm.value.certName,
@@ -68,10 +68,10 @@ export class CertificationComponent implements OnInit {
         examIndex: this.CertificationForm.value.exam.examIndex,
         state: "Pending"
       }
-  
-      var url = "http://localhost:3000/certification/requestCert"
-  
-      this.http.post<any>(url, certificateApproval).subscribe(res => {
+
+      var url = "http://localhost:3000/certification/requestCert"  //server url
+
+      this.http.post<any>(url, certificateApproval).subscribe(res => {   //requesting ro the server and send data to  save
         if (res.state) {
           console.log(res.msg);
           alert("Successfully Requested..!");
@@ -86,23 +86,21 @@ export class CertificationComponent implements OnInit {
       });
       console.log(certificateApproval)
     }
-    else{
+    else {
       alert("Please Login First..!")
       this.router.navigate(['/login']);
     }
   }
- 
+
 
   // used to show/hide form fields
 
   testfunction(value) {
     if (value == "Educational Certificate") {
       this.flag = true;
-
     }
     else {
       this.flag = false;
-
     }
   }
 
