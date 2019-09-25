@@ -1,25 +1,20 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { StickyDirection } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-certification',
   templateUrl: './certification.component.html',
   styleUrls: ['./certification.component.scss']
 })
+
+
 export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
-
   userid: String;
-  userName: String;
-  certName: String;
-  examination: String;
-  examIndex: String;
-  examYear: String;
 
   constructor(
     private fb: FormBuilder,
@@ -40,10 +35,20 @@ export class CertificationComponent implements OnInit {
   });
 
   // certificate types
-  certificates = ['Student Status Verification Certificate', 'Character Certificate', 'Leaving Certificate', 'Educational Certificate'];
+  certificates = [
+    'Student Status Verification Certificate',
+    'Character Certificate',
+    'Leaving Certificate',
+    'Educational Certificate'
+  ];
 
   // examinations
-  exams = ['Grade 05 Scholarship Examination', 'Ordinary Level ( G.C.E. O/L ) Examination', 'Advanced Level ( G.C.E. A/L ) Examination'];
+  exams = [
+    'Grade 05 Scholarship Examination',
+    'Ordinary Level ( G.C.E. O/L ) Examination',
+    'Advanced Level ( G.C.E. A/L ) Examination'
+  ];
+
   yearofExam = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
   ngOnInit() {
@@ -51,24 +56,42 @@ export class CertificationComponent implements OnInit {
 
   submitToApproval() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    console.log(myCookie.usertype)
-    const certRequest = {
-      userid: this.userid,
-      userName: this.userName,
-      certName: this.certName,
-      examination: this.examination,
-      examIndex: this.examIndex,
-      examYear: this.examYear
+    this.userid = myCookie.userid;
+    // console.log(this.CertificationForm.value , myCookie.usertype)
+    if(this.userid){  
+      const certificateApproval = {
+        userid: myCookie.userid,
+        certName: this.CertificationForm.value.certName,
+        certType: this.CertificationForm.value.certType,
+        examName: this.CertificationForm.value.exam.examName,
+        examYear: this.CertificationForm.value.exam.examYear,
+        examIndex: this.CertificationForm.value.exam.examIndex,
+        state: "Pending"
+      }
+  
+      var url = "http://localhost:3000/certification/requestCert"
+  
+      this.http.post<any>(url, certificateApproval).subscribe(res => {
+        if (res.state) {
+          console.log(res.msg);
+          alert("Successfully Requested..!");
+          this.CertificationForm.reset();
+          this.router.navigate(['/certification']);
+        }
+        else {
+          console.log(res.msg);
+          alert("Certificate Requesting Unsuccessfull..!");
+          this.router.navigate(['/certification']);
+        }
+      });
+      console.log(certificateApproval)
     }
-    console.log(certRequest);
+    else{
+      alert("Please Login First..!")
+      this.router.navigate(['/login']);
+    }
   }
-  // on submit
-
-  applyCertificates() {
-    console.log(this.CertificationForm.value);
-    alert('Applied Sucessfully');
-    this.CertificationForm.reset();
-  }
+ 
 
   // used to show/hide form fields
 
@@ -81,7 +104,6 @@ export class CertificationComponent implements OnInit {
       this.flag = false;
 
     }
-
   }
 
 }
