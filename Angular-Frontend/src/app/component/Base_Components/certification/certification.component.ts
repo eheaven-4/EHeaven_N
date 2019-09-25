@@ -14,6 +14,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
+  userid: String;
 
   constructor(
     private fb: FormBuilder,
@@ -55,34 +56,42 @@ export class CertificationComponent implements OnInit {
 
   submitToApproval() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    this.userid = myCookie.userid;
     // console.log(this.CertificationForm.value , myCookie.usertype)
-
-    const certificateApproval = {
-      userId : myCookie.userid,
-      certName : this.CertificationForm.value.certName,
-      certType : this.CertificationForm.value.certType,
-      exam : {
-        examName : this.CertificationForm.value.exam.examName,
-        examYear : this.CertificationForm.value.exam.examYear,
-        examIndex : this.CertificationForm.value.exam.examIndex,
+    if(this.userid){  
+      const certificateApproval = {
+        userid: myCookie.userid,
+        certName: this.CertificationForm.value.certName,
+        certType: this.CertificationForm.value.certType,
+        examName: this.CertificationForm.value.exam.examName,
+        examYear: this.CertificationForm.value.exam.examYear,
+        examIndex: this.CertificationForm.value.exam.examIndex,
+        state: "Pending"
       }
+  
+      var url = "http://localhost:3000/certification/requestCert"
+  
+      this.http.post<any>(url, certificateApproval).subscribe(res => {
+        if (res.state) {
+          console.log(res.msg);
+          alert("Successfully Requested..!");
+          this.CertificationForm.reset();
+          this.router.navigate(['/certification']);
+        }
+        else {
+          console.log(res.msg);
+          alert("Certificate Requesting Unsuccessfull..!");
+          this.router.navigate(['/certification']);
+        }
+      });
+      console.log(certificateApproval)
     }
-
-    var url = ""
-
-    this.http.post<any>(url, certificateApproval).subscribe( res => {
-
-    });
-    
-    console.log(certificateApproval)
+    else{
+      alert("Please Login First..!")
+      this.router.navigate(['/login']);
+    }
   }
-  // on submit
-
-  applyCertificates() {
-    console.log(this.CertificationForm.value);
-    alert('Applied Sucessfully');
-    this.CertificationForm.reset();
-  }
+ 
 
   // used to show/hide form fields
 
@@ -95,7 +104,6 @@ export class CertificationComponent implements OnInit {
       this.flag = false;
 
     }
-
   }
 
 }
