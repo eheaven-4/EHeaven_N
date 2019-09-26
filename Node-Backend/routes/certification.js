@@ -12,6 +12,7 @@ router.post("/requestCert", function (req, res) {
         examName: req.body.examName,
         examYear: req.body.examYear,
         examIndex: req.body.examIndex,
+        reqDate:req.body.reqDate,
         state: req.body.state
     });
     console.log(newRequest);
@@ -31,7 +32,7 @@ router.get("/pendingCert/:id", function (req, res) {
     const id = req.params.id;
     requestCertification.find({ state: "Pending" , userid: id})
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex state')
+        .select('userid certName certType examName examYear examIndex reqDate state')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -48,10 +49,10 @@ router.get("/pendingCert/:id", function (req, res) {
 //get issued all certificates by specific user
 router.get("/issuedCert/:id", function (req, res) {
     console.log("Hello");
-    const id = req.param.id;
+    const id = req.params.id;
     requestCertification.find({ state: "Issued", userid: id })
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex state')
+        .select('userid certName certType examName examYear examIndex reqDate state')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
