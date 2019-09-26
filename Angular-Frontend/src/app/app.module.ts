@@ -28,6 +28,8 @@ import { NotificationComponent } from './component/Base_Components/notification/
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
+import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
+
 
 
 @NgModule({
@@ -46,6 +48,7 @@ import { PrepareCertificationComponent } from './component/Admin/prepare-certifi
     AddNotificationComponent,
     CertificationComponent,
     PrepareCertificationComponent,
+    AttendanceComponent,
   ],
   imports: [
     BrowserModule,

@@ -13,8 +13,13 @@ import { AcademicsComponent } from './component/Base_Components/academics/academ
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
 
+
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
+
+import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
+
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -26,7 +31,8 @@ const routes: Routes = [
   {path: 'academics/:id', component: AcademicsComponent },
   {path: 'add_notification', component: AddNotificationComponent},
   {path: 'certification', component: CertificationComponent},
-  {path: 'prepare_certification', component: PrepareCertificationComponent}
+  {path: 'prepare_certification', component: PrepareCertificationComponent},
+  {path: 'attendance' , component:AttendanceComponent}
 ];
 
 @NgModule({
