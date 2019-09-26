@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-academics',
@@ -10,10 +11,11 @@ import { Component, OnInit } from '@angular/core';
 export class AcademicsComponent implements OnInit {
 
   constructor(
+    private http: HttpClient
   ) { }
-
+  
   ngOnInit() {
 
   }
-  
+ 
 }

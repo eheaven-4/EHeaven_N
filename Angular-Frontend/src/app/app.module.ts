@@ -29,6 +29,7 @@ import { AddNotificationComponent } from './component/Admin/add-notification/add
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
