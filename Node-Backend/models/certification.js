@@ -7,7 +7,8 @@ const requestCertificationSchema = mongoose.Schema({
     certType: { type: String, require: true },
     examName: { type: String, require: true },
     examYear: { type: String, require: true },
-    examIndex: { type: String, require: true },
+    examIndex: { type: String,  require: true },
+    reqDate: {type: String, require: true},
     state: { type: String, require: true}
 });
 

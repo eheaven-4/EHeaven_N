@@ -6,7 +6,7 @@
 
     <div class="container-fluid col-md-10 reg-form" style="background-color:white">
       <div class="container">
-        
+
         <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">Request - Certification</h2>
         <!-- <hr> -->
 
@@ -33,8 +33,9 @@
                 <label>Certification Required :</label>
                 <mat-select #t class="browser-default custom-select mb-4 box_border" formControlName="certType"
                   (selectionChange)="testfunction(t.value)">
-                  <mat-option value="None" selected></mat-option>
-                  <mat-option *ngFor="let cert of certificates" [value]="cert" >{{ cert }}</mat-option>
+                  <!-- <mat-option value="None" selected></mat-option> -->
+                  <mat-option style="text-align: left" *ngFor="let cert of certificates" [value]="cert">{{ cert }}
+                  </mat-option>
                 </mat-select>
                 <!-- {{t.value}} -->
               </div>
@@ -43,16 +44,18 @@
                 <div class="form-row mb-4">
                   <label>Examination :</label>
                   <mat-select class="browser-default custom-select mb-4 box_border" formControlName="examName">
-                    <mat-option value="None" selected></mat-option>
-                    <mat-option *ngFor="let exams of exams" [value]="exams">{{ exams }}</mat-option>
+                    <!-- <mat-option value="None" selected></mat-option> -->
+                    <mat-option style="text-align: left" *ngFor="let exams of exams" [value]="exams">{{ exams }}
+                    </mat-option>
                   </mat-select>
                 </div>
 
                 <div class="form-row mb-4">
                   <label>Select Year of Examination :</label>
                   <mat-select class="browser-default custom-select mb-4 box_border" formControlName="examYear">
-                    <mat-option value="None" selected></mat-option>
-                    <mat-option *ngFor="let yoe of yearofExam" [value]="yoe">{{ yoe }}</mat-option>
+                    <!-- <mat-option value="None" selected></mat-option> -->
+                    <mat-option style="text-align: left" *ngFor="let yoe of yearofExam" [value]="yoe">{{ yoe }}
+                    </mat-option>
                   </mat-select>
                 </div>
 
@@ -67,11 +70,33 @@
               <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border"
                 (click)="submitToApproval()">Submit for Approval</button>
             </mat-card>
-            
+
           </mat-tab>
           <!-- /*****************************************************************************************************************************/ -->
-          <mat-tab label="PENDING CERTIFICATES"> Content 2 </mat-tab>
-          <mat-tab label="APPROVED CERTIFICATES"> Content 3 </mat-tab>
+          <mat-tab label="PENDING CERTIFICATES">
+            <mat-card>
+              <!-- {{pendingCert | json}} -->
+              <mat-list>
+                  <mat-list-item *ngFor="let cert of pendingCert">
+                    <mat-icon mat-list-icon>note</mat-icon>
+                    <h3 mat-line>{{cert.certType}}</h3>
+                    <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                  </mat-list-item>
+                </mat-list>
+            </mat-card>
+          </mat-tab>
+          <mat-tab label="APPROVED CERTIFICATES">
+            <mat-card>
+              <!-- {{issuedCert | json}} -->
+              <mat-list>
+                  <mat-list-item *ngFor="let cert of issuedCert">
+                    <mat-icon mat-list-icon>note</mat-icon>
+                    <h3 mat-line>{{cert.certType}}</h3>
+                    <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                  </mat-list-item>
+                </mat-list>
+            </mat-card>
+          </mat-tab>
         </mat-tab-group>
       </div>
     </div>
