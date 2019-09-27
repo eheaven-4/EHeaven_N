@@ -70,9 +70,10 @@
               <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border"
                 (click)="submitToApproval()">Submit for Approval</button>
             </mat-card>
-
           </mat-tab>
+
           <!-- /*****************************************************************************************************************************/ -->
+          
           <mat-tab label="PENDING CERTIFICATES">
             <mat-card>
               <!-- {{pendingCert | json}} -->
@@ -85,6 +86,9 @@
                 </mat-list>
             </mat-card>
           </mat-tab>
+
+          <!-- /*****************************************************************************************************************************/ -->
+
           <mat-tab label="APPROVED CERTIFICATES">
             <mat-card>
               <!-- {{issuedCert | json}} -->
@@ -101,5 +105,4 @@
       </div>
     </div>
     <!-- <div class="col-md-1"  style="background-color: white"></div> -->
-
   </div>

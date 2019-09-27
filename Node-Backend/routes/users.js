@@ -5,12 +5,19 @@ const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const passport = require('passport');
 const multer = require('multer');
+const pdfDoc = require('pdf-lib');
+const fs = require('fs');
 
-
-
-router.get("/", function (req, res) {
-    res.send("Hello users");
+router.get("/", async function (req, res)  {
     console.log("hello");
+    const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const pageOne = pages[0];
+    pageOne.drawText('You can modify PDFs too!')
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
+    res.send("Hello users");
 });
 
 

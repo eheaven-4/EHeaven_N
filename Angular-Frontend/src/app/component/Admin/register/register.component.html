@@ -4,7 +4,7 @@
             <app-sidebar></app-sidebar>
         </div>
 
-        <div class="container-fluid col-md-9 reg-form"  style="background-color: white">
+        <div class="container-fluid col-md-9 reg-form" style="background-color: white">
             <div class="container">
                 <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Register</h2>
                 <hr>
@@ -15,96 +15,112 @@
 
                     <div class="form-row mb-4">
                         <div class="col">
-                            <select class="browser-default custom-select mb-4 box_border" name="usertype" [(ngModel)]="usertype">
-                                    <option value="" disabled>User type</option>
-                                    <option value="Student">Student</option>
-                                    <option value="Parent">Parent</option>
-                                    <option value="Teacher">Teacher</option>
-                                    <option value="Principal">Principal</option>
-                                    <option value="Administrator">Administrator</option>
+                            <select class="browser-default custom-select mb-4 box_border" name="usertype"
+                                [(ngModel)]="usertype">
+                                <option value="" disabled>User type</option>
+                                <option value="Student">Student</option>
+                                <option value="Parent">Parent</option>
+                                <option value="Teacher">Teacher</option>
+                                <option value="Principal">Principal</option>
+                                <option value="Administrator">Administrator</option>
                             </select>
-                            <small class="form-text text-muted mb-4" style="margin-top:-20px">Usertype</small>
+                            <small class="form-text text-muted mb-4"
+                                style="margin-top:-20px; text-align: left">Usertype</small>
 
                         </div>
                         <div class="col">
-                            <input type="text" class="form-control box_border" placeholder="User ID"  name="userid" [(ngModel)]="userid">
+                            <input type="text" class="form-control box_border" placeholder="User ID" name="userid"
+                                [(ngModel)]="userid">
                         </div>
                     </div>
 
-                    <input type="text" class="form-control box_border" placeholder="Full name"  name="name" [(ngModel)]="name" style="margin-top:-30px">
+                    <input type="text" class="form-control box_border" placeholder="Full name" name="name"
+                        [(ngModel)]="name" style="margin-top:-30px">
 
                     <div class="form-row mb-4">
                     </div>
 
-                    <input type="email" class="form-control mb-4 box_border" placeholder="E-mail" name="email" [(ngModel)]="email">
+                    <input type="email" class="form-control mb-4 box_border" placeholder="E-mail" name="email"
+                        [(ngModel)]="email">
 
-                    <input type="text" class="form-control box_border" placeholder="Password" name="password" [(ngModel)]="password">
-                    <small class="form-text text-muted mb-4">
+                    <input type="text" class="form-control box_border" placeholder="Password" name="password"
+                        [(ngModel)]="password">
+                    <small class="form-text text-muted mb-4" style=" text-align: left">
                         At least 8 characters and 1 digit
                     </small>
                     <div class="form-row mb-4">
-                            <div class="col">
-                                <small class="form-text text-muted mb-4" style="margin-top:-20px">Birthday</small>
-                                <input type="date" class="form-control box_border" placeholder="Date of birth"  name="birthday" [(ngModel)]="birthday" style="margin-top:-22px">
-                            </div>
-                            <div class="col">
-                                <input type="number" class="form-control box_border" placeholder="Home Number"  name="homenumber" [(ngModel)]="homenumber">
-                            </div>
-                            <div class="col">
-                                <input type="number" class="form-control box_border" placeholder="Mobile Number"  name="mobilenumber" [(ngModel)]="mobilenumber">
-                            </div>
+                        <div class="col">
+                            <input type="date" class="form-control box_border" placeholder="Date of birth"
+                                name="birthday" [(ngModel)]="birthday">
+                            <small class="form-text text-muted mb-4"
+                                style="margin-top:0px; text-align: left">Birthday</small>
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control box_border" placeholder="Home Number"
+                                name="homenumber" [(ngModel)]="homenumber">
+                        </div>
+                        <div class="col">
+                            <input type="number" class="form-control box_border" placeholder="Mobile Number"
+                                name="mobilenumber" [(ngModel)]="mobilenumber">
+                        </div>
                     </div>
+                    <div class="form-row mb-4" style="margin-top: -30px">
+                        <div class="col ">
+                            <select class="browser-default custom-select mb-4 box_border" name="gender"
+                                [(ngModel)]="gender">
+                                <option value="" disabled>Gender</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                            </select>
+                            <small class="form-text text-muted mb-4"
+                                style="margin-top:-20px; text-align: left">Gender</small>
+
+                        </div>
+                        <div class="col ">
+                            <select class="browser-default custom-select mb-4 box_border" name="nationality"
+                                [(ngModel)]="nationality">
+                                <option value="" disabled>Nationality</option>
+                                <option value="Sinhala">Sinhala</option>
+                                <option value="Tamil">Tamil</option>
+                                <option value="Muslim">Muslim</option>
+                                <option value="Cristian">Cristian</option>
+                            </select>
+                            <small class="form-text text-muted mb-4"
+                                style="margin-top:-20px; text-align: left">Nationality</small>
+
+                        </div>
+                        <div class="col">
+                            <input type="text" class="form-control box_border" placeholder="NIC Number" name="nicnumber"
+                                [(ngModel)]="nicnumber">
+                        </div>
+                    </div>
+
+                    <input type="text" class="form-control box_border" placeholder="Father Name" name="father"
+                        [(ngModel)]="father" style="margin-top:-20px">
+
                     <div class="form-row mb-4">
-                            <div class="col ">
-                                <select class="browser-default custom-select mb-4 box_border" name="gender" [(ngModel)]="gender">
-                                    <option value="" disabled>Gender</option>
-                                    <option value="Male">Male</option>
-                                    <option value="Female">Female</option>
-                                </select>
-                            </div>
-                            <div class="col ">
-                                    <select class="browser-default custom-select mb-4 box_border" name="nationality" [(ngModel)]="nationality">
-                                            <option value="" disabled>Nationality</option>
-                                            <option value="Sinhala">Sinhala</option>
-                                            <option value="Tamil">Tamil</option>
-                                            <option value="Muslim">Muslim</option>
-                                            <option value="Cristian">Cristian</option>
-                                        </select>
-                            </div>
-                            <div class="col">
-                                    <input type="text" class="form-control box_border" placeholder="NIC Number"  name="nicnumber" [(ngModel)]="nicnumber">
-                            </div>
                     </div>
 
-                    <input type="text" class="form-control box_border" placeholder="Father Name"  name="father" [(ngModel)]="father" style="margin-top:-20px">
+                    <input type="text" class="form-control box_border" placeholder="Mother Name" name="mother"
+                        [(ngModel)]="mother">
 
                     <div class="form-row mb-4">
                     </div>
 
-                    <input type="text" class="form-control box_border" placeholder="Mother Name"  name="mother" [(ngModel)]="mother">
+                    <textarea type="text" class="form-control box_border" placeholder="Address" name="address"
+                        [(ngModel)]="address"></textarea>
 
-                    <div class="form-row mb-4">
-                    </div>
-
-                    <textarea type="text" class="form-control box_border" placeholder="Address"  name="address" [(ngModel)]="address"></textarea>
-
-                    <input
-                        type="file" class="file_upload"
-                        style="display: none"
-                        name="profilepic"
-                        accept="image/*"
-                        (change)="onFileSelected($event)"
-                        #fileInput>
-                    <button
-                        class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
-                        type="button"
+                    <input type="file" class="file_upload" style="display: none" name="profilepic" accept="image/*"
+                        (change)="onFileSelected($event)" #fileInput>
+                    <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
                         (click)="fileInput.click()">Choose Profile Picture</button>
 
-                    <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit" (click)="registerUser()">Register Now</button>
+                    <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"
+                        (click)="registerUser()">Register Now</button>
                 </form>
             </div>
         </div>
-        <div class="col-md-1"  style="background-color: white"></div>
+        <div class="col-md-1" style="background-color: white"></div>
     </div>
 
 </div>
