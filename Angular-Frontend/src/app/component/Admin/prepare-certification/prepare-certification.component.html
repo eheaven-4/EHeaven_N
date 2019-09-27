@@ -1,90 +1,92 @@
-<div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <app-sidebar></app-sidebar>
-    </div>
-
-    <div class="container-fluid col-md-10 reg-form" style="background-color:white">
-      <div class="container">
-        <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">ADMIN - CERTIFICATION</h2>
-        <hr>
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <app-sidebar></app-sidebar>
       </div>
-      <div style="padding-left: 50px; padding-right: 50px">
-        <mat-tab-group>
-          <mat-tab label="REQUESTED CERTIFICATES">list certification requests from students ( via certification
-            component) here
-          </mat-tab>
+
+      <div class="container-fluid col-md-10 reg-form" style="background-color:white">
+        <div class="container">
+          <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">ADMIN - CERTIFICATION</h2>
+          <hr>
+        </div>
+        <div style="padding-left: 50px; padding-right: 50px">
+          <mat-tab-group>
+            <mat-tab label="REQUESTED CERTIFICATES">list certification requests from students ( via certification
+              component) here
+            </mat-tab>
             <mat-tab label="PREPARE CERTIFICATES">
-              <mat-card >
-                <mat-accordion >
-                  <mat-expansion-panel >
+              <mat-card>
+                <mat-accordion>
+                  <mat-expansion-panel>
                     <mat-expansion-panel-header>Student Status Verification Certificate</mat-expansion-panel-header>
-                      <mat-action-row>
-                          <div class="container">
-                              <mat-form-field>
-                                <input matInput placeholder="Name of the Student">
-                              </mat-form-field>
-                              <mat-form-field>
-                                  <input matInput placeholder="Admission Number">
-                              </mat-form-field>
-                              <mat-form-field>
-                                  <input matInput [matDatepicker]="picker" placeholder="Date of Admission">
-                                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                  <mat-datepicker #picker></mat-datepicker>
-                              </mat-form-field>
-                              <mat-form-field>
-                                  <input matInput placeholder="Current Status">
-                                  <!-- <small>Whether he/she is/was a student</small> -->
-                              </mat-form-field>
-                              <mat-form-field>
-                                <textarea matInput placeholder="Description"></textarea>
-                              </mat-form-field>
-                              <button id="abutton" >Submit</button>
-                            </div>
+                    <mat-action-row>
+                      <div class="container">
+                        <mat-form-field>
+                          <input matInput placeholder="Name of the Student">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput placeholder="Admission Number">
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput [matDatepicker]="picker" placeholder="Date of Admission">
+                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                          <mat-datepicker #picker></mat-datepicker>
+                        </mat-form-field>
+                        <mat-form-field>
+                          <input matInput placeholder="Current Status">
+                          <!-- <small>Whether he/she is/was a student</small> -->
+                        </mat-form-field>
+                        <mat-form-field>
+                          <textarea matInput placeholder="Description"></textarea>
+                        </mat-form-field>
+                        <button id="abutton">Submit</button>
+                      </div>
 
-                        <!-- <button mat-button id="abutton" color="primary">USE</button> -->
+                      <!-- <button mat-button id="abutton" color="primary">USE</button> -->
 
-                      </mat-action-row>
+                    </mat-action-row>
                   </mat-expansion-panel>
-                  <mat-expansion-panel >
+                  <mat-expansion-panel>
                     <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
-                      <mat-action-row>
-                        <button mat-button color="primary">USE</button>
-                      </mat-action-row>
+                    <mat-action-row>
+                      <button mat-button color="primary">USE</button>
+                    </mat-action-row>
                   </mat-expansion-panel>
-                  <mat-expansion-panel >
+                  <mat-expansion-panel>
                     <mat-expansion-panel-header>Leaving Certificate</mat-expansion-panel-header>
+                    <mat-action-row>
+                      <button mat-button color="primary">USE</button>
+                    </mat-action-row>
+                  </mat-expansion-panel>
+                  <mat-expansion-panel>
+                    <mat-expansion-panel-header>Educational Certificate</mat-expansion-panel-header>
+                    <mat-expansion-panel>
+                      <mat-expansion-panel-header>G.C.E. (A/L) Certificate </mat-expansion-panel-header>
                       <mat-action-row>
                         <button mat-button color="primary">USE</button>
                       </mat-action-row>
-                  </mat-expansion-panel>
-                  <mat-expansion-panel >
-                    <mat-expansion-panel-header>Educational Certificate</mat-expansion-panel-header>
-                    <mat-expansion-panel >
-                      <mat-expansion-panel-header>G.C.E. (A/L) Certificate </mat-expansion-panel-header>
-                        <mat-action-row>
-                          <button mat-button color="primary">USE</button>
-                        </mat-action-row>
                     </mat-expansion-panel>
-                    <mat-expansion-panel >
+                    <mat-expansion-panel>
                       <mat-expansion-panel-header>G.C.E. (O/L) Certificate </mat-expansion-panel-header>
-                        <mat-action-row>
-                          <button mat-button color="primary">USE</button>
-                        </mat-action-row>
+                      <mat-action-row>
+                        <button mat-button color="primary">USE</button>
+                      </mat-action-row>
                     </mat-expansion-panel>
                   </mat-expansion-panel>
                 </mat-accordion>
               </mat-card>
             </mat-tab>
-          <mat-tab label="PENDING CERTIFICATES"> pending principal approval </mat-tab>
-          <mat-tab label="CERTIFICATION HISTORY"> History </mat-tab>
-        </mat-tab-group>
+            <mat-tab label="PENDING CERTIFICATES"> pending principal approval </mat-tab>
+            <mat-tab label="CERTIFICATION HISTORY"> History </mat-tab>
+          </mat-tab-group>
 
+        </div>
       </div>
+      <!-- <div class="col-md-1"  style="background-color: white"></div> -->
+
     </div>
-    <!-- <div class="col-md-1"  style="background-color: white"></div> -->
+
+
 
   </div>
-
-
-

@@ -1,50 +1,54 @@
-<div class="container-fluid">
-    <div class="row">
-        <div class="col-md-2">
-            <app-sidebar></app-sidebar>
-        </div>
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <app-sidebar></app-sidebar>
+            </div>
 
-        <div class="container-fluid col-md-10" style="background-color:white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-10">
-                        <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">Notification</h2>
+            <div class="container-fluid col-md-10" style="background-color:white">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">Notification
+                            </h2>
+                        </div>
+                        <div class="col-md-2" style="padding-top: 25px">
+                            <button class="btn btn-info my-4 btn-block reg_btn box_border"
+                                routerLink="/add_notification"><b>+</b> Add New</button>
+                        </div>
                     </div>
-                    <div class="col-md-2" style="padding-top: 25px">
-                        <button 
-                            class="btn btn-info my-4 btn-block reg_btn box_border"
-                            routerLink="/add_notification"><b>+</b> Add New</button>
-                    </div>
+                    <hr>
                 </div>
-                <hr>
+                <div style="padding-left: 35px; padding-right: 35px">
+                    <mat-card class="notice-card" *ngFor="let notice of notices">
+                        <p style="display: none" name="notice_id">{{notice._id}}</p>
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image"></div>
+                            <mat-card-title>{{notice.subject}}</mat-card-title>
+                            <mat-card-subtitle style="margin-top:-15px">{{notice.date}}</mat-card-subtitle>
+                        </mat-card-header>
+                        <mat-card-content>
+                            <p>{{notice.message}}</p>
+                        </mat-card-content>
+                        <mat-card-actions style="text-align: right">
+                            <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}</mat-card-subtitle>
+
+                            <button *ngIf="notice.state=='Pending' && notice.usertype == 'Administrator'"
+                                mat-raised-button class="approve_btn"
+                                (click)="approve($event, notice._id)">Approve</button>
+
+                            <button *ngIf="notice.state=='Approved'  && notice.usertype == 'Administrator'"
+                                mat-raised-button color="warn" style="width:100px;"
+                                (click)="disapprove($event,notice._id)">Disapprove</button>
+
+                            <button mat-raised-button class="view_btn"
+                                (click)="approve($event, notice._id)">View</button>
+
+                        </mat-card-actions>
+                    </mat-card>
+                </div>
             </div>
-            <div style="padding-left: 35px; padding-right: 35px">
-                <mat-card class="notice-card" *ngFor="let notice of notices">
-                    <p style="display: none" name="notice_id">{{notice._id}}</p>
-                    <mat-card-header>
-                        <div mat-card-avatar class="example-header-image"></div>
-                        <mat-card-title>{{notice.subject}}</mat-card-title>
-                        <mat-card-subtitle style="margin-top:-15px">{{notice.date}}</mat-card-subtitle>
-                    </mat-card-header>
-                    <mat-card-content>
-                        <p>{{notice.message}}</p>
-                    </mat-card-content>
-                    <mat-card-actions style="text-align: right">
-                        <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}</mat-card-subtitle>
-
-                        <button *ngIf="notice.state=='Pending' && notice.usertype == 'Administrator'" mat-raised-button
-                            class="approve_btn" (click)="approve($event, notice._id)">Approve</button>
-
-                        <button *ngIf="notice.state=='Approved'  && notice.usertype == 'Administrator'"
-                            mat-raised-button color="warn" style="width:100px;"
-                            (click)="disapprove($event,notice._id)">Disapprove</button>
-
-                        <button mat-raised-button class="view_btn" (click)="approve($event, notice._id)">View</button>
-
-                    </mat-card-actions>
-                </mat-card>
-            </div>
+            <!-- <div class="col-md-1" style="background-color: white"></div> -->
         </div>
-        <!-- <div class="col-md-1" style="background-color: white"></div> -->
     </div>
 </div>
