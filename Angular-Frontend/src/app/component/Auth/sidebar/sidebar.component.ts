@@ -11,7 +11,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 export class SidebarComponent implements OnInit {
 
   userid: String;
-  user : any;
+  user: any;
   constructor(
     private router: Router,
     private cookies: MycookiesService,
@@ -26,11 +26,11 @@ export class SidebarComponent implements OnInit {
   //   return JSON.parse(user).userid;
   // }
 
-  userAcademics(){
+  userAcademics() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
     console.log(myCookie.userid);
     this.userid = myCookie.userid;
     // var id = this.fetchUserData();
-    this.router.navigate(['/academics'+'/'+this.userid]);
+    this.router.navigate(['/academics' + '/' + this.userid]);
   }
 }
