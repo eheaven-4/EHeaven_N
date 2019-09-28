@@ -9,17 +9,17 @@ const pdfDoc = require('pdf-lib');
 const fs = require('fs');
 
 //test hereee for certification
-// router.get("/", async function (req, res)  {
-//     console.log("hello");
-//     const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
-//     var doc = await pdfDoc.PDFDocument.load(uint8Array);
-//     const pages = doc.getPages()
-//     const pageOne = pages[0];
-//     pageOne.drawText('You can modify PDFs too!')
-//     const pdfBytes = await doc.save()
-//     fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
-//     res.send("Hello users");
-// });
+router.get("/", async function (req, res)  {
+    console.log("hello");
+    const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const pageOne = pages[0];
+    pageOne.drawText('You can modify PDFs too!')
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
+    res.send("Hello users");
+});
 
 
 router.post("/login", function (req, res,next) {
