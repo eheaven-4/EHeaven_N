@@ -1,4 +1,4 @@
-const express = require('express');
+ const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
@@ -10,6 +10,7 @@ const config = require('./config/database');
 const users = require('./routes/users');
 const notification = require('./routes/notification');
 const certification = require('./routes/certification');
+const attendance = require('./routes/attendance');
 
 app.use(cors());
 
@@ -32,6 +33,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use('/users', users);
 app.use('/notification', notification);
 app.use('/certification', certification);
+app.use('/attendance',attendance);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
