@@ -41,23 +41,22 @@ export class PrepareCertificationComponent implements OnInit {
       description: this.StudentStatusForm.value.description,
     }
 
-        var url = "http://localhost:3000/certification/studentstatus"  //server url
-
-        // tslint:disable-next-line: align
-        this.http.post<any>(url, studentStatusApproval).subscribe(res => {   //requesting ro the server and send data to  save
-          if (res.state) {
-            console.log(res.msg);
-            alert('Successfully Requested..!');
-            this.StudentStatusForm.reset();
-            // this.router.navigate(['/certification']);
-          }
-          else {
-            console.log(res.msg);
-            alert("Certificate Requesting Unsuccessfull..!");
-            // this.router.navigate(['/certification']);
-          }
-        });
-        console.log(studentStatusApproval);
+    var url = "http://localhost:3000/certification/studentstatus";  //server url
+    // tslint:disable-next-line: align
+    this.http.post<any>(url, studentStatusApproval).subscribe(res => {   //requesting ro the server and send data to  save
+      if (res.state) {
+        console.log(res.msg);
+        alert('Successfully Requested..!');
+        this.StudentStatusForm.reset();
+        // this.router.navigate(['/certification']);
+      }
+      else {
+        console.log(res.msg);
+        alert("Certificate Requesting Unsuccessfull..!");
+        // this.router.navigate(['/certification']);
+      }
+    });
+    console.log(studentStatusApproval);
 
 
 

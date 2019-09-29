@@ -70,7 +70,7 @@ router.get("/issuedCert/:id", function (req, res) {
 module.exports = router; 
 
 //test
-router.get("/studentstatus", async function (req, res)  {
+router.post("/studentstatus", async function (req, res)  {
     console.log("hello at server ");
     const newRequest = new requestStudentstatus({
         studentName: req.body.studentName,
