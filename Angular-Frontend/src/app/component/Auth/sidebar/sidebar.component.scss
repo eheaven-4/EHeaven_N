@@ -14,7 +14,6 @@
 }
 
 .sidebar_button {
-  // background-color: aqua;
   height: 100%;
   margin-bottom: 0px;
   width: 120%;
@@ -22,15 +21,15 @@
 .sidebar_button2 {
   width: 120%;
   height: 100%;
-  // height: 80px;
-  // margin-top: -15px;
 }
 .sidebar_button:hover {
   cursor: pointer;
+  transition: 0.5s;
   background-color: #17191d;
 }
 .sidebar_button2:hover {
   cursor: pointer;
+  transition: 0.5s;
   background-color: #17191d;
 }
 

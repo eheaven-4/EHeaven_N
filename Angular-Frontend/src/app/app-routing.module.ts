@@ -19,6 +19,8 @@ import { PrepareCertificationComponent } from './component/Admin/prepare-certifi
 
 import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
+import { NewsComponent } from './component/Admin/news/news.component';
+import { PaymentsComponent } from './component/Admin/payments/payments.component';
 
 
 const routes: Routes = [
@@ -34,6 +36,8 @@ const routes: Routes = [
   {path: 'prepare_certification', component: PrepareCertificationComponent},
   {path: 'attendance' , component:AttendanceComponent},
   {path: 'admin_dashboard', component:AdminDashboardComponent},
+  {path: 'news_feeds', component:NewsComponent},
+  {path: 'payments', component:PaymentsComponent}
 ];
 
 @NgModule({

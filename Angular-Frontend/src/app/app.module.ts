@@ -31,6 +31,7 @@ import { PrepareCertificationComponent } from './component/Admin/prepare-certifi
 import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
 import { NewsComponent } from './component/Admin/news/news.component';
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
+import { PaymentsComponent } from './component/Admin/payments/payments.component';
 
 
 
@@ -53,6 +54,7 @@ import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin
     AttendanceComponent,
     NewsComponent,
     AdminDashboardComponent,
+    PaymentsComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),
