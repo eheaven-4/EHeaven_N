@@ -18,7 +18,7 @@ import { CertificationComponent } from './component/Base_Components/certificatio
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 
 import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
-
+import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
 
 
 const routes: Routes = [
@@ -32,7 +32,8 @@ const routes: Routes = [
   {path: 'add_notification', component: AddNotificationComponent},
   {path: 'certification', component: CertificationComponent},
   {path: 'prepare_certification', component: PrepareCertificationComponent},
-  {path: 'attendance' , component:AttendanceComponent}
+  {path: 'attendance' , component:AttendanceComponent},
+  {path: 'admin_dashboard', component:AdminDashboardComponent},
 ];
 
 @NgModule({

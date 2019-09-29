@@ -1,6 +1,16 @@
 <div>
     <div class="side-bar">
-
+        
+        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active ">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons" routerLinkActive="nav-text active ">person</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links" routerLinkActive="nav-text active ">Admin Portal</p>
+                </div>
+            </div>
+        </div>
         <div class="sidebar_button" routerLink="/academics"  (click)="userAcademics()"  routerLinkActive="nav-link active ">
             <div class="row">
                 <div class="col-md-1 icn">
@@ -93,15 +103,5 @@
             </div>
         </div>
 
-        <div class="sidebar_button2" routerLink="/register" (click)="userRegistration()" routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">person_add</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">User Registration</p>
-                </div>
-            </div>
-        </div>
     </div>
 </div>

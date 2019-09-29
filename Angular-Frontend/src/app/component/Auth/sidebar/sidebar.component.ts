@@ -163,11 +163,11 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  userRegistration() {
+  adminDashboard() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/register']);
+      this.router.navigate(['/admin_dashboard']);
     }
     else {
       this.ngFlashMessage.showFlashMessage({

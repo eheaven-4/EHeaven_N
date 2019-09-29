@@ -29,6 +29,8 @@ import { AddNotificationComponent } from './component/Admin/add-notification/add
 import { CertificationComponent } from './component/Base_Components/certification/certification.component';
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
+import { NewsComponent } from './component/Admin/news/news.component';
+import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
 
 
 
@@ -49,6 +51,8 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
     CertificationComponent,
     PrepareCertificationComponent,
     AttendanceComponent,
+    NewsComponent,
+    AdminDashboardComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),
