@@ -17,3 +17,14 @@ const requestCertification = module.exports = mongoose.model("requestCertificati
 module.exports.saveRequest = function (newRequestCertification, callback) {
     newRequestCertification.save(callback);
 };
+
+const requestStudentstatusSchema = mongoose.Schema({
+    studentName: { type: String, require: true },
+    admissionNum: { type: String, require: true },
+    dateofAdmission: { type: String, require: true },
+    currentStatus: { type: String, require: true },
+    description: { type: String, require: true },
+});
+
+const requestStudentstatus = module.exports = mongoose.model("requestStudentstatus", requestStudentstatusSchema);
+

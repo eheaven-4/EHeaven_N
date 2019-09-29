@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const requestCertification = require('../models/certification');
+const requestStudentstatus = require('../models/certification');
 const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
@@ -70,7 +71,7 @@ router.get("/issuedCert/:id", function (req, res) {
 module.exports = router; 
 
 //test
-router.get("/studentstatus", async function (req, res)  {
+router.post("/studentstatus", async function (req, res)  {
     console.log("hello at server ");
     const newRequest = new requestStudentstatus({
         studentName: req.body.studentName,
