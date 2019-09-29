@@ -51,6 +51,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
     AttendanceComponent,
   ],
   imports: [
+    NgFlashMessagesModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,

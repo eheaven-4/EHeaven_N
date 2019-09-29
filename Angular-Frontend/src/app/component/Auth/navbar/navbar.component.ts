@@ -18,7 +18,7 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private flashmessage: NgFlashMessageService,
+    private ngFlashMessage: NgFlashMessageService,
     private cookieService: CookieService,
     private cookies: MycookiesService
   ) { }
@@ -28,11 +28,11 @@ export class NavbarComponent implements OnInit {
 
   logoutUser() {
     this.logout();
-    this.flashmessage.showFlashMessage({
-      messages: ["Logout Successfully"],
+    this.ngFlashMessage.showFlashMessage({
+      messages: ["Logout Successfully..!"],
       dismissible: true,
       timeout: 2000,
-      type: 'success'
+      type: 'warning'
     });
     this.router.navigate(['/login']);
   }
@@ -54,7 +54,12 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/profile' + '/' + id]);
     }
     else {
-      alert("Please Login First..!");
+      this.ngFlashMessage.showFlashMessage({
+        messages: ["Please Login First..!"], 
+        dismissible: true, 
+        timeout: 2000,
+        type: 'warning',
+      });
       this.router.navigate(['/login']);
     }
   }
