@@ -51,7 +51,9 @@ export class LoginComponent implements OnInit {
             timeout: 2000,
             type: 'success',
           });
+          // window.location.reload();     //reload the page
           this.router.navigate(['/academics' + '/' + id]);
+
         }
         else{
           this.router.navigate(['/login']);

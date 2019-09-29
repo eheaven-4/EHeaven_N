@@ -1,48 +1,65 @@
-<div class="container" style="padding-top: 50px">
-
-    <h2 style="color:  rgb(0, 140, 255); font-weight: bold">{{classname}} Class Name List</h2>
-    <hr>
-    <div>
-        <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px ;padding-left: 200px">
-    </div>
-</div>
 <div class="row">
-
-    <div class="col-md-6">
-        <div style="text-align: center">
-            <h3>Name</h3>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-2">
+                    <app-sidebar></app-sidebar>
+                </div>
+                <div class="container-fluid col-md-10" style="background-color:white">
+                    <div class="flashMessage">
+                        <ng-flash-message></ng-flash-message>
+                    </div>
+                    <div>
+                    </div>
+                <div class="container" style="padding-top: 50px">
+                
+                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold">{{classname}} Class Name List</h2>
+                    <hr>
+                    <div>
+                        <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px ;padding-left: 200px">
+                    </div>
+                </div>
+                <div class="row">
+                
+                    <div class="col-md-6">
+                        <div style="text-align: center">
+                            <h3>Name</h3>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <h3>
+                            Attendence
+                        </h3>
+                    </div>
+                </div>
+                
+                <div style="padding-top: 50px">
+                    <form #userForm="ngForm" class="text-center border p-5 reg-frm" (ngSubmit)="onSubmit()" novalidate>
+                        <div class="row" *ngFor="let student of students; index as i">
+                            <div class="col-md-6" style="text-align: center">
+                
+                                <h4>{{student.name}}</h4>
+                            </div>
+                            <div>
+                                <fieldset required>
+                                    <input type="radio" name="{{student.name}}" (click)="storeValue(student.name,true,i)">Present
+                                    <input type="radio" name="{{student.name}}" (click)="storeValue(student.name,false,i)"> Absence
+                                </fieldset>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-3">
+                
+                            </div>
+                            <div class="col-md-3">
+                                <button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button>
+                
+                            </div>
+                        </div>
+                
+                    </form>
+                </div>
+                        
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="col-md-6">
-        <h3>
-            Attendence
-        </h3>
-    </div>
-</div>
-
-<div style="padding-top: 50px">
-    <form #userForm="ngForm" class="text-center border p-5 reg-frm" (ngSubmit)="onSubmit()" novalidate>
-        <div class="row" *ngFor="let student of students; index as i">
-            <div class="col-md-6" style="text-align: center">
-
-                <h4>{{student.name}}</h4>
-            </div>
-            <div>
-                <fieldset required>
-                    <input type="radio" name="{{student.name}}" (click)="storeValue(student.name,true,i)">Present
-                    <input type="radio" name="{{student.name}}" (click)="storeValue(student.name,false,i)"> Absence
-                </fieldset>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-
-            </div>
-            <div class="col-md-3">
-                <button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button>
-
-            </div>
-        </div>
-
-    </form>
-</div>
