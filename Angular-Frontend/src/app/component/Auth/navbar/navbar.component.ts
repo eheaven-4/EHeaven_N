@@ -35,7 +35,7 @@ export class NavbarComponent implements OnInit {
       type: 'warning'
     });
     this.router.navigate(['/login']);
-    window.location.reload();     //reload the page
+    // window.location.reload();     //reload the page
   }
   
   logout() {
