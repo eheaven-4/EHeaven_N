@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -51,6 +51,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
     AttendanceComponent,
   ],
   imports: [
+    NgFlashMessagesModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
@@ -62,6 +63,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
     MatDatepickerModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
+    FontAwesomeModule
   ],
   providers: [
     CookieService,

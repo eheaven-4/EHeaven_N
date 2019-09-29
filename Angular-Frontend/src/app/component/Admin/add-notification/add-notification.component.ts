@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../mycookies.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-add-notification',
@@ -22,14 +23,14 @@ export class AddNotificationComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookies: MycookiesService  //import Mycookies Service files
+    private cookies: MycookiesService, //import Mycookies Service files
+    private ngFlashMessage: NgFlashMessageService,
   ) { }
 
   ngOnInit() { }
   
   addNotice() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  
-    // console.log(myCookie.userid);
     this.userid = myCookie.userid;
     this.usertype = myCookie.usertype;
 
@@ -49,12 +50,22 @@ export class AddNotificationComponent implements OnInit {
       this.http.post<any>(url, notice).subscribe(res => {
         if (res.state) {
           console.log(res.msg);
-          alert("Successfully Added..!");
+          this.ngFlashMessage.showFlashMessage({
+            messages: ["Successfully Added ..!"], 
+            dismissible: true, 
+            timeout: 2000,
+            type: 'success',
+          });
           this.router.navigate(['/notifications']);
         }
         else {
           console.log(res.msg);
-          alert("Notification Adding Unsuccessfull..!");
+          this.ngFlashMessage.showFlashMessage({
+            messages: ["Notification Adding Unsuccessfull..!"], 
+            dismissible: true, 
+            timeout: 2000,
+            type: 'danger',
+          });
           this.router.navigate(['/add_notification']);
         }
       });

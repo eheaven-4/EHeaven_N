@@ -62,18 +62,21 @@ export class RegisterComponent implements OnInit {
     this.http.post<any>(url, user).subscribe(res => {
       if (res.state) {
         console.log(res.msg);
-        alert("Successfully registerd");
+        this.ngFlashMessageService.showFlashMessage({
+          messages: ["Successfully Registered..!"], 
+          dismissible: true, 
+          timeout: 2000,
+          type: 'success',
+        });
         this.router.navigate(['/login']);
       }
       else {
-        // this.ngFlashMessageService.showFlashMessage({
-        //   messages: ["You are not Registerd"],
-        //   dismissible: true, 
-        //   timeout: 2000,
-        //   type: 'warning'
-        // });
-        console.log(res.msg);
-        alert("Successfully registerd");
+        this.ngFlashMessageService.showFlashMessage({
+          messages: ["You are not Registerd..!"],
+          dismissible: true, 
+          timeout: 2000,
+          type: 'warning'
+        });
         this.router.navigate(['/register']);
       }
     });

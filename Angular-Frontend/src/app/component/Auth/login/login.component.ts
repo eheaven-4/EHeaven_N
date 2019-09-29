@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookies: MycookiesService
+    private cookies: MycookiesService,
+    private ngFlashMessage: NgFlashMessageService
   ) { }
 
   ngOnInit() { }
@@ -43,7 +45,15 @@ export class LoginComponent implements OnInit {
         var id = myCookie.userid;
 
         if(id){
+          // window.location.reload();     //reload the page
           this.router.navigate(['/academics' + '/' + id]);
+              this.ngFlashMessage.showFlashMessage({
+                messages: ["Successfully Logged In..!"], 
+                dismissible: true, 
+                timeout: 2000,
+                type: 'success',
+              });
+
         }
         else{
           this.router.navigate(['/login']);
@@ -52,7 +62,12 @@ export class LoginComponent implements OnInit {
       }
       else {
         console.log(res.msg);
-        alert("Username or password incorrect .. !");
+        this.ngFlashMessage.showFlashMessage({
+          messages: ["Username or password incorrect..!"], 
+          dismissible: true, 
+          timeout: 2000,
+          type: 'warning',
+        });
         this.router.navigate(['/login']);
       }
     });
