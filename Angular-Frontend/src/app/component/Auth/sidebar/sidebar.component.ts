@@ -51,8 +51,8 @@ export class SidebarComponent implements OnInit {
   userNotification() {
 
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
+      // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      // var id = userCookie.userid;
       this.router.navigate(['/notifications']);
     }
     else {
