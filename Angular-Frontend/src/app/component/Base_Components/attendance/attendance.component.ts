@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AttendenceService} from './attendence.service';
+import {User} from './../../../user';
+import {Attend} from './attend';
 
 @Component({
   selector: 'app-attendance',
@@ -7,82 +9,86 @@ import {AttendenceService} from './attendence.service';
   styleUrls: ['./attendance.component.scss']
 })
 export class AttendanceComponent implements OnInit {
-  public classname="1-A"
-  public students=[{"name":"Pradeepa1","flag":false},
-  {"name":"Pradeepa2","flag":true},
-  {"name":"Pradeepa3","flag":true},
-  {"name":"Pradeep4","flag":true},
-  {"name":"Pradeep5","flag":true},
-  {"name":"Pradeepa6","flag":true},
-  {"name":"Pradeepa7","flag":false},
-  {"name":"Pradeepa8","flag":true},
-  {"name":"Pradeepa9","flag":true},
-  {"name":"Pradeepa10","flag":true},
-  {"name":"Pradeepa11","flag":true},
-  {"name":"Pradeepa12","flag":true},
-  {"name":"Pradeepa13","flag":true},
-  {"name":"Pradeepa14","flag":true},
-  {"name":"Pradeepa15","flag":true},
-  {"name":"Pradeepa16","flag":true},
-  {"name":"Pradeepa17","flag":true},
-  {"name":"Pradeepa18","flag":true}
-];
-public dataarr=[];
-public data={};
-public  i=0;
+public classname="1-A";
+
+public students:Array<User>;
+public attendRecord:Attend[];
+public i=0;
+
+
 
   constructor(private attendanceservice:AttendenceService) { }
 
   ngOnInit() {
+    this.attendanceservice.retriveUsers()
+    .subscribe((data:User[])=>{
+      this.students=data;
+    })
   }
   addData(stu:object){
-    this.attendanceservice.enrolladd(stu)
+    this.attendanceservice.logAdd(stu)
        .subscribe(
           data=>console.log('Success',data),
           error=>console.error('Error!',error) 
     )
   }
-
+  // genarateDate(){
+  //   var date=Date();
+  //   var dat=1;
   
-  storeValue(name:string,val:boolean,index) {
+
+  // }
+  
+  storeValue(userid:string,val:boolean,index) {
       var value="";
       if(index==this.i){
-        var stu={
-          "name":name,
-          "attend":val
-
-        };
-        console.log(stu);
-        this.addData(stu);
-
-        this.dataarr[name]=val;
+        var newRec=new Attend();
+        newRec.userid=userid;
+        newRec.attend=val;
+        newRec.class=this.classname;
+      
+        console.log(newRec);
+        //this.addData(newRec);
+        if(this.i==0){
+          this.attendRecord[0]=newRec;
+        }
+        //this.attendRecord.push(newRec);
         this.i++;
       }else{
-        for (var key in this.dataarr) {
-          if(key==name){
-            this.dataarr[key]=val;
-          }
-        }   
+        for(var i = 0; i < this.attendRecord.length; i++) {
+            if(this.attendRecord[i].userid==userid){
+                this.attendRecord[i].attend=val;
+              
+            }
+        }
+        // var newRec=new Attend();
+        // newRec.userid=userid;
+        // newRec.attend=val;
+        // newRec.class=this.classname;
+        // newRec.date=this.today;
 
-      }
-      if(val){
-        value="Present";
-      }else{
-        value="Absence";
-      }
-      console.log(name+" is "+value);
+        // console.log(newRec);
+      }   
+
+      // }
+      // if(val){
+      //   value="Present";
+      // }else{
+      //   value="Absence";
+      // }
+      // console.log(name+" is "+value);
          
   }
-  onSubmit(){
-    for (var key in this.dataarr) {
-      var valu = this.dataarr[key];
-      console.log(key, valu);
-    }
+  // onSubmit(){
+  //   for (var key in this.dataarr) {
+  //     var valu = this.dataarr[key];
+  //     console.log(key, valu);
+  //   }
     // this.attendanceservice.enroll(this.dataarr)
     //    .subscribe(
     //       data=>console.log('Success',data),
     //       error=>console.error('Error!',error) 
     // )
-  }
+ // }
 
 }

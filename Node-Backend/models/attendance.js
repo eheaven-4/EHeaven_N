@@ -14,3 +14,6 @@ module.exports.addAttendance=function(newattend,callback){
     console.log(newattend);
     newattend.save(callback);
 }
+// module.exports.retriveUsers(callback){
+//     users.find(callback);
+// }
