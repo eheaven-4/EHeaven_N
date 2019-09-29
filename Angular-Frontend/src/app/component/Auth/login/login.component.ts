@@ -45,14 +45,14 @@ export class LoginComponent implements OnInit {
         var id = myCookie.userid;
 
         if(id){
-          this.ngFlashMessage.showFlashMessage({
-            messages: ["Successfully Logged In..!"], 
-            dismissible: true, 
-            timeout: 2000,
-            type: 'success',
-          });
           // window.location.reload();     //reload the page
           this.router.navigate(['/academics' + '/' + id]);
+              this.ngFlashMessage.showFlashMessage({
+                messages: ["Successfully Logged In..!"], 
+                dismissible: true, 
+                timeout: 2000,
+                type: 'success',
+              });
 
         }
         else{
