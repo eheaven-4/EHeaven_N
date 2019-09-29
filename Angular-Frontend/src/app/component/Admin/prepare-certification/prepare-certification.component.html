@@ -16,34 +16,37 @@
               component) here
             </mat-tab>
             <mat-tab label="PREPARE CERTIFICATES">
-              <mat-card>
+              <mat-card class="border text-center p-5 reg-frm" [formGroup]="StudentStatusForm">
                 <mat-accordion>
                   <mat-expansion-panel>
                     <mat-expansion-panel-header>Student Status Verification Certificate</mat-expansion-panel-header>
                     <mat-action-row>
                       <div class="container">
                         <mat-form-field>
-                          <input matInput placeholder="Name of the Student">
+                          <input matInput formControlName="studentName" placeholder="Name of the Student">
                         </mat-form-field>
                         <mat-form-field>
-                          <input matInput placeholder="Admission Number">
+                          <input matInput formControlName="admissionNum" placeholder="Admission Number">
                         </mat-form-field>
                         <mat-form-field>
-                          <input matInput [matDatepicker]="picker" placeholder="Date of Admission">
+                          <input matInput formControlName="dateofAdmission" [matDatepicker]="picker" placeholder="Date of Admission">
                           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                           <mat-datepicker #picker></mat-datepicker>
                         </mat-form-field>
                         <mat-form-field>
-                          <input matInput placeholder="Current Status">
+                          <input matInput formControlName="currentStatus" placeholder="Current Status">
                           <!-- <small>Whether he/she is/was a student</small> -->
                         </mat-form-field>
                         <mat-form-field>
-                          <textarea matInput placeholder="Description"></textarea>
+                          <textarea matInput formControlName="description" placeholder="Description"></textarea>
                         </mat-form-field>
-                        <button id="abutton">Submit</button>
+                        <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitToApproval()">Submit</button>
+
+                        <!-- {{StudentStatusForm.value | json}} -->
+
                       </div>
 
-                      <!-- <button mat-button id="abutton" color="primary">USE</button> -->
+
 
                     </mat-action-row>
                   </mat-expansion-panel>
