@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
 interface Certificate {
-  _id: String, 
+  _id: String,
   userid: String,
   certName: String,
   certType: String,
@@ -49,7 +49,7 @@ export class CertificationComponent implements OnInit {
     })
   });
 
-  // certificate types 
+  // certificate types
   certificates = [
     'Student Status Verification Certificate',
     'Character Certificate',
@@ -95,7 +95,7 @@ export class CertificationComponent implements OnInit {
     // console.log(this.CertificationForm.value , myCookie.usertype)
     if (this.userid) {
       if(this.CertificationForm.value.certName == '' || this.CertificationForm.value.certType == ''){
-        alert("Fili the form field please..!")
+        alert("Fill the form field please..!")
       }
       else{
         //create certificateApproval JSON object
@@ -109,9 +109,9 @@ export class CertificationComponent implements OnInit {
           reqDate: date,
           state: "Pending"
         }
-  
+
         var url = "http://localhost:3000/certification/requestCert"  //server url
-  
+
         this.http.post<any>(url, certificateApproval).subscribe(res => {   //requesting ro the server and send data to  save
           if (res.state) {
             console.log(res.msg);

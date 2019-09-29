@@ -70,14 +70,22 @@ router.get("/issuedCert/:id", function (req, res) {
 module.exports = router; 
 
 //test
-router.get("/", async function (req, res)  {
-    console.log("hello");
-    const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
-    var doc = await pdfDoc.PDFDocument.load(uint8Array);
-    const pages = doc.getPages()
-    const pageOne = pages[0];
-    pageOne.drawText('You can modify PDFs too!')
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
-    res.send("Hello users");
+router.get("/studentstatus", async function (req, res)  {
+    console.log("hello at server ");
+    const newRequest = new requestStudentstatus({
+        studentName: req.body.studentName,
+        admissionNum: req.body.admissionNum,
+        dateofAdmission: req.body.dateofAdmission,
+        currentStatus: req.body.currentStatus,
+        description: req.body.description,
+    });
+    console.log(newRequest);
+    // const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
+    // var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    // const pages = doc.getPages()
+    // const pageOne = pages[0];
+    // pageOne.drawText('You can modify PDFs too!')
+    // const pdfBytes = await doc.save()
+    // fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
+    // res.send("Hello users");
 });
