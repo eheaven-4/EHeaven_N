@@ -59,7 +59,7 @@ export class PrepareCertificationComponent implements OnInit {
         });
     console.log(studentStatusApproval);
 
-    window.location.reload();
+    // window.location.reload();
 
   }
 

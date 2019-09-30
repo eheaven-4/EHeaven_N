@@ -73,8 +73,9 @@ export class CertificationComponent implements OnInit {
     var id = myCookie.userid;
     //load pending and issued certificates tho the user
 
-    var pendingUrl = "http://localhost:3000/certification/pendingCert"
-    var issuedUrl = "http://localhost:3000/certification/issuedCert"
+    var pendingUrl = "http://localhost:3000/certification/pendingCert";
+    var issuedUrl = "http://localhost:3000/certification/issuedCert";
+    
     this.http.get<any>(pendingUrl+'/' + id).subscribe(res => {
       console.log(res)
       this.pendingCert = res;
@@ -132,7 +133,7 @@ export class CertificationComponent implements OnInit {
       alert("Please Login First..!")
       this.router.navigate(['/login']);
     }
-    window.location.reload();     //reload the page
+    // window.location.reload();     //reload the page
   }
 
 

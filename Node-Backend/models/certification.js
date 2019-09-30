@@ -12,11 +12,7 @@ const requestCertificationSchema = mongoose.Schema({
     state: { type: String, require: true}
 });
 
-const requestCertification = module.exports = mongoose.model("requestCertification", requestCertificationSchema);
-
-module.exports.saveRequest = function (newRequestCertification, callback) {
-    newRequestCertification.save(callback);
-};
+const requestCertification = mongoose.model("requestCertification", requestCertificationSchema);
 
 const requestStudentstatusSchema = mongoose.Schema({
     studentName: { type: String, require: true },
@@ -26,5 +22,9 @@ const requestStudentstatusSchema = mongoose.Schema({
     description: { type: String, require: true },
 });
 
-const requestStudentstatus = module.exports = mongoose.model("requestStudentstatus", requestStudentstatusSchema);
+const requestStudentstatus=  mongoose.model("requestStudentstatus", requestStudentstatusSchema);
 
+module.exports = {
+    requestCertification: requestCertification,
+    requestStudentstatus: requestStudentstatus
+}
