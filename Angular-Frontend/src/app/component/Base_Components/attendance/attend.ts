@@ -1,5 +1,5 @@
 export class Attend {
-    userid:string;
+    username:string;
     attend:boolean;
     class:string;
 }

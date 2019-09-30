@@ -9,10 +9,10 @@ router.post("/addLog",function(request,response){
     var today=new Date();
     var todaystr=today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate();
     const stu=new attendance({
-        userid:request.body.name,
+        userid:request.body.username,
         attend:request.body.attend,
         date:todaystr,
-        class:"1-A"
+        class:request.body.class
     });
     console.log(stu);
     attendance.addAttendance(stu,function (err,req){

@@ -14,81 +14,105 @@ public classname="1-A";
 public students:Array<User>;
 public attendRecord:Attend[];
 public i=0;
+public numberOfStudent=0;
+public today=0;
+public presentStu=0;
+public mainflag=true;
+public historyflagD=true;
+public historyflagS=true;
 
-
-
-  constructor(private attendanceservice:AttendenceService) { }
+  constructor(private attendanceservice:AttendenceService) {this.today = Date.now()}
 
   ngOnInit() {
     this.attendanceservice.retriveUsers()
     .subscribe((data:User[])=>{
       this.students=data;
-    })
+    });
+    
+    
   }
-  addData(stu:object){
+  addData(stu:Attend){
     this.attendanceservice.logAdd(stu)
        .subscribe(
           data=>console.log('Success',data),
           error=>console.error('Error!',error) 
-    )
+    );
   }
-  // genarateDate(){
-  //   var date=Date();
-  //   var dat=1;
   
-
-  // }
-  
-  storeValue(userid:string,val:boolean,index) {
-      var value="";
+  storeValue(index) {
+      this.numberOfStudent=this.students.length;
+      console.log(this.numberOfStudent);
       if(index==this.i){
         var newRec=new Attend();
-        newRec.userid=userid;
-        newRec.attend=val;
+        newRec.username=this.students[index].userid;
+        newRec.attend=true;
         newRec.class=this.classname;
+        this.presentStu++;
       
         console.log(newRec);
         //this.addData(newRec);
-        if(this.i==0){
-          this.attendRecord[0]=newRec;
-        }
+        this.addData(newRec);
         //this.attendRecord.push(newRec);
         this.i++;
-      }else{
-        for(var i = 0; i < this.attendRecord.length; i++) {
-            if(this.attendRecord[i].userid==userid){
-                this.attendRecord[i].attend=val;
+      }
+      else if(this.i<index){
+          for(var j = this.i; j <index; j++) {
+            var newRec=new Attend();
+            newRec.username=this.students[j].userid;
+            newRec.attend=false;
+            newRec.class=this.classname;
+            console.log(newRec);
+            this.addData(newRec);
               
-            }
-        }
-        // var newRec=new Attend();
-        // newRec.userid=userid;
-        // newRec.attend=val;
-        // newRec.class=this.classname;
-        // newRec.date=this.today;
+          }
+        
+          newRec=new Attend();
+          newRec.username=this.students[index].userid;
+          newRec.attend=true;
+          newRec.class=this.classname;
+          console.log(newRec);
+          this.addData(newRec);
+          //newRec.date=this.today;
+          this.i=index+1;
+          this.presentStu++;
 
-        // console.log(newRec);
-      }   
+          // console.log(newRec);
+      }else{
+        newRec=new Attend();
+        newRec.username=this.students[index].userid;
+        newRec.attend=true;
+        newRec.class=this.classname;
+        console.log(newRec);
+        this.updateData(newRec);
 
-      // }
-      // if(val){
-      //   value="Present";
-      // }else{
-      //   value="Absence";
-      // }
-      // console.log(name+" is "+value);
-         
+      }      
   }
-  // onSubmit(){
-  //   for (var key in this.dataarr) {
-  //     var valu = this.dataarr[key];
-  //     console.log(key, valu);
-  //   }
-    // this.attendanceservice.enroll(this.dataarr)
-    //    .subscribe(
-    //       data=>console.log('Success',data),
-    //       error=>console.error('Error!',error) 
-    // )
- // }
+  updateData(stu:Attend){
+    this.attendanceservice.logUpdate(stu)
+        .subscribe(
+            data=>console.log('Success',data),
+            error=>console.error('Error!',error) 
+    );
+  }
+  onSubmit(){
+    this.mainflag=false;
+    if(this.i<=this.numberOfStudent){
+      for(var j=this.i;j<=this.numberOfStudent;j++){
+        var newRec=new Attend();
+        newRec.username=this.students[j].userid;
+        newRec.attend=false;
+        newRec.class=this.classname;
+        console.log(newRec);
+        this.addData(newRec);
+
+      }
+    }
+  }
+  searchStu(){
+
+  }
+  searchDate(){
+    
+  }
 
 }
