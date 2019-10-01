@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgFlashMessagesModule } from 'ng-flash-messages';
@@ -11,8 +11,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
-
 import { AppRoutingModule } from './app-routing.module';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/Auth/navbar/navbar.component';
@@ -69,11 +69,13 @@ import { PaymentsComponent } from './component/Admin/payments/payments.component
     MatDatepickerModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    FontAwesomeModule
+    MDBBootstrapModule,
+    FontAwesomeModule,
   ],
   providers: [
     CookieService,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [ NO_ERRORS_SCHEMA ]
 })
 export class AppModule { }
