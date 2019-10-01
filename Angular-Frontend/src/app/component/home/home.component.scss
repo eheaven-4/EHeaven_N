@@ -49,6 +49,7 @@
     font-size: 50px;
     font-family: 'Courier New', Courier, monospace;
     padding-top: 20px;
+    color: #E69F0E;
 }
 .news-card {
   height: 500px;
@@ -99,4 +100,20 @@
   position: absolute;
   width: 100%;
   backface-visibility: hidden;
+}
+/**********************************************************************************************/
+.vision_txt{
+    font-size: 50px;
+    padding-top: 10px;
+    padding-bottom: 50px;
+    text-align:center;
+    font-family: cursive;
+}
+.select-demo{
+	font-size: 45px;
+	font-family: 'Oswald', sans-serif;
+	text-align: center;
+}
+.orange{
+	color: #E69F0E;
 }

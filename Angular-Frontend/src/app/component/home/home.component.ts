@@ -7,13 +7,6 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  mouseEnter(div : string){
-    console.log("mouse enter : " + div);
- }
-
- mouseLeave(div : string){
-   console.log('mouse leave :' + div);
- }
   constructor() { }
 
   ngOnInit() {

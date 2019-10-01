@@ -34,11 +34,14 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="background-color:#ff9800">
-        <p class="news_head">- News Feed - </p>
+    <div class="container-fluid" style="background-color:#f3f3f3">
+        <p style="text-align: center; margin-top: 30px; margin-bottom: -30px">
+            <img src="../../../assets/icons/chevron-down-solid.svg" style="width: 20px; ">
+        </p>
+        <p class="news_head">- News Feeds - </p>
     </div>
 
-    <div class="container-fluid" style="background-color: white">
+    <div class="container-fluid" style="background-color: #f3f3f3">
         <div class="news_feeds">
             <div class="container-fluid">
                 <div class="row">
@@ -52,8 +55,7 @@
                                             <mat-card-title>Top News</mat-card-title>
                                             <mat-card-subtitle>Date and time</mat-card-subtitle>
                                         </mat-card-header>
-                                        <img mat-card-image
-                                            src="../../../assets/backgrounds/marketing-books.jpg"
+                                        <img mat-card-image src="../../../assets/backgrounds/marketing-books.jpg"
                                             class="card-img">
                                         <mat-card-content>
                                             <p style="text-align: justify;">
@@ -64,7 +66,7 @@
                                                 The Shiba Inu is the smallest of the six original and distinct spitz
                                                 breeds of dog from Japan.
                                                 A small, agile dog that copes very well with mountainous terrain, the
-                                                Shiba Inu was originally bred for hunting. mJapan.  
+                                                Shiba Inu was originally bred for hunting. mJapan.
                                             </p>
                                         </mat-card-content>
                                         <mat-card-actions>
@@ -89,49 +91,127 @@
                         </div>
                     </div>
                     <div class="col-md-3">
-                            <div class=" flip-box">
-                                <div class="flip-box-inner">
-                                    <div class="flip-box-front">
-                                        <mat-card class="news-card ">
-                                            <mat-card-header>
-                                                <div mat-card-avatar class="example-header-image"></div>
-                                                <mat-card-title>Top News</mat-card-title>
-                                                <mat-card-subtitle>Date and time</mat-card-subtitle>
-                                            </mat-card-header>
-                                            <img mat-card-image
-                                                src="https://material.angular.io/assets/img/examples/shiba2.jpg"
-                                                class="card-img">
-                                            <mat-card-content>
-                                                <p style="text-align: justify;">
-                                                    The Shiba Inu is the smallest of the six original and distinct spitz
-                                                    breeds of dog from Japan.
-                                                    A small, agile dog that copes very well with mountainous terrain, the
-                                                    Shiba Inu was originally bred for hunting. mJapan.
-                                                </p>
-                                            </mat-card-content>
-                                            <mat-card-actions>
-                                            </mat-card-actions>
-                                        </mat-card>
-                                    </div>
-                                    <div class="flip-box-back">
-                                        <h2>Paris</h2>
-                                        <p>What an amazing city The Shiba Inu is the smallest of the six original and
-                                            distinct spitz breeds
-                                            of
-                                            dog
-                                            from
-                                            Japan.
-                                            A small, agile dog that copes very well with mountainous terrain, the Shiba
-                                            Inu
-                                            was
-                                            originally
-                                            bred for hunting.</p>
-                                    </div>
+                        <div class=" flip-box">
+                            <div class="flip-box-inner">
+                                <div class="flip-box-front">
+                                    <mat-card class="news-card ">
+                                        <mat-card-header>
+                                            <div mat-card-avatar class="example-header-image"></div>
+                                            <mat-card-title>Top News</mat-card-title>
+                                            <mat-card-subtitle>Date and time</mat-card-subtitle>
+                                        </mat-card-header>
+                                        <img mat-card-image
+                                            src="https://material.angular.io/assets/img/examples/shiba2.jpg"
+                                            class="card-img">
+                                        <mat-card-content>
+                                            <p style="text-align: justify;">
+                                                The Shiba Inu is the smallest of the six original and distinct spitz
+                                                breeds of dog from Japan.
+                                                A small, agile dog that copes very well with mountainous terrain, the
+                                                Shiba Inu was originally bred for hunting. mJapan.
+                                            </p>
+                                        </mat-card-content>
+                                        <mat-card-actions>
+                                        </mat-card-actions>
+                                    </mat-card>
+                                </div>
+                                <div class="flip-box-back">
+                                    <h2>Paris</h2>
+                                    <p>What an amazing city The Shiba Inu is the smallest of the six original and
+                                        distinct spitz breeds
+                                        of
+                                        dog
+                                        from
+                                        Japan.
+                                        A small, agile dog that copes very well with mountainous terrain, the Shiba
+                                        Inu
+                                        was
+                                        originally
+                                        bred for hunting.</p>
                                 </div>
                             </div>
                         </div>
+                    </div>
                 </div>
 
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid" style="background-color:#333333">
+        <p style="text-align: center; margin-top: 30px; margin-bottom: -30px">
+            <img src="../../../assets/icons/chevron-down-solid.svg" style="width: 20px; ">
+        </p>
+        <p class="news_head">- Our Gallery - </p>
+    </div>
+    <!-- <div class="container-fluid" style="background-color:#004d40; height: 20px;"></div> -->
+
+    <div class="container-fluid" style="background-color: #333333;">
+        <mdb-carousel class="carousel slide carousel-fade" [animation]="'carousel-fade'">
+            <mdb-carousel-item>
+                <div class="view w-100">
+                    <img class="d-block w-100" src="../../../assets/slideshow/1.jpg" alt="First slide">
+                    <!-- <div class="mask rgba-black-light waves-light" mdbWavesEffect></div> -->
+                </div>
+                <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Light mask</h3>
+                    <p>First text</p>
+                </div> -->
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <div class="view w-100">
+                    <img class="d-block w-100" src="../../../assets/slideshow/2.jpg" alt="Second slide">
+                    <div class="mask rgba-black-strong waves-light" mdbWavesEffect></div>
+                </div>
+                <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Strong mask</h3>
+                    <p>Secondary text</p>
+                </div> -->
+            </mdb-carousel-item>
+            <mdb-carousel-item>
+                <div class="view w-100">
+                    <img class="d-block w-100" src="../../../assets/slideshow/3.jpg" alt="Third slide">
+                    <div class="mask rgba-black-slight waves-light" mdbWavesEffect></div>
+                </div>
+                <!-- <div class="carousel-caption">
+                    <h3 class="h3-responsive">Slight mask</h3>
+                    <p>Third text</p>
+                </div> -->
+            </mdb-carousel-item>
+        </mdb-carousel>
+
+    </div>
+    <div class="container-fluid" style="background-color:#333333; height: 20px;">
+
+    </div>
+    <div class="container-fluid" style="background-color:#333333">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="../../../assets/slideshow/1.jpg" style="width: 102%">
+            </div>
+            <div class="col-md-4">
+                <img src="../../../assets/slideshow/2.jpg" style="width: 102%; margin-left: -5px">
+            </div>
+            <div class="col-md-4">
+                <img src="../../../assets/slideshow/3.jpg" style="width: 102%; margin-left: -10px">
+            </div>
+        </div>
+
+    </div>
+    <!-- <div class="container-fluid" style="background-color:#004d40; height: 20px;"></div> -->
+    <div class="container-fluid" style="background-color:#333333; height: 20px;"></div>
+    <div class="container-fluid" style="background-color:#f3f3f3">
+        <p style="text-align: center; margin-top: 30px; margin-bottom: -30px">
+            <img src="../../../assets/icons/chevron-down-solid.svg" style="width: 20px; ">
+        </p>
+        <p class="news_head">- Our Vision - </p>
+    </div>
+
+    <div class="container-fluid" style="background-color: #f3f3f3">
+        <div>
+            <div class="container">
+                <p class="vision_txt">*** " If you are planning for a year, sow rice. If you are planning for a decade,
+                    plant trees. If you are planning for a lifetime, Educate people." ***</p>
             </div>
         </div>
     </div>
