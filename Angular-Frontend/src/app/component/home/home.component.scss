@@ -1,62 +1,102 @@
-.back_gr{
-    background:linear-gradient(
-        rgb(0, 0, 0, 0.70),
-        rgba(0,0,0,0.70)
-        ),
-        url("../../../assets/backgrounds/marketing-books.jpg");
-    height: 700px;
-    width: 100%;
-    background-size: cover;
-    background-repeat: no-repeat;
+.back_gr {
+  background: linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../../../assets/backgrounds/marketing-books.jpg");
+  height: 700px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
-.logo_img{
-    padding-top:30px;
-    width:100px;
+.logo_img {
+  padding-top: 30px;
+  width: 100px;
 }
-.scl_name{
-    padding-top: 20px;
-    color:aliceblue;
-    text-align: center;
-    font-size: 100px;
-    font-family: "Calibari";
-    font-weight: bold;
+.scl_name {
+  padding-top: 20px;
+  color: aliceblue;
+  text-align: center;
+  font-size: 100px;
+  font-family: "Calibari";
+  font-weight: bold;
 }
-.school_des{
-    color: #ffffff;
-    font-family: "Calibari";
-    font-size: 20px;
-    text-align: justify;
+.school_des {
+  color: #ffffff;
+  font-family: "Calibari";
+  font-size: 20px;
+  text-align: justify;
 }
-.school_map{
-    color: #ffffff;
-    font-family: "Calibari";
-    font-size: 20px;
-    text-align: justify;
-    padding-left: 30px;
+.school_map {
+  color: #ffffff;
+  font-family: "Calibari";
+  font-size: 20px;
+  text-align: justify;
+  padding-left: 30px;
 }
-.map{
-    padding-left: 30px;
-    width: 500px;
+.map {
+  padding-left: 30px;
+  width: 500px;
 }
- 
-.news-card {
-    margin-bottom: 20px;
-    max-width: 100%;
-    max-height: 500px;
-}
-  
+
+
 .example-header-image {
-    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
     background-size: cover;
 }
 
-.news_feeds{
-    padding-top:20px;
-    padding-bottom: 20px;
+
+/**********************************************/
+.news_head{
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Courier New', Courier, monospace;
+    padding-top: 20px;
+}
+.news-card {
+  height: 500px;
+  width: 100%;
+}
+.news_feeds {
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
-.news_view_btn{
-    background-color :#26a1da;
-    color: #ffffff;
-    width:100px;
+.flip-box-front {
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+}
+
+.flip-box-back {
+    background-color: rgb(31, 42, 49);
+    color: white;
+    transform: rotateY(180deg);
+      height: 500px;
+    border-radius: 5px;
+    text-align: justify;
+    padding-top: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+.flip-box {
+    height: 500px;
+    background-color: transparent;
+}
+
+.flip-box-inner {
+  position: relative;
+  width: 100%;
+//   height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-box:hover .flip-box-inner {
+  transform: rotateY(180deg);
+}
+
+.flip-box-front,
+.flip-box-back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
 }
