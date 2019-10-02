@@ -32,6 +32,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
 import { NewsComponent } from './component/Admin/news/news.component';
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
+import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
 
 
 
@@ -55,6 +56,7 @@ import { PaymentsComponent } from './component/Admin/payments/payments.component
     NewsComponent,
     AdminDashboardComponent,
     PaymentsComponent,
+    StudentProgressComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

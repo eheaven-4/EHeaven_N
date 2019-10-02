@@ -21,6 +21,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
 import { NewsComponent } from './component/Admin/news/news.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
+import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
   {path: 'attendance' , component:AttendanceComponent},
   {path: 'admin_dashboard', component:AdminDashboardComponent},
   {path: 'news_feeds', component:NewsComponent},
-  {path: 'payments', component:PaymentsComponent}
+  {path: 'payments', component:PaymentsComponent},
+  {path: 'student_progress/:id', component: StudentProgressComponent},
 ];
 
 @NgModule({
