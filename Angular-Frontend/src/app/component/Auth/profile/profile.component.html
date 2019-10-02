@@ -21,38 +21,88 @@
                     </div>
                     <div class="profile_data" style="padding-bottom: 50px">
                         <mat-card *ngIf="profiledata">
-                            <div class="row">
-                                <div class="clo-md-2">
-                                    <img class="icns" src="../../../../assets/">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="clo-md-2">
+                                        <i class="material-icons icons">person</i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="profile_attributes">Full Name </label>
+                                        <p class="profile_attributes_data">{{profiledata.name}}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <label class="profile_attributes">Full Name </label>
-                                    <p class="profile_attributes_data">{{profiledata.name}}</p>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="clo-md-2">
+                                        <i class="material-icons icons">person</i>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="profile_attributes">Address </label>
+                                        <p class="profile_attributes_data">{{profiledata.address}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <img src="../../../../assets/icons/id-badge-regular.svg">
+                                            </div>
+                                            <div class="col-md-10">
+                                                <label class="profile_attributes">User ID </label>
+                                                <p class="profile_attributes_data">{{profiledata.userid}}</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <fa-icon [icon]="faAt" style="font-size: 20px"></fa-icon>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label class="profile_attributes">E-mail </label>
+                                                    <p class="profile_attributes_data">{{profiledata.email}}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="row">
+                                            <div class="col-md-2">
+                                                <img src="../../../../assets/icons/id-badge-regular.svg">
+                                            </div>
+                                            <div class="col-md-10">
+                                                
+                                                <label class="profile_attributes">Mobile No </label>
+                                                <p class="profile_attributes_data">{{profiledata.mobilenumber}}</p>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="row">
+                                                <div class="col-md-2">
+                                                    <fa-icon [icon]="faAt" style="font-size: 20px"></fa-icon>
+                                                </div>
+                                                <div class="col-md-10">
+                                                    <label class="profile_attributes">NIC No </label>
+                                                    <p class="profile_attributes_data">{{profiledata.nicnumber}}</p>
+                                                    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                             <div>
-                                <label class="profile_attributes">Address </label>
-                                <p class="profile_attributes_data">{{profiledata.address}}</p>
 
                             </div>
                             <div>
-                                <label class="profile_attributes">User ID </label>
-                                <p class="profile_attributes_data">{{profiledata.userid}}</p>
-
-                            </div>
-                            <div>
-                                <label class="profile_attributes">E-mail </label>
-                                <p class="profile_attributes_data">{{profiledata.email}}</p>
-
-                            </div>
-                            <div>
-                                <label class="profile_attributes">Mobile No </label>
-                                <p class="profile_attributes_data">{{profiledata.mobilenumber}}</p>
-
-                            </div>
-                            <div>
-                                <label class="profile_attributes">NIC No </label>
-                                <p class="profile_attributes_data">{{profiledata.nicnumber}}</p>
 
                             </div>
                             <div>
