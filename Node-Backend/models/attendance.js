@@ -15,7 +15,7 @@ module.exports.addAttendance=function(newattend,callback){
     newattend.save(callback);
 };
 module.exports.updateAttendance=function(datalog,callback){
-    con
+    //con
 }
 // module.exports.retriveUsers(callback){
 //     users.find(callback);
