@@ -39,5 +39,35 @@ router.get("/received", function (req, res) {
     
 });
 
+router.get("/searchDate/:date", function (req, res) {
+    console.log("serchdate");
+    console.log(req.params.date);
+    attendance.find({date:req.params.date})
+    .exec(function(err,data){
+        if(err){
+            console.log("Error");
+        }else{
+            console.log(data);
+            res.json(data);
+        }
+    });
+    
+});
+
+router.get("/searchStu/:userid", function (req, res) {
+    console.log("serchStudent");
+    users.find({userid:req.params.userid})
+    .exec(function(err,data){
+        if(err){
+            console.log("Error");
+        }else{
+            console.log(data);
+            res.json(data);
+        }
+    });
+    
+});
+
+
 module.exports = router;
 

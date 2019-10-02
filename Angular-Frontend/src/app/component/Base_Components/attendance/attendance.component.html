@@ -78,11 +78,11 @@
                                 <mat-tab-group  mat-align-tabs="center">
                                     <mat-tab label="Special Date">
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagD">
-                                            <form class="text-center border p-5 reg-frm" (click)="searchStu()">
+                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchDate()">
                                                 <h4>
                                                     Enter Date
                                                 </h4>
-                                                <input   type="text" #name>
+                                                <input   type="text" [(ngModel)]="data.date" name="Date">
                                                 <hr>
                                                         
                                                 <button class="btn btn-primary">search</button>
@@ -93,16 +93,19 @@
                                             </form>
                                         </div>
                                         <div *ngIf="!historyflagD">
+                                                <div *ngFor="let result of searchDateResult">
+                                                    {{result.date}};
+                                                </div>
                                             hello
                                         </div>
                                     </mat-tab>
                                     <mat-tab label="Special Student">
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagS">
-                                            <form class="text-center border p-5 reg-frm" (click)="searchStu()">
+                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu()">
                                                 <h4>
                                                     Enter student Rejistration number
                                                 </h4>
-                                                <input   type="text" #name>
+                                                <input   type="text" [(ngModel)]="data.username" name="name">
                                                 <hr>
                                                 
                                                 <button class="btn btn-primary">search</button>
@@ -111,9 +114,12 @@
                                                       </div> -->
 
                                             </form>
-                                            <div *ngIf="!historyflagS">
-                                                    hello
-                                            </div>
+                                            
+                                        </div>
+                                        <div *ngIf="!historyflagS" style="padding-top: 100px; padding-bottom: 100px">
+                                                <div *ngFor="let result of searchStuResult">
+                                                        {{result.userid}};
+                                                </div>
                                         </div>
                                     </mat-tab>
                                 </mat-tab-group>

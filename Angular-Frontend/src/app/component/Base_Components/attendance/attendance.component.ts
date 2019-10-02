@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {AttendenceService} from './attendence.service';
 import {User} from './../../../user';
 import {Attend} from './attend';
+import {Attendreturn} from './attend';
 
 @Component({
   selector: 'app-attendance',
@@ -13,20 +14,24 @@ public classname="1-A";
 
 public students:Array<User>;
 public attendRecord:Attend[];
+
+public searchStuResult:Attendreturn[];
+public searchDateResult:Attendreturn[];
 public i=0;
 public numberOfStudent=0;
-public today=0;
 public presentStu=0;
 public mainflag=true;
 public historyflagD=true;
 public historyflagS=true;
+public data=new Attendreturn();
 
-  constructor(private attendanceservice:AttendenceService) {this.today = Date.now()}
+  constructor(private attendanceservice:AttendenceService) { }
 
   ngOnInit() {
     this.attendanceservice.retriveUsers()
     .subscribe((data:User[])=>{
       this.students=data;
+      this.numberOfStudent=data.length;
     });
     
     
@@ -40,7 +45,7 @@ public historyflagS=true;
   }
   
   storeValue(index) {
-      this.numberOfStudent=this.students.length;
+     
       console.log(this.numberOfStudent);
       if(index==this.i){
         var newRec=new Attend();
@@ -109,10 +114,23 @@ public historyflagS=true;
     }
   }
   searchStu(){
+    this.historyflagS=false;
+    //console.log(this.data.username);
+    this.attendanceservice.retriveStu(this.data.date)
+    .subscribe((data:Attendreturn[])=>{
+      this.searchStuResult=data;
+    });
+  
 
   }
   searchDate(){
-    
+    //console.log(this.data.username);
+    this.historyflagD=false;
+    this.attendanceservice.retriveDate(this.data.date)
+    .subscribe((data:Attendreturn[])=>{
+      this.searchDateResult=data;
+
+    });
   }
 
 }
