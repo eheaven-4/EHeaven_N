@@ -9,6 +9,13 @@ export class StudentProgressComponent implements OnInit {
 
   constructor() { }
 
+  certificates = [
+    'Student Status Verification Certificate',
+    'Character Certificate',
+    'Leaving Certificate',
+    'Educational Certificate'
+  ];
+  
   ngOnInit() {
   }
 

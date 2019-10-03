@@ -97,22 +97,7 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  userGrades() {
-    if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      this.router.navigate(['/certification']);
-    }
-    else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
-      this.router.navigate(['/login']);
-    }
-  }
+  
   userAttendence() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
@@ -151,7 +136,7 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/certification']);
+      this.router.navigate(['/student_progress' + '/' + id]);
     }
     else {
       this.ngFlashMessage.showFlashMessage({

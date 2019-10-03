@@ -1,1 +1,44 @@
-asdfghjkl
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-2">
+        <app-sidebar></app-sidebar>
+      </div>
+      <div class="container-fluid col-md-10" style="background-color:white">
+        <div>
+          <div class="container">
+            <h2 style="color:   rgb(0, 140, 255); font-weight: bold;padding-top: 20px">News</h2>
+            <hr>
+          </div>
+          <div style="padding-top:50px ; padding-bottom:50px">
+            <form class="border text-center p-5 reg-frm">
+              <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+
+              <div class="form-row mb-4">
+                <label>Topic :</label>
+                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="topic"
+                  [(ngModel)]="topic">
+              </div>
+
+              <div class="form-row mb-4">
+                <label>News :</label>
+                <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news"
+                  id="textbox" [(ngModel)]="news"></textarea>
+              </div>
+
+              <div class="form-row mb-4">
+                <label>Date :</label>
+                <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy"
+                  name="date" [(ngModel)]="date">
+              </div>
+              <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+              (click)="fileInput.click()">Attach a image</button>
+
+              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
