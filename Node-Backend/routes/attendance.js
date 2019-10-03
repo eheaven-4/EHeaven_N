@@ -9,13 +9,14 @@ router.post("/addLog",function(request,response){
     var today=new Date();
     var year=today.getFullYear();
     var date=today.getDate();
-    var month=function(){
-        if(today.getMonth()<9){
-            return ('0'+(today.getMonth()+1));
-        }else{
-            return today.getMonth()+1;
-        }
+    var month='';
+    if(today.getMonth()<9){
+        month=('0'+(today.getMonth()+1));
+    }else{
+        month=today.getMonth()+1;
     }
+    
+    
     var todaystr=year+"/"+month+"/"+date;
     const stu=new attendance({
         userid:request.body.username,

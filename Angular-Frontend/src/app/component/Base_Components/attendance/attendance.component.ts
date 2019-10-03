@@ -102,7 +102,7 @@ public data=new Attendreturn();
   onSubmit(){
     this.mainflag=false;
     if(this.i<=this.numberOfStudent){
-      for(var j=this.i;j<=this.numberOfStudent;j++){
+      for(var j=this.i;j<this.numberOfStudent;j++){
         var newRec=new Attend();
         newRec.username=this.students[j].userid;
         newRec.attend=false;
