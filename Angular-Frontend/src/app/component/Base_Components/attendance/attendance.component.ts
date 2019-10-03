@@ -113,20 +113,20 @@ public data=new Attendreturn();
       }
     }
   }
-  searchStu(){
+  searchStu(value:string){
     this.historyflagS=false;
-    //console.log(this.data.username);
-    this.attendanceservice.retriveStu(this.data.date)
+    console.log(value);
+    this.attendanceservice.retriveStu(value)
     .subscribe((data:Attendreturn[])=>{
       this.searchStuResult=data;
     });
   
 
   }
-  searchDate(){
-    //console.log(this.data.username);
+  searchDate(value:string){
+    console.log(value);
     this.historyflagD=false;
-    this.attendanceservice.retriveDate(this.data.date)
+    this.attendanceservice.retriveDate(value)
     .subscribe((data:Attendreturn[])=>{
       this.searchDateResult=data;
 

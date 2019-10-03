@@ -7,7 +7,16 @@ const users=require('../models/users');
 router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
-    var todaystr=today.getFullYear()+"/"+(today.getMonth()+1)+"/"+today.getDate();
+    var year=today.getFullYear();
+    var date=today.getDate();
+    var month=function(){
+        if(today.getMonth()<9){
+            return ('0'+(today.getMonth()+1));
+        }else{
+            return today.getMonth()+1;
+        }
+    }
+    var todaystr=year+"/"+month+"/"+date;
     const stu=new attendance({
         userid:request.body.username,
         attend:request.body.attend,
@@ -39,10 +48,11 @@ router.get("/received", function (req, res) {
     
 });
 
-router.get("/searchDate/:date", function (req, res) {
-    console.log("serchdate");
-    console.log(req.params.date);
-    attendance.find({date:req.params.date})
+router.get("/searchDate", function (req, res) {
+    console.log("searchdate");
+    var inputdate = req.query.date;
+    console.log(inputdate);
+    attendance.find({date:inputdate})
     .exec(function(err,data){
         if(err){
             console.log("Error");
@@ -56,7 +66,7 @@ router.get("/searchDate/:date", function (req, res) {
 
 router.get("/searchStu/:userid", function (req, res) {
     console.log("serchStudent");
-    users.find({userid:req.params.userid})
+    attend.find({userid:req.params.userid})
     .exec(function(err,data){
         if(err){
             console.log("Error");

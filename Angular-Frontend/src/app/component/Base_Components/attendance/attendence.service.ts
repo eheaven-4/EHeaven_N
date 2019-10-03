@@ -24,10 +24,11 @@ export class AttendenceService {
   logUpdate(stu:Attend){
     return this._http.post<Attend>(this.update_url,stu);
   }
-  retriveDate(date:string){
-  console.log(date);
-   var  get_date='http://localhost:3000/attendance/searchDate/'+date;
-   return this._http.get<any>(get_date);
+  retriveDate(value:string){
+  
+  console.log(value);
+   var  get_date='http://localhost:3000/attendance/searchDate';
+   return this._http.get<any>(get_date,{params: {date:value}});
 
   }
   retriveStu(userid:string){
