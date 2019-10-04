@@ -119,7 +119,24 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/certification']);
+      this.router.navigate(['/extra_curricular']);
+    }
+    else {
+      this.ngFlashMessage.showFlashMessage({
+        messages: ["Please Login First..!"], 
+        dismissible: true, 
+        timeout: 2000,
+        type: 'warning',
+      });
+      this.router.navigate(['/login']);
+    }
+  }
+
+  userStudentMarks() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/manage_marks']);
     }
     else {
       this.ngFlashMessage.showFlashMessage({
