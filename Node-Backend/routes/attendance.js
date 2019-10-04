@@ -8,16 +8,21 @@ router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
     var year=today.getFullYear();
-    var date=today.getDate();
+    var date='';
     var month='';
     if(today.getMonth()<9){
         month=('0'+(today.getMonth()+1));
     }else{
         month=today.getMonth()+1;
     }
+    if(today.getDate()<10){
+        date='0'+today.getDate();
+    }else{
+        date=today.getDate();
+    }
     
     
-    var todaystr=year+"/"+month+"/"+date;
+    var todaystr=year+"-"+month+"-"+date;
     const stu=new attendance({
         userid:request.body.username,
         attend:request.body.attend,
@@ -65,7 +70,7 @@ router.get("/searchDate", function (req, res) {
     
 });
 
-router.get("/searchStu/:userid", function (req, res) {
+router.get("/searchStu", function (req, res) {
     console.log("serchStudent");
     attend.find({userid:req.params.userid})
     .exec(function(err,data){

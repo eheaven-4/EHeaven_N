@@ -24,6 +24,9 @@ public mainflag=true;
 public historyflagD=true;
 public historyflagS=true;
 public data=new Attendreturn();
+public today=new Date();
+public spanflageD=false;
+public spanflageS=false;
 
   constructor(private attendanceservice:AttendenceService) { }
 
@@ -120,6 +123,9 @@ public data=new Attendreturn();
     .subscribe((data:Attendreturn[])=>{
       this.searchStuResult=data;
     });
+    // if(!this.searchStuResult){
+    //   this.historyflagS=true;
+    // }
   
 
   }
@@ -128,9 +134,21 @@ public data=new Attendreturn();
     this.historyflagD=false;
     this.attendanceservice.retriveDate(value)
     .subscribe((data:Attendreturn[])=>{
-      this.searchDateResult=data;
+      if(data.length==0){
+        this.historyflagD=true;
+        this.spanflageD=true;
+      }else{
+        this.searchDateResult=data;
+      }
+      
 
     });
+    // if(this.searchDateResult.length==0){
+      
+    // }
+    // if(!this.searchDateResult){
+    //   this.historyflagD=true;
+    // }
   }
 
 }
