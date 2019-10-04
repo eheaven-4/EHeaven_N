@@ -24,6 +24,7 @@ import { PaymentsComponent } from './component/Admin/payments/payments.component
 import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
 import { ManageMarksComponent } from './component/Base_Components/manage-marks/manage-marks.component';
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
+import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
 
 
 const routes: Routes = [
@@ -43,7 +44,9 @@ const routes: Routes = [
   {path: 'payments', component:PaymentsComponent},
   {path: 'student_progress/:id', component: StudentProgressComponent},
   {path: 'manage_marks', component: ManageMarksComponent},
-  {path: 'extra_curricular', component: ExtraCurricularComponent}
+  {path: 'extra_curricular', component: ExtraCurricularComponent},
+  {path: 'class_registration', component:ClassRegistrationComponent},
+  
 ];
 
 @NgModule({

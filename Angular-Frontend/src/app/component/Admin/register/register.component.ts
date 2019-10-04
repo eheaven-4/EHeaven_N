@@ -12,6 +12,7 @@ export class RegisterComponent implements OnInit {
 
   usertype: String;
   userid: String;
+  selectclass: String;
   name: String;
   email: String;
   password: String;
@@ -41,6 +42,7 @@ export class RegisterComponent implements OnInit {
     const user = {
       usertype: this.usertype,
       userid: this.userid,
+      selectclass: this.selectclass,
       name: this.name,
       email: this.email,
       password: this.password,
