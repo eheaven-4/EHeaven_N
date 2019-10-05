@@ -70,9 +70,9 @@ router.get("/searchDate", function (req, res) {
     
 });
 
-router.get("/searchStu", function (req, res) {
+router.get("/searchStu/:userid", function (req, res) {
     console.log("serchStudent");
-    attend.find({userid:req.params.userid})
+    attendance.find({userid:req.params.userid})
     .exec(function(err,data){
         if(err){
             console.log("Error");

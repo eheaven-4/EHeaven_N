@@ -32,7 +32,7 @@ export class AttendenceService {
 
   }
   retriveStu(userid:string){
-    console.log(userid);
+    console.log(userid+"hello");
     var  get_Students='http://localhost:3000/attendance/searchStu/'+userid;
     return this._http.get<any>(get_Students);
 

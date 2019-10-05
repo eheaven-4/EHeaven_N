@@ -36,6 +36,7 @@ import { StudentProgressComponent } from './component/Base_Components/student-pr
 import { ManageMarksComponent } from './component/Base_Components/manage-marks/manage-marks.component';
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
 import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
+import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.component';
 
 
 
@@ -63,6 +64,7 @@ import { ClassRegistrationComponent } from './component/Admin/class-registration
     ManageMarksComponent,
     ExtraCurricularComponent,
     ClassRegistrationComponent,
+    BulkaddComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

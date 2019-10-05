@@ -141,7 +141,7 @@
                                             
                                         </div>
                                         <div *ngIf="!historyflagS" style="padding-top: 100px; padding-bottom: 100px">
-                                                <h2>{{searchDateResult[0].date}} Day  {{classname}} Attendence List</h2>
+                                                <h2>{{searchStuResult[0].userid}} Student  {{classname}} Attendence List</h2>
                                             <div class="row">
                                                <div class="col-md-6">
                                                     <div style="text-align: center">
@@ -154,7 +154,7 @@
                                                     </h3>
                                                 </div>
                                             </div>
-                                            <div class="row" *ngFor="let result of searchDateResult">
+                                            <div class="row" *ngFor="let result of searchStuResult">
                                                 <div class="col-md-6">
                                                     <div style="text-align: center">
                                                         <h3>{{result.date}}</h3>                                        
