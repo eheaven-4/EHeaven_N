@@ -85,10 +85,11 @@ router.post("/studentstatus", async function (req, res)  {
     const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
-    const pageOne = pages[0];
-    // pageOne.drawText('bZZZZZZZ');
-    pageOne.drawText(
-        this.newRequest.studentName,    //hereeee
+    const page = pages[0];
+    console.log(newRequest.studentName);
+    // pageOne.drawText(newRequest.studentName);
+    page.drawText(
+        newRequest.studentName,    
         {
             x: 100,
           y: 100,
@@ -97,7 +98,7 @@ router.post("/studentstatus", async function (req, res)  {
         );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
-    res.send("Hello users");
+    // res.send("Hello users");
 });
 
 module.exports = router; 
