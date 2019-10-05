@@ -10,7 +10,7 @@ const fs = require('fs');
 
 
 
-router.post("/login", function (req, res,next) {
+router.post("/login", function (req, res, next) {
     const userid = req.body.userid;
     const password = req.body.password;
 
@@ -21,22 +21,22 @@ router.post("/login", function (req, res,next) {
                 state: false,
                 msg: "No user found"
             });
-            return ;
+            return;
         }
         User.passwordCheck(password, user.password, function (err, match) {
             console.log(userid, password);
             if (err) {
                 throw err;
             }
-            
+
             if (match) {
                 console.log("Userid and Password match!");
-            /************************************************************************************** */
+                /************************************************************************************** */
                 // const cookies = res.cookie('cookieName', password, { maxAge: 9000, httpOnly: true });
                 // console.log('cookie created successfully');
                 /************************************************************************************** */
                 const token = jwt.sign(user.toJSON(), config.secret, { expiresIn: 86400 });
-                
+
                 res.json({
                     state: true,
                     token: "JWT" + token,
@@ -58,7 +58,7 @@ router.post("/login", function (req, res,next) {
                 });
             }
         });
-});
+    });
 });
 
 router.post("/register", function (req, res) {

@@ -9,22 +9,24 @@ import { ProfileComponent } from './component/Auth/profile/profile.component';
 
 import { HomeComponent } from './component/home/home.component';
 
-import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
-import { NotificationComponent } from './component/Base_Components/notification/notification.component';
-import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
-
-
-import { CertificationComponent } from './component/Base_Components/certification/certification.component';
-import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
-
-import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
+import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
+import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
+import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
+import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
+import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
+import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 import { NewsComponent } from './component/Admin/news/news.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
+
+
+import { NotificationComponent } from './component/Base_Components/notification/notification.component';
+import { CertificationComponent } from './component/Base_Components/certification/certification.component';
+
+import { AttendanceComponent } from './component/Base_Components/attendance/attendance.component';
 import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
 import { ManageMarksComponent } from './component/Base_Components/manage-marks/manage-marks.component';
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
-import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
 
 
 const routes: Routes = [
@@ -46,6 +48,8 @@ const routes: Routes = [
   {path: 'manage_marks', component: ManageMarksComponent},
   {path: 'extra_curricular', component: ExtraCurricularComponent},
   {path: 'class_registration', component:ClassRegistrationComponent},
+  {path: 'add_cls_tt', component:AddClassTimetableComponent},
+  {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
   
 ];
 

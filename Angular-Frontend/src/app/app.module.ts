@@ -37,6 +37,8 @@ import { ManageMarksComponent } from './component/Base_Components/manage-marks/m
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
 import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
 import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.component';
+import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
+import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 
 
 
@@ -65,6 +67,8 @@ import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.com
     ExtraCurricularComponent,
     ClassRegistrationComponent,
     BulkaddComponent,
+    AddClassTimetableComponent,
+    AddTeacherTimetableComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),
