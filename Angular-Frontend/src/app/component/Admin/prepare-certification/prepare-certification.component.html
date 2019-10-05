@@ -20,9 +20,11 @@
                         component) here
                       </mat-tab>
                       <mat-tab label="PREPARE CERTIFICATES">
-                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="StudentStatusForm">
+                        <mat-card >
                           <mat-accordion>
-                            <mat-expansion-panel>
+
+              <!-- ************************************************** Student Status Certificate Form ********************************************* -->
+                            <mat-expansion-panel [formGroup]="StudentStatusForm">
                               <mat-expansion-panel-header>Student Status Verification Certificate</mat-expansion-panel-header>
                               <mat-action-row>
                                 <div class="container">
@@ -45,14 +47,43 @@
 
                             <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitStudentstatus()">Submit</button>
                                 </div>
-
-
                               </mat-action-row>
+
                             </mat-expansion-panel>
-                            <mat-expansion-panel>
+
+              <!-- ************************************************** Character Certificate Form ********************************************* -->
+                            <mat-expansion-panel [formGroup]="CharacterCertForm">
                               <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
                               <mat-action-row>
-                                <button mat-button color="primary">USE</button>
+                                  <div class="container">
+                                      <mat-form-field>
+                                        <input matInput formControlName="studentName" placeholder="Name of the Student">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <input matInput formControlName="admissionNum" placeholder="Admission Number">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                          <input matInput formControlName="lastClass" placeholder="Last Class of Study">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                          <input matInput formControlName="lastExam" placeholder="Last Exam Sat">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                          <input matInput formControlName="examYear" placeholder="Examination Year">
+                                      </mat-form-field>
+                                      <!-- <mat-form-field>
+                                          <input matInput formControlName="dateofLeaving" [matDatepicker]="picker" placeholder="Date of Leaving">
+                                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                          <mat-datepicker #picker></mat-datepicker>
+                                        </mat-form-field> -->
+                                      <mat-form-field>
+                                        <textarea matInput formControlName="description" placeholder="Description"></textarea>
+                                      </mat-form-field>
+
+                                      <!-- {{CharacterCertForm".value | json}} -->
+
+                                <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
+                                    </div>
                               </mat-action-row>
                             </mat-expansion-panel>
                             <mat-expansion-panel>

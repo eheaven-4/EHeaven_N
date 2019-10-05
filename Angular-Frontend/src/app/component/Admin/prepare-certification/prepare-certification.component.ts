@@ -17,6 +17,8 @@ export class PrepareCertificationComponent implements OnInit {
     private http: HttpClient,
   ) { }
 
+  // ********************* Student Status Form *********************
+
   StudentStatusForm = this.fb.group({
     studentName: ['', Validators.required],
     admissionNum: ['', Validators.required],
@@ -26,12 +28,7 @@ export class PrepareCertificationComponent implements OnInit {
 
   });
 
-  ngOnInit() {
-
-  }
-
   submitStudentstatus() {
-
 
     const studentStatusApproval = {
       studentName: this.StudentStatusForm.value.studentName,
@@ -42,8 +39,6 @@ export class PrepareCertificationComponent implements OnInit {
     };
 
     var url = 'http://localhost:3000/certification/studentstatus'
-
-
 
     this.http.post<any>(url, studentStatusApproval).subscribe(res => {
           if (res.state) {
@@ -59,8 +54,36 @@ export class PrepareCertificationComponent implements OnInit {
         });
     console.log(studentStatusApproval);
 
-    // window.location.reload();
+    window.location.reload();
 
   }
 
+ // ********************* Character Certificate Form *********************
+
+ CharacterCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  admissionNum: ['', Validators.required],
+  dateofLeaving: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  lastExam: ['', Validators.required],
+  examYear: ['', Validators.required],
+  description: ['', Validators.required],
+
+});
+
+// submitCharacterCert() {
+
+//   const studentStatusApproval = {
+//     studentName: this.StudentStatusForm.value.studentName,
+//     admissionNum: this.StudentStatusForm.value.admissionNum,
+//     dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
+//     currentStatus: this.StudentStatusForm.value.currentStatus,
+//     description: this.StudentStatusForm.value.description,
+//   };
+
+
+
+  ngOnInit() {
+
+  }
 }
