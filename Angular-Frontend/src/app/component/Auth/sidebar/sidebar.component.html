@@ -55,9 +55,18 @@
                 </div>
             </div>
         </div>
+        <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons" routerLinkActive="nav-text active ">emoji_people</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links" routerLinkActive="nav-text active ">Register</p>
+                </div>
+            </div>
+        </div>
 
-
-        <div class="sidebar_button2" routerLinkActive="nav-link active " (click)="userExtraCur()">
+        <div class="sidebar_button2" routerLink="/extra_curricular" routerLinkActive="nav-link active " (click)="userExtraCur()">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons" routerLinkActive="nav-text active ">sports_handball</i>
@@ -67,7 +76,17 @@
                 </div>
             </div>
         </div>
-
+        
+        <div class="sidebar_button2" routerLink="/manage_marks" routerLinkActive="nav-link active " (click)="userStudentMarks()">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons" routerLinkActive="nav-text active ">score</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links" routerLinkActive="nav-text active ">Manage Marks</p>
+                </div>
+            </div>
+        </div>
         <div class="sidebar_button2" routerLink="/student_progress" routerLinkActive="nav-link active " (click)="userStudentProg()">
             <div class="row">
                 <div class="col-md-1 icn">
@@ -78,16 +97,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="sidebar_button2" routerLink="/register" routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">poll</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">Registration</p>
-                </div>
-            </div>
-        </div> -->
 
     </div>
 </div>

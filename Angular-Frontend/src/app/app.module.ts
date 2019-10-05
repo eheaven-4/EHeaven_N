@@ -33,6 +33,9 @@ import { NewsComponent } from './component/Admin/news/news.component';
 import { AdminDashboardComponent } from './component/Admin/admin-dashboard/admin-dashboard.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
 import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
+import { ManageMarksComponent } from './component/Base_Components/manage-marks/manage-marks.component';
+import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
+import { ClassRegistrationComponent } from './component/Admin/class-registration/class-registration.component';
 
 
 
@@ -57,6 +60,9 @@ import { StudentProgressComponent } from './component/Base_Components/student-pr
     AdminDashboardComponent,
     PaymentsComponent,
     StudentProgressComponent,
+    ManageMarksComponent,
+    ExtraCurricularComponent,
+    ClassRegistrationComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

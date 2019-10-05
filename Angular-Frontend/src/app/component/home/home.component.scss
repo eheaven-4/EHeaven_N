@@ -70,8 +70,8 @@
 }
 
 .flip-box-back {
-    background-color: rgb(31, 42, 49);
-    color: white;
+    background-color: rgb(228, 135, 13);
+    color: black;
     transform: rotateY(180deg);
       height: 500px;
     border-radius: 5px;
@@ -106,7 +106,7 @@
 }
 /**********************************************************************************************/
 .vision_txt{
-    font-size: 50px;
+    font-size: 30px;
     padding-top: 10px;
     padding-bottom: 50px;
     text-align:center;
@@ -134,7 +134,7 @@
 
 .date_div{
   background-color: #E69F0E;
-}  
+}
 .content_div{
   padding-left:30px; padding-right: 30px; background-color: white;
 }
