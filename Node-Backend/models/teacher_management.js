@@ -1,9 +1,8 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
-const classTimeTableSchema = mongoose.Schema({
-    className: { type: String, require: true },
-    classTeacher: { type : String, require: true},
+const teacherTimeTableSchema = mongoose.Schema({
+    teacherName: { type : String, require: true},
     monday: [{ 
         one: {type: String, require: true},
         two: {type: String, require: true},
@@ -59,4 +58,4 @@ const classTimeTableSchema = mongoose.Schema({
      }]
 });
 
-const classTimeTable = module.exports = mongoose.model("classTimeTable", classTimeTableSchema);  
+const teacherTimeTable = module.exports = mongoose.model("teacherTimeTable", teacherTimeTableSchema);  

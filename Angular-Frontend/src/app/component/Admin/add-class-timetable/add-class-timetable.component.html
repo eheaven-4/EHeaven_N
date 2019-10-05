@@ -18,12 +18,22 @@
                     <div style="padding-top:50px; padding-bottom: 50px">
                         <form class="border text-center p-5 reg-frm">
                             <img src="../../../assets/logo/logo.png" style="width:50%; margin-bottom: 50px">
-                            <div class="row" style="padding-bottom: 30px">
-                                <label style="padding-top: 5px">Class Name :</label>
-
-                                <div class="col-md-3">
-                                    <input type="text" class="form-control box_border" 
-                                        name="className" [(ngModel)]="className" placeholder="example: 5A">
+                            <div class="container-fluid">
+                                <div class="row" style="padding-bottom: 30px">
+                                    <div class="col-md-2">
+                                        <label style="padding-top: 5px">Class Name :</label>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <input type="text" class="form-control box_border" name="className"
+                                            [(ngModel)]="className" placeholder="example: 5A">
+                                    </div>
+                                    <div class="col-md-2">
+                                        <label style="padding-top: 5px">Class Teacher : </label>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <input type="text" class="form-control box_border" name="classTeacher"
+                                            [(ngModel)]="classTeacher" placeholder="example: W.A.Fernando">
+                                    </div>
                                 </div>
                             </div>
                             <div class="row">

@@ -1,0 +1,46 @@
+.body {
+    background-color: white;
+    height: 100px;
+  }
+  
+  #textbox {
+    height: 200px;
+  }
+  
+  .border {
+    margin: auto;
+    border-style: ridge;
+    padding-top: 50px;
+    padding-right: 80px;
+    padding-bottom: 50px;
+    padding-left: 80px;
+    box-shadow: 0px 5px 5px rgb(134, 132, 245);
+    width: 1000px;
+  }
+  .box_border {
+    border-radius: 3px;
+  }
+  
+  .reg-frm {
+    box-shadow: 0px 5px 5px rgb(134, 132, 245);
+    padding-top: 40px;
+    width: 80%;
+    text-align: center;
+    margin: auto;
+  }
+  
+  .reg_btn {
+    width: 50%;
+    margin: auto;
+    color: aliceblue;
+    background-color: rgb(0, 140, 255);
+    border-color: rgb(0, 140, 255);
+    box-shadow: 0px 5px 5px rgb(134, 132, 245);
+  }
+  .period_txt {
+    font-size: 10px;
+    color: rgb(144, 142, 142);
+    text-align: left;
+    margin-bottom: 0px;
+  }
+  
