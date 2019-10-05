@@ -21,13 +21,14 @@ router.post("/login", function (req, res,next) {
                 state: false,
                 msg: "No user found"
             });
+            return ;
         }
         User.passwordCheck(password, user.password, function (err, match) {
             console.log(userid, password);
             if (err) {
                 throw err;
             }
-
+            
             if (match) {
                 console.log("Userid and Password match!");
             /************************************************************************************** */

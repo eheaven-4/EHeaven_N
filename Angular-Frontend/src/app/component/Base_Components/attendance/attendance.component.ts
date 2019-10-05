@@ -121,13 +121,14 @@ public spanflageS=false;
     console.log(value);
     this.attendanceservice.retriveStu(value)
     .subscribe((data:Attendreturn[])=>{
-      this.searchStuResult=data;
+      if(data.length==0){
+        this.historyflagS=true;
+        this.spanflageS=true;
+      }else{
+        this.searchStuResult=data;
+      }
+      
     });
-    // if(!this.searchStuResult){
-    //   this.historyflagS=true;
-    // }
-  
-
   }
   searchDate(value:string){
     console.log(value);
@@ -143,12 +144,7 @@ public spanflageS=false;
       
 
     });
-    // if(this.searchDateResult.length==0){
-      
-    // }
-    // if(!this.searchDateResult){
-    //   this.historyflagD=true;
-    // }
+    
   }
 
 }

@@ -50,6 +50,8 @@ module.exports.passwordCheck = function(plainpassword, hash,callback){
 
        if(res){
            callback(null, res);
+       }else{
+           callback(err,false);
        }
     });
 }
