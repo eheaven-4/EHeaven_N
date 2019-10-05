@@ -78,7 +78,6 @@ router.post("/studentstatus", async function (req, res)  {
         studentName: req.body.studentName,
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
-        currentStatus: req.body.currentStatus,
         description: req.body.description,
     });
     console.log(newRequest);
@@ -86,14 +85,36 @@ router.post("/studentstatus", async function (req, res)  {
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
-    console.log(newRequest.studentName);
-    // pageOne.drawText(newRequest.studentName);
     page.drawText(
         newRequest.studentName,    
         {
-            x: 100,
-          y: 100,
-          size: 24,
+            x: 200,
+          y: 615,
+          size: 12,
+        },
+        );
+    page.drawText(
+        newRequest.admissionNum,    
+        {
+            x: 215,
+            y: 447,
+            size: 12,
+        },
+        );
+    page.drawText(
+        newRequest.dateofAdmission,    
+        {
+            x: 240,
+            y: 580,
+            size: 12,
+        },
+        );
+    page.drawText(
+        newRequest.description,    
+        {
+            x: 60,
+            y: 510,
+            size: 12,
         },
         );
     const pdfBytes = await doc.save()
