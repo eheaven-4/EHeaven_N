@@ -2,22 +2,22 @@ const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
 const classTimeTableSchema = mongoose.Schema({
-    object: { type: String, require: true },
+    className: { type: String, require: true },
 
-    // monday: { 
-    //     1: {type: String, require: true},
-    //     2: {type: String, require: true},
-    //     // 3: {type: String, require: true},
-    //     // 4: {type: String, require: true},
-    //     // 5: {type: String, require: true},
-    //     // 6: {type: String, require: true},
-    //     // 7: {type: String, require: true},
-    //     // 8: {type: String, require: true},
-    //  },
+    monday: [{ 
+        one: {type: String, require: true},
+        two: {type: String, require: true},
+        // 3: {type: String, require: true},
+        // 4: {type: String, require: true},
+        // 5: {type: String, require: true},
+        // 6: {type: String, require: true},
+        // 7: {type: String, require: true},
+        // 8: {type: String, require: true},
+     }],
     // tuesday: { 
-    //     1: {type: String, require: true},
-    //     // 2: {type: String, require: true},
-    //     3: {type: String, require: true},
+        // 1: {type: String, require: true},
+        // 2: {type: String, require: true},
+        // 3: {type: String, require: true},
         // 4: {type: String, require: true},
         // 5: {type: String, require: true},
         // 6: {type: String, require: true},
@@ -60,6 +60,3 @@ const classTimeTableSchema = mongoose.Schema({
 });
 
 const classTimeTable = module.exports = mongoose.model("classTimeTable", classTimeTableSchema);  
-
-
-// const classTimeTableSchema = mongoose.model("classTimeTable", classTimeTableSchema);

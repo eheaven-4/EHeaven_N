@@ -1,0 +1,274 @@
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="container-fluid col-md-10" style="background-color:white">
+                <div class="flashMessage">
+                    <ng-flash-message></ng-flash-message>
+                </div>
+                <div>
+                    <div class="container">
+                        <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 20px;">Manage Classes
+                            Timetables
+                        </h2>
+                        <hr>
+                    </div>
+                    <div style="padding-top:50px; padding-bottom: 50px">
+                        <form class="border text-center p-5 reg-frm">
+                            <img src="../../../assets/logo/logo.png" style="width:50%; margin-bottom: 50px">
+                            <div class="row" style="padding-bottom: 30px">
+                                <label style="padding-top: 5px">Class Name :</label>
+
+                                <div class="col-md-4">
+                                    <input type="text" class="form-control box_border" 
+                                        name="className" [(ngModel)]="className" placeholder="example: 5A">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <label>Monday :</label>
+                                <div class="row" style="padding-left: 30px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 1 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monOne" [(ngModel)]="monOne">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 2 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monTwo" [(ngModel)]="monTwo">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 3</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monThree" [(ngModel)]="monThree">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 4</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monFour" [(ngModel)]="monFour">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 30px; padding-top: 10px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 5 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monFive" [(ngModel)]="monFive">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 6 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monSix" [(ngModel)]="monSix">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 7</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monSeven" [(ngModel)]="monSeven">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 8</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="monEight" [(ngModel)]="monEight">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 30px">
+                                <label>Tuesday :</label>
+                                <div class="row" style="padding-left: 30px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 1 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 2 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 3</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 4</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 30px; padding-top: 10px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 5 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 6 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 7</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 8</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 30px">
+                                <label>Wednesday :</label>
+                                <div class="row" style="padding-left: 30px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 1 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 2 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 3</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 4</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 30px; padding-top: 10px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 5 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 6 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 7</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 8</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 30px">
+                                <label>Thursday :</label>
+                                <div class="row" style="padding-left: 30px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 1 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 2 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 3</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 4</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 30px; padding-top: 10px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 5 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 6 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 7</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 8</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" style="padding-top: 30px">
+                                <label>Friday :</label>
+                                <div class="row" style="padding-left: 30px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 1 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 2 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 3</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 4</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                                <div class="row" style="padding-left: 30px; padding-top: 10px">
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 5 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 6 </p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 7</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <p class="period_txt">Period 8</p>
+                                        <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                            name="subject" [(ngModel)]="subject">
+                                    </div>
+                                </div>
+                            </div>
+                            <button (click)="addNotice()" type="button"
+                                class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button>
+                        </form>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
