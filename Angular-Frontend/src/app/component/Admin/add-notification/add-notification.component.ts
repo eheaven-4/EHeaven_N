@@ -18,8 +18,6 @@ export class AddNotificationComponent implements OnInit {
   date: String;
   state: String;
 
-  user: any;
-
   constructor(
     private router: Router,
     private http: HttpClient,

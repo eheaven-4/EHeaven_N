@@ -6,16 +6,22 @@
   background-size: cover;
   background-repeat: no-repeat;
 }
+
+@font-face{
+  font-family: myfont;
+  src: url(../../../assets/Fonts/OLD.ttf);
+}
+
 .logo_img {
   padding-top: 30px;
   width: 100px;
 }
 .scl_name {
   padding-top: 20px;
-  color: aliceblue;
+  color: white;
   text-align: center;
   font-size: 100px;
-  font-family: "Calibari";
+  font-family: myfont;
   font-weight: bold;
 }
 .school_des {

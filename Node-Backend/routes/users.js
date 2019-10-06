@@ -9,7 +9,7 @@ const pdfDoc = require('pdf-lib');
 const fs = require('fs');
 
 
-
+//user login scope
 router.post("/login", function (req, res, next) {
     const userid = req.body.userid;
     const password = req.body.password;
@@ -60,7 +60,7 @@ router.post("/login", function (req, res, next) {
         });
     });
 });
-
+//user registraton scope 
 router.post("/register", function (req, res) {
     const newUser = new User({
         usertype: req.body.usertype,
@@ -91,7 +91,7 @@ router.post("/register", function (req, res) {
     });
 });
 
-
+//specific user profile data retrive
 router.get("/profile/:id", function (req, res) {
     User.findByUserid(req.params.id, function (err, data) {
         if (err)
@@ -99,4 +99,22 @@ router.get("/profile/:id", function (req, res) {
         res.json(data);
     });
 });
+
+//get users ids names using select class name
+router.get("/getStudentsNames/:cName" , function(req, res,next){
+    const cName = req.params.cName;
+    User.find({selectclass : cName})
+        .select('userid name')
+        .exec()
+        .then( data=> {
+            console.log("Data Transfer Success..!")
+            res.status(200).json(data)
+        })
+        .catch(error => {
+            console.log("Data Transfer Unsuccessfull..!")
+            res.status(500).json({
+                error : error
+            })
+        })
+})
 module.exports = router;  
