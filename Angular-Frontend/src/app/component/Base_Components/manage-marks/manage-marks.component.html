@@ -20,18 +20,18 @@
                         <hr>
                     </div>
                     <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
-                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
+                        <mat-card class="border text-center p-5 reg-frm">
                             <img src="../../../assets/logo/logo.png" style="width:40%; margin-bottom: 50px">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <label class="top_txt">Class Room Name : </label>
-                                    <input formControlName="certName" type="text" class="form-control box_border">
-                                    <small class="text-danger">Class-room name is required *</small>
+                                    <p class="top_txt">Class Room Name : </p>
+                                    <input type="text" class="form-control box_border" placeholder="5A" name="className" [(ngModel)]="className">
+                                    <p class="text-danger" style="text-align: left; font-size: 10px">Class-room name is required *</p>
                                 </div>
 
                                 <!-- {{CertificationForm.value | json}} -->
                                 <div class="col-md-4">
-                                    <button mat-raised-button class="search_btn"><img
+                                    <button mat-raised-button class="search_btn" (click)="searchStudents($event, className)"><img
                                             src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                         Search</button>
                                 </div>
@@ -42,23 +42,26 @@
 
                     <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
                         <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
+                            <div class="row" *ngIf="ctName">
+                                <p style="color: rgb(115, 115, 115)">Class Teacher Name : </p><p> &nbsp;&nbsp;{{ctName.classTeacher}}</p>
+                            </div>
                             <div class="row">
                                 <div class="col-md-6">
-                                    <label class="top_txt">Subject : </label>
+                                    <p class="top_txt">Subject : </p>
                                     <mat-select class="browser-default custom-select mb-4 box_border">
                                         <mat-option style="text-align: left" [value]="exams">{{ exams }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="top_txt">Year : </label>
+                                    <p class="top_txt">Year : </p>
                                     <mat-select class="browser-default custom-select mb-4 box_border">
                                         <mat-option style="text-align: left" [value]="exams">{{ exams }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col-md-3">
-                                    <label class="top_txt">Semester : </label>
+                                    <p class="top_txt">Semester : </p>
                                     <mat-select class="browser-default custom-select mb-4 box_border">
                                         <mat-option style="text-align: left" [value]="exams">{{ exams }}
                                         </mat-option>
