@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { CookieService } from 'ngx-cookie-service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
 @Component({
@@ -17,7 +16,6 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private cookies: MycookiesService,
-    private cookieService: CookieService,
     private ngFlashMessage: NgFlashMessageService,
   ) { }
 
@@ -28,6 +26,8 @@ export class SidebarComponent implements OnInit {
   userAcademics() {
 
     if (this.myCookie) {
+
+      //Takes user id from the cookies data
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
       this.router.navigate(['/academics' + '/' + id]);
@@ -48,11 +48,10 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //side bar notification conponent opening link
+  //all the users refer this link. 
   userNotification() {
-
     if (this.myCookie) {
-      // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      // var id = userCookie.userid;
       this.router.navigate(['/notifications']);
     }
     else {
@@ -65,6 +64,8 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  //sidebar user certification request component opening link
   userCertification() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
@@ -81,22 +82,8 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
-  userPrepCertification() {
-    if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      this.router.navigate(['/prepare_certification']);
-    }
-    else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
-      this.router.navigate(['/login']);
-    }
-  }
+
+  //sidebar user attendence request component opening link
   
   userAttendence() {
     if (this.myCookie) {
@@ -115,6 +102,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //sidebar user extra curricular activities component opening link
+  //only students can vew this link
   userExtraCur() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
@@ -131,6 +120,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  //sidebar student marks management component opening link
+  //only teachers can viwe this tab
 
   userStudentMarks() {
     if (this.myCookie) {
@@ -149,6 +141,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //sidebar user certification request component opening link
+  //all the users can view this tab
   userStudentProg() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
@@ -165,6 +159,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  //clicking this button opens the admin dash board, only admin
+  //can access this link
   adminDashboard() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
