@@ -21,10 +21,27 @@ const requestStudentstatusSchema = mongoose.Schema({
     state: {type :String, require: true}
 });
 
+const requestCharacterCertSchema = mongoose.Schema({
+    studentName: { type: String, require: true },
+    admissionNum: { type: String, require: true },
+    dateofAdmission: { type: String, require: true },
+    dateofLeaving: { type: String, require: true },
+    lastClass: { type: String, require: true },
+    lastExam: {type :String, require: true},
+    examYear: {type :String, require: true},
+    academicStatus: {type :String, require: true},
+    moral: {type :String, require: true},
+    leadership: {type :String, require: true},
+    societies: {type :String, require: true},
+    sports: {type :String, require: true},
+});
+
 const requestCertification = mongoose.model("requestCertification", requestCertificationSchema);
 const requestStudentstatus=  mongoose.model("requestStudentstatus", requestStudentstatusSchema);
+const requestCharacterCert=  mongoose.model("requestCharacterCert", requestCharacterCertSchema);
 
 module.exports = {
     requestCertification: requestCertification,
-    requestStudentstatus: requestStudentstatus
+    requestStudentstatus: requestStudentstatus,
+    requestCharacterCert: requestCharacterCert,
 }

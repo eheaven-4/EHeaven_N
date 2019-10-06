@@ -93,13 +93,17 @@
                                           </mat-option>
                                         </mat-select>
                                       </mat-form-field>
-
-
                                       <mat-form-field>
-                                        <textarea matInput formControlName="description" placeholder="Description"></textarea>
+                                        <textarea matInput formControlName="leadership" placeholder="Leadership/Prefectship Details"></textarea>
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <textarea matInput formControlName="societies" placeholder="School based Societies/Activities"></textarea>
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <textarea matInput formControlName="sports" placeholder="Sports"></textarea>
                                       </mat-form-field>
 
-                                      <!-- {{CharacterCertForm".value | json}} -->
+                                      <!-- {{CharacterCertForm.value | json}} -->
 
                                 <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
                                     </div>
