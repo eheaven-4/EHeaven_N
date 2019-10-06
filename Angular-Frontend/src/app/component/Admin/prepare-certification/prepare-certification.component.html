@@ -71,11 +71,30 @@
                                       <mat-form-field>
                                           <input matInput formControlName="examYear" placeholder="Examination Year">
                                       </mat-form-field>
-                                      <!-- <mat-form-field>
-                                          <input matInput formControlName="dateofLeaving" [matDatepicker]="picker" placeholder="Date of Leaving">
-                                          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                          <mat-datepicker #picker></mat-datepicker>
-                                        </mat-form-field> -->
+                                      <mat-form-field>
+                                         <input matInput type="date" formControlName="dateofAdmission" placeholder="Date of Admission">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <input matInput type="date" formControlName="dateofLeaving" placeholder="Date of Leaving">
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <mat-label>Academic Performance</mat-label>
+                                        <mat-select formControlName="academicStatus">
+                                          <mat-option style="text-align: left" *ngFor="let acaPer of academicPerformance" [value]="acaPer">
+                                            {{ acaPer }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+                                      <mat-form-field>
+                                        <mat-label>Moral Conduct</mat-label>
+                                        <mat-select formControlName="moral">
+                                          <mat-option style="text-align: left" *ngFor="let conduct of moralConduct" [value]="conduct">
+                                            {{ conduct }}
+                                          </mat-option>
+                                        </mat-select>
+                                      </mat-form-field>
+
+
                                       <mat-form-field>
                                         <textarea matInput formControlName="description" placeholder="Description"></textarea>
                                       </mat-form-field>

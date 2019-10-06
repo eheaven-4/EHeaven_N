@@ -4,18 +4,19 @@ import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms'
 import { HttpClient } from '@angular/common/http';
 
 
+
 @Component({
   selector: 'app-prepare-certification',
   templateUrl: './prepare-certification.component.html',
   styleUrls: ['./prepare-certification.component.scss']
 })
 export class PrepareCertificationComponent implements OnInit {
-
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
   ) { }
+
 
   // ********************* Student Status Form *********************
 
@@ -28,6 +29,36 @@ export class PrepareCertificationComponent implements OnInit {
 
   });
 
+ // ********************* Character Certificate Form *********************
+
+ CharacterCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  admissionNum: ['', Validators.required],
+  dateofAdmission: ['', Validators.required],
+  dateofLeaving: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  lastExam: ['', Validators.required],
+  examYear: ['', Validators.required],
+  academicStatus: ['', Validators.required],
+  moral: ['', Validators.required],
+  description: ['', Validators.required],
+});
+
+// academic performance categories
+academicPerformance = [
+  'Not satisfactory',
+  'Satisfactory',
+  'Moderate',
+  'Excellent'
+];
+
+moralConduct = [
+  'Satisfactory',
+  'Good',
+  'Excellent'
+];
+
+// ******************************** Submit student status form *********************************
   submitStudentstatus() {
 
     const studentStatusApproval = {
@@ -58,19 +89,7 @@ export class PrepareCertificationComponent implements OnInit {
 
   }
 
- // ********************* Character Certificate Form *********************
-
- CharacterCertForm = this.fb.group({
-  studentName: ['', Validators.required],
-  admissionNum: ['', Validators.required],
-  dateofLeaving: ['', Validators.required],
-  lastClass: ['', Validators.required],
-  lastExam: ['', Validators.required],
-  examYear: ['', Validators.required],
-  description: ['', Validators.required],
-
-});
-
+// ******************************** Submit Character form *********************************
 // submitCharacterCert() {
 
 //   const studentStatusApproval = {
