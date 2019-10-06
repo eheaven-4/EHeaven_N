@@ -79,6 +79,7 @@ router.post("/studentstatus", async function (req, res)  {
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
         description: req.body.description,
+        state : req.body.state
     });
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname  +'/student.pdf')
@@ -119,6 +120,17 @@ router.post("/studentstatus", async function (req, res)  {
         );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "studentEdit.pdf", pdfBytes)
+
+    newRequest
+        .save()
+        .then(result => {
+            console.log(result)
+            res.json({ state: true, msg: "Data inserted Successfully..!" });
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+        })
     // res.send("Hello users");
 });
 

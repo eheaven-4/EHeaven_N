@@ -18,6 +18,7 @@ const requestStudentstatusSchema = mongoose.Schema({
     dateofAdmission: { type: String, require: true },
     currentStatus: { type: String, require: true },
     description: { type: String, require: true },
+    state: {type :String, require: true}
 });
 
 const requestCertification = mongoose.model("requestCertification", requestCertificationSchema);

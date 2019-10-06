@@ -67,6 +67,7 @@ moralConduct = [
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
       currentStatus: this.StudentStatusForm.value.currentStatus,
       description: this.StudentStatusForm.value.description,
+      state : 'Pending'
     };
 
     var url = 'http://localhost:3000/certification/studentstatus'
