@@ -7,6 +7,12 @@ interface classTeacher{
   ctName : String
 }
 
+interface studentData{
+  _id : String,
+  userid : String,
+  name : String
+}
+
 @Component({
   selector: 'app-manage-marks',
   templateUrl: './manage-marks.component.html',
@@ -16,27 +22,26 @@ export class ManageMarksComponent implements OnInit {
 
   className : String;
   ctName : classTeacher [] = [];
+  stData : studentData [] = [];
 
   constructor(
     private fb: FormBuilder,
     private http: HttpClient,
   ) { }
   // certificate types
-  certificates = [
-    'Student Status Verification Certificate',
-    'Character Certificate',
-    'Leaving Certificate',
-    'Educational Certificate'
+  subjects = [
+    'Mathematics',
+    'Science',
+    'Buddhism',
+    'Sinhala',
+    'Tamil',
+    'Music',
+    'Home Science',
+    'English',
+    'Health and Sports'
   ];
-  CertificationForm = this.fb.group({
-    certName: ['', Validators.required],
-    certType: ['', Validators.required],
-    exam: this.fb.group({
-      examName: ['', Validators.required],
-      examYear: ['', Validators.required],
-      examIndex: ['', Validators.required]
-    })
-  });
+  years = [2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029];
+  semesters = ['First Semester', 'Second Semester', 'Third Semester']
 
   ngOnInit() {
     var url = "http://localhost:3000/class_management/classRoomsNames";
@@ -52,11 +57,19 @@ export class ManageMarksComponent implements OnInit {
     console.log(cName)
 
     var url1 ="http://localhost:3000/class_management/getClassTeacherName"
-    // var url2 = ""
+    var url2 = "http://localhost:3000/users/getStudentsNames"
 
     this.http.get<any>(url1 + '/' + cName).subscribe(res => {
       this.ctName = res
       console.log(res)
     });
+    this.http.get<any>(url2 + '/' + cName).subscribe(res => {
+      this.stData = res
+      console.log(res)
+    })
+  }
+
+  submitMarks(){
+    
   }
 }
