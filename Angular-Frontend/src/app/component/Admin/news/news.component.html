@@ -7,17 +7,32 @@
       <div class="container-fluid col-md-10" style="background-color:white">
         <div>
           <div class="container">
-            <h2 style="color:   rgb(0, 140, 255); font-weight: bold;padding-top: 20px">News</h2>
+            <h2 style="color:   rgb(0, 140, 255); font-weight: bold;padding-top: 20px;">News</h2>
             <hr>
           </div>
           <div style="padding-top:50px ; padding-bottom:50px">
             <form class="border text-center p-5 reg-frm">
               <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
+
+
+            </form>
+
+            <form class="border text-center p-5 reg-frm">
+
+
+              <h2 style="color:   rgb(0, 140, 255); font-weight: bold;padding-top: 20px">Add New News</h2>
+              <hr>
               <div class="form-row mb-4">
                 <label>Topic :</label>
                 <input type="text" class="form-control box_border" aria-describedby="textHelp" name="topic"
                   [(ngModel)]="topic">
+              </div>
+
+              <div class="form-row mb-4">
+                <label>News Sumery :</label>
+                <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news_sumery"
+                  id="textbox1" [(ngModel)]="news_sumery"></textarea>
               </div>
 
               <div class="form-row mb-4">
@@ -40,5 +55,6 @@
         </div>
       </div>
     </div>
+
   </div>
 </div>
