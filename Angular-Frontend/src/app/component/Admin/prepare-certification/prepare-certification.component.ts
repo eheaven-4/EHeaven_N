@@ -59,6 +59,40 @@ moralConduct = [
   'Excellent'
 ];
 
+// ********************* Leaving Certificate Form *********************
+
+LeavingCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  admissionNum: ['', Validators.required],
+  dateofAdmission: ['', Validators.required],
+  dateofLeaving: ['', Validators.required],
+  dateofBirth: ['', Validators.required],
+  fathersName: ['', Validators.required],
+  fathersOccupation: ['', Validators.required],
+  fathersAddress: ['', Validators.required],
+  religion: ['', Validators.required],
+  schoolName: ['', Validators.required],
+  schoolType: ['', Validators.required],
+  cause: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  subjects: ['', Validators.required],
+});
+
+religions = [
+  'Buddhist',
+  'Christian',
+  'Islamic',
+  'Hindu',
+  'Other'
+];
+
+schooltypes = [
+  'English',
+  'Bilingual',
+  'Vernaular',
+];
+
+
 // ******************************** Submit student status form *********************************
   submitStudentstatus() {
 
@@ -123,7 +157,7 @@ submitCharacterCert() {
         });
   console.log(characterCertApproval);
 
-  // window.location.reload();
+  window.location.reload();
 
 }
 

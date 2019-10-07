@@ -109,12 +109,69 @@
                                     </div>
                               </mat-action-row>
                             </mat-expansion-panel>
-                            <mat-expansion-panel>
+
+                <!-- ************************************************** Leaving Certificate Form ********************************************* -->
+                            <mat-expansion-panel [formGroup]="LeavingCertForm">
                               <mat-expansion-panel-header>Leaving Certificate</mat-expansion-panel-header>
                               <mat-action-row>
-                                <button mat-button color="primary">USE</button>
+                                <div class="container">
+                                  <mat-form-field>
+                                    <input matInput formControlName="studentName" placeholder="Name of the Student in full">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput type="date" formControlName="dateofBirth" placeholder="Date of Birth">
+                                 </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput formControlName="fathersName" placeholder="Name of Father or Guardian in full">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput formControlName="fathersOccupation" placeholder="Father's or Guardian's Occupation">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <textarea matInput formControlName="fathersAddress" placeholder="Father's or Guardian's Permenant Address"></textarea>
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <mat-label>Religion</mat-label>
+                                    <mat-select formControlName="religion">
+                                      <mat-option style="text-align: left" *ngFor="let rel of religions" [value]="rel">
+                                        {{ rel }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                      <input matInput formControlName="schoolName" placeholder="Name of School">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <mat-label>Type of School</mat-label>
+                                    <mat-select formControlName="schoolType">
+                                      <mat-option style="text-align: left" *ngFor="let typ of schooltypes" [value]="typ">
+                                        {{ typ }}
+                                      </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                     <input matInput type="date" formControlName="dateofAdmission" placeholder="Date of Admission">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput type="date" formControlName="dateofLeaving" placeholder="Date of Leaving">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput formControlName="cause" placeholder="Cause of Leaving">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <input matInput formControlName="lastClass" placeholder="Last Standard the pupil passed">
+                                  </mat-form-field>
+                                  <mat-form-field>
+                                    <textarea matInput formControlName="subjects" placeholder="Subjects studied in the Last Class"></textarea>
+                                  </mat-form-field>
+
+                                  <!-- {{LeavingCertForm.value | json}} -->
+
+                            <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
+                                </div>
                               </mat-action-row>
                             </mat-expansion-panel>
+
                             <mat-expansion-panel>
                               <mat-expansion-panel-header>Educational Certificate</mat-expansion-panel-header>
                               <mat-expansion-panel>
