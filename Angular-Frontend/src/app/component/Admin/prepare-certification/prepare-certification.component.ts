@@ -93,6 +93,36 @@ schooltypes = [
   'Vernaular',
 ];
 
+// ********************* A/L Certificate Form *********************************************************************
+
+AlCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  examYear: ['', Validators.required],
+  centerNo: ['', Validators.required],
+  indexNo: ['', Validators.required],
+  medium: ['', Validators.required],
+  fathersName: ['', Validators.required],
+  fathersOccupation: ['', Validators.required],
+  fathersAddress: ['', Validators.required],
+  religion: ['', Validators.required],
+  schoolName: ['', Validators.required],
+  schoolType: ['', Validators.required],
+  cause: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  subjects: ['', Validators.required],
+});
+
+//examination Medium
+mediums = [
+  'English',
+  'Sinhala',
+  'Tamil',
+];
+
+// examinations years
+yearofExam = [
+  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
+];
 
 // ******************************** Submit student status *********************************
   submitStudentstatus() {

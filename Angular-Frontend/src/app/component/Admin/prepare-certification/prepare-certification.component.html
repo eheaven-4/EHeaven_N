@@ -116,13 +116,13 @@
                               <mat-action-row>
                                 <div class="container">
                                   <mat-form-field>
-                                    <input matInput formControlName="studentName" placeholder="Name of the Student in full">
+                                    <input matInput formControlName="studentName" placeholder="Name of the Student in Full">
                                   </mat-form-field>
                                   <mat-form-field>
                                     <input matInput type="date" formControlName="dateofBirth" placeholder="Date of Birth">
                                  </mat-form-field>
                                   <mat-form-field>
-                                    <input matInput formControlName="fathersName" placeholder="Name of Father or Guardian in full">
+                                    <input matInput formControlName="fathersName" placeholder="Name of Father or Guardian in Full">
                                   </mat-form-field>
                                   <mat-form-field>
                                     <input matInput formControlName="fathersOccupation" placeholder="Father's or Guardian's Occupation">
@@ -177,12 +177,45 @@
 
                             <mat-expansion-panel>
                               <mat-expansion-panel-header>Educational Certificate</mat-expansion-panel-header>
-                              <mat-expansion-panel>
-                                <mat-expansion-panel-header>G.C.E. (A/L) Certificate </mat-expansion-panel-header>
-                                <mat-action-row>
-                                  <button mat-button color="primary">USE</button>
-                                </mat-action-row>
-                              </mat-expansion-panel>
+
+                  <!-- ************************************************** A/L Certificate Form ********************************************* -->
+                                <mat-expansion-panel [formGroup]="AlCertForm">
+                                  <mat-expansion-panel-header>G.C.E. (A/L) Certificate </mat-expansion-panel-header>
+                                  <mat-action-row>
+                                      <div class="container">
+                                          <mat-form-field>
+                                            <input matInput formControlName="studentName" placeholder="Name of the Student in Full">
+                                          </mat-form-field>
+                                          <mat-form-field>
+                                              <mat-label>Examination Year</mat-label>
+                                              <mat-select formControlName="examYear">
+                                                <mat-option style="text-align: left" *ngFor="let year of yearofExam" [value]="year">
+                                                  {{ year }}
+                                                </mat-option>
+                                              </mat-select>
+                                            </mat-form-field>
+                                          <mat-form-field>
+                                            <input matInput formControlName="centerNo" placeholder="Examination Center Number">
+                                          </mat-form-field>
+                                          <mat-form-field>
+                                            <textarea matInput formControlName="indexNo" placeholder="Index Number"></textarea>
+                                          </mat-form-field>
+                                          <mat-form-field>
+                                            <mat-label>Medium</mat-label>
+                                            <mat-select formControlName="medium">
+                                              <mat-option style="text-align: left" *ngFor="let med of mediums" [value]="med">
+                                                {{ med }}
+                                              </mat-option>
+                                            </mat-select>
+                                          </mat-form-field>
+
+
+                                          <!-- {{AlCertForm.value | json}} -->
+
+                                    <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitAlCert()">Submit</button>
+                                        </div>
+                                  </mat-action-row>
+                                </mat-expansion-panel>
                               <mat-expansion-panel>
                                 <mat-expansion-panel-header>G.C.E. (O/L) Certificate </mat-expansion-panel-header>
                                 <mat-action-row>
