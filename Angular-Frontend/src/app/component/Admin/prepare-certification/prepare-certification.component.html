@@ -150,6 +150,9 @@
                                     </mat-select>
                                   </mat-form-field>
                                   <mat-form-field>
+                                    <input matInput formControlName="admissionNum" placeholder="Admission Number">
+                                  </mat-form-field>
+                                  <mat-form-field>
                                      <input matInput type="date" formControlName="dateofAdmission" placeholder="Date of Admission">
                                   </mat-form-field>
                                   <mat-form-field>
@@ -167,7 +170,7 @@
 
                                   <!-- {{LeavingCertForm.value | json}} -->
 
-                            <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
+                            <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitLeavingCert()">Submit</button>
                                 </div>
                               </mat-action-row>
                             </mat-expansion-panel>
