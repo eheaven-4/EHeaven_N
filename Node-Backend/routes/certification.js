@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { requestCertification } = require('../models/certification');
 const { requestStudentstatus } = require('../models/certification');
+const { requestCharacterCert } = require('../models/certification');
 const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
@@ -71,9 +72,9 @@ router.get("/issuedCert/:id", function (req, res) {
         });
 });
 
-//test function to generate student status pdf
+/*******************************generate student status certificate pdf ***************************************/
 router.post("/studentstatus", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestStudentstatus({
         studentName: req.body.studentName,
         admissionNum: req.body.admissionNum,
@@ -133,5 +134,44 @@ router.post("/studentstatus", async function (req, res) {
         })
     // res.send("Hello users");
 });
+
+/*******************************generate character certificate pdf ***************************************/
+router.post("/charactercert", async function (req, res) {
+    console.log("hello at server ");
+    const newRequest = new requestCharacterCert({
+        studentName: req.body.studentName,
+        admissionNum: req.body.admissionNum,
+        dateofAdmission: req.body.dateofAdmission,
+        description: req.body.description,
+        dateofLeaving: req.body.dateofLeaving,
+        lastClass: req.body.lastClass,
+        lastExam: req.body.lastExam,
+        examYear: req.body.examYear,
+        academicStatus: req.body.academicStatus,
+        moral: req.body.moral,
+        leadership: req.body.leadership,
+        societies: req.body.societies,
+        sports: req.body.sports,
+    });
+    console.log(newRequest);
+    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const page = pages[0];
+    // page.drawText(
+    //     newRequest.studentName,
+    //     {
+    //         x: 200,
+    //         y: 615,
+    //         size: 12,
+    //     },
+    // );
+
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes)
+
+});
+
+
 
 module.exports = router; 

@@ -24,7 +24,6 @@ export class PrepareCertificationComponent implements OnInit {
     studentName: ['', Validators.required],
     admissionNum: ['', Validators.required],
     dateofAdmission: ['', Validators.required],
-    currentStatus: ['', Validators.required],
     description: ['', Validators.required],
 
   });
@@ -41,7 +40,9 @@ export class PrepareCertificationComponent implements OnInit {
   examYear: ['', Validators.required],
   academicStatus: ['', Validators.required],
   moral: ['', Validators.required],
-  description: ['', Validators.required],
+  leadership: ['', Validators.required],
+  societies: ['', Validators.required],
+  sports: ['', Validators.required],
 });
 
 // academic performance categories
@@ -58,6 +59,40 @@ moralConduct = [
   'Excellent'
 ];
 
+// ********************* Leaving Certificate Form *********************
+
+LeavingCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  admissionNum: ['', Validators.required],
+  dateofAdmission: ['', Validators.required],
+  dateofLeaving: ['', Validators.required],
+  dateofBirth: ['', Validators.required],
+  fathersName: ['', Validators.required],
+  fathersOccupation: ['', Validators.required],
+  fathersAddress: ['', Validators.required],
+  religion: ['', Validators.required],
+  schoolName: ['', Validators.required],
+  schoolType: ['', Validators.required],
+  cause: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  subjects: ['', Validators.required],
+});
+
+religions = [
+  'Buddhist',
+  'Christian',
+  'Islamic',
+  'Hindu',
+  'Other'
+];
+
+schooltypes = [
+  'English',
+  'Bilingual',
+  'Vernaular',
+];
+
+
 // ******************************** Submit student status form *********************************
   submitStudentstatus() {
 
@@ -65,7 +100,6 @@ moralConduct = [
       studentName: this.StudentStatusForm.value.studentName,
       admissionNum: this.StudentStatusForm.value.admissionNum,
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
-      currentStatus: this.StudentStatusForm.value.currentStatus,
       description: this.StudentStatusForm.value.description,
       state : 'Pending'
     };
@@ -91,17 +125,41 @@ moralConduct = [
   }
 
 // ******************************** Submit Character form *********************************
-// submitCharacterCert() {
+submitCharacterCert() {
 
-//   const studentStatusApproval = {
-//     studentName: this.StudentStatusForm.value.studentName,
-//     admissionNum: this.StudentStatusForm.value.admissionNum,
-//     dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
-//     currentStatus: this.StudentStatusForm.value.currentStatus,
-//     description: this.StudentStatusForm.value.description,
-//   };
+  const characterCertApproval = {
+    studentName: this.CharacterCertForm.value.studentName,
+    admissionNum: this.CharacterCertForm.value.admissionNum,
+    dateofAdmission: this.CharacterCertForm.value.dateofAdmission,
+    dateofLeaving: this.CharacterCertForm.value.dateofLeaving,
+    lastClass: this.CharacterCertForm.value.lastClass,
+    lastExam: this.CharacterCertForm.value.lastExam,
+    examYear: this.CharacterCertForm.value.examYear,
+    academicStatus: this.CharacterCertForm.value.academicStatus,
+    moral: this.CharacterCertForm.value.moral,
+    leadership: this.CharacterCertForm.value.leadership,
+    societies: this.CharacterCertForm.value.societies,
+    sports: this.CharacterCertForm.value.sports,
+  };
+  var url = 'http://localhost:3000/certification/charactercert'
 
+  this.http.post<any>(url, characterCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.CharacterCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
+  console.log(characterCertApproval);
 
+  window.location.reload();
+
+}
 
   ngOnInit() {
 
