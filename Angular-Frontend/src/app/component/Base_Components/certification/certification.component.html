@@ -17,7 +17,7 @@
                     </div>
                     <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
                       <mat-tab-group>
-                        <mat-tab label="APPLY CERTIFICATES  ">
+                        <mat-tab label="APPLY CERTIFICATES ">
                           <br>
                           <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
                             <img src="../../../assets/logo/logo.png" style="width:50%; margin-bottom: 50px">
@@ -35,11 +35,10 @@
                               <label>Certification Required :</label>
                               <mat-select #t class="browser-default custom-select mb-4 box_border" formControlName="certType"
                                 (selectionChange)="testfunction(t.value)">
-                                <!-- <mat-option value="None" selected></mat-option> -->
                                 <mat-option style="text-align: left" *ngFor="let cert of certificates" [value]="cert">{{ cert }}
                                 </mat-option>
                               </mat-select>
-                              <!-- {{t.value}} -->
+                              {{t.value}}
                             </div>
                     
                             <div *ngIf="flag" formGroupName='exam'>

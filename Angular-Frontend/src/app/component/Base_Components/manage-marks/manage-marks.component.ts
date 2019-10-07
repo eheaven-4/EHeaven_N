@@ -25,9 +25,27 @@ export class ManageMarksComponent implements OnInit {
   ctName : classTeacher [] = [];    //store class teacher name of user given input class Name
   stData : studentData [] = [];   //store classroom student in the specific class
 
+  subject : String;
+  year : String;
+  semester : String;
+  userid : String;
+  username : String;
+  marks : String;
+
   constructor(
     private http: HttpClient,
+    private fb: FormBuilder,
   ) { }
+
+  StudentMarksForm = this.fb.group({
+    stuSubject: ['', Validators.required],
+    // certType: ['', Validators.required],
+    // exam: this.fb.group({
+    //   examName: ['', Validators.required],
+    //   examYear: ['', Validators.required],
+    //   examIndex: ['', Validators.required]
+    // })
+  });
   // Subjects types
   subjects = [
     'Mathematics',
@@ -74,7 +92,19 @@ export class ManageMarksComponent implements OnInit {
   }
 
   submitMarks(){
+    console.log("naisudnikfs")
     //send students marks to the backend
-    
+    const object = {
+      subject : this.subject,
+      year: this.year,
+      semester : this.semester,
+      marksBulk : [{
+        userid : this.userid,
+        name : this.username,
+        marks : this.marks
+      }]
+    };
+
+    console.log(object);
   }
 }
