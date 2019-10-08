@@ -26,6 +26,7 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
   }
 
+  //log out the website 
   logoutUser() {
     this.logout();
     this.ngFlashMessage.showFlashMessage({
@@ -38,24 +39,23 @@ export class NavbarComponent implements OnInit {
     // window.location.reload();     //reload the page
   }
   
+  //delete the saved cookes from the cookies when th user logout
   logout() {
     this.authtoken = null;
     this.user = null;
     localStorage.clear();
-
     this.cookieService.delete('userAuth');
   }
 
-  userProfile() {
+  userProfile() {   //get user data from the cookied and view this in the profile page
     var myCookie = this.cookies.getCookie("userAuth");
     // console.log(myCookie);
-    if (myCookie) {
+    if (myCookie) {   //if the cookie available routes to the user profile page
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // console.log(id);
       this.router.navigate(['/profile' + '/' + id]);
     }
-    else {
+    else {    //else redirect to the login again to store data to cookies
       this.ngFlashMessage.showFlashMessage({
         messages: ["Please Login First..!"], 
         dismissible: true, 

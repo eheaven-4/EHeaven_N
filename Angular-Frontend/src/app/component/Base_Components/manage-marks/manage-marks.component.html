@@ -25,72 +25,83 @@
                             <div class="row">
                                 <div class="col-md-8">
                                     <p class="top_txt">Class Room Name : </p>
-                                    <input type="text" class="form-control box_border" placeholder="5A" name="className" [(ngModel)]="className">
-                                    <p class="text-danger" style="text-align: left; font-size: 10px">Class-room name is required *</p>
+                                    <input type="text" class="form-control border" placeholder="5A" name="className"
+                                        [(ngModel)]="className">
+                                    <p class="text-danger" style="text-align: left; font-size: 10px">Class-room name is
+                                        required *</p>
                                 </div>
 
-                                <!-- {{CertificationForm.value | json}} -->
                                 <div class="col-md-4">
-                                    <button mat-raised-button class="search_btn" (click)="searchStudents($event, className)"><img
-                                            src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
-                                        Search</button>
+                                    <button mat-raised-button class="search_btn"
+                                    (click)="searchStudents($event, className)"><img
+                                    src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
+                                    Search</button>
                                 </div>
                             </div>
                         </mat-card>
                     </div>
                     <!-- [{{#each userData}}] -->
-
+                    
                     <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
-                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
-                            <div class="row" *ngIf="ctName">
-                                <p style="color: rgb(115, 115, 115)">Class Teacher Name : </p><p> &nbsp;&nbsp;{{ctName.classTeacher}}</p>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <p class="top_txt">Subject : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
+                            <mat-card class="border text-center p-5 reg-frm">
+                                <div class="row" *ngIf="ctName">
+                                    <p style="color: rgb(115, 115, 115)">Class Teacher Name : </p>
+                                    <p> &nbsp;&nbsp;{{ctName.classTeacher}}</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-5">
+                                        <p class="top_txt">Subject : </p>
+                                        <mat-select #t class="browser-default custom-select mb-4 border" >
+                                            <mat-option style="text-align: left" *ngFor="let subject of subjects"
+                                            [value]="subject">{{ subject }}
                                         </mat-option>
                                     </mat-select>
+                                    {{t.value | json}}
                                 </div>
                                 <div class="col-md-3">
                                     <p class="top_txt">Year : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
+                                    <mat-select class="browser-default custom-select mb-4 border">
+                                        <mat-option style="text-align: left" *ngFor="let year of years" [value]="year">
+                                            {{ year }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <p class="top_txt">Semester : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
+                                    <mat-select class="browser-default custom-select mb-4 border">
+                                        <mat-option style="text-align: left" *ngFor="let semester of semesters"
+                                            [value]="semester">{{ semester }}
                                         </mat-option>
                                     </mat-select>
+                                
                                 </div>
                             </div>
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Id</th>
-                                        <th>Hero Name</th>
-                                        <th>Country</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <div class="row">
-                                <button mat-raised-button class="search_btn" style="width:30%; margin: auto">
-                                    <img src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Submit</button>
+                            <div class="container-fluid" style="padding-top: 30px">
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th style="text-align: left">Student Id</th>
+                                            <th style="text-align: left">Student Name</th>
+                                            <th>Marks</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody >
+                                        <tr *ngFor="let data of stData">
+                                            <td class="tableInner">{{data.userid}}</td>
+                                            <td class="tableInner">{{data.name}}</td>
+                                            <td><input type="text" class="marks"></td>
+                                        
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="row">
+                                    <button mat-raised-button class="search_btn" style="width:30%; margin: auto"
+                                        (click)="submitMarks()">Submit Marks</button>
+                                </div>
                             </div>
                         </mat-card>
                     </div>
-
                 </div>
             </div>
         </div>
