@@ -13,6 +13,7 @@ const certification = require('./routes/certification');
 const attendance = require('./routes/attendance');
 const class_management = require('./routes/class_management');
 const teacher_management = require('./routes/teacher_management');
+// const filehandler=require('./routes/filehandler');
 
 app.use(cors());
 
@@ -38,6 +39,7 @@ app.use('/certification', certification);
 app.use('/attendance',attendance);
 app.use('/class_management',class_management);
 app.use('/teacher_management',teacher_management);
+// app.use('/filehandler',filehandler);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
