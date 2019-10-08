@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -94,22 +94,20 @@ schooltypes = [
 ];
 
 // ********************* A/L Certificate Form *********************************************************************
+get subjects(){
+  return this.AlCertForm.get('subjects') as FormArray
+}
 
+addsubjects(){
+  this.subjects.push(this.fb.control(''));
+}
 AlCertForm = this.fb.group({
   studentName: ['', Validators.required],
   examYear: ['', Validators.required],
   centerNo: ['', Validators.required],
   indexNo: ['', Validators.required],
   medium: ['', Validators.required],
-  fathersName: ['', Validators.required],
-  fathersOccupation: ['', Validators.required],
-  fathersAddress: ['', Validators.required],
-  religion: ['', Validators.required],
-  schoolName: ['', Validators.required],
-  schoolType: ['', Validators.required],
-  cause: ['', Validators.required],
-  lastClass: ['', Validators.required],
-  subjects: ['', Validators.required],
+  subjects: this.fb.array([]),
 });
 
 //examination Medium
@@ -123,6 +121,7 @@ mediums = [
 yearofExam = [
   '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
 ];
+
 
 // ******************************** Submit student status *********************************
   submitStudentstatus() {

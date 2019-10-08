@@ -198,7 +198,7 @@
                                             <input matInput formControlName="centerNo" placeholder="Examination Center Number">
                                           </mat-form-field>
                                           <mat-form-field>
-                                            <textarea matInput formControlName="indexNo" placeholder="Index Number"></textarea>
+                                            <input matInput formControlName="indexNo" placeholder="Index Number">
                                           </mat-form-field>
                                           <mat-form-field>
                                             <mat-label>Medium</mat-label>
@@ -209,8 +209,15 @@
                                             </mat-select>
                                           </mat-form-field>
 
+                                            <mat-label>Subjects</mat-label>
+                                            <button type="button" class="btn btn-secondary btn-sm m-2" (click)="addsubjects()">Add</button>
+                                            <div class="container" formArrayName="subjects" *ngFor="let sub of subjects.controls; let i =index">
+                                              <input matInput [formControlName]="i" placeholder="Subject">
+                                              <input matInput [formControlName]="i" placeholder="Subject">
+                                            </div>
 
-                                          <!-- {{AlCertForm.value | json}} -->
+
+                                          {{AlCertForm.value | json}}
 
                                     <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitAlCert()">Submit</button>
                                         </div>
