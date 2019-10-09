@@ -3,23 +3,27 @@ const router = express.Router();
 const academics = require('../models/academics');
 const config = require('../config/database');
 const multer = require('multer');
-const DIR = './uploads/';
-const upload = multer({ dest: DIR }).single('photo');
 
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+  }
+})
 
-router.post('/uploadsfile', function (req, res, next) {
-  console.log("hello")
-  var path = '';
-  upload(req, res, function (err) {
+const upload = multer({ storage: storage }).single('profileImage');
+
+router.post('/uploadfile', function (req, res) {
+  upload(req, res, (err) => {
     if (err) {
-      // An error occurred when uploading
-      console.log(err);
-      return res.status(422).send("an Error occured")
+      res.json({ state: false, msg: "Did not insert new attendance" });
     }
-    // No error occured.
-    path = req.file.path;
-    return res.send("Upload Completed for " + path);
-  });
+    if (req) {
+      res.json({ state: true, msg: "New Attendence inserted" });
+    }
+  })
 });
 
 module.exports = router;
