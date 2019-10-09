@@ -3,6 +3,7 @@ const router = express.Router();
 const { requestCertification } = require('../models/certification');
 const { requestStudentstatus } = require('../models/certification');
 const { requestCharacterCert } = require('../models/certification');
+const { requestLeavingCert } = require('../models/certification');
 const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
@@ -73,6 +74,7 @@ router.get("/issuedCert/:id", function (req, res) {
 });
 
 /*******************************generate student status certificate pdf ***************************************/
+
 router.post("/studentstatus", async function (req, res) {
     // console.log("hello at server ");
     const newRequest = new requestStudentstatus({
@@ -136,6 +138,7 @@ router.post("/studentstatus", async function (req, res) {
 });
 
 /*******************************generate character certificate pdf ***************************************/
+
 router.post("/charactercert", async function (req, res) {
     console.log("hello at server ");
     const newRequest = new requestCharacterCert({
@@ -172,6 +175,43 @@ router.post("/charactercert", async function (req, res) {
 
 });
 
+/*******************************generate leaving certificate pdf ***************************************/
 
+router.post("/leavingcert", async function (req, res) {
+    console.log("hello at server ");
+    const newRequest = new requestLeavingCert({
+        studentName: req.body.studentName,
+        admissionNum: req.body.admissionNum,
+        dateofAdmission: req.body.dateofAdmission,
+        dateofLeaving: req.body.dateofLeaving,
+        dateofBirth: req.body.dateofBirth,
+        fathersName: req.body.fathersName,
+        fathersOccupation: req.body.fathersOccupation,
+        fathersAddress: req.body.fathersAddress,
+        religion: req.body.religion,
+        schoolName: req.body.schoolName,
+        schoolType: req.body.schoolType,
+        cause: req.body.cause,
+        lastClass: req.body.lastClass,
+        subjects: req.body.subjects,
+    });
+    console.log(newRequest);
+    const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const page = pages[0];
+    // page.drawText(
+    //     newRequest.studentName,
+    //     {
+    //         x: 200,
+    //         y: 615,
+    //         size: 12,
+    //     },
+    // );
+
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+
+});
 
 module.exports = router; 

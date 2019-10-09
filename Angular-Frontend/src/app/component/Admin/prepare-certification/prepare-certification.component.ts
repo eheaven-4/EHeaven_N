@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup, FormArray } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -18,7 +18,7 @@ export class PrepareCertificationComponent implements OnInit {
   ) { }
 
 
-  // ********************* Student Status Form *********************
+  // ********************* Student Status Form ****************************************************************************
 
   StudentStatusForm = this.fb.group({
     studentName: ['', Validators.required],
@@ -28,7 +28,7 @@ export class PrepareCertificationComponent implements OnInit {
 
   });
 
- // ********************* Character Certificate Form *********************
+ // ********************* Character Certificate Form *********************************************************************
 
  CharacterCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -53,13 +53,14 @@ academicPerformance = [
   'Excellent'
 ];
 
+//moral conduct of the student
 moralConduct = [
   'Satisfactory',
   'Good',
   'Excellent'
 ];
 
-// ********************* Leaving Certificate Form *********************
+// ********************* Leaving Certificate Form *********************************************************************
 
 LeavingCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -92,8 +93,37 @@ schooltypes = [
   'Vernaular',
 ];
 
+// ********************* A/L Certificate Form *********************************************************************
+get subjects(){
+  return this.AlCertForm.get('subjects') as FormArray
+}
 
-// ******************************** Submit student status form *********************************
+addsubjects(){
+  this.subjects.push(this.fb.control(''));
+}
+AlCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  examYear: ['', Validators.required],
+  centerNo: ['', Validators.required],
+  indexNo: ['', Validators.required],
+  medium: ['', Validators.required],
+  subjects: this.fb.array([]),
+});
+
+//examination Medium
+mediums = [
+  'English',
+  'Sinhala',
+  'Tamil',
+];
+
+// examinations years
+yearofExam = [
+  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
+];
+
+
+// ******************************** Submit student status *********************************
   submitStudentstatus() {
 
     const studentStatusApproval = {
@@ -124,7 +154,7 @@ schooltypes = [
 
   }
 
-// ******************************** Submit Character form *********************************
+// ******************************** Submit Character certificate *********************************
 submitCharacterCert() {
 
   const characterCertApproval = {
@@ -156,6 +186,45 @@ submitCharacterCert() {
           }
         });
   console.log(characterCertApproval);
+
+  window.location.reload();
+
+}
+
+// ******************************** Submit Leaving certificate ***********************************
+submitLeavingCert() {
+
+  const leavingCertApproval = {
+    studentName: this.LeavingCertForm.value.studentName,
+    admissionNum: this.LeavingCertForm.value.admissionNum,
+    dateofAdmission: this.LeavingCertForm.value.dateofAdmission,
+    dateofLeaving: this.LeavingCertForm.value.dateofLeaving,
+    dateofBirth: this.LeavingCertForm.value.dateofBirth,
+    fathersName: this.LeavingCertForm.value.fathersName,
+    fathersOccupation: this.LeavingCertForm.value.fathersOccupation,
+    fathersAddress: this.LeavingCertForm.value.fathersAddress,
+    religion: this.LeavingCertForm.value.religion,
+    schoolName: this.LeavingCertForm.value.schoolName,
+    schoolType: this.LeavingCertForm.value.schoolType,
+    cause: this.LeavingCertForm.value.cause,
+    lastClass: this.LeavingCertForm.value.lastClass,
+    subjects: this.LeavingCertForm.value.subjects,
+  };
+  var url = 'http://localhost:3000/certification/leavingcert'
+
+  this.http.post<any>(url, leavingCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.LeavingCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
+  console.log(leavingCertApproval);
 
   window.location.reload();
 
