@@ -121,9 +121,9 @@
                                         [(ngModel)]="address"></textarea>
 
                                     <input type="file" class="file_upload" style="display: none" name="profilepic"
-                                        accept="image/*" (change)="onFileSelected($event)" #fileInput>
+                                        accept="image/*" (change)="selectImage($event)" #fileInput>
                                     <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
-                                        (click)="fileInput.click()">Choose Profile Picture</button>
+                                        (click)="fileInput.click()" accept="image/*">Choose Profile Picture</button>
 
                                     <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"
                                         (click)="registerUser()">Register

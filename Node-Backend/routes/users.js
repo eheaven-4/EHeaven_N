@@ -3,11 +3,20 @@ const router = express.Router();
 const User = require('../models/users');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
-const passport = require('passport');
 const multer = require('multer');
 const pdfDoc = require('pdf-lib');
-const fs = require('fs');
+const bcrypt = require('bcryptjs');
 
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'profile_Images/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
+
+const upload = multer({ storage: storage }).single('profileImage');
 
 //user login scope
 router.post("/login", function (req, res, next) {
@@ -62,32 +71,52 @@ router.post("/login", function (req, res, next) {
 });
 //user registraton scope 
 router.post("/register", function (req, res) {
-    const newUser = new User({
-        usertype: req.body.usertype,
-        userid: req.body.userid,
-        selectclass: req.body.selectclass,
-        name: req.body.name,
-        email: req.body.email,
-        password: req.body.password,
-        birthday: req.body.birthday,
-        mobilenumber: req.body.mobilenumber,
-        homenumber: req.body.homenumber,
-        gender: req.body.gender,
-        nationality: req.body.nationality,
-        nicnumber: req.body.nicnumber,
-        father: req.body.father,
-        mother: req.body.mother,
-        address: req.body.address,
-    });
-    console.log(newUser);
+    upload(req, res, (err) => {
+        // console.log(req.file.filename)
+        var fullPath = req.path + '/' + req.file.originalname;
 
-    User.saveUser(newUser, function (err, user) {
-        if (err) {
-            res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
-        }
-        if (user) {
-            res.json({ state: true, msg: "Data inserted Successfully..!" });
-        }
+        var newUser = new User({
+            usertype: req.body.usertype,
+            userid: req.body.userid,
+            selectclass: req.body.selectclass,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            birthday: req.body.birthday,
+            mobilenumber: req.body.mobilenumber,
+            homenumber: req.body.homenumber,
+            gender: req.body.gender,
+            nationality: req.body.nationality,
+            nicnumber: req.body.nicnumber,
+            father: req.body.father,
+            mother: req.body.mother,
+            address: req.body.address,
+            filepath: fullPath,
+        });
+
+        // var newUser = new acad(document);
+        console.log(newUser);
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                console.log(hash);
+                newUser.password = hash;
+
+                if (err) {
+                    throw err;
+                }
+                else {
+                    newUser.save()
+                        .then(result => {
+                            console.log(result)
+                            res.json({ state: true, msg: "Data Inserted Successfully..!" });
+                        })
+                        .catch(error => {
+                            console.log(error)
+                            res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+                        })
+                }
+            });
+        });
     });
 });
 
@@ -101,19 +130,19 @@ router.get("/profile/:id", function (req, res) {
 });
 
 //get users ids names using select class name
-router.get("/getStudentsNames/:cName" , function(req, res,next){
+router.get("/getStudentsNames/:cName", function (req, res, next) {
     const cName = req.params.cName;
-    User.find({selectclass : cName})
+    User.find({ selectclass: cName })
         .select('userid name')
         .exec()
-        .then( data=> {
+        .then(data => {
             console.log("Data Transfer Success..!")
             res.status(200).json(data)
         })
         .catch(error => {
             console.log("Data Transfer Unsuccessfull..!")
             res.status(500).json({
-                error : error
+                error: error
             })
         })
 })

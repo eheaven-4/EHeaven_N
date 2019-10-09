@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const academics = require('../models/academics');
+const acad = require('../models/academics');
 const config = require('../config/database');
 const multer = require('multer');
 
@@ -9,20 +9,32 @@ var storage = multer.diskStorage({
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.fieldname + '-' + Date.now() + '.jpg')
+    cb(null, file.originalname)
+    // console.log(file.originalname)
   }
-})
+});
 
-const upload = multer({ storage: storage }).single('profileImage');
+
+var upload = multer({ storage: storage }).single('profileImage');
 
 router.post('/uploadfile', function (req, res) {
   upload(req, res, (err) => {
-    if (err) {
-      res.json({ state: false, msg: "Did not insert new attendance" });
-    }
-    if (req) {
-      res.json({ state: true, msg: "New Attendence inserted" });
-    }
+    console.log(req.file.filename)
+    var fullPath = req.path + '/' + req.file.originalname;
+    var document = {
+      path: fullPath,
+    };
+
+    var photo = new acad(document);
+    photo.save()
+      .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+      })
+      .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+      })
   })
 });
 
