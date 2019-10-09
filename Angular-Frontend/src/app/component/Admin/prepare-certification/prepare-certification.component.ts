@@ -94,33 +94,8 @@ schooltypes = [
 ];
 
 // ********************* A/L Certificate Form *********************************************************************
-// get subjects(){
-//   return <FormArray>this.AlCertForm.get('subjects');
-// }
 
-// AlCertForm = this.fb.group({
-//   studentName: ['', Validators.required],
-//   examYear: ['', Validators.required],
-//   centerNo: ['', Validators.required],
-//   indexNo: ['', Validators.required],
-//   medium: ['', Validators.required],
-//   // subjects: this.fb.array([
-//   //   this.addAlsub()
-//   // ]),
-
-// });
-
-// addAlsub(): FormGroup {
-//   return this.fb.group({
-//     subjectName: ['', Validators.required],
-//     grade: ['', Validators.required],
-//   });
-// }
-
-// addsubjects(): void {
-//   (<FormArray>this.AlCertForm.get('subjects')).push(this.addAlsub());
-// }
-//examination Medium
+// examination Medium
 mediums = [
   'English',
   'Sinhala',
@@ -132,9 +107,36 @@ yearofExam = [
   '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
 ];
 
-// addsubjects(){
-//   this.subjects.push(this.fb.control(''));
-// }
+// examination Grades
+grades = [
+  'A',
+  'B',
+  'C',
+  'S',
+  'F',
+];
+
+AlCertForm = this.fb.group({
+  certDetails: this.fb.group({
+    studentName: ['', Validators.required],
+    examYear: ['', Validators.required],
+    centerNo: ['', Validators.required],
+    indexNo: ['', Validators.required],
+    medium: ['', Validators.required],
+  }),
+  subjects: this.fb.array([this.subjects])
+});
+
+get subjects(): FormGroup {
+  return this.fb.group({
+    subjectName: ['', Validators.required],
+    grade: ['', Validators.required],
+  });
+}
+
+addSubject() {
+  (this.AlCertForm.get('subjects') as FormArray).push(this.subjects);
+}
 
 
 // ******************************** Submit student status *********************************
@@ -247,28 +249,6 @@ submitLeavingCert() {
   ngOnInit() {
 
   }
-  leagueForm = this.fb.group({
-    league_details: this.fb.group({
-      name: "",
-      founder: ""
-    }),
-    teams: this.fb.array([this.teams])
-  });
-
-  get teams(): FormGroup {
-    return this.fb.group({
-      team_name: "",
-      team_score: "",
-    });
-  }
-
-  addTeam() {
-    (this.leagueForm.get("teams") as FormArray).push(this.teams);
-  }
-
-
-
-
 
 }
 
