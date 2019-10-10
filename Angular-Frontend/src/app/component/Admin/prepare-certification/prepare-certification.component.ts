@@ -246,6 +246,37 @@ submitLeavingCert() {
 
 }
 
+// ******************************** Submit A/L certificate ***********************************
+submitAlCert() {
+
+  const AlCertForm = {
+    studentName: this.AlCertForm.value.certDetails.studentName,
+    examYear: this.AlCertForm.value.certDetails.examYear,
+    centerNo: this.AlCertForm.value.certDetails.centerNo,
+    indexNo: this.AlCertForm.value.certDetails.indexNo,
+    medium: this.AlCertForm.value.certDetails.medium,
+
+  };
+  // var url = 'http://localhost:3000/certification/leavingcert'
+
+  // this.http.post<any>(url, AlCertForm).subscribe(res => {
+  //         if (res.state) {
+  //           console.log(res.msg);
+  //           alert('Successful');
+  //           this.LeavingCertForm.reset();
+  //           this.router.navigate(['/prepare_certification']);
+  //         } else {
+  //           console.log(res.msg);
+  //           alert('Error!! Try Again');
+  //           this.router.navigate(['/prepare_certification']);
+  //         }
+  //       });
+  console.log(AlCertForm);
+
+  // window.location.reload();
+
+}
+
   ngOnInit() {
 
   }
