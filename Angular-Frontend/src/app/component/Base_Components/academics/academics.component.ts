@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
@@ -16,7 +16,7 @@ export class AcademicsComponent implements OnInit {
   constructor(
     private http: HttpClient,
   ) { }
-
+  
   ngOnInit() {
 
   }
@@ -38,4 +38,6 @@ export class AcademicsComponent implements OnInit {
     });
   }
 
-}
+  }
+ 
+

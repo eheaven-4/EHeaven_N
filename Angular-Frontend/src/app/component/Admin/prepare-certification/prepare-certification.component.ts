@@ -18,17 +18,18 @@ export class PrepareCertificationComponent implements OnInit {
   ) { }
 
 
-  // ********************* Student Status Form ****************************************************************************
+  // ********************* Student Status Form *********************
 
   StudentStatusForm = this.fb.group({
     studentName: ['', Validators.required],
     admissionNum: ['', Validators.required],
     dateofAdmission: ['', Validators.required],
+    currentStatus: ['', Validators.required],
     description: ['', Validators.required],
 
   });
 
- // ********************* Character Certificate Form *********************************************************************
+ // ********************* Character Certificate Form *********************
 
  CharacterCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -40,9 +41,7 @@ export class PrepareCertificationComponent implements OnInit {
   examYear: ['', Validators.required],
   academicStatus: ['', Validators.required],
   moral: ['', Validators.required],
-  leadership: ['', Validators.required],
-  societies: ['', Validators.required],
-  sports: ['', Validators.required],
+  description: ['', Validators.required],
 });
 
 // academic performance categories
@@ -53,7 +52,6 @@ academicPerformance = [
   'Excellent'
 ];
 
-//moral conduct of the student
 moralConduct = [
   'Satisfactory',
   'Good',
@@ -94,8 +92,33 @@ schooltypes = [
 ];
 
 // ********************* A/L Certificate Form *********************************************************************
+// get subjects(){
+//   return <FormArray>this.AlCertForm.get('subjects');
+// }
 
-// examination Medium
+// AlCertForm = this.fb.group({
+//   studentName: ['', Validators.required],
+//   examYear: ['', Validators.required],
+//   centerNo: ['', Validators.required],
+//   indexNo: ['', Validators.required],
+//   medium: ['', Validators.required],
+//   // subjects: this.fb.array([
+//   //   this.addAlsub()
+//   // ]),
+
+// });
+
+// addAlsub(): FormGroup {
+//   return this.fb.group({
+//     subjectName: ['', Validators.required],
+//     grade: ['', Validators.required],
+//   });
+// }
+
+// addsubjects(): void {
+//   (<FormArray>this.AlCertForm.get('subjects')).push(this.addAlsub());
+// }
+//examination Medium
 mediums = [
   'English',
   'Sinhala',
@@ -107,36 +130,9 @@ yearofExam = [
   '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
 ];
 
-// examination Grades
-grades = [
-  'A',
-  'B',
-  'C',
-  'S',
-  'F',
-];
-
-AlCertForm = this.fb.group({
-  certDetails: this.fb.group({
-    studentName: ['', Validators.required],
-    examYear: ['', Validators.required],
-    centerNo: ['', Validators.required],
-    indexNo: ['', Validators.required],
-    medium: ['', Validators.required],
-  }),
-  subjects: this.fb.array([this.subjects])
-});
-
-get subjects(): FormGroup {
-  return this.fb.group({
-    subjectName: ['', Validators.required],
-    grade: ['', Validators.required],
-  });
-}
-
-addSubject() {
-  (this.AlCertForm.get('subjects') as FormArray).push(this.subjects);
-}
+// addsubjects(){
+//   this.subjects.push(this.fb.control(''));
+// }
 
 
 // ******************************** Submit student status *********************************
@@ -146,8 +142,8 @@ addSubject() {
       studentName: this.StudentStatusForm.value.studentName,
       admissionNum: this.StudentStatusForm.value.admissionNum,
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
+      currentStatus: this.StudentStatusForm.value.currentStatus,
       description: this.StudentStatusForm.value.description,
-      state : 'Pending'
     };
 
     var url = 'http://localhost:3000/certification/studentstatus'
@@ -170,81 +166,29 @@ addSubject() {
 
   }
 
-// ******************************** Submit Character certificate *********************************
-submitCharacterCert() {
+// ******************************** Submit Character form *********************************
+// submitCharacterCert() {
 
-  const characterCertApproval = {
-    studentName: this.CharacterCertForm.value.studentName,
-    admissionNum: this.CharacterCertForm.value.admissionNum,
-    dateofAdmission: this.CharacterCertForm.value.dateofAdmission,
-    dateofLeaving: this.CharacterCertForm.value.dateofLeaving,
-    lastClass: this.CharacterCertForm.value.lastClass,
-    lastExam: this.CharacterCertForm.value.lastExam,
-    examYear: this.CharacterCertForm.value.examYear,
-    academicStatus: this.CharacterCertForm.value.academicStatus,
-    moral: this.CharacterCertForm.value.moral,
-    leadership: this.CharacterCertForm.value.leadership,
-    societies: this.CharacterCertForm.value.societies,
-    sports: this.CharacterCertForm.value.sports,
-  };
-  var url = 'http://localhost:3000/certification/charactercert'
+//   const studentStatusApproval = {
+//     studentName: this.StudentStatusForm.value.studentName,
+//     admissionNum: this.StudentStatusForm.value.admissionNum,
+//     dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
+//     currentStatus: this.StudentStatusForm.value.currentStatus,
+//     description: this.StudentStatusForm.value.description,
+//   };
 
-  this.http.post<any>(url, characterCertApproval).subscribe(res => {
-          if (res.state) {
-            console.log(res.msg);
-            alert('Successful');
-            this.CharacterCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
-          } else {
-            console.log(res.msg);
-            alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
-          }
-        });
-  console.log(characterCertApproval);
 
-  window.location.reload();
 
-}
+  ngOnInit() {
 
-// ******************************** Submit Leaving certificate ***********************************
-submitLeavingCert() {
-
-  const leavingCertApproval = {
-    studentName: this.LeavingCertForm.value.studentName,
-    admissionNum: this.LeavingCertForm.value.admissionNum,
-    dateofAdmission: this.LeavingCertForm.value.dateofAdmission,
-    dateofLeaving: this.LeavingCertForm.value.dateofLeaving,
-    dateofBirth: this.LeavingCertForm.value.dateofBirth,
-    fathersName: this.LeavingCertForm.value.fathersName,
-    fathersOccupation: this.LeavingCertForm.value.fathersOccupation,
-    fathersAddress: this.LeavingCertForm.value.fathersAddress,
-    religion: this.LeavingCertForm.value.religion,
-    schoolName: this.LeavingCertForm.value.schoolName,
-    schoolType: this.LeavingCertForm.value.schoolType,
-    cause: this.LeavingCertForm.value.cause,
-    lastClass: this.LeavingCertForm.value.lastClass,
-    subjects: this.LeavingCertForm.value.subjects,
-  };
-  var url = 'http://localhost:3000/certification/leavingcert'
-
-  this.http.post<any>(url, leavingCertApproval).subscribe(res => {
-          if (res.state) {
-            console.log(res.msg);
-            alert('Successful');
-            this.LeavingCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
-          } else {
-            console.log(res.msg);
-            alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
-          }
-        });
-  console.log(leavingCertApproval);
-
-  window.location.reload();
-
-}
+  }
+  leagueForm = this.fb.group({
+    league_details: this.fb.group({
+      name: "",
+      founder: ""
+    }),
+    teams: this.fb.array([this.teams])
+  });
 
 // ******************************** Submit A/L certificate ***********************************
 submitAlCert() {
@@ -279,7 +223,13 @@ submitAlCert() {
 
   ngOnInit() {
 
+  addTeam() {
+    (this.leagueForm.get("teams") as FormArray).push(this.teams);
   }
+
+
+
+
 
 }
 

@@ -8,7 +8,6 @@ import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FileSelectDirective } from 'ng2-file-upload';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -42,10 +41,10 @@ import { AddClassTimetableComponent } from './component/Admin/add-class-timetabl
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    FileSelectDirective,
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
@@ -86,7 +85,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     FlexLayoutModule,
     MDBBootstrapModule,
     FontAwesomeModule,
-    ],
+  ],
   providers: [
     CookieService,
   ],
