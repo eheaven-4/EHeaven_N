@@ -8,10 +8,6 @@ import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-<<<<<<< HEAD
-import { FileSelectDirective ,FileDropDirective} from 'ng2-file-upload';
-=======
->>>>>>> parent of 5ee58ece... Merge branch 'master' of https://github.com/eheaven-4/EHeaven_N
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -49,11 +45,6 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
 @NgModule({
   declarations: [
     AppComponent,
-<<<<<<< HEAD
-    FileSelectDirective,
-    FileDropDirective,
-=======
->>>>>>> parent of 5ee58ece... Merge branch 'master' of https://github.com/eheaven-4/EHeaven_N
     NavbarComponent,
     LoginComponent,
     RegisterComponent,

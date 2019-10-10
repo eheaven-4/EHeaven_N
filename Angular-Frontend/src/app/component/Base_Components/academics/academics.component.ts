@@ -40,4 +40,4 @@ export class AcademicsComponent implements OnInit {
 
   }
  
-}
+
