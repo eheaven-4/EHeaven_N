@@ -8,7 +8,7 @@ import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FileSelectDirective } from 'ng2-file-upload';
+import { FileSelectDirective ,FileDropDirective} from 'ng2-file-upload';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -46,6 +46,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
   declarations: [
     AppComponent,
     FileSelectDirective,
+    FileDropDirective,
     NavbarComponent,
     LoginComponent,
     RegisterComponent,
