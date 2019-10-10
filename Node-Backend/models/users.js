@@ -18,6 +18,7 @@ const userSchema = mongoose.Schema({
     father:{type:String, require:true},
     mother:{type:String, require:true},
     address:{type:String, require:true},
+    filepath:{type: String, require:true}    
 });
 
 const Users = module.exports = mongoose.model("Users", userSchema);  

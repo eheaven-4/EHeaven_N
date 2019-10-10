@@ -15,7 +15,10 @@
                     </div>
                     <div>
                         <div style="padding: 100px; height: 100%; box-sizing: border-box;">
-
+                            <input id="photo" type="file" accept="image/*" (change)="selectImage($event)"/>
+                            <button type="button" class="btn btn-success btn-s" (click)="upload()">
+                                Upload with method 2
+                            </button>
                         </div>
                     </div>
                 </div>

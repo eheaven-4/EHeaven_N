@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
+import { all } from 'q';
 
 @Component({
   selector: 'app-register',
@@ -26,6 +27,7 @@ export class RegisterComponent implements OnInit {
   mother: String;
   address: String;
 
+  images;
   constructor(
     // private authService: AuthService, 
     private ngFlashMessageService: NgFlashMessageService,
@@ -36,9 +38,15 @@ export class RegisterComponent implements OnInit {
   ngOnInit() {
   }
 
-
+  selectImage(event) {
+    if (event.target.files.length > 0) {
+      const file = event.target.files[0];
+      this.images = file;
+    }
+  }
   /**************************************************** */
   registerUser() {
+    const formData = new FormData();
     const user = {
       usertype: this.usertype,
       userid: this.userid,
@@ -57,10 +65,12 @@ export class RegisterComponent implements OnInit {
       address: this.address,
     }
 
+    formData.append('profileImage', this.images)
+
     /****************************************************** */
-
-
+    	
     var url = "http://localhost:3000/users/register";
+
     this.http.post<any>(url, user).subscribe(res => {
       if (res.state) {
         console.log(res.msg);

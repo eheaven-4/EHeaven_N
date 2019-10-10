@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
 
@@ -58,7 +58,86 @@ moralConduct = [
   'Excellent'
 ];
 
-// ******************************** Submit student status form *********************************
+// ********************* Leaving Certificate Form *********************************************************************
+
+LeavingCertForm = this.fb.group({
+  studentName: ['', Validators.required],
+  admissionNum: ['', Validators.required],
+  dateofAdmission: ['', Validators.required],
+  dateofLeaving: ['', Validators.required],
+  dateofBirth: ['', Validators.required],
+  fathersName: ['', Validators.required],
+  fathersOccupation: ['', Validators.required],
+  fathersAddress: ['', Validators.required],
+  religion: ['', Validators.required],
+  schoolName: ['', Validators.required],
+  schoolType: ['', Validators.required],
+  cause: ['', Validators.required],
+  lastClass: ['', Validators.required],
+  subjects: ['', Validators.required],
+});
+
+religions = [
+  'Buddhist',
+  'Christian',
+  'Islamic',
+  'Hindu',
+  'Other'
+];
+
+schooltypes = [
+  'English',
+  'Bilingual',
+  'Vernaular',
+];
+
+// ********************* A/L Certificate Form *********************************************************************
+
+// examination Medium
+mediums = [
+  'English',
+  'Sinhala',
+  'Tamil',
+];
+
+// examinations years
+yearofExam = [
+  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
+];
+
+// examination Grades
+grades = [
+  'A',
+  'B',
+  'C',
+  'S',
+  'F',
+];
+
+AlCertForm = this.fb.group({
+  certDetails: this.fb.group({
+    studentName: ['', Validators.required],
+    examYear: ['', Validators.required],
+    centerNo: ['', Validators.required],
+    indexNo: ['', Validators.required],
+    medium: ['', Validators.required],
+  }),
+  subjects: this.fb.array([this.subjects])
+});
+
+get subjects(): FormGroup {
+  return this.fb.group({
+    subjectName: ['', Validators.required],
+    grade: ['', Validators.required],
+  });
+}
+
+addSubject() {
+  (this.AlCertForm.get('subjects') as FormArray).push(this.subjects);
+}
+
+
+// ******************************** Submit student status *********************************
   submitStudentstatus() {
 
     const studentStatusApproval = {
@@ -105,4 +184,9 @@ moralConduct = [
   ngOnInit() {
 
   }
+
 }
+
+
+
+
