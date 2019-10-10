@@ -17,17 +17,17 @@ export class BulkaddComponent implements OnInit {
   private uploader :FileUploader;
 
   ngOnInit() {
-    this.uploader = new FileUploader({url: this.url});
+    // this.uploader = new FileUploader({url: this.url});
 
-    this.fileHandler.showFileNames().subscribe(response => {
-      for (let i = 0; i < response.json().length; i++) {
-        this.files[i] = {
-          filename: response.json()[i].filename,
-          originalname: response.json()[i].originalname,
-          contentType: response.json()[i].contentType
-        };
-      }
-    });
+    // this.fileHandler.showFileNames().subscribe(response => {
+    //   for (let i = 0; i < response.json().length; i++) {
+    //     this.files[i] = {
+    //       filename: response.json()[i].filename,
+    //       originalname: response.json()[i].originalname,
+    //       contentType: response.json()[i].contentType
+    //     };
+    //   }
+    // });
   }
   handleFile(files:FileList){
     console.log(files.item(0));

@@ -27,7 +27,6 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() { }
 
-  //user login function
   userLogin() {
     const user = {
       userid: this.userid,
@@ -40,13 +39,13 @@ export class LoginComponent implements OnInit {
       
       if (res.state == true) {
         // this.storeData(res.token, res.user);
-        this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);  //save the user data into the cookies for one day
-        var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get cookie data
+        this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
+        var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
         console.log(myCookie.userid);
-        var id = myCookie.userid;   //get user id from the cookies
+        var id = myCookie.userid;
 
         if(id){
-          //if user id and the passwod match  routes to the academic page in the fron page
+          // window.location.reload();     //reload the page
           this.router.navigate(['/academics' + '/' + id]);
               this.ngFlashMessage.showFlashMessage({
                 messages: ["Successfully Logged In..!"], 
@@ -56,7 +55,6 @@ export class LoginComponent implements OnInit {
               });
 
         }
-        //if not match redirect to the login page again
         else{
           this.router.navigate(['/login']);
         }
@@ -64,7 +62,7 @@ export class LoginComponent implements OnInit {
       }
       else {
         console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({    //render the error message when login faild
+        this.ngFlashMessage.showFlashMessage({
           messages: ["Username or password incorrect..!"], 
           dismissible: true, 
           timeout: 2000,

@@ -7,22 +7,22 @@
   background-repeat: no-repeat;
 }
 
-.logo_img {
-  padding-top: 30px;
-  width: 100px;
-}
-
 @font-face{
   font-family: myfont;
   src: url(../../../assets/Fonts/OLD.ttf);
 }
 
+.logo_img {
+  padding-top: 30px;
+  width: 100px;
+}
 .scl_name {
   padding-top: 20px;
   color: white;
   text-align: center;
   font-size: 100px;
   font-family: myfont;
+  font-weight: bold;
 }
 .school_des {
   color: #ffffff;
@@ -41,7 +41,11 @@
   padding-left: 30px;
   width: 500px;
 }
-
+.map:hover{
+  width: 510px;
+  transition: 0.5s;
+  height: 200px;
+}
 .example-header-image {
     background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
     background-size: cover;
