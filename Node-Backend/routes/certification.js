@@ -86,7 +86,7 @@ router.post("/studentstatus", async function (req, res) {
         description: req.body.description,
         state: req.body.state
     });
-    console.log(newRequest);
+    // console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/student.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
@@ -142,12 +142,11 @@ router.post("/studentstatus", async function (req, res) {
 /*******************************generate character certificate pdf ***************************************/
 
 router.post("/charactercert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestCharacterCert({
         studentName: req.body.studentName,
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
-        description: req.body.description,
         dateofLeaving: req.body.dateofLeaving,
         lastClass: req.body.lastClass,
         lastExam: req.body.lastExam,
@@ -163,19 +162,101 @@ router.post("/charactercert", async function (req, res) {
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
-    // page.drawText(
-    //     newRequest.studentName,
-    //     {
-    //         x: 200,
-    //         y: 615,
-    //         size: 12,
-    //     },
-    // );
-
+    page.drawText(
+        newRequest.studentName,
+        {
+            x: 175,
+            y: 635,
+            size: 12,
+        },
+    );
+    page.drawText(
+        newRequest.admissionNum,
+        {
+            x: 250,
+            y: 148,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.dateofAdmission,
+        {
+            x: 250,
+            y: 612,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.dateofLeaving,
+        {
+            x: 400,
+            y: 612,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.lastClass,
+        {
+            x: 200,
+            y: 589,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.examYear,
+        {
+            x: 350,
+            y: 566,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.leadership,
+        {
+            x: 100,
+            y: 488,
+            size: 10,
+            lineHeight: 10,
+        },
+    );
+    page.drawText(
+        newRequest.societies,
+        {
+            x: 100,
+            y: 415,
+            size: 10,
+            lineHeight: 10,
+        },
+    );
+    page.drawText(
+        newRequest.sports,
+        {
+            x: 100,
+            y: 320,
+            size: 10,
+            lineHeight: 10,
+        },
+    );
+    page.drawText(
+        newRequest.academicStatus,
+        {
+            x: 410,
+            y: 207,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.moral,
+        {
+            x: 130,
+            y: 191,
+            size: 10,
+        },
+    );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes)
 
-});
+}); 
 
 /*******************************generate leaving certificate pdf ***************************************/
 
@@ -229,21 +310,21 @@ router.post("/alcert", async function (req, res) {
         subjects: req.body.subjects,
     });
     console.log(newRequest);
-    // const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
-    // var doc = await pdfDoc.PDFDocument.load(uint8Array);
-    // const pages = doc.getPages()
-    // const page = pages[0];
-    // page.drawText(
-    //     newRequest.studentName,
-    //     {
-    //         x: 200,
-    //         y: 615,
-    //         size: 12,
-    //     },
-    // );
+    const uint8Array = fs.readFileSync(__dirname + '/A-Level.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const page = pages[0];
+    page.drawText(
+        newRequest.studentName,
+        {
+            x: 200,
+            y: 615,
+            size: 12,
+        },
+    );
 
-    // const pdfBytes = await doc.save()
-    // fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
 
 });
 
@@ -259,21 +340,21 @@ router.post("/olcert", async function (req, res) {
         subjectsOl: req.body.subjectsOl,
     });
     console.log(newRequest);
-    // const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
-    // var doc = await pdfDoc.PDFDocument.load(uint8Array);
-    // const pages = doc.getPages()
-    // const page = pages[0];
-    // page.drawText(
-    //     newRequest.studentName,
-    //     {
-    //         x: 200,
-    //         y: 615,
-    //         size: 12,
-    //     },
-    // );
+    const uint8Array = fs.readFileSync(__dirname + '/O-Level.pdf')
+    var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    const pages = doc.getPages()
+    const page = pages[0];
+    page.drawText(
+        newRequest.studentName,
+        {
+            x: 200,
+            y: 615,
+            size: 12,
+        },
+    );
 
-    // const pdfBytes = await doc.save()
-    // fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save()
+    fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes)
 
 });
 
