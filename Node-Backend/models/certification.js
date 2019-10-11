@@ -65,7 +65,7 @@ const requestAlCertSchema = mongoose.Schema({
     centerNo: { type: String, require: true },
     indexNo: { type: String, require: true },
     medium: { type: String, require: true },
-    subjects: {type :String, require: true},
+    subjects: {type :Array, require: true},
 });
 
 const requestCertification = mongoose.model("requestCertification", requestCertificationSchema);

@@ -219,23 +219,15 @@ router.post("/leavingcert", async function (req, res) {
 
 router.post("/alcert", async function (req, res) {
     console.log("hello at server ");
-    // const newRequest = new requestLeavingCert({
-    //     studentName: req.body.studentName,
-    //     admissionNum: req.body.admissionNum,
-    //     dateofAdmission: req.body.dateofAdmission,
-    //     dateofLeaving: req.body.dateofLeaving,
-    //     dateofBirth: req.body.dateofBirth,
-    //     fathersName: req.body.fathersName,
-    //     fathersOccupation: req.body.fathersOccupation,
-    //     fathersAddress: req.body.fathersAddress,
-    //     religion: req.body.religion,
-    //     schoolName: req.body.schoolName,
-    //     schoolType: req.body.schoolType,
-    //     cause: req.body.cause,
-    //     lastClass: req.body.lastClass,
-    //     subjects: req.body.subjects,
-    // });
-    // console.log(newRequest);
+    const newRequest = new requestAlCert({
+        studentName: req.body.studentName,
+        examYear: req.body.examYear,
+        centerNo: req.body.centerNo,
+        indexNo: req.body.indexNo,
+        medium: req.body.medium,
+        subjects: req.body.subjects,
+    });
+    console.log(newRequest);
     // const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
     // var doc = await pdfDoc.PDFDocument.load(uint8Array);
     // const pages = doc.getPages()

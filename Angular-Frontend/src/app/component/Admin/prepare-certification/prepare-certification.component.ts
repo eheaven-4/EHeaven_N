@@ -265,21 +265,21 @@ submitAlt() {
   };
   var url = 'http://localhost:3000/certification/alcert'
 
-  // this.http.post<any>(url, alCertApproval).subscribe(res => {
-  //         if (res.state) {
-  //           console.log(res.msg);
-  //           alert('Successful');
-  //           this.LeavingCertForm.reset();
-  //           this.router.navigate(['/prepare_certification']);
-  //         } else {
-  //           console.log(res.msg);
-  //           alert('Error!! Try Again');
-  //           this.router.navigate(['/prepare_certification']);
-  //         }
-  //       });
+  this.http.post<any>(url, alCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.AlCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
   console.log(alCertApproval);
 
-  window.location.reload();
+  // window.location.reload();
 
 }
 
