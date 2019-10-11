@@ -13,7 +13,6 @@ export class RegisterComponent implements OnInit {
 
   images;
   constructor(
-    // private authService: AuthService, 
     private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
