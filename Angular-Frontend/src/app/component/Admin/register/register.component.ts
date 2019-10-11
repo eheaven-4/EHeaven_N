@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { all } from 'q';
 import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
@@ -22,7 +21,7 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   //registratin form attributes
-  RegistrationForm= this.fb.group({
+  RegistrationForm = this.fb.group({
     usertype: ['', Validators.required],
     userid: ['', Validators.required],
     selectclass: ['', Validators.required],
@@ -48,19 +47,11 @@ export class RegisterComponent implements OnInit {
       const file = event.target.files[0];
       this.images = file;
     }
-    else{
-      this.ngFlashMessageService.showFlashMessage({
-        messages: ["Select the Profile Image..!"],
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning'
-      });
-    }
   }
   /**************************************************** */
   registerUser() {
     const formData = new FormData();
-   
+
     formData.append('profileImage', this.images)
     formData.append('usertype', this.RegistrationForm.value.usertype)
     formData.append('userid', this.RegistrationForm.value.userid)
@@ -77,31 +68,41 @@ export class RegisterComponent implements OnInit {
     formData.append('father', this.RegistrationForm.value.father)
     formData.append('mother', this.RegistrationForm.value.mother)
     formData.append('address', this.RegistrationForm.value.address)
-    
+
     /****************************************************** */
-    	
+
     var url = "http://localhost:3000/users/register";
 
-    this.http.post<any>(url, formData).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["Successfully Registered..!"], 
-          dismissible: true, 
-          timeout: 2000,
-          type: 'success',
-        });
-        this.router.navigate(['/login']);
-      }
-      else {
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["You are not Registerd..!"],
-          dismissible: true, 
-          timeout: 2000,
-          type: 'warning'
-        });
-        this.router.navigate(['/register']);
-      }
-    });
+    if (this.images == null) {
+      this.ngFlashMessageService.showFlashMessage({
+        messages: ["Select the Profile Image..!"],
+        dismissible: true,
+        timeout: 2000,
+        type: 'warning'
+      });
+    }
+    else {
+      this.http.post<any>(url, formData).subscribe(res => {
+        if (res.state) {
+          console.log(res.msg);
+          this.ngFlashMessageService.showFlashMessage({
+            messages: ["Successfully Registered..!"],
+            dismissible: true,
+            timeout: 2000,
+            type: 'success',
+          });
+          this.router.navigate(['/login']);
+        }
+        else {
+          this.ngFlashMessageService.showFlashMessage({
+            messages: ["You are not Registerd..!"],
+            dismissible: true,
+            timeout: 2000,
+            type: 'warning'
+          });
+          this.router.navigate(['/register']);
+        }
+      });
+    }
   }
 }
