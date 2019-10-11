@@ -18,6 +18,26 @@ export class PrepareCertificationComponent implements OnInit {
   ) { }
 
 
+// examination Medium
+mediums = [
+  'English',
+  'Sinhala',
+  'Tamil',
+];
+
+// examinations years
+yearofExam = [
+  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
+];
+
+// examination Grades
+grades = [
+  'A',
+  'B',
+  'C',
+  'S',
+  'F',
+];
   // ********************* Student Status Form ****************************************************************************
 
   StudentStatusForm = this.fb.group({
@@ -28,7 +48,7 @@ export class PrepareCertificationComponent implements OnInit {
 
   });
 
- // ********************* Character Certificate Form *********************************************************************
+ // ********************* Character Certificate Form **********************************************************************
 
  CharacterCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -53,14 +73,14 @@ academicPerformance = [
   'Excellent'
 ];
 
-//moral conduct of the student
+// moral conduct of the student
 moralConduct = [
   'Satisfactory',
   'Good',
   'Excellent'
 ];
 
-// ********************* Leaving Certificate Form *********************************************************************
+// ********************* Leaving Certificate Form ************************************************************************
 
 LeavingCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -93,31 +113,10 @@ schooltypes = [
   'Vernaular',
 ];
 
-// ********************* A/L Certificate Form *********************************************************************
-
-// examination Medium
-mediums = [
-  'English',
-  'Sinhala',
-  'Tamil',
-];
-
-// examinations years
-yearofExam = [
-  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
-];
-
-// examination Grades
-grades = [
-  'A',
-  'B',
-  'C',
-  'S',
-  'F',
-];
+// ********************* A/L Certificate Form ****************************************************************************
 
 // subject Numbers
-subjectnumbers = [
+subjectnumbersAl = [
   //insert AL subject Numbers here
 ];
 
@@ -144,8 +143,36 @@ addSubject() {
   (this.AlCertForm.get('subjects') as FormArray).push(this.subjects);
 }
 
+// ********************* O/L Certificate Form ****************************************************************************
 
-// ******************************** Submit student status *********************************
+// subject numbers ol
+subjectnumbersOl = [
+  //insert AL subject Numbers here
+];
+
+OlCertForm = this.fb.group({
+  certDetails: this.fb.group({
+    studentName: ['', Validators.required],
+    examYear: ['', Validators.required],
+    centerNo: ['', Validators.required],
+    indexNo: ['', Validators.required],
+  }),
+  subjectsOl: this.fb.array([this.subjectsOl])
+});
+
+get subjectsOl(): FormGroup {
+  return this.fb.group({
+    subjectName: ['', Validators.required],
+    // subjectNumber: ['', Validators.required],
+    medium: ['', Validators.required],
+    grade: ['', Validators.required],
+  });
+}
+
+addSubjectOl() {
+  (this.OlCertForm.get('subjectsOl') as FormArray).push(this.subjectsOl);
+}
+// ******************************** Submit student status ****************************************************************
   submitStudentstatus() {
 
     const studentStatusApproval = {
@@ -176,7 +203,7 @@ addSubject() {
 
   }
 
-// ******************************** Submit Character certificate *********************************
+// ******************************** Submit Character certificate *********************************************************
 submitCharacterCert() {
 
   const characterCertApproval = {
@@ -213,7 +240,7 @@ submitCharacterCert() {
 
 }
 
-// ******************************** Submit Leaving certificate ***********************************
+// ******************************** Submit Leaving certificate ***********************************************************
 submitLeavingCert() {
 
   const leavingCertApproval = {
@@ -252,8 +279,8 @@ submitLeavingCert() {
 
 }
 
-// ******************************** Submit A/L certificate ***********************************
-submitAlt() {
+// ******************************** Submit A/L certificate ***************************************************************
+submitAlCert() {
 
   const alCertApproval = {
     studentName: this.AlCertForm.value.certDetails.studentName,
@@ -279,9 +306,41 @@ submitAlt() {
         });
   console.log(alCertApproval);
 
-  // window.location.reload();
+  window.location.reload();
 
 }
+
+// ******************************** Submit O/L certificate ***************************************************************
+submitOlCert() {
+
+  const olCertApproval = {
+    studentName: this.OlCertForm.value.certDetails.studentName,
+    examYear: this.OlCertForm.value.certDetails.examYear,
+    centerNo: this.OlCertForm.value.certDetails.centerNo,
+    indexNo: this.OlCertForm.value.certDetails.indexNo,
+    subjectsOl: this.OlCertForm.value.subjectsOl,
+  };
+  var url = 'http://localhost:3000/certification/olcert'
+
+  this.http.post<any>(url, olCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.OlCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
+  console.log(olCertApproval);
+
+  window.location.reload();
+
+}
+
+
 
   ngOnInit() {
 
