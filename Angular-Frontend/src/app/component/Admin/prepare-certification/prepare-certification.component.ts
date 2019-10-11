@@ -236,7 +236,7 @@ submitCharacterCert() {
         });
   console.log(characterCertApproval);
 
-  // window.location.reload();
+  window.location.reload();
 
 }
 

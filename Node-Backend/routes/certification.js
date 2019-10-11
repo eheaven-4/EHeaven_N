@@ -261,7 +261,7 @@ router.post("/charactercert", async function (req, res) {
 /*******************************generate leaving certificate pdf ***************************************/
 
 router.post("/leavingcert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestLeavingCert({
         studentName: req.body.studentName,
         admissionNum: req.body.admissionNum,
@@ -283,15 +283,121 @@ router.post("/leavingcert", async function (req, res) {
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
-    // page.drawText(
-    //     newRequest.studentName,
-    //     {
-    //         x: 200,
-    //         y: 615,
-    //         size: 12,
-    //     },
-    // );
-
+    page.drawText(
+        newRequest.studentName,
+        {
+            x: 145,
+            y: 730,
+            size: 9,
+            lineHeight: 23,
+        },
+    );
+    page.drawText(
+        newRequest.dateofBirth,
+        {
+            x: 115,
+            y: 685,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.religion,
+        {
+            x: 400,
+            y: 685,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.fathersName,
+        {
+            x: 210,
+            y: 663,
+            size: 9,
+            lineHeight: 12,
+        },
+    );
+    page.drawText(
+        newRequest.fathersOccupation,
+        {
+            x: 210,
+            y: 637,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.fathersAddress,
+        {
+            x: 250,
+            y: 615,
+            size: 9,
+            lineHeight: 13,
+        },
+    );
+    page.drawText(
+        newRequest.schoolName,
+        {
+            x: 60,
+            y: 560,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.schoolType,
+        {
+            x: 415,
+            y: 545,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.dateofAdmission,
+        {
+            x: 145,
+            y: 518,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.dateofLeaving,
+        {
+            x: 415,
+            y: 518,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.admissionNum,
+        {
+            x: 145,
+            y: 494,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.cause,
+        {
+            x: 385,
+            y: 494,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.lastClass,
+        {
+            x: 445,
+            y: 458,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.subjects,
+        {
+            x: 210,
+            y: 430,
+            size: 9,
+        },
+    );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
 
