@@ -19,21 +19,22 @@ var upload = multer({ storage: storage }).single('profileImage');
 
 router.post('/uploadfile', function (req, res) {
   upload(req, res, (err) => {
-    console.log(req.file.filename)
-    var fullPath = req.path + '/' + req.file.originalname;
+    console.log(req.file)
+    var fullPath = req.file.destination  + req.file.originalname;
     var document = {
       path: fullPath,
+      name: req.body.name
     };
 
     var photo = new acad(document);
     photo.save()
       .then(result => {
         console.log(result)
-        res.json({ state: true, msg: "Data inserted Successfully..!" });
+        res.json({ state: true, msg: "Data Inserted Successfully..!" });
       })
       .catch(error => {
         console.log(error)
-        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+        res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
       })
   })
 });

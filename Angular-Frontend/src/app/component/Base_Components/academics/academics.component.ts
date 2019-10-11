@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-academics',
@@ -10,30 +11,40 @@ import { FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 
 export class AcademicsComponent implements OnInit {
-
   images;
+
 
   constructor(
     private http: HttpClient,
+    private fb: FormBuilder,
   ) { }
-
-  ngOnInit() {
-
-  }
+  CertificationForm = this.fb.group({
+    name: ['', Validators.required],
+  });
+  ngOnInit() { }
 
   selectImage(event) {
     if (event.target.files.length > 0) {
       const file = event.target.files[0];
       this.images = file;
     }
+    else{
+      alert("sex")
+    }
   }
+
+
   upload() {
+
     const formData = new FormData();
+
+    formData.append('name', this.CertificationForm.value.name)
     formData.append('profileImage', this.images)
+
 
     const url = "http://localhost:3000/academics/uploadfile";
 
-    this.http.post(url,formData).subscribe(res => {
+    this.http.post(url, formData).subscribe(res => {
       console.log(res)
     });
   }
