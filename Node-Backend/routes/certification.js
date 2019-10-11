@@ -4,6 +4,8 @@ const { requestCertification } = require('../models/certification');
 const { requestStudentstatus } = require('../models/certification');
 const { requestCharacterCert } = require('../models/certification');
 const { requestLeavingCert } = require('../models/certification');
+const { requestAlCert } = require('../models/certification');
+const { requestOlCert } = require('../models/certification');
 const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
@@ -211,6 +213,67 @@ router.post("/leavingcert", async function (req, res) {
 
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+
+});
+
+/*******************************generate A/L certificate pdf ***************************************/
+
+router.post("/alcert", async function (req, res) {
+    console.log("hello at server ");
+    const newRequest = new requestAlCert({
+        studentName: req.body.studentName,
+        examYear: req.body.examYear,
+        centerNo: req.body.centerNo,
+        indexNo: req.body.indexNo,
+        medium: req.body.medium,
+        subjects: req.body.subjects,
+    });
+    console.log(newRequest);
+    // const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
+    // var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    // const pages = doc.getPages()
+    // const page = pages[0];
+    // page.drawText(
+    //     newRequest.studentName,
+    //     {
+    //         x: 200,
+    //         y: 615,
+    //         size: 12,
+    //     },
+    // );
+
+    // const pdfBytes = await doc.save()
+    // fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+
+});
+
+/*******************************generate O/L certificate pdf ***************************************/
+
+router.post("/olcert", async function (req, res) {
+    console.log("hello at server ");
+    const newRequest = new requestOlCert({
+        studentName: req.body.studentName,
+        examYear: req.body.examYear,
+        centerNo: req.body.centerNo,
+        indexNo: req.body.indexNo,
+        subjectsOl: req.body.subjectsOl,
+    });
+    console.log(newRequest);
+    // const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
+    // var doc = await pdfDoc.PDFDocument.load(uint8Array);
+    // const pages = doc.getPages()
+    // const page = pages[0];
+    // page.drawText(
+    //     newRequest.studentName,
+    //     {
+    //         x: 200,
+    //         y: 615,
+    //         size: 12,
+    //     },
+    // );
+
+    // const pdfBytes = await doc.save()
+    // fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
 
 });
 

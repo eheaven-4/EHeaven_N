@@ -58,14 +58,37 @@ const requestLeavingCertSchema = mongoose.Schema({
     subjects: {type :String, require: true},
 });
 
+//A/L certificate
+const requestAlCertSchema = mongoose.Schema({
+    studentName: { type: String, require: true },
+    examYear: { type: String, require: true },
+    centerNo: { type: String, require: true },
+    indexNo: { type: String, require: true },
+    medium: { type: String, require: true },
+    subjects: {type :Array, require: true},
+});
+
+//O/L certificate
+const requestOlCertSchema = mongoose.Schema({
+    studentName: { type: String, require: true },
+    examYear: { type: String, require: true },
+    centerNo: { type: String, require: true },
+    indexNo: { type: String, require: true },
+    subjectsOl: {type :Array, require: true},
+});
+
 const requestCertification = mongoose.model("requestCertification", requestCertificationSchema);
 const requestStudentstatus=  mongoose.model("requestStudentstatus", requestStudentstatusSchema);
 const requestCharacterCert=  mongoose.model("requestCharacterCert", requestCharacterCertSchema);
 const requestLeavingCert=  mongoose.model("requestLeavingrCert", requestLeavingCertSchema);
+const requestAlCert=  mongoose.model("requestAlrCert", requestAlCertSchema);
+const requestOlCert=  mongoose.model("requestOlrCert", requestOlCertSchema);
 
 module.exports = {
     requestCertification: requestCertification,
     requestStudentstatus: requestStudentstatus,
     requestCharacterCert: requestCharacterCert,
     requestLeavingCert: requestLeavingCert,
+    requestAlCert: requestAlCert,
+    requestOlCert: requestOlCert,
 }
