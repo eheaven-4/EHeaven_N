@@ -32,11 +32,14 @@ yearofExam = [
 
 // examination Grades
 grades = [
-  'A',
-  'B',
-  'C',
-  'S',
-  'F',
+  'A DISTINCTION PASS',
+  'B VERY GOOD PASS',
+  'C CREDI PASS',
+  'S ORDINARY PASS',
+  'W WEAK',
+  '+ ABSENT',
+  'X Not Finalized',
+  'N Results Nullified',
 ];
   // ********************* Student Status Form ****************************************************************************
 
@@ -306,7 +309,7 @@ submitAlCert() {
         });
   console.log(alCertApproval);
 
-  window.location.reload();
+  // window.location.reload();
 
 }
 

@@ -423,12 +423,44 @@ router.post("/alcert", async function (req, res) {
     page.drawText(
         newRequest.studentName,
         {
-            x: 200,
-            y: 615,
-            size: 12,
+            x: 150,
+            y: 648,
+            size: 10,
+            lineHeight: 23,
         },
     );
-
+    page.drawText(
+        newRequest.examYear,
+        {
+            x: 305,
+            y: 543,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.centerNo,
+        {
+            x: 113,
+            y: 499,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.indexNo,
+        {
+            x: 270,
+            y: 499,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.medium,
+        {
+            x: 450,
+            y: 499,
+            size: 10,
+        },
+    );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
 
