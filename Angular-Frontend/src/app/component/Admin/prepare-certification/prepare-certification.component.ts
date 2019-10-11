@@ -167,15 +167,15 @@ yearofExam = [
   }
 
 // ******************************** Submit Character form *********************************
-// submitCharacterCert() {
+submitCharacterCert() {
 
-//   const studentStatusApproval = {
-//     studentName: this.StudentStatusForm.value.studentName,
-//     admissionNum: this.StudentStatusForm.value.admissionNum,
-//     dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
-//     currentStatus: this.StudentStatusForm.value.currentStatus,
-//     description: this.StudentStatusForm.value.description,
-//   };
+  const studentStatusApproval = {
+    studentName: this.StudentStatusForm.value.studentName,
+    admissionNum: this.StudentStatusForm.value.admissionNum,
+    dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
+    currentStatus: this.StudentStatusForm.value.currentStatus,
+    description: this.StudentStatusForm.value.description,
+  };
 
 
 
@@ -187,7 +187,7 @@ yearofExam = [
       name: "",
       founder: ""
     }),
-    teams: this.fb.array([this.teams])
+   teams: this.fb.array([this.teams])
   });
 
 // ******************************** Submit A/L certificate ***********************************
@@ -201,23 +201,23 @@ submitAlCert() {
     medium: this.AlCertForm.value.certDetails.medium,
 
   };
-  // var url = 'http://localhost:3000/certification/leavingcert'
+  var url = 'http://localhost:3000/certification/leavingcert'
 
-  // this.http.post<any>(url, AlCertForm).subscribe(res => {
-  //         if (res.state) {
-  //           console.log(res.msg);
-  //           alert('Successful');
-  //           this.LeavingCertForm.reset();
-  //           this.router.navigate(['/prepare_certification']);
-  //         } else {
-  //           console.log(res.msg);
-  //           alert('Error!! Try Again');
-  //           this.router.navigate(['/prepare_certification']);
-  //         }
-  //       });
+  this.http.post<any>(url, AlCertForm).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.LeavingCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
   console.log(AlCertForm);
 
-  // window.location.reload();
+  window.location.reload();
 
 }
 
@@ -231,8 +231,9 @@ submitAlCert() {
 
 
 
+  }}
+
+
+
+
 }
-
-
-
-
