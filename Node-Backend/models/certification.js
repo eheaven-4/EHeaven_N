@@ -65,7 +65,11 @@ const requestAlCertSchema = mongoose.Schema({
     centerNo: { type: String, require: true },
     indexNo: { type: String, require: true },
     medium: { type: String, require: true },
+    zscore: {type :String, require: true},
+    districtrank: {type :String, require: true},
+    islandrank: {type :String, require: true},
     subjects: {type :Array, require: true},
+    
 });
 
 //O/L certificate

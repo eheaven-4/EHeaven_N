@@ -414,8 +414,11 @@ router.post("/alcert", async function (req, res) {
         indexNo: req.body.indexNo,
         medium: req.body.medium,
         subjects: req.body.subjects,
+        zscore: req.body.zscore,
+        districtrank: req.body.districtrank,
+        islandrank: req.body.islandrank,
     });
-    // var x = newRequest.subjects.toString();
+    
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/A-Level.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
@@ -462,14 +465,55 @@ router.post("/alcert", async function (req, res) {
             size: 10,
         },
     );
-    // page.drawText(
-    //     x,
-    //     {
-    //         x: 450,
-    //         y: 499,
-    //         size: 10,
-    //     },
-    // );
+    var a=0;
+    for(i=0;i<newRequest.subjects.length;i++){
+        page.drawText(
+            newRequest.subjects[i].subjectName,
+            {
+                x: 80,
+                y: 406+a,
+                size: 10,
+            },
+        );
+        a=a-20;
+    }
+    var b=0;
+    for(i=0;i<newRequest.subjects.length;i++){
+        page.drawText(
+            newRequest.subjects[i].grade,
+            {
+                x: 330,
+                y: 406+b,
+                size: 10,
+            },
+        );
+        b=b-20;
+    }
+    page.drawText(
+        newRequest.zscore,
+        {
+            x: 430,
+            y: 186,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.districtrank,
+        {
+            x: 430,
+            y: 174,
+            size: 9,
+        },
+    );
+    page.drawText(
+        newRequest.islandrank,
+        {
+            x: 430,
+            y: 161,
+            size: 9,
+        },
+    );
+   
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
 

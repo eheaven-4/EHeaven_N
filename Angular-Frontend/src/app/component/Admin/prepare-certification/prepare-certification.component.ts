@@ -193,13 +193,16 @@ AlCertForm = this.fb.group({
     indexNo: ['', Validators.required],
     medium: ['', Validators.required],
   }),
-  subjects: this.fb.array([this.subjects])
+  subjects: this.fb.array([this.subjects]),
+  zscore: ['', Validators.required],
+  districtrank: ['', Validators.required],
+  islandrank: ['', Validators.required],
+
 });
 
 get subjects(): FormGroup {
   return this.fb.group({
     subjectName: ['', Validators.required],
-    // subjectNumber: ['', Validators.required],
     grade: ['', Validators.required],
   });
 }
@@ -403,6 +406,9 @@ submitAlCert() {
     indexNo: this.AlCertForm.value.certDetails.indexNo,
     medium: this.AlCertForm.value.certDetails.medium,
     subjects: this.AlCertForm.value.subjects,
+    zscore: this.AlCertForm.value.zscore,
+    districtrank: this.AlCertForm.value.districtrank,
+    islandrank: this.AlCertForm.value.islandrank,
   };
   var url = 'http://localhost:3000/certification/alcert';
 
@@ -420,7 +426,7 @@ submitAlCert() {
         });
   console.log(alCertApproval);
 
-  // window.location.reload();
+  window.location.reload();
 
 }
 
