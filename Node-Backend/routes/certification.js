@@ -538,12 +538,72 @@ router.post("/olcert", async function (req, res) {
     page.drawText(
         newRequest.studentName,
         {
-            x: 200,
-            y: 615,
-            size: 12,
+            x: 150,
+            y: 648,
+            size: 10,
+            lineHeight: 23,
         },
     );
-
+    page.drawText(
+        newRequest.examYear,
+        {
+            x: 305,
+            y: 543,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.centerNo,
+        {
+            x: 113,
+            y: 520,
+            size: 10,
+        },
+    );
+    page.drawText(
+        newRequest.indexNo,
+        {
+            x: 440,
+            y: 520,
+            size: 10,
+        },
+    );
+    var a=0;
+    for(i=0;i<newRequest.subjectsOl.length;i++){
+        page.drawText(
+            newRequest.subjectsOl[i].subjectName,
+            {
+                x: 80,
+                y: 440+a,
+                size: 10,
+            },
+        );
+        a=a-19;
+    }
+    var b=0;
+    for(i=0;i<newRequest.subjectsOl.length;i++){
+        page.drawText(
+            newRequest.subjectsOl[i].medium,
+            {
+                x: 278,
+                y: 440+b,
+                size: 10,
+            },
+        );
+        b=b-19;
+    }
+    var c=0;
+    for(i=0;i<newRequest.subjectsOl.length;i++){
+        page.drawText(
+            newRequest.subjectsOl[i].grade,
+            {
+                x: 345,
+                y: 440+c,
+                size: 10,
+            },
+        );
+        c=c-19;
+    }
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes)
 

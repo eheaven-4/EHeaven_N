@@ -280,7 +280,6 @@ OlCertForm = this.fb.group({
 get subjectsOl(): FormGroup {
   return this.fb.group({
     subjectName: ['', Validators.required],
-    // subjectNumber: ['', Validators.required],
     medium: ['', Validators.required],
     grade: ['', Validators.required],
   });
@@ -459,8 +458,6 @@ submitOlCert() {
   window.location.reload();
 
 }
-
-
 
   ngOnInit() {
 
