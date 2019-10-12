@@ -118,9 +118,71 @@ schooltypes = [
 
 // ********************* A/L Certificate Form ****************************************************************************
 
-// subject Numbers
-subjectnumbersAl = [
-  //insert AL subject Numbers here
+// subject names and numbers a-level
+subjectnamesAl = [
+  '01   Physics',
+  '02   Chemistry',
+  '07   Mathematics',
+  '08   Agricultural Science',
+  '09   Biology',
+  '10   Combine Mathematics',
+  '11   Higher Mathematics',
+  '*12  Common Genaral Test',
+  '**13   General English',
+  '14   Civil Technology',
+  '15   Mechanical Technology',
+  '16   Electrical,Electronic and Information Technolgy',
+  '17   Food Technology',
+  '18   Agro Technology',
+  '19   Bio-Resource Technolgy',
+  '20   Information and Communication Technology',
+  '21   Economics',
+  '22   Geography',
+  '23   Political Science',
+  '24   Logic and Scientific Method',
+  '25A   History of India',
+  '25B   History of Europe',
+  '25C   History of Modern World',
+  '28   Home Economics',
+  '29   Cpmmunication and Media Studies',
+  '31   Business Statistics',
+  '32   Business Studies',
+  '33   Accounting',
+  '41   Buddhism',
+  '42   Hinduism',
+  '43   Christianity',
+  '44   Islam',
+  '45   Buddhist Civilization',
+  '46   Hindu Civilization',
+  '47   Islamic Civilization',
+  '48   Greek and Roman Civilization',
+  '49   Christian Civilization',
+  '51   Art',
+  '52   Dancing(Indigenous)',
+  '53   Dancing(Bharatha)',
+  '54   Oriental Music',
+  '55   Carnatic Music',
+  '56   Western Music',
+  '57   Drama and Theatre(Sinhala)',
+  '58   Drama and Theatre(Tamil)',
+  '59   Drama and Theatre(English)',
+  '65   Engineering Technology',
+  '66   Bio Systems Technology',
+  '67   Science for Technology',
+  '71   Sinhala',
+  '72   Tamil',
+  '73   English',
+  '74   Pali',
+  '75   Sanskrit',
+  '78   Arabic',
+  '79   Malay',
+  '81   French',
+  '82   German',
+  '83   Russian',
+  '84   Hindi',
+  '86   Chinese',
+  '87   Japanese',
+
 ];
 
 AlCertForm = this.fb.group({
@@ -148,11 +210,60 @@ addSubject() {
 
 // ********************* O/L Certificate Form ****************************************************************************
 
-// subject numbers ol
-subjectnumbersOl = [
-  //insert AL subject Numbers here
+// subject names and numbers o-level
+// tslint:disable-next-line: member-ordering
+subjectnamesOl = [
+  '11   Buddhism',
+  '12   Saivanery',
+  '14   Catholicism',
+  '15   Christianity',
+  '16   Islam',
+  '21   Sinhala Language & Lit.',
+  '22   Tamil Lanuage & Lit.',
+  '31   English',
+  '32   Mathematics',
+  '33   History',
+  '34   Science',
+  '60   Business & Accounting Studies',
+  '61   Geography',
+  '62   Citizenship Education & Governance',
+  '63   Entrepreneurship Studies',
+  '64   Second Langusge(Sinhala)',
+  '65   Second Langusge(Tamil)',
+  '66   Pali',
+  '67   Sanskrit',
+  '68   French',
+  '69   German',
+  '70   Hindi',
+  '71   Japanese',
+  '72   Arabic',
+  '40   Music (Oriental)',
+  '41   Music (Western)',
+  '42   Music (Carnatic)',
+  '43   Art',
+  '44   Dancing (Oriental)',
+  '45   Dancing (Bharatha)',
+  '46   Appreciation of English Literary Texts',
+  '47   Appreciation of Sinhala Literary Texts',
+  '48   Appreciation of Tamil Literary Texts',
+  '49   Appreciation of Arabic Literary Texts',
+  '50   Drama & Theatre (Sinhala)',
+  '51   Drama & Theatre (Tamil)',
+  '52   Drama & Theatre (English)',
+  '80   Information & Communication Technology',
+  '81   Agriculture & Food Technology',
+  '82   Fisheries & Food Technology',
+  '83   Design & Technology',
+  '84   Arts & Crafts',
+  '85   Home Economics',
+  '86   Health & Physical Education',
+  '87   Communication & Media Studies',
+  '92   Electronic Writing & Shorthand (Sinhala)',
+  '93   Electronic Writing & Shorthand (Tamil)',
+  '94   Electronic Writing & Shorthand (English)',
 ];
 
+// tslint:disable-next-line: member-ordering
 OlCertForm = this.fb.group({
   certDetails: this.fb.group({
     studentName: ['', Validators.required],
@@ -293,7 +404,7 @@ submitAlCert() {
     medium: this.AlCertForm.value.certDetails.medium,
     subjects: this.AlCertForm.value.subjects,
   };
-  var url = 'http://localhost:3000/certification/alcert'
+  var url = 'http://localhost:3000/certification/alcert';
 
   this.http.post<any>(url, alCertApproval).subscribe(res => {
           if (res.state) {

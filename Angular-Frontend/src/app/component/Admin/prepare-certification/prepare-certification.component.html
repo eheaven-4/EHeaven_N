@@ -179,7 +179,7 @@
                           </mat-expansion-panel>
 
                           <mat-expansion-panel>
-                            <mat-expansion-panel-header>Educational Certificate</mat-expansion-panel-header>
+                            <mat-expansion-panel-header>Academic Certificates</mat-expansion-panel-header>
 
                 <!-- ************************************************** A/L Certificate Form ********************************************* -->
 
@@ -217,17 +217,17 @@
                                 <div formArrayName="subjects">
                                   <button mat-raised-button type="button" class="btn btn-dark btn-sm" (click)="addSubject()">Add Subject</button>
                                   <div class="subjects" *ngFor="let team of AlCertForm.get('subjects').controls; let teamIndex = index" [formGroupName]="teamIndex">
-                                    <mat-form-field appearance="outline">
+                                    <!-- <mat-form-field appearance="outline">
                                         <input matInput formControlName="subjectName" placeholder="Subject">
-                                    </mat-form-field>
-                                    <!-- <mat-form-field>
-                                      <mat-label>Subject Number</mat-label>
-                                    <mat-select formControlName="subjectNumber">
-                                        <mat-option style="text-align: left" *ngFor="let num of subjectnumbersAl" [value]="num">
-                                          {{ num }}
-                                        </mat-option>
-                                    </mat-select>
-                                  </mat-form-field> -->
+                                    </mat-form-field> -->
+                                  <mat-form-field appearance="outline">
+                                    <mat-label>Subject</mat-label>
+                                      <mat-select formControlName="subjectName">
+                                          <mat-option style="text-align: left" *ngFor="let sub of subjectnamesAl" [value]="sub">
+                                            {{ sub }}
+                                          </mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
                                     <mat-form-field>
                                       <mat-label>Grade</mat-label>
                                         <mat-select formControlName="grade">
@@ -268,22 +268,18 @@
                                     <mat-form-field>
                                         <input matInput formControlName="indexNo" placeholder="Index Number">
                                     </mat-form-field>
-
                                   </div>
                                   <div formArrayName="subjectsOl">
                                     <button mat-raised-button type="button" class="btn btn-dark btn-sm" (click)="addSubjectOl()">Add Subject</button>
                                     <div class="subjects" *ngFor="let team of OlCertForm.get('subjectsOl').controls; let teamIndex = index" [formGroupName]="teamIndex">
                                       <mat-form-field appearance="outline">
-                                          <input matInput formControlName="subjectName" placeholder="Subject">
+                                        <mat-label>Subject</mat-label>
+                                          <mat-select formControlName="subjectName">
+                                              <mat-option style="text-align: left" *ngFor="let sub of subjectnamesOl" [value]="sub">
+                                                {{ sub }}
+                                              </mat-option>
+                                          </mat-select>
                                       </mat-form-field>
-                                      <!-- <mat-form-field>
-                                        <mat-label>Subject Number</mat-label>
-                                      <mat-select formControlName="subjectNumber">
-                                          <mat-option style="text-align: left" *ngFor="let num of subjectnumbersAl" [value]="num">
-                                            {{ num }}
-                                          </mat-option>
-                                      </mat-select>
-                                    </mat-form-field> -->
                                       <mat-form-field>
                                         <mat-label>Medium</mat-label>
                                           <mat-select formControlName="medium">
@@ -299,7 +295,7 @@
                                               {{ grd }}
                                             </mat-option>
                                           </mat-select>
-                                    </mat-form-field>
+                                      </mat-form-field>
                                     </div>
                                   </div>
                                   <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitOlCert()">Submit</button>

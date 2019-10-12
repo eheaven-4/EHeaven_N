@@ -415,6 +415,7 @@ router.post("/alcert", async function (req, res) {
         medium: req.body.medium,
         subjects: req.body.subjects,
     });
+    // var x = newRequest.subjects.toString();
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/A-Level.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
@@ -461,6 +462,14 @@ router.post("/alcert", async function (req, res) {
             size: 10,
         },
     );
+    // page.drawText(
+    //     x,
+    //     {
+    //         x: 450,
+    //         y: 499,
+    //         size: 10,
+    //     },
+    // );
     const pdfBytes = await doc.save()
     fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
 
