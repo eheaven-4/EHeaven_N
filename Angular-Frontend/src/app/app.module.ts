@@ -7,8 +7,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule,MatGridListModule} from '@angular/material';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -87,7 +89,9 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     FlexLayoutModule,
     MDBBootstrapModule,
     FontAwesomeModule,
-    MatButtonModule
+    MatButtonModule,
+    MatGridListModule,
+    MatSlideToggleModule
   ],
   providers: [
     CookieService,

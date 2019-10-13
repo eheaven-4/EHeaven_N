@@ -92,3 +92,15 @@ input:checked + .slider:before {
   .active-pink .fa, .active-pink-2 .fa {
   color: #f48fb1;
   }
+  // mat-grid-tile{
+  //   background-color: yellow;
+  // }
+  .example-form {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
