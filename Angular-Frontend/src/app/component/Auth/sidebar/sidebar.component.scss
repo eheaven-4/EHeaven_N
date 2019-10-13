@@ -3,13 +3,16 @@
   width: 100%;
   // background-color: #263238;
 }
-
+@font-face{
+  font-family: side_font;
+  src: url(../../../../assets/Fonts/Roboto-Regular.ttf);
+}
 .sidebar_links {
   width: 100%;
   color: white;
   margin-left: 30px;
   padding-top: 20px;
-  font-family: "Roboto";
+  font-family: side_font;
   font-weight: 300;
 }
 
