@@ -6,7 +6,7 @@
             </div>
             <div class="container-fluid col-md-10" style="background-color:white">
                 <div class="flashMessage">
-                    <ng-flash-message></ng-flash-message>
+                    <ng-flash-message style="position: fixed; padding-top: 5px"></ng-flash-message>
                 </div>
                 <div>
                     <div class="container">
@@ -14,12 +14,16 @@
                         <hr>
                     </div>
                     <div>
-                        <div style="padding: 100px; height: 100%; box-sizing: border-box;">
-                            <input id="photo" type="file" accept="image/*" (change)="selectImage($event)"/>
-                            <button type="button" class="btn btn-success btn-s" (click)="upload()">
-                                Upload with method 2
-                            </button>
-                        </div>
+                        <form  id="myForm" [formGroup]="CertificationForm">
+                            <label>Name</label>
+                            <input type="text" id="name" name="name"  formControlName="name">
+                            <div style="padding: 100px; height: 100%; box-sizing: border-box;">
+                                <input name="file" id="photo" type="file" accept="image/*" (change)="selectImage($event)"/>
+                                <button type="button" class="btn btn-success btn-s" (click)="upload()">
+                                    Upload
+                                </button>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

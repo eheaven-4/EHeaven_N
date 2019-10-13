@@ -73,7 +73,7 @@ router.post("/login", function (req, res, next) {
 router.post("/register", function (req, res) {
     upload(req, res, (err) => {
         // console.log(req.file.filename)
-        var fullPath = req.path + '/' + req.file.originalname;
+        var fullPath =  req.file.destination  + req.file.originalname;
 
         var newUser = new User({
             usertype: req.body.usertype,

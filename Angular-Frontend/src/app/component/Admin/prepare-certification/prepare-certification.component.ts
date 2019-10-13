@@ -18,6 +18,29 @@ export class PrepareCertificationComponent implements OnInit {
   ) { }
 
 
+// examination Medium
+mediums = [
+  'English',
+  'Sinhala',
+  'Tamil',
+];
+
+// examinations years
+yearofExam = [
+  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
+];
+
+// examination Grades
+grades = [
+  'A DISTINCTION PASS',
+  'B VERY GOOD PASS',
+  'C CREDI PASS',
+  'S ORDINARY PASS',
+  'W WEAK',
+  '+ ABSENT',
+  'X Not Finalized',
+  'N Results Nullified',
+];
   // ********************* Student Status Form ****************************************************************************
 
   StudentStatusForm = this.fb.group({
@@ -28,7 +51,7 @@ export class PrepareCertificationComponent implements OnInit {
 
   });
 
- // ********************* Character Certificate Form *********************************************************************
+ // ********************* Character Certificate Form **********************************************************************
 
  CharacterCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -53,14 +76,14 @@ academicPerformance = [
   'Excellent'
 ];
 
-//moral conduct of the student
+// moral conduct of the student
 moralConduct = [
   'Satisfactory',
   'Good',
   'Excellent'
 ];
 
-// ********************* Leaving Certificate Form *********************************************************************
+// ********************* Leaving Certificate Form ************************************************************************
 
 LeavingCertForm = this.fb.group({
   studentName: ['', Validators.required],
@@ -93,32 +116,73 @@ schooltypes = [
   'Vernaular',
 ];
 
-// ********************* A/L Certificate Form *********************************************************************
+// ********************* A/L Certificate Form ****************************************************************************
 
-// examination Medium
-mediums = [
-  'English',
-  'Sinhala',
-  'Tamil',
-];
+// subject names and numbers a-level
+subjectnamesAl = [
+  '01   Physics',
+  '02   Chemistry',
+  '07   Mathematics',
+  '08   Agricultural Science',
+  '09   Biology',
+  '10   Combine Mathematics',
+  '11   Higher Mathematics',
+  '*12  Common Genaral Test',
+  '**13   General English',
+  '14   Civil Technology',
+  '15   Mechanical Technology',
+  '16   Electrical,Electronic and Information Technolgy',
+  '17   Food Technology',
+  '18   Agro Technology',
+  '19   Bio-Resource Technolgy',
+  '20   Information and Communication Technology',
+  '21   Economics',
+  '22   Geography',
+  '23   Political Science',
+  '24   Logic and Scientific Method',
+  '25A   History of India',
+  '25B   History of Europe',
+  '25C   History of Modern World',
+  '28   Home Economics',
+  '29   Cpmmunication and Media Studies',
+  '31   Business Statistics',
+  '32   Business Studies',
+  '33   Accounting',
+  '41   Buddhism',
+  '42   Hinduism',
+  '43   Christianity',
+  '44   Islam',
+  '45   Buddhist Civilization',
+  '46   Hindu Civilization',
+  '47   Islamic Civilization',
+  '48   Greek and Roman Civilization',
+  '49   Christian Civilization',
+  '51   Art',
+  '52   Dancing(Indigenous)',
+  '53   Dancing(Bharatha)',
+  '54   Oriental Music',
+  '55   Carnatic Music',
+  '56   Western Music',
+  '57   Drama and Theatre(Sinhala)',
+  '58   Drama and Theatre(Tamil)',
+  '59   Drama and Theatre(English)',
+  '65   Engineering Technology',
+  '66   Bio Systems Technology',
+  '67   Science for Technology',
+  '71   Sinhala',
+  '72   Tamil',
+  '73   English',
+  '74   Pali',
+  '75   Sanskrit',
+  '78   Arabic',
+  '79   Malay',
+  '81   French',
+  '82   German',
+  '83   Russian',
+  '84   Hindi',
+  '86   Chinese',
+  '87   Japanese',
 
-// examinations years
-yearofExam = [
-  '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'
-];
-
-// examination Grades
-grades = [
-  'A',
-  'B',
-  'C',
-  'S',
-  'F',
-];
-
-// subject Numbers
-subjectnumbers = [
-  //insert AL subject Numbers here
 ];
 
 AlCertForm = this.fb.group({
@@ -129,13 +193,16 @@ AlCertForm = this.fb.group({
     indexNo: ['', Validators.required],
     medium: ['', Validators.required],
   }),
-  subjects: this.fb.array([this.subjects])
+  subjects: this.fb.array([this.subjects]),
+  zscore: ['', Validators.required],
+  districtrank: ['', Validators.required],
+  islandrank: ['', Validators.required],
+
 });
 
 get subjects(): FormGroup {
   return this.fb.group({
     subjectName: ['', Validators.required],
-    // subjectNumber: ['', Validators.required],
     grade: ['', Validators.required],
   });
 }
@@ -144,8 +211,84 @@ addSubject() {
   (this.AlCertForm.get('subjects') as FormArray).push(this.subjects);
 }
 
+// ********************* O/L Certificate Form ****************************************************************************
 
-// ******************************** Submit student status *********************************
+// subject names and numbers o-level
+// tslint:disable-next-line: member-ordering
+subjectnamesOl = [
+  '11   Buddhism',
+  '12   Saivanery',
+  '14   Catholicism',
+  '15   Christianity',
+  '16   Islam',
+  '21   Sinhala Language & Lit.',
+  '22   Tamil Lanuage & Lit.',
+  '31   English',
+  '32   Mathematics',
+  '33   History',
+  '34   Science',
+  '60   Business & Accounting Studies',
+  '61   Geography',
+  '62   Citizenship Education & Governance',
+  '63   Entrepreneurship Studies',
+  '64   Second Langusge(Sinhala)',
+  '65   Second Langusge(Tamil)',
+  '66   Pali',
+  '67   Sanskrit',
+  '68   French',
+  '69   German',
+  '70   Hindi',
+  '71   Japanese',
+  '72   Arabic',
+  '40   Music (Oriental)',
+  '41   Music (Western)',
+  '42   Music (Carnatic)',
+  '43   Art',
+  '44   Dancing (Oriental)',
+  '45   Dancing (Bharatha)',
+  '46   Appreciation of English Literary Texts',
+  '47   Appreciation of Sinhala Literary Texts',
+  '48   Appreciation of Tamil Literary Texts',
+  '49   Appreciation of Arabic Literary Texts',
+  '50   Drama & Theatre (Sinhala)',
+  '51   Drama & Theatre (Tamil)',
+  '52   Drama & Theatre (English)',
+  '80   Information & Communication Technology',
+  '81   Agriculture & Food Technology',
+  '82   Fisheries & Food Technology',
+  '83   Design & Technology',
+  '84   Arts & Crafts',
+  '85   Home Economics',
+  '86   Health & Physical Education',
+  '87   Communication & Media Studies',
+  '92   Electronic Writing & Shorthand (Sinhala)',
+  '93   Electronic Writing & Shorthand (Tamil)',
+  '94   Electronic Writing & Shorthand (English)',
+];
+
+// tslint:disable-next-line: member-ordering
+OlCertForm = this.fb.group({
+  certDetails: this.fb.group({
+    studentName: ['', Validators.required],
+    examYear: ['', Validators.required],
+    centerNo: ['', Validators.required],
+    indexNo: ['', Validators.required],
+  }),
+  subjectsOl: this.fb.array([this.subjectsOl])
+});
+
+get subjectsOl(): FormGroup {
+  return this.fb.group({
+    subjectName: ['', Validators.required],
+    medium: ['', Validators.required],
+    grade: ['', Validators.required],
+  });
+}
+
+addSubjectOl() {
+  (this.OlCertForm.get('subjectsOl') as FormArray).push(this.subjectsOl);
+}
+// ******************************** Submit student status ****************************************************************
   submitStudentstatus() {
 
     const studentStatusApproval = {
@@ -176,7 +319,7 @@ addSubject() {
 
   }
 
-// ******************************** Submit Character certificate *********************************
+// ******************************** Submit Character certificate *********************************************************
 submitCharacterCert() {
 
   const characterCertApproval = {
@@ -213,7 +356,7 @@ submitCharacterCert() {
 
 }
 
-// ******************************** Submit Leaving certificate ***********************************
+// ******************************** Submit Leaving certificate ***********************************************************
 submitLeavingCert() {
 
   const leavingCertApproval = {
@@ -252,8 +395,8 @@ submitLeavingCert() {
 
 }
 
-// ******************************** Submit A/L certificate ***********************************
-submitAlt() {
+// ******************************** Submit A/L certificate ***************************************************************
+submitAlCert() {
 
   const alCertApproval = {
     studentName: this.AlCertForm.value.certDetails.studentName,
@@ -262,22 +405,55 @@ submitAlt() {
     indexNo: this.AlCertForm.value.certDetails.indexNo,
     medium: this.AlCertForm.value.certDetails.medium,
     subjects: this.AlCertForm.value.subjects,
+    zscore: this.AlCertForm.value.zscore,
+    districtrank: this.AlCertForm.value.districtrank,
+    islandrank: this.AlCertForm.value.islandrank,
   };
-  var url = 'http://localhost:3000/certification/alcert'
+  var url = 'http://localhost:3000/certification/alcert';
 
-  // this.http.post<any>(url, alCertApproval).subscribe(res => {
-  //         if (res.state) {
-  //           console.log(res.msg);
-  //           alert('Successful');
-  //           this.LeavingCertForm.reset();
-  //           this.router.navigate(['/prepare_certification']);
-  //         } else {
-  //           console.log(res.msg);
-  //           alert('Error!! Try Again');
-  //           this.router.navigate(['/prepare_certification']);
-  //         }
-  //       });
+  this.http.post<any>(url, alCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.AlCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
   console.log(alCertApproval);
+
+  window.location.reload();
+
+}
+
+// ******************************** Submit O/L certificate ***************************************************************
+submitOlCert() {
+
+  const olCertApproval = {
+    studentName: this.OlCertForm.value.certDetails.studentName,
+    examYear: this.OlCertForm.value.certDetails.examYear,
+    centerNo: this.OlCertForm.value.certDetails.centerNo,
+    indexNo: this.OlCertForm.value.certDetails.indexNo,
+    subjectsOl: this.OlCertForm.value.subjectsOl,
+  };
+  var url = 'http://localhost:3000/certification/olcert'
+
+  this.http.post<any>(url, olCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            alert('Successful');
+            this.OlCertForm.reset();
+            this.router.navigate(['/prepare_certification']);
+          } else {
+            console.log(res.msg);
+            alert('Error!! Try Again');
+            this.router.navigate(['/prepare_certification']);
+          }
+        });
+  console.log(olCertApproval);
 
   window.location.reload();
 
