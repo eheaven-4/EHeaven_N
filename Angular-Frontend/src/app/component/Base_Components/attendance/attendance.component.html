@@ -17,46 +17,44 @@
                         </div>
                     </div>
                     <mat-tab-group>
+                        
                         <mat-tab label="Student Name List">
-                            <div *ngIf="mainflag" class="row">
+                            <mat-grid-list cols="3" *ngIf="mainflag" rowHeight="100px">
+                                <mat-grid-tile he>
+                                    <h2>Registration ID</h2>
+                                </mat-grid-tile>
+                                <mat-grid-tile he>
+                                       <h2> Name</h2>
+                                </mat-grid-tile>
+                                    
+                                <mat-grid-tile>
+                                   <h2> Attendance</h2>
+                                </mat-grid-tile>
+                            </mat-grid-list>
                                 
-                                <div class="col-md-6">
-                                    <div style="text-align: center">
-                                        <h3>Name</h3>                                        
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                        <h3>
-                                            Attendence
-                                        </h3>
-                                </div>
-                            </div>
-                                
-                            <div style="padding-top: 50px">
-                                <form #userForm="ngForm" class="text-center border p-5 reg-frm" (ngSubmit)="onSubmit()" novalidate *ngIf="mainflag">
-                                    <div class="row" *ngFor="let student of students; index as i">
-                                        <div class="col-md-6" style="text-align: center">
-                                
-                                            <h4>{{student.name}}</h4>
-                                        </div>
-                                        <div>
-                                            <label class="switch" >                                                    
-                                                <input type="checkbox" name="{{student.userid}}" (click)="storeValue(i)" >
-                                                <span class="slider round"></span>
-                                            </label>
-                                            <!-- <label class="switch" >                                                    
-                                                    <input type="checkbox" name="{{student.userid}}" (click)="storeValue(student.userid,true,i)" >
-                                                    <span class="slider round"></span>
-                                                </label> -->
-                                        </div>
-                                    </div>
-                                        
-                                    <div class="row">
+                            <div>
+                                <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit()" novalidate *ngIf="mainflag">
+                                     
+                                    <mat-grid-list cols="3" *ngFor="let student of students;index as i" rowHeight="100px">
+                                            <mat-grid-tile>{{student.userid}}</mat-grid-tile>
+                                        <mat-grid-tile>{{student.name}}</mat-grid-tile>
+                                        <mat-grid-tile>
+                                                <mat-slide-toggle (click)="storeValue(i)" color="primary" #val></mat-slide-toggle>
+                                                {{val.value}}
+
+                                        </mat-grid-tile>
+                                    </mat-grid-list>
+                                        <mat-gride-list cols="3">
+                                            
+                                            <mat-list-tile><button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button></mat-list-tile>
+                        
+                                        </mat-gride-list>
+                                    <!-- <div class="row">
                                         <div class="col-md-8" style="padding-left: 200px">
                                             <button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button>
                                 
                                         </div>
-                                    </div>
+                                    </div> -->
                                 
                                 </form>
                             </div>
@@ -77,21 +75,40 @@
                             <mat-tab label="Attendence History">
                                 <mat-tab-group  mat-align-tabs="center">
                                     <mat-tab label="Special Date">
+
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagD">
-                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchDate(dateid.value)">
-                                                <h4>
-                                                    Enter Date
-                                                </h4>
-                                                <input   type="date" #dateid name="Date">
-                                                <hr>
-                                                <span *ngIf="spanflageD" class="dangourous">May be entered date was a holiday.Please Enter valid date.</span>
-                                                <hr>     
+                                                <form class="example-form">
+                                                        <mat-form-field>
+                                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" #date disabled="true">
+                                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                                <mat-datepicker #picker></mat-datepicker>
+                                                                {{date.name}}
+                                                        </mat-form-field>
+                                                              
+                                                      
+                                                        
+                                                </form>
+                                                      
+                                            <!-- <form class="text-center border p-5 reg-frm form-inline" (ngSubmit)="searchDate(dateid.value)">
+                                                <div class ="row">
+                                                    <h4>
+                                                        Enter Date
+                                                    </h4>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input class="form-control form-control-sm mr-3 w-75" #dateid type="date" placeholder="Search"
+                                                        aria-label="Search">
+                                                        <mat-icon>search</mat-icon>
+                                                    </div>
+                                                    <hr>
+                                                    <span *ngIf="spanflageD" class="dangourous">May be entered date was a holiday.Please Enter valid date.</span>
+                                                    <hr>
+                                                </div>     
                                                 <button class="btn btn-primary">search</button>
-                                                        <!-- <div class="active-purple-3 active-purple-4 mb-4">
-                                                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                              </div> -->
+                                                        
         
-                                            </form>
+                                            </form> -->
                                         </div>
                                         <div  *ngIf="!historyflagD">
                                             <h2>{{searchDateResult[0].date}} Day  {{classname}} Attendence List</h2>
