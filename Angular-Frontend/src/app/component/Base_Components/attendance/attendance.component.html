@@ -33,7 +33,7 @@
                             </div>
                                 
                             <div style="padding-top: 50px">
-                                <form #userForm="ngForm" class="text-center border p-5 reg-frm" (ngSubmit)="onSubmit()" novalidate *ngIf="mainflag">
+                                <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit()" novalidate *ngIf="mainflag">
                                     <div class="row" *ngFor="let student of students; index as i">
                                         <div class="col-md-6" style="text-align: center">
                                 
@@ -77,15 +77,25 @@
                             <mat-tab label="Attendence History">
                                 <mat-tab-group  mat-align-tabs="center">
                                     <mat-tab label="Special Date">
+
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagD">
-                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchDate(dateid.value)">
-                                                <h4>
-                                                    Enter Date
-                                                </h4>
-                                                <input   type="date" #dateid name="Date">
-                                                <hr>
-                                                <span *ngIf="spanflageD" class="dangourous">May be entered date was a holiday.Please Enter valid date.</span>
-                                                <hr>     
+                                            <form class="text-center border p-5 reg-frm form-inline" (ngSubmit)="searchDate(dateid.value)">
+                                                <div class ="row">
+                                                    <h4>
+                                                        Enter Date
+                                                    </h4>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <input class="form-control form-control-sm mr-3 w-75" #dateid type="date" placeholder="Search"
+                                                        aria-label="Search">
+                                                        
+                                                            <i class="material-icons">today</i>
+                                                    </div>
+                                                    <hr>
+                                                    <span *ngIf="spanflageD" class="dangourous">May be entered date was a holiday.Please Enter valid date.</span>
+                                                    <hr>
+                                                </div>     
                                                 <button class="btn btn-primary">search</button>
                                                         <!-- <div class="active-purple-3 active-purple-4 mb-4">
                                                                 <input class="form-control" type="text" placeholder="Search" aria-label="Search">

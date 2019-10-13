@@ -7,12 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import {MatButtonModule} from '@angular/material';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
+
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/Auth/navbar/navbar.component';
@@ -85,6 +87,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     FlexLayoutModule,
     MDBBootstrapModule,
     FontAwesomeModule,
+    MatButtonModule
   ],
   providers: [
     CookieService,
