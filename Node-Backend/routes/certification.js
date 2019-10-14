@@ -156,9 +156,11 @@ router.post("/charactercert", async function (req, res) {
         leadership: req.body.leadership,
         societies: req.body.societies,
         sports: req.body.sports,
+        state: req.body.state
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf');
+
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -253,8 +255,19 @@ router.post("/charactercert", async function (req, res) {
             size: 10,
         },
     );
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes);
+        
+    newRequest
+        .save()
+        .then(result => {
+            console.log(result)
+            res.json({ state: true, msg: "Data inserted Successfully..!" });
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+        })
 
 }); 
 
@@ -398,8 +411,19 @@ router.post("/leavingcert", async function (req, res) {
             size: 9,
         },
     );
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 
@@ -514,8 +538,19 @@ router.post("/alcert", async function (req, res) {
         },
     );
    
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 
@@ -604,8 +639,19 @@ router.post("/olcert", async function (req, res) {
         );
         c=c-19;
     }
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 

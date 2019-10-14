@@ -335,6 +335,7 @@ submitCharacterCert() {
     leadership: this.CharacterCertForm.value.leadership,
     societies: this.CharacterCertForm.value.societies,
     sports: this.CharacterCertForm.value.sports,
+    state : 'Pending'
   };
   var url = 'http://localhost:3000/certification/charactercert'
 
