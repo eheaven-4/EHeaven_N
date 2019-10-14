@@ -16,8 +16,16 @@
                 </div>
                 <div style="padding-left: 50px; padding-right: 50px">
                   <mat-tab-group>
-                    <mat-tab label="REQUESTED CERTIFICATES">list certification requests from students ( via certification
-                      component) here
+                    <mat-tab label="REQUESTED CERTIFICATES">
+                        <mat-card>
+                            <mat-list>
+                              <mat-list-item *ngFor="let cert of pendingCertList">
+                                <mat-icon mat-list-icon>note</mat-icon>
+                                <h3 mat-line>{{cert.certType}}</h3>
+                                <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                              </mat-list-item>
+                            </mat-list>
+                          </mat-card>
                     </mat-tab>
 
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - FORMS //////////////////////////////////////////////////////////////////////// -->
@@ -316,7 +324,9 @@
                     </mat-tab>
 
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW PREPARED CERTIFICATES //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="PENDING CERTIFICATES"> pending principal approval </mat-tab>
+                    <mat-tab label="PENDING CERTIFICATES"> pending principal approval
+
+                    </mat-tab>
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW CERTIFICATION HISTORY //////////////////////////////////////////////////////////////////////// -->
                     <mat-tab label="CERTIFICATION HISTORY"> History </mat-tab>
                   </mat-tab-group>
