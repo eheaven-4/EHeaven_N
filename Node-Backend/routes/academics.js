@@ -4,11 +4,15 @@ const acad = require('../models/academics');
 const config = require('../config/database');
 const multer = require('multer');
 
+var path = require('path');
+var fs = require('fs');
+
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploads/')
   },
   filename: function (req, file, cb) {
+    console.log(req)
     cb(null, file.originalname)
     // console.log(file.originalname)
   }
@@ -37,6 +41,13 @@ router.post('/uploadfile', function (req, res) {
         res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
       })
   })
+});
+
+router.get("/profileImage/:id", function(req, res) {
+  console.log("hello")
+  const id = req.params.id;
+  console.log(id)
+  res.sendFile(path.join(__dirname, '../uploads/'+id+'.jpg'));
 });
 
 module.exports = router;

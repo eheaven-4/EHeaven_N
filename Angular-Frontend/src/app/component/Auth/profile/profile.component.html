@@ -16,7 +16,7 @@
                     </div>
 
                     <div class="profile-pic">
-                        <mat-card><img src="../../../assets/backgrounds/sample-profile.png" class="profile_matcard">
+                        <mat-card *ngIf="profiledata"><img src="http://localhost:3000/users/profileImage/{{profiledata.filepath}}" class="profile_matcard">
                         </mat-card>
                     </div>
                     <div class="profile_data" style="padding-bottom: 50px">

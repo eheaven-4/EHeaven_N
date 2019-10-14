@@ -6,6 +6,7 @@ const config = require('../config/database');
 const multer = require('multer');
 const pdfDoc = require('pdf-lib');
 const bcrypt = require('bcryptjs');
+var path = require('path');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -73,7 +74,7 @@ router.post("/login", function (req, res, next) {
 router.post("/register", function (req, res) {
     upload(req, res, (err) => {
         // console.log(req.file.filename)
-        var fullPath =  req.file.destination  + req.file.originalname;
+        var fullPath = req.file.originalname;
 
         var newUser = new User({
             usertype: req.body.usertype,
@@ -128,6 +129,14 @@ router.get("/profile/:id", function (req, res) {
         res.json(data);
     });
 });
+
+router.get("/profileImage/:filename", function (req, res) {
+    const filename = req.params.filename;
+    console.log(filename)
+    res.sendFile(path.join(__dirname, '../profile_Images/' + filename));
+});
+
+
 
 //get users ids names using select class name
 router.get("/getStudentsNames/:cName", function (req, res, next) {
