@@ -1,27 +1,35 @@
-.nav-itm{
-    font-family: "Calibri (Body)";
-    padding-right: 0px;
-    font-size: 0.9em;
-    
+.nav-itm {
+  padding-right: 0px;
+  font-size: 0.9em;
 }
 
-.navbar_shadow{
-    box-shadow: 0px 5px 5px grey;
+@font-face {
+  font-family: side_font;
+  src: url(../../../../assets/Fonts/Roboto-Regular.ttf);
 }
-.logo{
-    width: 15%
+
+.navbar_shadow {
+  box-shadow: 0px 5px 5px grey;
 }
-.nav_bar{
-    margin-left: 15px;
+
+.logo {
+  width: 15%;
 }
+
+.nav_bar {
+  margin-left: 15px;
+}
+
 .example-icon {
-    padding: 0 14px;
+  padding: 0 14px;
 }
 
 .example-spacer {
-    flex: 1 1 auto;
+  flex: 1 1 auto;
 }
-.btn{
-    color: #2bb5f5;
-    height: 62px;
+
+.btn {
+  color: #2bb5f5;
+  height: 62px;
+  font-family: side_font;
 }

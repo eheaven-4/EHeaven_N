@@ -4,9 +4,13 @@ const news = require('../models/news');
 const config = require('../config/database');
 
 
-router.post("/add", function(req, res){
+router.post("/add",(req, res)=>{
     console.log("hello");
-    
+
+    const newNews = new News({
+        
+
+    })
 
 
 });
