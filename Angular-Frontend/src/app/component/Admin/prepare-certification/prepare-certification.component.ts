@@ -3,7 +3,16 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-
+interface Certificate {
+  userid: String,
+  certName: String,
+  certType: String,
+  examName: String,
+  examYear: String,
+  examIndex: String,
+  reqDate: String,
+  state: String
+}
 
 @Component({
   selector: 'app-prepare-certification',
@@ -459,8 +468,20 @@ submitOlCert() {
   window.location.reload();
 
 }
-
+pendingCertList : Certificate [] = [];
   ngOnInit() {
+
+    // var date  = Date();
+    // console.log(date);
+
+    var pendingUrl = "http://localhost:3000/certification/pendingCertList";
+
+    this.http.get<any>(pendingUrl).subscribe(res => {
+      console.log(res)
+      this.pendingCertList   = res;
+
+    })
+
 
   }
 

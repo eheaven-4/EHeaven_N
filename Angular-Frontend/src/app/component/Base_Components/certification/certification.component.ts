@@ -68,7 +68,7 @@ export class CertificationComponent implements OnInit {
 
   ngOnInit() {
     var date  = Date();
-    console.log(date)
+    console.log(date);
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
     var id = myCookie.userid;
     //load pending and issued certificates tho the user
