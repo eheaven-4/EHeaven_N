@@ -38,6 +38,7 @@ const requestCharacterCertSchema = mongoose.Schema({
     leadership: {type :String, require: true},
     societies: {type :String, require: true},
     sports: {type :String, require: true},
+    state: {type :String, require: true}
 });
 
 //leaving certificate
