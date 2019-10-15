@@ -22,7 +22,7 @@ router.post("/addLog",function(request,response){
     }
     
     
-    var todaystr=year+"-"+month+"-"+date;
+    var todaystr=month+"/"+date+"/"+year;
     const stu=new attendance({
         userid:request.body.username,
         attend:request.body.attend,

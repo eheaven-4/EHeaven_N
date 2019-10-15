@@ -59,17 +59,12 @@
                                 </form>
                             </div>
                             <div>
-                                <ul>
-                                    <li>
-                                        Date:{{ today | date }}  
-                                    </li>
-                                    <li>
-                                        Number of Students:{{numberOfStudent}}                                            
-                                    </li>
-                                    <li>
-                                        Number of Present students:{{presentStu}}
-                                    </li>
-                                </ul>
+                                    <mat-list role="list">
+                                            <mat-list-item role="listitem"> Date:{{ today | date }} </mat-list-item>
+                                            <mat-list-item role="listitem">Number of Students:{{numberOfStudent}} </mat-list-item>
+                                            <mat-list-item role="listitem"> Number of Present students:{{presentStu}}</mat-list-item>
+                                    </mat-list>
+                            
                             </div>
                             </mat-tab>
                             <mat-tab label="Attendence History">
@@ -77,13 +72,20 @@
                                     <mat-tab label="Special Date">
 
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagD">
-                                                <form class="example-form">
+                                                <form class="example-form " (ngSubmit)="searchDate(dateid.value)">
+                                                  <mat-grid-list cols="1" rowHeight="100px">
+                                                    <mat-grid-tile>
                                                         <mat-form-field>
-                                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date" #date disabled="true">
+                                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date"  appearance="outline" #dateid>
                                                                 <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                                                                 <mat-datepicker #picker></mat-datepicker>
-                                                                {{date.name}}
+                                                        
                                                         </mat-form-field>
+                                                        </mat-grid-tile>
+                                                        <mat-grid-tile>
+                                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
+                                                      </mat-grid-tile>
+                                                    </mat-grid-list>
                                                               
                                                       
                                                         

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-interface Certificate {
+interface certificateReqesuted {
   userid: String,
   certName: String,
   certType: String,
@@ -468,16 +468,14 @@ submitOlCert() {
   window.location.reload();
 
 }
-pendingCertList : Certificate [] = [];
+pendingCertList : certificateReqesuted [] = [];
   ngOnInit() {
 
-    // var date  = Date();
-    // console.log(date);
 
     var pendingUrl = "http://localhost:3000/certification/pendingCertList";
 
     this.http.get<any>(pendingUrl).subscribe(res => {
-      console.log(res)
+      console.log(res);
       this.pendingCertList   = res;
 
     })
