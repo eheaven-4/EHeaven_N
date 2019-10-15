@@ -475,7 +475,7 @@ pendingCertList : certificateReqesuted [] = [];
     var pendingUrl = "http://localhost:3000/certification/pendingCertList";
 
     this.http.get<any>(pendingUrl).subscribe(res => {
-      console.log(res)
+      console.log(res);
       this.pendingCertList   = res;
 
     })
