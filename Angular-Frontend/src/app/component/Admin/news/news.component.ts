@@ -45,15 +45,13 @@ export class NewsComponent implements OnInit {
   addnews() {
     const formData = new FormData();
 
-    formData.append('newspic', this.images);
+    formData.append('newsImage', this.images);
     formData.append('userid', this.NewsForm.value.userid);
     formData.append('topic', this.NewsForm.value.topic);
     formData.append('newsSumery', this.NewsForm.value.newsSumery);
     formData.append('news', this.NewsForm.value.news);
 
-    var url = 'http://localhost:3000/news/add';
-
-    // console.log(formData);
+    const url = 'http://localhost:3000/news/add';
 
     if (this.images == null) {
       this.ngFlashMessageService.showFlashMessage({
@@ -63,29 +61,29 @@ export class NewsComponent implements OnInit {
         type: 'warning'
       });
     } else {
+      // console.log(formData)
       this.http.post<any>(url, formData).subscribe(res => {
+        console.log(res.msg);
         if (res.state) {
-          console.log(res.msg);
-          this.ngFlashMessageService.showFlashMessage({
-            messages: ['Successfully submited ..!'],
-            dismissible: true,
-            timeout: 2000,
-            type: 'success',
-          });
+            this.ngFlashMessageService.showFlashMessage({
+              messages: ['Successfully submited ..!'],
+              dismissible: true,
+              timeout: 2000,
+              type: 'success',
+            });
 
-        } else {
-          this.ngFlashMessageService.showFlashMessage({
-            messages: ['News is not submited..!'],
-            dismissible: true,
-            timeout: 2000,
-            type: 'warning'
-          });
-
-        }
+          } else {
+            this.ngFlashMessageService.showFlashMessage({
+              messages: ['News is not submited..!'],
+              dismissible: true,
+              timeout: 2000,
+              type: 'warning'
+            });
+          }
       });
     }
 
-}
+  }
 }
 
 

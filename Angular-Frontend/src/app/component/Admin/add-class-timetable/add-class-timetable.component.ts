@@ -23,7 +23,7 @@ export class AddClassTimetableComponent implements OnInit {
   constructor(
     private router: Router,
     private http: HttpClient,
-    private cookies: MycookiesService, //import Mycookies Service files
+    private cookies: MycookiesService, // import Mycookies Service files
     private ngFlashMessage: NgFlashMessageService,
   ) { }
 
