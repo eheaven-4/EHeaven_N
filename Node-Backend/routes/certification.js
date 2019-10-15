@@ -57,7 +57,7 @@ router.get("/pendingCert/:id", function (req, res) {
 
 /************************get certification requests from users(Admin comp)******************************/
 router.get("/pendingCertList", function (req, res) {
-    console.log("Hello");
+    // console.log("Hello");
     requestCertification.find({ state: "Pending" })
         // .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate state')
