@@ -12,9 +12,4 @@ const newsSchema = mongoose.Schema({
     filepath:{type: String, require:true} 
 });
 
-const News = module.exports = mongoose.model("News", newsSchema);  
-
-module.export = {
-
-
-}
+const News = module.exports = mongoose.model("News", newsSchema); 
