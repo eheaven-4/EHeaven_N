@@ -34,6 +34,7 @@ export class ProfileComponent implements OnInit {
 
   authtoken: any;
   user: any;
+  id: any;
 
   constructor(
     private http: HttpClient,
@@ -43,11 +44,12 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     console.log(this.cookies.getCookie("userAuth"));
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
-    var id = myCookie.userid;
+    this.id = myCookie.userid;
+    
     var url = "http://localhost:3000/users/profile";
 
-    console.log(id);
-    this.http.get<any>(url + '/' + id).subscribe(res => {
+    console.log(this.id);
+    this.http.get<any>(url + '/' + this.id).subscribe(res => {
       console.log(res);
       this.profiledata = res;
     }, (err) => {

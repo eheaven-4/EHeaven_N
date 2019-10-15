@@ -35,7 +35,7 @@ router.post("/requestCert", function (req, res) {
         })
 });
 
-//get pending certificate to issued  by specific user
+//get pending certificate requests to be issued to the user
 router.get("/pendingCert/:id", function (req, res) {
     console.log("Hello");
     const id = req.params.id;
@@ -55,7 +55,29 @@ router.get("/pendingCert/:id", function (req, res) {
         });
 });
 
-//get issued all certificates by specific user
+/************************get certification requests from users(Admin comp)******************************/
+router.get("/pendingCertList", function (req, res) {
+    console.log("Hello");
+    requestCertification.find({ state: "Pending" })
+        // .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate state')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
+
+
+//get issued all certificates issued to a particular user
 router.get("/issuedCert/:id", function (req, res) {
     console.log("Hello");
     const id = req.params.id;
@@ -75,7 +97,7 @@ router.get("/issuedCert/:id", function (req, res) {
         });
 });
 
-/*******************************generate student status certificate pdf ***************************************/
+/*******************************generate student status certificate pdf ******************************/
 
 router.post("/studentstatus", async function (req, res) {
     // console.log("hello at server ");
@@ -139,7 +161,7 @@ router.post("/studentstatus", async function (req, res) {
     // res.send("Hello users");
 });
 
-/*******************************generate character certificate pdf ***************************************/
+/*******************************generate character certificate pdf ***********************************/
 
 router.post("/charactercert", async function (req, res) {
     // console.log("hello at server ");
@@ -156,9 +178,11 @@ router.post("/charactercert", async function (req, res) {
         leadership: req.body.leadership,
         societies: req.body.societies,
         sports: req.body.sports,
+        state: req.body.state
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf');
+
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -253,12 +277,23 @@ router.post("/charactercert", async function (req, res) {
             size: 10,
         },
     );
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "characterEdit.pdf", pdfBytes);
+        
+    newRequest
+        .save()
+        .then(result => {
+            console.log(result)
+            res.json({ state: true, msg: "Data inserted Successfully..!" });
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+        })
 
 }); 
 
-/*******************************generate leaving certificate pdf ***************************************/
+/*******************************generate leaving certificate pdf *************************************/
 
 router.post("/leavingcert", async function (req, res) {
     // console.log("hello at server ");
@@ -398,12 +433,23 @@ router.post("/leavingcert", async function (req, res) {
             size: 9,
         },
     );
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "leavingEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 
-/*******************************generate A/L certificate pdf ***************************************/
+/*******************************generate A/L certificate pdf ****************************************/
 
 router.post("/alcert", async function (req, res) {
     console.log("hello at server ");
@@ -514,12 +560,23 @@ router.post("/alcert", async function (req, res) {
         },
     );
    
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "alEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 
-/*******************************generate O/L certificate pdf ***************************************/
+/*******************************generate O/L certificate pdf ****************************************/
 
 router.post("/olcert", async function (req, res) {
     console.log("hello at server ");
@@ -604,8 +661,19 @@ router.post("/olcert", async function (req, res) {
         );
         c=c-19;
     }
-    const pdfBytes = await doc.save()
-    fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes)
+    const pdfBytes = await doc.save();
+    fs.writeFileSync(__dirname + "olEdit.pdf", pdfBytes);
+
+    newRequest
+    .save()
+    .then(result => {
+        console.log(result)
+        res.json({ state: true, msg: "Data inserted Successfully..!" });
+    })
+    .catch(error => {
+        console.log(error)
+        res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    })
 
 });
 

@@ -68,14 +68,14 @@ export class CertificationComponent implements OnInit {
 
   ngOnInit() {
     var date  = Date();
-    console.log(date)
+    console.log(date);
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
     var id = myCookie.userid;
     //load pending and issued certificates tho the user
 
     var pendingUrl = "http://localhost:3000/certification/pendingCert";
     var issuedUrl = "http://localhost:3000/certification/issuedCert";
-    
+
     this.http.get<any>(pendingUrl+'/' + id).subscribe(res => {
       console.log(res)
       this.pendingCert = res;
@@ -90,7 +90,7 @@ export class CertificationComponent implements OnInit {
 
   submitToApproval() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
-    this.userid = myCookie.userid;     //tke userid from cookies
+    this.userid = myCookie.userid;     //get userid from cookies
     var date  = Date(); //get todays date and time
 
     // console.log(this.CertificationForm.value , myCookie.usertype)

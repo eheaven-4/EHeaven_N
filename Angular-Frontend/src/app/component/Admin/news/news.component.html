@@ -11,50 +11,55 @@
             <hr>
           </div>
           <div style="padding-top:50px ; padding-bottom:50px">
-            <form class="border text-center p-5 reg-frm">
+            <!-- <form class="border text-center p-5 reg-frm">
               <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+            </form> -->
 
-
-
-            </form>
-
-            <form class="border text-center p-5 reg-frm">
+            <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
 
 
               <h2 style="color:   rgb(0, 140, 255); font-weight: bold;padding-top: 20px">Add New News</h2>
               <hr>
               <div class="form-row mb-4">
+                <input type="text" class="form-control box_border" placeholder="User ID" name="userid"
+                  formControlName="userid">
+              </div>
+
+              <div class="form-row mb-4">
                 <label>Topic :</label>
                 <input type="text" class="form-control box_border" aria-describedby="textHelp" name="topic"
-                  [(ngModel)]="topic">
+                  formControlName="topic">
               </div>
 
               <div class="form-row mb-4">
                 <label>News Sumery :</label>
-                <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news_sumery"
-                  id="textbox1" [(ngModel)]="news_sumery"></textarea>
+                <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="newsSumery"
+                  id="textbox1" formControlName="newsSumery"></textarea>
               </div>
 
               <div class="form-row mb-4">
                 <label>News :</label>
                 <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news"
-                  id="textbox" [(ngModel)]="news"></textarea>
+                  id="textbox" formControlName="news"></textarea>
               </div>
 
               <div class="form-row mb-4">
                 <label>Date :</label>
                 <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy"
-                  name="date" [(ngModel)]="date">
+                  name="date" formControlName="date">
               </div>
-              <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
-              (click)="fileInput.click()">Attach a image</button>
+              <input type="file" class="file_upload" style="display: none" name="newspic" accept="image/*"
+                (change)="selectImage($event)" #fileInput>
 
-              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
+              <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+                (click)="fileInput.click()" accept="image/*">Choose Image </button>
+
+              <button (click)="addnews()" type="submit"
+                class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
             </form>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </div>

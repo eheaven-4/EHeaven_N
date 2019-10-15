@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,7 +21,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
   ) { }
 
-  //registratin form attributes
+  // registratin form attributes
   RegistrationForm = this.fb.group({
     usertype: ['', Validators.required],
     userid: ['', Validators.required],
@@ -40,9 +42,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-  //load the image as the button event and asign to  the images variable
+  // load the image as the button event and asign to  the images variable
   selectImage(event) {
-    if (event.target.files.length > 0) {  //check the file is select or not. 
+    if (event.target.files.length > 0) {  // check the file is select or not.
       const file = event.target.files[0];
       this.images = file;
     }
@@ -69,8 +71,8 @@ export class RegisterComponent implements OnInit {
     formData.append('address', this.RegistrationForm.value.address)
 
     /****************************************************** */
-
-    var url = "http://localhost:3000/users/register";
+    console.log(formData);
+    const url = 'http://localhost:3000/users/register';
 
     if (this.images == null) {
       this.ngFlashMessageService.showFlashMessage({
