@@ -11,21 +11,19 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 
 
 export class AcademicsComponent implements OnInit {
- 
+
 
   constructor(
     private http: HttpClient,
     private ngFlashMessageService: NgFlashMessageService,
     private cookies: MycookiesService,
   ) { }
-  
-  
+
+
 
   ngOnInit() {
-    
-   }
-
 
   }
- 
+}
+
 
