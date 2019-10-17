@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
     formData.append('birthday', this.RegistrationForm.value.birthday)
     formData.append('mobilenumber', this.RegistrationForm.value.mobilenumber)
     formData.append('homenumber', this.RegistrationForm.value.homenumber)
-    formData.append('gender', this.RegistrationForm.value.gender)
+    formData.append('gender', this.RegistrationForm.value.gender) 
     formData.append('nationality', this.RegistrationForm.value.nationality)
     formData.append('nicnumber', this.RegistrationForm.value.nicnumber)
     formData.append('father', this.RegistrationForm.value.father)

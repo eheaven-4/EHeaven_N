@@ -14,7 +14,7 @@ var storage = multer.diskStorage({
     }
 });
 
-const upload = multer({ storage: storage }).single('notification_attachment');
+const upload = multer({ storage: storage }).single('notificationAttachment');
 
 //add notification function 
 router.post("/add", function (req, res) {
