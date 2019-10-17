@@ -468,10 +468,22 @@ submitOlCert() {
   window.location.reload();
 
 }
+
+/***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
+
+acceptCert(){
+  // console.log('Hello');
+
+}
+
+rejectCert(){
+  // console.log('Hello');
+
+}
 pendingCertList : certificateReqesuted [] = [];
   ngOnInit() {
 
-    
+
     var pendingUrl = "http://localhost:3000/certification/pendingCertList";
 
     this.http.get<any>(pendingUrl).subscribe(res => {
