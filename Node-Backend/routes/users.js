@@ -10,7 +10,7 @@ var path = require('path');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'profile_Images/')
+        cb(null, 'local_storage/profile_Images/')
     },
     filename: function (req, file, cb) {
         cb(null, file.originalname)
@@ -130,10 +130,11 @@ router.get("/profile/:id", function (req, res) {
     });
 });
 
+//send profile image to progile.component.html
 router.get("/profileImage/:filename", function (req, res) {
     const filename = req.params.filename;
     console.log(filename)
-    res.sendFile(path.join(__dirname, '../profile_Images/' + filename));
+    res.sendFile(path.join(__dirname, '../local_storage/profile_Images/' + filename));
 });
 
 
