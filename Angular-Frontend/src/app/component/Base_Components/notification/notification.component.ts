@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router } from '@angular/router';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
 interface notification {  //decalare interface class for load notification attributes. 
   _id: String;
@@ -12,6 +13,10 @@ interface notification {  //decalare interface class for load notification attri
   state: String;
 }
 
+interface userType {
+  userType:String;
+}
+
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -20,8 +25,11 @@ interface notification {  //decalare interface class for load notification attri
 export class NotificationComponent implements OnInit {
 
   notices: notification[] = [];
+  usertype: userType[] = [];
   noticeId: any;
   notice_id: String;
+  userType: String;
+
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;
 
@@ -29,39 +37,18 @@ export class NotificationComponent implements OnInit {
     private http: HttpClient,
     private router: Router,
     private cookies: MycookiesService,
+    private ngFlashMessage: NgFlashMessageService,
   ) { }
 
   ngOnInit() {
-    // console.log(this.cookies.getCookie("userAuth"));
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    // console.log(myCookie);
-    var userType = myCookie.usertype;
-    console.log(userType)
+
+    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
+    this.usertype = myCookie.usertype;   //load user type to the userType array
+
     if(myCookie){
       var url = "http://localhost:3000/notification/view";
-  
       this.http.get<any>(url).subscribe(res => {
         this.notices = res;
-        console.log(res)
-        // var i = 0;
-        // for (var prop in res) {
-        //   if (res.hasOwnProperty(prop)) {
-        //     // console.log(res[i].state)          
-        //     if (res[i].state == 'Approved') {
-        //       console.log(res[i].state)
-        //       this.disapprove_show = true
-        //     }
-        //     else {
-        //       this.approve_show = true
-
-        //     }
-        //     i++;
-        //   }
-        //   else {
-        //     break
-        //   }
-        // }
-  
       }, (err) => {
         console.log(err);
       });
@@ -78,8 +65,12 @@ export class NotificationComponent implements OnInit {
     var url = "http://localhost:3000/notification/delete";
 
     this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
-      console.log(res);
-      alert("Successfully Deleted..!");
+        this.ngFlashMessage.showFlashMessage({
+          messages: ["Successfully Added ..!"],
+          dismissible: true,
+          timeout: 2000,
+          type: 'success',
+        });
       window.location.reload();     //reload the page
     }, (err) => {
       console.log(err);

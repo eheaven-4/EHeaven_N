@@ -34,17 +34,26 @@
                             <mat-card-content>
                                 <p>{{notice.message}}</p>
                             </mat-card-content>
+
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <mat-card-subtitle style="padding-right: 20px"><a
+                                            href="http://localhost:3000/notification/notAttachment/{{notice.filepath}}">Attchment</a>
+                                    </mat-card-subtitle>
+                                </div>
+                                <div class="col-md-7">
+                                    <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}
+                                    </mat-card-subtitle>
+                                </div>
+                            </div>
+
                             <mat-card-actions style="text-align: right">
-                                <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}
-                                </mat-card-subtitle>
 
-                                <button *ngIf="notice.state=='Pending' && notice.usertype == 'Administrator'"
-                                    mat-raised-button class="approve_btn"
-                                    (click)="approve($event, notice._id)">Approve</button>
+                                <button *ngIf="notice.state=='Pending' && usertype == 'Administrator'" mat-raised-button
+                                    class="approve_btn" (click)="approve($event, notice._id)">Approve</button>
 
-                                <button *ngIf="notice.usertype == 'Administrator'"
-                                    mat-raised-button color="warn" style="width:100px;"
-                                    (click)="disapprove($event,notice._id)">Disapprove</button>
+                                <button *ngIf="usertype == 'Administrator'" mat-raised-button color="warn"
+                                    style="width:100px;" (click)="disapprove($event,notice._id)">Disapprove</button>
 
                                 <button mat-raised-button class="view_btn"
                                     (click)="view($event, notice._id)">View</button>

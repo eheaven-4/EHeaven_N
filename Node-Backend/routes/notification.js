@@ -46,7 +46,7 @@ router.post("/add", function (req, res) {
 //GET all notices
 router.get("/view", (req, res, next) => {
     Notification.find().sort({ date: -1 })
-        .select('userid subject message date state usertype')
+        .select('userid subject message date state usertype filepath')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -58,6 +58,13 @@ router.get("/view", (req, res, next) => {
                 error: error
             });
         });
+});
+
+//Get notification attchment 
+router.get("/notAttachment/:filename", function(req, res){
+    const filename = req.params.filename;
+    console.log(filename)
+    res.sendFile(path.join(__dirname, '../local_storage/notification_Attachment/' + filename));
 });
 
 //Delete a user by ID
