@@ -4,13 +4,14 @@ const Notification = require('../models/notification');
 const config = require('../config/database');
 const multer = require('multer');
 var path = require('path');
+const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, 'local_storage/notification_attachment/')
     },
     filename: function (req, file, cb) {
-        cb(null, "NOT_FILE - "+file.originalname)
+        cb(null, "NOT_FILE - " + file.originalname)
     }
 });
 
@@ -21,7 +22,7 @@ router.post("/add", function (req, res) {
     upload(req, res, (err) => { //uploading file to the notification_Attachment folder and 
         var filePath = "NOT_FILE - " + req.file.originalname;    //send data to the database
         //get file name 
-        
+
         const newNotice = new Notification({
             userid: req.body.userid,
             subject: req.body.subject,
@@ -61,30 +62,12 @@ router.get("/view", (req, res, next) => {
 });
 
 //Get notification attchment 
-router.get("/notAttachment/:filename", function(req, res){
+router.get("/notAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
-    console.log(filename)
+    // console.log(filename)x
     res.sendFile(path.join(__dirname, '../local_storage/notification_Attachment/' + filename));
 });
 
-//Delete a user by ID
-router.delete('/delete/:_id', (req, res, next) => {
-    // console.log("Hello");
-    const id = req.params._id;
-    Notification.remove({ _id: id })
-        .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'Deleted Successfully'
-            });
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
-});
 
 //Approve botton status update 
 router.get('/approve/:_id', (req, res, next) => {
@@ -109,5 +92,41 @@ router.get('/approve/:_id', (req, res, next) => {
         });
 });
 
+//Delete a user by ID
+router.delete('/delete/:_id', (req, res, next) => {
+    // console.log("Hello");
+    const id = req.params._id;
+    Notification.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+router.delete("/notAttachment/:filename", function (req, res) {
+    const filename = req.params.filename;
+    console.log(filename)
+    const path = 'local_storage/notification_attachment/' + filename;
+    try {
+        fs.unlinkSync(path)
+        res.status(200).json({
+            message: 'Delete the file successfully..!'
+        })
+        //file removed
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: error
+        });
+    }
+});
 
 module.exports = router;  

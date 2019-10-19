@@ -14,7 +14,7 @@ interface notification {  //decalare interface class for load notification attri
 }
 
 interface userType {
-  userType:String;
+  userType: String;
 }
 
 @Component({
@@ -28,6 +28,7 @@ export class NotificationComponent implements OnInit {
   usertype: userType[] = [];
   noticeId: any;
   notice_id: String;
+  file_path: String;
   userType: String;
 
   public approve_show: boolean = false;
@@ -45,7 +46,7 @@ export class NotificationComponent implements OnInit {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
     this.usertype = myCookie.usertype;   //load user type to the userType array
 
-    if(myCookie){
+    if (myCookie) {
       var url = "http://localhost:3000/notification/view";
       this.http.get<any>(url).subscribe(res => {
         this.notices = res;
@@ -53,28 +54,40 @@ export class NotificationComponent implements OnInit {
         console.log(err);
       });
     }
-    else{
+    else {
       alert("Please Login First..!");
       this.router.navigate(['/login']);
     }
   }
 
-  disapprove(event, notice_id) {  //disapprove button action
+  disapprove(event, notice_id, file_path) {  //disapprove button action
     var mybtnId = notice_id;
+    var mybtnFile = file_path;
     console.log(mybtnId);
+    console.log(mybtnFile);
+
+
     var url = "http://localhost:3000/notification/delete";
+    var urlDelete = "http://localhost:3000/notification/notAttachment";
+
+    this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+      console.log(res);
+    }, (err) => {
+      console.log(err)
+    });
 
     this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Successfully Added ..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'success',
-        });
-      window.location.reload();     //reload the page
+      this.ngFlashMessage.showFlashMessage({
+        messages: ["Successfully Added ..!"],
+        dismissible: true,
+        timeout: 2000,
+        type: 'success',
+      });
     }, (err) => {
       console.log(err);
     });
+    
+    window.location.reload();     //reload the page
   }
 
   approve(event, notice_id) {     //approve button action

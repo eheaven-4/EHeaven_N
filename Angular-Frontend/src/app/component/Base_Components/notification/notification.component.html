@@ -53,7 +53,7 @@
                                     class="approve_btn" (click)="approve($event, notice._id)">Approve</button>
 
                                 <button *ngIf="usertype == 'Administrator'" mat-raised-button color="warn"
-                                    style="width:100px;" (click)="disapprove($event,notice._id)">Disapprove</button>
+                                    style="width:100px;" (click)="disapprove($event,notice._id,notice.filepath)">Disapprove</button>
 
                                 <button mat-raised-button class="view_btn"
                                     (click)="view($event, notice._id)">View</button>
