@@ -13,7 +13,7 @@ interface notification {  //decalare interface class for load notification attri
   state: String;
 }
 
-interface userType {
+interface userType {  //load interface for get user type
   userType: String;
 }
 
@@ -26,7 +26,7 @@ export class NotificationComponent implements OnInit {
 
   notices: notification[] = [];
   usertype: userType[] = [];
-  noticeId: any;
+
   notice_id: String;
   file_path: String;
   userType: String;
@@ -62,20 +62,20 @@ export class NotificationComponent implements OnInit {
 
   disapprove(event, notice_id, file_path) {  //disapprove button action
     var mybtnId = notice_id;
-    var mybtnFile = file_path;
-    console.log(mybtnId);
-    console.log(mybtnFile);
+    var mybtnFile = file_path;  
 
+    var url = "http://localhost:3000/notification/delete";    //notification content delete url
+    var urlDelete = "http://localhost:3000/notification/notAttachment"; //notification attachment delete url
 
-    var url = "http://localhost:3000/notification/delete";
-    var urlDelete = "http://localhost:3000/notification/notAttachment";
-
-    this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
-      console.log(res);
-    }, (err) => {
-      console.log(err)
-    });
-
+    //if there is a file in attachment call atachment file delteing request
+    if(mybtnFile){
+      this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err)
+      });
+    }
+    //call content delete request
     this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
       this.ngFlashMessage.showFlashMessage({
         messages: ["Successfully Added ..!"],
@@ -86,7 +86,7 @@ export class NotificationComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
-    
+
     window.location.reload();     //reload the page
   }
 

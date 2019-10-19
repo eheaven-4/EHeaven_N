@@ -29,7 +29,7 @@
                             <mat-card-header>
                                 <div mat-card-avatar class="example-header-image"></div>
                                 <mat-card-title>{{notice.subject}}</mat-card-title>
-                                <mat-card-subtitle style="margin-top:-15px">{{notice.date}}</mat-card-subtitle>
+                                <mat-card-subtitle style="margin-top:-15px">{{notice.date | date:'yyyy-MM-dd HH:mm:ss'}}</mat-card-subtitle>
                             </mat-card-header>
                             <mat-card-content>
                                 <p>{{notice.message}}</p>
@@ -37,12 +37,13 @@
 
                             <div class="row">
                                 <div class="col-md-7">
-                                    <mat-card-subtitle style="padding-right: 20px"><a
-                                            href="http://localhost:3000/notification/notAttachment/{{notice.filepath}}">Attchment</a>
+                                    <mat-card-subtitle *ngIf="notice.filepath" style="padding-right: 20px"><a
+                                            href="http://localhost:3000/notification/notAttachment/{{notice.filepath}}"><img src="../../../../assets/icons/paperclip-solid.svg"
+                                            class="attachment_icn">&nbsp;&nbsp;Attachment</a>
                                     </mat-card-subtitle>
                                 </div>
                                 <div class="col-md-7">
-                                    <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}
+                                    <mat-card-subtitle *ngIf="usertype == 'Administrator'" style="padding-right: 20px">state : {{notice.state}}
                                     </mat-card-subtitle>
                                 </div>
                             </div>

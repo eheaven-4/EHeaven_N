@@ -20,8 +20,11 @@ const upload = multer({ storage: storage }).single('notificationAttachment');
 //add notification function 
 router.post("/add", function (req, res) {
     upload(req, res, (err) => { //uploading file to the notification_Attachment folder and 
-        var filePath = "NOT_FILE - " + req.file.originalname;    //send data to the database
-        //get file name 
+
+        if (req.file) {
+            var filePath = "NOT_FILE - " + req.file.originalname;    //send data to the database
+            //get file name 
+        }
 
         const newNotice = new Notification({
             userid: req.body.userid,
