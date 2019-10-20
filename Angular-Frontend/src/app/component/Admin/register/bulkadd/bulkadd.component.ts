@@ -1,22 +1,42 @@
 import { Component, OnInit } from '@angular/core';
-import {FileuploadService} from './fileupload.service';
-import { FileUploader } from 'ng2-file-upload';
+// import {FileuploadService} from './fileupload.service';
+import {FileSelectDirective,FileUploader} from 'ng2-file-upload';
 
+const url='http://localhost:3000/filehandler/upload';
 @Component({
   selector: 'app-bulkadd',
   templateUrl: './bulkadd.component.html',
   styleUrls: ['./bulkadd.component.scss']
 })
-export class BulkaddComponent implements OnInit {
-  fileToUpload:File=null;
+export class BulkaddComponent{
+  uploader:FileUploader=new FileUploader({url:url});
+  attchmentList:any=[];
 
-  constructor(public fileHandler:FileuploadService) { }
+  constructor() { 
 
-  private files=[];
-  private url='http://localhost:3000/upload';
-  private uploader :FileUploader;
+    this.uploader.onCompleteItem=(item:any,response:any,headers:any)=>{
+      this.attchmentList.push(JSON.parse(response));
+    }
+  
 
-  ngOnInit() {
+
+  // ngOnInit() {
+
+  
+
+
+  // };
+  // FileSelcted(event){
+  //   console.log(event);
+  //   this.fileToUpload=event.target.files[0];
+  // }
+  // UploadFile(){
+  //   console.log(this.fileToUpload);
+  //   this.fileHandler.UploadFile(this.fileToUpload).subscribe(
+  //     res=>{console.log(res);}
+  //   );
+
+  }
     // this.uploader = new FileUploader({url: this.url});
 
     // this.fileHandler.showFileNames().subscribe(response => {
@@ -28,16 +48,6 @@ export class BulkaddComponent implements OnInit {
     //     };
     //   }
     // });
-  }
-  handleFile(files:FileList){
-    console.log(files.item(0));
-    //this.fileToUpload=files.item(0);
-    this.fileHandler.postFile(files.item(0))
-      .subscribe(data=>{
-        console.log("Success");
-      },error=>{console.error()}
-      );
-    
-  }
-
+  // }
+  
 }

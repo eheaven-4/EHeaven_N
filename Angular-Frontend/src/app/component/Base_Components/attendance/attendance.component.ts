@@ -3,6 +3,7 @@ import {AttendenceService} from './attendence.service';
 import {User} from './../../../user';
 import {Attend} from './attend';
 import {Attendreturn} from './attend';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-attendance',
@@ -28,7 +29,7 @@ public today=new Date();
 public spanflageD=false;
 public spanflageS=false;
 
-  constructor(private attendanceservice:AttendenceService) { }
+  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder) { }
 
   ngOnInit() {
     this.attendanceservice.retriveUsers()
