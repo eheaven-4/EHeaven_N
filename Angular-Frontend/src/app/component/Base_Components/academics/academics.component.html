@@ -13,9 +13,101 @@
                         <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 60px">Academics</h2>
                         <hr>
                     </div>
-                    <div>
 
+                    <form>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Teacher Name :</label>
+                                    <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                        name="subject" placeholder="K.D. Karunarathne">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Teacher ID :</label>
+                                    <input type="text" class="form-control box_border" aria-describedby="textHelp"
+                                        name="subject" placeholder="17001112">
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Grade :</label>
+                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                        formControlName="grade">
+                                        <mat-option style="text-align: left" *ngFor="let gds of grades" [value]="gds">
+                                            {{ gds }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Attachment Type :</label>
+                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                        formControlName="type">
+                                        <mat-option style="text-align: left" *ngFor="let att of attachmentType"
+                                            [value]="att">
+                                            {{ att }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="col-md-3" style="margin-top: 7px;">
+                                    <input type="file" style="display: none" name="academicFile"
+                                        (change)="selectImage($event)" #fileInput>
+                                    <button class="btn btn-outline-primary my-4 btn-block" type="button"
+                                        (click)="fileInput.click()" accept="image/*">Attach a file</button>
+                                </div>
+
+                                <div class="col-md-3" style="margin-top: 7px;">
+                                    <button class="btn btn-info my-4 btn-block submit_btn" type="submit">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+
+                    <div class="container contentDiv">
+                        <h6>Lecture Slides</h6>
+                        <hr>
+                        <div class="sub_contentDiv">
+                            <div>
+                                <img class="icons" src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
+                                <a href="#" class="content_txt">My new file</a>
+                            </div>
+                        </div>
                     </div>
+                    
+                    <div class="container contentDiv">
+                        <h6>Tutorials</h6>
+                        <hr>
+                        <div class="sub_contentDiv">
+                            <div>
+                                <img class="icons" src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
+                                <a href="#" class="content_txt">My new file</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container contentDiv">
+                        <h6>Resourses</h6>
+                        <hr>
+                        <div class="sub_contentDiv">
+                            <div>
+                                <img style="width: 20px; margin-top: -5px;"
+                                    src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
+                                <a href="#" class="content_txt">My new file</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="container contentDiv" style="padding-bottom:50px;">
+                        <h6>Other</h6>
+                        <hr>
+                        <div class="sub_contentDiv">
+                            <div>
+                                <img style="width: 17px; margin-top: -8px;" src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
+                                <a href="#" class="content_txt">My new file</a>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
         </div>
