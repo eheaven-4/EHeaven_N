@@ -1,1 +1,6 @@
-<button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button" (click)="fileInput.click()" accept="image/*">Choose Profile Picture</button>
+
+<h1>Upload Section</h1>
+
+<input type="file" name="fileUpload" id="fileUpload" ng2FileSelect [uploader]="uploader" >
+
+<button type="button" (click)="item.upload()">upload</button>

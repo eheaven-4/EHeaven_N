@@ -13,8 +13,9 @@ const certification = require('./routes/certification');
 const attendance = require('./routes/attendance');
 const class_management = require('./routes/class_management');
 const teacher_management = require('./routes/teacher_management');
-const academics = require('./routes/academics')
-const news = require('./routes/news')
+const academics = require('./routes/academics');
+const news = require('./routes/news');
+const filehandler= require('./routes/filehandler');
 
 // const filehandler=require('./routes/filehandler');
 
@@ -44,7 +45,7 @@ app.use('/class_management',class_management);
 app.use('/teacher_management',teacher_management);
 app.use('/academics', academics);
 app.use('/news',news);
-// app.use('/filehandler',filehandler);
+app.use('/filehandler',filehandler);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
