@@ -1,16 +1,13 @@
-.body
-{
-  background-color:white;
+.body {
+  background-color: white;
   height: 100px;
-
-
 }
 
-#textbox{
+#textbox {
   height: 200px;
 }
 
-.border{
+.border {
   margin: auto;
   border-style: ridge;
   padding-top: 50px;
@@ -19,14 +16,12 @@
   padding-left: 80px;
   box-shadow: 0px 5px 5px rgb(134, 132, 245);
   width: 1000px;
-
 }
-.box_border{
+.box_border {
   border-radius: 3px;
-
 }
 
-.reg-frm{
+.reg-frm {
   box-shadow: 0px 5px 5px rgb(134, 132, 245);
   padding-top: 40px;
   width: 70%;
@@ -34,17 +29,17 @@
   margin: auto;
 }
 
-.reg-form{
-  padding-top:40px;
+.reg-form {
+  padding-top: 40px;
   padding-bottom: 50px;
 }
 
-.reg_btn{
+.reg_btn {
   color: aliceblue;
   background-color: rgb(0, 140, 255);
-  border-color:  rgb(0, 140, 255);
+  border-color: rgb(0, 140, 255);
   box-shadow: 0px 5px 5px rgb(134, 132, 245);
 }
-.pick_btn{
+.pick_btn {
   width: 30%;
 }
