@@ -1,27 +1,30 @@
-.submit_btn{
-    background-color: rgb(0, 140, 255);
+.submit_btn {
+  background-color: rgb(0, 140, 255);
+  border-color: rgb(0, 140, 255);
+  box-shadow: 0px 5px 5px rgb(134, 132, 245);
 }
 
-.submit_btn:hover{
-    background-color: rgb(0, 103, 187);
+.submit_btn:hover {
+  background-color: rgb(0, 103, 187);
 }
-.contentDiv{
-    padding-top: 20px;
-    padding-left: 50px;
-}
-
-.sub_contentDiv{
-    padding-left: 20px;
+.contentDiv {
+  padding-top: 20px;
+  padding-left: 50px;
 }
 
-.icons{
-    width: 15px;
-    margin-top: -10px;
+.sub_contentDiv {
+  padding-left: 20px;
 }
 
-.content_txt{
-    color: rgb(74, 74, 74);
+.icons {
+  width: 15px;
+  margin-top: -10px;
 }
-.content_txt:hover{
-    color: rgb(0, 104, 196);
+
+.content_txt {
+  color: rgb(74, 74, 74);
+  font-size: 15px;
+}
+.content_txt:hover {
+  color: rgb(0, 104, 196);
 }
