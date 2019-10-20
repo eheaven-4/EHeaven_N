@@ -10,7 +10,7 @@ const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
 
-/*save date to requesting certificate data on databade */
+/*Student request certificates */
 router.post("/requestCert", function (req, res) {
     const newRequest = new requestCertification({
         userid: req.body.userid,
@@ -35,6 +35,7 @@ router.post("/requestCert", function (req, res) {
         })
 });
 
+/************************get certification requests from users(Student comp)******************************/
 //get pending certificate requests to be issued to the user
 router.get("/pendingCert/:id", function (req, res) {
     console.log("Hello");
@@ -55,28 +56,6 @@ router.get("/pendingCert/:id", function (req, res) {
         });
 });
 
-/************************get certification requests from users(Admin comp)******************************/
-router.get("/pendingCertList", function (req, res) {
-    console.log("Hello");
-    requestCertification.find({ state: "Pending" })
-        // .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate state')
-        .exec()
-        .then(docs => {
-            console.log("Data Transfer Success.!");
-            res.status(200).json(docs);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
-});
-
-
-
-
 //get issued all certificates issued to a particular user
 router.get("/issuedCert/:id", function (req, res) {
     console.log("Hello");
@@ -96,6 +75,28 @@ router.get("/issuedCert/:id", function (req, res) {
             });
         });
 });
+
+
+/************************get certification requests from users(Admin comp)******************************/
+router.get("/pendingCertList", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ state: "Pending" })
+        // .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate state')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
 
 /*******************************generate student status certificate pdf ******************************/
 

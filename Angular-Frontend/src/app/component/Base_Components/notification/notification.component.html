@@ -29,22 +29,32 @@
                             <mat-card-header>
                                 <div mat-card-avatar class="example-header-image"></div>
                                 <mat-card-title>{{notice.subject}}</mat-card-title>
-                                <mat-card-subtitle style="margin-top:-15px">{{notice.date}}</mat-card-subtitle>
+                                <mat-card-subtitle style="margin-top:-15px">{{notice.date | date:'yyyy-MM-dd HH:mm:ss'}}</mat-card-subtitle>
                             </mat-card-header>
                             <mat-card-content>
                                 <p>{{notice.message}}</p>
                             </mat-card-content>
+
+                            <div class="row">
+                                <div class="col-md-7">
+                                    <mat-card-subtitle *ngIf="notice.filepath" style="padding-right: 20px"><a
+                                            href="http://localhost:3000/notification/notAttachment/{{notice.filepath}}"><img src="../../../../assets/icons/paperclip-solid.svg"
+                                            class="attachment_icn">&nbsp;&nbsp;Attachment</a>
+                                    </mat-card-subtitle>
+                                </div>
+                                <div class="col-md-7">
+                                    <mat-card-subtitle *ngIf="usertype == 'Administrator'" style="padding-right: 20px">state : {{notice.state}}
+                                    </mat-card-subtitle>
+                                </div>
+                            </div>
+
                             <mat-card-actions style="text-align: right">
-                                <mat-card-subtitle style="padding-right: 20px">state : {{notice.state}}
-                                </mat-card-subtitle>
 
-                                <button *ngIf="notice.state=='Pending' && notice.usertype == 'Administrator'"
-                                    mat-raised-button class="approve_btn"
-                                    (click)="approve($event, notice._id)">Approve</button>
+                                <button *ngIf="notice.state=='Pending' && usertype == 'Administrator'" mat-raised-button
+                                    class="approve_btn" (click)="approve($event, notice._id)">Approve</button>
 
-                                <button *ngIf="notice.usertype == 'Administrator'"
-                                    mat-raised-button color="warn" style="width:100px;"
-                                    (click)="disapprove($event,notice._id)">Disapprove</button>
+                                <button *ngIf="usertype == 'Administrator'" mat-raised-button color="warn"
+                                    style="width:100px;" (click)="disapprove($event,notice._id,notice.filepath)">Disapprove</button>
 
                                 <button mat-raised-button class="view_btn"
                                     (click)="view($event, notice._id)">View</button>

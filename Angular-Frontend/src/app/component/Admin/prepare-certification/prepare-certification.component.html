@@ -21,8 +21,12 @@
                             <mat-list>
                               <mat-list-item *ngFor="let cert of pendingCertList">
                                 <mat-icon mat-list-icon>note</mat-icon>
-                                <h3 mat-line>{{cert.certType}}</h3>
-                                <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                <h3 mat-line>User ID : {{cert.userid}} </h3>
+                                <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                <button type="button" class="btn btn_1" (click)="acceptCert()">Accept</button>
+                                <button type="button" class="btn btn_2" (click)="rejectCert()">Reject</button>
+                                <mat-divider></mat-divider>
                               </mat-list-item>
                             </mat-list>
                           </mat-card>
@@ -324,11 +328,47 @@
                     </mat-tab>
 
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW PREPARED CERTIFICATES //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="PENDING CERTIFICATES"> pending principal approval
+                    <mat-tab label="PENDING CERTIFICATES">
+                      <mat-card>
+                        <mat-accordion>
+                          <mat-expansion-panel>
+                            <mat-expansion-panel-header>Student Status Verification</mat-expansion-panel-header>
 
+                            <p>This is the primary content of the panel.</p>
+                            <button type="button" class="btn btn_1 ">Mark Complete</button>
+                          </mat-expansion-panel>
+                          <mat-expansion-panel>
+                              <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
+
+                              <p>This is the primary content of the panel.</p>
+                              <button type="button" class="btn btn_1 ">Mark Complete</button>
+                          </mat-expansion-panel>
+                          <mat-expansion-panel>
+                                <mat-expansion-panel-header>Leaving Certificate</mat-expansion-panel-header>
+
+                                <p>This is the primary content of the panel.</p>
+                                <button type="button" class="btn btn_1 ">Mark Complete</button>
+                          </mat-expansion-panel>
+                          <mat-expansion-panel>
+                                  <mat-expansion-panel-header>Academic Certificates</mat-expansion-panel-header>
+
+                                  <mat-expansion-panel>
+                                      <mat-expansion-panel-header>GCE(A/L)</mat-expansion-panel-header>
+                                      <button type="button" class="btn btn_1 ">Mark Complete</button>
+                                  </mat-expansion-panel>
+                                  <mat-expansion-panel>
+                                      <mat-expansion-panel-header>GCE(O/L)</mat-expansion-panel-header>
+                                      <button type="button" class="btn btn_1 ">Mark Complete</button>
+                                  </mat-expansion-panel>
+
+                          </mat-expansion-panel>
+                        </mat-accordion>
+                      </mat-card>
                     </mat-tab>
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW CERTIFICATION HISTORY //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="CERTIFICATION HISTORY"> History </mat-tab>
+                    <mat-tab label="CERTIFICATION HISTORY">
+                      History
+                    </mat-tab>
                   </mat-tab-group>
 
                 </div>
