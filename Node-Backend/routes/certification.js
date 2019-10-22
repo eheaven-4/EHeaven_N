@@ -110,7 +110,7 @@ router.post("/studentstatus", async function (req, res) {
         state: req.body.state
     });
     // console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/student.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/student.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -182,7 +182,7 @@ router.post("/charactercert", async function (req, res) {
         state: req.body.state
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/Character.pdf');
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/Character.pdf');
 
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
@@ -315,7 +315,7 @@ router.post("/leavingcert", async function (req, res) {
         subjects: req.body.subjects,
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/Leaving.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/Leaving.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -467,7 +467,7 @@ router.post("/alcert", async function (req, res) {
     });
     
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/A-Level.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/A-Level.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -589,7 +589,7 @@ router.post("/olcert", async function (req, res) {
         subjectsOl: req.body.subjectsOl,
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/O-Level.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf')
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
