@@ -10,9 +10,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatButtonModule,MatGridListModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { FileUploadModule } from 'ng2-file-upload';
   
-import {  FileUploader } from 'ng2-file-upload/ng2-file-upload';
-import { FileSelectDirective } from 'ng2-file-upload';
+// import { FileSelectDirective } from 'ng2-file-upload';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
@@ -49,7 +49,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
 
 @NgModule({
   declarations: [
-    FileSelectDirective,
+    
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -75,7 +75,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     BulkaddComponent,
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
-    FileSelectDirective
+  
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),
@@ -95,6 +95,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     MatButtonModule,
     MatGridListModule,
     MatSlideToggleModule,
+    FileUploadModule
 
   ],
   providers: [

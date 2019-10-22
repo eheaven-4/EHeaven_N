@@ -13,10 +13,12 @@ export class BulkaddComponent{
   attchmentList:any=[];
 
   constructor() { 
-
+    console.log("a");
     this.uploader.onCompleteItem=(item:any,response:any,headers:any)=>{
-      this.attchmentList.push(JSON.parse(response));
+      console.log("h");
+      //this.attchmentList.push(JSON.parse(response));
     }
+    console.log("b");
   
 
 

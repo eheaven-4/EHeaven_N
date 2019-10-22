@@ -2,5 +2,6 @@
 <h1>Upload Section</h1>
 
 <input type="file" name="fileUpload" id="fileUpload" ng2FileSelect [uploader]="uploader" >
-
+<div *ngFor="let item of uploader.queue">
 <button type="button" (click)="item.upload()">upload</button>
+</div>

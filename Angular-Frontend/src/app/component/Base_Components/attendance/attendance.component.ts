@@ -29,8 +29,11 @@ public today=new Date();
 public spanflageD=false;
 public spanflageS=false;
 
-  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder) { }
 
+  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder) { }
+  public attendacelist=this.inputs.group({
+    
+  })
   ngOnInit() {
     this.attendanceservice.retriveUsers()
     .subscribe((data:User[])=>{
