@@ -30,7 +30,7 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/academics' + '/' + id]);
+      this.router.navigate(['/academic_subject' + '/' + id]);
     }
     else {
       this.ngFlashMessage.showFlashMessage({

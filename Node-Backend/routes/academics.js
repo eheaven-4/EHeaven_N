@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const acad = require('../models/academics');
+const academicStuff = require('../models/academics');
 const config = require('../config/database');
 const multer = require('multer');
 
@@ -9,7 +9,7 @@ var fs = require('fs');
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, 'uploads/')
+    cb(null, 'local_storage/academic_Stuff/')
   },
   filename: function (req, file, cb) {
     console.log(req)
@@ -19,18 +19,22 @@ var storage = multer.diskStorage({
 });
 
 
-var upload = multer({ storage: storage }).single('profileImage');
+var upload = multer({ storage: storage }).single('academic_stuff');
 
-router.post('/uploadfile', function (req, res) {
+router.post('/addStuff', function (req, res) {
   upload(req, res, (err) => {
     console.log(req.file)
-    var fullPath = req.file.destination  + req.file.originalname;
+    var fullPath = req.file.originalname;
     var document = {
+      userid: req.body.userid,
+      teachername: req.body.teachername,
+      subject: req.body.subject,
+      attachmenttype: req.body.attachmenttype,
+      grade: req.body.grade,
       path: fullPath,
-      name: req.body.name
     };
 
-    var photo = new acad(document);
+    var photo = new academicStuff(document);
     photo.save()
       .then(result => {
         console.log(result)
@@ -42,6 +46,8 @@ router.post('/uploadfile', function (req, res) {
       })
   })
 });
+
+
 
 router.get("/profileImage/:id", function(req, res) {
   console.log("hello")

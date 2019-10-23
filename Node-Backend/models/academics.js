@@ -1,10 +1,14 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
-var photoSchema = mongoose.Schema({
+var academicStuffSchema = mongoose.Schema({
+    userid: { type: String },
+    teachername: { type: String },
+    subject: { type: String },
+    attachmenttype: { type: String },
+    grade: { type: String },
     path: { type: String },
-    name: {type: String}
 });
 
 // module.exports = mongoose.model('Photos', photoSchema)
-const acad = module.exports = mongoose.model("acad", photoSchema);  
+const academicStuff = module.exports = mongoose.model("academicStuff", academicStuffSchema);  
