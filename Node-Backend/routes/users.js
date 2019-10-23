@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/users');
+const {User} = require('../models/users');
+const {bulkUser} = require('../models/users');
 const jwt = require('jsonwebtoken');
 const config = require('../config/database');
 const multer = require('multer');
@@ -16,8 +17,17 @@ var storage = multer.diskStorage({
         cb(null, file.originalname)
     }
 });
+var bulkStorage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'local_storage/bulk_Registration/')
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.originalname)
+    }
+});
 
 const upload = multer({ storage: storage }).single('profileImage');
+const uploadBulk = multer({ storage : bulkStorage}).single('bulk_req_file');
 
 //user login scope
 router.post("/login", function (req, res, next) {
@@ -70,6 +80,7 @@ router.post("/login", function (req, res, next) {
         });
     });
 });
+
 //user registraton scope 
 router.post("/register", function (req, res) {
     upload(req, res, (err) => {
@@ -155,5 +166,30 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
                 error: error
             })
         })
+})
+
+router.post("/bulkRegistration", function( req, res, next){
+    uploadBulk(req, res, (err) => { //uploading file to the notification_Attachment folder and 
+
+        if (req.file) {
+            var filePath = "NOT_FILE - " + req.file.originalname;    //send data to the database
+            //get file name 
+        }
+
+        const newNotice = new bulkUser({
+            name: req.body.name,
+            filepath: filePath
+        });
+
+        newNotice.save()
+            .then(result => {
+                console.log(result)
+                res.json({ state: true, msg: "Data Inserted Successfully..!" });
+            })
+            .catch(error => {
+                console.log(error)
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+            })
+    });
 })
 module.exports = router;  

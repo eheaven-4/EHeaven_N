@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
 
         if(id){
           // window.location.reload();     //reload the page
-          this.router.navigate(['/academics' + '/' + id]);
+          this.router.navigate(['/academic_subject' + '/' + id]);
               this.ngFlashMessage.showFlashMessage({
                 messages: ["Successfully Logged In..!"], 
                 dismissible: true, 
