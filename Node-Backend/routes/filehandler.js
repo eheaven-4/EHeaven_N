@@ -9,17 +9,20 @@ var path = require('path');
 const fs = require('fs');
 
 
-var sotore=multer.diskStorage({
-  destination:function(req,file,cb){
-    console.log("hii");
-    cb(null,'/upload');
-  },
-  filename:function(req,file,cb){
-    console.log("hi");
-    cb(null,Data.now()+'_'+file.originalname);
-  }
-});
-const upload=multer({storage:sotore}).single('file');
+// var sotore=multer.diskStorage({
+//   destination:function(req,file,cb){
+//     console.log("hii");
+//     cb(null,'/upload');
+//   },
+
+//   filename:function(req,file,cb){
+//     console.log("hi");
+//     cb(null,Data.now()+'_'+file.originalname);
+//   }
+// });
+var DIR = './uploads/';
+const upload=multer({dest:DIR}).single('file');
+
 
 router.post("/upload",function(req, res) {
   console.log("hiii");

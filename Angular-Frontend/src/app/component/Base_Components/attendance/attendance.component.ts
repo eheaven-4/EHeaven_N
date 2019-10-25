@@ -3,13 +3,16 @@ import {AttendenceService} from './attendence.service';
 import {User} from './../../../user';
 import {Attend} from './attend';
 import {Attendreturn} from './attend';
-import { FormBuilder } from '@angular/forms';
+import {FormBuilder,Validators,FormGroup} from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-attendance',
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss']
 })
+
+
 export class AttendanceComponent implements OnInit {
 public classname="1-A";
 
@@ -28,9 +31,9 @@ public data=new Attendreturn();
 public today=new Date();
 public spanflageD=false;
 public spanflageS=false;
+public c_url=null;
 
-
-  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder) { }
+  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder,private router : Router) { }
   public attendacelist=this.inputs.group({
     
   })
@@ -40,9 +43,18 @@ public spanflageS=false;
       this.students=data;
       this.numberOfStudent=data.length;
     });
-    
+    this.c_url = this.router.url;
+    console.log(this.c_url)
     
   }
+  // attendlist=this.inputs.group()
+  // get attendance(): FormGroup {
+  //   return this.inputs.group({
+  //     id: ['', Validators.required],
+  //     class: ['', Validators.required],
+  //     attend: ['', Validators.required],
+  //   });
+  // }
   addData(stu:Attend){
     this.attendanceservice.logAdd(stu)
        .subscribe(
