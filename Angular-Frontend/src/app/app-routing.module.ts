@@ -27,6 +27,7 @@ import { AttendanceComponent } from './component/Base_Components/attendance/atte
 import { StudentProgressComponent } from './component/Base_Components/student-progress/student-progress.component';
 import { ManageMarksComponent } from './component/Base_Components/manage-marks/manage-marks.component';
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
+import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
 
 
 const routes: Routes = [
@@ -50,7 +51,7 @@ const routes: Routes = [
   {path: 'class_registration', component:ClassRegistrationComponent},
   {path: 'add_cls_tt', component:AddClassTimetableComponent},
   {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
-  
+  {path: 'academic_subject/:id', component:AcademicSubjectComponent}
 ];
 
 @NgModule({

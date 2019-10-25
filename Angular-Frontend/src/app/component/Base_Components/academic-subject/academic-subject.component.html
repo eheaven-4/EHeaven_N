@@ -1,0 +1,43 @@
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="container-fluid col-md-10" style="background-color:white">
+                <div class="flashMessage">
+                    <ng-flash-message style="position: fixed; padding-top: 5px"></ng-flash-message>
+                </div>
+                <div>
+                    <div class="container">
+                        <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 60px">Academics</h2>
+                        <hr>
+                    </div>
+                    <div class="row">
+                        <img class="img_logo" src="../../../assets/logo/logo.png">
+                    </div>
+                    <div class="row">
+                        <p class="select_subject">SELECT YOUR SUBJECT</p>
+                    </div>
+                    <form [formGroup]="subjectSearch">
+                        <div class="container">
+                            <div class="row" style="width: 80%; margin: auto">
+                                <div class="col-md-9 src_box">
+                                    <mat-select class="browser-default custom-select mb-4 " formControlName="name">
+                                        <mat-option style="text-align: left" *ngFor="let subN of subjectNames"
+                                            [value]="subN">
+                                            {{ subN }}
+                                        </mat-option>
+                                    </mat-select>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn btn-info my-4 btn-block src_btn" (click)=searchSubject()>Search</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

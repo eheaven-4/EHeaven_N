@@ -1,8 +1,18 @@
+<div class="container">
+    <div class="row">
+        <form [formGroup]="bulkFileForm" style="padding-top: 100px; margin: auto;">
+            <input type="name" class="form-control mb-4" placeholder="name here ..." name="name"
+                formControlName="name" >
 
-<h1>Upload Section</h1>
+            <input type="file" style="display: none" name="profilepic" accept="text/*"
+                (change)="selectFile($event)" #fileInput>
 
-<input type="file" name="fileUpload" id="fileUpload" ng2FileSelect [uploader]="uploader" >
-<div *ngFor="let item of uploader.queue">
-<button type="button" (click)="item.upload()">upload</button>
+            <button class="btn btn-outline-primary my-4 btn-block" type="button"
+                (click)="fileInput.click()" accept="text/*">Choose File</button>
+
+            <button class="btn btn-info my-4 btn-block" type="submit"
+                (click)="bulkRegistration()">Submit
+                Now</button>
+        </form>
+    </div>
 </div>
-

@@ -44,6 +44,7 @@ import { ClassRegistrationComponent } from './component/Admin/class-registration
 import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.component';
 import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
+import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
 
 
 
@@ -75,6 +76,7 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
     BulkaddComponent,
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
+    AcademicSubjectComponent,
   
   ],
   imports: [
