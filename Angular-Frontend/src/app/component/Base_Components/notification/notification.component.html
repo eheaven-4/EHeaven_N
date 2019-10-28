@@ -54,7 +54,8 @@
                             <mat-card-actions style="text-align: right">
 
                                 <button *ngIf="notice.state=='Pending' && usertype == 'Administrator'" mat-raised-button
-                                    class="approve_btn" (click)="approve($event, notice._id)">Approve</button>
+                                color="success"
+                                      (click)="approve($event, notice._id)">Approve</button>
 
                                 <button *ngIf="usertype == 'Administrator'" mat-raised-button color="warn"
                                     style="width:100px;"

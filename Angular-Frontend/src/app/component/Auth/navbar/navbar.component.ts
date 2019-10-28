@@ -4,6 +4,10 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { CookieService } from 'ngx-cookie-service';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
+interface userType {  //load interface for get user type
+  userType: String;
+}
+
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
@@ -15,6 +19,10 @@ export class NavbarComponent implements OnInit {
   user: any;
   authtoken: any;
   userid: String;
+  usertype: userType[] = [];
+
+  public approve_show: boolean = false;
+  public disapprove_show: boolean = false;
 
   constructor(
     private router: Router,
@@ -24,10 +32,18 @@ export class NavbarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
+    this.usertype = myCookie.usertype;
+
   }
 
   logoutUser() {
-    this.logout();
+    // this.logout();
+    this.authtoken = null;
+    this.user = null;
+    localStorage.clear();
+
+    this.cookieService.delete('userAuth');
     this.ngFlashMessage.showFlashMessage({
       messages: ["Logout Successfully..!"],
       dismissible: true,
@@ -35,16 +51,17 @@ export class NavbarComponent implements OnInit {
       type: 'warning'
     });
     this.router.navigate(['/login']);
+
     // window.location.reload();     //reload the page
   }
   
-  logout() {
-    this.authtoken = null;
-    this.user = null;
-    localStorage.clear();
+  // logout() {
+  //   this.authtoken = null;
+  //   this.user = null;
+  //   localStorage.clear();
 
-    this.cookieService.delete('userAuth');
-  }
+  //   this.cookieService.delete('userAuth');
+  // }
 
   userProfile() {
     var myCookie = this.cookies.getCookie("userAuth");
