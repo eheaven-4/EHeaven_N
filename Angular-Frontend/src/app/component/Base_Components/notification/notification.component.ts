@@ -4,7 +4,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
 
-interface notification {  //decalare interface class for load notification attributes. 
+interface notification {  //decalare interface class for load notification attributes.
   _id: String;
   userid: String;
   subject: String;
@@ -44,16 +44,16 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
 
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
-    this.usertype = myCookie.usertype;   //load user type to the userType array
+    this.usertype = myCookie.usertype;   // load user type to the userType array
 
     if (myCookie) {
-      var url = "http://localhost:3000/notification/view";
+      var url = 'http://localhost:3000/notification/view';
       this.http.get<any>(url).subscribe(res => {
         this.notices = res;
       }, (err) => {
         console.log(err);
       });
-    }
+    } 
     else {
       alert("Please Login First..!");
       this.router.navigate(['/login']);
@@ -62,7 +62,7 @@ export class NotificationComponent implements OnInit {
 
   disapprove(event, notice_id, file_path) {  //disapprove button action
     var mybtnId = notice_id;
-    var mybtnFile = file_path;  
+    var mybtnFile = file_path;
 
     var url = "http://localhost:3000/notification/delete";    //notification content delete url
     var urlDelete = "http://localhost:3000/notification/notAttachment"; //notification attachment delete url
@@ -87,7 +87,7 @@ export class NotificationComponent implements OnInit {
       console.log(err);
     });
 
-    window.location.reload();     //reload the page
+    window.location.reload();     // reload the page
   }
 
   approve(event, notice_id) {     //approve button action

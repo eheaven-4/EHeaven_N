@@ -7,6 +7,9 @@ import { PositioningService } from '../utils/positioning/positioning.service';
  */
 export declare class PopoverDirective implements OnInit, OnDestroy {
     private _positionService;
+    containerClass: string;
+    bodyClass: string;
+    headerClass: string;
     /**
      * Content to be displayed as popover.
      */

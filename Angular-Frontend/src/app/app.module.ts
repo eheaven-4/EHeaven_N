@@ -11,7 +11,7 @@ import {MatButtonModule,MatGridListModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FileUploadModule } from 'ng2-file-upload';
-  
+
 // import { FileSelectDirective } from 'ng2-file-upload';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -45,12 +45,13 @@ import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.com
 import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
+import { NewsviewComponent } from './component/Admin/newsview/newsview.component';
 
 
 
 @NgModule({
   declarations: [
-    
+
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -77,7 +78,8 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
     AcademicSubjectComponent,
-  
+    NewsviewComponent,
+
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

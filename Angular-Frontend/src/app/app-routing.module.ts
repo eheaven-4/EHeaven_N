@@ -17,6 +17,7 @@ import { AddClassTimetableComponent } from './component/Admin/add-class-timetabl
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 import { NewsComponent } from './component/Admin/news/news.component';
+import { NewsviewComponent} from './component/Admin/newsview/newsview.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
 
 
@@ -44,6 +45,7 @@ const routes: Routes = [
   {path: 'attendance' , component:AttendanceComponent},
   {path: 'admin_dashboard', component:AdminDashboardComponent},
   {path: 'news_feeds', component:NewsComponent},
+  {path: 'newsview', component: NewsviewComponent },
   {path: 'payments', component:PaymentsComponent},
   {path: 'student_progress/:id', component: StudentProgressComponent},
   {path: 'manage_marks', component: ManageMarksComponent},

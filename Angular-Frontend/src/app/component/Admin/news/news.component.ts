@@ -3,6 +3,8 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MycookiesService } from '../../Admin/mycookies.service';
+
 
 
 @Component({
@@ -13,23 +15,35 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class NewsComponent implements OnInit {
 
   images;
+  date: string;
+  attachment;
+  state;
+
+
 
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
+    private cookies: MycookiesService,
   ) { }
 
   // news form attributes
   NewsForm = this.fb.group({
-    userid: ['', Validators.required],
+    // userid: ['', Validators.required],
     topic: ['', Validators.required],
     newsSumery: ['', Validators.required],
     news: ['', Validators.required],
     date: ['', Validators.required],
 
+
   });
+
+
+  // get topic() {
+  //   return this.NewsForm.get('topic');
+  // }
 
   ngOnInit() {
   }
@@ -43,14 +57,24 @@ export class NewsComponent implements OnInit {
   }
 
   addnews() {
+
+    // tslint:disable-next-line: prefer-const
+    const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+    const userid = myCookie.userid;
+
+
+    this.date = Date();
+
     const formData = new FormData();
 
     formData.append('newsImage', this.images);
-    formData.append('userid', this.NewsForm.value.userid);
+    // formData.append('userid', this.NewsForm.value.userid);
     formData.append('topic', this.NewsForm.value.topic);
     formData.append('date' , this.NewsForm.value.date );
     formData.append('newsSumery', this.NewsForm.value.newsSumery);
     formData.append('news', this.NewsForm.value.news);
+    formData.append('state', this.state)
+
 
     const url = 'http://localhost:3000/news/add';
 
@@ -71,7 +95,12 @@ export class NewsComponent implements OnInit {
               dismissible: true,
               timeout: 2000,
               type: 'success',
+
+
+
             });
+            this.router.navigate(['/news-view']);
+
 
           } else {
             this.ngFlashMessageService.showFlashMessage({
@@ -80,6 +109,7 @@ export class NewsComponent implements OnInit {
               timeout: 2000,
               type: 'warning'
             });
+            this.router.navigate(['/news']);
           }
       });
     }
