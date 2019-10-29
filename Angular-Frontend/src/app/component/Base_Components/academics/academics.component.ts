@@ -26,12 +26,7 @@ export class AcademicsComponent implements OnInit {
   subjects = ['Maths', 'Science', 'English']
 
   ngOnInit() {
-    if (!localStorage.getItem('foo')) { 
-      localStorage.setItem('foo', 'no reload') 
-      location.reload() 
-    } else {
-      localStorage.removeItem('foo') 
-    }
+    
   }
 }
 

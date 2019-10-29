@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-academic-subject',
@@ -13,10 +14,21 @@ export class AcademicSubjectComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cookies: MycookiesService
+    private cookies: MycookiesService,
+    private fb : FormBuilder,
   ) { }
 
+  subjectForm = this.fb.group({
+    subjectName: ['', Validators.required]
+  });
+
   ngOnInit() {
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
   }
 
 
@@ -24,6 +36,8 @@ export class AcademicSubjectComponent implements OnInit {
     var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
     var id = userCookie.userid;
     this.router.navigate(['/academics' + '/' + id]);
+
+    console.log(this.subjectForm.value.subjectName)
   }
 }
 
