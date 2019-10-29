@@ -29,7 +29,7 @@ export class NotificationComponent implements OnInit {
 
   notice_id: String;
   file_path: String;
-  userType: String;
+  // userType: String;
 
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;

@@ -4,8 +4,6 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 
-
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

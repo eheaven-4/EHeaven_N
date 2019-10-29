@@ -22,6 +22,7 @@ var storage = multer.diskStorage({
 var upload = multer({ storage: storage }).single('academic_stuff');
 
 router.post('/addStuff', function (req, res) {
+  console.log("hello")
   upload(req, res, (err) => {
     console.log(req.file)
     var fullPath = req.file.originalname;
@@ -46,8 +47,6 @@ router.post('/addStuff', function (req, res) {
       })
   })
 });
-
-
 
 router.get("/profileImage/:id", function(req, res) {
   console.log("hello")

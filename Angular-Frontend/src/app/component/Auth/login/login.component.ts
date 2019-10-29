@@ -18,6 +18,8 @@ export class LoginComponent implements OnInit {
   user: any;
   authtoken: any;
 
+  mySubscription: any;
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -46,14 +48,14 @@ export class LoginComponent implements OnInit {
 
         if(id){
           // window.location.reload();     //reload the page
-          this.router.navigate(['/academics' + '/' + id]);
+          this.router.navigate(['/academic_subject' + '/' + id]);
               this.ngFlashMessage.showFlashMessage({
                 messages: ["Successfully Logged In..!"], 
                 dismissible: true, 
                 timeout: 2000,
                 type: 'success',
               });
-
+              // location.reload();
         }
         else{
           this.router.navigate(['/login']);
@@ -72,19 +74,4 @@ export class LoginComponent implements OnInit {
       }
     });
   }
-
-  // storeData(token, userData) {
-  //   localStorage.setItem("tokenId", token);
-  //   localStorage.setItem("user", JSON.stringify(userData));
-
-  //   this.authtoken = token;
-  //   this.user = userData;
-  // }
-
-  // fetchUserData() {
-  //   const user = localStorage.getItem("user");
-  //   this.user_id = user;
-  //   return JSON.parse(this.user_id).userid;
-  // }
-
 }

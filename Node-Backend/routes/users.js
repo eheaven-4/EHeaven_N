@@ -17,13 +17,14 @@ var storage = multer.diskStorage({
     }
 });
 
+
 const upload = multer({ storage: storage }).single('profileImage');
 
 //user login scope
 router.post("/login", function (req, res, next) {
     const userid = req.body.userid;
     const password = req.body.password;
-
+    // const query = { userid: userid };
     User.findByUserid(userid, function (err, user) {
         if (err) throw err;
         if (!user) {
@@ -70,6 +71,7 @@ router.post("/login", function (req, res, next) {
         });
     });
 });
+
 //user registraton scope 
 router.post("/register", function (req, res) {
     upload(req, res, (err) => {
@@ -156,4 +158,6 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
             })
         })
 })
+
+
 module.exports = router;  
