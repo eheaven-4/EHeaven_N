@@ -5,7 +5,13 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
-
+interface news {  // decalare interface class for load notification attributes.
+  _id: String;
+  topic: String;
+  newsSumery: String;
+  news: String;
+  date: String;
+}
 
 @Component({
   selector: 'app-news',
@@ -17,9 +23,8 @@ export class NewsComponent implements OnInit {
   images;
   date: string;
   attachment;
-  state;
 
-
+  news: news[] = [];
 
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
@@ -40,12 +45,15 @@ export class NewsComponent implements OnInit {
 
   });
 
-
-  // get topic() {
-  //   return this.NewsForm.get('topic');
-  // }
-
   ngOnInit() {
+
+      const url = 'http://localhost:3000/news/view';
+      this.http.get<any>(url).subscribe(res => {
+        this.news = res;
+        
+      }, (err) => {
+        console.log(err);
+      });
   }
 
   // load the image as the button event and asign to  the images variable
@@ -73,7 +81,6 @@ export class NewsComponent implements OnInit {
     formData.append('date' , this.NewsForm.value.date );
     formData.append('newsSumery', this.NewsForm.value.newsSumery);
     formData.append('news', this.NewsForm.value.news);
-    formData.append('state', this.state)
 
 
     const url = 'http://localhost:3000/news/add';

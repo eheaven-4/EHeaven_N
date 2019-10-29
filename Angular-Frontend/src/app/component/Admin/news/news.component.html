@@ -50,10 +50,50 @@
                 class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
             </form>
           </div>
+
+
+          <div class="container">
+            <div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-10">
+                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">NewsView
+                    </h2>
+                  </div>
+                  <div class="col-md-2" style="padding-top: 25px">
+                    <button class="btn btn-info my-4 btn-block reg_btn box_border" routerLink="/news"><b>+</b> Add
+                      New</button>
+                  </div>
+                </div>
+                <hr>
+              </div>
+              <div style="padding-left: 35px; padding-right: 35px">
+                <mat-card class="news-card" *ngFor="let new of news">
+                  <!-- <p style="display: none" name="notice_id">{{news._id}}</p> -->
+                  <mat-card-header>
+                    <div mat-card-avatar class="example-header-image"></div>
+                    <mat-card-title>{{new.topic}}</mat-card-title>
+                    <mat-card-subtitle style="margin-top:-15px">{{new.date | date:'yyyy-MM-dd HH:mm:ss'}}
+                    </mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content>
+                    <p>{{new.newsSumery}}</p>
+                    <p>{{new.news}}</p>
+
+                  </mat-card-content>
+                  <mat-card-actions style="text-align: right">
+
+                    <button mat-raised-button class="edit_btn" (click)="edit($event, news._id)">edit</button>
+                    <button mat-raised-button class="delete_btn" (click)="delete($event, news._id)">delete</button>
+                  </mat-card-actions>
+                </mat-card>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
-<!-- <app-news-view></app-news-view> -->
+  <!-- <app-news-view></app-news-view> -->
 </div>
