@@ -50,7 +50,7 @@ export class NewsComponent implements OnInit {
       const url = 'http://localhost:3000/news/view';
       this.http.get<any>(url).subscribe(res => {
         this.news = res;
-        
+
       }, (err) => {
         console.log(err);
       });
@@ -98,7 +98,7 @@ export class NewsComponent implements OnInit {
         console.log(res.msg);
         if (res.state) {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['Successfully submited ..!'],
+              messages: ['Successfully updated ..!'],
               dismissible: true,
               timeout: 2000,
               type: 'success',
@@ -106,12 +106,12 @@ export class NewsComponent implements OnInit {
 
 
             });
-            this.router.navigate(['/news-view']);
+            this.router.navigate(['/news']);
 
 
           } else {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['News is not submited..!'],
+              messages: ['News is not update..!'],
               dismissible: true,
               timeout: 2000,
               type: 'warning'
