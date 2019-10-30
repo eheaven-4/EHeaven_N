@@ -53,7 +53,7 @@ export class NotificationComponent implements OnInit {
       }, (err) => {
         console.log(err);
       });
-    } 
+    }
     else {
       alert("Please Login First..!");
       this.router.navigate(['/login']);

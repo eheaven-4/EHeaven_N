@@ -99,20 +99,19 @@ export class NewsComponent implements OnInit {
         console.log(res.msg);
         if (res.state) {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['Successfully updated ..!'],
+              messages: ['Successfully added ..!'],
               dismissible: true,
               timeout: 2000,
               type: 'success',
+              });
 
-
-
-            });
-            this.router.navigate(['/news']);
+            window.location.reload();
+            // this.router.navigate(['/news']);
 
 
           } else {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['News is not update..!'],
+              messages: ['News is not add..!'],
               dismissible: true,
               timeout: 2000,
               type: 'warning'
@@ -124,11 +123,13 @@ export class NewsComponent implements OnInit {
 
   }
   delete(event, news_id) {
+
+   // console.log(news_id);
     const mybtnId = news_id;
 
     const url = 'http://localhost:3000/news/delete';
 
-    this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the notification request to the server
+    this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
       this.ngFlashMessage.showFlashMessage({
         messages: ['Successfully Added ..!'],
         dismissible: true,
@@ -143,11 +144,4 @@ export class NewsComponent implements OnInit {
   }
 
 }
-
-
-
-
-
-
-
 
