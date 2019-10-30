@@ -25,6 +25,7 @@ export class NewsComponent implements OnInit {
   attachment;
 
   news: news[] = [];
+  ngFlashMessage: any;
 
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
@@ -122,6 +123,25 @@ export class NewsComponent implements OnInit {
     }
 
   }
+  delete(event, news_id) {
+    const mybtnId = news_id;
+
+    const url = 'http://localhost:3000/news/delete';
+
+    this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the notification request to the server
+      this.ngFlashMessage.showFlashMessage({
+        messages: ['Successfully Added ..!'],
+        dismissible: true,
+        timeout: 2000,
+        type: 'success',
+      });
+    }, (err) => {
+      console.log(err);
+    });
+
+    window.location.reload();     // reload the page
+  }
+
 }
 
 
