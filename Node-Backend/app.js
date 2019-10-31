@@ -17,8 +17,6 @@ const academics = require('./routes/academics');
 const news = require('./routes/news');
 const filehandler= require('./routes/filehandler');
 
-// const filehandler=require('./routes/filehandler');
-
 app.use(cors());
 
 const connection = mongoose.connect(config.database);

@@ -1,35 +1,49 @@
 // const IncomingForm = require('formidable').IncomingForm;
 const express = require('express');
 const router = express.Router();
-const multer =require('multer');
+const multer = require('multer');
 const attendance = require('../models/filehandler');
 const config = require('../config/database');
-const users=require('../models/users');
+const bulkUser = require('../models/filehandler');
 var path = require('path');
 const fs = require('fs');
 
 
-var sotore=multer.diskStorage({
-  destination:function(req,file,cb){
-    console.log("hii");
-    cb(null,'/upload');
+var bulkStorage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, 'local_storage/bulk_Registration/')
   },
-  filename:function(req,file,cb){
-    console.log("hi");
-    cb(null,Data.now()+'_'+file.originalname);
+  filename: function (req, file, cb) {
+      cb(null, file.originalname)
   }
 });
-const upload=multer({storage:sotore}).single('file');
 
-router.post("/upload",function(req, res) {
-  console.log("hiii");
-  upload(req,res,function(err){
-    if(err){
-      return res.status(501).json({error:err});
-    }
+const uploadBulk = multer({ storage : bulkStorage}).single('bulk_req_file');
 
-    return res.json({originalname:req.file.originalname,uploadname:req.file.filename});
-  });
-});
+
+router.post("/bulkRegistration", function( req, res, next){
+    uploadBulk(req, res, (err) => { //uploading file to the notification_Attachment folder and 
+
+        if (req.file) {
+            var filePath = "NOT_FILE - " + req.file.originalname;    //send data to the database
+            //get file name 
+        }
+
+        const newNotice = new bulkUser({
+            name: req.body.name,
+            filepath: filePath
+        });
+
+        newNotice.save()
+            .then(result => {
+                console.log(result)
+                res.json({ state: true, msg: "Data Inserted Successfully..!" });
+            })
+            .catch(error => {
+                console.log(error)
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+            })
+    });
+})
 
 module.exports = router;

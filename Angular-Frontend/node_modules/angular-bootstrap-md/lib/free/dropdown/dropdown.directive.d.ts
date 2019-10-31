@@ -1,4 +1,4 @@
-import { ElementRef, EmbeddedViewRef, EventEmitter, OnDestroy, OnInit, Renderer2, ViewContainerRef } from '@angular/core';
+import { ElementRef, EmbeddedViewRef, EventEmitter, OnDestroy, OnInit, Renderer2, ViewContainerRef, ChangeDetectorRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { ComponentLoader } from '../utils/component-loader/component-loader.class';
 import { ComponentLoaderFactory } from '../utils/component-loader/component-loader.factory';
@@ -13,6 +13,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     private _cis;
     private _config;
     private _state;
+    private cdRef;
     /**
      * Placement of a popover. Accepts: "top", "bottom", "left", "right"
      */
@@ -69,7 +70,7 @@ export declare class BsDropdownDirective implements OnInit, OnDestroy {
     _subscriptions: Subscription[];
     _isInited: boolean;
     _isDropupDefault: boolean;
-    constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _cis: ComponentLoaderFactory, _config: BsDropdownConfig, _state: BsDropdownState);
+    constructor(_elementRef: ElementRef, _renderer: Renderer2, _viewContainerRef: ViewContainerRef, _cis: ComponentLoaderFactory, _config: BsDropdownConfig, _state: BsDropdownState, cdRef: ChangeDetectorRef);
     ngOnInit(): void;
     /**
      * Opens an element’s popover. This is considered a “manual” triggering of

@@ -11,7 +11,7 @@ import {MatButtonModule,MatGridListModule} from '@angular/material';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FileUploadModule } from 'ng2-file-upload';
-  
+
 // import { FileSelectDirective } from 'ng2-file-upload';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
@@ -50,7 +50,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
 
 @NgModule({
   declarations: [
-    
+
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -77,7 +77,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
     AcademicSubjectComponent,
-  
+
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

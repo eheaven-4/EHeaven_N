@@ -19,11 +19,11 @@
                     <div class="row">
                         <p class="select_subject">SELECT YOUR SUBJECT</p>
                     </div>
-                    <form [formGroup]="subjectSearch">
+                    <form [formGroup]="subjectForm">
                         <div class="container">
                             <div class="row" style="width: 80%; margin: auto">
                                 <div class="col-md-9 src_box">
-                                    <mat-select class="browser-default custom-select mb-4 " formControlName="name">
+                                    <mat-select class="browser-default custom-select mb-4 " formControlName="subjectName">
                                         <mat-option style="text-align: left" *ngFor="let subN of subjectNames"
                                             [value]="subN">
                                             {{ subN }}

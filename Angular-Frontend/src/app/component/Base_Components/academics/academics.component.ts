@@ -24,8 +24,9 @@ export class AcademicsComponent implements OnInit {
   grades = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
   attachmentType = ['Tutorial', 'Lectuer Slide', 'Resouses', 'Other'];
   subjects = ['Maths', 'Science', 'English']
-  ngOnInit() {
 
+  ngOnInit() {
+    
   }
 }
 
