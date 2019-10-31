@@ -19,6 +19,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule } from '@angular/material';
 import {MatMenuModule} from '@angular/material/menu';
 
+
 @NgModule({
     imports: [
         MatButtonModule,
@@ -27,7 +28,7 @@ import {MatMenuModule} from '@angular/material/menu';
         MatToolbarModule,
         MatSidenavModule,
         MatListModule,
-        MatStepperModule,   
+        MatStepperModule,
         FormsModule,
         ReactiveFormsModule,
         MatFormFieldModule,
@@ -52,7 +53,7 @@ import {MatMenuModule} from '@angular/material/menu';
   exports:[
     MatButtonModule,
     MatCheckboxModule,
-    MatIconModule,  
+    MatIconModule,
     MatToolbarModule,
     MatSidenavModule,
     MatListModule,
@@ -74,7 +75,7 @@ import {MatMenuModule} from '@angular/material/menu';
     MatNativeDateModule,
     MatMenuModule,
     ],
-  
+
   })
-  
+
   export class MatModule{}
