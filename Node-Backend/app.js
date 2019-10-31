@@ -18,7 +18,7 @@ const news = require('./routes/news');
 const filehandler= require('./routes/filehandler');
 
 app.use(cors());
-
+// saskaojsaoijao
 const connection = mongoose.connect(config.database);
 if(connection){
     console.log("Database Connected");
