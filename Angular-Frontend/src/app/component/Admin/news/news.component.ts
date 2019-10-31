@@ -79,7 +79,7 @@ export class NewsComponent implements OnInit {
     formData.append('newsImage', this.images);
     // formData.append('userid', this.NewsForm.value.userid);
     formData.append('topic', this.NewsForm.value.topic);
-    formData.append('date' , this.NewsForm.value.date );
+    formData.append('date' , this.date );
     formData.append('newsSumery', this.NewsForm.value.newsSumery);
     formData.append('news', this.NewsForm.value.news);
 
