@@ -25,6 +25,7 @@ export class NewsComponent implements OnInit {
   attachment;
 
   news: news[] = [];
+  ngFlashMessage: any;
 
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
@@ -50,7 +51,7 @@ export class NewsComponent implements OnInit {
       const url = 'http://localhost:3000/news/view';
       this.http.get<any>(url).subscribe(res => {
         this.news = res;
-        
+
       }, (err) => {
         console.log(err);
       });
@@ -98,20 +99,19 @@ export class NewsComponent implements OnInit {
         console.log(res.msg);
         if (res.state) {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['Successfully submited ..!'],
+              messages: ['Successfully added ..!'],
               dismissible: true,
               timeout: 2000,
               type: 'success',
+              });
 
-
-
-            });
-            this.router.navigate(['/news-view']);
+            window.location.reload();
+            // this.router.navigate(['/news']);
 
 
           } else {
             this.ngFlashMessageService.showFlashMessage({
-              messages: ['News is not submited..!'],
+              messages: ['News is not add..!'],
               dismissible: true,
               timeout: 2000,
               type: 'warning'
@@ -122,12 +122,26 @@ export class NewsComponent implements OnInit {
     }
 
   }
+  delete(event, news_id) {
+
+   // console.log(news_id);
+    const mybtnId = news_id;
+
+    const url = 'http://localhost:3000/news/delete';
+
+    this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
+      this.ngFlashMessage.showFlashMessage({
+        messages: ['Successfully Added ..!'],
+        dismissible: true,
+        timeout: 2000,
+        type: 'success',
+      });
+    }, (err) => {
+      console.log(err);
+    });
+
+    window.location.reload();     // reload the page
+  }
+
 }
-
-
-
-
-
-
-
 

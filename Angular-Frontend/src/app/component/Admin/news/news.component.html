@@ -37,7 +37,7 @@
 
               <div class="form-row mb-4">
                 <label>Date :</label>
-                <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy"
+                <input type="Date" class="form-control box_border" aria-describedby="DateHelp" placeholder="dd/mm/yyyy "
                   name="date" formControlName="date">
               </div>
               <input type="file" class="file_upload" style="display: none" name="newspic" accept="image/*"
@@ -60,10 +60,11 @@
                     <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">NewsView
                     </h2>
                   </div>
-                  
+
                 </div>
                 <hr>
               </div>
+              <br>
               <div style="padding-left: 35px; padding-right: 35px">
                 <mat-card class="news-card" *ngFor="let new of news">
                   <!-- <p style="display: none" name="notice_id">{{news._id}}</p> -->
@@ -74,14 +75,16 @@
                     </mat-card-subtitle>
                   </mat-card-header>
                   <mat-card-content>
-                    <p>{{new.newsSumery}}</p>
-                    <p>{{new.news}}</p>
-
-                  </mat-card-content>
+                        <h6>News image</h6>
+                        <br>
+                       <p>{{new.newsSumery}}</p>
+                       <br>
+                       <p>{{new.news}}</p>
+                 </mat-card-content>
                   <mat-card-actions style="text-align: right">
 
-                    <button mat-raised-button class="edit_btn" (click)="edit($event, news._id)">edit</button>
-                    <button mat-raised-button class="delete_btn" (click)="delete($event, news._id)">delete</button>
+                    <button mat-raised-button class="edit_btn" (click)="edit($event, new._id)">Edit</button>
+                    <button mat-raised-button class="delete_btn" (click)="delete($event, new._id)">Delete</button>
                   </mat-card-actions>
                 </mat-card>
               </div>
@@ -91,6 +94,4 @@
       </div>
     </div>
   </div>
-
-  <!-- <app-news-view></app-news-view> -->
 </div>

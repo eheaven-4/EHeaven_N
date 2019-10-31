@@ -59,10 +59,22 @@ router.get("/view", (req, res, next) => {
         });
 });
 
-
-// // router.delete("/remove",(req,res,next)=>{
-
- 
-// });
+router.delete('/delete/:_id', (req, res, next) => {
+    // console.log("Hello");
+    const id = req.params._id;
+    newNews.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 module.exports = router;
