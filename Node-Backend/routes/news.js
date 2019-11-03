@@ -20,7 +20,7 @@ router.post("/add",(req, res)=>{
 
     upload(req, res, (err) => {
         
-        // var fullPath = req.file.destination  + req.file.originalname;
+        
         var document = {
             userid:req.body.userid,
             topic:req.body.topic,
@@ -39,7 +39,42 @@ router.post("/add",(req, res)=>{
           .catch(error => {
             console.log(error)
             res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
-          })
+          }) 
       })
 });
+
+router.get("/view", (req, res, next) => {
+    newNews.find().sort({ date: -1 })
+        .select('userid topic newsSumery news date usertype')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+router.delete('/delete/:_id', (req, res, next) => {
+    // console.log("Hello");
+    const id = req.params._id;
+    newNews.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
 module.exports = router;

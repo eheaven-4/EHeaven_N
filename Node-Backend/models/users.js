@@ -21,13 +21,9 @@ const userSchema = mongoose.Schema({
     filepath: { type: String, require: true }
 });
 
-// const bulkUserSchema = mongoose.Schema({
-//     name: { type: String, require: true },
-//     filepath: { type: String, require: true }
-// })
+
 
 const Users = module.exports = mongoose.model("Users", userSchema);
-// const bulkUser = mongoose.model("bulkUser", bulkUserSchema);
 
 
 module.exports.saveUser = function (newUser, callback) {
@@ -68,10 +64,3 @@ module.exports.passwordCheck = function (plainpassword, hash, callback) {
 module.exports.findUserById = function (id, callback) {
     Users.findOne(id, callback);
 }
-
-// module.exports = {
-//     bulkUser: bulkUser,
-//     Users: Users,
-//     // findByUserid : findByUserid
-
-// }

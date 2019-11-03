@@ -1,28 +1,34 @@
 <div class="row">
-    <mat-toolbar style="background-color: #f5f5f5" class="navbar_shadow">
-        <mat-toolbar-row>
-          <span><a class="navbar-brand">
-              <img src="../../../assets/logo/logo.png" class="logo">
-            </a>
-          </span>
-          <span class="example-spacer"></span>
-      
-          <span class="nav-itm">
-            <button mat-button routerLink="/" class="btn ">Home</button>
-          </span>
-      
-          <span class="nav-itm">
-            <button mat-button routerLink="/login" class="btn ">Login</button>
-          </span>
-      
-          <span class="nav-itm">
-            <button mat-button (click)="logoutUser()" class="btn ">Logout</button>
-          </span>
-      
-          <span class="nav-itm">
-            <button mat-button routerLink="/profile" (click)="userProfile()" class="btn ">Profile</button>
-          </span>
-      
-        </mat-toolbar-row>
-      </mat-toolbar>
+  <mat-toolbar style="background-color: #f5f5f5" class="navbar_shadow">
+    <mat-toolbar-row>
+      <span><a class="navbar-brand">
+          <img src="../../../assets/logo/logo.png" class="logo">
+        </a>
+      </span>
+      <span class="example-spacer"></span>
+
+      <span class="nav-itm">
+
+        <!-- <button mat-button routerLink="/" class="navbtn "> -->
+        <button mat-button routerLink="/" class="btn ">Home</button>
+      </span>
+
+      <span class="nav-itm">
+        <button  mat-button routerLink="/academic_subject" (click)="menu()" class="btn ">Menu</button>
+      </span>
+
+      <span class="nav-itm">
+        <button *ngIf="usertype == ''" mat-button routerLink="/login" class="btn ">Login</button>
+      </span>
+
+      <span class="nav-itm">
+
+        <button
+          *ngIf="usertype == 'Administrator' || usertype == 'Student' || usertype == 'Teacher' || usertype == 'Principal' || usertype == 'Parent' "
+          mat-button (click)="logoutUser()" class="btn ">Logout</button>
+      </span>
+
+
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
