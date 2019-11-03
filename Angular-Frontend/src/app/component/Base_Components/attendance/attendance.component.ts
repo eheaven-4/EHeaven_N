@@ -32,6 +32,7 @@ public today=new Date();
 public spanflageD=false;
 public spanflageS=false;
 public c_url=null;
+public toggle;
 
   constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder,private router : Router) { }
   public attendacelist=this.inputs.group({
@@ -42,9 +43,15 @@ public c_url=null;
     .subscribe((data:User[])=>{
       this.students=data;
       this.numberOfStudent=data.length;
+      this.toggle=new Array(this.numberOfStudent);
+      for (var j=0;j<this.numberOfStudent;j++){
+        this.toggle[j]="Absence";
+        console.log(this.toggle[j]);
+
+      }
     });
-    this.c_url = this.router.url;
-    console.log(this.c_url)
+    
+    
     
   }
   // attendlist=this.inputs.group()
@@ -66,6 +73,7 @@ public c_url=null;
   storeValue(index) {
      
       console.log(this.numberOfStudent);
+      this.toggle[index]="Present";
       if(index==this.i){
         var newRec=new Attend();
         newRec.username=this.students[index].userid;
@@ -157,8 +165,6 @@ public c_url=null;
       }else{
         this.searchDateResult=data;
       }
-      
-
     });
     
   }

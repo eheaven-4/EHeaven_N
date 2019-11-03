@@ -39,8 +39,9 @@
                                             <mat-grid-tile>{{student.userid}}</mat-grid-tile>
                                         <mat-grid-tile>{{student.name}}</mat-grid-tile>
                                         <mat-grid-tile>
-                                                <mat-slide-toggle (click)="storeValue(i)" color="primary" #val></mat-slide-toggle>
-                                                {{val.value}}
+                                                <mat-slide-toggle id="{{student.name}}" (click)="storeValue(i)" color="primary" name="name" ngModel></mat-slide-toggle>
+                                            
+                                                {{"       "}}{{toggle[i]}}
 
                                         </mat-grid-tile>
                                     </mat-grid-list>
