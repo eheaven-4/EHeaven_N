@@ -41,7 +41,7 @@
                                         <mat-grid-tile>
                                                 <mat-slide-toggle id="{{student.name}}" (click)="storeValue(i)" color="primary" name="name" ngModel></mat-slide-toggle>
                                             
-                                                {{"       "}}{{toggle[i]}}
+                                                {{toggle[i]}}
 
                                         </mat-grid-tile>
                                     </mat-grid-list>
@@ -168,34 +168,54 @@
                                             
                                         </div>
                                         <div *ngIf="!historyflagS" style="padding-top: 100px; padding-bottom: 100px">
-                                                <h2>{{searchStuResult[0].userid}} Student  {{classname}} Attendence List</h2>
-                                            <div class="row">
+                                                <div style="text-align:center;"><h2 >{{searchStuResult[0].userid}} Student Attendence List</h2></div>
+                                            <mat-grid-list cols="2" rowHeight="100px">
+                                                <mat-grid-tile>
+                                                        <h3>Date</h3>
+                                                </mat-grid-tile>
+                                                <mat-grid-tile>
+                                                        <h3>Attendence</h3>
+                                                </mat-grid-tile>
+                                            </mat-grid-list>
+                                            <!-- <div class="row">
                                                <div class="col-md-6">
                                                     <div style="text-align: center">
                                                         <h3>Date</h3>                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <div style="text-align: center">
                                                     <h3>
                                                         Attendence
                                                     </h3>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row" *ngFor="let result of searchStuResult">
+                                            </div> -->
+                                            <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchStuResult">
+                                                    <mat-grid-tile>
+                                                        <h3>{{result.date}}</h3>
+                                                    </mat-grid-tile>
+                                                    <mat-grid-tile>
+                                                            <h3>{{result.attend}}</h3>
+                                                    </mat-grid-tile>
+                                            </mat-grid-list>
+                                            <!-- <div class="row" *ngFor="let result of searchStuResult">
                                                 <div class="col-md-6">
                                                     <div style="text-align: center">
                                                         <h3>{{result.date}}</h3>                                        
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
+                                                    <div style="text-align: center">
                                                     <h3>
                                                         {{result.attend}}
                                                     </h3>
+                                                    </div>
                                                 </div>
-                                                    <!-- {{result.date}}; -->
-                                            </div>
+                                                    {{result.date}};
+                                            </div> -->
                                             <div>
-                                                <label>
+                                                <label style="text-align: center;">
                                                     click here to search another student
                                                 </label>
                                                 <hr>
