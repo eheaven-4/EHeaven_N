@@ -25,10 +25,10 @@ export class NewsComponent implements OnInit {
   attachment;
 
   news: news[] = [];
-  ngFlashMessage: any;
+  // ngFlashMessage: any;
 
   constructor(
-    private ngFlashMessageService: NgFlashMessageService,
+    private ngFlashMessage: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
@@ -87,7 +87,7 @@ export class NewsComponent implements OnInit {
     const url = 'http://localhost:3000/news/add';
 
     if (this.images == null) {
-      this.ngFlashMessageService.showFlashMessage({
+      this.ngFlashMessage.showFlashMessage({
         messages: ['Select the Profile Image..!'],
         dismissible: true,
         timeout: 2000,
@@ -98,7 +98,7 @@ export class NewsComponent implements OnInit {
       this.http.post<any>(url, formData).subscribe(res => {
         console.log(res.msg);
         if (res.state) {
-            this.ngFlashMessageService.showFlashMessage({
+            this.ngFlashMessage.showFlashMessage({
               messages: ['Successfully added ..!'],
               dismissible: true,
               timeout: 2000,
@@ -110,7 +110,7 @@ export class NewsComponent implements OnInit {
 
 
           } else {
-            this.ngFlashMessageService.showFlashMessage({
+            this.ngFlashMessage.showFlashMessage({
               messages: ['News is not add..!'],
               dismissible: true,
               timeout: 2000,

@@ -43,7 +43,7 @@ router.post("/add",(req, res)=>{
       })
 });
 
-router.get("/view", (req, res, next) => {
+router.get("/view", (req, res, next) => { // news get methord
     newNews.find().sort({ date: -1 })
         .select('userid topic newsSumery news date usertype')
         .exec()
@@ -59,7 +59,7 @@ router.get("/view", (req, res, next) => {
         });
 });
 
-router.delete('/delete/:_id', (req, res, next) => {
+router.delete('/delete/:_id', (req, res, next) => {// news delete methord
     // console.log("Hello");
     const id = req.params._id;
     newNews.remove({ _id: id })
@@ -75,6 +75,14 @@ router.delete('/delete/:_id', (req, res, next) => {
                 error: error
             });
         });
+});
+
+router.put('/edit/:_id',(req,res,nest)=>{ // news update methord
+    const id = req.params._id;
+    
+
+
+
 });
 
 module.exports = router;
