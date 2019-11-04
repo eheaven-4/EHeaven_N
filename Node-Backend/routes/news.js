@@ -77,12 +77,26 @@ router.delete('/delete/:_id', (req, res, next) => {// news delete methord
         });
 });
 
-router.put('/edit/:_id',(req,res,nest)=>{ // news update methord
-    const id = req.params._id;
-    
+router.put('/update/:id' ,(req, res) =>{  // update methord 
 
-
+    console.log('updated news');
+    newNews.findByIdAndUpdate(req.params.id, {
+        $set: {topic: req.body.topic , newsSumery: req.body.newsSumery , news: req.body.news  }
+    },
+    {
+        new: true
+    },
+    (err, updatednews)=>{
+        if(err){
+            res.send('Error');
+        }else{
+            res.json(updatednews);
+        }
+    }
+    );
 
 });
+
+    
 
 module.exports = router;
