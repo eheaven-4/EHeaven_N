@@ -15,11 +15,8 @@ router.post("/addLog",function(request,response){
     }else{
         month=today.getMonth()+1;
     }
-    if(today.getDate()<10){
-        date='0'+today.getDate();
-    }else{
-        date=today.getDate();
-    }
+    
+    date=today.getDate();
     
     
     var todaystr=month+"/"+date+"/"+year;
