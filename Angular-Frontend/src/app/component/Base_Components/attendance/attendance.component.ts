@@ -45,7 +45,7 @@ public toggle;
       this.numberOfStudent=data.length;
       this.toggle=new Array(this.numberOfStudent);
       for (var j=0;j<this.numberOfStudent;j++){
-        this.toggle[j]="Absence";
+        this.toggle[j]="Absent";
         console.log(this.toggle[j]);
 
       }
@@ -76,7 +76,8 @@ public toggle;
       this.toggle[index]="Present";
       if(index==this.i){
         var newRec=new Attend();
-        newRec.username=this.students[index].userid;
+        newRec.username=this.students[index].name;
+        newRec.userid=this.students[index].userid;
         newRec.attend=true;
         newRec.class=this.classname;
         this.presentStu++;

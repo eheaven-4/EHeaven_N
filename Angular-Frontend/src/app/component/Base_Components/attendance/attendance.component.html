@@ -65,6 +65,7 @@
                                             <mat-list-item role="listitem"> Date:{{ today | date }} </mat-list-item>
                                             <mat-list-item role="listitem">Number of Students:{{numberOfStudent}} </mat-list-item>
                                             <mat-list-item role="listitem"> Number of Present students:{{presentStu}}</mat-list-item>
+                                            <mat-list-item role="listitem"> Number of Absent students:{{numberOfStudent-presentStu}}</mat-list-item>
                                     </mat-list>
                             
                             </div>
@@ -73,7 +74,7 @@
                                 <mat-tab-group  mat-align-tabs="center">
                                     <mat-tab label="Special Date">
 
-                                        <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagD">
+                                        <div style="padding-top: 100px ; padding-bottom: 100px;align-content: center;" *ngIf="historyflagD" >
                                                 <form class="example-form " (ngSubmit)="searchDate(dateid.value)">
                                                   <mat-grid-list cols="1" rowHeight="100px">
                                                     <mat-grid-tile>
@@ -162,7 +163,7 @@
                                                         click here to search another Date
                                                     </label>
                                                     <hr>
-                                                    <button mat-raised-button color="primary" (click)="historyflagD=true;"><mat-icon>restore</mat-icon>Click here</button>
+                                                    <button mat-raised-button color="primary" (click)="historyflagD=true;"><mat-icon>replay</mat-icon>Click here</button>
                                                     <!-- <button class="submit" (click)="historyflagD=true;">Click here</button> -->
                                             </div>
                                         </div>
@@ -171,7 +172,7 @@
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagS">
                                             <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(stuid.value)">
                                                 <h4>
-                                                    Enter student Rejistration number
+                                                    Enter student Rejistration number or name 
                                                 </h4>
                                                 
                                                 <input   type="text" #stuid name="name">
@@ -238,7 +239,7 @@
                                                     click here to search another student
                                                 </label>
                                                 <hr>
-                                                <button mat-raised-button color="primary" (click)="historyflagS=true;"><mat-icon>restore</mat-icon>Click here</button>
+                                                <button mat-raised-button color="primary" (click)="historyflagS=true;"><mat-icon>replay</mat-icon>Click here</button>
                                                 <!-- <button class="submit"  (click)="historyflagS=true">Click here</button> -->
                                                 
                                             </div>

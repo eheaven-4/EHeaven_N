@@ -21,7 +21,8 @@ router.post("/addLog",function(request,response){
     
     var todaystr=month+"/"+date+"/"+year;
     const stu=new attendance({
-        userid:request.body.username,
+        username:request.body.username,
+        userid:request.body.userid,
         attend:request.body.attend,
         date:todaystr,
         class:request.body.class
@@ -68,8 +69,8 @@ router.get("/searchDate", function (req, res) {
 });
 
 router.get("/searchStu/:userid", function (req, res) {
-    console.log("serchStudent");
-    attendance.find({userid:req.params.userid})
+    console.log(req.params.userid);
+    attendance.find({$or:[{userid:req.params.userid},{username:req.params.userid}]})
     .exec(function(err,data){
         if(err){
             console.log("Error");
