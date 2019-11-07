@@ -33,6 +33,8 @@ public spanflageD=false;
 public spanflageS=false;
 public c_url=null;
 public toggle;
+public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+
 
   constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder,private router : Router) { }
   public attendacelist=this.inputs.group({
@@ -83,9 +85,9 @@ public toggle;
         this.presentStu++;
       
         console.log(newRec);
-        //this.addData(newRec);
+        
         this.addData(newRec);
-        //this.attendRecord.push(newRec);
+        
         this.i++;
       }
       else if(this.i<index){

@@ -171,19 +171,44 @@
                                     <mat-tab label="Special Student">
                                         <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagS">
                                             <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(stuid.value)">
-                                                <h4>
-                                                    Enter student Rejistration number or name 
-                                                </h4>
-                                                
-                                                <input   type="text" #stuid name="name">
-                                                <hr>
-                                                
-                                                <!-- <button class="btn btn-primary">search</button> -->
-                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
-                                                <!-- <div class="active-purple-3 active-purple-4 mb-4">
-                                                        <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                      </div> -->
+                                                <mat-grid-list cols="2">
+                                                    <mat-grid-tile>
+                                                            
+                                                        <!-- <mat-list role="list" style="color: blue;">
 
+                                                            <mat-list-item role="listitem" style="text-align: center;">
+                                                                <h4>
+                                                                    Enter student Registration number or name 
+                                                                </h4>
+                                                            </mat-list-item>
+                                                            <mat-list-item role="listitem" style="text-align: center;">    
+                                                                <input   type="text" #stuid name="name">
+                                                            </mat-list-item>
+
+                                                        </mat-list> -->
+                                                        <mat-form-field class="example-full-width">
+                                                                <input matInput placeholder="Enter student Registration number or name" >
+                                                        </mat-form-field>
+                                                        <mat-hint>Ex:00000001 or Pradeepa Sandaruwan</mat-hint>
+                                                        
+                                                        <!-- <button class="btn btn-primary">search</button> -->
+                                                        
+                                                        <!-- <div class="active-purple-3 active-purple-4 mb-4">
+                                                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
+                                                            </div> -->
+                                                    </mat-grid-tile>
+                                                    <mat-grid-tile>
+                                                        <mat-form-field>
+                                                            <mat-label>Favorite food</mat-label>
+                                                                <mat-select [(ngModel)]="selectedValue" name="month">
+                                                                    <mat-option *ngFor="let month of months" [value]="month.value">
+                                                                        {{month}}
+                                                                    </mat-option>
+                                                                </mat-select>
+                                                        </mat-form-field>
+                                                    </mat-grid-tile>  
+                                                </mat-grid-list>  
+                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
                                             </form>
                                             
                                         </div>
