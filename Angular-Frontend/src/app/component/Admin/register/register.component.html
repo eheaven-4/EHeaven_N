@@ -22,7 +22,7 @@
                                     <div class="form-row mb-4">
                                         <div class="col">
                                             <select class="browser-default custom-select mb-4 box_border"
-                                                name="usertype" formControlName="usertype">
+                                                name="usertype" formControlName="usertype" [(ngModel)]="usertype">
                                                 <option value="" disabled>User type</option>
                                                 <option value="Student">Student</option>
                                                 <option value="Parent">Parent</option>
@@ -34,11 +34,12 @@
                                                 style="margin-top:-20px; text-align: left">Usertype</small>
 
                                         </div>
+                                       
                                         <div class="col">
-                                            <input type="text" class="form-control box_border" placeholder="User ID"
+                                            <input  type="text" class="form-control box_border" placeholder="User ID"
                                                 name="userid" formControlName="userid">
                                         </div>
-                                        <div class="col">
+                                        <div class="col"  *ngIf="usertype == 'Student'">
                                             <input type="text" class="form-control box_border"
                                                 placeholder="Selected Class" name="selectclass"
                                                 formControlName="selectclass">
@@ -102,27 +103,22 @@
                                                 style="margin-top:-20px; text-align: left">Nationality</small>
 
                                         </div>
-                                        <div class="col">
+                                        <div class="col"  *ngIf="usertype != 'Student'">
                                             <input type="text" class="form-control box_border" placeholder="NIC Number"
                                                 name="nicnumber" formControlName="nicnumber">
                                         </div>
                                     </div>
 
-                                    <input type="text" class="form-control box_border" placeholder="Father Name"
-                                        name="father" formControlName="father" style="margin-top:-20px">
+                                    
+                                    <textarea  style="margin-top: -30px; margin-bottom: 30px;"  type="text" class="form-control box_border" placeholder="Address"
+                                    name="address" formControlName="address"></textarea>
+                                    
+                                    <input style="margin-bottom: 30px;"  *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Father Name"
+                                        name="father" formControlName="father">                    
 
-                                    <div class="form-row mb-4">
-                                    </div>
-
-                                    <input type="text" class="form-control box_border" placeholder="Mother Name"
+                                    <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Mother Name"
                                         name="mother" formControlName="mother">
-
-                                    <div class="form-row mb-4">
-                                    </div>
-
-                                    <textarea type="text" class="form-control box_border" placeholder="Address"
-                                        name="address" formControlName="address"></textarea>
-
+                                    
                                     <input type="file" class="file_upload" style="display: none" name="profilepic"
                                         accept="image/*" (change)="selectImage($event)" #fileInput>
 
