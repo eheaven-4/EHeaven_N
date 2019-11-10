@@ -159,5 +159,27 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
         })
 })
 
+router.get("/searchUsers/:userid", function (req, res, next) {
+    const userid = req.params.userid;
+    User.findOne({ userid: userid })
+        .select()
+        .exec()
+        .then(data => {
+            console.log("Data Transfer Success..!");
+            res.status(200).json(data);
+        })
+        .catch(error => {
+            console.log("Data Transfer Unsuccessfull..!");
+            error: error
+        })
+})
+
+router.post("/updateUser/:userid", function(req,res, next) {
+
+})
+
+router.delete("/deleteUser/:userid", function(req,res,next){
+
+})
 
 module.exports = router;  

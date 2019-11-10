@@ -42,6 +42,7 @@ import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.com
 import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
+import { SearchUserComponent } from './component/Admin/search-user/search-user.component';
 
 
 
@@ -74,6 +75,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
     AcademicSubjectComponent,
+    SearchUserComponent,
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),

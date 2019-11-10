@@ -1,46 +1,82 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFlashMessageService } from 'ng-flash-messages';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
+import { NgFlashMessageService } from 'ng-flash-messages';
 
+interface user {
+  _id: String;
+  usertype: String;
+  userid: String;
+  selectclass: String;
+  name: String;
+  email: String;
+  password: String;
+  birthday: String;
+  mobilenumber: String;
+  homenumber: String;
+  gender: String;
+  nationality: String;
+  nicnumber: String;
+  father: String;
+  mother: String;
+  address: String;
+}
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-search-user',
+  templateUrl: './search-user.component.html',
+  styleUrls: ['./search-user.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class SearchUserComponent implements OnInit {
+
+  constructor(
+    private http: HttpClient,
+    private fb: FormBuilder,
+    private ngFlashMessageService: NgFlashMessageService,
+    private router: Router,
+  ) { }
+  userdata: user[] = [];
+  UserForm: FormGroup;
   submitted = false;
   images;
   filename;
-  RegistrationForm: FormGroup;
-  constructor(
-    private ngFlashMessageService: NgFlashMessageService,
-    private router: Router,
-    private http: HttpClient,
-    private fb: FormBuilder,
-  ) { }
+  userid;
+  dataform : Boolean = false;
 
-  // registratin form attributes
+  RegistrationForm = this.fb.group({
+    usertype: ['', Validators.required],
+    userid: ['', Validators.required],
+    selectclass: [''],
+    name: ['', [Validators.required, Validators.maxLength(60)]],
+    email: ['', [Validators.required, Validators.email]],
+    password: ['', [Validators.required, Validators.minLength(8)]],
+    birthday: ['', Validators.required],
+    mobilenumber: [''],
+    homenumber: [''],
+    gender: ['', Validators.required],
+    nationality: ['', Validators.required],
+    nicnumber: [''],
+    father: [''],
+    mother: [''],
+    address: ['', Validators.required],
+  });
 
   ngOnInit() {
-    this.RegistrationForm = this.fb.group({
-      usertype: ['', Validators.required],
-      userid: ['', Validators.required],
-      selectclass: [''],
-      name: ['', [Validators.required, Validators.maxLength(60)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      birthday: ['', Validators.required],
-      mobilenumber: [''],
-      homenumber: [''],
-      gender: ['', Validators.required],
-      nationality: ['', Validators.required],
-      nicnumber: [''],
-      father: [''],
-      mother: [''],
-      address: ['', Validators.required],
+    this.UserForm = this.fb.group({
+      userid: ['', Validators.required]
     });
+  }
+
+  searchUser() {
+    this.userid = this.UserForm.value.userid;
+
+    const url = "http://localhost:3000/users/searchUsers"
+
+    this.http.get<any>(url + "/" + this.userid).subscribe(res => {
+      this.userdata = res;
+      console.log(res);
+      this.dataform = true;
+    })
   }
   // load the image as the button event and asign to  the images variable
   selectImage(event) {
@@ -54,10 +90,10 @@ export class RegisterComponent implements OnInit {
   /**************************************************** */
 
 
-  get f() { 
-    return this.RegistrationForm.controls; 
+  get f() {
+    return this.RegistrationForm.controls;
   }
-  
+
   onReset() {
     this.submitted = false;
     this.RegistrationForm.reset();
@@ -65,12 +101,12 @@ export class RegisterComponent implements OnInit {
 
 
   /**************************************************** */
-  registerUser() {
+  updateUser() {
     this.submitted = true;
 
     // stop here if form is invalid
     if (this.RegistrationForm.invalid) {
-      return; 
+      return;
     }
     else {
       const formData = new FormData();
