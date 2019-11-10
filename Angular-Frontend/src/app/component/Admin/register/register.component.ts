@@ -31,7 +31,7 @@ export class RegisterComponent implements OnInit {
       selectclass: [''],
       name: ['', [Validators.required, Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       birthday: ['', Validators.required],
       mobilenumber: [''],
       homenumber: [''],
@@ -52,11 +52,19 @@ export class RegisterComponent implements OnInit {
       console.log(this.filename)
     }
   }
-  get f() { return this.RegistrationForm.controls; }
+  /**************************************************** */
+
+
+  get f() { 
+    return this.RegistrationForm.controls; 
+  }
+  
   onReset() {
     this.submitted = false;
     this.RegistrationForm.reset();
   }
+
+
   /**************************************************** */
   registerUser() {
     this.submitted = true;

@@ -12,6 +12,6 @@ const noticeSchema = mongoose.Schema({
 
 const Notification = module.exports = mongoose.model("Notification", noticeSchema);  
 
-module.exports.saveNotice = function(newNotice, callback) {
-    newNotice.save(callback);  
-};
+// module.exports.saveNotice = function(newNotice, callback) {
+//     newNotice.save(callback);  
+// };

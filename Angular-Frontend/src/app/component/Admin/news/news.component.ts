@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
 interface news {  // decalare interface class for load notification attributes.
@@ -24,8 +24,10 @@ export class NewsComponent implements OnInit {
   date: string;
   attachment;
   filename;
+  submitted = false;
 
   news: news[] = [];
+  NewsForm: FormGroup;
   // ngFlashMessage: any;
 
   constructor(
@@ -37,25 +39,30 @@ export class NewsComponent implements OnInit {
   ) { }
 
   // news form attributes
-  NewsForm = this.fb.group({
-    // userid: ['', Validators.required],
-    topic: ['', Validators.required],
-    newsSumery: ['', Validators.required],
-    news: ['', Validators.required],
-    date: ['', Validators.required],
-
-
-  });
 
   ngOnInit() {
+    this.NewsForm = this.fb.group({
+      topic: ['', [Validators.required, Validators.maxLength(20)]],
+      newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
+      news: ['', Validators.maxLength(800)],
+    });
 
-      const url = 'http://localhost:3000/news/view';
-      this.http.get<any>(url).subscribe(res => {
-        this.news = res;
+    const url = 'http://localhost:3000/news/view';
+    this.http.get<any>(url).subscribe(res => {
+      this.news = res;
+      console.log(res)
+    }, (err) => {
+      console.log(err);
+    });
+  }
 
-      }, (err) => {
-        console.log(err);
-      });
+  get f() {
+    return this.NewsForm.controls;
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.NewsForm.reset();
   }
 
   // load the image as the button event and asign to  the images variable
@@ -68,44 +75,51 @@ export class NewsComponent implements OnInit {
   }
 
   addnews() {
+    this.submitted = true;
 
-    // tslint:disable-next-line: prefer-const
-    const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-    const userid = myCookie.userid;
+    // stop here if form is invalid
+    if (this.NewsForm.invalid) {
+      return;
+    }
+    else {
 
-
-    this.date = Date();
-
-    const formData = new FormData();
-
-    formData.append('newsImage', this.images);
-    // formData.append('userid', this.NewsForm.value.userid);
-    formData.append('topic', this.NewsForm.value.topic);
-    formData.append('date' , this.date );
-    formData.append('newsSumery', this.NewsForm.value.newsSumery);
-    formData.append('news', this.NewsForm.value.news);
+      // tslint:disable-next-line: prefer-const
+      const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+      const userid = myCookie.userid;
 
 
-    const url = 'http://localhost:3000/news/add';
+      this.date = Date();
 
-    if (this.images == null) {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ['Select the Profile Image..!'],
-        dismissible: true,
-        timeout: 2000,
-        type: 'warning'
-      });
-    } else {
-      // console.log(formData)
-      this.http.post<any>(url, formData).subscribe(res => {
-        console.log(res.msg);
-        if (res.state) {
+      const formData = new FormData();
+
+      formData.append('newsImage', this.images);
+      // formData.append('userid', this.NewsForm.value.userid);
+      formData.append('topic', this.NewsForm.value.topic);
+      formData.append('date', this.date);
+      formData.append('newsSumery', this.NewsForm.value.newsSumery);
+      formData.append('news', this.NewsForm.value.news);
+
+
+      const url = 'http://localhost:3000/news/add';
+
+      if (this.images == null) {
+        this.ngFlashMessage.showFlashMessage({
+          messages: ['Select the Profile Image..!'],
+          dismissible: true,
+          timeout: 2000,
+          type: 'warning'
+        });
+      } else {
+        // console.log(formData)
+        this.http.post<any>(url, formData).subscribe(res => {
+          console.log(res.msg);
+          if (res.state) {
             this.ngFlashMessage.showFlashMessage({
               messages: ['Successfully added ..!'],
               dismissible: true,
               timeout: 2000,
               type: 'success',
-              });
+            });
 
             window.location.reload();
             // this.router.navigate(['/news']);
@@ -120,16 +134,27 @@ export class NewsComponent implements OnInit {
             });
             this.router.navigate(['/news']);
           }
-      });
+        });
+      }
     }
-
   }
-  delete(event, news_id) {
+  delete(event, news_id, file_path) {
 
-   // console.log(news_id);
+    // console.log(news_id);
     const mybtnId = news_id;
+    var mybtnFile = file_path;
 
     const url = 'http://localhost:3000/news/delete';
+    var urlDelete = "http://localhost:3000/news/newsAttachment"; //notification attachment delete url
+
+    //if there is a file in attachment call atachment file delteing request
+    if (mybtnFile) {
+      this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+        console.log(res);
+      }, (err) => {
+        console.log(err)
+      });
+    }
 
     this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
       this.ngFlashMessage.showFlashMessage({
