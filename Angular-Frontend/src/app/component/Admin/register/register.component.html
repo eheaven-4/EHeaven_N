@@ -34,12 +34,12 @@
                                                 style="margin-top:-20px; text-align: left">Usertype</small>
 
                                         </div>
-                                       
+
                                         <div class="col">
-                                            <input  type="text" class="form-control box_border" placeholder="User ID"
+                                            <input type="text" class="form-control box_border" placeholder="User ID"
                                                 name="userid" formControlName="userid">
                                         </div>
-                                        <div class="col"  *ngIf="usertype == 'Student'">
+                                        <div class="col" *ngIf="usertype == 'Student'">
                                             <input type="text" class="form-control box_border"
                                                 placeholder="Selected Class" name="selectclass"
                                                 formControlName="selectclass">
@@ -103,24 +103,27 @@
                                                 style="margin-top:-20px; text-align: left">Nationality</small>
 
                                         </div>
-                                        <div class="col"  *ngIf="usertype != 'Student'">
+                                        <div class="col" *ngIf="usertype != 'Student'">
                                             <input type="text" class="form-control box_border" placeholder="NIC Number"
                                                 name="nicnumber" formControlName="nicnumber">
                                         </div>
                                     </div>
 
-                                    
-                                    <textarea  style="margin-top: -30px; margin-bottom: 30px;"  type="text" class="form-control box_border" placeholder="Address"
-                                    name="address" formControlName="address"></textarea>
-                                    
-                                    <input style="margin-bottom: 30px;"  *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Father Name"
-                                        name="father" formControlName="father">                    
 
-                                    <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Mother Name"
-                                        name="mother" formControlName="mother">
-                                    
+                                    <textarea style="margin-top: -30px; margin-bottom: 30px;" type="text"
+                                        class="form-control box_border" placeholder="Address" name="address"
+                                        formControlName="address"></textarea>
+
+                                    <input style="margin-bottom: 30px;" *ngIf="usertype == 'Student'" type="text"
+                                        class="form-control box_border" placeholder="Father Name" name="father"
+                                        formControlName="father">
+
+                                    <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border"
+                                        placeholder="Mother Name" name="mother" formControlName="mother">
+
                                     <input type="file" class="file_upload" style="display: none" name="profilepic"
-                                        accept="image/*" (change)="selectImage($event)" #fileInput>
+                                        accept="image/*" [uploader]="uploader" (change)="selectImage($event)"
+                                        #fileInput>
 
                                     <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
                                         type="button" (click)="fileInput.click()" accept="image/*">Choose Profile
@@ -128,8 +131,10 @@
 
                                     <small class="form-text text-muted mb-4"
                                         style=" text-align: left; margin-top: -18px;">
-                                        Resolution : (320 x 280)p / 8 : 7
+                                        Resolution : (320 x 280)p / 8 : 7 {{filename}}
                                     </small>
+                                    
+                                   
                                     <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"
                                         (click)="registerUser()">Register
                                         Now</button>

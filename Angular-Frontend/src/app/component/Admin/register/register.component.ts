@@ -12,11 +12,13 @@ import { FormBuilder, Validators } from '@angular/forms';
 export class RegisterComponent implements OnInit {
 
   images;
+  filename;
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
+    // private ngProgress: NgProgress,
   ) { }
 
   // registratin form attributes
@@ -39,12 +41,15 @@ export class RegisterComponent implements OnInit {
   });
 
   ngOnInit() {
+    
   }
   // load the image as the button event and asign to  the images variable
   selectImage(event) {
     if (event.target.files.length > 0) {  // check the file is select or not.
       const file = event.target.files[0];
       this.images = file;
+      this.filename = file.name;
+      console.log(this.filename)
     }
   }
   /**************************************************** */
@@ -61,7 +66,7 @@ export class RegisterComponent implements OnInit {
     formData.append('birthday', this.RegistrationForm.value.birthday)
     formData.append('mobilenumber', this.RegistrationForm.value.mobilenumber)
     formData.append('homenumber', this.RegistrationForm.value.homenumber)
-    formData.append('gender', this.RegistrationForm.value.gender) 
+    formData.append('gender', this.RegistrationForm.value.gender)
     formData.append('nationality', this.RegistrationForm.value.nationality)
     formData.append('nicnumber', this.RegistrationForm.value.nicnumber)
     formData.append('father', this.RegistrationForm.value.father)
@@ -83,6 +88,7 @@ export class RegisterComponent implements OnInit {
     else {
       this.http.post<any>(url, formData).subscribe(res => {
         if (res.state) {
+
           console.log(res.msg);
           this.ngFlashMessageService.showFlashMessage({
             messages: ["Successfully Registered..!"],
@@ -90,6 +96,7 @@ export class RegisterComponent implements OnInit {
             timeout: 2000,
             type: 'success',
           });
+          // this.ngProgress.done();
           this.router.navigate(['/login']);
         }
         else {

@@ -16,7 +16,9 @@
                     </div>
 
                     <div class="profile-pic">
-                        <mat-card *ngIf="profiledata"><img src="http://localhost:3000/users/profileImage/{{profiledata.filepath}}" class="profile_matcard">
+                        <mat-card *ngIf="profiledata"><img
+                                src="http://localhost:3000/users/profileImage/{{profiledata.filepath}}"
+                                class="profile_matcard">
                         </mat-card>
                     </div>
                     <div class="profile_data" style="padding-bottom: 50px">
@@ -47,34 +49,14 @@
                             </div>
                             <div class="container-fluid">
                                 <div class="row">
-                                    <div class="col-md-6">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    <img src="../../../../assets/icons/id-badge-regular.svg"
-                                                        style="width: 30px">
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <label class="profile_attributes">User ID </label>
-                                                    <p class="profile_attributes_data">{{profiledata.userid}}</p>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-1">
+                                        <fa-icon [icon]="faAt" 
+                                            style="font-size: 30px; color: #5e5e5e; margin-left: 15px;">
+                                        </fa-icon>
                                     </div>
-                                    <div class="col-md-6" style="margin-left: -20px">
-                                        <div class="container-fluid">
-                                            <div class="row">
-                                                <div class="col-md-1">
-                                                    <fa-icon [icon]="faAt" style="font-size: 30px; color: #5e5e5e;">
-                                                    </fa-icon>
-                                                </div>
-                                                <div class="col-md-10">
-                                                    <label class="profile_attributes">E-mail </label>
-                                                    <p class="profile_attributes_data">{{profiledata.email}}</p>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="col-md-10" style="margin-left: -32px">
+                                        <label class="profile_attributes">E-mail </label>
+                                        <p class="profile_attributes_data">{{profiledata.email}}</p>
                                     </div>
                                 </div>
                             </div>
@@ -99,12 +81,13 @@
                                     <div class="col-md-6">
                                         <div class="row">
                                             <div class="col-md-1">
-                                                    <img src="../../../../assets/icons/id-card-regular.svg"
+                                                <img src="../../../../assets/icons/id-card-regular.svg"
                                                     style="width: 30px; padding-top: 5px; margin-left: -5px">
                                             </div>
                                             <div class="col-md-10" style="margin-left: -10px">
                                                 <label class="profile_attributes">NIC No </label>
-                                                <p class="profile_attributes_data" style="width: 102%">{{profiledata.nicnumber}}</p>
+                                                <p class="profile_attributes_data" style="width: 102%">
+                                                    {{profiledata.nicnumber}}</p>
 
                                             </div>
                                         </div>
@@ -112,30 +95,30 @@
                                 </div>
                             </div>
                             <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="clo-md-2">
-                                                <img src="../../../../assets/icons/male-solid.svg"
-                                                style="width: 15px; margin-left: 30px">
-                                        </div>
-                                        <div class="col-md-10">
-                                            <label class="profile_attributes">Father's Name </label>
-                                            <p class="profile_attributes_data">{{profiledata.father}}</p>
-                                        </div>
+                                <div class="row">
+                                    <div class="clo-md-2">
+                                        <img src="../../../../assets/icons/male-solid.svg"
+                                            style="width: 15px; margin-left: 30px">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="profile_attributes">Father's Name </label>
+                                        <p class="profile_attributes_data">{{profiledata.father}}</p>
                                     </div>
                                 </div>
-                                <div class="container-fluid">
-                                        <div class="row">
-                                            <div class="clo-md-2">
-                                                    <img src="../../../../assets/icons/female-solid.svg"
-                                                    style="width: 20px; margin-left: 27px">
-                                            </div>
-                                            <div class="col-md-10">
-                                                <label class="profile_attributes">Mother's Name </label>
-                                                <p class="profile_attributes_data">{{profiledata.mother}}</p>
-                                            </div>
-                                        </div>
-                                    </div>                                
-                            
+                            </div>
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="clo-md-2">
+                                        <img src="../../../../assets/icons/female-solid.svg"
+                                            style="width: 20px; margin-left: 27px">
+                                    </div>
+                                    <div class="col-md-10">
+                                        <label class="profile_attributes">Mother's Name </label>
+                                        <p class="profile_attributes_data">{{profiledata.mother}}</p>
+                                    </div>
+                                </div>
+                            </div>
+
                         </mat-card>
                     </div>
                 </div>
