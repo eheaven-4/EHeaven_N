@@ -9,14 +9,20 @@ export class StudentProgressComponent implements OnInit {
 
   constructor() { }
 
-  certificates = [
-    'Student Status Verification Certificate',
-    'Character Certificate',
-    'Leaving Certificate',
-    'Educational Certificate'
-  ];
-  
+  certificates;
+
   ngOnInit() {
+    var year = new Date().getFullYear();
+    var range = [];
+
+    range.push(year);
+
+    for (var i = 1; i < 7; i++) {
+      range.push(year - i);
+      console.log(range[i]);
+    }
+    // $scope.years = range;
+    
   }
 
 }

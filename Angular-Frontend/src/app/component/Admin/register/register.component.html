@@ -18,11 +18,11 @@
                             <div style="padding-top: 50px;padding-bottom: 50px">
                                 <form class="text-center border p-5 reg-frm" [formGroup]="RegistrationForm">
                                     <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
-
                                     <div class="form-row mb-4">
                                         <div class="col">
                                             <select class="browser-default custom-select mb-4 box_border"
-                                                name="usertype" formControlName="usertype" [(ngModel)]="usertype">
+                                                name="usertype" formControlName="usertype" [(ngModel)]="usertype"
+                                                [ngClass]="{ 'is-invalid': submitted && f.usertype.errors }">
                                                 <option value="" disabled>User type</option>
                                                 <option value="Student">Student</option>
                                                 <option value="Parent">Parent</option>
@@ -31,41 +31,60 @@
                                                 <option value="Administrator">Administrator</option>
                                             </select>
                                             <small class="form-text text-muted mb-4"
-                                                style="margin-top:-20px; text-align: left">Usertype</small>
+                                                style="margin-top:-20px; text-align: left">Usertype *</small>
+                                        </div>
 
-                                        </div>
-                                       
                                         <div class="col">
-                                            <input  type="text" class="form-control box_border" placeholder="User ID"
-                                                name="userid" formControlName="userid">
+                                            <input type="text" class="form-control box_border" placeholder="User ID *"
+                                                name="userid" formControlName="userid"
+                                                [ngClass]="{ 'is-invalid': submitted && f.userid.errors }">
                                         </div>
-                                        <div class="col"  *ngIf="usertype == 'Student'">
+                                        <div class="col" *ngIf="usertype == 'Student'">
                                             <input type="text" class="form-control box_border"
                                                 placeholder="Selected Class" name="selectclass"
                                                 formControlName="selectclass">
                                         </div>
                                     </div>
 
-                                    <input type="text" class="form-control box_border" placeholder="Full name"
-                                        name="name" formControlName="name" style="margin-top:-30px">
-
-                                    <div class="form-row mb-4">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control box_border" placeholder="Full name"
+                                            name="name" formControlName="name" style="margin-top:-30px"
+                                            [ngClass]="{ 'is-invalid': submitted && f.name.errors }">
+                                        <div *ngIf="submitted && f.name.errors" class="err_msg">
+                                            <div *ngIf="f.name.errors.required">Name is required</div>
+                                            <div *ngIf="f.name.errors.maxlength">Name must less than 60 characters</div>
+                                        </div>
                                     </div>
 
-                                    <input type="email" class="form-control mb-4 box_border" placeholder="E-mail"
-                                        name="email" formControlName="email">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control box_border" placeholder="E-mail"
+                                            name="email" formControlName="email"
+                                            [ngClass]="{ 'is-invalid': submitted && f.email.errors }">
+                                        <div *ngIf="submitted && f.email.errors" class="err_msg">
+                                            <div *ngIf="f.email.errors.required">Email is required</div>
+                                            <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
+                                        </div>
+                                    </div>
 
-                                    <input type="text" class="form-control box_border" placeholder="Password"
-                                        name="password" formControlName="password">
-                                    <small class="form-text text-muted mb-4" style=" text-align: left">
-                                        At least 8 characters and 1 digit
-                                    </small>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control box_border" placeholder="Password"
+                                            name="password" formControlName="password"
+                                            [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+                                        <div *ngIf="submitted && f.password.errors" class="err_msg">
+                                            <div *ngIf="f.password.errors.required">Password is required</div>
+                                            <div *ngIf="f.password.errors.minlength">Password must be at least 6
+                                                characters
+                                            </div>
+                                        </div>
+                                    </div>
+
                                     <div class="form-row mb-4">
                                         <div class="col">
                                             <input type="date" class="form-control box_border"
-                                                placeholder="Date of birth" name="birthday" formControlName="birthday">
+                                                placeholder="Date of birth" name="birthday" formControlName="birthday"
+                                                [ngClass]="{ 'is-invalid': submitted && f.birthday.errors }">
                                             <small class="form-text text-muted mb-4"
-                                                style="margin-top:0px; text-align: left">Birthday</small>
+                                                style="margin-top:0px; text-align: left">Birthday *</small>
                                         </div>
                                         <div class="col">
                                             <input type="number" class="form-control box_border"
@@ -78,21 +97,24 @@
                                                 formControlName="mobilenumber">
                                         </div>
                                     </div>
+
                                     <div class="form-row mb-4" style="margin-top: -30px">
                                         <div class="col ">
                                             <select class="browser-default custom-select mb-4 box_border" name="gender"
-                                                formControlName="gender">
+                                                formControlName="gender"
+                                                [ngClass]="{ 'is-invalid': submitted && f.gender.errors }">
                                                 <option value="" disabled>Gender</option>
                                                 <option value="Male">Male</option>
                                                 <option value="Female">Female</option>
                                             </select>
                                             <small class="form-text text-muted mb-4"
-                                                style="margin-top:-20px; text-align: left">Gender</small>
+                                                style="margin-top:-20px; text-align: left">Gender *</small>
 
                                         </div>
                                         <div class="col ">
                                             <select class="browser-default custom-select mb-4 box_border"
-                                                name="nationality" formControlName="nationality">
+                                                name="nationality" formControlName="nationality"
+                                                [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }">
                                                 <option value="" disabled>Nationality</option>
                                                 <option value="Sinhala">Sinhala</option>
                                                 <option value="Tamil">Tamil</option>
@@ -100,27 +122,29 @@
                                                 <option value="Cristian">Cristian</option>
                                             </select>
                                             <small class="form-text text-muted mb-4"
-                                                style="margin-top:-20px; text-align: left">Nationality</small>
+                                                style="margin-top:-20px; text-align: left">Nationality *</small>
 
                                         </div>
-                                        <div class="col"  *ngIf="usertype != 'Student'">
+                                        <div class="col" *ngIf="usertype != 'Student'">
                                             <input type="text" class="form-control box_border" placeholder="NIC Number"
                                                 name="nicnumber" formControlName="nicnumber">
                                         </div>
                                     </div>
 
-                                    
-                                    <textarea  style="margin-top: -30px; margin-bottom: 30px;"  type="text" class="form-control box_border" placeholder="Address"
-                                    name="address" formControlName="address"></textarea>
-                                    
-                                    <input style="margin-bottom: 30px;"  *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Father Name"
-                                        name="father" formControlName="father">                    
+                                    <textarea style="margin-top: -30px; margin-bottom: 30px;" type="text"
+                                        class="form-control box_border" placeholder="Address *" name="address"
+                                        formControlName="address"></textarea>
 
-                                    <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border" placeholder="Mother Name"
-                                        name="mother" formControlName="mother">
-                                    
+                                    <input style="margin-bottom: 30px;" *ngIf="usertype == 'Student'" type="text"
+                                        class="form-control box_border" placeholder="Father Name" name="father"
+                                        formControlName="father">
+
+                                    <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border"
+                                        placeholder="Mother Name" name="mother" formControlName="mother">
+
                                     <input type="file" class="file_upload" style="display: none" name="profilepic"
-                                        accept="image/*" (change)="selectImage($event)" #fileInput>
+                                        accept="image/*" [uploader]="uploader" (change)="selectImage($event)"
+                                        #fileInput>
 
                                     <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
                                         type="button" (click)="fileInput.click()" accept="image/*">Choose Profile
@@ -128,8 +152,9 @@
 
                                     <small class="form-text text-muted mb-4"
                                         style=" text-align: left; margin-top: -18px;">
-                                        Resolution : (320 x 280)p / 8 : 7
+                                        Resolution : (320 x 280)p / 8 : 7 {{filename}}
                                     </small>
+
                                     <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"
                                         (click)="registerUser()">Register
                                         Now</button>

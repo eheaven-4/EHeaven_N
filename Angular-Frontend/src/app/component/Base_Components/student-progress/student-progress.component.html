@@ -9,38 +9,44 @@
                     <ng-flash-message></ng-flash-message>
                 </div>
                 <div>
+                    <form>
 
-                    <div class="container">
-                        <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px">My Progress</h2>
-                        <hr>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-5">
+                        <div class="container">
+                            <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px">My Progress</h2>
+                            <hr>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-5">
                                     <label class="top_txt">Year Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border" formControlName="certType"
-                                      (selectionChange)="testfunction(t.value)">
-                                      <!-- <mat-option value="None" selected></mat-option> -->
-                                      <mat-option style="text-align: left" *ngFor="let cert of certificates" [value]="cert">{{ cert }}
-                                      </mat-option>
+                                    <mat-select #t class="browser-default custom-select mb-4 border"
+                                        (selectionChange)="testfunction(t.value)">
+                                        <!-- <mat-option value="None" selected></mat-option> -->
+                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
+                                            [value]="cert">{{ cert }}
+                                        </mat-option>
                                     </mat-select>
-                            </div>
-                            <div class="col-md-5">
+                                </div>
+                                <div class="col-md-5">
                                     <label class="top_txt">Subject Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border" formControlName="certType"
-                                      (selectionChange)="testfunction(t.value)">
-                                      <!-- <mat-option value="None" selected></mat-option> -->
-                                      <mat-option style="text-align: left" *ngFor="let cert of certificates" [value]="cert">{{ cert }}
-                                      </mat-option>
+                                    <mat-select #t class="browser-default custom-select mb-4 border"
+                                        (selectionChange)="testfunction(t.value)">
+                                        <!-- <mat-option value="None" selected></mat-option> -->
+                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
+                                            [value]="cert">{{ cert }}
+                                        </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col-md-2">
-                                        <button mat-raised-button class="search_btn"><img src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px"> Search</button>
+                                    <button mat-raised-button class="search_btn"><img
+                                            src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
+                                        Search</button>
                                 </div>
-                                
+
+                            </div>
                         </div>
-                    </div>
-                    
+                    </form>
+
                 </div>
             </div>
         </div>
