@@ -7,17 +7,14 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import {MatButtonModule,MatGridListModule} from '@angular/material';
-import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatButtonModule,MatGridListModule} from '@angular/material';
+import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { FileUploadModule } from 'ng2-file-upload';
 
-// import { FileSelectDirective } from 'ng2-file-upload';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 // import { MDBBootstrapModule } from 'angular-bootstrap-md';
-
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/Auth/navbar/navbar.component';
@@ -77,7 +74,6 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
     AcademicSubjectComponent,
-
   ],
   imports: [
     NgFlashMessagesModule.forRoot(),
@@ -97,8 +93,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     MatButtonModule,
     MatGridListModule,
     MatSlideToggleModule,
-    FileUploadModule
-
+    // NgProgressModule,
   ],
   providers: [
     CookieService,

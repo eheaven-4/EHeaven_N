@@ -16,6 +16,7 @@ export class AddNotificationComponent implements OnInit {
   attachment;
   date;
   state;
+  filename;
 
   constructor(
     private router: Router,
@@ -36,6 +37,7 @@ export class AddNotificationComponent implements OnInit {
     if (event.target.files.length > 0) {  // check the file is select or not.
       const file = event.target.files[0];
       this.attachment = file;
+      this.filename = file.name;
     }
   }
 
