@@ -143,9 +143,9 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
       }
     }
   }
-  searchStu(value:string){
+  searchStu(value:string,month:number){
     this.historyflagS=false;
-    console.log(value);
+    console.log(value,month);
     this.attendanceservice.retriveStu(value)
     .subscribe((data:Attendreturn[])=>{
       if(data.length==0){

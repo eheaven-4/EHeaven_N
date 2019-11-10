@@ -16,7 +16,7 @@ import { FileUploadModule } from 'ng2-file-upload';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-import { MDBBootstrapModule } from 'angular-bootstrap-md';
+// import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 
 import { AppComponent } from './app.component';
@@ -92,7 +92,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     MatDatepickerModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MDBBootstrapModule,
+    // MDBBootstrapModule,
     FontAwesomeModule,
     MatButtonModule,
     MatGridListModule,

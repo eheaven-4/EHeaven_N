@@ -128,18 +128,7 @@
                                             </mat-grid-list>
                                             
 
-                                            <!-- <div class="row">
-                                               <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                        <h3>UserID</h3>                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h3>
-                                                        Attendence
-                                                    </h3>
-                                                </div>
-                                            </div> -->
+                                            
 
                                             <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchDateResult">
                                                 <mat-grid-tile><h3>{{result.userid}}</h3></mat-grid-tile>
@@ -147,68 +136,50 @@
                                                 
                                             </mat-grid-list>
 
-                                            <!-- <div class="row" *ngFor="let result of searchDateResult">
-                                                <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                        <h3>{{result.userid}}</h3>                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <h3>{{result.attend}}</h3>
-                                                </div>
-                                                    {{result.date}};
-                                            </div> -->
+                                           
                                             <div style="text-align: center;color:blue;">
                                                     <label >
                                                         click here to search another Date
                                                     </label>
                                                     <hr>
                                                     <button mat-raised-button color="primary" (click)="historyflagD=true;"><mat-icon>replay</mat-icon>Click here</button>
-                                                    <!-- <button class="submit" (click)="historyflagD=true;">Click here</button> -->
+                                                    
                                             </div>
                                         </div>
                                     </mat-tab>
                                     <mat-tab label="Special Student">
-                                        <div style="padding-top: 100px ; padding-bottom: 100px" *ngIf="historyflagS">
-                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(stuid.value)">
+                                        <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
+                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected)" #user="ngForm">
+                                                h {{ user.stu }}
                                                 <mat-grid-list cols="2">
                                                     <mat-grid-tile>
                                                             
-                                                        <!-- <mat-list role="list" style="color: blue;">
-
-                                                            <mat-list-item role="listitem" style="text-align: center;">
-                                                                <h4>
-                                                                    Enter student Registration number or name 
-                                                                </h4>
-                                                            </mat-list-item>
-                                                            <mat-list-item role="listitem" style="text-align: center;">    
-                                                                <input   type="text" #stuid name="name">
-                                                            </mat-list-item>
-
-                                                        </mat-list> -->
-                                                        <mat-form-field class="example-full-width">
-                                                                <input matInput placeholder="Enter student Registration number or name" >
+                                                        
+                                                        <mat-form-field class="example-full-width" >
+                                                                <input matInput placeholder="Enter student Registration number or name"  name="stu" ngModel>
                                                         </mat-form-field>
-                                                        <mat-hint>Ex:00000001 or Pradeepa Sandaruwan</mat-hint>
+                                                    <hr>
+                                                        <mat-hint>Ex:00000001</mat-hint>
                                                         
-                                                        <!-- <button class="btn btn-primary">search</button> -->
                                                         
-                                                        <!-- <div class="active-purple-3 active-purple-4 mb-4">
-                                                                <input class="form-control" type="text" placeholder="Search" aria-label="Search">
-                                                            </div> -->
                                                     </mat-grid-tile>
                                                     <mat-grid-tile>
-                                                        <mat-form-field>
-                                                            <mat-label>Favorite food</mat-label>
-                                                                <mat-select [(ngModel)]="selectedValue" name="month">
-                                                                    <mat-option *ngFor="let month of months" [value]="month.value">
-                                                                        {{month}}
-                                                                    </mat-option>
-                                                                </mat-select>
-                                                        </mat-form-field>
+                                                            <mat-form-field #month>
+                                                                    <mat-label>Month</mat-label>
+                                                                    <mat-select [(value)]="selected">
+                                                                      <mat-option>None</mat-option>
+                                                                      <mat-option *ngFor="let month of months;index as i" value="{{i}}">{{month}}</mat-option>
+                                                                    </mat-select>
+                                                            </mat-form-field>
+                                                                 
+                                                          
                                                     </mat-grid-tile>  
+                                                  
                                                 </mat-grid-list>  
+                                                
                                                 <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
+                                                
+                                                
                                             </form>
                                             
                                         </div>
@@ -222,20 +193,7 @@
                                                         <h3>Attendence</h3>
                                                 </mat-grid-tile>
                                             </mat-grid-list>
-                                            <!-- <div class="row">
-                                               <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                        <h3>Date</h3>                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                    <h3>
-                                                        Attendence
-                                                    </h3>
-                                                    </div>
-                                                </div>
-                                            </div> -->
+                                            
                                             <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchStuResult">
                                                     <mat-grid-tile>
                                                         <h3>{{result.date}}</h3>
@@ -244,28 +202,14 @@
                                                             <h3>{{result.attend}}</h3>
                                                     </mat-grid-tile>
                                             </mat-grid-list>
-                                            <!-- <div class="row" *ngFor="let result of searchStuResult">
-                                                <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                        <h3>{{result.date}}</h3>                                        
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-6">
-                                                    <div style="text-align: center">
-                                                    <h3>
-                                                        {{result.attend}}
-                                                    </h3>
-                                                    </div>
-                                                </div>
-                                                    {{result.date}};
-                                            </div> -->
+                                      
                                             <div style="text-align: center;">
                                                 <label style="color: blue;">
                                                     click here to search another student
                                                 </label>
                                                 <hr>
                                                 <button mat-raised-button color="primary" (click)="historyflagS=true;"><mat-icon>replay</mat-icon>Click here</button>
-                                                <!-- <button class="submit"  (click)="historyflagS=true">Click here</button> -->
+                                               
                                                 
                                             </div>
                                         </div>
