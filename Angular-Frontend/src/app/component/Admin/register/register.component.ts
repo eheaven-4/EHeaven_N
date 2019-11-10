@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,9 +10,10 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+  submitted = false;
   images;
   filename;
+  RegistrationForm: FormGroup;
   constructor(
     private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
@@ -22,26 +23,25 @@ export class RegisterComponent implements OnInit {
   ) { }
 
   // registratin form attributes
-  RegistrationForm = this.fb.group({
-    usertype: ['', Validators.required],
-    userid: ['', Validators.required],
-    selectclass: ['', Validators.required],
-    name: ['', Validators.required],
-    email: ['', Validators.required],
-    password: ['', Validators.required],
-    birthday: ['', Validators.required],
-    mobilenumber: ['', Validators.required],
-    homenumber: ['', Validators.required],
-    gender: ['', Validators.required],
-    nationality: ['', Validators.required],
-    nicnumber: ['', Validators.required],
-    father: ['', Validators.required],
-    mother: ['', Validators.required],
-    address: ['', Validators.required],
-  });
 
   ngOnInit() {
-    
+    this.RegistrationForm = this.fb.group({
+      usertype: ['', Validators.required],
+      userid: ['', Validators.required],
+      selectclass: [''],
+      name: ['', [Validators.required, Validators.maxLength(60)]],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      birthday: ['', Validators.required],
+      mobilenumber: [''],
+      homenumber: [''],
+      gender: ['', Validators.required],
+      nationality: ['', Validators.required],
+      nicnumber: [''],
+      father: [''],
+      mother: [''],
+      address: ['', Validators.required],
+    });
   }
   // load the image as the button event and asign to  the images variable
   selectImage(event) {
@@ -52,63 +52,76 @@ export class RegisterComponent implements OnInit {
       console.log(this.filename)
     }
   }
+  get f() { return this.RegistrationForm.controls; }
+  onReset() {
+    this.submitted = false;
+    this.RegistrationForm.reset();
+  }
   /**************************************************** */
   registerUser() {
-    const formData = new FormData();
+    this.submitted = true;
 
-    formData.append('profileImage', this.images)
-    formData.append('usertype', this.RegistrationForm.value.usertype)
-    formData.append('userid', this.RegistrationForm.value.userid)
-    formData.append('selectclass', this.RegistrationForm.value.selectclass)
-    formData.append('name', this.RegistrationForm.value.name)
-    formData.append('email', this.RegistrationForm.value.email)
-    formData.append('password', this.RegistrationForm.value.password)
-    formData.append('birthday', this.RegistrationForm.value.birthday)
-    formData.append('mobilenumber', this.RegistrationForm.value.mobilenumber)
-    formData.append('homenumber', this.RegistrationForm.value.homenumber)
-    formData.append('gender', this.RegistrationForm.value.gender)
-    formData.append('nationality', this.RegistrationForm.value.nationality)
-    formData.append('nicnumber', this.RegistrationForm.value.nicnumber)
-    formData.append('father', this.RegistrationForm.value.father)
-    formData.append('mother', this.RegistrationForm.value.mother)
-    formData.append('address', this.RegistrationForm.value.address)
-
-    /****************************************************** */
-    console.log(formData);
-    const url = 'http://localhost:3000/users/register';
-
-    if (this.images == null) {
-      this.ngFlashMessageService.showFlashMessage({
-        messages: ["Select the Profile Image..!"],
-        dismissible: true,
-        timeout: 2000,
-        type: 'warning'
-      });
+    // stop here if form is invalid
+    if (this.RegistrationForm.invalid) {
+      return;
     }
     else {
-      this.http.post<any>(url, formData).subscribe(res => {
-        if (res.state) {
+      const formData = new FormData();
 
-          console.log(res.msg);
-          this.ngFlashMessageService.showFlashMessage({
-            messages: ["Successfully Registered..!"],
-            dismissible: true,
-            timeout: 2000,
-            type: 'success',
-          });
-          // this.ngProgress.done();
-          this.router.navigate(['/login']);
-        }
-        else {
-          this.ngFlashMessageService.showFlashMessage({
-            messages: ["You are not Registerd..!"],
-            dismissible: true,
-            timeout: 2000,
-            type: 'warning'
-          });
-          this.router.navigate(['/register']);
-        }
-      });
+      formData.append('profileImage', this.images)
+      formData.append('usertype', this.RegistrationForm.value.usertype)
+      formData.append('userid', this.RegistrationForm.value.userid)
+      formData.append('selectclass', this.RegistrationForm.value.selectclass)
+      formData.append('name', this.RegistrationForm.value.name)
+      formData.append('email', this.RegistrationForm.value.email)
+      formData.append('password', this.RegistrationForm.value.password)
+      formData.append('birthday', this.RegistrationForm.value.birthday)
+      formData.append('mobilenumber', this.RegistrationForm.value.mobilenumber)
+      formData.append('homenumber', this.RegistrationForm.value.homenumber)
+      formData.append('gender', this.RegistrationForm.value.gender)
+      formData.append('nationality', this.RegistrationForm.value.nationality)
+      formData.append('nicnumber', this.RegistrationForm.value.nicnumber)
+      formData.append('father', this.RegistrationForm.value.father)
+      formData.append('mother', this.RegistrationForm.value.mother)
+      formData.append('address', this.RegistrationForm.value.address)
+
+      /****************************************************** */
+      console.log(formData);
+      const url = 'http://localhost:3000/users/register';
+
+      if (this.images == null) {
+        this.ngFlashMessageService.showFlashMessage({
+          messages: ["Select the Profile Image..!"],
+          dismissible: true,
+          timeout: 2000,
+          type: 'warning'
+        });
+      }
+      else {
+        this.http.post<any>(url, formData).subscribe(res => {
+          if (res.state) {
+
+            console.log(res.msg);
+            this.ngFlashMessageService.showFlashMessage({
+              messages: ["Successfully Registered..!"],
+              dismissible: true,
+              timeout: 2000,
+              type: 'success',
+            });
+            // this.ngProgress.done();
+            this.router.navigate(['/login']);
+          }
+          else {
+            this.ngFlashMessageService.showFlashMessage({
+              messages: ["You are not Registerd..!"],
+              dismissible: true,
+              timeout: 2000,
+              type: 'warning'
+            });
+            this.router.navigate(['/register']);
+          }
+        });
+      }
     }
   }
 }

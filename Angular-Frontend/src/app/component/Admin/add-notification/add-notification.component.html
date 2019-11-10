@@ -34,8 +34,11 @@
 
               <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
                 (click)="fileInput.click()" accept="image/*">Attach a file</button>
-
-              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit
+              <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;">
+                {{filename}}
+              </small>
+              <p>&nbsp;</p>
+              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border" >Submit
                 for Approval</button>
             </form>
           </div>
