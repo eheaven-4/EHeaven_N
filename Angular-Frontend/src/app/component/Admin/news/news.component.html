@@ -17,22 +17,33 @@
 
               <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
-              <div class="form-row mb-4">
-                <label>Topic :</label>
+              <div class="form-group">
+                <p style="text-align: left">Topic :</p>
                 <input type="text" class="form-control box_border" aria-describedby="textHelp" name="topic"
                   formControlName="topic">
+                <div *ngIf="submitted && f.topic.errors" class="err_msg">
+                  <div *ngIf="f.topic.errors.required">Topic is required</div>
+                  <div *ngIf="f.topic.errors.maxlength">Topic must less than 20 characters</div>
+                </div>
               </div>
 
               <div class="form-row mb-4">
-                <label>News Sumery :</label>
+                <p style="text-align: left;">News Sumery :</p>
                 <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="newsSumery"
                   id="textbox1" formControlName="newsSumery"></textarea>
+                <div *ngIf="submitted && f.newsSumery.errors" class="err_msg">
+                  <div *ngIf="f.newsSumery.errors.required">Summery is required</div>
+                  <div *ngIf="f.newsSumery.errors.maxlength">Summery must less than 400 characters</div>
+                </div>
               </div>
 
               <div class="form-row mb-4">
                 <label>News :</label>
                 <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news"
                   id="textbox" formControlName="news"></textarea>
+                <div *ngIf="submitted && f.news.errors" class="err_msg">
+                  <div *ngIf="f.news.errors.maxlength">News must less than 800 characters</div>
+                </div>
               </div>
 
 
@@ -59,31 +70,38 @@
                     <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">NewsView
                     </h2>
                   </div>
-
                 </div>
+
                 <hr>
+
               </div>
               <br>
               <div style="padding-left: 35px; padding-right: 35px">
                 <mat-card class="news-card" *ngFor="let new of news">
-                  <!-- <p style="display: none" name="notice_id">{{news._id}}</p> -->
+                  
                   <mat-card-header>
                     <div mat-card-avatar class="example-header-image"></div>
                     <mat-card-title>{{new.topic}}</mat-card-title>
                     <mat-card-subtitle style="margin-top:-15px">{{new.date | date:'yyyy-MM-dd HH:mm:ss'}}
                     </mat-card-subtitle>
                   </mat-card-header>
+                  
                   <mat-card-content>
-                    <h6>News image</h6>
-                    <br>
-                    <p>{{new.newsSumery}}</p>
-                    <br>
+                    <h6>{{new.newsSumery}}</h6>
                     <p>{{new.news}}</p>
                   </mat-card-content>
+
+                  <mat-card-subtitle *ngIf="new.filePath" style="padding-right: 20px"><a
+                      href="http://localhost:3000/news/newsAttachment/{{new.filePath}}"><img
+                        src="../../../../assets/icons/paperclip-solid.svg"
+                        class="attachment_icn">&nbsp;&nbsp;Attachment</a>
+                  </mat-card-subtitle>
+
                   <mat-card-actions style="text-align: right">
 
                     <button mat-raised-button class="edit_btn" (click)="edit($event, new._id)">Edit</button>
-                    <button mat-raised-button class="delete_btn" (click)="delete($event, new._id)">Delete</button>
+                    <button mat-raised-button class="delete_btn"
+                      (click)="delete($event, new._id, new.filePath)">Delete</button>
                   </mat-card-actions>
                 </mat-card>
               </div>
