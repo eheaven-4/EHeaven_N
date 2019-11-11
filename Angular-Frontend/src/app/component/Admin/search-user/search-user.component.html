@@ -28,7 +28,10 @@
                             </div>
                         </form>
                     </div>
+
                     <!-- {{userdata | json}} -->
+
+
                     <div class="container" *ngIf="dataform == true">
                         <div style="padding-bottom: 50px">
                             <form class="text-center border p-5 reg-frm" [formGroup]="RegistrationForm">
@@ -165,18 +168,31 @@
 
                                 <input type="file" class="file_upload" style="display: none" name="profilepic"
                                     accept="image/*" [uploader]="uploader" (change)="selectImage($event)" #fileInput>
+<!-- 
+                                <input #file type="file" accept='image/*' (change)="preview(file.files)" />
+                                <img [src]="imgURL" height="200" *ngIf="imgURL"> -->
 
-                                <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
-                                    (click)="fileInput.click()" accept="image/*">Choose Profile
-                                    Picture</button>
-
-                                <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;">
-                                    Resolution : (320 x 280)p / 8 : 7 {{filename}}
-                                </small>
+                                <div class="row">
+                                    <div class="col-md-4 profile-pic">
+                                        <mat-card *ngIf="userdata.filepath"><img
+                                                src="http://localhost:3000/users/profileImage/{{userdata.filepath}}"
+                                                class="profile_matcard" >
+                                        </mat-card>
+                                    </div>
+                                    <div class="col-md-8" style="padding-top: 100px;">
+                                        <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
+                                            type="button" (click)="fileInput.click()" accept="image/*">Update Profile
+                                            Picture</button>
+                                        <small class="form-text text-muted mb-4"
+                                            style=" text-align: left; margin-top: -18px;">
+                                            Resolution : (320 x 280)p / 8 : 7 {{filename}}
+                                        </small>
+                                    </div>
+                                </div>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button class="btn btn-info my-4 btn-block del_btn box_border" type="submit"
-                                            (click)="updateUser()">Delete User</button>
+                                            (click)="deleteUser()">Delete User</button>
                                     </div>
                                     <div class="col-md-6">
                                         <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"

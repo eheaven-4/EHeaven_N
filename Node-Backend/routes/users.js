@@ -7,6 +7,7 @@ const multer = require('multer');
 const pdfDoc = require('pdf-lib');
 const bcrypt = require('bcryptjs');
 var path = require('path');
+const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -174,12 +175,78 @@ router.get("/searchUsers/:userid", function (req, res, next) {
         })
 })
 
-router.post("/updateUser/:userid", function(req,res, next) {
+router.post("/updateUser/:userid", function (req, res, next) {
+    const userid = req.params.userid;
+    upload(req, res, (err) => {
 
+        var fullPath = req.file.originalname;
+
+        const input = {
+            usertype: req.body.usertype,
+            selectclass: req.body.selectclass,
+            name: req.body.name,
+            email: req.body.email,
+            password: req.body.password,
+            birthday: req.body.birthday,
+            mobilenumber: req.body.mobilenumber,
+            homenumber: req.body.homenumber,
+            gender: req.body.gender,
+            nationality: req.body.nationality,
+            nicnumber: req.body.nicnumber,
+            father: req.body.father,
+            mother: req.body.mother,
+            address: req.body.address,
+            filepath: fullPath,
+        }
+        for (const [key, value] of Object.entries(input)) {
+            console.log(key, value);
+        }
+        User.update({ userid: userid }, { $set: input })
+            .exec()
+            .then(result => {
+                console.log(result);
+                res.status(200).json(result);
+            })
+            .catch(error => {
+                console.log(error);
+                res.status(500).json({
+                    error: error
+                });
+            });
+    })
 })
 
-router.delete("/deleteUser/:userid", function(req,res,next){
-
+router.delete("/deleteUser/:userid", function (req, res, next) {
+    const userid = req.params.userid;
+    User.remove({ userid: userid })
+        .exec()
+        .then(result => {
+            res.status(200).json({
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
 })
-
+router.delete("/profImage/:filename", function (req, res) {
+    const filename = req.params.filename;
+    console.log(filename)
+    const path = 'local_storage/profile_Images/' + filename;
+    try {
+        fs.unlinkSync(path)
+        res.status(200).json({
+            message: 'Delete the file successfully..!'
+        })
+        //file removed
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: error
+        });
+    }
+});
 module.exports = router;  

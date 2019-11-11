@@ -44,7 +44,7 @@
     border-radius: 3px;
 }
 .pick_btn{
-    width: 30%;
+    width: 60%;
 }
                              
 .flashMessage{
@@ -58,4 +58,17 @@
     color: red;
     text-align: left;
     font-size: 10px;
+}
+.profile_matcard{
+    text-align: center;
+    padding-right: 10px;
+    width : 100%;
+}
+
+.profile-pic{
+    margin: auto;
+    padding-top: 30px;
+    text-align: center;
+    width : 280px;
+    height: 320px;
 }
