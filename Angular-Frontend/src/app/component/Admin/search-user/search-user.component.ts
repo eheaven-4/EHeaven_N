@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgFlashMessageService } from 'ng-flash-messages';
+import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 interface user {
   _id: String;
@@ -35,23 +37,25 @@ export class SearchUserComponent implements OnInit {
     private fb: FormBuilder,
     private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   userdata: user[] = [];
   UserForm: FormGroup;
-  UserDataForm : FormGroup;
+  UserDataForm: FormGroup;
   submitted = false;
   images;
   filename;
   userid;
   dataform: Boolean = false;  //sata division default didn't show
   propicName; //profile picture name variable
-  
+
   ngOnInit() {
     this.UserForm = this.fb.group({
       userid: ['', Validators.required]
     });
-    
+
     this.UserDataForm = this.fb.group({
       usertype: ['', Validators.required],
       userid: ['', Validators.required],
@@ -69,7 +73,7 @@ export class SearchUserComponent implements OnInit {
       mother: [''],
       address: ['', Validators.required],
     });
-    
+
   }
 
   searchUser() {
@@ -79,18 +83,15 @@ export class SearchUserComponent implements OnInit {
 
     this.http.get<any>(url + "/" + this.userid).subscribe(res => {
       if (res.state == false) {
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["Error find in user..!  "],
-          dismissible: true,
-          timeout: 2000,
-          type: 'warning'
-        });
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Error find in user..! ", true ? "Retry" : undefined, config);
       }
       else {
         this.userdata = res.data;
         console.log(res.data.usertype);
         this.dataform = true;
-        this.propicName = res.data.filepath        
+        this.propicName = res.data.filepath
       }
     })
   }
@@ -122,10 +123,10 @@ export class SearchUserComponent implements OnInit {
     this.submitted = true;
 
     // stop here if form is invalid
-    // if (this.RegistrationForm.invalid) {
-    //   return;
-    // }
-    // else {
+    if (this.UserDataForm.invalid) {
+      return;
+    }
+    else {
       const formData = new FormData();
 
       formData.append('profileImage', this.images)
@@ -146,7 +147,7 @@ export class SearchUserComponent implements OnInit {
       formData.append('address', this.UserDataForm.value.address)
 
       /****************************************************** */
-      console.log(formData);
+      console.log(this.UserDataForm.value.usertype);
       const url = 'http://localhost:3000/users/updateUser/';
 
       // if (this.images == null) {
@@ -180,7 +181,7 @@ export class SearchUserComponent implements OnInit {
       //     }
       //   });
       // }
-    // }
+    }
   }
 
 
@@ -217,23 +218,33 @@ export class SearchUserComponent implements OnInit {
 
       })
     }
-    this.http.delete<any>(url2 + this.userid).subscribe(res => {
-      if (res.state == true) {
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["Successfully Deleted..! "],
-          dismissible: true,
-          timeout: 2000,
-          type: 'success',
-        });
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to delete?',
+        buttonText: {
+          ok: 'Save',
+          cancel: 'No'
+        }
       }
-      else {
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["Delete User Error..! "],
-          dismissible: true,
-          timeout: 2000,
-          type: 'warnig',
-        });
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.http.delete<any>(url2 + this.userid).subscribe(res => {
+          if (res.state == true) {
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Successfully Deleted..! ", true ? "Done" : undefined, config);
+          }
+          else {
+            this.ngFlashMessageService.showFlashMessage({
+              messages: ["Delete User Error..! "],
+              dismissible: true,
+              timeout: 2000,
+              type: 'warnig',
+            });
+          }
+        })
       }
-    })
+    });
   }
 }
