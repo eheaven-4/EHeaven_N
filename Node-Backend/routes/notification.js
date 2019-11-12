@@ -84,7 +84,7 @@ router.get('/approve/:_id', (req, res, next) => {
     })
         .exec()
         .then(result => {
-            console.log(result);
+            console.log(    );
             res.status(200).json(result);
         })
         .catch(error => {

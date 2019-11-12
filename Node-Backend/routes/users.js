@@ -25,14 +25,10 @@ const upload = multer({ storage: storage }).single('profileImage');
 router.post("/login", function (req, res, next) {
     const userid = req.body.userid;
     const password = req.body.password;
-    // const query = { userid: userid };
     User.findByUserid(userid, function (err, user) {
         if (err) throw err;
         if (!user) {
-            res.json({
-                state: false,
-                msg: "No user found"
-            });
+            res.json({state: false, msg: "No user found..!"});
             return;
         }
         User.passwordCheck(password, user.password, function (err, match) {
@@ -43,10 +39,6 @@ router.post("/login", function (req, res, next) {
 
             if (match) {
                 console.log("Userid and Password match!");
-                /************************************************************************************** */
-                // const cookies = res.cookie('cookieName', password, { maxAge: 9000, httpOnly: true });
-                // console.log('cookie created successfully');
-                /************************************************************************************** */
                 const token = jwt.sign(user.toJSON(), config.secret, { expiresIn: 86400 });
 
                 res.json({
@@ -150,30 +142,41 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
         .exec()
         .then(data => {
             console.log("Data Transfer Success..!")
-            res.status(200).json(data)
+            res.json({ state: true, msg: "Data Transfer Success..!" });
+
         })
         .catch(error => {
             console.log("Data Transfer Unsuccessfull..!")
-            res.status(500).json({
-                error: error
-            })
+            res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
         })
 })
 
+/*searth user function*/
+
 router.get("/searchUsers/:userid", function (req, res, next) {
     const userid = req.params.userid;
-    User.findOne({ userid: userid })
-        .select()
-        .exec()
-        .then(data => {
-            console.log("Data Transfer Success..!");
-            res.status(200).json(data);
-        })
-        .catch(error => {
-            console.log("Data Transfer Unsuccessfull..!");
-            error: error
-        })
+    User.findByUserid(userid, function (err, user) {
+        if (err) throw err;
+        if (!user) {
+            res.json({ state: false, msg: "No user found..!" });
+            return;
+        }
+        User.findOne({ userid: userid })
+            .select()
+            .exec()
+            .then(data => {
+                console.log("Data Transfer Success..!")
+                res.json({ state: true, msg: "Data Transfer Success..!" , data: data});
+    
+            })
+            .catch(error => {
+                console.log("Data Transfer Unsuccessfull..!")
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+            })
+    })
 })
+
+//update user data function
 
 router.post("/updateUser/:userid", function (req, res, next) {
     const userid = req.params.userid;
@@ -203,35 +206,35 @@ router.post("/updateUser/:userid", function (req, res, next) {
         }
         User.update({ userid: userid }, { $set: input })
             .exec()
-            .then(result => {
-                console.log(result);
-                res.status(200).json(result);
+            .then(data => {
+                console.log("Data Update Success..!")
+                res.json({ state: true, msg: "Data Update Success..!" });
+    
             })
             .catch(error => {
-                console.log(error);
-                res.status(500).json({
-                    error: error
-                });
-            });
+                console.log("Data Updating Unsuccessfull..!")
+                res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
+            })
     })
 })
 
+//delete userdata function
 router.delete("/deleteUser/:userid", function (req, res, next) {
     const userid = req.params.userid;
     User.remove({ userid: userid })
         .exec()
-        .then(result => {
-            res.status(200).json({
-                message: 'Deleted Successfully'
-            });
+        .then(data => {
+            console.log("Data Delete Success..!")
+            res.json({ state: true, msg: "Data Delete Success..!" });
+
         })
         .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
+            console.log("Data Deleting Unsuccessfull..!")
+            res.json({ state: false, msg: "Data Deleting Unsuccessfull..!" });
+        })
 })
+
+//delete user profile pictuer. 
 router.delete("/profImage/:filename", function (req, res) {
     const filename = req.params.filename;
     console.log(filename)
@@ -249,4 +252,5 @@ router.delete("/profImage/:filename", function (req, res) {
         });
     }
 });
+
 module.exports = router;  
