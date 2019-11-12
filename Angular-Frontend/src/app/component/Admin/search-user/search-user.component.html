@@ -40,7 +40,7 @@
                         <div style="padding-bottom: 50px">
                             <form class="text-center border p-5 reg-frm" [formGroup]="UserDataForm">
                                 <div class="form-row mb-4">
-                                    {{UserDataForm.value | json}}
+                                    <!-- {{UserDataForm.value | json}} -->
                                     <div class="col">
                                         <select class="browser-default custom-select mb-4 box_border" name="usertype"
                                             formControlName="usertype" [(ngModel)]="usertype"
@@ -186,7 +186,7 @@
                                                 src="http://localhost:3000/users/profileImage/{{userdata.filepath}}"
                                                 class="profile_matcard">
                                         </mat-card>
-                                        <p>{{userdata.filepath}}</p>
+                                        <!-- <p>{{userdata.filepath}}</p> -->
                                     </div>
                                     <div class="col-md-8" style="padding-top: 100px;">
                                         <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
