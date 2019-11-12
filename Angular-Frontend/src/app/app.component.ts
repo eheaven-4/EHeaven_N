@@ -9,6 +9,7 @@ import {Title} from "@angular/platform-browser";
 export class AppComponent {
   constructor(private titleService:Title) {
     this.titleService.setTitle("EHeaven");
+    
   }
 
   title = 'Angular-Frontend';

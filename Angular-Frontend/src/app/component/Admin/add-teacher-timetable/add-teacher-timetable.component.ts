@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { MycookiesService } from '../mycookies.service';
-import { isEmptyExpression } from '@angular/compiler';
+import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-add-teacher-timetable',
@@ -24,7 +24,8 @@ export class AddTeacherTimetableComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private cookies: MycookiesService, //import Mycookies Service files
-    private ngFlashMessage: NgFlashMessageService,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -88,27 +89,34 @@ export class AddTeacherTimetableComponent implements OnInit {
 
     var url = "http://localhost:3000/teacher_management/timeTableRegistration";
 
-    console.log(timeTable)
-    this.http.post<any>(url, timeTable).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Successfully Added ..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'success',
-        });
-        this.router.navigate(['/add_techr_tt']);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to Add?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
       }
-      else {
-        console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Notification Adding Unsuccessfull..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'danger',
-        });
-        this.router.navigate(['/add_techr_tt']);
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        console.log(timeTable)
+        this.http.post<any>(url, timeTable).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Time table Successfully Added..! ", true ? "Done" : undefined, config);
+            this.router.navigate(['/add_techr_tt']);
+          }
+          else {
+            console.log(res.msg);
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Time table Adding Unsuccessfull..! ", true ? "Retry" : undefined, config);
+            this.router.navigate(['/add_techr_tt']);
+          }
+        })
       }
     })
   }

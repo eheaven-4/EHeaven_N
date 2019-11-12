@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 interface news {  // decalare interface class for load notification attributes.
   _id: String;
@@ -31,11 +33,12 @@ export class NewsComponent implements OnInit {
   // ngFlashMessage: any;
 
   constructor(
-    private ngFlashMessage: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
     private cookies: MycookiesService,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   // news form attributes
@@ -102,36 +105,37 @@ export class NewsComponent implements OnInit {
       const url = 'http://localhost:3000/news/add';
 
       if (this.images == null) {
-        this.ngFlashMessage.showFlashMessage({
-          messages: ['Select the Profile Image..!'],
-          dismissible: true,
-          timeout: 2000,
-          type: 'warning'
-        });
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Please Select a Image..! ", true ? "Retry" : undefined, config);
       } else {
-        // console.log(formData)
-        this.http.post<any>(url, formData).subscribe(res => {
-          console.log(res.msg);
-          if (res.state) {
-            this.ngFlashMessage.showFlashMessage({
-              messages: ['Successfully added ..!'],
-              dismissible: true,
-              timeout: 2000,
-              type: 'success',
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          data: {
+            message: 'Are you sure want to Add?',
+            buttonText: {
+              ok: 'Yes',
+              cancel: 'No'
+            }
+          }
+        });
+        dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+          if (confirmed) {
+            this.http.post<any>(url, formData).subscribe(res => {
+              console.log(res.msg);
+              if (res.state) {
+                let config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open("News Successfully Added..! ", true ? "Done" : undefined, config);
+
+                window.location.reload();
+
+              } else {
+                let config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open("News is not Added..! ", true ? "Retry" : undefined, config);
+                this.router.navigate(['/news']);
+              }
             });
-
-            window.location.reload();
-            // this.router.navigate(['/news']);
-
-
-          } else {
-            this.ngFlashMessage.showFlashMessage({
-              messages: ['News is not add..!'],
-              dismissible: true,
-              timeout: 2000,
-              type: 'warning'
-            });
-            this.router.navigate(['/news']);
           }
         });
       }
@@ -147,26 +151,35 @@ export class NewsComponent implements OnInit {
     var urlDelete = "http://localhost:3000/news/newsAttachment"; //notification attachment delete url
 
     //if there is a file in attachment call atachment file delteing request
-    if (mybtnFile) {
-      this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
-        console.log(res);
-      }, (err) => {
-        console.log(err)
-      });
-    }
-
-    this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
-      this.ngFlashMessage.showFlashMessage({
-        messages: ['Successfully Added ..!'],
-        dismissible: true,
-        timeout: 2000,
-        type: 'success',
-      });
-    }, (err) => {
-      console.log(err);
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to Delete?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
     });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        if (mybtnFile) {
+          this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+            console.log(res);
+          }, (err) => {
+            console.log(err)
+          });
+        }
 
-    window.location.reload();     // reload the page
+        this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("News Successfully Deleted..! ", true ? "Done" : undefined, config);
+        }, (err) => {
+          console.log(err);
+        });
+        window.location.reload();     // reload the page
+      }
+    })
   }
 
 }

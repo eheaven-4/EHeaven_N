@@ -35,7 +35,6 @@ export class SearchUserComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
@@ -212,23 +211,24 @@ export class SearchUserComponent implements OnInit {
     const url1 = "http://localhost:3000/users/profImage/"
     const url2 = "http://localhost:3000/users/deleteUser/"
     console.log(this.propicName)
-    if (this.propicName) {
-      this.http.delete<any>(url1 + this.propicName).subscribe(res => {
-        console.log(res);
 
-      })
-    }
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: 'Are you sure want to delete?',
         buttonText: {
-          ok: 'Save',
+          ok: 'Yes',
           cancel: 'No'
         }
       }
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
+        if (this.propicName) {
+          this.http.delete<any>(url1 + this.propicName).subscribe(res => {
+            console.log(res);
+
+          })
+        }
         this.http.delete<any>(url2 + this.userid).subscribe(res => {
           if (res.state == true) {
             let config = new MatSnackBarConfig();
@@ -236,14 +236,12 @@ export class SearchUserComponent implements OnInit {
             this.snackBar.open("Successfully Deleted..! ", true ? "Done" : undefined, config);
           }
           else {
-            this.ngFlashMessageService.showFlashMessage({
-              messages: ["Delete User Error..! "],
-              dismissible: true,
-              timeout: 2000,
-              type: 'warnig',
-            });
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Delete Unsuccessfull..! ", true ? "Retry" : undefined, config);
           }
         })
+        window.location.reload();
       }
     });
   }

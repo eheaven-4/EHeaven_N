@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { NgFlashMessageService } from 'ng-flash-messages';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-login',
@@ -24,7 +24,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private cookies: MycookiesService,
-    private ngFlashMessage: NgFlashMessageService
+    public snackBar: MatSnackBar,
+
   ) { }
 
   ngOnInit() { }
@@ -49,12 +50,9 @@ export class LoginComponent implements OnInit {
         if(id){
           // window.location.reload();     //reload the page
           this.router.navigate(['/academic_subject' + '/' + id]);
-              this.ngFlashMessage.showFlashMessage({
-                messages: ["Successfully Logged In..!"], 
-                dismissible: true, 
-                timeout: 2000,
-                type: 'success',
-              });
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
               // location.reload();
         }
         else{
@@ -64,12 +62,9 @@ export class LoginComponent implements OnInit {
       }
       else {
         console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Username or password incorrect..!"], 
-          dismissible: true, 
-          timeout: 2000,
-          type: 'warning',
-        });
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Username or Password Incorrect..! ", true ? "Retry" : undefined, config);
         this.router.navigate(['/login']);
       }
     });
