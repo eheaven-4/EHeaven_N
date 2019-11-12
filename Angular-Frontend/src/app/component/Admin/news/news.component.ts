@@ -42,7 +42,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.NewsForm = this.fb.group({
-      topic: ['', [Validators.required, Validators.maxLength(20)]],
+      topic: ['', [Validators.required, Validators.maxLength(50)]],
       newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
       news: ['', Validators.maxLength(800)],
     });
@@ -93,7 +93,6 @@ export class NewsComponent implements OnInit {
       const formData = new FormData();
 
       formData.append('newsImage', this.images);
-      // formData.append('userid', this.NewsForm.value.userid);
       formData.append('topic', this.NewsForm.value.topic);
       formData.append('date', this.date);
       formData.append('newsSumery', this.NewsForm.value.newsSumery);
