@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgFlashMessageService } from 'ng-flash-messages';
+import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,18 +12,18 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 })
 export class SidebarComponent implements OnInit {
 
-  userid: String;
-  user: any;
-  myCookie: String = this.cookies.getCookie("userAuth")
+    userid: String;
+    user: any;
+    myCookie: String = this.cookies.getCookie("userAuth")
   constructor(
     private router: Router,
     private cookies: MycookiesService,
     private cookieService: CookieService,
-    private ngFlashMessage: NgFlashMessageService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
-    
+
   }
 
   userAcademics() {
@@ -33,17 +34,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/academic_subject' + '/' + id]);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        // Array of messages each will be displayed in new line
-        messages: ["Please Login First..!"], 
-        // Whether the flash can be dismissed by the user defaults to false
-        dismissible: true, 
-        // Time after which the flash disappears defaults to 2000ms
-        timeout: 2000,
-        // Type of flash message, it defaults to info and success, warning, danger types can also be used
-        type: 'warning',
-        
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -56,12 +49,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/notifications']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -72,12 +62,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/certification']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -88,16 +75,13 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/prepare_certification']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
-  
+
   userAttendence() {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
@@ -105,12 +89,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/attendance']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -122,12 +103,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/extra_curricular']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -139,12 +117,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/manage_marks']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -156,12 +131,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/student_progress' + '/' + id]);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
@@ -172,12 +144,9 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/admin_dashboard']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }

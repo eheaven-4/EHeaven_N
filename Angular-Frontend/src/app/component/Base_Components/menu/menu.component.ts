@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { MycookiesService } from '../../Admin/mycookies.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-menu',
@@ -7,9 +10,147 @@ import { Component, OnInit } from '@angular/core';
 })
 export class MenuComponent implements OnInit {
 
-  constructor() { }
+  userid: String;
+  user: any;
+  myCookie: String = this.cookies.getCookie("userAuth")
+  
+  constructor(
+    private router: Router,
+    private cookies: MycookiesService,
+    public snackBar: MatSnackBar,
+  ) { }
 
   ngOnInit() {
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
+  }
+  userAcademics() {
+
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/academic_subject' + '/' + id]);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
   }
 
+  userNotification() {
+
+    if (this.myCookie) {
+      // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      // var id = userCookie.userid;
+      this.router.navigate(['/notifications']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+  userCertification() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/certification']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+  userPrepCertification() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/prepare_certification']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  userAttendence() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/attendance']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  userExtraCur() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/extra_curricular']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  userStudentMarks() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/manage_marks']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  userStudentProg() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/student_progress' + '/' + id]);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
+
+  adminDashboard() {
+    if (this.myCookie) {
+      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var id = userCookie.userid;
+      this.router.navigate(['/admin_dashboard']);
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
+      this.router.navigate(['/login']);
+    }
+  }
 }
