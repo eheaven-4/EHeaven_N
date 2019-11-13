@@ -70,14 +70,9 @@ router.get("/searchDate", function (req, res) {
 
 router.get("/searchStu/:stu/:month", function (req, res){
     console.log(req.params.stu,req.params.month);
+    
     var date = new RegExp("^" + req.params.month);
-    // ({
-    //     $or : [ 
-    //         {"userid": req.params.userid},
-    //         {"username": req.params.userid}
-    //     ],
-    //     "class": "1-A"         
-    // })
+    
     ({$and:[{$or:[{userid:req.params.userid},{username:req.params.userid}]},{class:'1-A'}]})
     attendance.find({
         $and:[

@@ -5,6 +5,7 @@ import {Attend} from './attend';
 import {Attendreturn} from './attend';
 import {FormBuilder,Validators,FormGroup} from '@angular/forms';
 import { Router } from '@angular/router';
+import { templateJitUrl } from '@angular/compiler';
 
 @Component({
   selector: 'app-attendance',
@@ -145,8 +146,10 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
   }
   searchStu(month:string,stu:string){
     this.historyflagS=false;
-    console.log(stu,month);
-    this.attendanceservice.retriveStu(month,stu)
+    var temp=parseInt(month)
+    temp+=1;
+    console.log(stu,temp);
+    this.attendanceservice.retriveStu(temp,stu)
     .subscribe((data:Attendreturn[])=>{
       if(data.length==0){
         this.historyflagS=true;
