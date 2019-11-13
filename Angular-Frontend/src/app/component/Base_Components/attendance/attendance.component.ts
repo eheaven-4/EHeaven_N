@@ -143,10 +143,10 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
       }
     }
   }
-  searchStu(value:string,month:number){
+  searchStu(month:string,stu:string){
     this.historyflagS=false;
-    console.log(value,month);
-    this.attendanceservice.retriveStu(value)
+    console.log(stu,month);
+    this.attendanceservice.retriveStu(month,stu)
     .subscribe((data:Attendreturn[])=>{
       if(data.length==0){
         this.historyflagS=true;

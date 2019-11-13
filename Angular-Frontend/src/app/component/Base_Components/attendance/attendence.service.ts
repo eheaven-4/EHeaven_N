@@ -31,9 +31,9 @@ export class AttendenceService {
    return this._http.get<any>(get_date,{params: {date:value}});
 
   }
-  retriveStu(userid:string){
-    console.log(userid+"hello");
-    var  get_Students='http://localhost:3000/attendance/searchStu/'+userid;
+  retriveStu(month:string,stu:string){
+    console.log(stu+"hello");
+    var  get_Students='http://localhost:3000/attendance/searchStu/'+stu+'/'+month;
     return this._http.get<any>(get_Students);
 
   }

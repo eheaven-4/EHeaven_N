@@ -11,10 +11,11 @@ import { MatButtonModule,MatGridListModule} from '@angular/material';
 import { MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
+import {SlideshowModule} from 'ng-simple-slideshow';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
-// import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/Auth/navbar/navbar.component';
@@ -78,6 +79,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
   imports: [
     NgFlashMessagesModule.forRoot(),
     BrowserModule,
+    SlideshowModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
@@ -88,7 +90,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     MatDatepickerModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    // MDBBootstrapModule,
+    MDBBootstrapModule,
     FontAwesomeModule,
     MatButtonModule,
     MatGridListModule,

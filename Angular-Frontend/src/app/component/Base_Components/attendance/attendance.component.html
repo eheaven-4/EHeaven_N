@@ -149,19 +149,20 @@
                                     </mat-tab>
                                     <mat-tab label="Special Student">
                                         <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
-                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected)" #user="ngForm">
-                                                h {{user.value|json}}
-                                               ahsdlkashdlkshaldkhslakhd {{selected}}
+                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
+                                                <!-- h {{user.value|json}}
+                                               ahsdlkashdlkshaldkhslakhd {{selected}} -->
                                                 <mat-grid-list cols="2">
                                                     <mat-grid-tile>
                                                             
-                                                        
+                                                    <p>
                                                         <mat-form-field class="example-full-width" >
                                                                 <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel>
                                                         </mat-form-field>
-                                                    <hr>
+                                                    </p>
+                                                    <p>
                                                         <mat-hint>Ex:00000001</mat-hint>
-                                                        
+                                                    </p> 
                                                         
                                                     </mat-grid-tile>
                                                     <mat-grid-tile>
