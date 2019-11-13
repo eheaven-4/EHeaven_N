@@ -3,6 +3,8 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
+import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +21,10 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    // private ngProgress: NgProgress,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
+
+
   ) { }
 
   // registratin form attributes
@@ -31,7 +36,7 @@ export class RegisterComponent implements OnInit {
       selectclass: [''],
       name: ['', [Validators.required, Validators.maxLength(60)]],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]],
+      password: ['', [Validators.required, Validators.minLength(8)]],
       birthday: ['', Validators.required],
       mobilenumber: [''],
       homenumber: [''],
@@ -52,11 +57,19 @@ export class RegisterComponent implements OnInit {
       console.log(this.filename)
     }
   }
-  get f() { return this.RegistrationForm.controls; }
+  /**************************************************** */
+
+
+  get f() {
+    return this.RegistrationForm.controls;
+  }
+
   onReset() {
     this.submitted = false;
     this.RegistrationForm.reset();
   }
+
+
   /**************************************************** */
   registerUser() {
     this.submitted = true;
@@ -90,35 +103,38 @@ export class RegisterComponent implements OnInit {
       const url = 'http://localhost:3000/users/register';
 
       if (this.images == null) {
-        this.ngFlashMessageService.showFlashMessage({
-          messages: ["Select the Profile Image..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'warning'
-        });
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Please select a profile picture..! ", true ? "Ok" : undefined, config);
       }
       else {
-        this.http.post<any>(url, formData).subscribe(res => {
-          if (res.state) {
-
-            console.log(res.msg);
-            this.ngFlashMessageService.showFlashMessage({
-              messages: ["Successfully Registered..!"],
-              dismissible: true,
-              timeout: 2000,
-              type: 'success',
-            });
-            // this.ngProgress.done();
-            this.router.navigate(['/login']);
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+          data: {
+            message: 'Are you sure want to Register?',
+            buttonText: {
+              ok: 'Yes',
+              cancel: 'No'
+            }
           }
-          else {
-            this.ngFlashMessageService.showFlashMessage({
-              messages: ["You are not Registerd..!"],
-              dismissible: true,
-              timeout: 2000,
-              type: 'warning'
+        });
+        dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+          if (confirmed) {
+            this.http.post<any>(url, formData).subscribe(res => {
+              if (res.state) {
+                console.log(res.msg);
+                let config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
+                // this.ngProgress.done();
+                this.router.navigate(['/login']); 
+              }
+              else {
+                let config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
+                this.router.navigate(['/register']);
+              }
             });
-            this.router.navigate(['/register']);
           }
         });
       }

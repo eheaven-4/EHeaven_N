@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatButtonModule,MatGridListModule} from '@angular/material';
-import { MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { MatButtonModule, MatGridListModule } from '@angular/material';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 
 import {SlideshowModule} from 'ng-simple-slideshow';
@@ -43,12 +43,14 @@ import { BulkaddComponent } from './component/Admin/register/bulkadd/bulkadd.com
 import { AddClassTimetableComponent } from './component/Admin/add-class-timetable/add-class-timetable.component';
 import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-timetable/add-teacher-timetable.component';
 import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
+import { SearchUserComponent } from './component/Admin/search-user/search-user.component';
+import { AlertDialogComponent } from './component/Auth/alert-dialog/alert-dialog.component';
+import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialog/confirmation-dialog.component';
 
 
 
 @NgModule({
   declarations: [
-
     AppComponent,
     NavbarComponent,
     LoginComponent,
@@ -75,7 +77,11 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     AddClassTimetableComponent,
     AddTeacherTimetableComponent,
     AcademicSubjectComponent,
+    SearchUserComponent,
+    AlertDialogComponent,
+    ConfirmationDialogComponent,
   ],
+
   imports: [
     NgFlashMessagesModule.forRoot(),
     BrowserModule,
@@ -95,12 +101,28 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
     MatButtonModule,
     MatGridListModule,
     MatSlideToggleModule,
-    // NgProgressModule,
   ],
+
   providers: [
     CookieService,
   ],
-  bootstrap: [AppComponent],
-  schemas: [ NO_ERRORS_SCHEMA ]
+
+  bootstrap: [
+    AppComponent
+  ],
+
+  schemas: [
+    NO_ERRORS_SCHEMA
+  ],
+
+  exports: [
+    ConfirmationDialogComponent,
+    AlertDialogComponent
+  ],
+
+  entryComponents: [
+    ConfirmationDialogComponent,
+    AlertDialogComponent
+  ],
 })
 export class AppModule { }

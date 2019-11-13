@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../mycookies.service';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { FormBuilder, Validators } from '@angular/forms';
+import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 @Component({
   selector: 'app-add-notification',
@@ -17,22 +18,32 @@ export class AddNotificationComponent implements OnInit {
   date;
   state;
   filename;
-
+  submitted = false;
+  
   constructor(
     private router: Router,
     private http: HttpClient,
     private cookies: MycookiesService, //import Mycookies Service files
-    private ngFlashMessage: NgFlashMessageService,
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   NotificationForm = this.fb.group({
-    subject: ['', Validators.required],
-    message: ['', Validators.required],
+    subject: ['',[ Validators.required, Validators.maxLength(100)]],
+    message: ['', [Validators.required, Validators.maxLength(1200)]],
   });
 
   ngOnInit() { }
 
+  get f() {
+    return this.NotificationForm.controls;
+  }
+
+  onReset() {
+    this.submitted = false;
+    this.NotificationForm.reset();
+  }
   selectImage(event) {
     if (event.target.files.length > 0) {  // check the file is select or not.
       const file = event.target.files[0];
@@ -42,46 +53,63 @@ export class AddNotificationComponent implements OnInit {
   }
 
   addNotice() {
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    var userid = myCookie.userid;
+    this.submitted = true;
 
-    this.date = Date();
-    this.state = "Pending"
-    const formData = new FormData();
-
-    formData.append('notificationAttachment', this.attachment)
-    formData.append('userid', userid.value)
-    formData.append('date', this.date)
-    formData.append('subject', this.NotificationForm.value.subject)
-    formData.append('message', this.NotificationForm.value.message)
-    formData.append('state', this.state)
-
-    console.log(formData)
-
-    var url = "http://localhost:3000/notification/add";
-
-    //send request to  the server
-    this.http.post<any>(url, formData).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Successfully Added ..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'success',
-        });
-        this.router.navigate(['/notifications']);
-      }
-      else {
-        console.log(res.msg);
-        this.ngFlashMessage.showFlashMessage({
-          messages: ["Notification Adding Unsuccessfull..!"],
-          dismissible: true,
-          timeout: 2000,
-          type: 'danger',
-        });
-        this.router.navigate(['/add_notification']);
-      }
-    });
+    // stop here if form is invalid
+    if (this.NotificationForm.invalid) {
+      return;
+    }
+    else {
+      var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      var userid = myCookie.userid;
+      
+      this.date = Date();
+      this.state = "Pending"
+      const formData = new FormData();
+      
+      formData.append('notificationAttachment', this.attachment)
+      formData.append('userid', userid.value)
+      formData.append('date', this.date)
+      formData.append('subject', this.NotificationForm.value.subject)
+      formData.append('message', this.NotificationForm.value.message)
+      formData.append('state', this.state)
+      
+      console.log(formData)
+      
+      var url = "http://localhost:3000/notification/add";
+      
+      //send request to  the server
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to Add?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.http.post<any>(url, formData).subscribe(res => {
+            if (res.state) {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("News Successfully Added..! ", true ? "Done" : undefined, config);
+              
+              this.router.navigate(['/notifications']);
+            }
+            else {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Notification is not Added..! ", true ? "Done" : undefined, config);
+              
+              this.router.navigate(['/add_notification']);
+            }
+          });
+        }
+      })
+    }
   }
 }

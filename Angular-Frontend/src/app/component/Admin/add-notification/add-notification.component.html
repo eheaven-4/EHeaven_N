@@ -21,12 +21,20 @@
                 <label>Subject :</label>
                 <input type="text" class="form-control box_border" aria-describedby="textHelp" name="subject"
                   formControlName="subject">
+                <div *ngIf="submitted && f.subject.errors" class="err_msg">
+                  <div *ngIf="f.subject.errors.required">Subject is required</div>
+                  <div *ngIf="f.subject.errors.maxlength">Subject must less than 100 characters</div>
+                </div>
               </div>
 
               <div class="form-row mb-4">
                 <label>Message :</label>
                 <textarea type="text" class="form-control box_border" placeholder="Write a message here" id="textbox"
                   name="message" formControlName="message"></textarea>
+                <div *ngIf="submitted && f.message.errors" class="err_msg">
+                  <div *ngIf="f.message.errors.required">Message is required</div>
+                  <div *ngIf="f.message.errors.maxlength">Message must less than 1200 characters</div>
+                </div>
               </div>
 
               <input type="file" class="file_upload" style="display: none" name="profilepic"
@@ -38,7 +46,7 @@
                 {{filename}}
               </small>
               <p>&nbsp;</p>
-              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border" >Submit
+              <button (click)="addNotice()" type="button" class="btn btn-info my-4 btn-block reg_btn box_border">Submit
                 for Approval</button>
             </form>
           </div>
