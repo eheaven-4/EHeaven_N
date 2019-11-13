@@ -7,6 +7,12 @@ interface classTeacher{
   ctName : String
 }
 
+interface students{
+  _id : String,
+  userid : String,
+  name: String
+}
+
 @Component({
   selector: 'app-manage-marks',
   templateUrl: './manage-marks.component.html',
@@ -16,6 +22,7 @@ export class ManageMarksComponent implements OnInit {
 
   className : String;
   ctName : classTeacher [] = [];
+  csNames : students [] = [] ;
 
   constructor(
     private fb: FormBuilder,
@@ -52,11 +59,17 @@ export class ManageMarksComponent implements OnInit {
     console.log(cName)
 
     var url1 ="http://localhost:3000/class_management/getClassTeacherName"
-    // var url2 = ""
+    var url2 = "http://localhost:3000/users/getStudentsNames/"
 
     this.http.get<any>(url1 + '/' + cName).subscribe(res => {
       this.ctName = res
       console.log(res)
     });
+
+    this.http.get<any>(url2+cName).subscribe(res => {
+      this.csNames= res.data
+      console.log(res);
+      
+    })
   }
 }

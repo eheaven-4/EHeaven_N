@@ -142,7 +142,7 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
         .exec()
         .then(data => {
             console.log("Data Transfer Success..!")
-            res.json({ state: true, msg: "Data Transfer Success..!" });
+            res.json({ state: true, msg: "Data Transfer Success..!", data: data });
 
         })
         .catch(error => {

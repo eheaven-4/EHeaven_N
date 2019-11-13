@@ -71,16 +71,16 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Id</th>
-                                        <th>Hero Name</th>
-                                        <th>Country</th>
+                                        <th style="text-align: left;">Id</th>
+                                        <th style="text-align: left;">Hero Name</th>
+                                        <th style="text-align: left;">Country</th>
                                     </tr>
                                 </thead>
-                                <tbody>
+                                <tbody *ngFor = "let stdata of csNames">
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td class="stid">{{stdata.userid}}</td>
+                                        <td class="stname">{{stdata.name}}</td>
+                                        <td style="margin: auto;"><input type="text" class="form-control box_border stmarks" ></td>
                                     </tr>
                                 </tbody>
                             </table>

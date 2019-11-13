@@ -29,10 +29,12 @@ import { ManageMarksComponent } from './component/Base_Components/manage-marks/m
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
 import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
 import { SearchUserComponent } from './component/Admin/search-user/search-user.component';
+import { MenuComponent } from './component/Base_Components/menu/menu.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'menu', component: MenuComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile/:id', component: ProfileComponent},

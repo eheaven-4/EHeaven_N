@@ -46,6 +46,7 @@ import { AcademicSubjectComponent } from './component/Base_Components/academic-s
 import { SearchUserComponent } from './component/Admin/search-user/search-user.component';
 import { AlertDialogComponent } from './component/Auth/alert-dialog/alert-dialog.component';
 import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialog/confirmation-dialog.component';
+import { MenuComponent } from './component/Base_Components/menu/menu.component';
 
 
 
@@ -80,6 +81,7 @@ import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialo
     SearchUserComponent,
     AlertDialogComponent,
     ConfirmationDialogComponent,
+    MenuComponent,
   ],
 
   imports: [

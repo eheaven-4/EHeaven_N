@@ -84,12 +84,9 @@ export class NavbarComponent implements OnInit {
   }
   menu(){
     var myCookie = this.cookies.getCookie("userAuth");
-    // console.log(myCookie);
     if (myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // console.log(id);
-      this.router.navigate(['/academic_subject' + '/' + id]);
+      this.router.navigate(['/menu']);
     }
     else {
       this.ngFlashMessage.showFlashMessage({
