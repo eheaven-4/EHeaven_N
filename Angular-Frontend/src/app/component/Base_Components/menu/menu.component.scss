@@ -20,7 +20,7 @@
 
 .sidebar_button:hover {
   cursor: pointer;
-  transition: 0.5s;
+  transition: 0.7s;
   .icons{
       color: white;
   }
@@ -34,7 +34,9 @@
 }
 .icn {
   color: rgb(91, 91, 91);
+  // margin: auto;
   margin: auto;
+  // margin-top: -40px;
   font-size: 40px;
   // padding-top: 18px;
   // padding-left: 30px;

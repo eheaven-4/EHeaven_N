@@ -47,6 +47,7 @@ import { SearchUserComponent } from './component/Admin/search-user/search-user.c
 import { AlertDialogComponent } from './component/Auth/alert-dialog/alert-dialog.component';
 import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialog/confirmation-dialog.component';
 import { MenuComponent } from './component/Base_Components/menu/menu.component';
+import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
 
 
 
@@ -82,6 +83,7 @@ import { MenuComponent } from './component/Base_Components/menu/menu.component';
     AlertDialogComponent,
     ConfirmationDialogComponent,
     MenuComponent,
+    SubjectsComponent,
   ],
 
   imports: [

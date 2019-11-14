@@ -20,13 +20,18 @@
                         <hr>
                     </div>
                     <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
-                        <mat-card class="border text-center p-5 reg-frm">
+                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="ClassSearchForm">
                             <img src="../../../assets/logo/logo.png" style="width:40%; margin-bottom: 50px">
                             <div class="row">
                                 <div class="col-md-8">
                                     <p class="top_txt">Class Room Name : </p>
-                                    <input type="text" class="form-control box_border" placeholder="5A" name="className" [(ngModel)]="className">
-                                    <p class="text-danger" style="text-align: left; font-size: 10px">Class-room name is required *</p>
+                                    <input type="text" class="form-control box_border" formControlName="className" placeholder="5A" name="className"  [(ngModel)]="className">
+                                    <div *ngIf="submitted && f.className.errors" class="err_msg">
+                                        <div *ngIf="f.className.errors.required">Classname is required</div>
+                                        <div *ngIf="f.className.errors.maxlength">Invalid classname</div>
+                                        <div *ngIf="f.className.errors.minlength">Invalid classname</div>
+
+                                    </div>
                                 </div>
 
                                 <!-- {{CertificationForm.value | json}} -->
@@ -40,30 +45,30 @@
                     </div>
                     <!-- [{{#each userData}}] -->
 
-                    <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
-                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="CertificationForm">
+                    <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px" *ngIf="dataform == true">
+                        <mat-card class="border text-center p-5 reg-frm" [formGroup]="StudentMarksForm">
                             <div class="row" *ngIf="ctName">
                                 <p style="color: rgb(115, 115, 115)">Class Teacher Name : </p><p> &nbsp;&nbsp;{{ctName.classTeacher}}</p>
                             </div>
                             <div class="row">
                                 <div class="col-md-6">
                                     <p class="top_txt">Subject : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
-                                        </mat-option>
+                                    <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
+                                        <mat-option style="text-align: left"></mat-option>
                                     </mat-select>
+                                    <div *ngIf="f2.subject.errors.required">Classname is required</div>
                                 </div>
                                 <div class="col-md-3">
                                     <p class="top_txt">Year : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
+                                    <mat-select class="browser-default custom-select mb-4 box_border" formControlName="year" [(ngModel)]="year" name="year">
+                                        <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'>{{ year }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
                                 <div class="col-md-3">
                                     <p class="top_txt">Semester : </p>
-                                    <mat-select class="browser-default custom-select mb-4 box_border">
-                                        <mat-option style="text-align: left" [value]="exams">{{ exams }}
+                                    <mat-select class="browser-default custom-select mb-4 box_border" formControlName="semester" [(ngModel)]="semester" name="semester">
+                                        <mat-option style="text-align: left" *ngFor='let semester of mySemester' [value]="semester">{{ semester }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
@@ -71,9 +76,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: left;">Id</th>
-                                        <th style="text-align: left;">Hero Name</th>
-                                        <th style="text-align: left;">Country</th>
+                                        <th style="text-align: left;">Student ID</th>
+                                        <th style="text-align: left;">Student Name</th>
+                                        <th style="text-align: left;">Subject Marks</th>
                                     </tr>
                                 </thead>
                                 <tbody *ngFor = "let stdata of csNames">
@@ -90,7 +95,6 @@
                             </div>
                         </mat-card>
                     </div>
-
                 </div>
             </div>
         </div>
