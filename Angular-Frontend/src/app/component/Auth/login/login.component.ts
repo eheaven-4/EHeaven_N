@@ -49,11 +49,10 @@ export class LoginComponent implements OnInit {
 
         if(id){
           // window.location.reload();     //reload the page
-          this.router.navigate(['/academic_subject' + '/' + id]);
+          this.router.navigate(['/menu']);
           let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
           this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
-              // location.reload();
         }
         else{
           this.router.navigate(['/login']);

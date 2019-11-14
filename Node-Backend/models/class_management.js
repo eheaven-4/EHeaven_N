@@ -59,4 +59,16 @@ const classTimeTableSchema = mongoose.Schema({
      }]
 });
 
-const classTimeTable = module.exports = mongoose.model("classTimeTable", classTimeTableSchema);  
+//Student Status verification certificate
+const academicSubjectSchema = mongoose.Schema({
+    subId: { type: String, require: true },
+    subName: { type: String, require: true },
+});
+
+const academicSubject=  mongoose.model("academicSubject", academicSubjectSchema);
+const classTimeTable =  mongoose.model("classTimeTable", classTimeTableSchema);  
+
+module.exports = {
+    academicSubject: academicSubject,
+    classTimeTable: classTimeTable,
+}

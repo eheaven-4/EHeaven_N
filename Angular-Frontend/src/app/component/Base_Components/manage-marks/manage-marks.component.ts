@@ -1,10 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { Validators, FormBuilder } from '@angular/forms';
+import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
-interface classTeacher{
-  _id : String,
-  ctName : String
+interface classTeacher {
+  _id: String,
+  ctName: String
+}
+
+interface students {
+  _id: String,
+  userid: String,
+  name: String
+}
+
+interface yearArrray{
+  year : String
+}
+
+interface subjectsArray{
+  subId : String,
+  subName : String,
 }
 
 @Component({
@@ -14,49 +30,104 @@ interface classTeacher{
 })
 export class ManageMarksComponent implements OnInit {
 
-  className : String;
-  ctName : classTeacher [] = [];
+  className: String;
+  ctName: classTeacher[] = [];
+  csNames: students[] = [];
+  ClassSearchForm: FormGroup;
+  dataform: Boolean = false;  //sata division default didn't show
+  submitted = false;
+  myYear: yearArrray [] = [];
+  mySubject: subjectsArray [] =[];
 
   constructor(
     private fb: FormBuilder,
+    public snackBar: MatSnackBar,
     private http: HttpClient,
   ) { }
-  // certificate types
-  certificates = [
-    'Student Status Verification Certificate',
-    'Character Certificate',
-    'Leaving Certificate',
-    'Educational Certificate'
+
+  mySemester = [
+    '1 st Semester',
+    '2 nd Semester',
+    '3 rd Semester'
   ];
-  CertificationForm = this.fb.group({
-    certName: ['', Validators.required],
-    certType: ['', Validators.required],
-    exam: this.fb.group({
-      examName: ['', Validators.required],
-      examYear: ['', Validators.required],
-      examIndex: ['', Validators.required]
-    })
+
+  StudentMarksForm = this.fb.group({
+    subject: ['', Validators.required],
+    year: ['', Validators.required],
+    semester: ['', Validators.required]    
   });
 
   ngOnInit() {
-    var url = "http://localhost:3000/class_management/classRoomsNames";
 
-    this.http.get<any>(url).subscribe(data => {
-      console.log(data);
+    this.ClassSearchForm = this.fb.group({
+      className: ['', [Validators.required, Validators.maxLength(2), Validators.minLength(2)]]
     });
+
+    var year = new Date().getFullYear();
+    var years = [];
+
+    for (var i = 0; i < 5; i++) {
+      years.push(year - i);
+      this.myYear[i] = years[i]
+    }
+
+
+    
   }
 
-  searchStudents(event, className){
-    
-    const cName = className;
-    console.log(cName)
+  get f() {
+    return this.ClassSearchForm.controls;
+  }
+  get f2(){
+    return this.StudentMarksForm.controls;
+  }
 
-    var url1 ="http://localhost:3000/class_management/getClassTeacherName"
-    // var url2 = ""
+  onReset() {
+    this.submitted = false;
+    this.ClassSearchForm.reset();
+    this.StudentMarksForm.reset();
+  }
+  searchStudents(event, className) {
+    this.submitted = true;
 
-    this.http.get<any>(url1 + '/' + cName).subscribe(res => {
-      this.ctName = res
-      console.log(res)
-    });
+    // stop here if form is invalid
+    if (this.ClassSearchForm.invalid) {
+      return;
+    }
+    else {
+
+      const cName = className;
+
+      var url1 = "http://localhost:3000/class_management/getClassTeacherName"
+      var url2 = "http://localhost:3000/users/getStudentsNames/"
+
+      this.http.get<any>(url1 + '/' + cName).subscribe(res => {        
+        if (res.state == false) {
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Error find in data..! ", true ? "Retry" : undefined, config);
+        }
+        else {
+          this.dataform = true;
+
+          this.ctName = res.data
+          this.http.get<any>(url2 + cName).subscribe(res => {
+            this.csNames = res.data
+            console.log(res);
+          })
+          console.log(res)
+        }
+      });
+
+    }
+  }
+
+  submitMarks(){
+    // stop here if form is invalid
+    if (this.StudentMarksForm.invalid) {
+      return;
+    }
+    else {
+    }
   }
 }

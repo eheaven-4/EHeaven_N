@@ -27,32 +27,40 @@ router.get("/classRoomsNames", function (req, res) {
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!")
-            res.status(200).json(docs)
+            res.json({ state: true, msg: "Data Transfered Successfully..!" , data: docs});
         })
         .catch(error => {
             console.log(error)
-            res.status(500).json({
-                error: error
-            })
+            res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
+
         })
 });
 
 //get Teachers name using class name 
 router.get("/getClassTeacherName/:cName", function(req,res) {
     const cName = req.params.cName;
-    classTimeTable.findOne({className : cName})
-        .select('classTeacher')
-        .exec()
-        .then (docs=> {
-            console.log("Data Transer Success..!")
-            res.status(200).json(docs)
-        })
-        .catch(error=> {
-            console.log(error)
-            res.status(500).json({
-                error : error
+    classTimeTable.findOne({className : cName}, function (err, className) {
+        if (!className) {
+            res.json({ state: false, msg: "No class found..!" });
+            return;
+        }
+        if(className){
+            classTimeTable.findOne({className : cName})
+            .select('classTeacher')
+            .exec()
+            .then (docs=> {      
+                    console.log("Data Transer Success..!")
+                    res.json({ state: true, msg: "Data Transfered Successfully..!" , data: docs});
             })
-        })
+            .catch(error=> {
+                console.log(error)
+                res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
+            })
+        }
+    })
+    
 });
+
+
 
 module.exports = router; 

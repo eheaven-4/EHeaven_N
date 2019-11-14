@@ -14,10 +14,6 @@ interface notification {  //decalare interface class for load notification attri
   state: String;
 }
 
-interface userType {  //load interface for get user type
-  userType: String;
-}
-
 @Component({
   selector: 'app-notification',
   templateUrl: './notification.component.html',
@@ -26,8 +22,8 @@ interface userType {  //load interface for get user type
 export class NotificationComponent implements OnInit {
 
   notices: notification[] = [];
-  usertype: userType[] = [];
-
+  // usertype: userType[] = [];
+  usertype
   notice_id: String;
   file_path: String;
   // userType: String;

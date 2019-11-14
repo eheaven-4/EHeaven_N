@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
@@ -35,7 +33,6 @@ export class SearchUserComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private fb: FormBuilder,
-    private router: Router,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }

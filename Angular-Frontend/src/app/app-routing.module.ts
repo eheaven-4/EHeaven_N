@@ -29,10 +29,13 @@ import { ManageMarksComponent } from './component/Base_Components/manage-marks/m
 import { ExtraCurricularComponent } from './component/Base_Components/extra-curricular/extra-curricular.component';
 import { AcademicSubjectComponent } from './component/Base_Components/academic-subject/academic-subject.component';
 import { SearchUserComponent } from './component/Admin/search-user/search-user.component';
+import { MenuComponent } from './component/Base_Components/menu/menu.component';
+import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
 
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'menu', component: MenuComponent},
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
   {path: 'profile/:id', component: ProfileComponent},
@@ -53,7 +56,8 @@ const routes: Routes = [
   {path: 'add_cls_tt', component:AddClassTimetableComponent},
   {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
   {path: 'academic_subject/:id', component:AcademicSubjectComponent},
-  {path: 'search_user', component:SearchUserComponent}
+  {path: 'search_user', component:SearchUserComponent},
+  {path: 'subjects', component: SubjectsComponent}
 ];
 
 @NgModule({

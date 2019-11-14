@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { CookieService } from 'ngx-cookie-service';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
 interface userType {  //load interface for get user type
   userType: String;
@@ -26,9 +26,9 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private ngFlashMessage: NgFlashMessageService,
     private cookieService: CookieService,
-    private cookies: MycookiesService
+    private cookies: MycookiesService,
+    public snackBar: MatSnackBar,
   ) { }
 
   ngOnInit() {
@@ -44,24 +44,14 @@ export class NavbarComponent implements OnInit {
     localStorage.clear();
 
     this.cookieService.delete('userAuth');
-    this.ngFlashMessage.showFlashMessage({
-      messages: ["Logout Successfully..!"],
-      dismissible: true,
-      timeout: 2000,
-      type: 'warning'
-    });
+    let config = new MatSnackBarConfig();
+    config.duration = true ? 2000 : 0;
+    this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
     this.router.navigate(['/login']);
 
     // window.location.reload();     //reload the page
   }
-  
-  // logout() {
-  //   this.authtoken = null;
-  //   this.user = null;
-  //   localStorage.clear();
 
-  //   this.cookieService.delete('userAuth');
-  // }
 
   userProfile() {
     var myCookie = this.cookies.getCookie("userAuth");
@@ -73,31 +63,22 @@ export class NavbarComponent implements OnInit {
       this.router.navigate(['/profile' + '/' + id]);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }
-  menu(){
+  menu() {
     var myCookie = this.cookies.getCookie("userAuth");
-    // console.log(myCookie);
     if (myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // console.log(id);
-      this.router.navigate(['/academic_subject' + '/' + id]);
+      this.router.navigate(['/menu']);
     }
     else {
-      this.ngFlashMessage.showFlashMessage({
-        messages: ["Please Login First..!"], 
-        dismissible: true, 
-        timeout: 2000,
-        type: 'warning',
-      });
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Please Login First..!", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
     }
   }

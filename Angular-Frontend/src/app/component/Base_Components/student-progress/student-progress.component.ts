@@ -15,11 +15,12 @@ export class StudentProgressComponent implements OnInit {
     var year = new Date().getFullYear();
     var range = [];
 
-    range.push(year);
+    
+    // range.push(year);
 
-    for (var i = 1; i < 7; i++) {
+    for (var i = 0; i < 7; i++) {
       range.push(year - i);
-      console.log(range[i]);
+      console.log(range[i]);      
     }
     // $scope.years = range;
     

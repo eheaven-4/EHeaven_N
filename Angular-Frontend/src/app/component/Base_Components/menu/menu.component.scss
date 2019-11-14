@@ -1,0 +1,114 @@
+@font-face {
+  font-family: side_font;
+  src: url(../../../../assets/Fonts/Roboto-Regular.ttf);
+}
+.sidebar_links {
+  width: 100%;
+  color: rgb(91, 91, 91);
+  margin-left: 50px;
+  padding-top: 15px;
+  font-family: side_font;
+  font-weight: 300;
+  text-align: left;
+  font-size: 17px;
+}
+
+.sidebar_button {
+  height: 85%;
+  margin-bottom: 0px;
+}
+
+.sidebar_button:hover {
+  cursor: pointer;
+  transition: 0.7s;
+  .icons{
+      color: white;
+  }
+  .sidebar_links{
+      color: white;
+  }
+}
+
+.icons {
+  font-size: 50px;
+}
+.icn {
+  color: rgb(91, 91, 91);
+  // margin: auto;
+  margin: auto;
+  // margin-top: -40px;
+  font-size: 40px;
+  // padding-top: 18px;
+  // padding-left: 30px;
+}
+.name {
+  margin-left: -30px;
+}
+
+.nav-link {
+  transition: 0.3s;
+  color: white;
+  background-color: #17191d;
+}
+.nav-text {
+  color: #6dd0dd;
+  font-weight: 500;
+}
+
+/****************************************/
+.admin:hover{
+    background-color: #bb0101;
+}
+.admintxt{
+    color: #bb0101;
+}
+
+.academictxt{
+    color: rgb(255, 0, 230);
+}
+.academic:hover{
+    background-color: rgb(164, 4, 148);
+}
+
+.certificationtxt{
+    color: rgb(30, 0, 255);
+}
+
+.certification:hover{
+    background-color:rgb(24, 2, 184)
+}
+
+.attendencetxt{
+    color:rgb(27, 201, 0) ;
+}
+.attendence:hover{
+    background-color: rgb(16, 121, 0);
+}
+
+.extratxt{
+    color: rgb(3, 194, 143);
+}
+.extra:hover{
+    background-color: rgb(1, 126, 93);
+}
+
+.markstxt{
+    color: rgb(255, 0, 85);
+}
+.marks:hover{
+    background-color: rgb(177, 0, 59);
+}
+
+.progresstxt{
+    color: rgb(255, 94, 0);
+}
+.progre:hover{
+    background-color:rgb(197, 72, 0) ;
+}
+
+.notificationtxt{
+    color: rgb(132, 0, 255);
+}
+.notification:hover{
+    background-color: rgb(70, 0, 135);
+}

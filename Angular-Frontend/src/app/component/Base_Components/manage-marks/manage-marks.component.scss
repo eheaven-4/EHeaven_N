@@ -19,3 +19,24 @@
 .border{
     border-radius: 4px;
 }
+.box_border{
+    border-radius: 3px;
+    
+}
+
+.stname{
+    text-align: left;
+}
+.stid{
+    text-align: left;
+}
+.stmarks{
+    text-align: center;
+    width: 100px;
+}
+.err_msg{
+    // margin-top: -15px;
+    color: red;
+    text-align: left;
+    font-size: 10px;
+}
