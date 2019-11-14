@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
 const attendanceSchema=mongoose.Schema({
-    username:{type:String,require:true},
+    name:{type:String,require:true},
     userid :{type:String,require:true},
     attend:{type:Boolean,require:true},
     date:{type:String,require:true},

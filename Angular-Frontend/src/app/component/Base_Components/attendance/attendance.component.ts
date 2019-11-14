@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {AttendenceService} from './attendence.service';
-import {User} from './../../../user';
+import {Returnuser} from './attend';
 import {Attend} from './attend';
 import {Attendreturn} from './attend';
 import {FormBuilder,Validators,FormGroup} from '@angular/forms';
@@ -17,7 +17,7 @@ import { templateJitUrl } from '@angular/compiler';
 export class AttendanceComponent implements OnInit {
 public classname="1-A";
 
-public students:Array<User>;
+public students:Array<Returnuser>;
 public attendRecord:Attend[];
 
 public searchStuResult:Attendreturn[];
@@ -43,13 +43,13 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
   })
   ngOnInit() {
     this.attendanceservice.retriveUsers()
-    .subscribe((data:User[])=>{
+    .subscribe((data:Returnuser[])=>{
       this.students=data;
       this.numberOfStudent=data.length;
       this.toggle=new Array(this.numberOfStudent);
       for (var j=0;j<this.numberOfStudent;j++){
         this.toggle[j]="Absent";
-        console.log(this.toggle[j]);
+        
 
       }
     });
@@ -57,14 +57,7 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
     
     
   }
-  // attendlist=this.inputs.group()
-  // get attendance(): FormGroup {
-  //   return this.inputs.group({
-  //     id: ['', Validators.required],
-  //     class: ['', Validators.required],
-  //     attend: ['', Validators.required],
-  //   });
-  // }
+ 
   addData(stu:Attend){
     this.attendanceservice.logAdd(stu)
        .subscribe(
@@ -72,77 +65,105 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
           error=>console.error('Error!',error) 
     );
   }
-  
-  storeValue(index) {
-     
-      console.log(this.numberOfStudent);
-      this.toggle[index]="Present";
-      if(index==this.i){
-        var newRec=new Attend();
-        newRec.username=this.students[index].name;
-        newRec.userid=this.students[index].userid;
-        newRec.attend=true;
-        newRec.class=this.classname;
-        this.presentStu++;
+  count(index){
+    if(this.toggle[index]=="Present"){
+      this.presentStu--;
+      this.toggle[index]="Absent";
       
-        console.log(newRec);
-        
-        this.addData(newRec);
-        
-        this.i++;
-      }
-      else if(this.i<index){
-          for(var j = this.i; j <index; j++) {
-            var newRec=new Attend();
-            newRec.username=this.students[j].userid;
-            newRec.attend=false;
-            newRec.class=this.classname;
-            console.log(newRec);
-            this.addData(newRec);
-              
-          }
-        
-          newRec=new Attend();
-          newRec.username=this.students[index].userid;
-          newRec.attend=true;
-          newRec.class=this.classname;
-          console.log(newRec);
-          this.addData(newRec);
-          //newRec.date=this.today;
-          this.i=index+1;
-          this.presentStu++;
-
-          // console.log(newRec);
-      }else{
-        newRec=new Attend();
-        newRec.username=this.students[index].userid;
-        newRec.attend=true;
-        newRec.class=this.classname;
-        console.log(newRec);
-        this.updateData(newRec);
-
-      }      
-  }
-  updateData(stu:Attend){
-    this.attendanceservice.logUpdate(stu)
-        .subscribe(
-            data=>console.log('Success',data),
-            error=>console.error('Error!',error) 
-    );
-  }
-  onSubmit(){
-    this.mainflag=false;
-    if(this.i<=this.numberOfStudent){
-      for(var j=this.i;j<this.numberOfStudent;j++){
-        var newRec=new Attend();
-        newRec.username=this.students[j].userid;
-        newRec.attend=false;
-        newRec.class=this.classname;
-        console.log(newRec);
-        this.addData(newRec);
-
-      }
+    }else{
+      this.presentStu++;
+      this.toggle[index]="Present";
     }
+  }
+  
+  // storeValue(index) {
+     
+  //     console.log(this.numberOfStudent);
+  //     this.toggle[index]="Present";
+  //     if(index==this.i){
+  //       var newRec=new Attend();
+  //       newRec.username=this.students[index].name;
+  //       newRec.userid=this.students[index].userid;
+  //       newRec.attend=true;
+  //       newRec.class=this.classname;
+  //       this.presentStu++;
+      
+  //       console.log(newRec);
+        
+  //       this.addData(newRec);
+        
+  //       this.i++;
+  //     }
+  //     else if(this.i<index){
+  //         for(var j = this.i; j <index; j++) {
+  //           var newRec=new Attend();
+  //           newRec.username=this.students[j].userid;
+  //           newRec.attend=false;
+  //           newRec.class=this.classname;
+  //           console.log(newRec);
+  //           this.addData(newRec);
+              
+  //         }
+        
+  //         newRec=new Attend();
+  //         newRec.username=this.students[index].userid;
+  //         newRec.attend=true;
+  //         newRec.class=this.classname;
+  //         console.log(newRec);
+  //         this.addData(newRec);
+  //         //newRec.date=this.today;
+  //         this.i=index+1;
+  //         this.presentStu++;
+
+  //         // console.log(newRec);
+  //     }else{
+  //       newRec=new Attend();
+  //       newRec.username=this.students[index].userid;
+  //       newRec.attend=true;
+  //       newRec.class=this.classname;
+  //       console.log(newRec);
+
+  //     }      
+  // }
+
+  onSubmit(userForm){
+    // console.log(userForm);
+    this.mainflag=false;
+    const student = Object.entries(userForm.value);
+    for (const [i,attend] of student) {
+      var newRec=new Attend();
+      newRec.username=this.students[i].name;
+      newRec.userid=this.students[i].userid;
+      newRec.class=this.classname;
+
+      if(attend==""){
+
+        newRec.attend=false;
+
+      }else if(attend==true){
+        
+        newRec.attend=true;
+      }else if(attend==false){
+        
+        newRec.attend=false;
+      }
+      console.log(newRec);
+      this.addData(newRec);
+      
+    }
+    
+    // 
+    // if(this.i<=this.numberOfStudent){
+    //   for(var j=this.i;j<this.numberOfStudent;j++){
+    //     var newRec=new Attend();
+    //     newRec.username=this.students[j].userid;
+    //     newRec.attend=false;
+    //     newRec.class=this.classname;
+    //     console.log(newRec);
+    //     this.addData(newRec);
+
+    //   }
+    // }
   }
   searchStu(month:string,stu:string){
     this.historyflagS=false;
