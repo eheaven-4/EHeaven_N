@@ -34,13 +34,15 @@
                             </mat-grid-list>
                                 
                             <div>
-                                <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit()" novalidate *ngIf="mainflag">
+                                <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit(userForm)" novalidate *ngIf="mainflag">
                                      
                                     <mat-grid-list cols="3" *ngFor="let student of students;index as i" rowHeight="100px">
                                             <mat-grid-tile>{{student.userid}}</mat-grid-tile>
                                         <mat-grid-tile>{{student.name}}</mat-grid-tile>
                                         <mat-grid-tile>
-                                                <mat-slide-toggle id="{{student.name}}" (click)="storeValue(i)" color="primary" name="name" ngModel></mat-slide-toggle>
+                                                <!-- <mat-slide-toggle id="{{student.name}}" (click)="storeValue(i)" color="primary" name="name" ngModel></mat-slide-toggle> -->
+                                                <mat-slide-toggle id="{{student.name}}" color="primary" value="{{i}}" name="{{i}}" (click)="count(i)" ngModel></mat-slide-toggle>
+                                                
                                             
                                                 {{toggle[i]}}
 
@@ -130,9 +132,13 @@
 
                                             
 
-                                            <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchDateResult">
+                                            <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchDateResult;">
                                                 <mat-grid-tile><h3>{{result.userid}}</h3></mat-grid-tile>
-                                                <mat-grid-tile><h3>{{result.attend}}</h3></mat-grid-tile>
+                                                <mat-grid-tile>                                                
+                                                   <h3> <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
+                                                    <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
+                                                    </h3>
+                                                </mat-grid-tile>
                                                 
                                             </mat-grid-list>
 
@@ -201,7 +207,10 @@
                                                         <h3>{{result.date}}</h3>
                                                     </mat-grid-tile>
                                                     <mat-grid-tile>
-                                                            <h3>{{result.attend}}</h3>
+                                                            <!-- <h3>{{result.attend}}</h3> -->
+                                                        <h3><div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
+                                                            <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
+                                                        </h3>
                                                     </mat-grid-tile>
                                             </mat-grid-list>
                                       

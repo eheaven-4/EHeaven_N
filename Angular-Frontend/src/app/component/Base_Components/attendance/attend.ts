@@ -10,3 +10,7 @@ export class Attendreturn{
     class:string;
     date:string;
 }
+export class Returnuser{
+    userid:string;
+    name:string;
+}

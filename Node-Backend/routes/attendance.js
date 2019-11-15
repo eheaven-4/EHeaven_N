@@ -8,20 +8,12 @@ router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
     var year=today.getFullYear();
-    var date='';
-    var month='';
-    if(today.getMonth()<9){
-        month=('0'+(today.getMonth()+1));
-    }else{
-        month=today.getMonth()+1;
-    }
-    
-    date=today.getDate();
-    
+    var date=today.getDate();
+    var month=today.getMonth()+1;
     
     var todaystr=month+"/"+date+"/"+year;
     const stu=new attendance({
-        username:request.body.username,
+        name:request.body.username,
         userid:request.body.userid,
         attend:request.body.attend,
         date:todaystr,
@@ -41,7 +33,7 @@ router.post("/addLog",function(request,response){
 
 
 router.get("/received", function (req, res) {
-    users.find({})
+    users.find({},{userid:1,name:1,_id:0})
     .exec(function(err,data){
         if(err){
             console.log("Error");
@@ -70,10 +62,9 @@ router.get("/searchDate", function (req, res) {
 
 router.get("/searchStu/:stu/:month", function (req, res){
     console.log(req.params.stu,req.params.month);
-    
     var date = new RegExp("^" + req.params.month);
     
-    ({$and:[{$or:[{userid:req.params.userid},{username:req.params.userid}]},{class:'1-A'}]})
+    // ({$and:[{$or:[{userid:req.params.userid},{username:req.params.userid}]},{class:'1-A'}]})
     attendance.find({
         $and:[
             {$or:[{userid:req.params.stu},{username:req.params.stu}]},
