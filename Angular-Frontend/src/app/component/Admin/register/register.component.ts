@@ -17,7 +17,6 @@ export class RegisterComponent implements OnInit {
   filename;
   RegistrationForm: FormGroup;
   constructor(
-    private ngFlashMessageService: NgFlashMessageService,
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,

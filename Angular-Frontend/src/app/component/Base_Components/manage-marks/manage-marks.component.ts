@@ -66,11 +66,17 @@ export class ManageMarksComponent implements OnInit {
     var year = new Date().getFullYear();
     var years = [];
 
+    /*load the last 5 years in to the mat select*/
     for (var i = 0; i < 5; i++) {
       years.push(year - i);
       this.myYear[i] = years[i]
     }
 
+    /*get all th subject names*/
+    const url = "http://localhost:3000/class_management/getSubjects"
+    this.http.get<any>(url).subscribe(res => {
+      this.mySubject = res.data;
+    });
 
     
   }
@@ -87,6 +93,7 @@ export class ManageMarksComponent implements OnInit {
     this.ClassSearchForm.reset();
     this.StudentMarksForm.reset();
   }
+
   searchStudents(event, className) {
     this.submitted = true;
 
@@ -123,11 +130,6 @@ export class ManageMarksComponent implements OnInit {
   }
 
   submitMarks(){
-    // stop here if form is invalid
-    if (this.StudentMarksForm.invalid) {
-      return;
-    }
-    else {
-    }
+    
   }
 }

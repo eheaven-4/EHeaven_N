@@ -54,9 +54,9 @@
                                 <div class="col-md-6">
                                     <p class="top_txt">Subject : </p>
                                     <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
-                                        <mat-option style="text-align: left"></mat-option>
+                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subName'>{{subject.subName}}</mat-option>
                                     </mat-select>
-                                    <div *ngIf="f2.subject.errors.required">Classname is required</div>
+                                
                                 </div>
                                 <div class="col-md-3">
                                     <p class="top_txt">Year : </p>
@@ -76,9 +76,9 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
-                                        <th style="text-align: left;">Student ID</th>
-                                        <th style="text-align: left;">Student Name</th>
-                                        <th style="text-align: left;">Subject Marks</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student ID</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student Name</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject Marks</th>
                                     </tr>
                                 </thead>
                                 <tbody *ngFor = "let stdata of csNames">
@@ -91,7 +91,7 @@
                             </table>
                             <div class="row">
                                 <button mat-raised-button class="search_btn" style="width:30%; margin: auto">
-                                    <img src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Submit</button>
+                                    <img src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px" (click)="submitMarks()">Submit</button>
                             </div>
                         </mat-card>
                     </div>
