@@ -23,6 +23,7 @@ export class AcademicSubjectComponent implements OnInit {
   images
   filename
   sbjName
+  userType
 
   constructor(
     private router: Router,
@@ -44,13 +45,16 @@ export class AcademicSubjectComponent implements OnInit {
   addSubjectForm = this.fb.group({
     attachmentType: ['', Validators.required],
     subjectName: ['', Validators.required],
-    className: ['', Validators.required]
+    className: ['', Validators.required],
+    showName:['', Validators.required]
   })
   ngOnInit() {
     const url = "http://localhost:3000/class_management/getSubjects"
     this.http.get<any>(url).subscribe(res => {
       this.mySubject = res.data;
     });
+    var userCookies = JSON.parse(this.cookies.getCookie("userAuth"))
+    this.userType = userCookies.usertype
   }
   // load the image as the button event and asign to  the images variable
   selectFile(event) {
@@ -89,6 +93,7 @@ export class AcademicSubjectComponent implements OnInit {
     formData.append('attachmenttype', this.addSubjectForm.value.attachmentType)
     formData.append('subject', this.addSubjectForm.value.subjectName)
     formData.append('class', this.addSubjectForm.value.className)
+    formData.append('showname',this.addSubjectForm.value.showName)
 
     if (this.images == null) {
       let config = new MatSnackBarConfig();

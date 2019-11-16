@@ -12,9 +12,9 @@ var storage = multer.diskStorage({
     cb(null, 'local_storage/academic_Stuff/')
   },
   filename: function (req, file, cb) {
-    console.log(req)
-    cb(null, "ACA_"+ file.originalname)
-    // console.log(file.originalname)
+    let date_ob = new Date();
+    let date = date_ob.getFullYear()+date_ob.getMonth()+date_ob.getHours() + date_ob.getMinutes()    
+    cb(null, date +file.originalname)
   }
 });
 
@@ -23,23 +23,24 @@ var upload = multer({ storage: storage }).single('academic_stuff');
 
 //Add the academic lecture notes function
 router.post('/addStuff', function (req, res) {
-  console.log("hello")
   upload(req, res, (err) => {
-    console.log(req.file)
-    var fullPath = "ACA_"+req.file.originalname;
+    let date_ob = new Date();
+    let date = date_ob.getFullYear()+date_ob.getMonth()+date_ob.getHours() + date_ob.getMinutes()    
+    var fullPath = date+req.file.originalname;
     var document = {
       userid: req.body.userid,
       teachername: req.body.teachername,
       subject: req.body.subject,
       attachmenttype: req.body.attachmenttype,
       class: req.body.class,
+      showname: req.body.showname,
       path: fullPath,
     };
-
+    // console.log(res)
+    
     var photo = new academicStuff(document);
     photo.save()
       .then(result => {
-        console.log(result)
         res.json({ state: true, msg: "Data Inserted Successfully..!" });
       })
       .catch(error => {
@@ -55,11 +56,11 @@ router.get("/acad&stu&attachment/:class/:subName", function(req, res) {
   const className = req.params.class
   const subjectName = req.params.subName
   academicStuff.find({class : className, subject: subjectName})
-        .select('userid teachername subject attachmenttype class path')
+        .select('userid teachername subject attachmenttype class showname path')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
-            res.status(200).json(docs);
+            res.status(200).json({state: true, msg: 'Data Transfer Success.!', data : docs});
         })
         .catch(error => {
             console.log(error);
@@ -75,7 +76,7 @@ router.get("/acad&other&attachment/:userid/:subName", function(req, res) {
   const subjectName = req.params.subName
 
   academicStuff.find({userid : userid, subject: subjectName})
-        .select('userid teachername subject attachmenttype class path')
+        .select('userid teachername subject attachmenttype class showname path')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
