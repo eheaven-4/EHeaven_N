@@ -4,6 +4,8 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
 import { ActivatedRoute } from '@angular/router';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
 
 interface lecSlide {
   _id: String,
@@ -31,7 +33,9 @@ export class AcademicsComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private cookies: MycookiesService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit() {
@@ -59,7 +63,46 @@ export class AcademicsComponent implements OnInit {
 
       })
     }
+  }
 
+  deleteStuff(event, acad_id, file_path){
+    var mybtnId = acad_id;
+    var mybtnFile = file_path;
+
+    var url = "http://localhost:3000/academics/deleteAcademic";    //academics content delete url
+    var urlDelete = "http://localhost:3000/academics/deleteAcad&Attachment"; //academics attachment delete url
+
+    //if there is a file in attachment call atachment file delteing request
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to Delete?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        if (mybtnFile) {
+          this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+            console.log(res);
+          }, (err) => {
+            console.log(err)
+          });
+        }
+        //call content delete request
+        this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Successfully Deleted..! ", true ? "Done" : undefined, config);
+        }, (err) => {
+          console.log(err);
+        });
+
+        window.location.reload();     // reload the page
+      }
+    })
   }
 }
 

@@ -24,16 +24,18 @@
                                         <div class="col-md-10">
                                             <img class="icons"
                                                 src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
-                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}" class="content_txt">{{lecSld.showname}}</a>
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
                                         </div>
-                                        <div class="col-md-1" *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
                                             <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
                                         </div>
                                         <div class="col-md-1">
                                             <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
-                                                mat-raised-button color="warn" class="deletebtn"><i
-                                                    class="material-icons deleteIcon">
-                                                    delete_forever</i></button>
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)">
+                                                <i class="material-icons deleteIcon">delete_forever</i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -52,14 +54,17 @@
                                         <div class="col-md-10">
                                             <img class="icons"
                                                 src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
-                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}" class="content_txt">{{lecSld.showname}}</a>
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
                                         </div>
-                                        <div class="col-md-1"  *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
                                             <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
                                         </div>
                                         <div class="col-md-1">
                                             <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
-                                                mat-raised-button color="warn" class="deletebtn"><i
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
                                                     class="material-icons deleteIcon">
                                                     delete_forever</i></button>
                                         </div>
@@ -80,14 +85,17 @@
                                         <div class="col-md-10">
                                             <img style="width: 20px; margin-top: -5px;"
                                                 src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
-                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}" class="content_txt">{{lecSld.showname}}</a>
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
                                         </div>
-                                        <div class="col-md-1"  *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
                                             <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
                                         </div>
                                         <div class="col-md-1">
                                             <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
-                                                mat-raised-button color="warn" class="deletebtn"><i
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
                                                     class="material-icons deleteIcon">
                                                     delete_forever</i></button>
                                         </div>
@@ -107,14 +115,17 @@
                                         <div class="col-md-10">
                                             <img style="width: 17px; margin-top: -8px;"
                                                 src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
-                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}" class="content_txt">{{lecSld.showname  }}</a>
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname  }}</a>
                                         </div>
-                                        <div class="col-md-1"  *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
                                             <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
                                         </div>
                                         <div class="col-md-1">
                                             <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
-                                                mat-raised-button color="warn" class="deletebtn"><i
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
                                                     class="material-icons deleteIcon">
                                                     delete_forever</i></button>
                                         </div>

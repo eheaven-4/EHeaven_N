@@ -97,12 +97,39 @@ router.get("/academicAttachment/:filename", function(req, res) {
 });
 
 //delete academic attachment details
-router.delete("", function(req,res) {
-
+router.delete("/deleteAcademic/:_id", function(req,res) {
+  const id = req.params._id;
+  academicStuff.remove({ _id: id })
+      .exec()
+      .then(result => {
+          res.status(200).json({ state: true,
+              message: 'Deleted Successfully'
+          });
+      })
+      .catch(error => {
+          console.log(error);
+          res.status(500).json({ state: false,
+              error: error
+          });
+      });
 })
 
 //delete academic attachment from local_storage
-router.delete("", function(req,res) { 
-
+router.delete("/deleteAcad&Attachment/:filename", function(req,res) { 
+const filename = req.params.filename;
+    console.log(filename)
+    const path = 'local_storage/academic_Stuff/' + filename;
+    try {
+        fs.unlinkSync(path)
+        res.status(200).json({
+            message: 'Delete the file successfully..!'
+        })
+        //file removed
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: error
+        });
+    }
 })
 module.exports = router;
