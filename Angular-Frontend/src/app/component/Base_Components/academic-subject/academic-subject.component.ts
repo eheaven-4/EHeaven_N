@@ -19,10 +19,10 @@ interface subjectsArray {
 })
 export class AcademicSubjectComponent implements OnInit {
 
-  subjectNames = ['Maths', 'Science', 'English']
   mySubject: subjectsArray[] = []
   images
   filename
+  sbjName
 
   constructor(
     private router: Router,
@@ -34,7 +34,7 @@ export class AcademicSubjectComponent implements OnInit {
   ) { }
 
   grades = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
-  attachment = ['Tutorial', 'Lectuer Slide', 'Resouses', 'Other'];
+  attachment = ['Tutorial', 'Lecture Slide', 'Resources', 'Other'];
   subjects = ['Maths', 'Science', 'English']
 
   subjectForm = this.fb.group({
@@ -65,9 +65,13 @@ export class AcademicSubjectComponent implements OnInit {
   searchSubject() {
     var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
     var id = userCookie.userid;
-    this.router.navigate(['/academics' + '/' + id]);
 
-    console.log(this.subjectForm.value.subjectName)
+    this.sbjName = this.subjectForm.value.subject
+    console.log(this.sbjName);
+
+
+    this.router.navigate(['/academics' + '/' + this.sbjName]);
+
   }
 
   addSubect() {

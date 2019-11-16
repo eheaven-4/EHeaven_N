@@ -13,16 +13,25 @@
                         <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 60px">Academics</h2>
                         <hr>
                     </div>
-
-                    
-
                     <div class="container contentDiv">
                         <h6>Lecture Slides</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img class="icons" src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Lecture Slide'">
+                                    <div class="row"
+                                        style="margin-bottom: 5px;padding-right: 100px;padding-left: 20px;">
+                                        <div class="col-md-11">
+                                            <img class="icons"
+                                                src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
+                                            <a href="#" class="content_txt">{{lecSld.path}}</a>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button *ngIf="userType == 'Teacher'" mat-raised-button color="warn" class="deletebtn"><i class="material-icons deleteIcon">
+                                                    delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -32,8 +41,13 @@
                         <hr>
                         <div class="sub_contentDiv">
                             <div>
-                                <img class="icons" src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                                <div *ngFor="let lecSld of lecSlide">
+                                    <div *ngIf="lecSld.attachmenttype == 'Tutorial'">
+                                        <img class="icons"
+                                            src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
+                                        <a href="#" class="content_txt">{{lecSld.path}}</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,10 +56,12 @@
                         <h6>Resourses</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img style="width: 20px; margin-top: -5px;"
-                                    src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Resources'">
+                                    <img style="width: 20px; margin-top: -5px;"
+                                        src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
+                                    <a href="#" class="content_txt">{{lecSld.path}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -54,14 +70,15 @@
                         <h6>Other</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img style="width: 17px; margin-top: -8px;"
-                                    src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Other'">
+                                    <img style="width: 17px; margin-top: -8px;"
+                                        src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
+                                    <a href="#" class="content_txt">{{lecSld.path}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

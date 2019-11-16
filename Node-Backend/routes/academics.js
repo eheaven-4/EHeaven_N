@@ -51,9 +51,10 @@ router.post('/addStuff', function (req, res) {
 
 
 //show academic attachment for students
-router.get("/acad&stu&attachment/:class", function(req, res) {
+router.get("/acad&stu&attachment/:class/:subName", function(req, res) {
   const className = req.params.class
-  academicStuff.find({class : className})
+  const subjectName = req.params.subName
+  academicStuff.find({class : className, subject: subjectName})
         .select('userid teachername subject attachmenttype class path')
         .exec()
         .then(docs => {
@@ -68,14 +69,39 @@ router.get("/acad&stu&attachment/:class", function(req, res) {
         });
 })
 
+//show academic attachment for others
+router.get("/acad&other&attachment/:userid/:subName", function(req, res) {
+  const userid = req.params.userid
+  const subjectName = req.params.subName
+
+  academicStuff.find({userid : userid, subject: subjectName})
+        .select('userid teachername subject attachmenttype class path')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json({state: true, msg: 'Data Transfer Success.!', data : docs});
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+})
 
 //get attachment 
-
-router.get("/academicAttachment/:id", function(req, res) {
-  console.log("hello")
-  const id = req.params.id;
-  console.log(id)
-  res.sendFile(path.join(__dirname, '../uploads/'+id+'.jpg'));
+router.get("/academicAttachment/:filename", function(req, res) {
+  const filename = req.params.filename;
+  res.sendFile(path.join(__dirname, '../local_storage/academic_Stuff/' + filename));
 });
 
+//delete academic attachment details
+router.delete("", function(req,res) {
+
+})
+
+//delete academic attachment from local_storage
+router.delete("", function(req,res) { 
+
+})
 module.exports = router;
