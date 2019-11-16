@@ -14,50 +14,7 @@
                         <hr>
                     </div>
 
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Attachment Type :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        formControlName="type">
-                                        <mat-option style="text-align: left" *ngFor="let att of attachmentType"
-                                            [value]="att">
-                                            {{ att }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-md-4">
-                                        <label>Subject :</label>
-                                        <mat-select class="browser-default custom-select mb-4 box_border"
-                                            formControlName="grade">
-                                            <mat-option style="text-align: left" *ngFor="let sbj of subjects" [value]="sbj">
-                                                {{ sbj }}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                <div class="col-md-2">
-                                    <label>Grade :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        formControlName="grade">
-                                        <mat-option style="text-align: left" *ngFor="let gds of grades" [value]="gds">
-                                            {{ gds }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-md-2" style="margin-top: 7px;">
-                                    <input type="file" style="display: none" name="academicFile"
-                                        (change)="selectImage($event)" #fileInput>
-                                    <button class="btn btn-outline-primary my-4 btn-block" type="button"
-                                        (click)="fileInput.click()" accept="image/*">Attach a file</button>
-                                </div>
-
-                                <div class="col-md-2" style="margin-top: 7px">
-                                    <button class="btn btn-info my-4 btn-block submit_btn" type="submit">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
+                    
 
                     <div class="container contentDiv">
                         <h6>Lecture Slides</h6>

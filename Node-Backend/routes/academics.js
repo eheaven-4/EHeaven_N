@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     console.log(req)
-    cb(null, file.originalname)
+    cb(null, "ACA_"+ file.originalname)
     // console.log(file.originalname)
   }
 });
@@ -21,17 +21,18 @@ var storage = multer.diskStorage({
 
 var upload = multer({ storage: storage }).single('academic_stuff');
 
+//Add the academic lecture notes function
 router.post('/addStuff', function (req, res) {
   console.log("hello")
   upload(req, res, (err) => {
     console.log(req.file)
-    var fullPath = req.file.originalname;
+    var fullPath = "ACA_"+req.file.originalname;
     var document = {
       userid: req.body.userid,
       teachername: req.body.teachername,
       subject: req.body.subject,
       attachmenttype: req.body.attachmenttype,
-      grade: req.body.grade,
+      class: req.body.class,
       path: fullPath,
     };
 
@@ -48,7 +49,29 @@ router.post('/addStuff', function (req, res) {
   })
 });
 
-router.get("/profileImage/:id", function(req, res) {
+
+//show academic attachment for students
+router.get("/acad&stu&attachment/:class", function(req, res) {
+  const className = req.params.class
+  academicStuff.find({class : className})
+        .select('userid teachername subject attachmenttype class path')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+})
+
+
+//get attachment 
+
+router.get("/academicAttachment/:id", function(req, res) {
   console.log("hello")
   const id = req.params.id;
   console.log(id)
