@@ -91,6 +91,10 @@
                                                     (change)="selectFile($event)" #fileInput>
                                                 <button class="btn btn-outline-primary my-4 btn-block" type="button"
                                                     (click)="fileInput.click()">Attach a file</button>
+                                                <small class="form-text text-muted mb-4"
+                                                    style=" text-align: left; margin-top: -18px;">
+                                                    {{filename}}
+                                                </small>
                                             </div>
 
                                             <div class="col-md-3" style="margin-top: 7px">
