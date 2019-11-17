@@ -78,7 +78,8 @@
 
                                         <div style="padding-top: 100px ; padding-bottom: 100px;align-content: center;" *ngIf="historyflagD" >
                                                 <form class="example-form " (ngSubmit)="searchDate(dateid.value)">
-                                                  <mat-grid-list cols="1" rowHeight="100px">
+                                                  <!-- <mat-grid-list cols="1" rowHeight="100px">
+                                                        
                                                     <mat-grid-tile>
                                                         <mat-form-field>
                                                                 <input matInput [matDatepicker]="picker" placeholder="Choose a date"  appearance="outline" #dateid>
@@ -90,8 +91,20 @@
                                                         <mat-grid-tile>
                                                                 <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
                                                       </mat-grid-tile>
-                                                    </mat-grid-list>
-                                                              
+                                                    </mat-grid-list> -->
+                                                    <div align="center"><span *ngIf="spanflageD" style="color: red;">May be you entered date was a holiday.Please Enter valid date.</span></div>
+                                                    <div class="row" style="padding-left:475px;">
+                                                            <mat-form-field>
+                                                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" style="width:100%;" appearance="outline" #dateid>
+                                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                                                    <mat-datepicker #picker></mat-datepicker>
+                                                            
+                                                            </mat-form-field>
+                                                        
+                                                    </div>
+                                                    <div class="row" style="padding-left:500px;">
+                                                            <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
+                                                    </div>
                                                       
                                                         
                                                 </form>
@@ -158,12 +171,12 @@
                                             <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
                                                 <!-- h {{user.value|json}}
                                                ahsdlkashdlkshaldkhslakhd {{selected}} -->
-                                                <mat-grid-list cols="2">
+                                                <!-- <mat-grid-list cols="2" rowHeight="150px">
                                                     <mat-grid-tile>
                                                             
                                                     <p>
                                                         <mat-form-field class="example-full-width" >
-                                                                <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel>
+                                                                <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel style="width:100%;">
                                                         </mat-form-field>
                                                     </p>
                                                     <p>
@@ -183,7 +196,24 @@
                                                           
                                                     </mat-grid-tile>  
                                                   
-                                                </mat-grid-list>  
+                                                </mat-grid-list>   -->
+                                                <div class="row" style="padding-bottom: 100px;padding-top: 100px;">
+                                                    <div class="col-4" style="margin-left: 200px;">
+                                                        <mat-form-field class="example-full-width" >
+                                                            <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel style="width:100%;">
+                                                        </mat-form-field>
+                                                        <mat-hint>Ex:00000001</mat-hint>
+                                                    </div>
+                                                    <div class="col-4" style="margin-left: 100px;">
+                                                        <mat-form-field #month>
+                                                            <mat-label>Month</mat-label>
+                                                            <mat-select [(value)]="selected">
+                                                              <mat-option>None</mat-option>
+                                                              <mat-option *ngFor="let month of months;index as i" value="{{i}}">{{month}}</mat-option>
+                                                            </mat-select>
+                                                        </mat-form-field>
+                                                    </div>
+                                                </div>
                                                 
                                                 <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
                                                 
@@ -192,7 +222,7 @@
                                             
                                         </div>
                                         <div *ngIf="!historyflagS" style="padding-top:100px; padding-bottom: 100px">
-                                                <div style="text-align:center;"><h2 >{{searchStuResult[0].userid}} Student Attendence List</h2></div>
+                                                <div style="text-align:center;"><h2 >{{searchStuResult[8].username}} Student Attendence List</h2></div>
                                             <mat-grid-list cols="2" rowHeight="100px">
                                                 <mat-grid-tile>
                                                         <h3>Date</h3>
