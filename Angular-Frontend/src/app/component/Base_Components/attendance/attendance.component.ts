@@ -3,7 +3,7 @@ import {AttendenceService} from './attendence.service';
 import {Returnuser} from './attend';
 import {Attend} from './attend';
 import {Attendreturn} from './attend';
-import {FormBuilder,Validators,FormGroup} from '@angular/forms';
+import {FormBuilder,Validators,FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { templateJitUrl } from '@angular/compiler';
 
@@ -35,6 +35,9 @@ public spanflageS=false;
 public c_url=null;
 public toggle;
 public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+stu = new FormControl('', [Validators.required]);
+
+  
 
 
   constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder,private router : Router) { }
@@ -56,6 +59,11 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
     
     
     
+  }
+  getErrorMessage() {
+    return this.stu.hasError('required') ? 'You must enter a value' :
+        
+            '';
   }
  
   addData(stu:Attend){
