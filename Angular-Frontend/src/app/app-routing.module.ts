@@ -41,7 +41,7 @@ const routes: Routes = [
   {path: 'profile/:id', component: ProfileComponent},
   {path: 'contactus', component: ContactusComponent},
   {path: 'notifications', component: NotificationComponent},
-  {path: 'academics/:id', component: AcademicsComponent },
+  {path: 'academics/:sbjName', component: AcademicsComponent },
   {path: 'add_notification', component: AddNotificationComponent},
   {path: 'certification', component: CertificationComponent},
   {path: 'prepare_certification', component: PrepareCertificationComponent},

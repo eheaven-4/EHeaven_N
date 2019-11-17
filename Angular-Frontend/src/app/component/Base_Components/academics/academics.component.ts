@@ -3,6 +3,19 @@ import { HttpClient } from '@angular/common/http';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { faFile } from '@fortawesome/free-solid-svg-icons';
+import { ActivatedRoute } from '@angular/router';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
+import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
+
+interface lecSlide {
+  _id: String,
+  userid: String,
+  teachername: String,
+  subject: String,
+  attachmenttype: String,
+  class: String,
+  path: String
+}
 
 @Component({
   selector: 'app-academics',
@@ -14,19 +27,82 @@ import { faFile } from '@fortawesome/free-solid-svg-icons';
 export class AcademicsComponent implements OnInit {
 
   faFile = faFile;
-  
+  lecSlide: lecSlide[] = []
+  userType
+
   constructor(
     private http: HttpClient,
-    private ngFlashMessageService: NgFlashMessageService,
     private cookies: MycookiesService,
+    private route: ActivatedRoute,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) { }
 
-  grades = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13'];
-  attachmentType = ['Tutorial', 'Lectuer Slide', 'Resouses', 'Other'];
-  subjects = ['Maths', 'Science', 'English']
-
   ngOnInit() {
-    
+    var subject = this.route.snapshot.paramMap.get("sbjName")
+    var userCookies = JSON.parse(this.cookies.getCookie("userAuth"))
+    this.userType = userCookies.usertype
+    var userId = userCookies.userid
+    var className = userCookies.selectclass
+    console.log(className);
+
+    const url1 = "http://localhost:3000/academics/acad&other&attachment/"
+    const url2 = "http://localhost:3000/academics/acad&stu&attachment/"
+
+    if (this.userType == 'Administrator' || this.userType == 'Teacher') {
+      this.http.get<any>(url1 + userId + '/' + subject).subscribe(res => {
+        this.lecSlide = res.data
+        console.log(this.lecSlide);
+
+      })
+    }
+    if (this.userType == 'Student' || this.userType == 'Parent') {
+      this.http.get<any>(url2 + className + '/' + subject).subscribe(res => {
+        this.lecSlide = res.data
+        console.log(this.lecSlide);
+
+      })
+    }
+  }
+
+  deleteStuff(event, acad_id, file_path){
+    var mybtnId = acad_id;
+    var mybtnFile = file_path;
+
+    var url = "http://localhost:3000/academics/deleteAcademic";    //academics content delete url
+    var urlDelete = "http://localhost:3000/academics/deleteAcad&Attachment"; //academics attachment delete url
+
+    //if there is a file in attachment call atachment file delteing request
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to Delete?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        if (mybtnFile) {
+          this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+            console.log(res);
+          }, (err) => {
+            console.log(err)
+          });
+        }
+        //call content delete request
+        this.http.delete(url + '/' + mybtnId).subscribe(res => {  //send delete the notification request to the server
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Successfully Deleted..! ", true ? "Done" : undefined, config);
+        }, (err) => {
+          console.log(err);
+        });
+
+        window.location.reload();     // reload the page
+      }
+    })
   }
 }
 

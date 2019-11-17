@@ -1,22 +1,48 @@
-.select_subject{
-    padding-top:40px;
-    margin: auto;
-    text-align: center;
-    font-size: 30px;
+.select_subject {
+  padding-top: 40px;
+  margin: auto;
+  text-align: center;
+  font-size: 30px;
 }
 
-.img_logo{
-    padding-top: 30px;
-    width: 30%;
-    margin: auto;
+.img_logo {
+  padding-top: 30px;
+  width: 30%;
+  margin: auto;
 }
 
-.src_box{
-    // width: 80%;
-    margin: auto;
-    padding-top: 23px;
+.src_box {
+  // width: 80%;
+  margin: auto;
+  padding-top: 23px;
 }
-.src_btn{
-    box-shadow: 0px 5px 5px rgb(134, 132, 245);
-    background-color: rgb(0, 140, 255);
+.src_btn {
+  box-shadow: 0px 5px 5px rgb(134, 132, 245);
+  background-color: rgb(0, 140, 255);
+}
+
+.academic-card {
+  max-width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.academicAdd-card {
+  max-width: 100%;
+  margin-left: 30px;
+  margin-right: 30px;
+  margin-top: 30px;
+  margin-bottom: 50px;
+}
+
+.submit_btn {
+  background-color: rgb(0, 140, 255);
+  border-color: rgb(0, 140, 255);
+  box-shadow: 0px 5px 5px rgb(134, 132, 245);
+}
+
+.submit_btn:hover {
+  background-color: rgb(0, 103, 187);
 }

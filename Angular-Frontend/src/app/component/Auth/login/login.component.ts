@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     var url = "http://localhost:3000/users/login";
 
     this.http.post<any>(url, user).subscribe(res => {
+      console.log(res.user);
       
       if (res.state == true) {
         // this.storeData(res.token, res.user);

@@ -1,15 +1,8 @@
-.submit_btn {
-  background-color: rgb(0, 140, 255);
-  border-color: rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
-}
 
-.submit_btn:hover {
-  background-color: rgb(0, 103, 187);
-}
 .contentDiv {
   padding-top: 20px;
   padding-left: 50px;
+  padding-right: 30px;
 }
 
 .sub_contentDiv {
@@ -27,4 +20,16 @@
 }
 .content_txt:hover {
   color: rgb(0, 104, 196);
+}
+.deletebtn{
+  margin-top: -2px;
+  height: 30px;
+  background-color: rgb(223, 2, 2);
+}
+.deletebtn:hover{
+  background-color: rgb(172, 2, 2);
+}
+.deleteIcon{
+  font-size: 20px;
+  margin-top: -10px;
 }
