@@ -7,11 +7,9 @@
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
-
 }
 
-
-@font-face{
+@font-face {
   font-family: myfont;
   src: url(../../../assets/Fonts/OLD.ttf);
 }
@@ -47,18 +45,17 @@
 }
 
 .example-header-image {
-    background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
-    background-size: cover;
+  background-image: url("https://material.angular.io/assets/img/examples/shiba1.jpg");
+  background-size: cover;
 }
 
-
 /**********************************************/
-.news_head{
-    text-align: center;
-    font-size: 50px;
-    font-family: 'Courier New', Courier, monospace;
-    padding-top: 20px;
-    color: #E69F0E;
+.news_head {
+  text-align: center;
+  font-size: 50px;
+  font-family: "Courier New", Courier, monospace;
+  padding-top: 20px;
+  color: #e69f0e;
 }
 .news-card {
   height: 500px;
@@ -76,25 +73,25 @@
 }
 
 .flip-box-back {
-    background-color: rgb(228, 135, 13);
-    color: black;
-    transform: rotateY(180deg);
-      height: 500px;
-    border-radius: 5px;
-    text-align: justify;
-    padding-top: 20px;
-    padding-left: 10px;
-    padding-right: 10px;
+  background-color: rgb(228, 135, 13);
+  color: black;
+  transform: rotateY(180deg);
+  height: 500px;
+  border-radius: 5px;
+  text-align: justify;
+  padding-top: 20px;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 .flip-box {
-    height: 500px;
-    background-color: transparent;
+  height: 500px;
+  background-color: transparent;
 }
 
 .flip-box-inner {
   position: relative;
   width: 100%;
-//   height: 100%;
+  //   height: 100%;
   text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
@@ -111,46 +108,47 @@
   backface-visibility: hidden;
 }
 /**********************************************************************************************/
-.vision_txt{
-    font-size: 30px;
-    padding-top: 10px;
-    padding-bottom: 50px;
-    text-align:center;
-    font-family: cursive;
+.vision_txt {
+  font-size: 30px;
+  padding-top: 10px;
+  padding-bottom: 50px;
+  text-align: center;
+  font-family: cursive;
 }
-.select-demo{
-	font-size: 45px;
-	font-family: 'Oswald', sans-serif;
-	text-align: center;
+.select-demo {
+  font-size: 45px;
+  font-family: "Oswald", sans-serif;
+  text-align: center;
 }
-.orange{
-	color: #E69F0E;
+.orange {
+  color: #e69f0e;
 }
 /**********************************************************************************************/
-.event_month{
-  font-size: 30px; text-align: center; padding-top: 5px;
+.event_month {
+  font-size: 30px;
+  text-align: center;
+  padding-top: 5px;
   color: white;
 }
 
-.event_date{
-  font-size: 60px; margin-top: -35px; text-align: center; margin-bottom: -10px;
+.event_date {
+  font-size: 60px;
+  margin-top: -35px;
+  text-align: center;
+  margin-bottom: -10px;
   color: white;
 }
 
-
-.date_div{
-  background-color: #E69F0E;
+.date_div {
+  background-color: #e69f0e;
 }
-.content_div{
-  padding-left:30px; padding-right: 30px; background-color: white;
+.content_div {
+  padding-left: 30px;
+  padding-right: 30px;
+  background-color: white;
 }
 
-.content_div:hover{
+.content_div:hover {
   background-color: #e2e2e2;
   cursor: pointer;
 }
-
-
-
-
-
