@@ -28,7 +28,14 @@ export class LoginComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
+  }
 
   userLogin() {
     const user = {

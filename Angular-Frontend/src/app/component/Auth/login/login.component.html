@@ -4,29 +4,24 @@
             <div class="col-md-2">
                 <app-sidebar></app-sidebar>
             </div>
-            <div class="container-fluid col-md-10" style="background-color:white">
-                <div class="flashMessage">
-                    <ng-flash-message></ng-flash-message>
-                </div>
-                <div>
+            <div class="container col-md-10" style="background-color:white">
+                <div class="container">
                     <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px">Login</h2>
                     <hr>
 
-                    <div class="form-group">
+                    <div class="form-group" style="padding-top: 50px">
                         <form class="text-center border border p-5  login-frm">
 
-                            <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+                            <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 30px">
 
                             <input type="text" class="form-control mb-4 box_border" placeholder="User ID" name="userid"
                                 [(ngModel)]="userid">
-                            <p
-                                style="text-align: left; margin-top: -20px; font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
+                            <p style="text-align: left; margin-top: -20px; font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
                                 &nbsp;&nbsp;&nbsp; i.e : 17001112</p>
 
                             <input type="password" class="form-control mb-4 box_border" placeholder="Password"
                                 name="password" [(ngModel)]="password">
-                            <p
-                                style="text-align: left; margin-top: -20px; margin-bottom: 30px;font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
+                            <p style="text-align: left; margin-top: -20px; margin-bottom: 30px;font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
                                 &nbsp;&nbsp;&nbsp;i.e : abc@123</p>
 
                             <button mat-button class="btn btn-info btn-block login_btn box_border" type="submit"
