@@ -16,14 +16,13 @@ export class RegisterComponent implements OnInit {
   images;
   filename;
   RegistrationForm: FormGroup;
+
   constructor(
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
-
-
   ) { }
 
   // registratin form attributes
@@ -98,7 +97,6 @@ export class RegisterComponent implements OnInit {
       formData.append('address', this.RegistrationForm.value.address)
 
       /****************************************************** */
-      console.log(formData);
       const url = 'http://localhost:3000/users/register';
 
       if (this.images == null) {
