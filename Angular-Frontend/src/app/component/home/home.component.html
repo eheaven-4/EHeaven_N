@@ -49,50 +49,32 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="flip-box">
-                            <div class="flip-box-inner">
+                            <div class="flip-box-inner" *ngFor="let new of news">
                                 <div class="flip-box-front">
                                     <mat-card class="news-card ">
                                         <mat-card-header>
                                             <div mat-card-avatar class="example-header-image"></div>
-                                            <mat-card-title>Top News</mat-card-title>
-                                            <mat-card-subtitle>Date and time</mat-card-subtitle>
+                                            <mat-card-title>{{new.topic}}</mat-card-title>
+                                            <mat-card-subtitle>{{new.date | date:'yyyy-MM-dd HH:mm:ss'}}</mat-card-subtitle>
                                         </mat-card-header>
                                         <img mat-card-image src="../../../assets/backgrounds/marketing-books.jpg"
                                             class="card-img">
                                         <mat-card-content>
-                                            <p style="text-align: justify;">
-                                                The Shiba Inu is the smallest of the six original and distinct spitz
-                                                breeds of dog from Japan.
-                                                A small, agile dog that copes very well with mountainous terrain, the
-                                                Shiba Inu was originally bred for hunting. mJapan.
-                                                The Shiba Inu is the smallest of the six original and distinct spitz
-                                                breeds of dog from Japan.
-                                                A small, agile dog that copes very well with mountainous terrain, the
-                                                Shiba Inu was originally bred for hunting. mJapan.
-                                            </p>
+                                            <p>{{new.newsSumery}}</p>
+
                                         </mat-card-content>
                                         <mat-card-actions>
                                         </mat-card-actions>
                                     </mat-card>
                                 </div>
                                 <div class="flip-box-back">
-                                    <h2>Paris</h2>
-                                    <p>What an amazing city The Shiba Inu is the smallest of the six original and
-                                        distinct spitz breeds
-                                        of
-                                        dog
-                                        from
-                                        Japan.
-                                        A small, agile dog that copes very well with mountainous terrain, the Shiba
-                                        Inu
-                                        was
-                                        originally
-                                        bred for hunting.</p>
+                                    <h2>{{new.topic}}</h2>
+                                    <p>{{new.news}}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-3">
+                    <!-- <div class="col-md-3">
                         <div class=" flip-box">
                             <div class="flip-box-inner">
                                 <div class="flip-box-front">
@@ -133,8 +115,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> -->
+                    <!-- <div class="col-md-3">
                         <div class="flip-box">
                             <div class="flip-box-inner">
                                 <div class="flip-box-front">
@@ -178,8 +160,8 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-md-3">
+                    </div> -->
+                    <!-- <div class="col-md-3">
                         <div class=" flip-box">
                             <div class="flip-box-inner">
                                 <div class="flip-box-front">
@@ -221,7 +203,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
         </div>
@@ -269,9 +251,9 @@
                     </div> -->
                 </mdb-carousel-item>
             </mdb-carousel>
-    
+
         </div>
-    
+
         <div class="container-fluid" style=" height: 20px;"></div>
 
     <!-- //photo collection division  -->
