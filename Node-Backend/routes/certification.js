@@ -38,7 +38,7 @@ router.post("/requestCert", function (req, res) {
 /************************get certification requests from users(Student comp)******************************/
 //get pending certificate requests to be issued to the user
 router.get("/pendingCert/:id", function (req, res) {
-    console.log("Hello");
+    // console.log("Hello");
     const id = req.params.id;
     requestCertification.find({ state: "Pending", userid: id })
         .sort({ _id: 1 })
@@ -58,7 +58,7 @@ router.get("/pendingCert/:id", function (req, res) {
 
 //get issued all certificates issued to a particular user
 router.get("/issuedCert/:id", function (req, res) {
-    console.log("Hello");
+    // console.log("Hello");
     const id = req.params.id;
     requestCertification.find({ state: "Issued", userid: id })
         .sort({ _id: 1 })
@@ -453,7 +453,7 @@ router.post("/leavingcert", async function (req, res) {
 /*******************************generate A/L certificate pdf ****************************************/
 
 router.post("/alcert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestAlCert({
         studentName: req.body.studentName,
         examYear: req.body.examYear,
@@ -580,7 +580,7 @@ router.post("/alcert", async function (req, res) {
 /*******************************generate O/L certificate pdf ****************************************/
 
 router.post("/olcert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestOlCert({
         studentName: req.body.studentName,
         examYear: req.body.examYear,
