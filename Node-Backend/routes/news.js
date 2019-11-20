@@ -108,7 +108,6 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 
 
 router.put('/update/:id', (req, res) => {  // update methord 
-
     console.log('updated news');
     News.findByIdAndUpdate(req.params.id, {
         $set: { topic: req.body.topic, newsSumery: req.body.newsSumery, news: req.body.news }
@@ -124,9 +123,23 @@ router.put('/update/:id', (req, res) => {  // update methord
             }
         }
     );
-
 });
 
+//get top 4 news in the DATABASE    
+router.get('/topNews', function(req,res) {
+    News.find()
+        .sort({date: -1})
+        .limit(4)
+        .exec()
+        .then(result => {
+            console.log(result)
+            res.json({ state: true, msg: "Data Transfer Successfully..!", data: result });
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data Transfering Unsuccessfull..!" });
+        })
+})
 
 
 module.exports = router;

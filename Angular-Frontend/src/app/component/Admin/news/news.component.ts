@@ -7,7 +7,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
-interface news {  // decalare interface class for load notification attributes.
+interface news {  // decalare interface class for load news attributes.
   _id: String;
   topic: String;
   newsSumery: String;

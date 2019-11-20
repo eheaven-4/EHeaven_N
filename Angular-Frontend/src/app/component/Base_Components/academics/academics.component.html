@@ -13,59 +13,32 @@
                         <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 60px">Academics</h2>
                         <hr>
                     </div>
-
-                    <form>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <label>Attachment Type :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        formControlName="type">
-                                        <mat-option style="text-align: left" *ngFor="let att of attachmentType"
-                                            [value]="att">
-                                            {{ att }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-md-4">
-                                        <label>Subject :</label>
-                                        <mat-select class="browser-default custom-select mb-4 box_border"
-                                            formControlName="grade">
-                                            <mat-option style="text-align: left" *ngFor="let sbj of subjects" [value]="sbj">
-                                                {{ sbj }}
-                                            </mat-option>
-                                        </mat-select>
-                                    </div>
-                                <div class="col-md-2">
-                                    <label>Grade :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        formControlName="grade">
-                                        <mat-option style="text-align: left" *ngFor="let gds of grades" [value]="gds">
-                                            {{ gds }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-md-2" style="margin-top: 7px;">
-                                    <input type="file" style="display: none" name="academicFile"
-                                        (change)="selectImage($event)" #fileInput>
-                                    <button class="btn btn-outline-primary my-4 btn-block" type="button"
-                                        (click)="fileInput.click()" accept="image/*">Attach a file</button>
-                                </div>
-
-                                <div class="col-md-2" style="margin-top: 7px">
-                                    <button class="btn btn-info my-4 btn-block submit_btn" type="submit">Submit</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-
                     <div class="container contentDiv">
                         <h6>Lecture Slides</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img class="icons" src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Lecture Slide'">
+                                    <div class="row"
+                                        style="margin-bottom: 5px;padding-right: 100px;padding-left: 20px;">
+                                        <div class="col-md-10">
+                                            <img class="icons"
+                                                src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
+                                        </div>
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                            <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)">
+                                                <i class="material-icons deleteIcon">delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -74,37 +47,93 @@
                         <h6>Tutorials</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img class="icons" src="../../../../assets/icons/file-powerpoint-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Tutorial'">
+                                    <div class="row"
+                                        style="margin-bottom: 5px;padding-right: 100px;padding-left: 20px;">
+                                        <div class="col-md-10">
+                                            <img class="icons"
+                                                src="../../../../assets/icons/file-invoice-solid.svg">&nbsp;&nbsp;
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
+                                        </div>
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                            <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
+                                                    class="material-icons deleteIcon">
+                                                    delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-
                     <div class="container contentDiv">
                         <h6>Resourses</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img style="width: 20px; margin-top: -5px;"
-                                    src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Resources'">
+                                    <div class="row"
+                                        style="margin-bottom: 5px;padding-right: 100px;padding-left: 20px;">
+                                        <div class="col-md-10">
+                                            <img style="width: 20px; margin-top: -5px;"
+                                                src="../../../../assets/icons/internet-explorer-brands.svg">&nbsp;
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname}}</a>
+                                        </div>
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                            <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
+                                                    class="material-icons deleteIcon">
+                                                    delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="container contentDiv" style="padding-bottom:50px;">
                         <h6>Other</h6>
                         <hr>
                         <div class="sub_contentDiv">
-                            <div>
-                                <img style="width: 17px; margin-top: -8px;"
-                                    src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
-                                <a href="#" class="content_txt">My new file</a>
+                            <div *ngFor="let lecSld of lecSlide">
+                                <div *ngIf="lecSld.attachmenttype == 'Other'">
+                                    <div class="row"
+                                        style="margin-bottom: 5px;padding-right: 100px;padding-left: 20px;">
+                                        <div class="col-md-10">
+                                            <img style="width: 17px; margin-top: -8px;"
+                                                src="../../../../assets/icons/clone-solid.svg">&nbsp;&nbsp;
+                                            <a href="http://localhost:3000/academics/academicAttachment/{{lecSld.path}}"
+                                                class="content_txt">{{lecSld.showname  }}</a>
+                                        </div>
+                                        <div class="col-md-1"
+                                            *ngIf="userType == 'Administrator' || userType == 'Teacher'">
+                                            <p style="color: rgb(138, 138, 138);">{{lecSld.class}}</p>
+                                        </div>
+                                        <div class="col-md-1">
+                                            <button *ngIf="userType == 'Administrator' || userType == 'Teacher'"
+                                                mat-raised-button color="warn" class="deletebtn"
+                                                (click)="deleteStuff($event,lecSld._id,lecSld.path)"><i
+                                                    class="material-icons deleteIcon">
+                                                    delete_forever</i></button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

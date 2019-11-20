@@ -9,7 +9,7 @@ const { requestOlCert } = require('../models/certification');
 const config = require('../config/database');
 const pdfDoc = require('pdf-lib');
 const fs = require('fs');
-
+    
 /*Student request certificates */
 router.post("/requestCert", function (req, res) {
     const newRequest = new requestCertification({

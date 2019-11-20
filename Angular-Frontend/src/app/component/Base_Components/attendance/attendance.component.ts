@@ -177,6 +177,7 @@ public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept',
         this.spanflageS=true;
       }else{
         this.searchStuResult=data;
+        console.log(this.searchStuResult);
       }
       
     });

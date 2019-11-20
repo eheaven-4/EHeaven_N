@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { faAt, faPhone, faMap } from '@fortawesome/free-solid-svg-icons';
+import { faAt, faPhone, faMap , faMobile, faBirthdayCake, faVenusMars, faGlobeEurope} from '@fortawesome/free-solid-svg-icons';
 
 interface profile {
   usertype: String;
@@ -27,10 +27,14 @@ interface profile {
 })
 export class ProfileComponent implements OnInit {
 
-  faAt = faAt;
-  faPhone = faPhone;
-  faMap = faMap;
-  profiledata: profile[] = [];
+  faVenusMars =faVenusMars
+  faAt = faAt
+  faGlobeEurope = faGlobeEurope
+  faPhone = faPhone
+  faBirthdayCake =faBirthdayCake
+  faMap = faMap
+  faMobile  = faMobile
+  profiledata: profile[] = []
 
   authtoken: any;
   user: any;

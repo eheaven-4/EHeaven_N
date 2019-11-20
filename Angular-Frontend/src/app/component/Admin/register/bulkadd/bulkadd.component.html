@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div class="row">
         <form [formGroup]="bulkFileForm" style="padding-top: 100px; margin: auto;">
             <input type="name" class="form-control mb-4" placeholder="name here ..." name="name"
@@ -15,4 +15,8 @@
                 Now</button>
         </form>
     </div>
-</div>
+</div> -->
+<h3>Angular 7 Image Preview before Upload:</h3>
+<span style="color:red;" *ngIf="message">{{message}}</span>
+<input #file type="file" accept='image/*' (change)="preview(file.files)" />
+<img [src]="imgURL" height="200" *ngIf="imgURL">

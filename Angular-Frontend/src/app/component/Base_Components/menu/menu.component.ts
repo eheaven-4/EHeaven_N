@@ -28,6 +28,8 @@ export class MenuComponent implements OnInit {
       localStorage.removeItem('foo') 
     }
   }
+
+  
   userAcademics() {
 
     if (this.myCookie) {

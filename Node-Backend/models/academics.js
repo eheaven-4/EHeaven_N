@@ -6,7 +6,8 @@ var academicStuffSchema = mongoose.Schema({
     teachername: { type: String },
     subject: { type: String },
     attachmenttype: { type: String },
-    grade: { type: String },
+    class: { type: String },
+    showname: {type: String},
     path: { type: String },
 });
 

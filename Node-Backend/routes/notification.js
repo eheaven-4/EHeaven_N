@@ -97,7 +97,6 @@ router.get('/approve/:_id', (req, res, next) => {
 
 //Delete a user by ID
 router.delete('/delete/:_id', (req, res, next) => {
-    // console.log("Hello");
     const id = req.params._id;
     Notification.remove({ _id: id })
         .exec()

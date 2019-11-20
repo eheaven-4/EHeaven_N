@@ -2,6 +2,17 @@
   font-family: side_font;
   src: url(../../../../assets/Fonts/Roboto-Regular.ttf);
 }
+
+.back_gr {
+  background: linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("../../../../assets/backgrounds/marketing-books.jpg");
+  min-height: 600px;
+  width: 100%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+}
 .sidebar_links {
   width: 100%;
   color: rgb(91, 91, 91);
@@ -21,11 +32,11 @@
 .sidebar_button:hover {
   cursor: pointer;
   transition: 0.7s;
-  .icons{
-      color: white;
+  .icons {
+    color: white;
   }
-  .sidebar_links{
-      color: white;
+  .sidebar_links {
+    color: white;
   }
 }
 
@@ -54,61 +65,85 @@
   color: #6dd0dd;
   font-weight: 500;
 }
-
+/********************************************/
+.admin{
+  background-color: #ffcfcf;
+}
+.academic{
+  background-color: rgb(255, 187, 248);
+}
+.certification{
+  background-color:  rgb(200, 194, 255);
+}
+.attendence{
+  background-color: rgb(193, 255, 183);
+}
+.extra{
+  background-color: rgb(195, 255, 239);
+}
+.notification{
+  background-color:  rgb(224, 191, 255);
+}
+.marks{
+  background-color: rgb(255, 192, 213)
+}
+.progress{
+  background-color: rgb(255, 206, 177);
+}
 /****************************************/
-.admin:hover{
-    background-color: #bb0101;
+.admin:hover {
+  background-color: #bb0101;
 }
-.admintxt{
-    color: #bb0101;
-}
-
-.academictxt{
-    color: rgb(255, 0, 230);
-}
-.academic:hover{
-    background-color: rgb(164, 4, 148);
+.admintxt {
+  color: #bb0101;
 }
 
-.certificationtxt{
-    color: rgb(30, 0, 255);
+.academictxt {
+  color: rgb(172, 0, 155);
+}
+.academic:hover {
+  background-color: rgb(164, 4, 148);
 }
 
-.certification:hover{
-    background-color:rgb(24, 2, 184)
+.certificationtxt {
+  color: rgb(30, 0, 255);
 }
 
-.attendencetxt{
-    color:rgb(27, 201, 0) ;
-}
-.attendence:hover{
-    background-color: rgb(16, 121, 0);
+.certification:hover {
+  background-color: rgb(24, 2, 184);
 }
 
-.extratxt{
-    color: rgb(3, 194, 143);
+.attendencetxt {
+  color: rgb(27, 201, 0);
 }
-.extra:hover{
-    background-color: rgb(1, 126, 93);
-}
-
-.markstxt{
-    color: rgb(255, 0, 85);
-}
-.marks:hover{
-    background-color: rgb(177, 0, 59);
+.attendence:hover {
+  background-color: rgb(16, 121, 0);
 }
 
-.progresstxt{
-    color: rgb(255, 94, 0);
+.extratxt {
+  color: rgb(0, 171, 125);
 }
-.progre:hover{
-    background-color:rgb(197, 72, 0) ;
+.extra:hover {
+  background-color: rgb(1, 126, 93);
 }
 
-.notificationtxt{
-    color: rgb(132, 0, 255);
+
+.notificationtxt {
+  color: rgb(132, 0, 255);
 }
-.notification:hover{
-    background-color: rgb(70, 0, 135);
+.notification:hover {
+  background-color: rgb(70, 0, 135);
+}
+.markstxt {
+  color: rgb(255, 0, 85);
+}
+.marks:hover {
+  background-color: rgb(177, 0, 59);
+}
+
+.progresstxt {
+  color: rgb(255, 94, 0);
+}
+.progre:hover {
+  background-color: rgb(197, 72, 0);
 }
