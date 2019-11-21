@@ -6,6 +6,7 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
+import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 interface news {  // decalare interface class for load news attributes.
   _id: String;
@@ -73,7 +74,7 @@ export class NewsComponent implements OnInit {
     if (event.target.files.length > 0) {  // check the file is select or not.
       const file = event.target.files[0];
       this.images = file;
-      this.filename = file.name
+      this.filename = file.name;
     }
   }
 
