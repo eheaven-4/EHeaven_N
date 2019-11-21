@@ -147,7 +147,8 @@ router.post("/studentstatus", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save()
-    fs.writeFileSync('./local_storage/certificates_completed/studentEdit.pdf', pdfBytes)
+    
+    fs.writeFileSync(`./local_storage/certificates_completed/student_status/${newRequest.admissionNum}.pdf`, pdfBytes)
 
     newRequest
         .save()
@@ -279,7 +280,8 @@ router.post("/charactercert", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/characterEdit.pdf', pdfBytes)
+ 
+    fs.writeFileSync(`./local_storage/certificates_completed/character/${newRequest.admissionNum}.pdf`, pdfBytes)
         
     newRequest
         .save()
@@ -435,7 +437,8 @@ router.post("/leavingcert", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/leavingEdit.pdf', pdfBytes)
+    
+    fs.writeFileSync(`./local_storage/certificates_completed/leaving/${newRequest.admissionNum}.pdf`, pdfBytes)
 
     newRequest
     .save()
@@ -562,7 +565,8 @@ router.post("/alcert", async function (req, res) {
     );
    
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/alEdit.pdf', pdfBytes)
+
+    fs.writeFileSync(`./local_storage/certificates_completed/alevel/${newRequest.indexNo}.pdf`, pdfBytes)
 
     newRequest
     .save()
@@ -663,7 +667,7 @@ router.post("/olcert", async function (req, res) {
         c=c-19;
     }
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/olEdit.pdf', pdfBytes)
+    fs.writeFileSync(`./local_storage/certificates_completed/olevel/${newRequest.indexNo}.pdf`, pdfBytes)
 
     newRequest
     .save()

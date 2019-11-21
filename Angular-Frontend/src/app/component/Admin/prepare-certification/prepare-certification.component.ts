@@ -472,7 +472,7 @@ submitOlCert() {
 /***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
 
 acceptCert(){
-  // console.log('Hello');
+  // console.log('Hello'); 
 
 }
 
