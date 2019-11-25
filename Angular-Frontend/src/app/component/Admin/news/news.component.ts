@@ -6,7 +6,6 @@ import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
-import { faEdit } from '@fortawesome/free-solid-svg-icons';
 
 interface news {  // decalare interface class for load news attributes.
   _id: String;
@@ -54,7 +53,7 @@ export class NewsComponent implements OnInit {
     const url = 'http://localhost:3000/news/view';
     this.http.get<any>(url).subscribe(res => {
       this.news = res;
-      console.log(res)
+      console.log(res);
     }, (err) => {
       console.log(err);
     });
@@ -84,8 +83,7 @@ export class NewsComponent implements OnInit {
     // stop here if form is invalid
     if (this.NewsForm.invalid) {
       return;
-    }
-    else {
+    } else {
 
       // tslint:disable-next-line: prefer-const
       const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
@@ -106,9 +104,9 @@ export class NewsComponent implements OnInit {
       const url = 'http://localhost:3000/news/add';
 
       if (this.images == null) {
-        let config = new MatSnackBarConfig();
+        const config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
-        this.snackBar.open("Please Select a Image..! ", true ? "Retry" : undefined, config);
+        this.snackBar.open('Please Select a Image..! ', true ? 'Retry' : undefined, config);
       } else {
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           data: {
@@ -124,16 +122,16 @@ export class NewsComponent implements OnInit {
             this.http.post<any>(url, formData).subscribe(res => {
               console.log(res.msg);
               if (res.state) {
-                let config = new MatSnackBarConfig();
+                const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open("News Successfully Added..! ", true ? "Done" : undefined, config);
+                this.snackBar.open('News Successfully Added..! ', true ? 'Done' : undefined, config);
 
                 window.location.reload();
 
               } else {
-                let config = new MatSnackBarConfig();
+                const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open("News is not Added..! ", true ? "Retry" : undefined, config);
+                this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
                 this.router.navigate(['/news']);
               }
             });
@@ -142,46 +140,71 @@ export class NewsComponent implements OnInit {
       }
     }
   }
-  delete(event, news_id, file_path) {
 
-    // console.log(news_id);
-    const mybtnId = news_id;
-    var mybtnFile = file_path;
 
-    const url = 'http://localhost:3000/news/delete';
-    var urlDelete = "http://localhost:3000/news/newsAttachment"; //notification attachment delete url
+  onEdit(editNews:any) {
 
-    //if there is a file in attachment call atachment file delteing request
-    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {
-        message: 'Are you sure want to Delete?',
-        buttonText: {
-          ok: 'Yes',
-          cancel: 'No'
-        }
-      }
+    const _id = editNews._id;
+    const topic = editNews.topic;
+    const newsSumery = editNews.newsSumery;
+    const news = editNews.news;
+
+    this.NewsForm.setValue({
+      'topic': topic,
+      'newsSumery': newsSumery,
+      'news': news
     });
-    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      if (confirmed) {
-        if (mybtnFile) {
-          this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
-            console.log(res);
-          }, (err) => {
-            console.log(err)
-          });
-        }
 
-        this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
-          let config = new MatSnackBarConfig();
-          config.duration = true ? 2000 : 0;
-          this.snackBar.open("News Successfully Deleted..! ", true ? "Done" : undefined, config);
+    const url = 'http:/localhost:3000/news/update';
+
+
+    console.log(editNews);
+
+  }
+
+
+
+
+delete(event, news_id, file_path) {
+
+  // console.log(news_id);
+  const mybtnId = news_id;
+  let mybtnFile = file_path;
+
+  const url = 'http://localhost:3000/news/delete';
+  let urlDelete = 'http://localhost:3000/news/newsAttachment'; // notification attachment delete url
+
+  // if there is a file in attachment call atachment file delteing request
+  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+    data: {
+      message: 'Are you sure want to Delete?',
+      buttonText: {
+        ok: 'Yes',
+        cancel: 'No'
+      }
+    }
+  });
+  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+    if (confirmed) {
+      if (mybtnFile) {
+        this.http.delete(urlDelete + '/' + mybtnFile).subscribe(res => {
+          console.log(res);
         }, (err) => {
           console.log(err);
         });
-        window.location.reload();     // reload the page
       }
-    })
-  }
+
+      this.http.delete(url + '/' + mybtnId).subscribe(res => {  // send delete the news to the server
+        const config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open('News Successfully Deleted..! ', true ? 'Done' : undefined, config);
+      }, (err) => {
+        console.log(err);
+      });
+      window.location.reload();     // reload the page
+    }
+  });
+}
 
 }
 

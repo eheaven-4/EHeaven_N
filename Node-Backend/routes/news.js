@@ -48,7 +48,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/view", (req, res, next) => { // news get methord
-    News.find().sort({ date: -1 })
+    News.find().sort({ date: 1 })
         .select('topic newsSumery news date filePath')
         .exec()
         .then(docs => {
@@ -108,8 +108,9 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 
 
 router.put('/update/:id', (req, res) => {  // update methord 
-    console.log('updated news');
-    News.findByIdAndUpdate(req.params.id, {
+    console.log('updated news'); 
+    News.findByIdAndUpdate( req.params.id, 
+        {
         $set: { topic: req.body.topic, newsSumery: req.body.newsSumery, news: req.body.news }
     },
         {
@@ -117,13 +118,14 @@ router.put('/update/:id', (req, res) => {  // update methord
         },
         (err, updatednews) => {
             if (err) {
-                res.send('Error');
+                res.send('Error updating news' );
             } else {
                 res.json(updatednews);
             }
         }
     );
 });
+
 
 //get top 4 news in the DATABASE    
 router.get('/topNews', function(req,res) {
