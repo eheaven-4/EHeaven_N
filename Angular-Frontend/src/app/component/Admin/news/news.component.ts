@@ -21,12 +21,18 @@ interface news {  // decalare interface class for load news attributes.
   styleUrls: ['./news.component.scss']
 })
 export class NewsComponent implements OnInit {
+  editform = false;
 
   images;
   date: string;
   attachment;
   filename;
   submitted = false;
+  newsId: string;
+
+  topic: string;
+  newsSumery: string;
+  currentNews: string;
 
   news: news[] = [];
   NewsForm: FormGroup;
@@ -75,6 +81,73 @@ export class NewsComponent implements OnInit {
       this.images = file;
       this.filename = file.name;
     }
+  }
+
+  updatenews() {
+    this.submitted = true;
+
+    console.log('updating news')
+    if (this.NewsForm.invalid) {
+      return;
+    } else{
+
+        // tslint:disable-next-line: prefer-const
+        const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+        const userid = myCookie.userid;
+
+
+        this.date = Date();
+
+        const formData = new FormData();
+
+        formData.append('newsImage', this.images);
+        formData.append('topic', this.NewsForm.value.topic);
+        formData.append('date', this.date);
+        formData.append('newsSumery', this.NewsForm.value.newsSumery);
+        formData.append('news', this.NewsForm.value.news);
+
+        const url = 'http:/localhost:3000/news/update';
+        // console.log("url1===",url)
+
+        if (this.images == null) {
+          const config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open('Please Select a Image..! ', true ? 'Retry' : undefined, config);
+        } else {
+          const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {
+              message: 'Are you sure want to Add?',
+              buttonText: {
+                ok: 'Yes',
+                cancel: 'No'
+              }
+            }
+          });
+          dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+            console.log('confirmed' , confirmed );
+            if (confirmed) {
+              this.http.post<any>(url + '/' + this.newsId, formData).subscribe(res => {
+               // console.log("url2===",url)
+                console.log(res.msg);
+                if (res.state) {
+                  const config = new MatSnackBarConfig();
+                  config.duration = true ? 2000 : 0;
+                  this.snackBar.open('News Successfully Added..! ', true ? 'Done' : undefined, config);
+
+                  window.location.reload();
+
+                } else {
+                  const config = new MatSnackBarConfig();
+                  config.duration = true ? 2000 : 0;
+                  this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
+                  this.router.navigate(['/news']);
+                }
+              });
+            }
+          });
+        }
+      }
+
   }
 
   addnews() {
@@ -141,26 +214,23 @@ export class NewsComponent implements OnInit {
     }
   }
 
+// when edit button press
+  onEdit(editNews:any,news_id) {
+    this.editform=true;
 
-  onEdit(editNews:any) {
-
+    this.newsId = news_id;
     const _id = editNews._id;
     const topic = editNews.topic;
     const newsSumery = editNews.newsSumery;
     const news = editNews.news;
-
+    this.editform=true;
     this.NewsForm.setValue({
       'topic': topic,
       'newsSumery': newsSumery,
-      'news': news
+      'news': news,
+
     });
-
-    const url = 'http:/localhost:3000/news/update';
-
-
-    console.log(editNews);
-
-  }
+}
 
 
 

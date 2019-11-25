@@ -107,7 +107,7 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 });
 
 
-router.put('/update/:id', (req, res) => {  // update methord 
+router.post('/update/:id', (req, res) => {  // update methord 
     console.log('updated news'); 
     News.findByIdAndUpdate( req.params.id, 
         {
