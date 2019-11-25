@@ -472,12 +472,22 @@ submitOlCert() {
 /***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
 
 acceptCert(){
-  // console.log('Hello'); 
+
+  // console.log(objid);
 
 }
 
-rejectCert(){
-  // console.log('Hello');
+rejectCert(certRequest){
+  // console.log(certRequest._id);
+  var objId = certRequest._id;
+  var url = "http://localhost:3000/certification/deleteCert"; //reject certification requests
+
+  this.http.delete(url + '/' + objId).subscribe(res => {
+
+  }, (err) => {
+    console.log(err);
+  });
+  window.location.reload();
 
 }
 pendingCertList : certificateReqesuted [] = [];
