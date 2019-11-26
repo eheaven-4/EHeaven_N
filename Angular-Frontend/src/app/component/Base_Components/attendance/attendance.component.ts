@@ -56,15 +56,8 @@ stu = new FormControl('', [Validators.required]);
 
       }
     });
-    
-    
-    
   }
-  getErrorMessage() {
-    return this.stu.hasError('required') ? 'You must enter a value' :
-        
-            '';
-  }
+  
  
   addData(stu:Attend){
     this.attendanceservice.logAdd(stu)
@@ -83,59 +76,8 @@ stu = new FormControl('', [Validators.required]);
       this.toggle[index]="Present";
     }
   }
-  
-  // storeValue(index) {
-     
-  //     console.log(this.numberOfStudent);
-  //     this.toggle[index]="Present";
-  //     if(index==this.i){
-  //       var newRec=new Attend();
-  //       newRec.username=this.students[index].name;
-  //       newRec.userid=this.students[index].userid;
-  //       newRec.attend=true;
-  //       newRec.class=this.classname;
-  //       this.presentStu++;
-      
-  //       console.log(newRec);
-        
-  //       this.addData(newRec);
-        
-  //       this.i++;
-  //     }
-  //     else if(this.i<index){
-  //         for(var j = this.i; j <index; j++) {
-  //           var newRec=new Attend();
-  //           newRec.username=this.students[j].userid;
-  //           newRec.attend=false;
-  //           newRec.class=this.classname;
-  //           console.log(newRec);
-  //           this.addData(newRec);
-              
-  //         }
-        
-  //         newRec=new Attend();
-  //         newRec.username=this.students[index].userid;
-  //         newRec.attend=true;
-  //         newRec.class=this.classname;
-  //         console.log(newRec);
-  //         this.addData(newRec);
-  //         //newRec.date=this.today;
-  //         this.i=index+1;
-  //         this.presentStu++;
-
-  //         // console.log(newRec);
-  //     }else{
-  //       newRec=new Attend();
-  //       newRec.username=this.students[index].userid;
-  //       newRec.attend=true;
-  //       newRec.class=this.classname;
-  //       console.log(newRec);
-
-  //     }      
-  // }
-
   onSubmit(userForm){
-    // console.log(userForm);
+    
     this.mainflag=false;
     const student = Object.entries(userForm.value);
     for (const [i,attend] of student) {
@@ -160,18 +102,7 @@ stu = new FormControl('', [Validators.required]);
       
     }
     
-    // 
-    // if(this.i<=this.numberOfStudent){
-    //   for(var j=this.i;j<this.numberOfStudent;j++){
-    //     var newRec=new Attend();
-    //     newRec.username=this.students[j].userid;
-    //     newRec.attend=false;
-    //     newRec.class=this.classname;
-    //     console.log(newRec);
-    //     this.addData(newRec);
-
-    //   }
-    // }
+    
   }
   searchStu(month:string,stu:string){
     this.historyflagS=false;

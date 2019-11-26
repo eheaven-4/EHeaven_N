@@ -3,7 +3,23 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
+import { filter, map } from 'rxjs/operators';
+// import { User } from 'src/app/user';
 
+
+export class  User{
+  usertype:string;
+  name:string;
+  userid:string;
+  email:string;
+  password:string;
+  birthday:string;
+  gender:string;
+  nationality:string;
+  NIC:string;
+  address:string;
+  image:string;
+}
 
 @Component({
   selector: 'app-bulkadd',
@@ -11,91 +27,94 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./bulkadd.component.scss']
 })
 export class BulkaddComponent {
-  public imagePath;
-  imgURL: any;
-  public message: string;
- 
-  preview(files) {
-    if (files.length === 0)
-      return;
- 
-    var mimeType = files[0].type;
-    if (mimeType.match(/image\/*/) == null) {
-      this.message = "Only images are supported.";
-      return;
-    }
- 
-    var reader = new FileReader();
-    this.imagePath = files;
-    reader.readAsDataURL(files[0]); 
-    reader.onload = (_event) => { 
-      this.imgURL = reader.result; 
-    }
-  }
+  flag=false;
+  fileToUpload: File = null;
+  Stringdata='';
+  users=[];
+  // public imagePath;
+  // imgURL: any;
+  // public message: string;
 
-  // file;
-  // constructor(
-  //   private ngFlashMessageService: NgFlashMessageService,
-  //   private router: Router,
-  //   private http: HttpClient,
-  //   private fb: FormBuilder
-  // ) { }
+  // preview(files) {
+  //   if (files.length === 0)
+  //     return;
 
-  // bulkFileForm = this.fb.group({
-  //   name: ['', Validators.required],
-  // });
+  //   var mimeType = files[0].type;
+  //   if (mimeType.match(/image\/*/) == null) {
+  //     this.message = "Only images are supported.";
+  //     return;
+  //   }
 
-  // ngOnInit() { }
-  
-  // selectFile(event) {
-  //   if (event.target.files.length > 0) {  // check the file is select or not.
-  //     const file = event.target.files[0];
-  //     this.file = file;
+  //   var reader = new FileReader();
+  //   this.imagePath = files;
+  //   reader.readAsDataURL(files[0]); 
+  //   reader.onload = (_event) => { 
+  //     this.imgURL = reader.result; 
   //   }
   // }
-  // bulkRegistration() {
-  //   /**************************************************** */
+  extractfile() {
     
-  //     const formData = new FormData();
-
-  //     formData.append('bulk_req_file', this.file)
-  //     formData.append('name', this.bulkFileForm.value.name)
-      
-
-  //     /****************************************************** */
-  //     console.log(formData);
-  //     const url = 'http://localhost:3000/users/bulkRegistration';
-
-  //     if (this.file == null) {
-  //       this.ngFlashMessageService.showFlashMessage({
-  //         messages: ["Select a File..!"],
-  //         dismissible: true,
-  //         timeout: 2000,
-  //         type: 'warning'
-  //       });
-  //     }
-  //     else {
-  //       this.http.post<any>(url, formData).subscribe(res => {
-  //         if (res.state) {
-  //           console.log(res.msg);
-  //           this.ngFlashMessageService.showFlashMessage({
-  //             messages: ["Successfully Registered..!"],
-  //             dismissible: true,
-  //             timeout: 2000,
-  //             type: 'success',
-  //           });
-  //           this.router.navigate(['/register']);
-  //         }
-  //         else {
-  //           this.ngFlashMessageService.showFlashMessage({
-  //             messages: ["You are not Registerd..!"],
-  //             dismissible: true,
-  //             timeout: 2000,
-  //             type: 'warning'
-  //           });
-  //           this.router.navigate(['/register']);
-  //         }
-  //       });
-  //     }
-  //   }
+    
   }
+  
+  handleFileInput(files: FileList) {
+    
+    this.fileToUpload = files.item(0);
+  }
+
+
+  bulkRegistration() {
+    let fileReader = new FileReader();
+    fileReader.readAsText(this.fileToUpload);
+    
+    fileReader.onload = (e) =>{
+      this.Stringdata=fileReader.result.toString();
+      // console.log(this.Stringdata);
+      var Stringusers=this.Stringdata.split('\n');
+      console.log(Stringusers.length);
+      
+      // console.log(users);
+      for (var i=0;i<Stringusers.length;i++){
+        
+        
+        // console.log(userstr);
+        if(Stringusers[i]=='\n'){
+          console.log(Stringusers[i]);
+          // console.log(users);
+          break;
+        }
+        var userstr=Stringusers[i].split(',');
+
+        var user=new User();
+        var temp=userstr[0].split(':');
+        user.usertype=temp[1];
+        var temp=userstr[1].split(':');
+        user.name=temp[1];
+        var temp=userstr[2].split(':');
+        user.userid=temp[1];
+        var temp=userstr[3].split(':');
+        user.email=temp[1];
+        var temp=userstr[4].split(':');
+        user.password=temp[1];
+        var temp=userstr[5].split(':');
+        user.birthday=temp[1];
+        var temp=userstr[6].split(':');
+        user.gender=temp[1];
+        var temp=userstr[7].split(':');
+        user.nationality=temp[1];
+        var temp=userstr[8].split(':');
+        user.NIC=temp[1];
+        var temp=userstr[9].split(':');
+        user.address=temp[1];
+        var temp=userstr[10].split(':');
+        user.image=temp[1];
+        this.users.push(user);
+        // console.log(user);
+      }
+      console.log(this.users);
+      this.flag=true;
+    }
+
+  }
+
+}
