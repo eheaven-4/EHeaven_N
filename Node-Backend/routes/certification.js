@@ -35,10 +35,10 @@ router.post("/requestCert", function (req, res) {
         })
 });
 
-/************************get certification requests from users(Student comp)******************************/
+/************************get certification requests from students*****************************/
 //get pending certificate requests to be issued to the user
 router.get("/pendingCert/:id", function (req, res) {
-    console.log("Hello");
+    // console.log("Hello");
     const id = req.params.id;
     requestCertification.find({ state: "Pending", userid: id })
         .sort({ _id: 1 })
@@ -58,7 +58,7 @@ router.get("/pendingCert/:id", function (req, res) {
 
 //get issued all certificates issued to a particular user
 router.get("/issuedCert/:id", function (req, res) {
-    console.log("Hello");
+    // console.log("Hello");
     const id = req.params.id;
     requestCertification.find({ state: "Issued", userid: id })
         .sort({ _id: 1 })
@@ -147,7 +147,8 @@ router.post("/studentstatus", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save()
-    fs.writeFileSync('./local_storage/certificates_completed/studentEdit.pdf', pdfBytes)
+    
+    fs.writeFileSync(`./local_storage/certificates_completed/student_status/${newRequest.admissionNum}.pdf`, pdfBytes)
 
     newRequest
         .save()
@@ -279,7 +280,8 @@ router.post("/charactercert", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/characterEdit.pdf', pdfBytes)
+ 
+    fs.writeFileSync(`./local_storage/certificates_completed/character/${newRequest.admissionNum}.pdf`, pdfBytes)
         
     newRequest
         .save()
@@ -435,7 +437,8 @@ router.post("/leavingcert", async function (req, res) {
         },
     );
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/leavingEdit.pdf', pdfBytes)
+    
+    fs.writeFileSync(`./local_storage/certificates_completed/leaving/${newRequest.admissionNum}.pdf`, pdfBytes)
 
     newRequest
     .save()
@@ -453,7 +456,7 @@ router.post("/leavingcert", async function (req, res) {
 /*******************************generate A/L certificate pdf ****************************************/
 
 router.post("/alcert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestAlCert({
         studentName: req.body.studentName,
         examYear: req.body.examYear,
@@ -562,7 +565,8 @@ router.post("/alcert", async function (req, res) {
     );
    
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/alEdit.pdf', pdfBytes)
+
+    fs.writeFileSync(`./local_storage/certificates_completed/alevel/${newRequest.indexNo}.pdf`, pdfBytes)
 
     newRequest
     .save()
@@ -570,7 +574,7 @@ router.post("/alcert", async function (req, res) {
         console.log(result)
         res.json({ state: true, msg: "Data inserted Successfully..!" });
     })
-    .catch(error => {
+    .catch(error => { 
         console.log(error)
         res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
     })
@@ -580,7 +584,7 @@ router.post("/alcert", async function (req, res) {
 /*******************************generate O/L certificate pdf ****************************************/
 
 router.post("/olcert", async function (req, res) {
-    console.log("hello at server ");
+    // console.log("hello at server ");
     const newRequest = new requestOlCert({
         studentName: req.body.studentName,
         examYear: req.body.examYear,
@@ -589,7 +593,7 @@ router.post("/olcert", async function (req, res) {
         subjectsOl: req.body.subjectsOl,
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf') 
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -663,7 +667,7 @@ router.post("/olcert", async function (req, res) {
         c=c-19;
     }
     const pdfBytes = await doc.save();
-    fs.writeFileSync('./local_storage/certificates_completed/olEdit.pdf', pdfBytes)
+    fs.writeFileSync(`./local_storage/certificates_completed/olevel/${newRequest.indexNo}.pdf`, pdfBytes)
 
     newRequest
     .save()
@@ -677,5 +681,24 @@ router.post("/olcert", async function (req, res) {
     })
 
 });
+
+/*******************************reject certification requests****************************************/
+
+router.delete("/deleteCert/:_id", function(req,res) {
+    const id = req.params._id;
+    requestCertification.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({ state: true,
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ state: false,
+                error: error
+            });
+        });
+  })
 
 module.exports = router; 

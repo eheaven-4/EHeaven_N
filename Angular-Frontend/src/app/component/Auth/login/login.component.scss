@@ -1,10 +1,3 @@
-.flashMessage{
-    padding-top: 5px;
-    height: 20px;
-    margin-bottom: -10px;
-    width: 100%;
-}
-
 .login-form{
     padding-top: 40px;
 }
@@ -18,6 +11,8 @@
 }
 
 .login_btn{
+    width: 40%;
+    margin-top: 20px;
     color: aliceblue;
     background-color: rgb(0, 140, 255);
     border-color:  rgb(0, 140, 255);
@@ -26,4 +21,11 @@
 
 .box_border{
     border-radius: 3px;
+}
+
+.err_msg{
+    // margin-top: -15px;
+    color: red;
+    text-align: left;
+    font-size: 10px;
 }

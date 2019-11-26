@@ -75,7 +75,7 @@ export class AcademicsComponent implements OnInit {
     //if there is a file in attachment call atachment file delteing request
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: 'Are you sure want to Delete?',
+        message: 'Are you sure want to Delete?', 
         buttonText: {
           ok: 'Yes',
           cancel: 'No'

@@ -28,7 +28,14 @@ export class LoginComponent implements OnInit {
 
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    if (!localStorage.getItem('foo')) { 
+      localStorage.setItem('foo', 'no reload') 
+      location.reload() 
+    } else {
+      localStorage.removeItem('foo') 
+    }
+  }
 
   userLogin() {
     const user = {
@@ -38,35 +45,45 @@ export class LoginComponent implements OnInit {
 
     var url = "http://localhost:3000/users/login";
 
-    this.http.post<any>(url, user).subscribe(res => {
-      console.log(res.user);
-      
-      if (res.state == true) {
-        // this.storeData(res.token, res.user);
-        this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
-        var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-        console.log(myCookie.userid);
-        var id = myCookie.userid;
-
-        if(id){
-          // window.location.reload();     //reload the page
-          this.router.navigate(['/menu']);
+    if(user.userid == ''){
+      let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("User ID is empty..! ", true ? "Retry" : undefined, config);
+    }
+    else if(user.password == ''){
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Password is Empty..! ", true ? "Retry" : undefined, config);
+    }
+    else{
+      this.http.post<any>(url, user).subscribe(res => {
+        console.log(res.user);
+        
+        if (res.state == true) {
+          this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
+          var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+          console.log(myCookie.userid);
+          var id = myCookie.userid;
+          
+          if(id){
+            this.router.navigate(['/menu']);
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
+          }
+          else{
+            this.router.navigate(['/login']);
+          }
+          
+        }
+        else {
+          console.log(res.msg);
           let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
-          this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
-        }
-        else{
+          this.snackBar.open("Username or Password Incorrect..! ", true ? "Retry" : undefined, config);
           this.router.navigate(['/login']);
         }
-
-      }
-      else {
-        console.log(res.msg);
-        let config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open("Username or Password Incorrect..! ", true ? "Retry" : undefined, config);
-        this.router.navigate(['/login']);
-      }
-    });
+      });
+    }
   }
 }

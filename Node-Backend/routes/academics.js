@@ -7,7 +7,7 @@ const multer = require('multer');
 var path = require('path');
 var fs = require('fs');
 
-var storage = multer.diskStorage({
+var storage = multer.diskStorage({ 
   destination: function (req, file, cb) {
     cb(null, 'local_storage/academic_Stuff/')
   },
