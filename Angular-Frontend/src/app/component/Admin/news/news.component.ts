@@ -29,6 +29,8 @@ export class NewsComponent implements OnInit {
   filename;
   submitted = false;
   newsId: string;
+  newspicname;
+  dataform: Boolean = false;
 
   topic: string;
   newsSumery: string;
@@ -92,11 +94,11 @@ export class NewsComponent implements OnInit {
     } else{
 
         // tslint:disable-next-line: prefer-const
-        const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-        const userid = myCookie.userid;
+        // const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+        // const userid = myCookie.userid;
 
 
-        this.date = Date();
+       // this.date = Date();
 
         const formData = new FormData();
 
@@ -106,7 +108,7 @@ export class NewsComponent implements OnInit {
         formData.append('newsSumery', this.NewsForm.value.newsSumery);
         formData.append('news', this.NewsForm.value.news);
 
-        const url = 'http:/localhost:3000/news/update';
+        const url = 'http://localhost:3000/news/update';
         // console.log("url1===",url)
 
         if (this.images == null) {
@@ -116,7 +118,7 @@ export class NewsComponent implements OnInit {
         } else {
           const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
             data: {
-              message: 'Are you sure want to Add?',
+              message: 'Are you sure want to update?',
               buttonText: {
                 ok: 'Yes',
                 cancel: 'No'
@@ -215,21 +217,40 @@ export class NewsComponent implements OnInit {
   }
 
 // when edit button press
-  onEdit(editNews:any,news_id) {
-    this.editform=true;
+  onEdit() {
+    this.editform = true;
 
-    this.newsId = news_id;
-    const _id = editNews._id;
-    const topic = editNews.topic;
-    const newsSumery = editNews.newsSumery;
-    const news = editNews.news;
-    this.editform=true;
-    this.NewsForm.setValue({
-      'topic': topic,
-      'newsSumery': newsSumery,
-      'news': news,
+    this.newsId = this.NewsForm.value.newsId;
 
+    const url = 'http://localhost:3000/news/view';
+
+    this.http.get<any>(url + '/' + this.newsId).subscribe(res => {
+      if (res.state == false) {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
+      } else {
+        this.news = res.data;
+       //  console.log(res.data.usertype);
+        this.dataform = true;
+        this.newspicname = res.data.filepath;
+      }
     });
+
+
+
+    // this.newsId = news_id;
+    // const _id = editNews._id;
+    // const topic = editNews.topic;
+    // const newsSumery = editNews.newsSumery;
+    // const news = editNews.news;
+    // this.editform=true;
+    // this.NewsForm.setValue({
+    //   'topic': topic,
+    //   'newsSumery': newsSumery,
+    //   'news': news,
+
+    // });
 }
 
 
