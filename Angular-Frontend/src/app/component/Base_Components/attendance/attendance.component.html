@@ -40,7 +40,7 @@
                                             <mat-grid-tile>{{student.userid}}</mat-grid-tile>
                                         <mat-grid-tile>{{student.name}}</mat-grid-tile>
                                         <mat-grid-tile>
-                                                <!-- <mat-slide-toggle id="{{student.name}}" (click)="storeValue(i)" color="primary" name="name" ngModel></mat-slide-toggle> -->
+                                                
                                                 <mat-slide-toggle id="{{student.name}}" color="primary" value="{{i}}" name="{{i}}" (click)="count(i)" ngModel></mat-slide-toggle>
                                                 
                                             
@@ -53,12 +53,7 @@
                                             <mat-list-tile><button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button></mat-list-tile>
                         
                                         </mat-gride-list>
-                                    <!-- <div class="row">
-                                        <div class="col-md-8" style="padding-left: 200px">
-                                            <button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button>
-                                
-                                        </div>
-                                    </div> -->
+                                    
                                 
                                 </form>
                             </div>
@@ -78,57 +73,32 @@
 
                                         <div style="padding-top: 100px ; padding-bottom: 100px;align-content: center;" *ngIf="historyflagD" >
                                                 <form class="example-form " (ngSubmit)="searchDate(dateid.value)">
-                                                  <!-- <mat-grid-list cols="1" rowHeight="100px">
-                                                        
-                                                    <mat-grid-tile>
-                                                        <mat-form-field>
-                                                                <input matInput [matDatepicker]="picker" placeholder="Choose a date"  appearance="outline" #dateid>
-                                                                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                                <mat-datepicker #picker></mat-datepicker>
-                                                        
-                                                        </mat-form-field>
-                                                        </mat-grid-tile>
-                                                        <mat-grid-tile>
-                                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
-                                                      </mat-grid-tile>
-                                                    </mat-grid-list> -->
+                                                 
                                                     <div align="center"><span *ngIf="spanflageD" style="color: red;">May be you entered date was a holiday.Please Enter valid date.</span></div>
-                                                    <div class="row" style="padding-left:475px;">
+                                                    <div class="row">
+                                                        <div class="col-md-3"></div>
+                                                        <div class="col" align="center">
                                                             <mat-form-field>
-                                                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" style="width:100%;" appearance="outline" #dateid>
+                                                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date"  appearance="outline" #dateid required disabled>
                                                                     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #picker></mat-datepicker>
-                                                            
+                                                                    <mat-datepicker #picker disabled="false"></mat-datepicker>
+                                                                    <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
                                                             </mat-form-field>
-                                                        
+                                                        </div>
                                                     </div>
-                                                    <div class="row" style="padding-left:500px;">
-                                                            <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
+                                                    <div class="row">
+                                                        <div class="col-md-3"></div> 
+                                                        <div class="col" align="center">
+                                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
+
+                                                        </div>
+
                                                     </div>
                                                       
                                                         
                                                 </form>
                                                       
-                                            <!-- <form class="text-center border p-5 reg-frm form-inline" (ngSubmit)="searchDate(dateid.value)">
-                                                <div class ="row">
-                                                    <h4>
-                                                        Enter Date
-                                                    </h4>
-                                                </div>
-                                                <div class="row">
-                                                    <div class="col-md-6">
-                                                        <input class="form-control form-control-sm mr-3 w-75" #dateid type="date" placeholder="Search"
-                                                        aria-label="Search">
-                                                        <mat-icon>search</mat-icon>
-                                                    </div>
-                                                    <hr>
-                                                    <span *ngIf="spanflageD" class="dangourous">May be entered date was a holiday.Please Enter valid date.</span>
-                                                    <hr>
-                                                </div>     
-                                                <button class="btn btn-primary">search</button>
-                                                        
-        
-                                            </form> -->
+                                            
                                         </div>
                                         <div  *ngIf="!historyflagD">
                                             <div style="text-align: center;">
@@ -137,20 +107,20 @@
                                                 <h2>{{classname}}</h2>
                                             </div>
                                             <mat-grid-list cols="2" rowHeight="100px">
-                                                <mat-grid-tile>UserID</mat-grid-tile>
-                                                <mat-grid-tile>Attendence</mat-grid-tile>
+                                                <mat-grid-tile><h3>UserID</h3></mat-grid-tile>
+                                                <mat-grid-tile><h3>Attendence</h3></mat-grid-tile>
                                                 
                                             </mat-grid-list>
                                             
 
                                             
 
-                                            <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchDateResult;">
-                                                <mat-grid-tile><h3>{{result.userid}}</h3></mat-grid-tile>
+                                            <mat-grid-list cols="2" rowHeight="50px" *ngFor="let result of searchDateResult;">
+                                                <mat-grid-tile>{{result.name}}</mat-grid-tile>
                                                 <mat-grid-tile>                                                
-                                                   <h3> <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
+                                                    <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
                                                     <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
-                                                    </h3>
+                                                    
                                                 </mat-grid-tile>
                                                 
                                             </mat-grid-list>
@@ -169,38 +139,15 @@
                                     <mat-tab label="Special Student">
                                         <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
                                             <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
-                                                <!-- h {{user.value|json}}
-                                               ahsdlkashdlkshaldkhslakhd {{selected}} -->
-                                                <!-- <mat-grid-list cols="2" rowHeight="150px">
-                                                    <mat-grid-tile>
-                                                            
-                                                    <p>
-                                                        <mat-form-field class="example-full-width" >
-                                                                <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel style="width:100%;">
-                                                        </mat-form-field>
-                                                    </p>
-                                                    <p>
-                                                        <mat-hint>Ex:00000001</mat-hint>
-                                                    </p> 
-                                                        
-                                                    </mat-grid-tile>
-                                                    <mat-grid-tile>
-                                                            <mat-form-field #month>
-                                                                    <mat-label>Month</mat-label>
-                                                                    <mat-select [(value)]="selected">
-                                                                      <mat-option>None</mat-option>
-                                                                      <mat-option *ngFor="let month of months;index as i" value="{{i}}">{{month}}</mat-option>
-                                                                    </mat-select>
-                                                            </mat-form-field>
-                                                                 
-                                                          
-                                                    </mat-grid-tile>  
-                                                  
-                                                </mat-grid-list>   -->
+                                                 
                                                 <div class="row" style="padding-bottom: 100px;padding-top: 100px;">
                                                     <div class="col-4" style="margin-left: 200px;">
+
+                                                            
                                                         <mat-form-field class="example-full-width" >
-                                                            <input matInput placeholder="Enter student Registration number or name"  name="stud" ngModel style="width:100%;">
+                                                            <input matInput placeholder="Enter student Registration number or name"  name="stud"  required ngModel>
+                                                            <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
+                                                            <mat-error></mat-error>
                                                         </mat-form-field>
                                                         <mat-hint>Ex:00000001</mat-hint>
                                                     </div>
@@ -232,15 +179,14 @@
                                                 </mat-grid-tile>
                                             </mat-grid-list>
                                             
-                                            <mat-grid-list cols="2" rowHeight="100px" *ngFor="let result of searchStuResult">
+                                            <mat-grid-list cols="2" rowHeight="50px" *ngFor="let result of searchStuResult">
                                                     <mat-grid-tile>
-                                                        <h3>{{result.date}}</h3>
+                                                        {{result.date}}
                                                     </mat-grid-tile>
                                                     <mat-grid-tile>
-                                                            <!-- <h3>{{result.attend}}</h3> -->
-                                                        <h3><div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
+                                                        <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
                                                             <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
-                                                        </h3>
+                                                        
                                                     </mat-grid-tile>
                                             </mat-grid-list>
                                       

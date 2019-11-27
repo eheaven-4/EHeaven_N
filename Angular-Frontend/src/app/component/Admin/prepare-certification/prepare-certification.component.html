@@ -23,15 +23,16 @@
                                 <mat-icon mat-list-icon>note</mat-icon>
                                 <h3 mat-line>User ID : {{cert.userid}} </h3>
                                 <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                <!-- <h3>{{cert._id}}</h3> -->
                                 <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
                                 <button type="button" class="btn btn_1" (click)="acceptCert()">Accept</button>
-                                <button type="button" class="btn btn_2" (click)="rejectCert()">Reject</button>
+                                <button type="button" class="btn btn_2" (click)="rejectCert(cert)">Reject</button>
                                 <mat-divider></mat-divider>
                               </mat-list-item>
                             </mat-list>
                           </mat-card>
                     </mat-tab>
- 
+
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - FORMS //////////////////////////////////////////////////////////////////////// -->
 
                     <mat-tab label="PREPARE CERTIFICATES">

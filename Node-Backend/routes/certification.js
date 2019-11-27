@@ -35,7 +35,7 @@ router.post("/requestCert", function (req, res) {
         })
 });
 
-/************************get certification requests from users(Student comp)******************************/
+/************************get certification requests from students*****************************/
 //get pending certificate requests to be issued to the user
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
@@ -574,7 +574,7 @@ router.post("/alcert", async function (req, res) {
         console.log(result)
         res.json({ state: true, msg: "Data inserted Successfully..!" });
     })
-    .catch(error => {
+    .catch(error => { 
         console.log(error)
         res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
     })
@@ -593,7 +593,7 @@ router.post("/olcert", async function (req, res) {
         subjectsOl: req.body.subjectsOl,
     });
     console.log(newRequest);
-    const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf')
+    const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf') 
     var doc = await pdfDoc.PDFDocument.load(uint8Array);
     const pages = doc.getPages()
     const page = pages[0];
@@ -681,5 +681,24 @@ router.post("/olcert", async function (req, res) {
     })
 
 });
+
+/*******************************reject certification requests****************************************/
+
+router.delete("/deleteCert/:_id", function(req,res) {
+    const id = req.params._id;
+    requestCertification.remove({ _id: id })
+        .exec()
+        .then(result => {
+            res.status(200).json({ state: true,
+                message: 'Deleted Successfully'
+            });
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({ state: false,
+                error: error
+            });
+        });
+  })
 
 module.exports = router; 

@@ -51,6 +51,7 @@ import { SubjectsComponent } from './component/Base_Components/subjects/subjects
 
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -108,7 +109,7 @@ import { SubjectsComponent } from './component/Base_Components/subjects/subjects
   ],
 
   providers: [
-    CookieService,
+    CookieService
   ],
 
   bootstrap: [
