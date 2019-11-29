@@ -156,7 +156,7 @@
 
                   <mat-card-actions style="text-align: right">
 
-                    <button mat-raised-button class="edit_btn" (click)=" onEdit(new,new._id)">Edit</button>
+                    <button mat-raised-button class="edit_btn" (click)=" onEdit($event , new._id)">Edit</button>
                     <button mat-raised-button class="delete_btn"
                       (click)="delete($event, new._id, new.filePath)">Delete</button>
                   </mat-card-actions>

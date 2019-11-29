@@ -13,6 +13,7 @@ interface news {  // decalare interface class for load news attributes.
   newsSumery: String;
   news: String;
   date: String;
+  filepath: String;
 }
 
 @Component({
@@ -34,7 +35,7 @@ export class NewsComponent implements OnInit {
 
   topic: string;
   newsSumery: string;
-  currentNews: string;
+ // currentNews: string;
 
   news: news[] = [];
   NewsForm: FormGroup;
@@ -84,6 +85,44 @@ export class NewsComponent implements OnInit {
       this.filename = file.name;
     }
   }
+  // when edit button press
+  onEdit() {
+    this.editform = true;
+
+    this.newsId = this.NewsForm.value.newsId;
+
+    const url = 'http://localhost:3000/news/view';
+
+    this.http.get<any>(url + '/' + this.newsId).subscribe(res => {
+      if (res.state == false) {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
+      } else {
+        this.news = res.data;
+       //  console.log(res.data.usertype);
+        this.dataform = true;
+        this.newspicname = res.data.filepath;
+      }
+    });
+
+
+
+    // this.newsId = news_id;
+    // const _id = editNews._id;
+    // const topic = editNews.topic;
+    // const newsSumery = editNews.newsSumery;
+    // const news = editNews.news;
+    // this.editform=true;
+    // this.NewsForm.setValue({
+    //   'topic': topic,
+    //   'newsSumery': newsSumery,
+    //   'news': news,
+
+    // });
+}
+
+
 
   updatenews() {
     this.submitted = true;
@@ -128,7 +167,7 @@ export class NewsComponent implements OnInit {
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             console.log('confirmed' , confirmed );
             if (confirmed) {
-              this.http.post<any>(url + '/' + this.newsId, formData).subscribe(res => {
+              this.http.post<any>(url +  this.newsId + '/' + this.newspicname, formData).subscribe(res => {
                // console.log("url2===",url)
                 console.log(res.msg);
                 if (res.state) {
@@ -215,43 +254,6 @@ export class NewsComponent implements OnInit {
       }
     }
   }
-
-// when edit button press
-  onEdit() {
-    this.editform = true;
-
-    this.newsId = this.NewsForm.value.newsId;
-
-    const url = 'http://localhost:3000/news/view';
-
-    this.http.get<any>(url + '/' + this.newsId).subscribe(res => {
-      if (res.state == false) {
-        let config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
-      } else {
-        this.news = res.data;
-       //  console.log(res.data.usertype);
-        this.dataform = true;
-        this.newspicname = res.data.filepath;
-      }
-    });
-
-
-
-    // this.newsId = news_id;
-    // const _id = editNews._id;
-    // const topic = editNews.topic;
-    // const newsSumery = editNews.newsSumery;
-    // const news = editNews.news;
-    // this.editform=true;
-    // this.NewsForm.setValue({
-    //   'topic': topic,
-    //   'newsSumery': newsSumery,
-    //   'news': news,
-
-    // });
-}
 
 
 

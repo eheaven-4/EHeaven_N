@@ -147,6 +147,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
+                
                 filePath: filPath,
             }
 
@@ -171,6 +172,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
+                
                 filePath: newspicname,
             }
             for (const [key, value] of Object.entries(input)) {
