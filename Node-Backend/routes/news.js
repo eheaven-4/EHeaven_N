@@ -107,11 +107,12 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 });
 
 
-router.get('/editnews/:id' , (req, res, next)=>{
+router.get('/editnews/:id', (req, res, next) => {
 
 
-   // const newsid = req.params._id;
-     // console.log(newsid);
+    const newsid = req.params.id;
+    // console.log(newsid);
+    // res.send(newsid)
     News.findById(req.params.id , (err , news)=> {
         if(err) throw err;
         if(!news){
@@ -135,68 +136,68 @@ router.get('/editnews/:id' , (req, res, next)=>{
 
 
 router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord 
-   const newsid = req.params._id;
-   const newspicname = req.params.newspicname;
+    const newsid = req.params._id;
+    const newspicname = req.params.newspicname;
 
-   upload(req,res , (err) => {
-       if(req.file){
-           filePath =  "NEWS_FILE - " + req.file.originalname;
+    upload(req, res, (err) => {
+        if (req.file) {
+            filePath = "NEWS_FILE - " + req.file.originalname;
 
-           const input ={
-               topic: req.body.topic,
-               newsSumery: req.body.newsSumery,
-               news: req.body.news,
-               filePath: filPath,
-           }
+            const input = {
+                topic: req.body.topic,
+                newsSumery: req.body.newsSumery,
+                news: req.body.news,
+                filePath: filPath,
+            }
 
-           for(const [key , value] of Object.entries(input)){
-               console.log(key , value);
-           }
-           News.update({_id : newsid} , {$set :input})
-               .exec()
-               .then(data => {
-                   console.log('News update success..')
-                   res.json({state : true , msg : 'News update success..'});
-               }) 
-               .catch(error => {
-                   console.log('News update unsuccessfull..')
-                   res.json({state: false, msg: 'News update unsuccess..'});
-               })
+            for (const [key, value] of Object.entries(input)) {
+                console.log(key, value);
+            }
+            News.update({ _id: newsid }, { $set: input })
+                .exec()
+                .then(data => {
+                    console.log('News update success..')
+                    res.json({ state: true, msg: 'News update success..' });
+                })
+                .catch(error => {
+                    console.log('News update unsuccessfull..')
+                    res.json({ state: false, msg: 'News update unsuccess..' });
+                })
 
 
-       } else{
+        } else {
 
-        const input ={
-            topic: req.body.topic,
-            newsSumery: req.body.newsSumery,
-            news: req.body.news,
-            filePath: newspicname,
+            const input = {
+                topic: req.body.topic,
+                newsSumery: req.body.newsSumery,
+                news: req.body.news,
+                filePath: newspicname,
+            }
+            for (const [key, value] of Object.entries(input)) {
+                console.log(key, value);
+            }
+            News.update({ _id: newsid }, { $set: input })
+                .exec()
+                .then(data => {
+                    console.log('News update success..')
+                    res.json({ state: true, msg: 'News update success..' });
+                })
+                .catch(error => {
+                    console.log('News update unsuccessfull..')
+                    res.json({ state: false, msg: 'News update unsuccess..' });
+                })
+
+
         }
-        for(const [key , value] of Object.entries(input)){
-            console.log(key , value);
-        }
-        News.update({_id: newsid} , {$set :input})
-        .exec()
-        .then(data => {
-            console.log('News update success..')
-            res.json({state : true , msg : 'News update success..'});
-        }) 
-        .catch(error => {
-            console.log('News update unsuccessfull..')
-            res.json({state: false, msg: 'News update unsuccess..'});
-        })
+    });
 
-
-   }
-});
-    
 });
 
 
 //get top 4 news in the DATABASE    
-router.get('/topNews', function(req,res) {
+router.get('/topNews', function (req, res) {
     News.find()
-        .sort({date: -1})
+        .sort({ date: -1 })
         .limit(4)
         .exec()
         .then(result => {
