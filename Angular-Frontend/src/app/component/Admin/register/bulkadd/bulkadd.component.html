@@ -1,22 +1,153 @@
-<!-- <div class="container">
-    <div class="row">
-        <form [formGroup]="bulkFileForm" style="padding-top: 100px; margin: auto;">
-            <input type="name" class="form-control mb-4" placeholder="name here ..." name="name"
-                formControlName="name" >
+<div class="container" >
+    <div class="row" *ngIf="!flag">
+        <form style="padding-top: 100px; margin: auto;">
+            
+            <label for="file">Choose File</label><hr>
+            <input type="file" id="file" (change)="handleFileInput($event.target.files)" accept="text/*">
+            
 
-            <input type="file" style="display: none" name="profilepic" accept="text/*"
-                (change)="selectFile($event)" #fileInput>
-
-            <button class="btn btn-outline-primary my-4 btn-block" type="button"
-                (click)="fileInput.click()" accept="text/*">Choose File</button>
-
+            
             <button class="btn btn-info my-4 btn-block" type="submit"
                 (click)="bulkRegistration()">Submit
                 Now</button>
         </form>
     </div>
-</div> -->
-<h3>Angular 7 Image Preview before Upload:</h3>
+    <div *ngIf="flag">
+        <!-- <div ngFor="let user of users">
+            {{user|json}}
+        </div> -->
+        
+    <div style="height: 50px;"></div>      
+    <div align="center">
+        <div *ngFor="let user of users;i as index;" >
+            <div class="col-6" >
+                <mat-card class="example-card" style="padding-top: 30px;">
+                    <mat-card-header>
+                                    <div mat-card-avatar class="example-header-image"><mat-icon>person</mat-icon></div>
+                            <mat-card-title>{{user.name}}</mat-card-title>
+                            
+                            </mat-card-header>
+                            <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->
+                            <mat-card-content>
+                                    <div class="row">
+                                            <div class="col">
+                                                UserType:
+                                            </div>
+                                            <div class="col">
+                                                {{user.usertype}}
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col">
+                                                    Name:
+                                                </div>
+                                                <div class="col">
+                                                    {{user.name}}
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col">
+                                                    Email:
+                                                </div>
+                                                <div class="col">
+                                                    {{user.email}}
+                                                </div>
+                                        </div>
+                                        <div class="row">
+                                                <div class="col">
+                                                    UserID:
+                                                </div>
+                                                <div class="col">
+                                                    {{user.userid}}
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        NIC:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.NIC}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        Birthday:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.birthday}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        Password:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.password}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        Gender
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.gender}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        Nationality:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.nationality}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        address:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.address}}
+                                                    </div>
+                                            </div>
+                                            <div class="row">
+                                                    <div class="col">
+                                                        Image:
+                                                    </div>
+                                                    <div class="col">
+                                                        {{user.image}}
+                                                    </div>
+                                            </div>
+                    </mat-card-content>
+                    <mat-card-actions align="right">
+                    <button type="button" (click)="addUser(i)" class="btn btn-primary" style="margin-right:10px">Add User</button>
+                    <button type="button" class="btn btn-danger">Cancel</button>
+                    </mat-card-actions>
+                </mat-card>
+                <div style="height: 50px;"></div>
+            </div>
+            
+                
+                    
+
+            <!-- <mat-grid-tile>{{user.name}}</mat-grid-tile>
+            <mat-grid-tile>{{user.email}}</mat-grid-tile>
+            <mat-grid-tile>{{user.userid}}</mat-grid-tile>
+            <mat-grid-tile>{{user.NIC}}</mat-grid-tile>
+            <mat-grid-tile>{{user.usertype}}</mat-grid-tile>
+            <mat-grid-tile>{{user.birthday}}</mat-grid-tile>
+            <mat-grid-tile>{{user.password}}</mat-grid-tile>
+            <mat-grid-tile>{{user.gender}}</mat-grid-tile>
+            <mat-grid-tile>{{user.nationality}}</mat-grid-tile>
+            <mat-grid-tile>{{user.address}}</mat-grid-tile>
+            <mat-grid-tile>{{user.image}}</mat-grid-tile>
+            <hr>    -->
+        </div>
+        </div>
+    </div>
+</div>
+<!-- <h3>Angular 7 Image Preview before Upload:</h3>
 <span style="color:red;" *ngIf="message">{{message}}</span>
 <input #file type="file" accept='image/*' (change)="preview(file.files)" />
-<img [src]="imgURL" height="200" *ngIf="imgURL">
+<img [src]="imgURL" height="200" *ngIf="imgURL"> -->
+
+ 
