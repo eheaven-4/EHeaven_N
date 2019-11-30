@@ -1,209 +1,292 @@
 <div class="row">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-2">
-                    <app-sidebar></app-sidebar>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-2">
+                <app-sidebar></app-sidebar>
+            </div>
+            <div class="container-fluid col-md-10" style="background-color:white">
+                <div class="container" style="padding-top: 50px">
+                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold">{{classname}} Class Attendance</h2>
+                    <hr>
                 </div>
-                <div class="container-fluid col-md-10" style="background-color:white">
-                    <div class="flashMessage">
-                        <ng-flash-message></ng-flash-message>
-                    </div>
-                    <div class="container" style="padding-top: 50px">
-                                    
-                        <h2 style="color:  rgb(0, 140, 255); font-weight: bold">{{classname}} Class Attendance</h2>
-                        <hr>
-                        <div>
-                            <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px ;padding-left: 200px">
+                <div class="container">
+                    <mat-card style="margin-bottom: 30px">
+                        <div class="row">
+                            <img src="../../../assets/logo/logo.png" class="img_logo">
                         </div>
-                    </div>
-                    <mat-tab-group>
-                        
-                        <mat-tab label="Student Name List">
-                            
-                            <mat-grid-list cols="3" *ngIf="mainflag" rowHeight="100px">
-                                <mat-grid-tile he>
-                                    <h4>Registration ID</h4>
-                                </mat-grid-tile>
-                                <mat-grid-tile he>
-                                       <h4> Name</h4>
-                                </mat-grid-tile>
-                                    
-                                <mat-grid-tile>
-                                   <h4> Attendance</h4>
-                                </mat-grid-tile>
-                            </mat-grid-list>
-                                
-                            <div>
-                                <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit(userForm)" novalidate *ngIf="mainflag">
-                                     
-                                    <mat-grid-list cols="3" *ngFor="let student of students;index as i" rowHeight="100px">
-                                            <mat-grid-tile>{{student.userid}}</mat-grid-tile>
-                                        <mat-grid-tile>{{student.name}}</mat-grid-tile>
-                                        <mat-grid-tile>
-                                                
-                                                <mat-slide-toggle id="{{student.name}}" color="primary" value="{{i}}" name="{{i}}" (click)="count(i)" ngModel></mat-slide-toggle>
-                                                
-                                            
-                                                {{toggle[i]}}
+                        <div class="container" style="padding-top: 50px">
+                            <mat-tab-group>
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <mat-icon class="example-tab-icon">people</mat-icon>
+                                        &nbsp;Student List
+                                    </ng-template>
+                                    <div>
+                                        <form #userForm="ngForm" class="text-center border p-5 reg-frm "
+                                            (ngSubmit)="onSubmit(userForm)" novalidate *ngIf="mainflag">
+                                            <div class="container">
+                                                <div class="row" style="padding-top: 20px">
+                                                    <div class="col-md-2">
+                                                        <h6>Registration ID</h6>
+                                                    </div>
+                                                    <div class="col-md-6" style="text-align: left">
+                                                        <h6> &nbsp;&nbsp;&nbsp;Student Name</h6>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <h6> Attendance</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="container">
+                                                <mat-card cols="3" *ngFor="let student of students;index as i"
+                                                    class="stu_matCard">
+                                                    <div class="row" style="margin-top: -7px">
+                                                        <div class="col-md-2">
+                                                            <mat-card-content>{{student.userid}}</mat-card-content>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <mat-card-content style="text-align: left">{{student.name}}
+                                                            </mat-card-content>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <mat-card-content>
+                                                                <div class="row">
+                                                                    <div class="col-md-6" style="text-align: right">
+                                                                        <mat-slide-toggle id="{{student.name}}"
+                                                                            color="primary" value="{{i}}" name="{{i}}"
+                                                                            (click)="count(i)" ngModel>
+                                                                        </mat-slide-toggle>
+                                                                    </div>
+                                                                    <div class="col-md-6" style="text-align: left">
+                                                                        <div>
+                                                                            &nbsp; {{toggle[i]}}
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </mat-card-content>
+                                                        </div>
+                                                    </div>
+                                                </mat-card>
+                                            </div>
+                                            <div class="row">
+                                                <button type="submit" style="margin: auto"
+                                                    class="btn my-4 reg_btn box_border">Submit</button>
+                                            </div>
 
-                                        </mat-grid-tile>
-                                    </mat-grid-list>
-                                        <mat-gride-list cols="3">
-                                            
-                                            <mat-list-tile><button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border">Submit</button></mat-list-tile>
-                        
-                                        </mat-gride-list>
-                                    
-                                
-                                </form>
-                            </div>
-                            <div>
-                                    <mat-list role="list" style="color: blue;">
-                                            <mat-list-item role="listitem"> Date:{{ today | date }} </mat-list-item>
-                                            <mat-list-item role="listitem">Number of Students:{{numberOfStudent}} </mat-list-item>
-                                            <mat-list-item role="listitem"> Number of Present students:{{presentStu}}</mat-list-item>
-                                            <mat-list-item role="listitem"> Number of Absent students:{{numberOfStudent-presentStu}}</mat-list-item>
-                                    </mat-list>
-                            
-                            </div>
-                            </mat-tab>
-                            <mat-tab label="Attendence History">
-                                <mat-tab-group  mat-align-tabs="center">
-                                    <mat-tab label="Special Date">
+                                        </form>
+                                    </div>
+                                    <div class="container" style="padding-top: 20px">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p>Date </p>
+                                            </div>
+                                            <div class="col-md-9"> : {{ today | date }}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p>Number of Students </p>
+                                            </div>
+                                            <div class="col-md-9">: {{numberOfStudent}}</div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p>Number of Present students </p>
+                                            </div>
+                                            <div class="col-md-9">: {{presentStu}} </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <p>Number of Absent students </p>
+                                            </div>
+                                            <div class="col-md-9">: {{numberOfStudent-presentStu}} </div>
+                                        </div>
+                                    </div>
+                                </mat-tab>
+                                <mat-tab>
+                                    <ng-template mat-tab-label>
+                                        <mat-icon class="example-tab-icon">history</mat-icon>
+                                        &nbsp;Attendence History
+                                    </ng-template>
+                                    <mat-tab-group mat-align-tabs="left" style="margin-left: 30px;margin-right: 30px">
+                                        <mat-tab>
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">calendar_today</mat-icon>
+                                                &nbsp;By Date
+                                            </ng-template>
+                                            <div style="padding-top:50px ; padding-bottom: 50px" *ngIf="historyflagD">
+                                                <form class="example-form" (ngSubmit)="searchDate(dateid.value)">
+                                                    <div>
+                                                        <p *ngIf="spanflageD" style="color: red;">May
+                                                            be you entered date was a holiday.Please Enter valid
+                                                            date.</p>
+                                                    </div>
 
-                                        <div style="padding-top: 100px ; padding-bottom: 100px;align-content: center;" *ngIf="historyflagD" >
-                                                <form class="example-form " (ngSubmit)="searchDate(dateid.value)">
-                                                 
-                                                    <div align="center"><span *ngIf="spanflageD" style="color: red;">May be you entered date was a holiday.Please Enter valid date.</span></div>
-                                                    <div class="row">
+                                                    <div class="row"
+                                                        style="margin-bottom: 20px ; margin-left: 30px;margin-right: 30px">
+                                                        <div class="col-md-5"></div>
+                                                        <div class="col-md-2">
+                                                            <input matInput [matDatepicker]="picker"
+                                                                placeholder="Choose a date" appearance="outline" #dateid
+                                                                required disabled>
+                                                        </div>
+                                                        <div class="col-md-2"
+                                                            style="margin-top: -9px; margin-left: -55px">
+                                                            <mat-datepicker-toggle matSuffix [for]="picker">
+                                                            </mat-datepicker-toggle>
+                                                            <mat-datepicker #picker disabled="false">
+                                                            </mat-datepicker>
+                                                        </div>
                                                         <div class="col-md-3"></div>
-                                                        <div class="col" align="center">
-                                                            <mat-form-field>
-                                                                    <input matInput [matDatepicker]="picker" placeholder="Choose a date"  appearance="outline" #dateid required disabled>
-                                                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                                                                    <mat-datepicker #picker disabled="false"></mat-datepicker>
-                                                                    <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
+
+                                                    </div>
+                                                    <div class="row" style="margin-left: 30px;margin-right: 30px">
+                                                        <button mat-raised-button color="primary"
+                                                            style="margin: auto; width: 20%">
+                                                            <mat-icon>search</mat-icon>Search
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                            <div *ngIf="!historyflagD">
+                                                <div style="text-align: center; margin-top: 40px">
+                                                    <h5 style="color:  rgb(0, 140, 255)">{{searchDateResult[0].date}} - Attendence List</h5>
+                                                    <h5 style="color:  rgb(0, 140, 255)">{{classname}}</h5>
+                                                </div>
+
+                                                <div class="container" style="margin-top: 40px">
+                                                    <div class="row">
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">
+                                                            <p style="font-weight: bold">Student ID</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p style="font-weight: bold">Student Name</p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <p style="font-weight: bold">&nbsp;State</p>
+                                                        </div>
+                                                        <div class="col-md-1"></div>
+                                                    </div>
+                                                </div>
+                                                <hr>
+                                                <div class="container">
+                                                    <div class="row" *ngFor="let result of searchDateResult;">
+                                                        <div class="col-md-1"></div>
+                                                        <div class="col-md-2">
+                                                            <p>{{result.userid}}</p>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p>{{result.name}}</p>
+                                                        </div>
+                                                        <div class="col-md-2">
+                                                            <div *ngIf="result.attend ; else elseBlock"
+                                                                style="color: blue;">Present
+                                                            </div>
+                                                            <ng-template #elseBlock>
+                                                                <div style="color: red;">Absent</div>
+                                                            </ng-template>
+                                                        </div>
+                                                        <div class="col-md-1"></div>
+                                                    </div>
+                                                </div>
+                                                <div style="text-align: center;color:blue;">
+                                                    <hr>
+                                                    <button mat-raised-button color="primary"
+                                                        (click)="historyflagD=true;">
+                                                        <mat-icon>replay</mat-icon>Return
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </mat-tab>
+
+
+
+                                        
+                                        <mat-tab>
+                                            <ng-template mat-tab-label>
+                                                <mat-icon class="example-tab-icon">person</mat-icon>
+                                                &nbsp;By Student
+                                            </ng-template>
+                                            <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
+                                                <form class="text-center border p-5 reg-frm"
+                                                    (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
+                                                    <div class="row" style="padding-bottom: 100px;padding-top: 100px;">
+                                                        <div class="col-4" style="margin-left: 200px;">
+                                                            <mat-form-field class="example-full-width">
+                                                                <input matInput
+                                                                    placeholder="Enter student Registration number or name"
+                                                                    name="stud" required ngModel>
+                                                                <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
+                                                                <mat-error></mat-error>
+                                                            </mat-form-field>
+                                                            <mat-hint>Ex:00000001</mat-hint>
+                                                        </div>
+                                                        <div class="col-4" style="margin-left: 100px;">
+                                                            <mat-form-field #month>
+                                                                <mat-label>Month</mat-label>
+                                                                <mat-select [(value)]="selected">
+                                                                    <mat-option>None</mat-option>
+                                                                    <mat-option *ngFor="let month of months;index as i"
+                                                                        value="{{i}}">{{month}}</mat-option>
+                                                                </mat-select>
                                                             </mat-form-field>
                                                         </div>
                                                     </div>
-                                                    <div class="row">
-                                                        <div class="col-md-3"></div> 
-                                                        <div class="col" align="center">
-                                                                <button mat-raised-button color="primary"><mat-icon>search</mat-icon>Search</button>
-
-                                                        </div>
-
-                                                    </div>
-                                                      
-                                                        
+                                                    <button mat-raised-button color="primary"
+                                                        style="margin-left: -100px;">
+                                                        <mat-icon>search</mat-icon>Search
+                                                    </button>
                                                 </form>
-                                                      
-                                            
-                                        </div>
-                                        <div  *ngIf="!historyflagD">
-                                            <div style="text-align: center;">
-                                            <h2>{{searchDateResult[0].date}} Day</h2>  
-                                                <h2> Attendence List</h2>
-                                                <h2>{{classname}}</h2>
                                             </div>
-                                            <mat-grid-list cols="2" rowHeight="100px">
-                                                <mat-grid-tile><h3>UserID</h3></mat-grid-tile>
-                                                <mat-grid-tile><h3>Attendence</h3></mat-grid-tile>
-                                                
-                                            </mat-grid-list>
-                                            
-
-                                            
-
-                                            <mat-grid-list cols="2" rowHeight="50px" *ngFor="let result of searchDateResult;">
-                                                <mat-grid-tile>{{result.name}}</mat-grid-tile>
-                                                <mat-grid-tile>                                                
-                                                    <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
-                                                    <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
-                                                    
-                                                </mat-grid-tile>
-                                                
-                                            </mat-grid-list>
-
-                                           
-                                            <div style="text-align: center;color:blue;">
-                                                    <label >
-                                                        click here to search another Date
-                                                    </label>
-                                                    <hr>
-                                                    <button mat-raised-button color="primary" (click)="historyflagD=true;"><mat-icon>replay</mat-icon>Click here</button>
-                                                    
-                                            </div>
-                                        </div>
-                                    </mat-tab>
-                                    <mat-tab label="Special Student">
-                                        <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
-                                            <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
-                                                 
-                                                <div class="row" style="padding-bottom: 100px;padding-top: 100px;">
-                                                    <div class="col-4" style="margin-left: 200px;">
-
-                                                            
-                                                        <mat-form-field class="example-full-width" >
-                                                            <input matInput placeholder="Enter student Registration number or name"  name="stud"  required ngModel>
-                                                            <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
-                                                            <mat-error></mat-error>
-                                                        </mat-form-field>
-                                                        <mat-hint>Ex:00000001</mat-hint>
-                                                    </div>
-                                                    <div class="col-4" style="margin-left: 100px;">
-                                                        <mat-form-field #month>
-                                                            <mat-label>Month</mat-label>
-                                                            <mat-select [(value)]="selected">
-                                                              <mat-option>None</mat-option>
-                                                              <mat-option *ngFor="let month of months;index as i" value="{{i}}">{{month}}</mat-option>
-                                                            </mat-select>
-                                                        </mat-form-field>
-                                                    </div>
+                                            <div *ngIf="!historyflagS" style="padding-top:100px; padding-bottom: 100px">
+                                                <div style="text-align:center;">
+                                                    <h2>{{searchStuResult[8].username}} Student Attendence List</h2>
                                                 </div>
-                                                
-                                                <button mat-raised-button color="primary" style="margin-left: -100px;"><mat-icon>search</mat-icon>Search</button>
-                                                
-                                                
-                                            </form>
-                                            
-                                        </div>
-                                        <div *ngIf="!historyflagS" style="padding-top:100px; padding-bottom: 100px">
-                                                <div style="text-align:center;"><h2 >{{searchStuResult[8].username}} Student Attendence List</h2></div>
-                                            <mat-grid-list cols="2" rowHeight="100px">
-                                                <mat-grid-tile>
+                                                <mat-grid-list cols="2" rowHeight="100px">
+                                                    <mat-grid-tile>
                                                         <h3>Date</h3>
-                                                </mat-grid-tile>
-                                                <mat-grid-tile>
+                                                    </mat-grid-tile>
+                                                    <mat-grid-tile>
                                                         <h3>Attendence</h3>
-                                                </mat-grid-tile>
-                                            </mat-grid-list>
-                                            
-                                            <mat-grid-list cols="2" rowHeight="50px" *ngFor="let result of searchStuResult">
+                                                    </mat-grid-tile>
+                                                </mat-grid-list>
+
+                                                <mat-grid-list cols="2" rowHeight="50px"
+                                                    *ngFor="let result of searchStuResult">
                                                     <mat-grid-tile>
                                                         {{result.date}}
                                                     </mat-grid-tile>
                                                     <mat-grid-tile>
-                                                        <div *ngIf="result.attend ; else elseBlock" style="color: blue;">Present</div>
-                                                            <ng-template #elseBlock ><div style="color: red;">Absent</div></ng-template>
-                                                        
+                                                        <div *ngIf="result.attend ; else elseBlock"
+                                                            style="color: blue;">Present
+                                                        </div>
+                                                        <ng-template #elseBlock>
+                                                            <div style="color: red;">Absent</div>
+                                                        </ng-template>
+
                                                     </mat-grid-tile>
-                                            </mat-grid-list>
-                                      
-                                            <div style="text-align: center;">
-                                                <label style="color: blue;">
-                                                    click here to search another student
-                                                </label>
-                                                <hr>
-                                                <button mat-raised-button color="primary" (click)="historyflagS=true;"><mat-icon>replay</mat-icon>Click here</button>
-                                               
-                                                
+                                                </mat-grid-list>
+
+                                                <div style="text-align: center;">
+                                                    <label style="color: blue;">
+                                                        click here to search another student
+                                                    </label>
+                                                    <hr>
+                                                    <button mat-raised-button color="primary"
+                                                        (click)="historyflagS=true;">
+                                                        <mat-icon>replay</mat-icon>Click here
+                                                    </button>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </mat-tab>
-                                </mat-tab-group>
-                            </mat-tab>
-                    </mat-tab-group>
+                                        </mat-tab>
+                                    </mat-tab-group>
+                                </mat-tab>
+                            </mat-tab-group>
+                        </div>
+                    </mat-card>
+
+                </div>
+
             </div>
         </div>
     </div>

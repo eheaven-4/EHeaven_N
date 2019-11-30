@@ -1,3 +1,19 @@
+.img_logo{
+  width: 40%;
+  margin: auto;
+  padding-top: 50px;
+}
+.stu_matCard{
+  height: 40px;
+  margin-bottom: 5px
+}
+.reg_btn{
+  width: 30%;
+  color: rgb(255, 255, 255);
+  background-color: rgb(0, 140, 255);
+  border-color:  rgb(0, 140, 255);
+  box-shadow: 0px 5px 5px rgb(134, 132, 245);
+}
 .switch {
   position: relative;
   display: inline-block;
@@ -97,7 +113,6 @@ input:checked + .slider:before {
   // }
   .example-form {
     min-width: 150px;
-    max-width: 500px;
     width: 100%;
   }
   
