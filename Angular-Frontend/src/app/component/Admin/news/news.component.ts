@@ -57,6 +57,7 @@ export class NewsComponent implements OnInit {
       topic: ['', [Validators.required, Validators.maxLength(50)]],
       newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
       news: ['', Validators.maxLength(800)],
+
     });
 
     const url = 'http://localhost:3000/news/view';
@@ -86,14 +87,17 @@ export class NewsComponent implements OnInit {
     }
   }
   // when edit button press
-  onEdit() {
+  onEdit(event, news_id) {
     this.editform = true;
 
-    this.newsId = this.NewsForm.value.newsId;
+    //const mybtnId = this.NewsForm.value.news_id;
+    // this.newsId = this.NewsForm.value.newsId;
 
-    const url = 'http://localhost:3000/news/view';
+    console.log(news_id);
 
-    this.http.get<any>(url + '/' + this.newsId).subscribe(res => {
+    const url = 'http://localhost:3000/news/editnews';
+
+    this.http.get<any>(url + '/' + news_id).subscribe(res => {
       if (res.state == false) {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;

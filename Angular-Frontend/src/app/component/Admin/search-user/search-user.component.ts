@@ -82,14 +82,13 @@ export class SearchUserComponent implements OnInit {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Error find in user..! ", true ? "Retry" : undefined, config);
-      }
-      else {
+      } else{
         this.userdata = res.data;
         console.log(res.data.usertype);
         this.dataform = true;
         this.propicName = res.data.filepath;
       }
-    })
+    });
   }
 
   /**************************************************** */
