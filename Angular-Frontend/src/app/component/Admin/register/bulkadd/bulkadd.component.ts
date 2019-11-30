@@ -31,6 +31,7 @@ export class BulkaddComponent {
   fileToUpload: File = null;
   Stringdata='';
   users=[];
+  userVisibale;
   // public imagePath;
   // imgURL: any;
   // public message: string;
@@ -112,9 +113,20 @@ export class BulkaddComponent {
         // console.log(user);
       }
       console.log(this.users);
+      this.userVisibale=new Array(this.users.length);
+      for(var i=0;i<this.users.length;i++){
+        this.userVisibale[i]=true;
+      }
       this.flag=true;
-    }
 
+    }
+    
+
+  }
+  addUser(i){
+    this.userVisibale[i]=false;
+
+      
   }
 
 }
