@@ -43,7 +43,7 @@
                                     <!-- {{UserDataForm.value | json}} -->
                                     <div class="col">
                                         <select class="browser-default custom-select mb-4 box_border" name="usertype"
-                                            formControlName="usertype" [(ngModel)]="usertype"
+                                            formControlName="usertype"
                                             [ngClass]="{ 'is-invalid': submitted && f.usertype.errors }"
                                             [(ngModel)]="userdata.usertype">
                                             <option value="" disabled>User type</option>

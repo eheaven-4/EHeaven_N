@@ -108,28 +108,23 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 
 
 router.get('/editnews/:id', (req, res, next) => {
-
-
     const newsid = req.params.id;
-    // console.log(newsid);
-    // res.send(newsid)
-    News.findById(req.params.id , (err , news)=> {
-        if(err) throw err;
-        if(!news){
-            res.json({state: false , msg : 'No news found'});
+    News.findById(req.params.id, (err, news) => {
+        if (err) throw err;
+        if (!news) {
+            res.json({ state: false, msg: 'No news found' });
             return;
         }
-
-        News.findOne({_id : newsid})
+        News.findOne({ _id: newsid })
             .select()
             .exec()
             .then(data => {
                 console.log('News Transfer Success..');
-                res.json({ state : true , msg : 'News Transfer success..' , data : data});
+                res.json({ state: true, msg: 'News Transfer success..', data: data });
             })
             .catch(error => {
                 console.log('Data Transfer Unsuccess..');
-                res.json({state : false , msg: 'News Inserting Unsuccessfull..'});
+                res.json({ state: false, msg: 'News Inserting Unsuccessfull..' });
             })
     })
 })
@@ -147,7 +142,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
-                
+
                 filePath: filPath,
             }
 
@@ -172,7 +167,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
-                
+
                 filePath: newspicname,
             }
             for (const [key, value] of Object.entries(input)) {

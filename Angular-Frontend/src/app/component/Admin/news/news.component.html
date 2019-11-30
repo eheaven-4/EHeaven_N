@@ -64,15 +64,21 @@
 
 
             <!-- edit form -->
+
             <div *ngIf="editform">
               <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
 
                 <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
                 <div class="form-group">
-                  <p style="text-align: left">Topicx :</p>
+                  <p style="text-align: left">Topic :</p>
+
+
                   <input type="text" class="form-control box_border" aria-describedby="textHelp" name="topic"
-                    formControlName="topic">
+                    formControlName="topic" [(ngModel)]="newsEdit.topic">
+
+
+
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">Topic is required</div>
                     <div *ngIf="f.topic.errors.maxlength">Topic must less than 50 characters</div>
@@ -82,7 +88,7 @@
                 <div class="form-row mb-4">
                   <p style="text-align: left;">News Sumery :</p>
                   <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="newsSumery"
-                    id="textbox1" formControlName="newsSumery"></textarea>
+                    id="textbox1" formControlName="newsSumery" [(ngModel)]="newsEdit.newsSumery"></textarea>
                   <div *ngIf="submitted && f.newsSumery.errors" class="err_msg">
                     <div *ngIf="f.newsSumery.errors.required">Summery is required</div>
                     <div *ngIf="f.newsSumery.errors.maxlength">Summery must less than 400 characters</div>
@@ -92,7 +98,7 @@
                 <div class="form-row mb-4">
                   <label>News :</label>
                   <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="news"
-                    id="textbox" formControlName="news"></textarea>
+                    id="textbox" formControlName="news" [(ngModel)]="newsEdit.news"></textarea>
                   <div *ngIf="submitted && f.news.errors" class="err_msg">
                     <div *ngIf="f.news.errors.maxlength">News must less than 800 characters</div>
                   </div>

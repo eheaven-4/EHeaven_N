@@ -7,7 +7,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
-interface news {  // decalare interface class for load news attributes.
+interface newsClass {  // decalare interface class for load news attributes.
   _id: String;
   topic: String;
   newsSumery: String;
@@ -37,7 +37,8 @@ export class NewsComponent implements OnInit {
   newsSumery: string;
  // currentNews: string;
 
-  news: news[] = [];
+  news: newsClass[] = [];
+  newsEdit : newsClass [] = [];
   NewsForm: FormGroup;
   // ngFlashMessage: any;
 
@@ -98,15 +99,16 @@ export class NewsComponent implements OnInit {
     const url = 'http://localhost:3000/news/editnews';
 
     this.http.get<any>(url + '/' + news_id).subscribe(res => {
+      console.log(res);
+      
       if (res.state == false) {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
       } else {
-        this.news = res.data;
-       //  console.log(res.data.usertype);
+        this.newsEdit = res.data;
         this.dataform = true;
-        this.newspicname = res.data.filepath;
+        // this.newspicname = res.data.filepath;
       }
     });
 
