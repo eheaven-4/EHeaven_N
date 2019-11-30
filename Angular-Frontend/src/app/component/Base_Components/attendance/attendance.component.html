@@ -140,7 +140,7 @@
 
                                                     </div>
                                                     <div class="row" style="margin-left: 30px;margin-right: 30px">
-                                                        <button mat-raised-button color="primary"
+                                                        <button mat-raised-button class="reg_btn"
                                                             style="margin: auto; width: 20%">
                                                             <mat-icon>search</mat-icon>Search
                                                         </button>
@@ -149,7 +149,8 @@
                                             </div>
                                             <div *ngIf="!historyflagD">
                                                 <div style="text-align: center; margin-top: 40px">
-                                                    <h5 style="color:  rgb(0, 140, 255)">{{searchDateResult[0].date}} - Attendence List</h5>
+                                                    <h5 style="color:  rgb(0, 140, 255)">{{searchDateResult[0].date}} -
+                                                        Attendence List</h5>
                                                     <h5 style="color:  rgb(0, 140, 255)">{{classname}}</h5>
                                                 </div>
 
@@ -191,7 +192,7 @@
                                                 </div>
                                                 <div style="text-align: center;color:blue;">
                                                     <hr>
-                                                    <button mat-raised-button color="primary"
+                                                    <button mat-raised-button class="reg_btn"
                                                         (click)="historyflagD=true;">
                                                         <mat-icon>replay</mat-icon>Return
                                                     </button>
@@ -199,82 +200,90 @@
                                             </div>
                                         </mat-tab>
 
-
-
-                                        
                                         <mat-tab>
                                             <ng-template mat-tab-label>
                                                 <mat-icon class="example-tab-icon">person</mat-icon>
                                                 &nbsp;By Student
                                             </ng-template>
-                                            <div style="padding-top:100px; padding-bottom: 100px" *ngIf="historyflagS">
+                                            <div style="padding-bottom: 20px" *ngIf="historyflagS">
                                                 <form class="text-center border p-5 reg-frm"
                                                     (ngSubmit)="searchStu(selected,user.value.stud)" #user="ngForm">
-                                                    <div class="row" style="padding-bottom: 100px;padding-top: 100px;">
-                                                        <div class="col-4" style="margin-left: 200px;">
-                                                            <mat-form-field class="example-full-width">
-                                                                <input matInput
-                                                                    placeholder="Enter student Registration number or name"
-                                                                    name="stud" required ngModel>
-                                                                <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
-                                                                <mat-error></mat-error>
-                                                            </mat-form-field>
-                                                            <mat-hint>Ex:00000001</mat-hint>
-                                                        </div>
-                                                        <div class="col-4" style="margin-left: 100px;">
-                                                            <mat-form-field #month>
-                                                                <mat-label>Month</mat-label>
-                                                                <mat-select [(value)]="selected">
-                                                                    <mat-option>None</mat-option>
-                                                                    <mat-option *ngFor="let month of months;index as i"
-                                                                        value="{{i}}">{{month}}</mat-option>
-                                                                </mat-select>
-                                                            </mat-form-field>
+                                                    <div class="container">
+
+                                                        <div class="row">
+                                                            <div class="col-md-6">
+                                                                <mat-form-field class="example-full-width">
+                                                                    <input matInput placeholder="Student ID or Name"
+                                                                        name="stud" required ngModel>
+                                                                    <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
+                                                                    <mat-error></mat-error>
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <mat-form-field #month>
+                                                                    <mat-label>Month</mat-label>
+                                                                    <mat-select [(value)]="selected">
+                                                                        <mat-option>None</mat-option>
+                                                                        <mat-option
+                                                                            *ngFor="let month of months;index as i"
+                                                                            value="{{i}}">{{month}}</mat-option>
+                                                                    </mat-select>
+                                                                </mat-form-field>
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                <button mat-raised-button class="reg_btn"
+                                                                    style="width: 100%;margin-top: 10px">
+                                                                    <mat-icon>search</mat-icon>Search
+                                                                </button>
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                    <button mat-raised-button color="primary"
-                                                        style="margin-left: -100px;">
-                                                        <mat-icon>search</mat-icon>Search
-                                                    </button>
+
                                                 </form>
                                             </div>
-                                            <div *ngIf="!historyflagS" style="padding-top:100px; padding-bottom: 100px">
+                                            
+                                            <div *ngIf="!historyflagS" style="padding-top:40px; padding-bottom: 40px">
                                                 <div style="text-align:center;">
-                                                    <h2>{{searchStuResult[8].username}} Student Attendence List</h2>
+                                                    <h5>{{searchStuResult[8].username}} Student Attendence List</h5>
                                                 </div>
-                                                <mat-grid-list cols="2" rowHeight="100px">
-                                                    <mat-grid-tile>
-                                                        <h3>Date</h3>
-                                                    </mat-grid-tile>
-                                                    <mat-grid-tile>
-                                                        <h3>Attendence</h3>
-                                                    </mat-grid-tile>
-                                                </mat-grid-list>
-
-                                                <mat-grid-list cols="2" rowHeight="50px"
-                                                    *ngFor="let result of searchStuResult">
-                                                    <mat-grid-tile>
-                                                        {{result.date}}
-                                                    </mat-grid-tile>
-                                                    <mat-grid-tile>
-                                                        <div *ngIf="result.attend ; else elseBlock"
-                                                            style="color: blue;">Present
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <div class="col-md-2"></div>
+                                                        <div class="col-md-4">
+                                                            <p style="font-weight: bold;text-align: center">Date</p>
                                                         </div>
-                                                        <ng-template #elseBlock>
-                                                            <div style="color: red;">Absent</div>
-                                                        </ng-template>
-
-                                                    </mat-grid-tile>
-                                                </mat-grid-list>
-
+                                                        <div class="col-md-4">
+                                                            <p style="font-weight: bold;text-align: center"> State</p>
+                                                        </div>
+                                                        <div class=" col-md-2">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <mat-card *ngFor="let result of searchStuResult" class="my_mat">
+                                                        <div class="row" style="margin-top: -13px">
+                                                            <div class="col-md-2"></div>
+                                                            <div class="col-md-4" style="text-align: center">
+                                                                {{result.date}}
+                                                            </div>
+                                                            <div class="col-md-4" style="text-align: center">
+                                                                <div *ngIf="result.attend ; else elseBlock"
+                                                                    style="color: blue;">Present
+                                                                </div>
+                                                                <ng-template #elseBlock>
+                                                                    <div style="color: red;">Absent</div>
+                                                                </ng-template>
+                                                            </div>
+                                                            <div class="col-md-2"></div>
+                                                        </div>
+                                                    </mat-card>
+                                                </div>
                                                 <div style="text-align: center;">
-                                                    <label style="color: blue;">
-                                                        click here to search another student
-                                                    </label>
+
                                                     <hr>
-                                                    <button mat-raised-button color="primary"
+                                                    <button mat-raised-button class="reg_btn"
                                                         (click)="historyflagS=true;">
-                                                        <mat-icon>replay</mat-icon>Click here
+                                                        <mat-icon>replay</mat-icon>Return
                                                     </button>
                                                 </div>
                                             </div>
@@ -284,9 +293,7 @@
                             </mat-tab-group>
                         </div>
                     </mat-card>
-
                 </div>
-
             </div>
         </div>
     </div>
