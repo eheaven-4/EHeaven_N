@@ -90,17 +90,13 @@ export class NewsComponent implements OnInit {
   // when edit button press
   onEdit(event, news_id) {
     this.editform = true;
-
-    //const mybtnId = this.NewsForm.value.news_id;
-    // this.newsId = this.NewsForm.value.newsId;
-
     console.log(news_id);
 
     const url = 'http://localhost:3000/news/editnews';
 
     this.http.get<any>(url + '/' + news_id).subscribe(res => {
       console.log(res);
-      
+
       if (res.state == false) {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
@@ -108,7 +104,7 @@ export class NewsComponent implements OnInit {
       } else {
         this.newsEdit = res.data;
         this.dataform = true;
-        // this.newspicname = res.data.filepath;
+        this.newspicname = res.data.filepath;
       }
     });
 
@@ -137,11 +133,6 @@ export class NewsComponent implements OnInit {
     if (this.NewsForm.invalid) {
       return;
     } else{
-
-        // tslint:disable-next-line: prefer-const
-        // const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-        // const userid = myCookie.userid;
-
 
        // this.date = Date();
 
@@ -173,7 +164,7 @@ export class NewsComponent implements OnInit {
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             console.log('confirmed' , confirmed );
             if (confirmed) {
-              this.http.post<any>(url +  this.newsId + '/' + this.newspicname, formData).subscribe(res => {
+              this.http.post<any>(url  + '/' + this.newspicname, formData).subscribe(res => {
                // console.log("url2===",url)
                 console.log(res.msg);
                 if (res.state) {
@@ -187,9 +178,10 @@ export class NewsComponent implements OnInit {
                   const config = new MatSnackBarConfig();
                   config.duration = true ? 2000 : 0;
                   this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
-                  this.router.navigate(['/news']);
+                 // this.router.navigate(['/news']);
                 }
               });
+              window.location.reload();
             }
           });
         }

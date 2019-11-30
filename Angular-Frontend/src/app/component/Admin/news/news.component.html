@@ -65,7 +65,7 @@
 
             <!-- edit form -->
 
-            <div *ngIf="editform">
+            <div *ngIf="editform" >
               <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
 
                 <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
@@ -114,7 +114,7 @@
                   {{filename}}
                 </small>
                 <p>&nbsp;</p>
-                <button (click)="updatenews()" type="submit"
+                <button (click)="updatenews($event)" type="submit"
                   class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Update</button>
               </form>
             </div>
