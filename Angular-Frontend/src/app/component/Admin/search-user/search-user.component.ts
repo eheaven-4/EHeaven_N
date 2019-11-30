@@ -82,14 +82,13 @@ export class SearchUserComponent implements OnInit {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Error find in user..! ", true ? "Retry" : undefined, config);
-      }
-      else {
+      } else{
         this.userdata = res.data;
         console.log(res.data.usertype);
         this.dataform = true;
-        this.propicName = res.data.filepath
+        this.propicName = res.data.filepath;
       }
-    })
+    });
   }
 
   /**************************************************** */
@@ -110,7 +109,7 @@ export class SearchUserComponent implements OnInit {
       const file = event.target.files[0];
       this.images = file;
       this.filename = file.name;
-      console.log(this.filename)
+      console.log(this.filename);
     }
   }
 
@@ -122,7 +121,8 @@ export class SearchUserComponent implements OnInit {
     if (this.UserDataForm.invalid) {
       return;
     }
-    else {
+    else{
+
       const formData = new FormData();
 
       formData.append('profileImage', this.images)
@@ -196,9 +196,9 @@ export class SearchUserComponent implements OnInit {
 
   //   var reader = new FileReader();
   //   this.imagePath = files;
-  //   reader.readAsDataURL(files[0]); 
-  //   reader.onload = (_event) => { 
-  //     this.imgURL = reader.result; 
+  //   reader.readAsDataURL(files[0]);
+  //   reader.onload = (_event) => {
+  //     this.imgURL = reader.result;
   //   }
   // }
 

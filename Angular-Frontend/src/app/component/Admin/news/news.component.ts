@@ -13,6 +13,7 @@ interface news {  // decalare interface class for load news attributes.
   newsSumery: String;
   news: String;
   date: String;
+  filepath: String;
 }
 
 @Component({
@@ -29,10 +30,12 @@ export class NewsComponent implements OnInit {
   filename;
   submitted = false;
   newsId: string;
+  newspicname;
+  dataform: Boolean = false;
 
   topic: string;
   newsSumery: string;
-  currentNews: string;
+ // currentNews: string;
 
   news: news[] = [];
   NewsForm: FormGroup;
@@ -54,6 +57,7 @@ export class NewsComponent implements OnInit {
       topic: ['', [Validators.required, Validators.maxLength(50)]],
       newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
       news: ['', Validators.maxLength(800)],
+
     });
 
     const url = 'http://localhost:3000/news/view';
@@ -82,6 +86,47 @@ export class NewsComponent implements OnInit {
       this.filename = file.name;
     }
   }
+  // when edit button press
+  onEdit(event, news_id) {
+    this.editform = true;
+
+    //const mybtnId = this.NewsForm.value.news_id;
+    // this.newsId = this.NewsForm.value.newsId;
+
+    console.log(news_id);
+
+    const url = 'http://localhost:3000/news/editnews';
+
+    this.http.get<any>(url + '/' + news_id).subscribe(res => {
+      if (res.state == false) {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
+      } else {
+        this.news = res.data;
+       //  console.log(res.data.usertype);
+        this.dataform = true;
+        this.newspicname = res.data.filepath;
+      }
+    });
+
+
+
+    // this.newsId = news_id;
+    // const _id = editNews._id;
+    // const topic = editNews.topic;
+    // const newsSumery = editNews.newsSumery;
+    // const news = editNews.news;
+    // this.editform=true;
+    // this.NewsForm.setValue({
+    //   'topic': topic,
+    //   'newsSumery': newsSumery,
+    //   'news': news,
+
+    // });
+}
+
+
 
   updatenews() {
     this.submitted = true;
@@ -92,11 +137,11 @@ export class NewsComponent implements OnInit {
     } else{
 
         // tslint:disable-next-line: prefer-const
-        const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-        const userid = myCookie.userid;
+        // const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+        // const userid = myCookie.userid;
 
 
-        this.date = Date();
+       // this.date = Date();
 
         const formData = new FormData();
 
@@ -106,7 +151,7 @@ export class NewsComponent implements OnInit {
         formData.append('newsSumery', this.NewsForm.value.newsSumery);
         formData.append('news', this.NewsForm.value.news);
 
-        const url = 'http:/localhost:3000/news/update';
+        const url = 'http://localhost:3000/news/update';
         // console.log("url1===",url)
 
         if (this.images == null) {
@@ -116,7 +161,7 @@ export class NewsComponent implements OnInit {
         } else {
           const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
             data: {
-              message: 'Are you sure want to Add?',
+              message: 'Are you sure want to update?',
               buttonText: {
                 ok: 'Yes',
                 cancel: 'No'
@@ -126,7 +171,7 @@ export class NewsComponent implements OnInit {
           dialogRef.afterClosed().subscribe((confirmed: boolean) => {
             console.log('confirmed' , confirmed );
             if (confirmed) {
-              this.http.post<any>(url + '/' + this.newsId, formData).subscribe(res => {
+              this.http.post<any>(url +  this.newsId + '/' + this.newspicname, formData).subscribe(res => {
                // console.log("url2===",url)
                 console.log(res.msg);
                 if (res.state) {
@@ -213,24 +258,6 @@ export class NewsComponent implements OnInit {
       }
     }
   }
-
-// when edit button press
-  onEdit(editNews:any,news_id) {
-    this.editform=true;
-
-    this.newsId = news_id;
-    const _id = editNews._id;
-    const topic = editNews.topic;
-    const newsSumery = editNews.newsSumery;
-    const news = editNews.news;
-    this.editform=true;
-    this.NewsForm.setValue({
-      'topic': topic,
-      'newsSumery': newsSumery,
-      'news': news,
-
-    });
-}
 
 
 
