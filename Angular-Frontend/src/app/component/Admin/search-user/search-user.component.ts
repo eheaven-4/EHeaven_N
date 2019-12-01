@@ -146,6 +146,9 @@ export class SearchUserComponent implements OnInit {
       console.log(this.UserDataForm.value.usertype);
       const url = 'http://localhost:3000/users/updateUser/';
 
+
+     
+
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
           message: 'Are you sure want to update?',

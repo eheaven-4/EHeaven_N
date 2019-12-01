@@ -107,28 +107,12 @@ export class NewsComponent implements OnInit {
         this.newspicname = res.data.filepath;
       }
     });
-
-
-
-    // this.newsId = news_id;
-    // const _id = editNews._id;
-    // const topic = editNews.topic;
-    // const newsSumery = editNews.newsSumery;
-    // const news = editNews.news;
-    // this.editform=true;
-    // this.NewsForm.setValue({
-    //   'topic': topic,
-    //   'newsSumery': newsSumery,
-    //   'news': news,
-
-    // });
   }
 
 
 
   updatenews() {
     this.submitted = true;
-
 
     console.log('updating news')
     if (this.NewsForm.invalid) {
@@ -146,48 +130,41 @@ export class NewsComponent implements OnInit {
       formData.append('news', this.NewsForm.value.news);
 
       const url = 'http://localhost:3000/news/update';
-      // console.log("url1===",url)
 
-     // console.log(this.news_id);
 
-      if (this.images == null) {
-        const config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open('Please Select a Image..! ', true ? 'Retry' : undefined, config);
-      } else {
-        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-          data: {
-            message: 'Are you sure want to update?',
-            buttonText: {
-              ok: 'Yes',
-              cancel: 'No'
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to update?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        console.log('confirmed', confirmed);
+        if (confirmed) {
+          this.http.post<any>(url + '/' + this.newspicname, formData).subscribe(res => {
+            
+            console.log(res.msg);
+            if (res.state) {
+              const config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open('News Successfully Added..! ', true ? 'Done' : undefined, config);
+
+              window.location.reload();
+
+            } else {
+              const config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
+              // this.router.navigate(['/news']);
             }
-          }
-        });
-        dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-          console.log('confirmed', confirmed);
-          if (confirmed) {
-            this.http.post<any>(url + '/' + this.newspicname, formData).subscribe(res => {
-              // console.log("url2===",url)
-              console.log(res.msg);
-              if (res.state) {
-                const config = new MatSnackBarConfig();
-                config.duration = true ? 2000 : 0;
-                this.snackBar.open('News Successfully Added..! ', true ? 'Done' : undefined, config);
+          });
+          // window.location.reload();
+        }
+      });
 
-                window.location.reload();
-
-              } else {
-                const config = new MatSnackBarConfig();
-                config.duration = true ? 2000 : 0;
-                this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
-                // this.router.navigate(['/news']);
-              }
-            });
-            // window.location.reload();
-          }
-        });
-      }
     }
 
   }
