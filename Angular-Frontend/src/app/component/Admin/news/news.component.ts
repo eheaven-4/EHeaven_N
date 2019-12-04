@@ -55,7 +55,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.NewsForm = this.fb.group({
-      topic: ['', [Validators.required, Validators.maxLength(50)]],
+      topic: ['', [Validators.required, Validators.maxLength(30)]],
       newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
       news: ['', Validators.maxLength(800)],
 

@@ -48,7 +48,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/view", (req, res, next) => { // news get methord
-    News.find().sort({ date: 1 })
+    News.find().sort({ date: -1 })
         .select('topic newsSumery news date filePath')
         .exec()
         .then(docs => {
@@ -136,14 +136,14 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
 
     upload(req, res, (err) => {
         if (req.file) {
-            filePath = "NEWS_FILE - " + req.file.originalname;
+            fullPath = "NEWS_FILE - " + req.file.originalname;
 
             const input = {
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
-
-                filePath: filPath,
+                filPath: fullPath,
+                date: req.body.date,
             }
 
             for (const [key, value] of Object.entries(input)) {
@@ -168,8 +168,8 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
-
                 filePath: newspicname,
+                date: req.body.date,
             }
             for (const [key, value] of Object.entries(input)) {
                 console.log(key, value);
