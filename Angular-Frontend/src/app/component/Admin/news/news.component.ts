@@ -29,7 +29,7 @@ export class NewsComponent implements OnInit {
   attachment;
   filename;
   submitted = false;
-  newsId: string;
+  newsId:string;
   newspicname;
   dataform: Boolean = false;
 
@@ -70,6 +70,31 @@ export class NewsComponent implements OnInit {
     });
   }
 
+  onEdit(event, news_id , filepath) {
+    this.editform = true;
+    window.scrollTo(0,0);
+    console.log(news_id);
+    this.newsId = news_id ;
+    const url = 'http://localhost:3000/news/editnews';
+
+    this.http.get<any>(url + '/' + news_id).subscribe(res => {
+      console.log(res);
+
+      if (res.state == false) {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
+      } else {
+        this.newsEdit = res.data;
+        this.dataform = true;
+        this.newspicname = filepath;
+        //console.log('picname =' + this.newspicname);
+      }
+    });
+
+
+  }
+
   get f() {
     return this.NewsForm.controls;
   }
@@ -88,31 +113,21 @@ export class NewsComponent implements OnInit {
     }
   }
   // when edit button press
-  onEdit(event, news_id) {
-    this.editform = true;
-    console.log(news_id);
 
-    const url = 'http://localhost:3000/news/editnews';
 
-    this.http.get<any>(url + '/' + news_id).subscribe(res => {
-      console.log(res);
 
-      if (res.state == false) {
-        let config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open('Error find in news..! ', true ? 'Retry' : undefined, config);
-      } else {
-        this.newsEdit = res.data;
-        this.dataform = true;
-        this.newspicname = res.data.filepath;
-      }
-    });
-  }
+
 
 
 
   updatenews() {
     this.submitted = true;
+
+    // window.scrollTo(5,5);
+
+
+
+    console.log('dbcskjbksbck =' + this.newspicname);
 
     console.log('updating news')
     if (this.NewsForm.invalid) {
@@ -129,7 +144,7 @@ export class NewsComponent implements OnInit {
       formData.append('newsSumery', this.NewsForm.value.newsSumery);
       formData.append('news', this.NewsForm.value.news);
 
-      const url = 'http://localhost:3000/news/update';
+      const url = 'http://localhost:3000/news/updateNews/';
 
 
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -144,8 +159,8 @@ export class NewsComponent implements OnInit {
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         console.log('confirmed', confirmed);
         if (confirmed) {
-          this.http.post<any>(url + '/' + this.newspicname, formData).subscribe(res => {
-            
+          this.http.post<any>(url  + this.newsId + '/' + this.newspicname, formData).subscribe(res => {
+
             console.log(res.msg);
             if (res.state) {
               const config = new MatSnackBarConfig();
@@ -158,7 +173,7 @@ export class NewsComponent implements OnInit {
               const config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
-              // this.router.navigate(['/news']);
+              this.router.navigate(['/news']);
             }
           });
           // window.location.reload();

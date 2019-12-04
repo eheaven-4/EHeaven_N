@@ -149,7 +149,8 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
             for (const [key, value] of Object.entries(input)) {
                 console.log(key, value);
             }
-            News.update({ _id: newsid }, { $set: input })
+            News.update({ _id: newsid }, { $set: input }
+                )
                 .exec()
                 .then(data => {
                     console.log('News update success..')
