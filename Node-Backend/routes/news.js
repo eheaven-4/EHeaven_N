@@ -48,7 +48,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/view", (req, res, next) => { // news get methord
-    News.find().sort({ date: -1 })
+    News.find().sort({ date: 1 })
         .select('topic newsSumery news date filePath')
         .exec()
         .then(docs => {
@@ -109,7 +109,7 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 
 router.get('/editnews/:id', (req, res, next) => {
     const newsid = req.params.id;
-    News.findById(req.params.id, (err, news) => {
+    News.findById(newsid , (err, news) => {
         if (err) throw err;
         if (!news) {
             res.json({ state: false, msg: 'No news found' });
@@ -133,6 +133,10 @@ router.get('/editnews/:id', (req, res, next) => {
 router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord 
     const newsid = req.params._id;
     const newspicname = req.params.newspicname;
+   // console.log(newspicname)
+
+
+
 
     upload(req, res, (err) => {
         if (req.file) {
@@ -145,7 +149,6 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 filPath: fullPath,
                 date: req.body.date,
             }
-
             for (const [key, value] of Object.entries(input)) {
                 console.log(key, value);
             }
@@ -195,7 +198,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
 //get top 4 news in the DATABASE    
 router.get('/topNews', function (req, res) {
     News.find()
-        .sort({ date: -1 })
+        .sort({ date: 1 })
         .limit(4)
         .exec()
         .then(result => {

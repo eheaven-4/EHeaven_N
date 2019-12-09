@@ -122,13 +122,6 @@ export class NewsComponent implements OnInit {
 
   updatenews() {
     this.submitted = true;
-
-    // window.scrollTo(5,5);
-
-
-
-    console.log('dbcskjbksbck =' + this.newspicname);
-
     console.log('updating news')
     if (this.NewsForm.invalid) {
       return;
