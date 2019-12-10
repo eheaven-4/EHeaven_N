@@ -117,6 +117,50 @@ router.post("/register", function (req, res) {
     });
 });
 
+router.post("/bulkUserRegistration", function (req, res) {
+        var newUser = new User({
+            usertype: req.body.usertype,
+            userid: req.body.userid,
+            // selectclass: req.body.selectclass,        
+            name: req.body.name,          
+            email: req.body.email,
+            password: req.body.password,
+            birthday: req.body.birthday,
+            // mobilenumber: req.body.mobilenumber,
+            // homenumber: req.body.homenumber,
+            gender: req.body.gender,
+            nationality: req.body.nationality,
+            nicnumber: req.body.NIC,
+            // father: req.body.father,
+            // mother: req.body.mother,
+            address: req.body.address,
+            filepath: req.body.image,
+        });
+        console.log(newUser);
+        bcrypt.genSalt(10, function (err, salt) {
+            bcrypt.hash(newUser.password, salt, function (err, hash) {
+                console.log(hash);
+                newUser.password = hash;
+
+                if (err) {
+                    throw err;
+                }
+                else{
+                    newUser.save()
+                        .then(result =>{
+                            console.log(result);
+                            res.json({ state: true, msg: "Data Inserted Successfully..!" });
+                        })
+                        .catch(error =>{
+                            console.log(error);
+                            res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+                        });
+                }
+            });
+        });
+    
+});
+
 //specific user profile data retrive
 router.get("/profile/:id", function (req, res) {
     User.findByUserid(req.params.id, function (err, data) {

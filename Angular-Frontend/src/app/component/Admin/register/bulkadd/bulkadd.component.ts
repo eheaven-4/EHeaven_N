@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { NgFlashMessageService } from 'ng-flash-messages';
-import { Router } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+
 import { FormBuilder, Validators } from '@angular/forms';
-import { filter, map } from 'rxjs/operators';
-// import { User } from 'src/app/user';
+
+import {RegisterService} from '../register.service'; 
 
 
 export class  User{
@@ -32,31 +31,9 @@ export class BulkaddComponent {
   Stringdata='';
   users=[];
   userVisibale;
-  // public imagePath;
-  // imgURL: any;
-  // public message: string;
+  constructor(private register:RegisterService){ }
 
-  // preview(files) {
-  //   if (files.length === 0)
-  //     return;
-
-  //   var mimeType = files[0].type;
-  //   if (mimeType.match(/image\/*/) == null) {
-  //     this.message = "Only images are supported.";
-  //     return;
-  //   }
-
-  //   var reader = new FileReader();
-  //   this.imagePath = files;
-  //   reader.readAsDataURL(files[0]); 
-  //   reader.onload = (_event) => { 
-  //     this.imgURL = reader.result; 
-  //   }
-  // }
-  extractfile() {
-    
-    
-  }
+  
   
   handleFileInput(files: FileList) {
     
@@ -67,6 +44,7 @@ export class BulkaddComponent {
   bulkRegistration() {
     let fileReader = new FileReader();
     fileReader.readAsText(this.fileToUpload);
+    
     
     fileReader.onload = (e) =>{
       this.Stringdata=fileReader.result.toString();
@@ -112,11 +90,12 @@ export class BulkaddComponent {
         this.users.push(user);
         // console.log(user);
       }
-      console.log(this.users);
       this.userVisibale=new Array(this.users.length);
       for(var i=0;i<this.users.length;i++){
         this.userVisibale[i]=true;
       }
+      console.log(this.users);
+      
       this.flag=true;
 
     }
@@ -124,6 +103,21 @@ export class BulkaddComponent {
 
   }
   addUser(i){
+    const formData = new FormData();
+
+    formData.append('usertype', this.users[i].usertype)
+    formData.append('userid', this.users[i].userid)
+    formData.append('name', this.users[i].name)
+    formData.append('email', this.users[i].email)
+    formData.append('password', this.users[i].password)
+    formData.append('birthday', this.users[i].birthday)
+    formData.append('profileImage', this.users[i].image)
+    formData.append('gender', this.users[i].gender)
+    formData.append('nationality', this.users[i].nationality)
+    formData.append('nicnumber', this.users[i].NIC)
+    formData.append('address', this.users[i].address)
+    this.register.addUser(formData);
+    
     this.userVisibale[i]=false;
 
       

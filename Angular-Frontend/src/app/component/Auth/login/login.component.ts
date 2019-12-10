@@ -28,6 +28,13 @@ export class LoginComponent implements OnInit {
 
   ) { }
 
+
+
+
+
+
+
+
   ngOnInit() { 
     if (!localStorage.getItem('foo')) { 
       localStorage.setItem('foo', 'no reload') 
@@ -74,6 +81,8 @@ export class LoginComponent implements OnInit {
           else{
             this.router.navigate(['/login']);
           }
+
+          
           
         }
         else {

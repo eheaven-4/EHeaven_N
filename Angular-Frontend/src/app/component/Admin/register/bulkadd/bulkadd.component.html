@@ -19,12 +19,12 @@
         
     <div style="height: 50px;"></div>      
     <div align="center">
-        <div *ngFor="let user of users;i as index;" >
-            <div class="col-6" >
+        <div *ngFor="let user of users;index as i" >
+            <div class="col-6" *ngIf="userVisibale[i]">
                 <mat-card class="example-card" style="padding-top: 30px;">
                     <mat-card-header>
                                     <div mat-card-avatar class="example-header-image"><mat-icon>person</mat-icon></div>
-                            <mat-card-title>{{user.name}}</mat-card-title>
+                            <mat-card-title>{{user.name}}    {{i}}</mat-card-title>
                             
                             </mat-card-header>
                             <!-- <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu"> -->

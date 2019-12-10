@@ -1,7 +1,7 @@
 <div>
     <div class="side-bar">
         
-        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active ">
+        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active " *ngIf="myCookie.usertype=">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons" routerLinkActive="nav-text active ">person</i>
