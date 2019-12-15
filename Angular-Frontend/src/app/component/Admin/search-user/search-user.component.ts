@@ -82,14 +82,13 @@ export class SearchUserComponent implements OnInit {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Error find in user..! ", true ? "Retry" : undefined, config);
-      }
-      else {
+      } else {
         this.userdata = res.data;
         console.log(res.data.usertype);
         this.dataform = true;
-        this.propicName = res.data.filepath
+        this.propicName = res.data.filepath;
       }
-    })
+    });
   }
 
   /**************************************************** */
@@ -110,7 +109,7 @@ export class SearchUserComponent implements OnInit {
       const file = event.target.files[0];
       this.images = file;
       this.filename = file.name;
-      console.log(this.filename)
+      console.log(this.filename);
     }
   }
 
@@ -121,8 +120,8 @@ export class SearchUserComponent implements OnInit {
     // stop here if form is invalid
     if (this.UserDataForm.invalid) {
       return;
-    }
-    else {
+    } else {
+
       const formData = new FormData();
 
       formData.append('profileImage', this.images)
@@ -146,6 +145,9 @@ export class SearchUserComponent implements OnInit {
       console.log(this.UserDataForm.value.usertype);
       const url = 'http://localhost:3000/users/updateUser/';
 
+
+
+
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
           message: 'Are you sure want to update?',
@@ -158,7 +160,7 @@ export class SearchUserComponent implements OnInit {
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
 
-          this.http.post<any>(url + this.userid +"/"+ this.propicName, formData).subscribe(res => {
+          this.http.post<any>(url + this.userid + "/" + this.propicName, formData).subscribe(res => {
             if (res.state) {
               console.log(res.msg);
               let config = new MatSnackBarConfig();
@@ -196,9 +198,9 @@ export class SearchUserComponent implements OnInit {
 
   //   var reader = new FileReader();
   //   this.imagePath = files;
-  //   reader.readAsDataURL(files[0]); 
-  //   reader.onload = (_event) => { 
-  //     this.imgURL = reader.result; 
+  //   reader.readAsDataURL(files[0]);
+  //   reader.onload = (_event) => {
+  //     this.imgURL = reader.result;
   //   }
   // }
 

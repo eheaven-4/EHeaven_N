@@ -107,30 +107,98 @@ router.delete("/newsAttachment/:filename", function (req, res) {
 });
 
 
-router.post('/update/:id', (req, res) => {  // update methord 
-    console.log('updated news'); 
-    News.findByIdAndUpdate( req.params.id, 
-        {
-        $set: { topic: req.body.topic, newsSumery: req.body.newsSumery, news: req.body.news }
-    },
-        {
-            new: true
-        },
-        (err, updatednews) => {
-            if (err) {
-                res.send('Error updating news' );
-            } else {
-                res.json(updatednews);
-            }
+router.get('/editnews/:id', (req, res, next) => {
+    const newsid = req.params.id;
+    News.findById(newsid , (err, news) => {
+        if (err) throw err;
+        if (!news) {
+            res.json({ state: false, msg: 'No news found' });
+            return;
         }
-    );
+        News.findOne({ _id: newsid })
+            .select()
+            .exec()
+            .then(data => {
+                console.log('News Transfer Success..');
+                res.json({ state: true, msg: 'News Transfer success..', data: data });
+            })
+            .catch(error => {
+                console.log('Data Transfer Unsuccess..');
+                res.json({ state: false, msg: 'News Inserting Unsuccessfull..' });
+            })
+    })
+})
+
+
+router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord 
+    const newsid = req.params._id;
+    const newspicname = req.params.newspicname;
+   // console.log(newspicname)
+
+
+
+
+    upload(req, res, (err) => {
+        if (req.file) {
+            fullPath = "NEWS_FILE - " + req.file.originalname;
+
+            const input = {
+                topic: req.body.topic,
+                newsSumery: req.body.newsSumery,
+                news: req.body.news,
+                filPath: fullPath,
+                date: req.body.date,
+            }
+            for (const [key, value] of Object.entries(input)) {
+                console.log(key, value);
+            }
+            News.update({ _id: newsid }, { $set: input }
+                )
+                .exec()
+                .then(data => {
+                    console.log('News update success..')
+                    res.json({ state: true, msg: 'News update success..' });
+                })
+                .catch(error => {
+                    console.log('News update unsuccessfull..')
+                    res.json({ state: false, msg: 'News update unsuccess..' });
+                })
+
+
+        } else {
+
+            const input = {
+                topic: req.body.topic,
+                newsSumery: req.body.newsSumery,
+                news: req.body.news,
+                filePath: newspicname,
+                date: req.body.date,
+            }
+            for (const [key, value] of Object.entries(input)) {
+                console.log(key, value);
+            }
+            News.update({ _id: newsid }, { $set: input })
+                .exec()
+                .then(data => {
+                    console.log('News update success..')
+                    res.json({ state: true, msg: 'News update success..' });
+                })
+                .catch(error => {
+                    console.log('News update unsuccessfull..')
+                    res.json({ state: false, msg: 'News update unsuccess..' });
+                })
+
+
+        }
+    });
+
 });
 
 
 //get top 4 news in the DATABASE    
-router.get('/topNews', function(req,res) {
+router.get('/topNews', function (req, res) {
     News.find()
-        .sort({date: -1})
+        .sort({ date: 1 })
         .limit(4)
         .exec()
         .then(result => {
