@@ -1,7 +1,7 @@
 <div>
     <div class="side-bar">
         
-        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active " *ngIf="myCookie.usertype=">
+        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active " *ngIf="userdetail.usertype=='Administrator'">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons" routerLinkActive="nav-text active ">person</i>
@@ -77,7 +77,7 @@
             </div>
         </div>
         
-        <div class="sidebar_button2" routerLink="/manage_marks" routerLinkActive="nav-link active " (click)="userStudentMarks()">
+        <div class="sidebar_button2" routerLink="/manage_marks" routerLinkActive="nav-link active " (click)="userStudentMarks()" *ngIf="userdetail.usertype=='Administrator'">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons" routerLinkActive="nav-text active ">score</i>

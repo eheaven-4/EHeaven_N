@@ -103,20 +103,22 @@ export class BulkaddComponent {
 
   }
   addUser(i){
-    const formData = new FormData();
+    // const formData = new FormData();
+    
 
-    formData.append('usertype', this.users[i].usertype)
-    formData.append('userid', this.users[i].userid)
-    formData.append('name', this.users[i].name)
-    formData.append('email', this.users[i].email)
-    formData.append('password', this.users[i].password)
-    formData.append('birthday', this.users[i].birthday)
-    formData.append('profileImage', this.users[i].image)
-    formData.append('gender', this.users[i].gender)
-    formData.append('nationality', this.users[i].nationality)
-    formData.append('nicnumber', this.users[i].NIC)
-    formData.append('address', this.users[i].address)
-    this.register.addUser(formData);
+    // formData.append('usertype', this.users[i].usertype)
+    // formData.append('userid', this.users[i].userid)
+    // formData.append('name', this.users[i].name)
+    // formData.append('email', this.users[i].email)
+    // formData.append('password', this.users[i].password)
+    // formData.append('birthday', this.users[i].birthday)
+    // formData.append('profileImage', this.users[i].image)
+    // formData.append('gender', this.users[i].gender)
+    // formData.append('nationality', this.users[i].nationality)
+    // formData.append('nicnumber', this.users[i].NIC)
+    // formData.append('address', this.users[i].address)
+    // console.log(formData);
+    this.register.addUser(this.users[i]);
     
     this.userVisibale[i]=false;
 

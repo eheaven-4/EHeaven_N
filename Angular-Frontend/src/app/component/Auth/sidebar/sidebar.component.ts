@@ -12,9 +12,10 @@ import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 })
 export class SidebarComponent implements OnInit {
 
-    userid: String;
-    user: any;
-    myCookie: String = this.cookies.getCookie("userAuth")
+  userid: String;
+  user: any;
+  myCookie: String = this.cookies.getCookie("userAuth")
+  userdetail;
   constructor(
     private router: Router,
     private cookies: MycookiesService,
@@ -23,7 +24,7 @@ export class SidebarComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-
+    this.userdetail=JSON.parse(this.cookies.getCookie("userAuth"));
   }
 
   userAcademics() {
@@ -86,6 +87,7 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
+      console.log(this.userdetail);
       this.router.navigate(['/attendance']);
     }
     else {

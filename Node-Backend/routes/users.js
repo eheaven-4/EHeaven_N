@@ -118,23 +118,25 @@ router.post("/register", function (req, res) {
 });
 
 router.post("/bulkUserRegistration", function (req, res) {
+        console.log("hello");
         var newUser = new User({
             usertype: req.body.usertype,
             userid: req.body.userid,
-            // selectclass: req.body.selectclass,        
+            selectclass: req.body.selectclass,        
             name: req.body.name,          
             email: req.body.email,
             password: req.body.password,
             birthday: req.body.birthday,
-            // mobilenumber: req.body.mobilenumber,
-            // homenumber: req.body.homenumber,
+            mobilenumber: req.body.mobilenumber,
+            homenumber: req.body.homenumber,
             gender: req.body.gender,
             nationality: req.body.nationality,
             nicnumber: req.body.NIC,
-            // father: req.body.father,
-            // mother: req.body.mother,
+            father: req.body.father,
+            mother: req.body.mother,
             address: req.body.address,
             filepath: req.body.image,
+        
         });
         console.log(newUser);
         bcrypt.genSalt(10, function (err, salt) {
