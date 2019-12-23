@@ -33,31 +33,80 @@ import { MenuComponent } from './component/Base_Components/menu/menu.component';
 import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
 
 
+// const routes: Routes = [
+//   {path: '', component: HomeComponent},
+//   {path: 'menu', component: MenuComponent},
+//   {path: 'login', component: LoginComponent},
+//   {path: 'register', component: RegisterComponent},
+//   {path: 'profile/:id', component: ProfileComponent},
+//   {path: 'contactus', component: ContactusComponent},
+//   {path: 'notifications', component: NotificationComponent},
+//   {path: 'academics/:sbjName', component: AcademicsComponent },
+//   {path: 'add_notification', component: AddNotificationComponent},
+//   {path: 'certification', component: CertificationComponent},
+//   {path: 'prepare_certification', component: PrepareCertificationComponent},
+//   {path: 'attendance' , component:AttendanceComponent},
+//   {path: 'admin_dashboard', component:AdminDashboardComponent},
+//   {path: 'news_feeds', component:NewsComponent},
+//   {path: 'payments', component:PaymentsComponent},
+//   {path: 'student_progress/:id', component: StudentProgressComponent},
+//   {path: 'manage_marks', component: ManageMarksComponent},
+//   {path: 'extra_curricular', component: ExtraCurricularComponent},
+//   {path: 'class_registration', component:ClassRegistrationComponent},
+//   {path: 'add_cls_tt', component:AddClassTimetableComponent},
+//   {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
+//   {path: 'academic_subject/:id', component:AcademicSubjectComponent},
+//   {path: 'search_user', component:SearchUserComponent},
+//   {path: 'subjects', component: SubjectsComponent}
+// ];
 const routes: Routes = [
   {path: '', component: HomeComponent},
-  {path: 'menu', component: MenuComponent},
+  // {path: 'menu/:id', component: MenuComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'register', component: RegisterComponent},
-  {path: 'profile/:id', component: ProfileComponent},
+  {path:'menu/:id',component:MenuComponent,children:[
+    {path:'register',component:RegisterComponent},
+    {path: 'profile', component: ProfileComponent},
+    {path: 'notifications', component: NotificationComponent},
+    {path: 'academics/:sbjName', component: AcademicsComponent },
+    {path: 'add_notification', component: AddNotificationComponent},
+    {path: 'certification', component: CertificationComponent},
+    {path: 'prepare_certification', component: PrepareCertificationComponent},
+    {path: 'attendance' , component:AttendanceComponent},
+    {path: 'admin_dashboard', component:AdminDashboardComponent},
+    {path: 'news_feeds', component:NewsComponent},
+    {path: 'payments', component:PaymentsComponent},
+    {path: 'student_progress', component: StudentProgressComponent},
+    {path: 'manage_marks', component: ManageMarksComponent},
+    {path: 'extra_curricular', component: ExtraCurricularComponent},
+    {path: 'class_registration', component:ClassRegistrationComponent},
+    {path: 'add_cls_tt', component:AddClassTimetableComponent},
+    {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
+    {path: 'academic_subject/:id', component:AcademicSubjectComponent},
+    {path: 'search_user', component:SearchUserComponent},
+    {path: 'subjects', component: SubjectsComponent}
+
+  ]},
+  // {path: 'register', component: RegisterComponent},
+  // {path: 'profile/:id', component: ProfileComponent},
   {path: 'contactus', component: ContactusComponent},
-  {path: 'notifications', component: NotificationComponent},
-  {path: 'academics/:sbjName', component: AcademicsComponent },
-  {path: 'add_notification', component: AddNotificationComponent},
-  {path: 'certification', component: CertificationComponent},
-  {path: 'prepare_certification', component: PrepareCertificationComponent},
-  {path: 'attendance' , component:AttendanceComponent},
-  {path: 'admin_dashboard', component:AdminDashboardComponent},
-  {path: 'news_feeds', component:NewsComponent},
-  {path: 'payments', component:PaymentsComponent},
-  {path: 'student_progress/:id', component: StudentProgressComponent},
-  {path: 'manage_marks', component: ManageMarksComponent},
-  {path: 'extra_curricular', component: ExtraCurricularComponent},
-  {path: 'class_registration', component:ClassRegistrationComponent},
-  {path: 'add_cls_tt', component:AddClassTimetableComponent},
-  {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
-  {path: 'academic_subject/:id', component:AcademicSubjectComponent},
-  {path: 'search_user', component:SearchUserComponent},
-  {path: 'subjects', component: SubjectsComponent}
+  // {path: 'notifications', component: NotificationComponent},
+  // {path: 'academics/:sbjName', component: AcademicsComponent },
+  // {path: 'add_notification', component: AddNotificationComponent},
+  // {path: 'certification', component: CertificationComponent},
+  // {path: 'prepare_certification', component: PrepareCertificationComponent},
+  // {path: 'attendance' , component:AttendanceComponent},
+  // {path: 'admin_dashboard', component:AdminDashboardComponent},
+  // {path: 'news_feeds', component:NewsComponent},
+  // {path: 'payments', component:PaymentsComponent},
+  // {path: 'student_progress/:id', component: StudentProgressComponent},
+  // {path: 'manage_marks', component: ManageMarksComponent},
+  // {path: 'extra_curricular', component: ExtraCurricularComponent},
+  // {path: 'class_registration', component:ClassRegistrationComponent},
+  // {path: 'add_cls_tt', component:AddClassTimetableComponent},
+  // {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
+  // {path: 'academic_subject/:id', component:AcademicSubjectComponent},
+  // {path: 'search_user', component:SearchUserComponent},
+  // {path: 'subjects', component: SubjectsComponent}
 ];
 
 @NgModule({
@@ -65,3 +114,4 @@ const routes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule { }
+

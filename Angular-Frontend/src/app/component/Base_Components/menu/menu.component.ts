@@ -3,6 +3,7 @@ import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -12,7 +13,9 @@ export class MenuComponent implements OnInit {
 
   userid: String;
   user: any;
-  myCookie: String = this.cookies.getCookie("userAuth")
+  myCookie: String = this.cookies.getCookie("userAuth");
+  userDetail=JSON.parse(this.cookies.getCookie("userAuth"));
+  flag=true;
   
   constructor(
     private router: Router,
@@ -26,6 +29,13 @@ export class MenuComponent implements OnInit {
       location.reload() 
     } else {
       localStorage.removeItem('foo') 
+    }
+    console.log(this.router.url);
+    if(this.router.url==("/menu/"+this.userDetail.userid)){
+      this.flag=true;
+
+    }else{
+      this.flag=false;
     }
   }
 
@@ -87,6 +97,7 @@ export class MenuComponent implements OnInit {
   }
 
   userAttendence() {
+    this.flag=false;
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
