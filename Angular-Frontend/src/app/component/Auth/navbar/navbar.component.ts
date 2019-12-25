@@ -60,7 +60,7 @@ export class NavbarComponent implements OnInit {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
       // console.log(id);
-      this.router.navigate(['/profile' + '/' + id]);
+      this.router.navigate([ '../',id]);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -73,7 +73,7 @@ export class NavbarComponent implements OnInit {
     var myCookie = this.cookies.getCookie("userAuth");
     if (myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      this.router.navigate(['/menu']);
+      this.router.navigate([userCookie.userid,'menu']);
     }
     else {
       let config = new MatSnackBarConfig();

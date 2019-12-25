@@ -73,7 +73,7 @@ export class LoginComponent implements OnInit {
           var id = myCookie.userid;
           
           if(id){
-            this.router.navigate(['/menu',myCookie.userid]);
+            this.router.navigate([myCookie.userid,'menu']);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);

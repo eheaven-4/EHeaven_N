@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -21,6 +21,7 @@ export class MenuComponent implements OnInit {
     private router: Router,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
+    public route :ActivatedRoute,
   ) { }
 
   ngOnInit() {
@@ -30,13 +31,8 @@ export class MenuComponent implements OnInit {
     } else {
       localStorage.removeItem('foo') 
     }
-    console.log(this.router.url);
-    if(this.router.url==("/menu/"+this.userDetail.userid)){
-      this.flag=true;
-
-    }else{
-      this.flag=false;
-    }
+    
+    
   }
 
   
@@ -45,7 +41,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/academic_subject' + '/' + id]);
+      // this.router.navigate(['../academic_subject']);
+      this.router.navigate(['/notifications'],{relativeTo:this.route});
     }
     else {
       let config = new MatSnackBarConfig();
@@ -60,7 +57,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       // var id = userCookie.userid;
-      this.router.navigate(['/notifications']);
+      // this.router.navigate(['../notifications']);
+      this.router.navigate(['../',this.userDetail.userid,'notifications']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -73,7 +71,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/certification']);
+      // this.router.navigate(['../certification']);
+      this.router.navigate(['../',this.userDetail.userid,'certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -86,7 +85,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/prepare_certification']);
+      // this.router.navigate(['../prepare_certification']);
+      this.router.navigate(['../',this.userDetail.userid,'prepare_certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -101,13 +101,15 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/attendance']);
+      // this.router.navigate([this.userDetail.userid,'../attendance']);
+      this.router.navigate(['../',this.userDetail.userid,'attendance']);
     }
     else {
       let config = new MatSnackBarConfig();
       config.duration = true ? 2000 : 0;
       this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
       this.router.navigate(['/login']);
+     
     }
   }
 
@@ -115,7 +117,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/extra_curricular']);
+      // this.router.navigate(['../extra_curricular']);
+      this.router.navigate(['../',this.userDetail.userid,'extra_curricular']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -129,13 +132,14 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/manage_marks']);
+      // this.router.navigate(['../manage_marks']);
+      this.router.navigate(['../',this.userDetail.userid,'manage_marks']);
     }
     else {
       let config = new MatSnackBarConfig();
       config.duration = true ? 2000 : 0;
       this.snackBar.open("Please Login First..! ", true ? "Retry" : undefined, config);
-      this.router.navigate(['/login']);
+      this.router.navigate(['../login']);
     }
   }
 
@@ -143,7 +147,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/student_progress' + '/' + id]);
+      // this.router.navigate(['../student_progress' + '/' + id]);
+      this.router.navigate(['../',this.userDetail.userid,'student_progress']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -157,7 +162,8 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/admin_dashboard']);
+      this.router.navigate(['../',this.userDetail.userid,'admin_dashboard']);
+      // this.router.navigate(['admin_dashboard',this.userDetail.userid],{relativeTo:this.route});
     }
     else {
       let config = new MatSnackBarConfig();

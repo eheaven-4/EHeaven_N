@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router,ActivatedRoute} from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgFlashMessageService } from 'ng-flash-messages';
@@ -15,17 +15,16 @@ export class SidebarComponent implements OnInit {
   userid: String;
   user: any;
   myCookie: String = this.cookies.getCookie("userAuth")
-  userdetail;
+  userDetail=JSON.parse(this.cookies.getCookie("userAuth"));;
   constructor(
     private router: Router,
     private cookies: MycookiesService,
     private cookieService: CookieService,
     public snackBar: MatSnackBar,
+    public route:ActivatedRoute,
   ) { }
 
-  ngOnInit() {
-    this.userdetail=JSON.parse(this.cookies.getCookie("userAuth"));
-  }
+  ngOnInit() { }
 
   userAcademics() {
 
@@ -33,6 +32,7 @@ export class SidebarComponent implements OnInit {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
       this.router.navigate(['/academic_subject' + '/' + id]);
+      // this.router.navigate(['../',this.userDetail.userid,'notifications']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -47,7 +47,7 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       // var id = userCookie.userid;
-      this.router.navigate(['/notifications']);
+      this.router.navigate(['../',this.userDetail.userid,'notifications']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -60,7 +60,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/certification']);
+      // this.router.navigate(['/certification'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -73,7 +74,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/prepare_certification']);
+      // this.router.navigate(['/prepare_certification'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'prepare_certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -87,8 +89,9 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      console.log(this.userdetail);
-      this.router.navigate(['/attendance']);
+
+      // this.router.navigate(['/attendance'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'attendance']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -102,7 +105,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/extra_curricular']);
+      // this.router.navigate(['/extra_curricular'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'extra_curricular']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -116,7 +120,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/manage_marks']);
+      // this.router.navigate(['/manage_marks'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'manage_marks']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -130,7 +135,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/student_progress' + '/' + id]);
+      // this.router.navigate(['/student_progress'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'student_progress']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -143,7 +149,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/admin_dashboard']);
+      // this.router.navigate(['/admin_dashboard'],{relativeTo:this.route});
+      this.router.navigate(['../',this.userDetail.userid,'admin_dashboard']);
     }
     else {
       let config = new MatSnackBarConfig();

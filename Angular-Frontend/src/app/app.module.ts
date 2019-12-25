@@ -48,6 +48,7 @@ import { AlertDialogComponent } from './component/Auth/alert-dialog/alert-dialog
 import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialog/confirmation-dialog.component';
 import { MenuComponent } from './component/Base_Components/menu/menu.component';
 import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
+import { UserRootComponent } from './component/user-root/user-root.component';
 
 
 
@@ -85,6 +86,7 @@ import { SubjectsComponent } from './component/Base_Components/subjects/subjects
     ConfirmationDialogComponent,
     MenuComponent,
     SubjectsComponent,
+    UserRootComponent,
   ],
 
   imports: [
