@@ -49,6 +49,7 @@ import { ConfirmationDialogComponent } from './component/Auth/confirmation-dialo
 import { MenuComponent } from './component/Base_Components/menu/menu.component';
 import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
 import { UserRootComponent } from './component/user-root/user-root.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 
 
@@ -87,6 +88,7 @@ import { UserRootComponent } from './component/user-root/user-root.component';
     MenuComponent,
     SubjectsComponent,
     UserRootComponent,
+    PageNotFoundComponent,
   ],
 
   imports: [

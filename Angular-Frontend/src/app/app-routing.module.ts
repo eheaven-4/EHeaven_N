@@ -33,6 +33,7 @@ import { MenuComponent } from './component/Base_Components/menu/menu.component';
 import { SubjectsComponent } from './component/Base_Components/subjects/subjects.component';
 import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { UserRootComponent } from './component/user-root/user-root.component';
+import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 
 
 // const routes: Routes = [
@@ -89,6 +90,7 @@ const routes: Routes = [
     {path: '', component: ProfileComponent},
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
+    {path:'**',component:PageNotFoundComponent}
   ]},
   
   {path: 'contactus', component: ContactusComponent},
