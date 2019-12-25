@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 
-interface certificateReqesuted {
+interface certificateRequested {
   userid: String,
   certName: String,
   certType: String,
@@ -490,7 +490,7 @@ rejectCert(certRequest){
   window.location.reload();
 
 }
-pendingCertList : certificateReqesuted [] = [];
+pendingCertList : certificateRequested [] = [];
   ngOnInit() {
 
 

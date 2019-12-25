@@ -70,7 +70,7 @@ export class CertificationComponent implements OnInit {
     var date  = Date();
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
     var id = myCookie.userid;
-    
+
     //load pending and issued certificates tho the user
     var pendingUrl = "http://localhost:3000/certification/pendingCert";
     var issuedUrl = "http://localhost:3000/certification/issuedCert";
@@ -98,7 +98,7 @@ export class CertificationComponent implements OnInit {
         alert("Fill the form field please..!")
       }
       else{
-        //create certificateApproval JSON object
+        //create certificateApproval
         const certificateApproval = {
           userid: myCookie.userid,
           certName: this.CertificationForm.value.certName,
@@ -112,7 +112,7 @@ export class CertificationComponent implements OnInit {
 
         var url = "http://localhost:3000/certification/requestCert"  //server url
 
-        this.http.post<any>(url, certificateApproval).subscribe(res => {   //requesting ro the server and send data to  save
+        this.http.post<any>(url, certificateApproval).subscribe(res => {   //requesting ro the server and send data to save
           if (res.state) {
             console.log(res.msg);
             alert("Successfully Requested..!");

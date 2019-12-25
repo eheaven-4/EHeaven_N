@@ -23,7 +23,7 @@
                     formControlName="topic">
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">Topic is required</div>
-                    <div *ngIf="f.topic.errors.maxlength">Topic must less than 50 characters</div>
+                    <div *ngIf="f.topic.errors.maxlength">Topic must less than 30 characters</div>
                   </div>
                 </div>
 
@@ -65,7 +65,7 @@
 
             <!-- edit form -->
 
-            <div *ngIf="editform">
+            <div *ngIf="editform" >
               <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
 
                 <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
@@ -81,7 +81,7 @@
 
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">Topic is required</div>
-                    <div *ngIf="f.topic.errors.maxlength">Topic must less than 50 characters</div>
+                    <div *ngIf="f.topic.errors.maxlength">Topic must less than 30 characters</div>
                   </div>
                 </div>
 
@@ -114,7 +114,7 @@
                   {{filename}}
                 </small>
                 <p>&nbsp;</p>
-                <button (click)="updatenews()" type="submit"
+                <button (click)="updatenews($event)" type="submit"
                   class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Update</button>
               </form>
             </div>
@@ -162,7 +162,7 @@
 
                   <mat-card-actions style="text-align: right">
 
-                    <button mat-raised-button class="edit_btn" (click)=" onEdit($event , new._id)">Edit</button>
+                    <button mat-raised-button class="edit_btn" (click)=" onEdit($event , new._id ,new.filePath)">Edit</button>
                     <button mat-raised-button class="delete_btn"
                       (click)="delete($event, new._id, new.filePath)">Delete</button>
                   </mat-card-actions>
