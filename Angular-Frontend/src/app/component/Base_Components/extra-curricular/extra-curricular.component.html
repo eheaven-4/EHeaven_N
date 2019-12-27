@@ -1,30 +1,53 @@
 <div class="row">
-        <div class="container-fluid">
-            <div class="row">
-                <!-- <div class="col-md-2">
-                    <app-sidebar></app-sidebar>
-                </div> -->
-                <div class="container-fluid" style="background-color:white">
-                    <div class="flashMessage">
-                        <ng-flash-message></ng-flash-message>
+  <div class="container-fluid">
+    <div class="row">
+            <div class="col-md-2">
+                <app-sidebar></app-sidebar>
+              </div>
+              <div class="container-fluid col-md-10" style="background-color:white">
+                <div class="flashMessage">
+                  <ng-flash-message></ng-flash-message>
+                </div>
+                <div>
+                    <div class="container" style="padding-top: 50px">
+
+                      <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Student - Extra-Curricular Activities</h2>
+               
+                      <div class="col-md-2" style="padding-top: 25px">
+                        <button class="btn btn-info my-4 btn-block reg_btn box_border"><b>+</b> Add New</button>
                     </div>
-                    <div>
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">My Extra Curricular Activity Manager
-                                    </h2>
-                                </div>
-                                
-                            </div>
-                            <hr>
-                        </div>
-                        <div style="padding-left: 35px; padding-right: 35px">
-                            
-                        </div>
-    
                     </div>
+                    <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
+                      <mat-tab-group>
+                        <mat-tab label="CURRENT ACHIEVEMENTS">
+                          <br>
+                          <mat-card class="border text-center p-5 reg-frm" [formGroup]="">
+
+
+
+
+                          </mat-card>
+                        </mat-tab>
+
+                        <!-- /*****************************************************************************************************************************/ -->
+
+                        <mat-tab label="PENDING APPROVAL">
+                          <mat-card>
+
+                            <mat-list>
+                              <mat-list-item *ngFor="">
+                                <mat-icon mat-list-icon>note</mat-icon>
+
+                              </mat-list-item>
+                            </mat-list>
+                          </mat-card>
+                        </mat-tab>
+
+                      </mat-tab-group>
+                    </div>
+
                 </div>
             </div>
         </div>
     </div>
+</div>
