@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Router} from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { faAt, faPhone, faMap , faMobile, faBirthdayCake, faVenusMars, faGlobeEurope} from '@fortawesome/free-solid-svg-icons';
 
@@ -42,7 +43,8 @@ export class ProfileComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private cookies: MycookiesService
+    private cookies: MycookiesService,
+    private router:Router,
   ) { }
 
   ngOnInit() {
@@ -59,5 +61,11 @@ export class ProfileComponent implements OnInit {
     }, (err) => {
       console.log(err);
     });
+    // console.log(this.router.url+"jjjjjjjj");
+    if(this.router.url!='/'+this.id){
+      this.router.navigate(['/404']);
+      
+    }
+    
   }
 }

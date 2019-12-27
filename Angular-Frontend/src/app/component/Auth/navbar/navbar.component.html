@@ -10,14 +10,14 @@
       <span class="nav-itm">
 
         <!-- <button mat-button routerLink="/" class="navbtn "> -->
-        <button mat-button routerLink="/" class="btn ">Home</button>    
+        <button mat-button routerLink="/" class="btn "><mat-icon>home</mat-icon></button>    
       </span>
 
       <span class="nav-itm">
-        <button  mat-button routerLink="/menu" (click)="menu()" class="btn ">Menu</button>
+        <button  mat-button routerLink="/menu" (click)="menu()" class="btn "><mat-icon>menu</mat-icon>Menu</button>
       </span>
-      <span class="nav-itm">
-          <button  mat-button routerLink="/profile" (click)="userProfile()" class="btn ">Profile</button>
+      <span class="nav-itm" *ngIf="usertype!=''">
+          <button  mat-button routerLink="/profile" (click)="userProfile()" class="btn "><mat-icon>person</mat-icon>Profile</button>
         </span>
       <span class="nav-itm">
         <button *ngIf="usertype == ''" mat-button routerLink="/login" class="btn ">Login</button>

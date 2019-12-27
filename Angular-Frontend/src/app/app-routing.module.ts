@@ -63,12 +63,12 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 //   {path: 'subjects', component: SubjectsComponent}
 // ];
 const routes: Routes = [
+  
   {path: '', component: HomeComponent},
-  // {path: 'menu/:id', component: MenuComponent},
   {path: 'login', component: LoginComponent},
+  {path:'404',component:PageNotFoundComponent},
   {path:':id/menu',component:MenuComponent},
   {path:':id',component:UserRootComponent,children:[  
-    // {path:'',redirectTo:'/notification',pathMatch:'full'},
     
     {path:'register',component:RegisterComponent},
     {path: 'notifications', component: NotificationComponent},
@@ -87,13 +87,16 @@ const routes: Routes = [
     {path: 'add_cls_tt', component:AddClassTimetableComponent},
     {path: 'add_techr_tt', component:AddTeacherTimetableComponent},
     {path: 'academic_subject', component:AcademicSubjectComponent},
-    {path: '', component: ProfileComponent},
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
-    {path:'**',component:PageNotFoundComponent}
+    {path: '', component: ProfileComponent},
+    
   ]},
   
   {path: 'contactus', component: ContactusComponent},
+  
+  {path:'**',redirectTo:'/404',pathMatch:'full'},
+  
   
 ];
 
