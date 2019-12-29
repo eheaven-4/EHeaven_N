@@ -303,7 +303,7 @@
         <div class="row">
             <div class="container-fluid" style="background-color:white">
                 <div class="container" style="padding-top: 50px">
-                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold">{{classname}} Class Attendance</h2>
+                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold"> Attendance</h2>
                     <hr>
                 </div>
                 <div class="container">
@@ -312,7 +312,10 @@
                             <img src="../../../assets/logo/logo.png" class="img_logo">
                         </div>
                         <div class="container" style="padding-top: 50px">
-                            
+                            <h3 style="color: red; font-weight: bold">Class List</h3>
+                            <mat-card *ngFor="let class of classlist" style="padding-top: 50px; color: brown;">
+                                <a href=""><mat-icon>home_work</mat-icon> {{class.classname}}</a>
+                            </mat-card>
 
 
 
