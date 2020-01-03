@@ -297,8 +297,7 @@
 
 
  -->
-
- <div class="row">
+<div class="row">
     <div class="container-fluid">
         <div class="row">
             <div class="container-fluid" style="background-color:white">
@@ -314,12 +313,8 @@
                         <div class="container" style="padding-top: 50px">
                             <h3 style="color: red; font-weight: bold">Class List</h3>
                             <mat-card *ngFor="let class of classlist" style="padding-top: 50px; color: brown;">
-                                <a href=""><mat-icon>home_work</mat-icon> {{class.classname}}</a>
+                               <button (click)="hi(class.classname)"><a ><mat-icon >home_work</mat-icon> {{class.classname}}</a></button>
                             </mat-card>
-
-
-
-
                         </div>
                     </mat-card>
                 </div>
@@ -327,3 +322,4 @@
         </div>
     </div>
 </div>
+

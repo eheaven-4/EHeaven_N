@@ -73,7 +73,7 @@ const routes: Routes = [
     
     {path:'register',component:RegisterComponent},
     {path: 'notifications', component: NotificationComponent},
-    {path: 'academics', component: AcademicsComponent},
+    {path: 'academics/:sbjName', component: AcademicsComponent},
     {path: 'add_notification', component: AddNotificationComponent},
     {path: 'certification', component: CertificationComponent},
     {path: 'prepare_certification', component: PrepareCertificationComponent},
@@ -98,7 +98,7 @@ const routes: Routes = [
   
   {path: 'contactus', component: ContactusComponent},
   
-  {path:'**',redirectTo:'/404',pathMatch:'full'},
+  // {path:'**',redirectTo:'/404',pathMatch:'full'},
   
   
 ];

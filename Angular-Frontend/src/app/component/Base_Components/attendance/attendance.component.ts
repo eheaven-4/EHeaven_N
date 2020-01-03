@@ -152,6 +152,10 @@ export class AttendanceComponent implements OnInit {
     });
 
   }
+  hi(name){
+    console.log(name);
+    
+  }
 
 
 }
