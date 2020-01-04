@@ -1,151 +1,98 @@
 <div class="row" *ngIf="flag">
     <div class="container-fluid back_gr">
         <div class="row">
-            <div class="container-fluid col-md-12" >
-                <div>
-                    <div class="text-center container" style="padding-top: 80px;" >
-                        <!-- <mat-card class="border text-center p-5 reg-frm"> -->
-                            <img src="../../../assets/logo/logo_Outline.png"
-                                style="width:40%; margin-bottom: 50px;">
+            <div class="container-fluid col-md-12">
+                <div class="text-center container" style="padding-top: 80px;">
+                    <!-- <mat-card class="border text-center p-5 reg-frm"> -->
+                    <img src="../../../assets/logo/logo_Outline.png" style="width:40%; margin-bottom: 50px;">
 
-                            <div class="row" style="margin: auto; padding-top: 50px;">
-                                <div class="col-md-3" *ngIf="userDetail.usertype=='Administrator'">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(255, 0, 0)"
-                                        class="sidebar_button admin" routerLink="/admin_dashboard"
-                                        (click)="adminDashboard()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons admintxt">person</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links admintxt">Admin Portal</p>
-                                            </div>
-                                        </div>
-                                    </mat-card>
+                    <div class="row" style="margin: auto; padding-top: 50px;">
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/admin_dashboard" (click)="adminDashboard()">
+                                <div class="col-md-3 div_icn" style="background-color: #004d40;">
+                                    <i class="material-icons icn">person</i>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(255, 0, 230)"
-                                        class="sidebar_button academic" routerLink="/academic_subject"
-                                        (click)="userAcademics()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons academictxt">school</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links academictxt">Academics</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Admin Portal</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(30, 0, 255)"
-                                        class="sidebar_button certification" routerLink="/certification"
-                                        (click)="userCertification()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons certificationtxt">receipt</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links certificationtxt">Certificaton</p>
-                                            </div>
-                                        </div>
-                                    </mat-card>
-                                </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(34, 255, 0)"
-                                        class="attendence sidebar_button" routerLink="/attendance"
-                                        (click)="userAttendence()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons attendencetxt">emoji_people</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links attendencetxt">Attendence</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
-                                </div>
-
                             </div>
-
-
-
-                            <div class="row" style="padding-top: 30px; margin: auto;">
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(0, 255, 195)"
-                                        class="sidebar_button extra" routerLink="/extra_curricular"
-                                        (click)="userExtraCur()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons extratxt">sports_handball</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links extratxt">Extra Curricular</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/academic_subject" (click)="userAcademics()">
+                                <div class="col-md-3 div_icn" style="background-color: #d50000;">
+                                    <i class="material-icons icn">school</i>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(132, 0, 255)"
-                                        class="sidebar_button notification" routerLink="/notifications"
-                                        (click)="userNotification()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons notificationtxt">notifications_active</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links notificationtxt">Notifications</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Academics</p>
                                 </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(255, 0, 85)"
-                                        class="sidebar_button marks" routerLink="/manage_marks"
-                                        (click)="userStudentMarks()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons markstxt">score</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links markstxt">Manage Marks</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
-                                </div>
-                                <div class="col-md-3">
-                                    <mat-card style=" box-shadow: 3px 3px 5px rgb(255, 94, 0)"
-                                        class="sidebar_button progress" routerLink="/student_progress"
-                                        (click)="userStudentProg()">
-
-                                        <div class="row">
-                                            <div class="col-md-1 icn">
-                                                <i class="material-icons icons progresstxt">poll</i>
-                                            </div>
-                                            <div class="col-md-11 name">
-                                                <p class="sidebar_links progresstxt">Student Progress</p>
-                                            </div>
-                                        </div>
-
-                                    </mat-card>
-                                </div>
-
                             </div>
-                        <!-- </mat-card> -->
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/certification" (click)="userCertification()">
+                                <div class="col-md-3 div_icn" style="background-color: #880e4f;">
+                                    <i class="material-icons icn">receipt</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Certificatonl</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/attendance" (click)="userAttendence()">
+                                <div class="col-md-3 div_icn" style="background-color: #1a237e;">
+                                    <i class="material-icons icn">emoji_people</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Attendence</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+                    <div class="row" style="margin: auto; padding-top: 50px;">
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/student_progress" (click)="userStudentProg()">
+                                <div class="col-md-3 div_icn" style="background-color: #1b5e20;">
+                                    <i class="material-icons icn">poll</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Student Progress</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/extra_curricular" (click)="userExtraCur()">
+                                <div class="col-md-3 div_icn" style="background-color: #f57f17;">
+                                    <i class="material-icons icn">sports_handball</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Extra Curricular</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/notifications" (click)="userNotification()">
+                                <div class="col-md-3 div_icn" style="background-color: #5d4037;">
+                                    <i class="material-icons icn">notifications_active</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Notifications</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="row menu_div" routerLink="/manage_marks" (click)="userStudentMarks()">
+                                <div class="col-md-3 div_icn" style="background-color: #263238;">
+                                    <i class="material-icons icn">score</i>
+                                </div>
+                                <div class="col-md-9 div_text">
+                                    <p class="txt">Manage Marks</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- </mat-card> -->
                 </div>
+
             </div>
         </div>
     </div>
