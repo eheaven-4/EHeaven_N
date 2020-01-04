@@ -20,9 +20,9 @@ router.post("/requestCert", function (req, res) {
         examYear: req.body.examYear,
         examIndex: req.body.examIndex,
         reqDate: req.body.reqDate,
-        state: req.body.state
+        certState: req.body.certState
     });
-    // console.log(newRequest);
+     console.log(newRequest);
     newRequest
         .save()
         .then(result => {

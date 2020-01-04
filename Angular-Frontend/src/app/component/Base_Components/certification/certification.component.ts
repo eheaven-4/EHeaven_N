@@ -5,15 +5,15 @@ import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
 interface Certificate {
-  _id: String,
-  userid: String,
-  certName: String,
-  certType: String,
-  examName: String,
-  examYear: String,
-  examIndex: String,
-  reqDate: String,
-  state: String
+  _id: String;
+  userid: String;
+  certName: String;
+  certType: String;
+  examName: String;
+  examYear: String;
+  examIndex: String;
+  reqDate: String;
+  certState: String;
 }
 
 @Component({
@@ -27,9 +27,10 @@ export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
   userid: String;
+  cookie=JSON.parse(this.cookies.getCookie('userAuth'));
 
-  pendingCert : Certificate [] = [];
-  issuedCert : Certificate [] = [];
+  pendingCert: Certificate [] = [];
+  issuedCert: Certificate [] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -67,38 +68,37 @@ export class CertificationComponent implements OnInit {
   yearofExam = ['2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018'];
 
   ngOnInit() {
-    var date  = Date();
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
-    var id = myCookie.userid;
+    let date  = Date();
+    let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));  // get userdate cookies from cookies
+    let id = myCookie.userid;
 
-    //load pending and issued certificates tho the user
-    var pendingUrl = "http://localhost:3000/certification/pendingCert";
-    var issuedUrl = "http://localhost:3000/certification/issuedCert";
+    // load pending and issued certificates tho the user
+    let pendingUrl = 'http://localhost:3000/certification/pendingCert';
+    let issuedUrl = 'http://localhost:3000/certification/issuedCert';
 
-    this.http.get<any>(pendingUrl+'/' + id).subscribe(res => {
-      console.log(res)
+    this.http.get<any>(pendingUrl + '/' + id).subscribe(res => {
+      console.log(res);
       this.pendingCert = res;
 
-    })
+    });
 
-    this.http.get<any>(issuedUrl+ '/'+ id).subscribe(res => {
-      console.log(res)
+    this.http.get<any>(issuedUrl + '/' + id).subscribe(res => {
+      console.log(res);
       this.issuedCert = res;
-    })
+    });
   }
 
   submitToApproval() {
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //get userdate cookies from cookies
-    this.userid = myCookie.userid;     //get userid from cookies
-    var date  = Date(); //get todays date and time
+    let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));  // get userdate cookies from cookies
+    this.userid = myCookie.userid;     // get userid from cookies
+    let date  = Date(); // get todays date and time
 
     // console.log(this.CertificationForm.value , myCookie.usertype)
     if (this.userid) {
-      if(this.CertificationForm.value.certName == '' || this.CertificationForm.value.certType == ''){
-        alert("Fill the form field please..!")
-      }
-      else{
-        //create certificateApproval
+      if (this.CertificationForm.value.certName == '' || this.CertificationForm.value.certType == '') {
+        alert('Fill the form field please..!');
+      } else {
+        // create certificateApproval
         const certificateApproval = {
           userid: myCookie.userid,
           certName: this.CertificationForm.value.certName,
@@ -107,29 +107,27 @@ export class CertificationComponent implements OnInit {
           examYear: this.CertificationForm.value.exam.examYear,
           examIndex: this.CertificationForm.value.exam.examIndex,
           reqDate: date,
-          state: "Pending"
-        }
+          certState: 'Pending'
+        };
 
-        var url = "http://localhost:3000/certification/requestCert"  //server url
+        let url = 'http://localhost:3000/certification/requestCert';  // server url
 
-        this.http.post<any>(url, certificateApproval).subscribe(res => {   //requesting ro the server and send data to save
+        this.http.post<any>(url, certificateApproval).subscribe(res => {   // requesting ro the server and send data to save
           if (res.state) {
             console.log(res.msg);
-            alert("Successfully Requested..!");
+            alert('Successfully Requested..!');
             this.CertificationForm.reset();
-            this.router.navigate(['/certification']);
-          }
-          else {
+            this.router.navigate(['../',this.cookie.userid,'certification']);
+          } else {
             console.log(res.msg);
-            alert("Certificate Requesting Unsuccessfull..!");
-            this.router.navigate(['/certification']);
+            alert('Certificate Requesting Unsuccessfull..!');
+            this.router.navigate(['../',this.cookie.userid,'certification']);
           }
         });
-        console.log(certificateApproval)
+       // console.log(certificateApproval);
       }
-    }
-    else {
-      alert("Please Login First..!")
+    } else {
+      alert('Please Login First..!');
       this.router.navigate(['/login']);
     }
     // window.location.reload();     //reload the page
@@ -139,10 +137,9 @@ export class CertificationComponent implements OnInit {
   // used to show/hide form fields
 
   testfunction(value) {
-    if (value == "Educational Certificate") {
+    if (value == 'Educational Certificate') {
       this.flag = true;
-    }
-    else {
+    } else {
       this.flag = false;
     }
   }
