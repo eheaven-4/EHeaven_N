@@ -19,11 +19,11 @@
                             <div class="row">
                                 <div class="col-md-6">
                                     <input type="text" class="form-control box_border" placeholder="Subject Name"
-                                        name="sbname" formControlName="sbname" [(ngModel)]="sbname">
+                                        name="sbname" formControlName="sbname">
                                 </div>
                                 <div class="col-md-3">
                                     <input type="text" class="form-control box_border" placeholder="Subject ID"
-                                        name="sbid" formControlName="sbid" [(ngModel)]="sbid">
+                                        name="sbid" formControlName="sbid" >
                                 </div>
                                 <div class="col-md-3">
                                     <button class="btn src_btn box_border" type="submit" (click)="regSubject()">
@@ -38,33 +38,33 @@
                     <!-- {{sbname | json}} -->
 
 
-                    <div class="container">
-                        <div style="padding-bottom: 50px">
-                            <form class="text-center border p-5 reg-frm">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th class="thStyle">Subject ID</th>
-                                            <th class="thStyle">Subject Name</th>
-                                            <th class="thStyle">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody *ngFor="let sub of subs">
-                                        <tr>
-                                            <td class="stid">{{sub.subId}}</td>
-                                            <td class="stname">{{sub.subName}}</td>
-                                            <td style="margin: auto;">
-                                                <button *ngIf="usertype == 'Administrator'"
-                                                    mat-raised-button color="warn" style="width:100px;"
-                                                    (click)="delSubject($event,sub._id)">Delete</button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </form>
-                        </div>
+                        <div class="container">
+                            <div style="padding-bottom: 50px">
+                                <form class="text-center border p-5 reg-frm">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th class="thStyle">Subject ID</th>
+                                                <th class="thStyle">Subject Name</th>
+                                                <th class="thStyle">Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let sub of subs">
+                                            <tr>
+                                                <td class="stid">{{sub.subId}}</td>
+                                                <td class="stname">{{sub.subName}}</td>
+                                                <td style="margin: auto;">
+                                                    <!-- <button *ngIf="usertype == 'Administrator'"
+                                                        mat-raised-button color="warn" style="width:100px;"
+                                                        (click)="delSubject($event,sub._id)">Delete</button> -->
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </form>
+                            </div>
 
-                    </div>
+                        </div>
                 </div>
             </div>
         </div>

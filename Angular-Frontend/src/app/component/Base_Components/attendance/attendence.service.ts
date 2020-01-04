@@ -4,6 +4,7 @@ import{HttpClient} from '@angular/common/http';
 import {User} from './../../../user';
 import {Attend} from './attend';
 import {Attendreturn} from './attend'
+import {ClassRoom} from '../../Admin/class-registration/Classroom';
 
 @Injectable({
   providedIn: 'root'
@@ -36,6 +37,10 @@ export class AttendenceService {
     var  get_Students='http://localhost:3000/attendance/searchStu/'+stu+'/'+month;
     return this._http.get<any>(get_Students);
 
+  }
+  getclass(){
+    var _url="http://localhost:3000/classroom/getdata";
+    return this._http.get(_url);
   }
 
 

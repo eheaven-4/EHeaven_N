@@ -19,6 +19,7 @@ export class AddNotificationComponent implements OnInit {
   state;
   filename;
   submitted = false;
+  Mycookie=JSON.parse(this.cookies.getCookie("userAuth"));
   
   constructor(
     private router: Router,
@@ -97,15 +98,15 @@ export class AddNotificationComponent implements OnInit {
               config.duration = true ? 2000 : 0;
               this.snackBar.open("News Successfully Added..! ", true ? "Done" : undefined, config);
               
-              this.router.navigate(['/notifications']);
+              this.router.navigate(['../',this.Mycookie.userid,'notifications']);
             }
             else {
               console.log(res.msg);
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Notification is not Added..! ", true ? "Done" : undefined, config);
-              
-              this.router.navigate(['/add_notification']);
+              // this.router.navigate(['/add_notification']);
+              this.router.navigate(['../',this.Mycookie.userid,'/add_notification']);
             }
           });
         }

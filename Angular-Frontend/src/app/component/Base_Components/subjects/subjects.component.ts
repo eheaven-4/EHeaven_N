@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators,FormGroup,FormControl } from '@angular/forms';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { Subjects } from './subject';
+import { from } from 'rxjs';
 
-interface subjects {
-  _id: String,
-  subId: String,
-  subName: String
-}
+// interface subjects {
+//   _id: String,
+//   subId: String,
+//   subName: String
+// }
 
 @Component({
   selector: 'app-subjects',
@@ -18,7 +20,7 @@ interface subjects {
 })
 export class SubjectsComponent implements OnInit {
 
-  subs :  subjects [] = [];
+  subs :  Array<Subjects>;
   usertype;
 
 
@@ -31,19 +33,20 @@ export class SubjectsComponent implements OnInit {
 
   ) { }
 
-  SubjectRegForm = this.fb.group({
-    sbid: ['', Validators.required],
-    sbname: ['', Validators.required]
-  })
+  SubjectRegForm = new FormGroup({
+    sbid:new FormControl(''),
+    sbname: new FormControl('')
+  });
 
   ngOnInit() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
     this.usertype = myCookie.usertype;
 
-    const url = "http://localhost:3000/class_management/getSubjects"
+    const url = "http://localhost:3000/class_management/getSubjects";
 
-    this.http.get<any>(url).subscribe(res => {
-      this.subs = res;
+    this.http.get<any>(url).subscribe((data:Subjects[])=>{
+      this.subs=data;
+      console.log(this.subs);
     });
     
   }
@@ -55,6 +58,7 @@ export class SubjectsComponent implements OnInit {
       subId: this.SubjectRegForm.value.sbid,
       subName: this.SubjectRegForm.value.sbname
     }
+    console.log(subjectData);
 
     const url = "http://localhost:3000/class_management/registerSubject"
 

@@ -6,7 +6,8 @@ const attendanceSchema=mongoose.Schema({
     userid :{type:String,require:true},
     attend:{type:Boolean,require:true},
     date:{type:String,require:true},
-    class:{type:String,require:true}
+    class:{type:String,require:true},
+    markeBy:{type:String,require:true}
 });
 const attendance=module.exports=mongoose.model("attendance",attendanceSchema);
 
