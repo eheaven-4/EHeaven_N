@@ -20,6 +20,7 @@ router.post("/requestCert", function (req, res) {
         examYear: req.body.examYear,
         examIndex: req.body.examIndex,
         reqDate: req.body.reqDate,
+        prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
      console.log(newRequest);
@@ -40,9 +41,9 @@ router.post("/requestCert", function (req, res) {
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({ state: "Pending", userid: id })
+    requestCertification.find({ certState: "Pending", userid: id })
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate state')
+        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -62,7 +63,7 @@ router.get("/issuedCert/:id", function (req, res) {
     const id = req.params.id;
     requestCertification.find({ state: "Issued", userid: id })
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate state')
+        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -80,9 +81,9 @@ router.get("/issuedCert/:id", function (req, res) {
 /************************get certification requests from users(Admin comp)******************************/
 router.get("/pendingCertList", function (req, res) {
     // console.log("Hello");
-    requestCertification.find({ state: "Pending" })
+    requestCertification.find({ certState: "Pending" })
         // .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate state')
+        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -107,7 +108,8 @@ router.post("/studentstatus", async function (req, res) {
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
         description: req.body.description,
-        state: req.body.state
+        prinapprovState: req.body.prinapprovState,
+        certState: req.body.certState
     });
     // console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/certificates/student.pdf')
@@ -180,7 +182,8 @@ router.post("/charactercert", async function (req, res) {
         leadership: req.body.leadership,
         societies: req.body.societies,
         sports: req.body.sports,
-        state: req.body.state
+        prinapprovState: req.body.prinapprovState,
+        certState: req.body.certState
     });
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/certificates/Character.pdf');
@@ -315,6 +318,8 @@ router.post("/leavingcert", async function (req, res) {
         cause: req.body.cause,
         lastClass: req.body.lastClass,
         subjects: req.body.subjects,
+        prinapprovState: req.body.prinapprovState,
+        certState: req.body.certState
     });
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/certificates/Leaving.pdf')
@@ -467,6 +472,8 @@ router.post("/alcert", async function (req, res) {
         zscore: req.body.zscore,
         districtrank: req.body.districtrank,
         islandrank: req.body.islandrank,
+        prinapprovState: req.body.prinapprovState,
+        certState: req.body.certState
     });
     
     console.log(newRequest);
@@ -591,6 +598,8 @@ router.post("/olcert", async function (req, res) {
         centerNo: req.body.centerNo,
         indexNo: req.body.indexNo,
         subjectsOl: req.body.subjectsOl,
+        prinapprovState: req.body.prinapprovState,
+        certState: req.body.certState
     });
     console.log(newRequest);
     const uint8Array = fs.readFileSync(__dirname + '/certificates/O-Level.pdf') 

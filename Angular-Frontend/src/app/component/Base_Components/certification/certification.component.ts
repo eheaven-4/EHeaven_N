@@ -13,6 +13,7 @@ interface Certificate {
   examYear: String;
   examIndex: String;
   reqDate: String;
+  prinapprovState: String;
   certState: String;
 }
 
@@ -107,6 +108,7 @@ export class CertificationComponent implements OnInit {
           examYear: this.CertificationForm.value.exam.examYear,
           examIndex: this.CertificationForm.value.exam.examIndex,
           reqDate: date,
+          prinapprovState: 'Pending',
           certState: 'Pending'
         };
 
@@ -130,7 +132,7 @@ export class CertificationComponent implements OnInit {
       alert('Please Login First..!');
       this.router.navigate(['/login']);
     }
-    // window.location.reload();     //reload the page
+     window.location.reload();     //reload the page
   }
 
 
