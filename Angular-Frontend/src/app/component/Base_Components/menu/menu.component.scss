@@ -62,7 +62,13 @@
   // border: rgb(129, 129, 129) 1px solid;
   box-shadow: 3px 3px 5px rgb(112, 112, 112);
 }
+.menu_div:hover{
+  border-right: 5px orangered solid;
+  border-left: 3px orangered solid;
 
+  cursor: pointer;
+  transition: 0.1s;
+}
 
 .div_icn {
   border-top-left-radius: 4px;
@@ -88,8 +94,4 @@
   font-size: 1.1em;
   font-weight: 500px;
   color: rgb(70, 70, 70);
-}
-.menu_div:hover{
-  background-color: rgb(238, 238, 238);
-  cursor: pointer;
 }
