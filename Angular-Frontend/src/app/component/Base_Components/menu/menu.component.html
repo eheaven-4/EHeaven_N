@@ -1,13 +1,12 @@
-<div class="row" *ngIf="flag">
+<div class="row" *ngIf="flag" style="display: block;">
     <div class="container-fluid back_gr">
         <div class="row">
-            <div class="container-fluid col-md-12">
+            <div class="container-fluid col-md-12 col-xs-12">
                 <div class="text-center container" style="padding-top: 80px;">
-                    <!-- <mat-card class="border text-center p-5 reg-frm"> -->
                     <img src="../../../assets/logo/logo_Outline.png" style="width:40%; margin-bottom: 50px;">
 
                     <div class="row" style="margin: auto; padding-top: 50px;">
-                        <div class="col-md-3">
+                        <div class="col-md-3 col-xs-3">
                             <div class="row menu_div" routerLink="/admin_dashboard" (click)="adminDashboard()">
                                 <div class="col-md-3 div_icn" style="background-color: #004d40;">
                                     <i class="material-icons icn">person</i>
@@ -17,7 +16,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3  col-xs-3">
                             <div class="row menu_div" routerLink="/academic_subject" (click)="userAcademics()">
                                 <div class="col-md-3 div_icn" style="background-color: #d50000;">
                                     <i class="material-icons icn">school</i>
@@ -27,7 +26,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3  col-xs-3">
                             <div class="row menu_div" routerLink="/certification" (click)="userCertification()">
                                 <div class="col-md-3 div_icn" style="background-color: #880e4f;">
                                     <i class="material-icons icn">receipt</i>
@@ -37,7 +36,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
+                        <div class="col-md-3  col-xs-3">
                             <div class="row menu_div" routerLink="/attendance" (click)="userAttendence()">
                                 <div class="col-md-3 div_icn" style="background-color: #1a237e;">
                                     <i class="material-icons icn">emoji_people</i>
@@ -90,7 +89,6 @@
                             </div>
                         </div>
                     </div>
-                    <!-- </mat-card> -->
                 </div>
 
             </div>
