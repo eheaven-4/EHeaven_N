@@ -34,6 +34,7 @@ import { SubjectsComponent } from './component/Base_Components/subjects/subjects
 import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
+import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
 
 
 // const routes: Routes = [
@@ -72,11 +73,12 @@ const routes: Routes = [
     
     {path:'register',component:RegisterComponent},
     {path: 'notifications', component: NotificationComponent},
-    {path: 'academics', component: AcademicsComponent},
+    {path: 'academics/:sbjName', component: AcademicsComponent},
     {path: 'add_notification', component: AddNotificationComponent},
     {path: 'certification', component: CertificationComponent},
     {path: 'prepare_certification', component: PrepareCertificationComponent},
     {path: 'attendance' , component:AttendanceComponent},
+    {path:'attendance_list',component:AttendanceListComponent},
     {path: 'admin_dashboard', component:AdminDashboardComponent},
     {path: 'news_feeds', component:NewsComponent},
     {path: 'payments', component:PaymentsComponent},
@@ -90,12 +92,13 @@ const routes: Routes = [
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
     {path: '', component: ProfileComponent},
+
     
   ]},
   
   {path: 'contactus', component: ContactusComponent},
   
-  {path:'**',redirectTo:'/404',pathMatch:'full'},
+  // {path:'**',redirectTo:'/404',pathMatch:'full'},
   
   
 ];

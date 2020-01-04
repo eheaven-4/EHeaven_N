@@ -25,16 +25,47 @@
                                 <div class="row">
                                     <div class="col-md-8">
                                         <label class="top_txt">Class Room Name : </label>
-                                        <input formControlName="certName" type="text" class="form-control box_border">
-                                        <small class="text-danger">Class-room name is required *</small>
+                                        <input formControlName="classname" type="text" class="form-control box_border" name="name">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
                                     </div>
+                                    <div class="col-md-8">
+                                        <label class="top_txt">Grade : </label>
+                                        <input formControlName="grade" type="text" class="form-control box_border" name="grade">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="top_txt">Medium : </label>
+                                        <input formControlName="medium" type="text" class="form-control box_border" name="medium">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="top_txt">Class Head teacher name: </label>
+                                        <input formControlName="teachername" type="text" class="form-control box_border" name="teachername">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="top_txt">Class Head teacher id: </label>
+                                        <input formControlName="classhead" type="text" class="form-control box_border" name="teacherid">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
+                                    </div>
+                                    <div class="col-md-8">
+                                        <label class="top_txt">Number of Student: </label>
+                                        <input formControlName="numberofStudent" type="text" class="form-control box_border" name="nos">
+                                        <!-- <small class="text-danger">Class-room name is required *</small> -->
+                                    </div>
+
     
                                     <!-- {{CertificationForm.value | json}} -->
-                                    <div class="col-md-4">
+                                    <!-- <div class="col-md-4">
                                         <button mat-raised-button class="add_btn"><img
                                                 src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                             Add</button>
-                                    </div>
+                                    </div> -->
+                                </div>
+                                <div class="col-md-4">
+                                    <button mat-raised-button class="add_btn" (click)="addClass(CertificationForm.value)"><img
+                                            src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
+                                        Add</button>
                                 </div>
                             </mat-card>
                         </div>
@@ -46,16 +77,18 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
-                                            <th>Id</th>
-                                            <th>Hero Name</th>
-                                            <th>Country</th>
+                                            <th>Class</th>
+                                            <th>Class Head</th>
+                                            <th>Medium</th>
+                                            <th>Number of Student</th>
                                         </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody *ngFor="let class of classes">
                                         <tr>
-                                            <td></td>
-                                            <td></td>
-                                            <td></td>
+                                            <td>{{class.classname}}</td>
+                                            <td>{{class.classhead}}</td>
+                                            <td>{{class.medium}}</td>
+                                            <td>{{class.numberofStudent}}</td>
                                         </tr>
                                     </tbody>
                                 </table>

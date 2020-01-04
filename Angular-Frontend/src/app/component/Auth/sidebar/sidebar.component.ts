@@ -31,8 +31,8 @@ export class SidebarComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      this.router.navigate(['/academic_subject' + '/' + id]);
-      // this.router.navigate(['../',this.userDetail.userid,'notifications']);
+      // this.router.navigate(['/academic_subject' + '/' + id]);
+      this.router.navigate(['../',this.userDetail.userid,'academic_subject']);
     }
     else {
       let config = new MatSnackBarConfig();

@@ -26,6 +26,7 @@ export class NotificationComponent implements OnInit {
   usertype
   notice_id: String;
   file_path: String;
+  cookie;
   // userType: String;
 
   public approve_show: boolean = false;
@@ -42,6 +43,7 @@ export class NotificationComponent implements OnInit {
   ngOnInit() {
 
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
+    this.cookie=JSON.parse(this.cookies.getCookie("userAuth"));
     this.usertype = myCookie.usertype;   // load user type to the userType array
 
     if (myCookie) {
