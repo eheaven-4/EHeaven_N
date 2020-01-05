@@ -4,9 +4,7 @@
 }
 
 .back_gr {
-  // background: linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-  //   url("../../../../assets/backgrounds/marketing-books.jpg");
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   min-height: 600px;
   width: 100%;
   background-size: cover;
@@ -85,6 +83,7 @@
 .div_text {
   border-top-right-radius: 5px;
   border-bottom-right-radius: 5px;
+  background-color: white;
 }
 
 .txt {

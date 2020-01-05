@@ -1,3 +1,15 @@
+@font-face {
+  font-family: topic_font;
+  src: url(../../../../assets/Fonts/RobotoSlab.ttf);
+}
+
+.topic {
+  color: rgb(0, 140, 255);
+  font-weight: 300;
+  padding-top: 50px;
+  font-family: topic_font;
+  font-weight: 300;
+}
 
 .contentDiv {
   padding-top: 20px;
@@ -21,15 +33,15 @@
 .content_txt:hover {
   color: rgb(0, 104, 196);
 }
-.deletebtn{
+.deletebtn {
   margin-top: -2px;
   height: 30px;
   background-color: rgb(223, 2, 2);
 }
-.deletebtn:hover{
+.deletebtn:hover {
   background-color: rgb(172, 2, 2);
 }
-.deleteIcon{
+.deleteIcon {
   font-size: 20px;
   margin-top: -10px;
 }
