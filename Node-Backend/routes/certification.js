@@ -61,7 +61,7 @@ router.get("/pendingCert/:id", function (req, res) {
 router.get("/issuedCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({ state: "Issued", userid: id })
+    requestCertification.find({ certState: "Issued", userid: id })
         .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
@@ -82,7 +82,8 @@ router.get("/issuedCert/:id", function (req, res) {
 router.get("/pendingCertList", function (req, res) {
     // console.log("Hello");
     requestCertification.find({ certState: "Pending" })
-        // .sort({ _id: 1 })
+            
+        .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
         .then(docs => {
@@ -96,7 +97,6 @@ router.get("/pendingCertList", function (req, res) {
             });
         });
 });
-
 
 
 /*******************************generate student status certificate pdf ******************************/
@@ -696,6 +696,7 @@ router.post("/olcert", async function (req, res) {
 router.delete("/deleteCert/:_id", function(req,res) {
     const id = req.params._id;
     requestCertification.remove({ _id: id })
+    
         .exec()
         .then(result => {
             res.status(200).json({ state: true,
