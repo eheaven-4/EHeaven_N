@@ -2,11 +2,10 @@
   padding-right: 0px;
   font-size: 0.9em;
 }
-.nav_item:hover{
+.nav_item:hover {
   border-bottom: solid 3px #2bb5f5;
   transition: 0.1s;
 }
-
 @font-face {
   font-family: side_font;
   src: url(../../../../assets/Fonts/Roboto-Regular.ttf);
@@ -17,7 +16,11 @@
 }
 
 .logo {
-  width: 15%;
+  width: 25%;
+}
+
+.logo:hover {
+  cursor: pointer;
 }
 
 .nav_bar {
@@ -37,4 +40,3 @@
   height: 62px;
   font-family: side_font;
 }
-
