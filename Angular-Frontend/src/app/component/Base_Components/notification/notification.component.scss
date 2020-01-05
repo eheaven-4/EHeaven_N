@@ -4,6 +4,18 @@
   height: 100px;
 }
 
+@font-face {
+  font-family: topic_font;
+  src: url(../../../../assets/Fonts/RobotoSlab.ttf);
+}
+
+.topic{
+    color:  rgb(0, 140, 255); 
+    font-weight: 300; 
+    padding-top: 50px;
+    font-family: topic_font;
+    font-weight: 300;
+}
 
 hr{
   margin-top: -10px
