@@ -711,4 +711,26 @@ router.delete("/deleteCert/:_id", function(req,res) {
         });
   })
 
+  /*******************************accept certification requests****************************************/
+  router.get("/acceptCert/:_id", function (req, res) {  //hereeee
+    console.log("Hello at back");
+    const id = req.params._id;
+    requestCertification.find({ _id: id })
+            
+        .update({certState: "Admin Approved"})
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
+
 module.exports = router; 
