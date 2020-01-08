@@ -1,4 +1,13 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+
+
+interface subjectsArray{
+  subject: String
+}
+interface yearArrray {
+  year: String
+}
 
 @Component({
   selector: 'app-student-progress',
@@ -7,23 +16,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class StudentProgressComponent implements OnInit {
 
-  constructor() { }
 
-  
+  constructor(
+    private http : HttpClient
+  ) { }
+
+  myYear: yearArrray[] = [];
+  mySubject: subjectsArray[] = [];
+
+
 
   ngOnInit() {
     var year = new Date().getFullYear();
-    var range = [];
+    var years = [];
 
-    
-    // range.push(year);
-
-    for (var i = 0; i < 7; i++) {
-      range.push(year - i);
-      console.log(range[i]);      
+    /*load the last 5 years in to the mat select*/
+    for (var i = 0; i < 5; i++) {
+      years.push(year - i);
+      this.myYear[i] = years[i]
     }
-    // $scope.years = range;
-    
+
+    /*get all th subject names*/
+    const url = "http://localhost:3000/class_management/getSubjects"
+    this.http.get<any>(url).subscribe(res => {
+      this.mySubject = res.data;
+    });
+
   }
 
 }

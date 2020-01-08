@@ -3,7 +3,7 @@
         <div class="row">
             <!-- <div class="col-md-2">
                 <app-sidebar></app-sidebar>
-            </div> -->      
+            </div> -->
             <div class="container-fluid" style="background-color:white">
                 <div>
                     <form>
@@ -16,23 +16,22 @@
                                 <div class="col-md-5">
                                     <label class="top_txt">Year Required :</label>
                                     <mat-select #t class="browser-default custom-select mb-4 border"
-                                        (selectionChange)="testfunction(t.value)">
-                                        <!-- <mat-option value="None" selected></mat-option> -->
-                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
-                                            [value]="cert">{{ cert }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
+                                    formControlName="year" [(ngModel)]="year" name="year">
+                                    
+                                    <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
+                                    [value]="cert">{{ year }}
+                                </mat-option>
+                            </mat-select>
+                        </div>
+                                                        <!--
                                 <div class="col-md-5">
                                     <label class="top_txt">Subject Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border"
-                                        (selectionChange)="testfunction(t.value)">
-                                        <!-- <mat-option value="None" selected></mat-option> -->
-                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
-                                            [value]="cert">{{ cert }}
-                                        </mat-option>
+                                    <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
+                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subName'>{{subject.subName}}</mat-option>
                                     </mat-select>
                                 </div>
+                            
+                            -->
                                 <div class="col-md-2">
                                     <button mat-raised-button class="search_btn"><img
                                             src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
