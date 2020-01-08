@@ -10,46 +10,37 @@
 
               <hr>
             </div>
-            <mat-expansion-panel [formGroup]="SchooldevForm">
-              <mat-expansion-panel-header>School Devolopment Payment</mat-expansion-panel-header>
-              <mat-action-row>
-                  <div class="container">
-                      <mat-form-field>
-                        <input matInput formControlName="studentName" placeholder="Name of the Student">
-                      </mat-form-field>
 
-                      <mat-form-field>
-                        <mat-label>Academic Performance</mat-label>
-                        <mat-select formControlName="academicStatus">
-                          <mat-option style="text-align: left" *ngFor="let acaPer of academicPerformance" [value]="acaPer">
-                            {{ acaPer }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <mat-label>Moral Conduct</mat-label>
-                        <mat-select formControlName="moral">
-                          <mat-option style="text-align: left" *ngFor="let conduct of moralConduct" [value]="conduct">
-                            {{ conduct }}
-                          </mat-option>
-                        </mat-select>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <textarea matInput formControlName="leadership" placeholder="Leadership/Prefectship Details"></textarea>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <textarea matInput formControlName="societies" placeholder="School based Societies/Activities"></textarea>
-                      </mat-form-field>
-                      <mat-form-field>
-                        <textarea matInput formControlName="sports" placeholder="Sports"></textarea>
-                      </mat-form-field>
+            <form class="border text-center p-5 reg-frm" >
 
-                      <!-- {{CharacterCertForm.value | json}} -->
+              <div class="form-group">
+                <p style="text-align: left">Student Name :</p>
+                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="sName"
+                  formControlName="sName">
+                <div *ngIf="submitted && f.topic.errors" class="err_msg">
+                  <div *ngIf="f.sName.errors.required">Student name is required</div>
+                </div>
+              </div>
+              <div class="form-group">
+                <p style="text-align: left">Student Class :</p>
+                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="sName" placeholder="1-A"
+                  formControlName="sClass">
+                <div *ngIf="submitted && f.sClass.errors" class="err_msg">
+                  <div *ngIf="f.sClass.errors.required">Student Class is required</div>
+                </div>
+              </div>
 
-                <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
-                    </div>
-              </mat-action-row>
-            </mat-expansion-panel>
+              <div class="form-group">
+                <p style="text-align: left">Payment :</p>
+                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="payment"
+                  formControlName="payment">
+                <div *ngIf="submitted && f.payment.errors" class="err_msg">
+                  <div *ngIf="f.payment.errors.required">payment is required</div>
+                </div>
+              </div>
+
+
+            </form>
 
     </div>
 
