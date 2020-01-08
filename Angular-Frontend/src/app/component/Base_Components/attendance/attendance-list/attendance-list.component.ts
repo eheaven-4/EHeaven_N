@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import {AttendenceService} from '../attendence.service';
 import {Returnuser} from '../attend';
 import {Attend} from '../attend';
@@ -6,6 +6,7 @@ import {Attendreturn} from '../attend';
 import {FormBuilder,Validators,FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
 import { templateJitUrl } from '@angular/compiler';
+import { MycookiesService} from '../../../Admin/mycookies.service';
 
 @Component({
   selector: 'app-attendance-list',
@@ -14,8 +15,9 @@ import { templateJitUrl } from '@angular/compiler';
 })
 export class AttendanceListComponent implements OnInit {
 
-  public classname="1-A";
+@Input('parentData') public classname;
 
+public usercookie=JSON.parse(this.cookie.getCookie("userAuth"));
 public students:Array<Returnuser>;
 public attendRecord:Attend[];
 
@@ -39,12 +41,16 @@ stu = new FormControl('', [Validators.required]);
   
 
 
-  constructor(private attendanceservice:AttendenceService,private inputs:FormBuilder,private router : Router) { }
+  constructor(private attendanceservice:AttendenceService,
+    private inputs:FormBuilder,
+    private router : Router,
+    private cookie:MycookiesService
+    ) { }
   public attendacelist=this.inputs.group({
     
   })
   ngOnInit() {
-    this.attendanceservice.retriveUsers()
+    this.attendanceservice.retriveUsers(this.classname)
     .subscribe((data:Returnuser[])=>{
       this.students=data;
       this.numberOfStudent=data.length;
@@ -84,7 +90,8 @@ stu = new FormControl('', [Validators.required]);
       newRec.username=this.students[i].name;
       newRec.userid=this.students[i].userid;
       newRec.class=this.classname;
-
+      newRec.marked=this.usercookie.userid;
+      
       if(attend==""){
 
         newRec.attend=false;

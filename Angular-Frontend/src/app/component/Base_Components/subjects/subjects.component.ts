@@ -4,8 +4,8 @@ import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { FormBuilder, Validators,FormGroup,FormControl } from '@angular/forms';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { Subjects } from './subject';
-import { from } from 'rxjs';
+import { Subjects } from './Subject';
+
 
 interface subjects {
   _id: String,
