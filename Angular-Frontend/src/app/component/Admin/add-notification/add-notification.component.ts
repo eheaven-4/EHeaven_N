@@ -13,7 +13,6 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
 })
 export class AddNotificationComponent implements OnInit {
 
-
   attachment;
   date;
   state;

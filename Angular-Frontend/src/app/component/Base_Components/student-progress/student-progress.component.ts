@@ -9,7 +9,7 @@ export class StudentProgressComponent implements OnInit {
 
   constructor() { }
 
-  certificates;
+  
 
   ngOnInit() {
     var year = new Date().getFullYear();

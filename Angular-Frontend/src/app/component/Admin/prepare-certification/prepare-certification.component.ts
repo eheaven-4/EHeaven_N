@@ -305,7 +305,8 @@ addSubjectOl() {
       admissionNum: this.StudentStatusForm.value.admissionNum,
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
       description: this.StudentStatusForm.value.description,
-      state : 'Pending'
+      certState : 'Pending',
+      prinapprovState: 'Pending',
     };
 
     var url = 'http://localhost:3000/certification/studentstatus'
@@ -344,7 +345,8 @@ submitCharacterCert() {
     leadership: this.CharacterCertForm.value.leadership,
     societies: this.CharacterCertForm.value.societies,
     sports: this.CharacterCertForm.value.sports,
-    state : 'Pending'
+    certState : 'Pending',
+    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/charactercert'
 
@@ -384,6 +386,8 @@ submitLeavingCert() {
     cause: this.LeavingCertForm.value.cause,
     lastClass: this.LeavingCertForm.value.lastClass,
     subjects: this.LeavingCertForm.value.subjects,
+    certState : 'Pending',
+    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/leavingcert'
 
@@ -418,6 +422,8 @@ submitAlCert() {
     zscore: this.AlCertForm.value.zscore,
     districtrank: this.AlCertForm.value.districtrank,
     islandrank: this.AlCertForm.value.islandrank,
+    certState : 'Pending',
+    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/alcert';
 
@@ -448,6 +454,8 @@ submitOlCert() {
     centerNo: this.OlCertForm.value.certDetails.centerNo,
     indexNo: this.OlCertForm.value.certDetails.indexNo,
     subjectsOl: this.OlCertForm.value.subjectsOl,
+    certState : 'Pending',
+    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/olcert'
 
@@ -471,9 +479,18 @@ submitOlCert() {
 
 /***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
 
-acceptCert(){
+acceptCert(certRequest){
+  // console.log(certRequest._id);
+  var objId = certRequest._id;
+  var url = "http://localhost:3000/certification/acceptCert"; //accept certification requests
 
-  // console.log(objid);
+  // this.http.post<any>(url + '/' +objId).subscribe(res => {
+  //   alert('Successful');
+  // }, (err) => {
+  //   console.log(err);
+  // });
+
+  // window.location.reload();
 
 }
 
@@ -487,6 +504,7 @@ rejectCert(certRequest){
   }, (err) => {
     console.log(err);
   });
+
   window.location.reload();
 
 }

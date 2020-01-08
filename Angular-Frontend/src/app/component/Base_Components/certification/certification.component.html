@@ -5,13 +5,11 @@
                 <app-sidebar></app-sidebar>
               </div> -->
               <div class="container-fluid " style="background-color:white">
-                <div class="flashMessage">
-                  <ng-flash-message></ng-flash-message>
-                </div>
+                
                 <div>
                     <div class="container" style="padding-top: 50px">
 
-                      <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Student - Certification</h2>
+                      <h2 class="topic">Student - Certification</h2>
                       <!-- <hr> -->
 
                     </div>
@@ -83,7 +81,10 @@
                               <mat-list-item *ngFor="let cert of pendingCert">
                                 <mat-icon mat-list-icon>note</mat-icon>
                                 <h3 mat-line>{{cert.certType}}</h3>
+                                <h3 mat-line>Requested On :</h3>
                                 <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                <h2 mat-line style="color: rgb(0, 20, 36)">Admin Approval : {{cert.certState}}</h2>
+                                <h3 mat-line style="color: rgb(0, 20, 36)">Principal Approval : {{cert.prinapprovState}} </h3>
                               </mat-list-item>
                             </mat-list>
                           </mat-card>

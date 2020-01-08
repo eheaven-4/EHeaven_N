@@ -7,11 +7,11 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { Subjects } from './Subject';
 
 
-// interface subjects {
-//   _id: String,
-//   subId: String,
-//   subName: String
-// }
+interface subjects {
+  _id: String,
+  subId: String,
+  subName: String
+}
 
 @Component({
   selector: 'app-subjects',
@@ -20,7 +20,7 @@ import { Subjects } from './Subject';
 })
 export class SubjectsComponent implements OnInit {
 
-  subs :Array<Subjects>;
+  subs :  subjects [] = [];
   usertype;
 
 
@@ -44,11 +44,9 @@ export class SubjectsComponent implements OnInit {
 
     const url = "http://localhost:3000/class_management/getSubjects";
 
-    this.http.get<any>(url).subscribe((data:Subjects[])=>{
-      this.subs=data;
-      // for(var i=0;i<3;i++){
-      //   console.log(this.subs[i].subId);
-      // }
+    this.http.get<any>(url).subscribe( res =>{
+      this.subs=res.data;
+      console.log(this.subs);
     });
     
   }

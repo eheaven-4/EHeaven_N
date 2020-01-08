@@ -5,13 +5,11 @@
               <app-sidebar></app-sidebar>
           </div> -->
           <div class="container-fluid" style="background-color:white">
-              <div class="flashMessage">
-                  <ng-flash-message></ng-flash-message>
-              </div>
+              
               <div>
 
                 <div class="container">
-                  <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">Admin - Certification</h2>
+                  <h2 class="topic">Admin - Certification</h2>
                   <hr>
                 </div>
                 <div style="padding-left: 50px; padding-right: 50px">
@@ -25,7 +23,7 @@
                                 <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
                                 <!-- <h3>{{cert._id}}</h3> -->
                                 <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
-                                <button type="button" class="btn btn_1" (click)="acceptCert()">Accept</button>
+                                <button type="button" class="btn btn_1" (click)="acceptCert(cert)">Accept</button>
                                 <button type="button" class="btn btn_2" (click)="rejectCert(cert)">Reject</button>
                                 <mat-divider></mat-divider>
                               </mat-list-item>
@@ -329,7 +327,7 @@
                     </mat-tab>
 
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW PREPARED CERTIFICATES //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="PENDING CERTIFICATES">
+                    <mat-tab label="PENDING CERTIFICATES" >
                       <mat-card>
                         <mat-accordion>
                           <mat-expansion-panel>

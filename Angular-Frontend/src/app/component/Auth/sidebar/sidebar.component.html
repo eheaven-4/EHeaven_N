@@ -1,62 +1,64 @@
-
-
-    <div class="side-bar container-fluid">
-        
-        <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()" routerLinkActive="nav-link active " *ngIf="userDetail.usertype=='Administrator'">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">person</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Admin Portal</p>
-                </div>
+<div class="side-bar container-fluid">
+    <div class="sidebar_button2" routerLink="/admin_dashboard" (click)="adminDashboard()"
+        routerLinkActive="nav-link active " *ngIf="userDetail.usertype=='Administrator'">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">person</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Admin Portal</p>
             </div>
         </div>
-        <div class="sidebar_button" routerLink="/academic_subject"  (click)="userAcademics()"  routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">school</i>
-                </div>
-                <div class="col-md-9 name">
+    </div>
+    <div class="sidebar_button" routerLink="/academic_subject" (click)="userAcademics()"
+        routerLinkActive="nav-link active ">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">school</i>
+            </div>
+            <div class="col-md-9 name">
 
-                    <p class="sidebar_links" routerLinkActive="nav-text active " >&nbsp;Academics</p>
-                </div>
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Academics</p>
             </div>
         </div>
+    </div>
 
-        <div class="sidebar_button2" routerLink="/notifications" (click)="userNotification()" routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">notifications_active</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Notifications</p>
-                </div>
+    <div class="sidebar_button2" routerLink="/notifications" (click)="userNotification()"
+        routerLinkActive="nav-link active ">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">notifications_active</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Notifications</p>
             </div>
         </div>
-        <div class="sidebar_button2" routerLink="/certification"  (click)="userCertification()" routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn"  style="margin-left: -5px">
-                    <i class="material-icons" routerLinkActive="nav-text active ">&nbsp;receipt</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;&nbsp;Certification</p>
-                </div>
+    </div>
+    <div class="sidebar_button2" routerLink="/certification" (click)="userCertification()"
+        routerLinkActive="nav-link active ">
+        <div class="row">
+            <div class="col-md-1 icn" style="margin-left: -5px">
+                <i class="material-icons" routerLinkActive="nav-text active ">&nbsp;receipt</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;&nbsp;Certification</p>
             </div>
         </div>
+    </div>
 
 
-        <div class="sidebar_button2" routerLink="/attendance" (click)="userAttendence()" routerLinkActive="nav-link active ">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">emoji_people</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Attendence</p>
-                </div>
+    <div class="sidebar_button2" routerLink="/attendance" (click)="userAttendence()"
+        routerLinkActive="nav-link active ">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">emoji_people</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Attendence</p>
             </div>
         </div>
-        <!-- <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
+    </div>
+    <!-- <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons" routerLinkActive="nav-text active ">emoji_people</i>
@@ -67,39 +69,39 @@
             </div>
         </div> -->
 
-        <div class="sidebar_button2" routerLink="/extra_curricular" routerLinkActive="nav-link active " (click)="userExtraCur()">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">sports_handball</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Extra Curricular</p>
-                </div>
+    <div class="sidebar_button2" routerLink="/extra_curricular" routerLinkActive="nav-link active "
+        (click)="userExtraCur()">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">sports_handball</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Extra Curricular</p>
             </div>
         </div>
-        
-        <div class="sidebar_button2" routerLink="/manage_marks" routerLinkActive="nav-link active " (click)="userStudentMarks()" *ngIf="userDetail.usertype=='Administrator'">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">score</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Manage Marks</p>
-                </div>
-            </div>
-        </div>
-        <div class="sidebar_button2" routerLink="/student_progress" routerLinkActive="nav-link active " (click)="userStudentProg()">
-            <div class="row">
-                <div class="col-md-1 icn">
-                    <i class="material-icons" routerLinkActive="nav-text active ">poll</i>
-                </div>
-                <div class="col-md-9 name">
-                    <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Student Progress</p>
-                </div>
-            </div>
-        </div>
-        
     </div>
 
+    <div class="sidebar_button2" routerLink="/manage_marks" routerLinkActive="nav-link active "
+        (click)="userStudentMarks()" *ngIf="userDetail.usertype=='Administrator'">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">score</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Manage Marks</p>
+            </div>
+        </div>
+    </div>
+    <div class="sidebar_button2" routerLink="/student_progress" routerLinkActive="nav-link active "
+        (click)="userStudentProg()">
+        <div class="row">
+            <div class="col-md-1 icn">
+                <i class="material-icons" routerLinkActive="nav-text active ">poll</i>
+            </div>
+            <div class="col-md-9 name">
+                <p class="sidebar_links" routerLinkActive="nav-text active ">&nbsp;Student Progress</p>
+            </div>
+        </div>
+    </div>
 
-
+</div>
