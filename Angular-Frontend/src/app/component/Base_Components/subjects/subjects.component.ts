@@ -4,8 +4,8 @@ import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { FormBuilder, Validators,FormGroup,FormControl } from '@angular/forms';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { Subjects } from './subject';
-import { from } from 'rxjs';
+import { Subjects } from './Subject';
+
 
 // interface subjects {
 //   _id: String,
@@ -20,7 +20,7 @@ import { from } from 'rxjs';
 })
 export class SubjectsComponent implements OnInit {
 
-  subs :  Array<Subjects>;
+  subs :Array<Subjects>;
   usertype;
 
 
@@ -46,7 +46,9 @@ export class SubjectsComponent implements OnInit {
 
     this.http.get<any>(url).subscribe((data:Subjects[])=>{
       this.subs=data;
-      console.log(this.subs);
+      // for(var i=0;i<3;i++){
+      //   console.log(this.subs[i].subId);
+      // }
     });
     
   }
