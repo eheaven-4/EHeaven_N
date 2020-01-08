@@ -13,3 +13,10 @@ export class PaymentsComponent implements OnInit {
   }
 
 }
+
+
+const payments = [
+  'a',
+  'b'
+
+];

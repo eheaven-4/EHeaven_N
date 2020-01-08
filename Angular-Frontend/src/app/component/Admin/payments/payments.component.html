@@ -1,3 +1,63 @@
-<div>
-  <h2>	ASHAN </h2>
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="container-fluid " style="background-color:white">
+
+        <div>
+            <div class="container" style="padding-top: 50px">
+
+              <h2 class="topic">Student -Payments</h2>
+
+              <hr>
+            </div>
+            <mat-expansion-panel [formGroup]="SchooldevForm">
+              <mat-expansion-panel-header>School Devolopment Payment</mat-expansion-panel-header>
+              <mat-action-row>
+                  <div class="container">
+                      <mat-form-field>
+                        <input matInput formControlName="studentName" placeholder="Name of the Student">
+                      </mat-form-field>
+
+                      <mat-form-field>
+                        <mat-label>Academic Performance</mat-label>
+                        <mat-select formControlName="academicStatus">
+                          <mat-option style="text-align: left" *ngFor="let acaPer of academicPerformance" [value]="acaPer">
+                            {{ acaPer }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <mat-label>Moral Conduct</mat-label>
+                        <mat-select formControlName="moral">
+                          <mat-option style="text-align: left" *ngFor="let conduct of moralConduct" [value]="conduct">
+                            {{ conduct }}
+                          </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <textarea matInput formControlName="leadership" placeholder="Leadership/Prefectship Details"></textarea>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <textarea matInput formControlName="societies" placeholder="School based Societies/Activities"></textarea>
+                      </mat-form-field>
+                      <mat-form-field>
+                        <textarea matInput formControlName="sports" placeholder="Sports"></textarea>
+                      </mat-form-field>
+
+                      <!-- {{CharacterCertForm.value | json}} -->
+
+                <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitCharacterCert()">Submit</button>
+                    </div>
+              </mat-action-row>
+            </mat-expansion-panel>
+
+    </div>
+
+  </div>
+
+
+
+</div>
+</div>
+
 </div>
