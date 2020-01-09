@@ -479,20 +479,20 @@ submitOlCert() {
 
 /***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
 
-acceptCert(certRequest){
-  // console.log(certRequest._id);
-  var objId = certRequest._id;
-  var url = "http://localhost:3000/certification/acceptCert"; //accept certification requests
+// acceptCert(certRequest){
+//   // console.log(certRequest._id);
+//   var objId = certRequest._id;
+//   var url = "http://localhost:3000/certification/acceptCert"; //accept certification requests
 
-  this.http.post<any>(url + '/' +objId).subscribe(res => {
-    alert('Successful');
-  }, (err) => {
-    console.log(err);
-  });
+//   this.http.post<any>(url + '/' +objId).subscribe(res => {
+//     alert('Successful');
+//   }, (err) => {
+//     console.log(err);
+//   });
 
-  // window.location.reload();
+//   // window.location.reload();
 
-}
+// }
 
 rejectCert(certRequest){
   // console.log(certRequest._id);

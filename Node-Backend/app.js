@@ -17,6 +17,7 @@ const teacher_management = require('./routes/teacher_management');
 const academics = require('./routes/academics');
 const news = require('./routes/news');
 const filehandler= require('./routes/filehandler');
+const payment = require('./routes/payment');
 
 app.use(cors());
 // saskaojsaoijao
@@ -46,6 +47,7 @@ app.use('/teacher_management',teacher_management);
 app.use('/academics', academics);
 app.use('/news',news);
 app.use('/filehandler',filehandler);
+app.use('/payment', payment);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
