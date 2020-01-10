@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFlashMessageService } from 'ng-flash-messages';
-import { FormBuilder, Validators } from '@angular/forms';
+// import { NgFlashMessageService } from 'ng-flash-messages';
+// import { FormBuilder, Validators } from '@angular/forms';
 import {AttendenceService} from '../../attendance/attendence.service';
 import {ClassRoom} from '../../../Admin/class-registration/Classroom';
+import{HttpClient} from '@angular/common/http';
 
 export class  Mark{
   userid:string;
@@ -30,7 +31,10 @@ export class MarkBulkAddComponent implements OnInit {
   classlist:Array<ClassRoom>;
   years=[2018,2019,2020,2021];
   terms=[1,2,3]
-  constructor(private attendanceservice:AttendenceService) { }
+  constructor(
+    private attendanceservice:AttendenceService,
+    private _http:HttpClient
+    ) { }
 
   ngOnInit() {
 
@@ -83,6 +87,13 @@ export class MarkBulkAddComponent implements OnInit {
       temp.year=year;
       temp.marks=this.marks;
       console.log(temp);
+      this._http.post<any>('http://localhost:3000/mark/addLog',temp)
+      .subscribe(
+        data=>console.log('Success',data),
+          error=>console.error('Error!',error)
+      );
+      console.log("hellp");
+      
       // this.userVisibale=new Array(this.users.length);
       // for(var i=0;i<this.users.length;i++){
       //   this.userVisibale[i]=true;
