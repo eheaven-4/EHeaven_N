@@ -18,6 +18,7 @@ export class  User{
   NIC:string;
   address:string;
   image:string;
+  selectclass:string;
 }
 
 @Component({
@@ -87,6 +88,8 @@ export class BulkaddComponent {
         user.address=temp[1];
         var temp=userstr[10].split(':');
         user.image=temp[1];
+        var temp=userstr[11].split(':');
+        user.selectclass=temp[1];
         this.users.push(user);
         // console.log(user);
       }

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormControl, FormGroup } from '@angular/forms';
 import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
+import { MycookiesService } from '../../Admin/mycookies.service';
 
 @Component({
   selector: 'app-register',
@@ -12,6 +13,7 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
   submitted = false;
   images;
   filename;
@@ -23,6 +25,7 @@ export class RegisterComponent implements OnInit {
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
+    private cookies: MycookiesService
   ) { }
 
   // registratin form attributes
@@ -123,14 +126,19 @@ export class RegisterComponent implements OnInit {
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
                 // this.ngProgress.done();
-                this.router.navigate(['/login']); 
+                
+                window.location.reload();
               }
               else {
                 let config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
-                this.router.navigate(['/register']);
+                // this.router.navigate(['/register']);
+                // this.router.navigate(['../',this.myCookie.userid,'notification']);
+                // window.location.reload();
+                
               }
+              // this.router.navigate(['../',this.myCookie.userid,'register']);
             });
           }
         });

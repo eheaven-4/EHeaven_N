@@ -19,8 +19,8 @@ export class AttendenceService {
   logAdd(stu:Attend){
     return this._http.post<Attend>(this.post_url,stu);
   }
-  retriveUsers(){
-    return this._http.get(this.get_url);
+  retriveUsers(classname){
+    return this._http.get(this.get_url+'/'+classname);
   }
   logUpdate(stu:Attend){
     return this._http.post<Attend>(this.update_url,stu);

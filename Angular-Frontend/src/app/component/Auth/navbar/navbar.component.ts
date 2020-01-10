@@ -48,7 +48,7 @@ export class NavbarComponent implements OnInit {
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
     this.router.navigate(['/login']);
 
-    // window.location.reload();     //reload the page
+    window.location.reload();     //reload the page
   }
 
 

@@ -17,7 +17,8 @@ router.post("/addLog",function(request,response){
         userid:request.body.userid,
         attend:request.body.attend,
         date:todaystr,
-        class:request.body.class
+        class:request.body.class,
+        markedBy:request.body.marked
     });
     console.log(stu);
     attendance.addAttendance(stu,function (err,req){
@@ -32,8 +33,8 @@ router.post("/addLog",function(request,response){
 });
 
 
-router.get("/received", function (req, res) {
-    users.find({},{userid:1,name:1,_id:0})
+router.get("/received/:classname", function (req, res) {
+    users.find({selectclass:req.params.classname},{userid:1,name:1,_id:0})
     .exec(function(err,data){
         if(err){
             console.log("Error");

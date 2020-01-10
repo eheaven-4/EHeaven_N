@@ -14,13 +14,13 @@ interface students {
   name: String
 }
 
-interface yearArrray{
-  year : String
+interface yearArrray {
+  year: String
 }
 
-interface subjectsArray{
-  subId : String,
-  subName : String,
+interface subjectsArray {
+  subId: String,
+  subName: String,
 }
 
 @Component({
@@ -36,8 +36,8 @@ export class ManageMarksComponent implements OnInit {
   ClassSearchForm: FormGroup;
   dataform: Boolean = false;  //sata division default didn't show
   submitted = false;
-  myYear: yearArrray [] = [];
-  mySubject: subjectsArray [] =[];
+  myYear: yearArrray[] = [];
+  mySubject: subjectsArray[] = [];  
 
   constructor(
     private fb: FormBuilder,
@@ -54,7 +54,10 @@ export class ManageMarksComponent implements OnInit {
   StudentMarksForm = this.fb.group({
     subject: ['', Validators.required],
     year: ['', Validators.required],
-    semester: ['', Validators.required]    
+    semester: ['', Validators.required],
+    studentId: ['', Validators.required],
+    studentName: ['', Validators.required],
+    subjectMark: ['', Validators.required],
   });
 
   ngOnInit() {
@@ -78,13 +81,13 @@ export class ManageMarksComponent implements OnInit {
       this.mySubject = res.data;
     });
 
-    
+
   }
 
   get f() {
     return this.ClassSearchForm.controls;
   }
-  get f2(){
+  get f2() {
     return this.StudentMarksForm.controls;
   }
 
@@ -108,7 +111,7 @@ export class ManageMarksComponent implements OnInit {
       var url1 = "http://localhost:3000/class_management/getClassTeacherName"
       var url2 = "http://localhost:3000/users/getStudentsNames/"
 
-      this.http.get<any>(url1 + '/' + cName).subscribe(res => {        
+      this.http.get<any>(url1 + '/' + cName).subscribe(res => {
         if (res.state == false) {
           let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
@@ -129,7 +132,16 @@ export class ManageMarksComponent implements OnInit {
     }
   }
 
-  submitMarks(){
-    
+  submitMarks() {
+    const formData = new FormData();
+
+    formData.append('subject', this.StudentMarksForm.value.subject)
+    formData.append('year', this.StudentMarksForm.value.year)
+    formData.append('semester', this.StudentMarksForm.value.semester)
+
+    // for (var i = 0; i < this.csNames.length; i++) {
+    //   formData.append('marks', this.csNames[i].name.value.);
+    // }
+
   }
 }

@@ -3,6 +3,7 @@ export class Attend{
     username:string;
     attend:boolean;
     class:string;
+    marked:string;
 }
 export class Attendreturn{
     username:string;
