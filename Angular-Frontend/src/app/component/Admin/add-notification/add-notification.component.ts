@@ -68,14 +68,12 @@ export class AddNotificationComponent implements OnInit {
       const formData = new FormData();
       
       formData.append('notificationAttachment', this.attachment)
-      formData.append('userid', userid.value)
+      formData.append('userid', userid)
       formData.append('date', this.date)
       formData.append('subject', this.NotificationForm.value.subject)
       formData.append('message', this.NotificationForm.value.message)
       formData.append('state', this.state)
-      
-      console.log(formData)
-      
+          
       var url = "http://localhost:3000/notification/add";
       
       //send request to  the server

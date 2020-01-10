@@ -17,93 +17,81 @@ export class PaymentsComponent implements OnInit {
   submitted = false;
   dataform: boolean = false;
 
-
-
-
-  paymentForm: FormGroup;
-
   constructor(
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    private cookies: MycookiesService,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
 
-  ngOnInit() {
-    this.paymentForm = this.fb.group({
-      sName : ['', [Validators.required]],
-      sId : ['' , [Validators.required]],
-      sClass : ['' , [Validators.required]],
-      pName : ['', [Validators.required]],
-      payment : ['' , [Validators.required]]
-    });
-  }
+  PaymentForm = this.fb.group({
+    sName: ['', Validators.required],
+    sId: ['', Validators.required],
+    sClass: ['', Validators.required],
+    pName: ['', Validators.required],
+    payment: ['', Validators.required]
+  });
+
+  ngOnInit() { }
 
   get f() {
-    return this.paymentForm.controls;
+    return this.PaymentForm.controls;
   }
 
   onReset() {
     this.submitted = false;
-    this.paymentForm.reset();
+    this.PaymentForm.reset();
   }
 
   addPayment() {
-  this.submitted = true;
+    this.submitted = true;
 
-
-  if (this.paymentForm.invalid) {
-    return;
-  } else {
-
-
-
-  const formData = new FormData();
-
-  formData.append('sName', this.paymentForm.value.sName);
-  formData.append('sId' , this.paymentForm.value.sId );
-  formData.append('sClass', this.paymentForm.value.sClass);
-  formData.append('pName', this.paymentForm.value.pName);
-  formData.append('payment' , this.paymentForm.value.payment);
-
-  const url = 'http://localhost:3000/payment/add';
-
-  const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-    data: {
-      message: 'Are you sure want to Add?',
-      buttonText: {
-        ok: 'Yes',
-        cancel: 'No'
-      }
+    if (this.PaymentForm.invalid) {
+      console.log("Invalid");
+      return;
     }
-  });
-  dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-    if (confirmed) {
-      this.http.post<any>(url , formData).subscribe(res => {
-        console.log(res.msg);
+    else {
+      console.log("Valid");
 
-        if  (res.state) {
-        const config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open('Payment Successfukky Added..!' , true ? 'Done' : undefined , config);
+      const formData = new FormData();
 
-        window.location.reload();
+      formData.append('sName', this.PaymentForm.value.sName);
+      formData.append('sId', this.PaymentForm.value.sId);
+      formData.append('sClass', this.PaymentForm.value.sClass);
+      formData.append('pName', this.PaymentForm.value.pName);
+      formData.append('payment', this.PaymentForm.value.payment);
 
-    } else {
-      const config = new MatSnackBarConfig();
-      config.duration = true ? 2000 : 0;
-      this.snackBar.open('Payment is not Added..!' , true ? 'Retry' : undefined , config);
-      //this.router.navigate('/payments');
-    }
+      const url = 'http://localhost:3000/payment/add';
 
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to Add?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
       });
-
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.http.post<any>(url, formData).subscribe(res => {
+            if (res.state) {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Payment Data Successfully Added..! ", true ? "Done" : undefined, config);
+            }
+            else {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Payment Data does not Added..! ", true ? "Done" : undefined, config);
+              
+            }
+          });
+        }
+      });
     }
-
-  });
-
-}
-}
+  }
 }

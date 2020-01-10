@@ -4,75 +4,67 @@
       <div class="container-fluid " style="background-color:white">
 
         <div>
-            <div class="container" style="padding-top: 50px">
+          <div class="container" style="padding-top: 50px">
 
-              <h2 class="topic">Student-Payments</h2>
+            <h2 class="topic">Student-Payments</h2>
 
-              <hr>
+            <hr>
+          </div>
+
+          <form class="border text-center p-5 reg-frm" [formGroup]="PaymentForm">
+
+            <div class="form-row mb-4">
+              <p style="text-align: left">Student Name :</p>
+              <input type="text" class="form-control box_border" name="sName"
+              formControlName="sName">
+              <div *ngIf="submitted && f.sName.errors" class="err_msg">
+                  <div *ngIf="f.sName.errors.required">Student name is required</div>
+                </div>
             </div>
 
-            <form class="border text-center p-5 reg-frm" [formGroup]="paymentForm" >
-
-              <div class="form-group">
-                <p style="text-align: left">Student Name :</p>
-                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="sName"
-                  formControlName="sName">
-                <!-- <div *ngIf="submitted && f.topic.errors" class="err_msg">
-                  <div *ngIf="f.sName.errors.required">Student name is required</div>
-                </div> -->
-              </div>
-
-              <div class="form-group">
-                <p style="text-align: left">Student Id :</p>
-                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="sId"
-                  formControlName="payment">
-                <!-- <div *ngIf="submitted && f.sId.errors" class="err_msg">
+            <div class="form-row mb-4">
+              <p style="text-align: left">Student Id :</p>
+              <input type="text" class="form-control box_border"  name="sId"
+              formControlName="sId">
+              <div *ngIf="submitted && f.sId.errors" class="err_msg">
                   <div *ngIf="f.sId.errors.required">Student Id is required</div>
-                </div> -->
-              </div>
+                </div>
+            </div>
 
-              <div class="form-group">
-                <p style="text-align: left">Student Class :</p>
-                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="sName" placeholder="1-A"
-                  formControlName="sClass">
-                <!-- <div *ngIf="submitted && f.sClass.errors" class="err_msg">
+            <div class="form-row mb-4">
+              <p style="text-align: left">Student Class :</p>
+              <input type="text" class="form-control box_border"  name="sClass"
+                placeholder="1-A" formControlName="sClass">
+              <div *ngIf="submitted && f.sClass.errors" class="err_msg">
                   <div *ngIf="f.sClass.errors.required">Student Class is required</div>
-                </div> -->
-              </div>
+                </div>
+            </div>
 
-              <div class="form-group">
-                <p style="text-align: left">Payment Name:</p>
+            <div class="form-row mb-4">
+              <p style="text-align: left">Payment Name:</p>
 
-                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="pName"
-                  formControlName="pName">
-                <!-- <div *ngIf="submitted && f.pName.errors" class="err_msg">
-                  <div *ngIf="f.ptName.errors.required">payment name is required</div>
-                </div> -->
-              </div>
-              <div class="form-group">
-                <p style="text-align: left">Payment :</p>
+              <input type="text" class="form-control box_border"  name="pName"
+              formControlName="pName">
+              <div *ngIf="submitted && f.pName.errors" class="err_msg">
+                  <div *ngIf="f.pName.errors.required">payment name is required</div>
+                </div>
+            </div>
+            <div class="form-row mb-4">
+              <p style="text-align: left">Payment :</p>
 
-                <input type="text" class="form-control box_border" aria-describedby="textHelp" name="payment"
-                  formControlName="payment">
-                <!-- <div *ngIf="submitted && f.payment.errors" class="err_msg">
+              <input type="text" class="form-control box_border" name="payment"
+              formControlName="payment">
+              <div *ngIf="submitted && f.payment.errors" class="err_msg">
                   <div *ngIf="f.payment.errors.required">payment is required</div>
-                </div> -->
-              </div>
-              <p>&nbsp;</p>
-              <button (click)="addPayment()" type="submit"
-                  class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
+                </div>
+            </div>
+            <p>&nbsp;</p>
+            <button (click)="addPayment()" type="submit"
+              class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Submit</button>
 
-
-
-            </form>
-
+          </form>
+        </div>
+      </div>
     </div>
-
   </div>
-
-
-
-</div>
-</div>
-
 </div>

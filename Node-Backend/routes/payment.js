@@ -4,18 +4,15 @@ const payment = require('../models/payment');
 const config = require('../config/database');
 var path = require('path');
 
-
 router.post('/add',(req,res)=>{
-
+    console.log(req.body);
     
-
     const newPayment = new payment ({
         sName: req.body.sName,
         sId : req.body.sId,
         sClass : req.body.sClass,
         pName : req.body.pName,
         payment : req.body.payment,
-
     });
 
     newPayment.save()
@@ -44,7 +41,5 @@ router.get("/view", (req, res, next) => {
             });
         });
 });
-
-
 
 module.exports = router;
