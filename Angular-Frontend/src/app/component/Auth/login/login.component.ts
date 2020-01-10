@@ -27,20 +27,12 @@ export class LoginComponent implements OnInit {
     public snackBar: MatSnackBar,
 
   ) { }
-
-
-
-
-
-
-
-
   ngOnInit() { 
     if (!localStorage.getItem('foo')) { 
       localStorage.setItem('foo', 'no reload') 
       location.reload() 
     } else {
-      localStorage.removeItem('foo') 
+      localStorage.removeItem('foo'); 
     }
   }
 

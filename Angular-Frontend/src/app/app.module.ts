@@ -51,6 +51,7 @@ import { SubjectsComponent } from './component/Base_Components/subjects/subjects
 import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
+import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/mark-bulk-add/mark-bulk-add.component';
 
 
 
@@ -91,6 +92,7 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
     UserRootComponent,
     PageNotFoundComponent,
     AttendanceListComponent,
+    MarkBulkAddComponent,
   ],
 
   imports: [
