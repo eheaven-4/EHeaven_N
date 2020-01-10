@@ -490,7 +490,7 @@ acceptCert(certRequest){
   //   console.log(err);
   // });
 
-  // window.location.reload();
+  window.location.reload();
 
 }
 
