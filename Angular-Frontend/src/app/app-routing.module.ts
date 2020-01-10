@@ -36,7 +36,6 @@ import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
 
-
 // const routes: Routes = [
 //   {path: '', component: HomeComponent},
 //   {path: 'menu', component: MenuComponent},

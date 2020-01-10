@@ -11,31 +11,48 @@
                             <h2 class="topic">My Progress</h2>
                             <hr>
                         </div>
+                        <div style="text-align: center;">
+                            <img src="../../../assets/logo/logo.png" class="logo">
+                        </div>
+
                         <div class="container">
-                            <div class="row">
+                            <div class="row" style="text-align: center;margin-bottom: 50px;">
                                 <div class="col-md-5">
                                     <label class="top_txt">Year Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border"
-                                    formControlName="year" [(ngModel)]="year" name="year">
-                                    
-                                    <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
-                                    [value]="cert">{{ year }}
-                                </mat-option>
-                            </mat-select>
-                        </div>
-                                                        <!--
-                                <div class="col-md-5">
-                                    <label class="top_txt">Subject Required :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
-                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subName'>{{subject.subName}}</mat-option>
+                                    <mat-select #t class="browser-default custom-select mb-4 border" [(ngModel)]="year"
+                                        name="year">
+
+                                        <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
+                                            [value]="cert">{{ year }}
+                                        </mat-option>
                                     </mat-select>
                                 </div>
-                            
-                            -->
+
+                                <div class="col-md-5">
+                                    <label class="top_txt">Subject Required :</label>
+                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                        [(ngModel)]="subject" name="subject">
+                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject'
+                                            [value]='subject.subName'>{{subject.subName}}</mat-option>
+                                    </mat-select>
+                                </div>
+
+
                                 <div class="col-md-2">
                                     <button mat-raised-button class="search_btn"><img
                                             src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                         Search</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="container" style="margin-bottom: 50px; ">
+                            <div class="row">
+                                <div class="chart-wrapper">
+                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                        [options]="barChartOptions" [plugins]="barChartPlugins"
+                                        [legend]="barChartLegend" [chartType]="barChartType" [colors]="chartColors">
+                                    </canvas>
                                 </div>
                             </div>
                         </div>
