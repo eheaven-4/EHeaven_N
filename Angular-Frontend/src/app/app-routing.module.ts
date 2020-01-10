@@ -91,15 +91,10 @@ const routes: Routes = [
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
     {path: '', component: ProfileComponent},
-
-
   ]},
 
   {path: 'contactus', component: ContactusComponent},
-
   // {path:'**',redirectTo:'/404',pathMatch:'full'},
-
-
 ];
 
 @NgModule({

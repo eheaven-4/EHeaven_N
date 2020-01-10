@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const passport = require('passport');
 const cors = require('cors');
+const { createServer } = require('http');
 
 const config = require('./config/database');
 const users = require('./routes/users');
@@ -22,13 +23,20 @@ const payment = require('./routes/payment');
 
 app.use(cors());
 // saskaojsaoijao
-const connection = mongoose.connect(config.database);
-if(connection){
-    console.log("Database Connected");
-}
-else{
-    console.log("Database not Connected");
-}
+const connection = mongoose.connect("mongodb+srv://sachin:sachin21@@ehven-fm9lu.gcp.mongodb.net/Eheaven?retryWrites=true&w=majority",
+{
+    useNewUrlParser : true,
+})
+.then(() => console.log("Database Connected"))
+.catch(err => console.log(err)
+);
+
+// if(connection){
+//     console.log("Database Connected");
+// }
+// else{
+//     console.log("Database not Connected");
+// }
 
 app.use(bodyParser.urlencoded({ extended: true}));
 app.use(bodyParser.json());

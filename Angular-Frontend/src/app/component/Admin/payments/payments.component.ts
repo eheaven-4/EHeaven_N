@@ -87,7 +87,6 @@ export class PaymentsComponent implements OnInit {
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Payment Data does not Added..! ", true ? "Done" : undefined, config);
-              
             }
           });
         }

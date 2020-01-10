@@ -1,57 +1,87 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <!-- <div class="col-md-2">
-                <app-sidebar></app-sidebar>
-            </div> -->
             <div class="container-fluid" style="background-color:white">
                 <div>
-                    <form>
-                        <div class="container">
-                            <h2 class="topic">My Progress</h2>
-                            <hr>
-                        </div>
-                        <div style="text-align: center;">
-                            <img src="../../../assets/logo/logo.png" class="logo">
-                        </div>
+                    <div class="container">
+                        <h2 class="topic">My Progress</h2>
+                        <hr>
+                    </div>
+                    <div style="text-align: center;">
+                        <img src="../../../assets/logo/logo.png" class="logo">
+                    </div>
 
+                    <form [formGroup]="StudentProgressForm">
                         <div class="container">
                             <div class="row" style="text-align: center;margin-bottom: 50px;">
                                 <div class="col-md-2 top_txt">
                                     <label>Year Required :</label>
                                     <mat-select #t class="browser-default custom-select mb-4 border" [(ngModel)]="year"
-                                        name="year">
+                                        name="year" formControlName="year">
 
                                         <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
-                                            [value]="cert">{{ year }}
+                                            [value]="year" >{{ year }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
 
-                                <div class="col-md-5 top_txt">
+                                <div class="col-md-4 top_txt">
                                     <label>Subject Required :</label>
                                     <mat-select class="browser-default custom-select mb-4 box_border"
-                                        [(ngModel)]="subject" name="subject">
+                                        [(ngModel)]="subject" name="subject" formControlName="subject">
                                         <mat-option style="text-align: left" *ngFor='let subject of mySubject'
-                                            [value]='subject.subName'>{{subject.subName}}</mat-option>
+                                            [value]='subject.subName'  >{{subject.subName}}</mat-option>
                                     </mat-select>
                                 </div>
 
-                                <div class="col-md-3 top_txt">
+                                <div class="col-md-2 top_txt">
                                     <label>Term Required :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        [(ngModel)]="term" name="term">
-                                        <mat-option style="text-align: left" *ngFor='let term of myTerm'
-                                            [value]='term'>{{term}}</mat-option>
+                                    <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="term"
+                                        name="term" formControlName="term">
+                                        <mat-option style="text-align: left" *ngFor='let term of myTerm' [value]='term'  formControlName="year">
+                                            {{term}}</mat-option>
                                     </mat-select>
                                 </div>
+                                <div class="col-md-2 top_txt">
+                                    <label>Class Name Required :</label>
 
+                                    <input type="text" class="form-control box_border" formControlName="className" name="className"
+                                        matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
+
+                                </div>
                                 <div class="col-md-2">
-                                    <button mat-raised-button class="search_btn"><img
+                                    <button mat-raised-button class="search_btn" (click)="myProgress()"><img
                                             src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                         Search</button>
                                 </div>
                             </div>
+                            <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
+                        </div>
+
+                        <!--Teacher View-->
+                        <div class="container" style="margin-bottom: 50px;">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
+                                            ID</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
+                                            Name</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject
+                                            Marks</th>
+                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject
+                                            Position</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngFor="let stdata of csNames">
+                                    <tr (click)="studentProgress()">
+                                        <td class="stid">{{stdata.userid}}</td>
+                                        <td class="stname">{{stdata.name}}</td>
+                                        <td style="margin: auto;">{{stdata.marks}}</td>
+                                        <td style="margin: auto;">{{stdata.position}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
                         </div>
 
                         <!--Student View-->
@@ -77,7 +107,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="row box2" >
+                                    <div class="row box2">
                                         <div class="container">
                                             <div class="row">
                                                 <p class="box_smtext">~ Class name</p>
@@ -96,7 +126,7 @@
                                     </div>
                                 </div>
                                 <div class="col-md-3">
-                                    <div class="row box3"  matTooltip="Your {subject} average whthin your class ">
+                                    <div class="row box3" matTooltip="Your {subject} average whthin your class ">
                                         <div class="container">
                                             <div class="row">
                                                 <p class="box_smtext">~ Average in class</p>
@@ -151,10 +181,7 @@
                             </div>
                         </div>
 
-                        <!--Teacher View-->
-                        <div class="container">
-                            
-                        </div>
+
                     </form>
 
                 </div>
