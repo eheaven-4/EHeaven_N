@@ -138,7 +138,7 @@ export class CertificationComponent implements OnInit {
 
   // used to show/hide form fields
 
-  testfunction(value) {
+  togglefunction(value) {
     if (value == 'Educational Certificate') {
       this.flag = true;
     } else {

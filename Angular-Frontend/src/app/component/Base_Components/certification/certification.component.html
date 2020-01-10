@@ -5,7 +5,7 @@
                 <app-sidebar></app-sidebar>
               </div> -->
               <div class="container-fluid " style="background-color:white">
-                
+
                 <div>
                     <div class="container" style="padding-top: 50px">
 
@@ -32,7 +32,7 @@
                             <div class="form-row mb-4">
                               <label>Certification Required :</label>
                               <mat-select #t class="browser-default custom-select mb-4 box_border" formControlName="certType"
-                                (selectionChange)="testfunction(t.value)">
+                                (selectionChange)="togglefunction(t.value)">
                                 <!-- <mat-option value="None" selected></mat-option> -->
                                 <mat-option style="text-align: left" *ngFor="let cert of certificates" [value]="cert">{{ cert }}
                                 </mat-option>
