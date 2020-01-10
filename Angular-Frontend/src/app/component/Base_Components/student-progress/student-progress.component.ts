@@ -24,7 +24,7 @@ export class StudentProgressComponent implements OnInit {
 
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
-
+  myTerm = ['1st Term','2nd Term','3rd Term',]
 
   barChartOptions: ChartOptions = {
     responsive: true,
@@ -35,7 +35,8 @@ export class StudentProgressComponent implements OnInit {
   barChartPlugins = [];
 
   barChartData: ChartDataSets[] = [
-    { data: [45, 37, 60], label: 'Maths Marks' }
+    { data: [45, 37, 60], label: 'Maths Marks' },
+    
   ];
   chartColors: Array<any> = [
     { // first color
