@@ -2,7 +2,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { NgFlashMessagesModule } from 'ng-flash-messages';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -10,6 +9,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatButtonModule, MatGridListModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { ChartsModule } from 'ng2-charts';
 
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -55,7 +55,6 @@ import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/m
 
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -96,14 +95,13 @@ import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/m
   ],
 
   imports: [
-    NgFlashMessagesModule.forRoot(),
     BrowserModule,
     SlideshowModule,
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    NgFlashMessagesModule,
+    ChartsModule,
     MatModule,
     MatExpansionModule,
     MatDatepickerModule,

@@ -3,7 +3,7 @@
         <div class="row">
             <!-- <div class="col-md-2">
                 <app-sidebar></app-sidebar>
-            </div> -->      
+            </div> -->
             <div class="container-fluid" style="background-color:white">
                 <div>
                     <form>
@@ -11,34 +11,149 @@
                             <h2 class="topic">My Progress</h2>
                             <hr>
                         </div>
+                        <div style="text-align: center;">
+                            <img src="../../../assets/logo/logo.png" class="logo">
+                        </div>
+
                         <div class="container">
-                            <div class="row">
-                                <div class="col-md-5">
-                                    <label class="top_txt">Year Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border"
-                                        (selectionChange)="testfunction(t.value)">
-                                        <!-- <mat-option value="None" selected></mat-option> -->
-                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
-                                            [value]="cert">{{ cert }}
+                            <div class="row" style="text-align: center;margin-bottom: 50px;">
+                                <div class="col-md-2 top_txt">
+                                    <label>Year Required :</label>
+                                    <mat-select #t class="browser-default custom-select mb-4 border" [(ngModel)]="year"
+                                        name="year">
+
+                                        <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
+                                            [value]="cert">{{ year }}
                                         </mat-option>
                                     </mat-select>
                                 </div>
-                                <div class="col-md-5">
-                                    <label class="top_txt">Subject Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border"
-                                        (selectionChange)="testfunction(t.value)">
-                                        <!-- <mat-option value="None" selected></mat-option> -->
-                                        <mat-option style="text-align: left" *ngFor="let cert of certificates"
-                                            [value]="cert">{{ cert }}
-                                        </mat-option>
+
+                                <div class="col-md-5 top_txt">
+                                    <label>Subject Required :</label>
+                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                        [(ngModel)]="subject" name="subject">
+                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject'
+                                            [value]='subject.subName'>{{subject.subName}}</mat-option>
                                     </mat-select>
                                 </div>
+
+                                <div class="col-md-3 top_txt">
+                                    <label>Term Required :</label>
+                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                        [(ngModel)]="term" name="term">
+                                        <mat-option style="text-align: left" *ngFor='let term of myTerm'
+                                            [value]='term'>{{term}}</mat-option>
+                                    </mat-select>
+                                </div>
+
                                 <div class="col-md-2">
                                     <button mat-raised-button class="search_btn"><img
                                             src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                         Search</button>
                                 </div>
                             </div>
+                        </div>
+
+                        <!--Student View-->
+                        <div class="container" style="margin-bottom: 50px;">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <div class="row box1">
+                                        <div class="container">
+                                            <div class="row">
+                                                <p class="box_smtext">~ Class position</p>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row" style="margin-top: -30px;">
+                                                <span class="box_bigtext">19</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row box2">
+                                        <div class="container">
+                                            <div class="row">
+                                                <p class="box_smtext">~ Class name</p>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row" style="margin-top: -30px;">
+                                                <span class="box_bigtext">5D</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="row box3">
+                                        <div class="container">
+                                            <div class="row">
+                                                <p class="box_smtext">~ Average in class</p>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row" style="margin-top: -30px;">
+                                                <span class="box_bigtext">5.1383</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="row box4">
+                                        <div class="container">
+                                            <div class="row">
+                                                <p class="box_smtext">~ Average in school</p>
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row">
+                                                <hr style="width: 92%; background-color: white; margin-top: -25px">
+                                            </div>
+                                        </div>
+                                        <div class="container">
+                                            <div class="row" style="margin-top: -30px;">
+                                                <span class="box_bigtext">5.1733</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </div>
+
+
+                        <div class="container" style="margin-bottom: 50px; ">
+                            <div class="row">
+                                <div class="chart-wrapper">
+                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                        [options]="barChartOptions" [plugins]="barChartPlugins"
+                                        [legend]="barChartLegend" [chartType]="barChartType" [colors]="chartColors">
+                                    </canvas>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!--Teacher View-->
+                        <div class="container">
+                            
                         </div>
                     </form>
 

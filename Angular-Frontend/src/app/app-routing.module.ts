@@ -36,7 +36,6 @@ import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
 
-
 // const routes: Routes = [
 //   {path: '', component: HomeComponent},
 //   {path: 'menu', component: MenuComponent},
@@ -64,21 +63,21 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
 //   {path: 'subjects', component: SubjectsComponent}
 // ];
 const routes: Routes = [
-  
+
   {path: '', component: HomeComponent},
   {path: 'login', component: LoginComponent},
   {path:'404',component:PageNotFoundComponent},
   {path:':id/menu',component:MenuComponent},
-  {path:':id',component:UserRootComponent,children:[  
-    
-    {path:'register',component:RegisterComponent},
+  {path:':id',component:UserRootComponent,children:[
+
+    {path: 'register',component:RegisterComponent},
     {path: 'notifications', component: NotificationComponent},
     {path: 'academics/:sbjName', component: AcademicsComponent},
     {path: 'add_notification', component: AddNotificationComponent},
     {path: 'certification', component: CertificationComponent},
     {path: 'prepare_certification', component: PrepareCertificationComponent},
     {path: 'attendance' , component:AttendanceComponent},
-    {path:'attendance_list',component:AttendanceListComponent},
+    {path: 'attendance_list',component:AttendanceListComponent},
     {path: 'admin_dashboard', component:AdminDashboardComponent},
     {path: 'news_feeds', component:NewsComponent},
     {path: 'payments', component:PaymentsComponent},
@@ -93,14 +92,14 @@ const routes: Routes = [
     {path: 'subjects', component: SubjectsComponent},
     {path: '', component: ProfileComponent},
 
-    
+
   ]},
-  
+
   {path: 'contactus', component: ContactusComponent},
-  
+
   // {path:'**',redirectTo:'/404',pathMatch:'full'},
-  
-  
+
+
 ];
 
 @NgModule({
