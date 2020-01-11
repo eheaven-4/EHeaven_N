@@ -1,6 +1,6 @@
 <div class="container" >
     <div class="row" style="margin-top: 50px;">
-        <div class="col-4">
+        <div class="col-3">
             <mat-form-field>
                 <mat-label>Select Class</mat-label>
                 <mat-select #class>
@@ -11,7 +11,7 @@
               <p>{{class.value}}</p>
         
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <mat-form-field>
                 <mat-label>Select Year</mat-label>
                 <mat-select #year>
@@ -21,7 +21,7 @@
               </mat-form-field>
               <p>{{year.value}}</p>
         </div>
-        <div class="col-4">
+        <div class="col-3">
             <mat-form-field>
                 <mat-label>Select Term</mat-label>
                 <mat-select #term>
@@ -31,6 +31,16 @@
               </mat-form-field>
               <p>{{term.value}}</p>
         </div>
+        <div class="col-3">
+          <mat-form-field>
+              <mat-label>Select Subject</mat-label>
+              <mat-select #subject>
+                <mat-option>None</mat-option>
+                <mat-option *ngFor="let term of terms" [value]="term">{{term+" Term"}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <p>{{term.value}}</p>
+      </div>
     </div>
 
     <div class="row">

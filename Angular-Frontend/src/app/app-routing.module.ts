@@ -94,7 +94,7 @@ const routes: Routes = [
   ]},
 
   {path: 'contactus', component: ContactusComponent},
-  // {path:'**',redirectTo:'/404',pathMatch:'full'},
+  {path:'**',redirectTo:'/404',pathMatch:'full'},
 ];
 
 @NgModule({

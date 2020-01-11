@@ -28,4 +28,7 @@ export class AttendanceComponent implements OnInit {
     this.flag=false;
     this.class=name; 
   }
+  showclass(){
+    this.flag=true;
+  }
 }

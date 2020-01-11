@@ -74,6 +74,7 @@ export class RegisterComponent implements OnInit {
   /**************************************************** */
   registerUser() {
     this.submitted = true;
+    console.log("hello");
 
     // stop here if form is invalid
     if (this.RegistrationForm.invalid) {
