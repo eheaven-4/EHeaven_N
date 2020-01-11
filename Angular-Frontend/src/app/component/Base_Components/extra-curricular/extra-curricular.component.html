@@ -36,12 +36,10 @@
                                 <mat-datepicker #picker></mat-datepicker>
                               </mat-form-field>
                             </div>
-
                             <div *ngIf="flag" formGroupName='sportclubs'>
                               <div class="form-row mb-4">
                                 <label>Sport/Club/Association :</label>
                                 <mat-select class="browser-default custom-select mb-4 box_border" formControlName="extracurrname">
-                                  <!-- <mat-option value="None" selected></mat-option> -->
                                   <mat-option style="text-align: left" *ngFor="let extras of extras" [value]="extras">{{ extras }}
                                   </mat-option>
                                 </mat-select>
@@ -49,7 +47,6 @@
                               <div class="form-row mb-4">
                                 <label>Type of Achievement :</label>
                                 <mat-select class="browser-default custom-select mb-4 box_border" formControlName="type">
-                                  <!-- <mat-option value="None" selected></mat-option> -->
                                   <mat-option style="text-align: left" *ngFor="let type of type" [value]="type">{{ type }}
                                   </mat-option>
                                 </mat-select>
@@ -66,21 +63,21 @@
                                 </mat-form-field>
                               </div>
                               <div class="form-row mb-4">
-                                <label>Description :</label>
-                                <input formControlName="desp" type="text" class="form-control box_border">
-                                <small class="text">Insert a summary regarding your Achievement/Membership.</small>
-                              </div>
-                              <div class="form-row mb-4">
                                 <label>Achievement :</label>
                                 <input formControlName="achv" type="text" class="form-control box_border">
                               </div>
 
                             </div>
-
-                            <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border"
-                            >Submit for Approval</button>
-                        </mat-card>
+                            <div class="form-row mb-4">
+                              <label>Description :</label>
+                              <input formControlName="desp" type="text" class="form-control box_border">
+                              <small class="text">Insert a summary regarding your Achievement/Membership.</small>
+                            </div>
+                            <!-- {{extracurrForm.value | json}} -->
+                            <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitToApproval()" >Submit for Approval</button>
+                          </mat-card>
                         </mat-tab>
+
                          <!-- /*****************************************************************************************************************************/ -->
                          <mat-tab label="PENDING APPROVAL">
                           <mat-card>
