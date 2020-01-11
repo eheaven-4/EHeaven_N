@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { requestExtracurr } = require('../models/student_extra');
+const  requestExtracurr = require('../models/student_extra');
 
 
 /*Student request extra curricular addition */
@@ -20,16 +20,24 @@ router.post("/requestExtracurr", function (req, res) {
         state: req.body.state,
     });
     console.log('Hello at server');
-    // console.log(newRequest);
-    newRequest
-        .save() 
-        .then(result => {
-            console.log(result)
-            res.json({ state: true, msg: "Data inserted Successfully..!" });
-        })
-        .catch(error => {
-            console.log(error)
-            res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
-        })
+    // // console.log(newRequest);
+    // newRequest
+    //     .save() 
+    //     .then(result => {
+    //         console.log(result)
+    //         res.json({ state: true, msg: "Data inserted Successfully..!" });
+    //     })
+    //     .catch(error => {
+    //         console.log(error)
+    //         res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
+    //     })
+    requestExtracurr.addLog(newRequest,function (err,request){
+        if(err){
+            res.json({state:false,msg:"Did not insert new attendance"});
+        }
+        if(request){
+            res.json({state:true,msg:"New Attendence inserted"});
+        }
+    });
 });
-
+module.exports = router;

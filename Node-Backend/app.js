@@ -20,6 +20,7 @@ const news = require('./routes/news');
 const filehandler= require('./routes/filehandler');
 const mark= require('./routes/mark');
 const payment = require('./routes/payment');
+const student_extra=require('./routes/student_extra');
 
 app.use(cors());
 // saskaojsaoijao
@@ -58,6 +59,7 @@ app.use('/news',news);
 app.use('/filehandler',filehandler);
 app.use('/mark',mark);
 app.use('/payment', payment);
+app.use('/student_extra',student_extra);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
@@ -67,4 +69,4 @@ app.listen(3000, function() {
     console.log("listning to port 3000");
 });
 
-module.exports = app;
+module.exports = app;  

@@ -19,8 +19,12 @@ const requestExtracurrSchema = mongoose.Schema({
 });
 
 
-const requestExtracurr = mongoose.model("requestExtracurr", requestExtracurrSchema);
+const requestExtracurr = module.exports=mongoose.model("requestExtracurr", requestExtracurrSchema);
 
-module.exports = {
-    requestExtracurr: requestExtracurr,
-}
+// module.exports = {
+//     requestExtracurr: requestExtracurr,
+// }
+module.exports.addLog=function(newLog,callback){
+    console.log(newLog);
+    newLog.save(callback);
+};
