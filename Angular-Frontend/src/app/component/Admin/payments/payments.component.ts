@@ -38,8 +38,6 @@ export class PaymentsComponent implements OnInit {
     sClass:new FormControl(''),
     pName:new FormControl(''),
     payment:new FormControl(''),
-    
-
   });
 
   ngOnInit() { }
@@ -62,8 +60,6 @@ export class PaymentsComponent implements OnInit {
     }
     else {
       console.log("Valid");
-
-      
 
       const url = 'http://localhost:3000/payment/add';
 

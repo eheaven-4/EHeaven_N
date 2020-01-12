@@ -5,7 +5,6 @@ const config = require('../config/database');
 var path = require('path');
 
 router.post('/add',(req,res)=>{
-    console.log(req.body);
     
     const newPayment = new payment ({
         sName: req.body.sName,
@@ -17,11 +16,9 @@ router.post('/add',(req,res)=>{
 
     newPayment.save()
     .then(result => {
-        console.log(result)
         res.json({ state: true, msg: "Data Inserted Successfully..!" });
     })
     .catch(error => {
-        console.log(error)
         res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
     })
 });

@@ -73,6 +73,7 @@ export class AddNotificationComponent implements OnInit {
       formData.append('subject', this.NotificationForm.value.subject)
       formData.append('message', this.NotificationForm.value.message)
       formData.append('state', this.state)
+          console.log(this.NotificationForm.value.subject);
           
       var url = "http://localhost:3000/notification/add";
       
@@ -93,7 +94,7 @@ export class AddNotificationComponent implements OnInit {
               console.log(res.msg);
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
-              this.snackBar.open("News Successfully Added..! ", true ? "Done" : undefined, config);
+              this.snackBar.open("Notification Successfully Added..! ", true ? "Done" : undefined, config);
               
               this.router.navigate(['../',this.Mycookie.userid,'notifications']);
             }

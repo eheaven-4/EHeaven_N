@@ -22,7 +22,7 @@
                                 <label>E-mail :</label>
                                 <input type="text" class="form-control box_border" aria-describedby="textHelp"
                                     name="email" formControlName="email">
-                                <div *ngIf="submitted && f.subject.errors" class="err_msg">
+                                <div *ngIf="submitted && f.email.errors" class="err_msg">
                                     <div *ngIf="f.email.errors.required">E-mail is required</div>
                                 </div>
                             </div>
