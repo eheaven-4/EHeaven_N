@@ -4,7 +4,6 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { Router } from '@angular/router';
 import { FormBuilder, Validators } from '@angular/forms';
 
 interface subjectsArray {
@@ -86,7 +85,6 @@ export class StudentProgressComponent implements OnInit {
     this.http.get<any>(url).subscribe(res => {
       this.mySubject = res.data;
     });
-
   }
 
   get f() {
