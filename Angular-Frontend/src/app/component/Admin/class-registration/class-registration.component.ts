@@ -10,7 +10,7 @@ import {ClassRoom} from './Classroom';
 })
 export class ClassRegistrationComponent implements OnInit {
    
-  CertificationForm=new FormGroup({
+  ClassRegistrationForm=new FormGroup({
     classname:new FormControl(''),
     grade:new FormControl(''),
     medium:new FormControl(''),

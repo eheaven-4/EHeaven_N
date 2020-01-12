@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators, FormGroup } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
@@ -25,12 +25,21 @@ export class PaymentsComponent implements OnInit {
     private dialog: MatDialog,
   ) { }
 
-  PaymentForm = this.fb.group({
-    sName: ['', Validators.required],
-    sId: ['', Validators.required],
-    sClass: ['', Validators.required],
-    pName: ['', Validators.required],
-    payment: ['', Validators.required]
+  // PaymentForm = this.fb.group({
+  //   sName: ['', Validators.required],
+  //   sId: ['', Validators.required],
+  //   sClass: ['', Validators.required],
+  //   pName: ['', Validators.required],
+  //   payment: ['', Validators.required]
+  // });
+  PaymentForm=new FormGroup({
+    sName:new FormControl(''),
+    sId:new FormControl(''),
+    sClass:new FormControl(''),
+    pName:new FormControl(''),
+    payment:new FormControl(''),
+    
+
   });
 
   ngOnInit() { }
@@ -44,7 +53,7 @@ export class PaymentsComponent implements OnInit {
     this.PaymentForm.reset();
   }
 
-  addPayment() {
+  addPayment(form) {
     this.submitted = true;
 
     if (this.PaymentForm.invalid) {
@@ -54,13 +63,7 @@ export class PaymentsComponent implements OnInit {
     else {
       console.log("Valid");
 
-      const formData = new FormData();
-
-      formData.append('sName', this.PaymentForm.value.sName);
-      formData.append('sId', this.PaymentForm.value.sId);
-      formData.append('sClass', this.PaymentForm.value.sClass);
-      formData.append('pName', this.PaymentForm.value.pName);
-      formData.append('payment', this.PaymentForm.value.payment);
+      
 
       const url = 'http://localhost:3000/payment/add';
 
@@ -75,7 +78,7 @@ export class PaymentsComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
-          this.http.post<any>(url, formData).subscribe(res => {
+          this.http.post<any>(url, form).subscribe(res => {
             if (res.state) {
               console.log(res.msg);
               let config = new MatSnackBarConfig();
