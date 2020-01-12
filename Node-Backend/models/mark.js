@@ -6,7 +6,7 @@ const markSchema=mongoose.Schema({
     year :{type:String,require:true},
     term:{type:String,require:true},
     marks:[{
-        stuname:String,
+        name:String,
         userid:String,
         mark:Number
     }]

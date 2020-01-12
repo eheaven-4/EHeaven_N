@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import {CookieService} from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
+    private ngcookie:CookieService,
 
   ) { }
   ngOnInit() { 
@@ -61,6 +63,11 @@ export class LoginComponent implements OnInit {
         if (res.state == true) {
           this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
           var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+          this.ngcookie.set("userid",res.user.userid);
+          this.ngcookie.set("name",res.user.name);
+          this.ngcookie.set("usertype",res.user.usertype);
+          // this.ngcookie.set("userid",res.user.userid);
+          // this.ngcookie.set("userid",res.user.userid);
           console.log(myCookie.userid);
           var id = myCookie.userid;
           
