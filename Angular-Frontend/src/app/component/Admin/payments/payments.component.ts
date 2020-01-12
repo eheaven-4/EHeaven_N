@@ -7,6 +7,7 @@ import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 
+
 @Component({
   selector: 'app-payments',
   templateUrl: './payments.component.html',
@@ -23,6 +24,7 @@ export class PaymentsComponent implements OnInit {
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
+
   ) { }
 
   // PaymentForm = this.fb.group({
@@ -42,7 +44,7 @@ export class PaymentsComponent implements OnInit {
 
   });
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   get f() {
     return this.PaymentForm.controls;
@@ -55,9 +57,9 @@ export class PaymentsComponent implements OnInit {
 
   addPayment(form) {
     this.submitted = true;
-
+    
     if (this.PaymentForm.invalid) {
-      console.log("Invalid");
+      
       return;
     }
     else {
