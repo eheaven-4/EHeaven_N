@@ -57,12 +57,12 @@
   width: 100%;
   height: 70px;
   border-radius: 5px;
-  box-shadow: 3px 3px 5px rgb(112, 112, 112);
+  box-shadow: 0px 0px 8px rgb(138, 138, 138);
+  margin-bottom: 30px;
 }
 .menu_div:hover{
   border-right: 5px orangered solid;
   border-left: 3px orangered solid;
-
   cursor: pointer;
   transition: 0.1s;
 }

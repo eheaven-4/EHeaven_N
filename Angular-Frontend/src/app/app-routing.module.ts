@@ -2,8 +2,6 @@ import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { RegisterComponent } from './component/Admin/register/register.component';
-import { ContactusComponent } from './component/Admin/contactus/contactus.component';
-
 import { LoginComponent } from './component/Auth/login/login.component';
 import { ProfileComponent } from './component/Auth/profile/profile.component';
 
@@ -35,6 +33,8 @@ import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
+import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
+import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 
 // const routes: Routes = [
 //   {path: '', component: HomeComponent},
@@ -68,8 +68,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path:'404',component:PageNotFoundComponent},
   {path:':id/menu',component:MenuComponent},
-  {path:':id',component:UserRootComponent,children:[
+  {path: 'contact_us', component:ContactUsComponent},
 
+  {path:':id',component:UserRootComponent,children:[
     {path: 'register',component:RegisterComponent},
     {path: 'notifications', component: NotificationComponent},
     {path: 'academics/:sbjName', component: AcademicsComponent},
@@ -91,9 +92,10 @@ const routes: Routes = [
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
     {path: '', component: ProfileComponent},
+    {path: 'mail_box', component: MailBoxComponent},
+
   ]},
 
-  {path: 'contactus', component: ContactusComponent},
   // {path:'**',redirectTo:'/404',pathMatch:'full'},
 ];
 
