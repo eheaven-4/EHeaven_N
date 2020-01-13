@@ -8,11 +8,13 @@ import { HttpClient } from '@angular/common/http';
 export class Mark {
   userid: string;
   mark: Number;
+  name:string;
 }
 export class Marksheet {
   classname: string;
   year: string;
   term: string;
+  subject:string;
   marks: Array<Mark>;
 }
 
@@ -28,6 +30,7 @@ export class MarkBulkAddComponent implements OnInit {
   Stringdata = '';
   marks = [];
   userVisibale;
+  mySubject;
   classlist: Array<ClassRoom>;
   years = [2018, 2019, 2020, 2021];
   terms = [1, 2, 3]
@@ -43,13 +46,17 @@ export class MarkBulkAddComponent implements OnInit {
         this.classlist = data;
         console.log(this.classlist);
       });
+      const url = "http://localhost:3000/class_management/getSubjects"
+      this._http.get<any>(url).subscribe(res => {
+        this.mySubject = res.data;
+      });
   }
   handleFileInput(files: FileList) {
 
     this.fileToUpload = files.item(0);
     console.log(this.fileToUpload.name);
   }
-  bulkRegistration(classname, year, term) {
+  bulkRegistration(classname, year, term,subje) {
     let fileReader = new FileReader();
     fileReader.readAsText(this.fileToUpload);
 
@@ -70,6 +77,7 @@ export class MarkBulkAddComponent implements OnInit {
         var mark = new Mark();
         mark.userid = markstr[0]
         mark.mark = Number(markstr[1]);
+        mark.name=markstr[2];
         console.log(mark);
         this.marks.push(mark);
       }
@@ -78,8 +86,9 @@ export class MarkBulkAddComponent implements OnInit {
       temp.term = term;
       temp.year = year;
       temp.marks = this.marks;
+      temp.subject=subje;
       console.log(temp);
-      this._http.post<any>('http://localhost:3000/mark/addLog', temp)
+      this._http.post<any>('http://localhost:3000/mark/addLog',temp)
         .subscribe(
           data => console.log('Success', data),
           error => console.error('Error!', error)

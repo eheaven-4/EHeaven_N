@@ -25,7 +25,6 @@ import { ProfileComponent } from './component/Auth/profile/profile.component';
 import { HomeComponent } from './component/home/home.component';
 import { SidebarComponent } from './component/Auth/sidebar/sidebar.component';
 import { FooterComponent } from './component/Auth/footer/footer.component';
-import { ContactusComponent } from './component/Admin/contactus/contactus.component';
 import { AcademicsComponent } from './component/Base_Components/academics/academics.component';
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
 import { AddNotificationComponent } from './component/Admin/add-notification/add-notification.component';
@@ -52,6 +51,8 @@ import { UserRootComponent } from './component/user-root/user-root.component';
 import { PageNotFoundComponent } from './component/page-not-found/page-not-found.component';
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
 import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/mark-bulk-add/mark-bulk-add.component';
+import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
+import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 
 
 
@@ -65,7 +66,6 @@ import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/m
     SidebarComponent,
     HomeComponent,
     FooterComponent,
-    ContactusComponent,
     NotificationComponent,
     AcademicsComponent,
     AddNotificationComponent,
@@ -92,6 +92,8 @@ import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/m
     PageNotFoundComponent,
     AttendanceListComponent,
     MarkBulkAddComponent,
+    ContactUsComponent,
+    MailBoxComponent,
   ],
 
   imports: [
