@@ -73,6 +73,15 @@
                               <input formControlName="desp" type="text" class="form-control box_border">
                               <small class="text">Insert a summary regarding your Achievement/Membership.</small>
                             </div>
+                            <div class="form-row mb-4">
+                              <label>Verified Certificate/Document</label>
+                              <input type="file" class="file_upload" style="display: none" name="certpic"
+                                        accept="image/*" [uploader]="uploader" (change)="selectImage($event)"
+                                        #fileInput>
+
+                              <button class="btn btn_1 "type="button" (click)="fileInput.click()" accept="image/*">Upload Image</button>
+                            </div>
+
                             <!-- {{extracurrForm.value | json}} -->
                             <button mat-raised-button type="submit" class="btn btn-info my-4 btn-block reg_btn box_border" (click)="submitToApproval()" >Submit for Approval</button>
                           </mat-card>
