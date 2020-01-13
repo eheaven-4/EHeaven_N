@@ -10,6 +10,12 @@
 
             <hr>
           </div>
+          <div class="col-md-2" style="padding-top: 25px ">
+
+            <button class="btn btn-info my-4 btn-block reg_btn box_border" (click)="onAdd($event)">Add New</button>
+          </div>
+
+          <div *ngIf="addnew">
 
           <form class="border text-center p-5 reg-frm" [formGroup]="PaymentForm">
             <!-- {{PaymentForm.value | json}} -->
@@ -35,14 +41,14 @@
             <div class="form-row mb-4">
               <p style="text-align: left">Student Class :</p>
               <input type="text" class="form-control box_border"  name="sClass"
-                placeholder="1-A" formControlName="sClass">
+                placeholder="1A" formControlName="sClass">
               <div *ngIf="submitted && f.sClass.errors" class="err_msg">
                   <div *ngIf="f.sClass.errors.required">Student Class is required</div>
                 </div>
             </div>
 
             <div class="form-row mb-4">
-              <p style="text-align: left">Payment Name:</p>
+              <p style="text-align: left">Payment Type:</p>
 
               <input type="text" class="form-control box_border"  name="pName"
               formControlName="pName">
@@ -50,22 +56,37 @@
                   <div *ngIf="f.pName.errors.required">payment name is required</div>
                 </div>
             </div>
+
+
             <div class="form-row mb-4">
               <p style="text-align: left">Payment :</p>
 
-              <input type="text" class="form-control box_border" name="payment"
+              <input type="number" class="form-control box_border" name="payment"
               formControlName="payment">
               <div *ngIf="submitted && f.payment.errors" class="err_msg">
                   <div *ngIf="f.payment.errors.required">payment is required</div>
                 </div>
             </div>
             <p>&nbsp;</p>
-            <button (click)="addPayment(PaymentForm.value)" type="submit" 
+            <button (click)="addPayment(PaymentForm.value)" type="submit"
               class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Submit</button>
 
           </form>
+        </div>
+
+        <hr>
+<!-- view begin -->
+        <div>
+
+        </div>
+
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+

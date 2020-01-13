@@ -14,6 +14,8 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
 })
 export class PaymentsComponent implements OnInit {
 
+  addnew = false;
+
   submitted = false;
   dataform: boolean = false;
 
@@ -32,13 +34,13 @@ export class PaymentsComponent implements OnInit {
   //   pName: ['', Validators.required],
   //   payment: ['', Validators.required]
   // });
-  PaymentForm=new FormGroup({
-    sName:new FormControl(''),
-    sId:new FormControl(''),
-    sClass:new FormControl(''),
-    pName:new FormControl(''),
-    payment:new FormControl(''),
-    
+  PaymentForm = new FormGroup({
+    sName: new FormControl('', Validators.required),
+    sId: new FormControl('', Validators.required),
+    sClass: new FormControl('', Validators.required),
+    pName: new FormControl('' , Validators.required),
+    payment: new FormControl('' , Validators.required),
+
 
   });
 
@@ -55,15 +57,15 @@ export class PaymentsComponent implements OnInit {
 
   addPayment(form) {
     this.submitted = true;
+   // this.addnew = false;
 
     if (this.PaymentForm.invalid) {
-      console.log("Invalid");
+      console.log('Invalid');
       return;
-    }
-    else {
-      console.log("Valid");
+    } else {
+      console.log('Valid');
 
-      
+
 
       const url = 'http://localhost:3000/payment/add';
 
@@ -81,19 +83,28 @@ export class PaymentsComponent implements OnInit {
           this.http.post<any>(url, form).subscribe(res => {
             if (res.state) {
               console.log(res.msg);
-              let config = new MatSnackBarConfig();
+              const config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
-              this.snackBar.open("Payment Data Successfully Added..! ", true ? "Done" : undefined, config);
-            }
-            else {
+              this.snackBar.open('Payment Data Successfully Added..! ', true ? 'Done' : undefined, config);
+              window.location.reload();
+            } else {
               console.log(res.msg);
-              let config = new MatSnackBarConfig();
+              const config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
-              this.snackBar.open("Payment Data does not Added..! ", true ? "Done" : undefined, config);
+              this.snackBar.open('Payment Data does not Added..! ', true ? 'Done' : undefined, config);
+              //this.router.navigate('/payments');
             }
           });
         }
       });
     }
   }
+
+
+onAdd(event){
+  this.addnew = true;
+
+}
+
+
 }
