@@ -28,12 +28,12 @@
                 </div>
 
                 <div class="form-row mb-4">
-                  <p style="text-align: left;">News Sumery :</p>
+                  <p style="text-align: left;">News Summary :</p>
                   <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="newsSumery"
                     id="textbox1" formControlName="newsSumery"></textarea>
                   <div *ngIf="submitted && f.newsSumery.errors" class="err_msg">
-                    <div *ngIf="f.newsSumery.errors.required">Summery is required</div>
-                    <div *ngIf="f.newsSumery.errors.maxlength">Summery must less than 400 characters</div>
+                    <div *ngIf="f.newsSumery.errors.required">Summary is required</div>
+                    <div *ngIf="f.newsSumery.errors.maxlength">Summary must less than 400 characters</div>
                   </div>
                 </div>
 
@@ -86,12 +86,12 @@
                 </div>
 
                 <div class="form-row mb-4">
-                  <p style="text-align: left;">News Sumery :</p>
+                  <p style="text-align: left;">News Summary :</p>
                   <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="newsSumery"
                     id="textbox1" formControlName="newsSumery" [(ngModel)]="newsEdit.newsSumery"></textarea>
                   <div *ngIf="submitted && f.newsSumery.errors" class="err_msg">
-                    <div *ngIf="f.newsSumery.errors.required">Summery is required</div>
-                    <div *ngIf="f.newsSumery.errors.maxlength">Summery must less than 400 characters</div>
+                    <div *ngIf="f.newsSumery.errors.required">Summary is required</div>
+                    <div *ngIf="f.newsSumery.errors.maxlength">Summary must less than 400 characters</div>
                   </div>
                 </div>
 
@@ -130,7 +130,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-10">
-                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px;">NewsView
+                    <h2 class="topic" style="color:  rgb(0, 140, 255); padding-top: 50px;">NewsView
                     </h2>
                   </div>
                 </div>

@@ -7,6 +7,9 @@ import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 
+interface YearArray {
+  year: String
+}
 
 @Component({
   selector: 'app-payments',
@@ -20,6 +23,7 @@ export class PaymentsComponent implements OnInit {
   submitted = false;
   dataform: boolean = false;
 
+  myYears: YearArray[] = [];
   paymenttypes = ['School Devolop founds', '2nd Term', '3rd Term',]
 
   constructor(
@@ -42,8 +46,17 @@ export class PaymentsComponent implements OnInit {
 
   });
 
-  ngOnInit() {}
+  ngOnInit() {
 
+    let year = new Date().getFullYear();
+    let years = [];
+
+    /*load the last 5 years in to the mat select*/
+    for (let i = 0; i < 5; i++) {
+      years.push(year - i);
+      this.myYears[i] = years[i]
+  }
+  }
   get f() {
     return this.PaymentForm.controls;
   }
