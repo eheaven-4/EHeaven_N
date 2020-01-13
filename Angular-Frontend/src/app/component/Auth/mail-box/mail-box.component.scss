@@ -1,0 +1,49 @@
+.body
+{
+  background-color:white;
+  height: 100px;
+}
+
+@font-face {
+  font-family: topic_font;
+  src: url(../../../../assets/Fonts/RobotoSlab.ttf);
+}
+
+.topic{
+    color:  rgb(0, 140, 255); 
+    font-weight: 300; 
+    padding-top: 50px;
+    font-family: topic_font;
+    font-weight: 300;
+}
+
+hr{
+  margin-top: -10px
+}
+
+.mat_card{
+    margin-bottom: 10px;
+    height: 55px;
+}
+.mat_card:hover{
+    background-color: rgb(243, 243, 243);
+    cursor: alias;
+    transition: 0.5s;
+}
+
+.circle_read{
+    color: #008b23;
+}
+
+.circle_not_read{
+    color: rgb(219, 0, 0);
+}
+
+.name{
+    font-weight: bold;
+}
+
+.delete_btn{
+    color: rgb(167, 2, 2);
+    cursor: pointer;
+}
