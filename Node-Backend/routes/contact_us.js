@@ -69,7 +69,7 @@ router.get("/viewMessage/:id", function(req,res) {
 
 //delete message
 router.delete("/deleteMessage/:id", function(req,res) {
-    const id = rq.params.id;
+    const id = req.params.id;
     ContactUs.remove({_id : id})
         .exec()
         .then(result => {

@@ -1,1 +1,50 @@
-<p>mail-box works!</p>
+<div class="row">
+    <div class="container-fluid" style="background-color:white">
+        <div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10">
+                        <h2 class="topic">Mail-Box
+                        </h2>
+                    </div>
+                </div>
+                <hr>
+            </div>
+            <div class="container">
+                <mat-card class="mat_card" *ngFor="let mail of mails">
+                    <div class="row" >
+                        <div class="col-md-3" (click)="readMail($event, mail._id)">
+                            <div class="row">
+                                <div class="col-md-2">
+                                    <i *ngIf="mail.state == 'read'" class="material-icons circle_read">
+                                        check_circle
+                                    </i>
+                                    <i *ngIf="mail.state == 'pending'" class="material-icons circle_not_read">
+                                        check_circle
+                                    </i>
+                                </div>
+                                <div class="col-md-10">
+                                    <p class="name">{{mail.name}}</p>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-7" (click)="readMail($event, mail._id)">
+                            <p>{{mail.subject}}</p>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="row">
+                                <div class="col-md-9" (click)="readMail($event, mail._id)">
+                                    {{mail.date  | date:'yyyy-MM-dd'}}
+                                </div>
+                                <div class="col-md-3">
+                                    <i class="material-icons delete_btn" (click)="deleteMail($delEvent, mail._id)">delete</i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </div>
+</div>
