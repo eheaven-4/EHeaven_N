@@ -20,6 +20,8 @@ export class PaymentsComponent implements OnInit {
   submitted = false;
   dataform: boolean = false;
 
+  paymenttypes = ['School Devolop founds', '2nd Term', '3rd Term',]
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -57,6 +59,9 @@ export class PaymentsComponent implements OnInit {
     if (this.PaymentForm.invalid) {
       console.log('Invalid');
       return;
+    }
+    else {
+      console.log("valid")
 
       const url = 'http://localhost:3000/payment/add';
 

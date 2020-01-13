@@ -9,12 +9,15 @@
             <h2 class="topic">Student-Payments</h2>
 
             <hr>
-          </div>
+
           <div class="col-md-2" style="padding-top: 25px ">
 
             <button class="btn btn-info my-4 btn-block reg_btn box_border" (click)="onAdd($event)">Add New</button>
           </div>
 
+
+           </div>
+          <div class="container">
           <div *ngIf="addnew">
 
           <form class="border text-center p-5 reg-frm" [formGroup]="PaymentForm">
@@ -57,6 +60,16 @@
                 </div>
             </div>
 
+            <!-- <div class=" form-row md-4">
+              <p style="text-align: left">Payment Type:</p>
+                 <mat-select class="browser-default custom-select box_border " [(ngModel)]="pName"
+                     name="pName" formControlName="pName">
+                       <mat-option style="text-align: left" *ngFor='let pName of paymenttypes' [value]='paymenttype'  formControlName="pName">
+                       {{pName}}</mat-option>
+                 </mat-select>
+         </div> -->
+
+
 
             <div class="form-row mb-4">
               <p style="text-align: left">Payment :</p>
@@ -69,16 +82,82 @@
             </div>
             <p>&nbsp;</p>
             <button (click)="addPayment(PaymentForm.value)" type="submit"
-              class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Submit</button>
+              class="btn btn-info my-4 btn-block reg_btn box_border" upload_btn>Submit</button>
 
           </form>
         </div>
 
-        <hr>
-<!-- view begin -->
-        <div>
-
         </div>
+
+
+
+
+
+<!-- view begin -->
+
+
+   <div class="container">
+   <div *ngIf="!addnew">
+  <form [formGroup]="paymentView">
+
+
+ <div class="row" style="text-align: center;margin-bottom: 50px;">
+
+
+
+  <div class="col-md-2 top_txt">
+    <label>Student Id :</label>
+
+         <input type="text" class="form-control box_border" formControlName="sId" name="sId"
+              style="text-align: left">
+</div>
+
+
+  <div class="col-md-2 top_txt">
+       <label> Year Required :</label>
+          <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="year"
+              name="year" formControlName="year">
+                <mat-option style="text-align: left" *ngFor='let term of myTerm' [value]='term'  formControlName="year">
+                {{year}}</mat-option>
+          </mat-select>
+  </div>
+
+  <div class="col-md-2 top_txt">
+       <label>Class Name Required :</label>
+
+            <input type="text" class="form-control box_border" formControlName="className" name="className" placeholder= "1A"
+                matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
+ </div>
+
+  <div class="col-md-4 top_txt">
+       <label> Payment Name Required :</label>
+          <mat-select class="browser-default custom-select mb-4 box_border p_btn" [(ngModel)]="paymenttype"
+              name="paymenttype" formControlName="paymenttype">
+                <mat-option style="text-align: left" *ngFor='let paymenttype of paymenttypes' [value]='paymenttype'  formControlName="paymenttype">
+                {{paymenttype}}</mat-option>
+          </mat-select>
+  </div>
+
+
+<div class="col-md-2">
+       <button mat-raised-button class="search_btn" (click)="myProgress()"><img
+            src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Search</button>
+</div>
+
+
+
+
+  </div>
+  </form>
+  </div>
+</div>
+
+
+
+
+
+
+
 
         </div>
       </div>
