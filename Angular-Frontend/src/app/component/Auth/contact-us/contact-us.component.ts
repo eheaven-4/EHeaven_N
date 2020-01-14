@@ -22,21 +22,13 @@ export class ContactUsComponent implements OnInit {
 
   submitted = false;
 
-  // ContactusForm = this.fb.group({
-  //   name: ['', [Validators.required, Validators.maxLength(100)]],
-  //   email: ['', Validators.required],
-  //   mobile: ['', [Validators.required, Validators.maxLength(10)]],
-  //   nic: ['', [Validators.required, Validators.maxLength(13)]],
-  //   subject: ['', [Validators.required, Validators.maxLength(100)]],
-  //   message: ['', [Validators.required, Validators.maxLength(800)]]
-  // })
   ContactusForm = new FormGroup({
-    name:new FormControl(''),
-    email:new FormControl(''),
-    mobile:new FormControl(''),
-    nic:new FormControl(''),
-    subject:new FormControl(''),
-    message:new FormControl(''),
+    name:new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    email:new FormControl('', Validators.required),
+    mobile:new FormControl('', [Validators.required,Validators.maxLength(10)]),
+    // nic:new FormControl('', Validators.maxLength(13)),
+    subject:new FormControl('', [Validators.required,Validators.maxLength(70)]),
+    message:new FormControl('', [Validators.required,Validators.maxLength(1200)]),
   })
 
   ngOnInit() {
@@ -60,15 +52,7 @@ export class ContactUsComponent implements OnInit {
       return;
     }
     else {
-      // const formData = new FormData();
-
-      // formData.append('name', this.ContactusForm.value.name)
-      // formData.append('email', this.ContactusForm.value.email)
-      // formData.append('mobile', this.ContactusForm.value.mobile)
-      // formData.append('nic', this.ContactusForm.value.nic)
-      // formData.append('subject', this.ContactusForm.value.subject)
-      // formData.append('message', this.ContactusForm.value.message)
-
+     
       var url = "http://localhost:3000/contact_us/sendMessage";
 
       // send request to  the server

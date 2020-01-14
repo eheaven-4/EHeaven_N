@@ -6,24 +6,22 @@ import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 
-interface mail {  //decalare interface class for load notification attributes.
+interface mail {  //decalare interface class for load all messages attributes.
   _id: String;
   name: String;
   email: String;
   mobile: String;
-  nic: String;
   date: String;
   state: String;
   subject: String;
   message: String;
 }
 
-interface message {  //decalare interface class for load notification attributes.
+interface message {  //decalare interface class for load one message  attributes.
   _id: String;
   name: String;
   email: String;
   mobile: String;
-  nic: String;
   date: String;
   state: String;
   subject: String;
@@ -56,7 +54,7 @@ export class MailBoxComponent implements OnInit {
   cookie;
   viewBox : boolean = false; 
 
-  _id;name;email;mobile;nic;date;subject;message;
+  _id;name;email;mobile;date;subject;message;
 
   ngOnInit() {
 

@@ -5,7 +5,6 @@ const contactusSchema = mongoose.Schema({
     name:{type:String, require:true},
     email:{type:String, require:true},
     mobile: {type:String, require:true},
-    nic:{type:String, require:true},
     subject:{type:String, require:true},
     message:{type: String, require:true},
     state:{type:String, require:true},

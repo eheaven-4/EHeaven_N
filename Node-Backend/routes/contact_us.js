@@ -13,7 +13,6 @@ router.post("/sendMessage", function (req, res) {
         name: req.body.name,
         email: req.body.email,
         mobile: req.body.mobile,
-        nic: req.body.nic,
         subject: req.body.subject,
         message: req.body.message,
         date: Date(),
@@ -37,7 +36,7 @@ router.post("/sendMessage", function (req, res) {
 //get all messages
 router.get("/allMessages", function (req, res) {
     ContactUs.find().sort({ date: -1 })
-        .select('name subject message date state mobile nic email')
+        .select('name subject message date state mobile email')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -67,6 +66,7 @@ router.get("/viewMessage/:id", function (req, res) {
         });
 })
 
+//read state update
 router.get("/readMessage/:id", function (req, res) {
     const id = req.params.id;
     ContactUs.update({ _id: id },
