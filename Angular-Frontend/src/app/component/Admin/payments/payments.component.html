@@ -117,12 +117,12 @@
 
 
 
-                  <div class="col-md-2 top_txt">
+                  <!-- <div class="col-md-2 top_txt">
                     <label>Student Id :</label>
 
                     <input type="text" class="form-control box_border" formControlName="sId" name="sId"
                       style="text-align: left">
-                  </div>
+                  </div> -->
 
 
 
@@ -156,7 +156,7 @@
 
 
                   <div class="col-md-2">
-                    <button mat-raised-button class="search_btn" (click)="myProgress()"><img
+                    <button mat-raised-button class="search_btn" (click)="searchPayment()"><img
                         src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Search</button>
                   </div>
 
@@ -173,20 +173,20 @@
                       <tr>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
                           ID</th>
+                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student Name
+                          </th>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Payment
                           Year</th>
-                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
-                          Class</th>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Payment
                           Type</th>
                       </tr>
                     </thead>
-                    <tbody *ngFor="let stdata of csNames">
-                      <tr (click)="studentProgress()">
-                        <td class="stid">{{stdata.userid}}</td>
-                        <td class="stname">{{stdata.name}}</td>
-                        <td style="margin: auto;">{{stdata.marks}}</td>
-                        <td style="margin: auto;">{{stdata.position}}</td>
+                    <tbody *ngFor="let pdata of paymentdata">
+                      <tr (click)="searchPayment()">
+                        <td class="stid">{{pdata.sId}}</td>
+                        <td class="stname">{{pdata.sName}}</td>
+                        <td style="margin: auto;">{{pdata.pYear}}</td>
+                        <td style="margin: auto;">{{pdata .payment}</td>
                       </tr>
                     </tbody>
                   </table>

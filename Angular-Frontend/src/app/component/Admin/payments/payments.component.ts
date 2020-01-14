@@ -8,7 +8,20 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
 
 
 interface YearArray {
-  year: String
+  year: string;
+}
+
+interface paymentdetaile {
+  sId: string;
+  sName: string;
+  sClass: string;
+  pName: string;
+  pYear: string;
+  payemnt: string;
+
+
+
+
 }
 
 @Component({
@@ -22,9 +35,14 @@ export class PaymentsComponent implements OnInit {
 
   submitted = false;
   dataform: boolean = false;
+  pYear;
+  sClass;
+  pName;
 
+
+  paymentdata: paymentdetaile[] = [];
   myYears: YearArray[] = [];
-  paymenttypes = ['School Devolop founds', '2nd Term', '3rd Term',]
+  paymenttypes = ['School Devolopment founds', '2nd Term', 'Others',]
 
   constructor(
     private router: Router,
@@ -115,6 +133,36 @@ export class PaymentsComponent implements OnInit {
     this.addnew = true;
 
   }
+
+
+searchPayment() {
+
+  console.log('cbsakc');
+
+  this.pYear = this.PaymentForm.value.pYear;
+  this.sClass = this.PaymentForm.value.sClas;
+  this.pName = this.PaymentForm.value.pNamel;
+
+  const url = 'http://localhost:3000/payment/earchPayment';
+
+  this.http.get<any>(url + '/' + this.pYear + this.sClass + this.pName).subscribe(res => {
+    if (res.state === false) {
+      console.log('bcakbckazb');
+      const config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open('Error find in payments..! ', true ? 'Retry' : undefined, config);
+    } else {
+      this.paymentdata = res.data;
+      console.log(res.data.sName);
+      console.log('sbakas');
+      this.dataform = true;
+    }
+  });
+
+
+
+}
+
 
 
 }
