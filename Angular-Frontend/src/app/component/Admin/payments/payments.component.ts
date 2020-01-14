@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, Validators, FormGroup,FormControl } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
@@ -40,8 +40,9 @@ export class PaymentsComponent implements OnInit {
     sName: new FormControl('', Validators.required),
     sId: new FormControl('', Validators.required),
     sClass: new FormControl('', Validators.required),
-    pName: new FormControl('' , Validators.required),
-    payment: new FormControl('' , Validators.required),
+    pName: new FormControl('', Validators.required),
+    payment: new FormControl('', Validators.required),
+    pYear: new FormControl('', Validators.required),
 
 
   });
@@ -55,7 +56,7 @@ export class PaymentsComponent implements OnInit {
     for (let i = 0; i < 5; i++) {
       years.push(year - i);
       this.myYears[i] = years[i]
-  }
+    }
   }
   get f() {
     return this.PaymentForm.controls;
@@ -72,8 +73,8 @@ export class PaymentsComponent implements OnInit {
     if (this.PaymentForm.invalid) {
       console.log('Invalid');
       return;
-    }
-    else {
+
+    } else {
       console.log("valid")
 
       const url = 'http://localhost:3000/payment/add';
@@ -110,10 +111,10 @@ export class PaymentsComponent implements OnInit {
   }
 
 
-onAdd(event){
-  this.addnew = true;
+  onAdd(event) {
+    this.addnew = true;
 
-}
+  }
 
 
 }

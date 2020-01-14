@@ -9,13 +9,9 @@ const paymentSchema = mongoose.Schema ({
     sId : {type : String , require : true},
     sClass : {type : String , require: true},
     pName : { type : String ,  require: true},
-    payment : {type : String, require :true}
+    payment : {type : String, require :true},
+    pYear: {type : String , require: true}
 
 });
 
-module.exports.findByStuid = function (sId, callback) {
-    const query = { sId: sId };
-
-    Users.findOne(query, callback);
-};
 const payment = module.exports = mongoose.model('payment' , paymentSchema)
