@@ -39,4 +39,31 @@ router.get("/view", (req, res, next) => {
         });
 });
 
+
+router.get("/searchPayment/:sId",(req,res,next)=>{
+    const sId = req.params.sId;
+    //console.log("fnskdj")
+    payment.findByStuid(sId , (err, payment )=>{
+        if(err) throw err;
+        if(!payment){
+            res.json({state: false , msg:'No payment found..!'});
+            return;
+        }
+        payment.findOne({stuid : stuid})
+            .select()
+            .exec()
+            .then(data => {
+                Console.log("Data transfer success..!")
+                res.json({status: true , msg: "Data transfer success..!" , data:data})
+            })
+            .catch(error => {
+                console.log("Data Transfer Unsuccessfull..!")
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+            })   
+
+    })
+
+})
+
+
 module.exports = router;

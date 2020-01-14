@@ -13,4 +13,9 @@ const paymentSchema = mongoose.Schema ({
 
 });
 
+module.exports.findByStuid = function (sId, callback) {
+    const query = { sId: sId };
+
+    Users.findOne(query, callback);
+};
 const payment = module.exports = mongoose.model('payment' , paymentSchema)
