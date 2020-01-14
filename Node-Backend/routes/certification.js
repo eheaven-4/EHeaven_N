@@ -41,7 +41,8 @@ router.post("/requestCert", function (req, res) {
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({ certState: "Pending", userid: id })
+    requestCertification.find({$or:[{ certState: "Pending", userid: id } , { prinapprovState: "Pending", userid: id }]})
+    // { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
         .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
         .exec()
@@ -712,23 +713,30 @@ router.delete("/deleteCert/:_id", function(req,res) {
   })
 
   /*******************************accept certification requests****************************************/
-  router.get("/acceptCert/:_id", function (req, res) {  //hereeee
-    console.log("Hello at back");
+  router.post("/acceptCert/:_id", function (req, res) {  //hereeee
+    console.log(req.params._id);
     const id = req.params._id;
-    requestCertification.find({ _id: id })
+    // requestCertification.find({ _id: id })
             
-        .update({certState: "Admin Approved"})
-        .exec()
-        .then(docs => {
-            console.log("Data Transfer Success.!");
-            res.status(200).json(docs);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
+    //     .update({certState: "Admin Approved"})
+    //     .exec()
+    //     .then(docs => {
+    //         console.log("Data Transfer Success.!");
+    //         console.log("hiiii")
+    //         res.status(200).json(docs);
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //         res.status(500).json({
+                
+    //         });
+    //     });
+    requestCertification.update(
+        {_id:id},
+        {
+            certState: "Admin Approved"
+        }
+    ).exec()
 });
 
 
