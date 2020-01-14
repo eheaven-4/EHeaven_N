@@ -6,12 +6,22 @@ import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../confirmation-dialog/confirmation-dialog.component';
 
 
-interface mail {  //decalare interface class for load notification attributes.
+interface mail {  //decalare interface class for load all messages attributes.
   _id: String;
   name: String;
   email: String;
   mobile: String;
-  nic: String;
+  date: String;
+  state: String;
+  subject: String;
+  message: String;
+}
+
+interface message {  //decalare interface class for load one message  attributes.
+  _id: String;
+  name: String;
+  email: String;
+  mobile: String;
   date: String;
   state: String;
   subject: String;
@@ -36,12 +46,18 @@ export class MailBoxComponent implements OnInit {
   ) { }
 
   mails: mail[] = [];
+  msg : message[] = [];
+
   public delete;
   usertype
   notice_id: String;
   cookie;
+  viewBox : boolean = false; 
+
+  _id;name;email;mobile;date;subject;message;
 
   ngOnInit() {
+
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
     this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
     this.usertype = myCookie.usertype;   // load user type to the userType array
@@ -90,6 +106,17 @@ export class MailBoxComponent implements OnInit {
   }
 
   readMail(event, notice_id) {
+    this.viewBox = true;
+  
+    var url = 'http://localhost:3000/contact_us/viewMessage';
+    var url2 = 'http://localhost:3000/contact_us/readMessage';
 
+    this.http.get<any>(url+'/'+notice_id).subscribe(res =>{
+      this.msg = res;
+      console.log(res);
+    });
+    this.http.get<any>(url2+'/'+notice_id).subscribe(res =>{
+      console.log(res);
+    });
   }
 }

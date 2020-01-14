@@ -22,6 +22,7 @@ const mark= require('./routes/mark');
 const payment = require('./routes/payment');
 const student_extra=require('./routes/student_extra');
 const contact_us = require('./routes/contact_us');
+const admin = require('./routes/admin');
 
 app.use(cors());
 // saskaojsaoijao
@@ -62,6 +63,7 @@ app.use('/mark',mark);
 app.use('/payment', payment);
 app.use('/student_extra',student_extra);
 app.use('/contact_us', contact_us);
+app.use('/admin', admin);
 
 app.get("/", function(req,res) {
     // res.send("Hello world");

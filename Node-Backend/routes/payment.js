@@ -12,6 +12,7 @@ router.post('/add',(req,res)=>{
         sClass : req.body.sClass,
         pName : req.body.pName,
         payment : req.body.payment,
+        pYear : req.body.pYear,
     });
 
     newPayment.save()
@@ -25,7 +26,7 @@ router.post('/add',(req,res)=>{
 
 router.get("/view", (req, res, next) => { 
     payment.find()
-        .select('sName sId sClass pName payment')
+        .select('sName sId sClass pYear pName payment')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -38,5 +39,27 @@ router.get("/view", (req, res, next) => {
             });
         });
 });
+
+
+router.get("/searchPayment/:sId/:sClass/:pName", function (req, res) {
+    const id = req.params.sId;
+    const clas = req.params.sClass;
+    const ptype = req.params.pName;
+
+    payment.findOne({ sId: id , sClass:clas , pName:ptype})
+        .exec()
+        .then(result => {
+            res.status(200).json(result);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+})
+
+
+
 
 module.exports = router;

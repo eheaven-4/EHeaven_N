@@ -57,7 +57,7 @@
                                         <mat-card-header>
                                             <div mat-card-avatar class="example-header-image"></div>
                                             <mat-card-title>{{new.topic}}</mat-card-title>
-                                            <mat-card-subtitle>{{new.date | date:'yyyy-MM-dd HH:mm:ss'}}
+                                            <mat-card-subtitle style="text-align: left;">{{new.date | date:'yyyy-MM-dd HH:mm:ss'}}
                                             </mat-card-subtitle>
                                         </mat-card-header>
                                           <img mat-card-image
@@ -65,7 +65,7 @@
                                               class="card-img">
 
 
-                                        <mat-card-content>
+                                        <mat-card-content style="text-align: justify;">
                                             <p>{{new.newsSumery}}</p>
 
                                         </mat-card-content>
@@ -74,8 +74,8 @@
                                     </mat-card>
                                 </div>
                                 <div class="flip-box-back">
-                                    <h2>{{new.topic}}</h2>
-                                    <p>{{new.news}}</p>
+                                    <h4>{{new.topic}}</h4>
+                                    <p style="text-align: justify;">{{new.news}}</p>
                                 </div>
                             </div>
                         </div>
