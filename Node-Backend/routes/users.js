@@ -31,7 +31,7 @@ router.post("/login", function (req, res, next) {
             res.json({ state: false, msg: "No user found..!" });
             return;
         }
-        User.passwordCheck(password, user.password, function (err, match) {
+        User.passwordCheck(password, user.pstuassword, function (err, match) {
             console.log(userid, password);
             if (err) {
                 throw err;
