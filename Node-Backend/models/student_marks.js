@@ -5,12 +5,14 @@ const markSchema=mongoose.Schema({
     classname:{type:String,require:true},
     year :{type:String,require:true},
     term:{type:String,require:true},
+    subject:{type:String,require:true},
     marks:[{
         name:String,
         userid:String,
         mark:Number
     }]
 });
+
 const mark=module.exports=mongoose.model("mark",markSchema);
 
 
