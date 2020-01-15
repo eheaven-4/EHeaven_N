@@ -143,9 +143,9 @@ searchPayment() {
   this.sClass = this.PaymentForm.value.sClas;
   this.pName = this.PaymentForm.value.pNamel;
 
-  const url = 'http://localhost:3000/payment/earchPayment';
+  const url = 'http://localhost:3000/payment/searchPayment';
 
-  this.http.get<any>(url + '/' + this.pYear + this.sClass + this.pName).subscribe(res => {
+  this.http.get<any>(url + '/' + this.pYear + '/' + this.sClass + '/' + this.pName).subscribe(res => {
     if (res.state === false) {
       console.log('bcakbckazb');
       const config = new MatSnackBarConfig();

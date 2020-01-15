@@ -42,11 +42,12 @@ router.get("/view", (req, res, next) => {
 
 
 router.get("/searchPayment/:pYear/:sClass/:pName", function (req, res) {
-    const id = req.params.sId;
+    const year = req.params.pYear;
     const clas = req.params.sClass;
     const ptype = req.params.pName;
 
-    payment.findOne({ sId: id , sClass:clas , pName:ptype})
+    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccc");
+    payment.find({ pYear:year , sClass:clas , pName:ptype})
         .exec()
         .then(result => {
             res.status(200).json(result);
