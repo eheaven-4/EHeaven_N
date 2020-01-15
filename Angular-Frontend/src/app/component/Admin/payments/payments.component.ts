@@ -137,11 +137,10 @@ export class PaymentsComponent implements OnInit {
 
 searchPayment() {
 
-  console.log('cbsakc');
 
   this.pYear = this.PaymentForm.value.pYear;
-  this.sClass = this.PaymentForm.value.sClas;
-  this.pName = this.PaymentForm.value.pNamel;
+  this.sClass = this.PaymentForm.value.sClass;
+  this.pName = this.PaymentForm.value.pName;
 
   const url = 'http://localhost:3000/payment/searchPayment';
 
@@ -153,9 +152,10 @@ searchPayment() {
       this.snackBar.open('Error find in payments..! ', true ? 'Retry' : undefined, config);
     } else {
       this.paymentdata = res.data;
-      console.log(res.data.sName);
+     // console.log(res.data.sName);
       console.log('sbakas');
       this.dataform = true;
+      console.log(res);
     }
   });
 

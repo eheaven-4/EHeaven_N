@@ -46,7 +46,7 @@ router.get("/searchPayment/:pYear/:sClass/:pName", function (req, res) {
     const clas = req.params.sClass;
     const ptype = req.params.pName;
 
-    console.log("aaaaaaaaaaaaaaaaaaaaaaaaaabbbbbbbbbbbbbbbbbbbbbbbcccccccccccccccc");
+    console.log("aaaaaaaaaaa");
     payment.find({ pYear:year , sClass:clas , pName:ptype})
         .exec()
         .then(result => {
