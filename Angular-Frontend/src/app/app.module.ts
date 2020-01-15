@@ -53,6 +53,9 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
 import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/mark-bulk-add/mark-bulk-add.component';
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
+import {Component} from '@angular/core';
+import {animate, state, style, transition, trigger} from '@angular/animations';
+
 
 
 
