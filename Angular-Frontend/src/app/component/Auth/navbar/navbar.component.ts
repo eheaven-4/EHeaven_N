@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
@@ -15,7 +14,7 @@ interface userType {  //load interface for get user type
 })
 
 export class NavbarComponent implements OnInit {
-
+  
   user: any;
   authtoken: any;
   userid: String;
@@ -26,7 +25,6 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private router: Router,
-    private cookieService: CookieService,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
   ) { }
@@ -34,6 +32,8 @@ export class NavbarComponent implements OnInit {
   ngOnInit() {
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
     this.usertype = myCookie.usertype;
+    
+  
   }
 
   logoutUser() {
@@ -41,14 +41,14 @@ export class NavbarComponent implements OnInit {
     this.authtoken = null;
     this.user = null;
     localStorage.clear();
-
-    this.cookieService.delete('userAuth');
+    this.cookies.logingstatus=false;
+    this.cookies.setCookie("userAuth","",-1);
     let config = new MatSnackBarConfig();
     config.duration = true ? 2000 : 0;
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
+    this.cookies.logingstatus=false;
     this.router.navigate(['/login']);
 
-    window.location.reload();     //reload the page
   }
 
 
