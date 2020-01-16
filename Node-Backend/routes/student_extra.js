@@ -19,24 +19,14 @@ router.post("/requestExtracurr", function (req, res) {
         micapprovState: req.body.micapprovState,
         state: req.body.state,
     });
-    console.log('Hello at server');
-    // // console.log(newRequest);
-    // newRequest
-    //     .save() 
-    //     .then(result => {
-    //         console.log(result)
-    //         res.json({ state: true, msg: "Data inserted Successfully..!" });
-    //     })
-    //     .catch(error => {
-    //         console.log(error)
-    //         res.json({ state: false, msg: "Data inserting Unsuccessfull..!" });
-    //     })
+    //console.log('Hello at server');
+   
     requestExtracurr.addLog(newRequest,function (err,request){
         if(err){
-            res.json({state:false,msg:"Did not insert new attendance"});
+            res.json({state:false,msg:"New record insertion failed"});
         }
         if(request){
-            res.json({state:true,msg:"New Attendence inserted"});
+            res.json({state:true,msg:"New record inserted"});
         }
     });
 });

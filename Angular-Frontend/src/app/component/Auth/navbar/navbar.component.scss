@@ -36,7 +36,11 @@
 }
 
 .btn {
-  color: #2bb5f5;
+  color: #ffffff;
   height: 62px;
   font-family: side_font;
+}
+.btn:hover{
+  color: #2bb5f5;
+  transition: 0.5s;
 }

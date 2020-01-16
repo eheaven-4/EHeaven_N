@@ -22,22 +22,14 @@ export class ContactUsComponent implements OnInit {
 
   submitted = false;
 
-  ContactusForm = this.fb.group({
-    name: ['', [Validators.required, Validators.maxLength(100)]],
-    email: ['', Validators.required],
-    mobile: ['', [Validators.required, Validators.maxLength(10)]],
-    nic: ['', [Validators.required, Validators.maxLength(13)]],
-    subject: ['', [Validators.required, Validators.maxLength(100)]],
-    message: ['', [Validators.required, Validators.maxLength(800)]]
+  ContactusForm = new FormGroup({
+    name:new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    email:new FormControl('', Validators.required),
+    mobile:new FormControl('', [Validators.required,Validators.maxLength(10)]),
+    // nic:new FormControl('', Validators.maxLength(13)),
+    subject:new FormControl('', [Validators.required,Validators.maxLength(70)]),
+    message:new FormControl('', [Validators.required,Validators.maxLength(1200)]),
   })
-  // ContactusForm = new FormGroup({
-  //   name:new FormControl(''),
-  //   email:new FormControl(''),
-  //   mobile:new FormControl(''),
-  //   nic:new FormControl(''),
-  //   subject:new FormControl(''),
-  //   message:new FormControl(''),
-  // })
 
   ngOnInit() {
   }
@@ -52,7 +44,7 @@ export class ContactUsComponent implements OnInit {
     this.ContactusForm.reset();
   }
 
-  sendMessage() {
+  sendMessage(form) {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -60,51 +52,43 @@ export class ContactUsComponent implements OnInit {
       return;
     }
     else {
-      const formData = new FormData();
-
-      formData.append('name', this.ContactusForm.value.name)
-      formData.append('email', this.ContactusForm.value.email)
-      formData.append('mobile', this.ContactusForm.value.mobile)
-      formData.append('nic', this.ContactusForm.value.nic)
-      formData.append('subject', this.ContactusForm.value.subject)
-      formData.append('message', this.ContactusForm.value.message)
-
+     
       var url = "http://localhost:3000/contact_us/sendMessage";
 
-      //send request to  the server
-      // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      //   data: {
-      //     message: 'Are you sure want to send message?',
-      //     buttonText: {
-      //       ok: 'Yes',
-      //       cancel: 'No'
-      //     }
-      //   }
-      // });
-      // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      //   if (confirmed) {
+      // send request to  the server
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to send message?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
       console.log("in");
-      this.http.post<any>(url, formData).subscribe(res => {
+      this.http.post<any>(url, form).subscribe(res => {
         console.log("out");
 
-        // if (res.state) {
-        //   console.log(res.msg);
-        //   let config = new MatSnackBarConfig();
-        //   config.duration = true ? 2000 : 0;
-        //   this.snackBar.open("Message Successfully Sent..! ", true ? "Done" : undefined, config);
+        if (res.state) {
+          console.log(res.msg);
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Message Successfully Sent..! ", true ? "Done" : undefined, config);
 
-        //   this.router.navigate(['../contact_us']);
-        // }
-        // else {
-        //   console.log(res.msg);
-        //   let config = new MatSnackBarConfig();
-        //   config.duration = true ? 2000 : 0;
-        //   this.snackBar.open("Message is not send..! ", true ? "Done" : undefined, config);
-        //   this.router.navigate(['../contact_us']);
-        // }
+          this.router.navigate(['../contact_us']);
+        }
+        else {
+          console.log(res.msg);
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 2000 : 0;
+          this.snackBar.open("Message is not send..! ", true ? "Done" : undefined, config);
+          this.router.navigate(['../contact_us']);
+        }
       });
-      // }
-      // })
+      }
+      })
     }
   }
 }

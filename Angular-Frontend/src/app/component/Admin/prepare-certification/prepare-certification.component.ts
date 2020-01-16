@@ -482,13 +482,14 @@ submitOlCert() {
 acceptCert(certRequest){
   // console.log(certRequest._id);
   var objId = certRequest._id;
-  var url = "http://localhost:3000/certification/acceptCert"; //accept certification requests
+  console.log(objId);
+  var url = "http://localhost:3000/certification/acceptCert/"+certRequest._id; //accept certification requests
 
-  // this.http.post<any>(url + '/' +objId).subscribe(res => {
-  //   alert('Successful');
-  // }, (err) => {
-  //   console.log(err);
-  // });
+  this.http.post(url,null).subscribe(res => {
+    alert('Successful');
+  }, (err) => {
+    console.log(err);
+  });
 
   window.location.reload();
 
