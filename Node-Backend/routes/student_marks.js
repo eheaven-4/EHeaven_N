@@ -57,15 +57,7 @@ router.get("/studentAverage/:userid/:term/:year/:class", function (req, res) {
         .exec()
         .then(function (resp) {
             res.send(resp)
-            st = resp
-            // marks.push(resp)
         });
-
-    // marks.forEach(function(item, index, array) {
-    //     console.log(item, index);
-    // })
-  
-
 })
 
 module.exports = router;
