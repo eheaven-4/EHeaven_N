@@ -77,7 +77,7 @@
                   <mat-select style="text-align: left;" class="browser-default custom-select mb-4 box_border "
                     [(ngModel)]="pName" name="pName" formControlName="pName">
                     <mat-option style="text-align: left" *ngFor='let pName of   paymenttypes' [value]='pName'
-                      formControlName="pName">
+                      >
                       {{pName}}</mat-option>
                   </mat-select>
                 </div>
@@ -110,29 +110,29 @@
 
           <div class="container">
             <div *ngIf="!addnew">
-              <form [formGroup]="paymentView" style="margin-top: 50px;">
+              <form [formGroup]="PaymentForm" style="margin-top: 50px;">
 
 
                 <div class="row" style="text-align: center;margin-bottom: 50px;">
 
 
 
-                  <div class="col-md-2 top_txt">
+                  <!-- <div class="col-md-2 top_txt">
                     <label>Student Id :</label>
 
                     <input type="text" class="form-control box_border" formControlName="sId" name="sId"
                       style="text-align: left">
-                  </div>
+                  </div> -->
 
 
 
                   <div class="col-md-2 top_txt">
                     <label>Year Required :</label>
-                    <mat-select #t class="browser-default custom-select mb-4 box_border" [(ngModel)]="year" name="year"
-                      formControlName="year">
+                    <mat-select #t class="browser-default custom-select mb-4 box_border" [(ngModel)]="pYear" name="pYear"
+                      formControlName="pYear">
 
-                      <mat-option style="text-align: left" *ngFor='let year of myYears' [value]='year' [value]="year">
-                        {{ year }}
+                      <mat-option style="text-align: left" *ngFor='let pYear of myYears' [value]="pYear"  >
+                        {{ pYear }}
                       </mat-option>
                     </mat-select>
                   </div>
@@ -140,23 +140,23 @@
                   <div class="col-md-2 top_txt">
                     <label>Class Name Required :</label>
 
-                    <input type="text" class="form-control box_border" formControlName="className" name="className"
+                    <input type="text" class="form-control box_border" formControlName="sClass" name="sClass"
                       placeholder="1A" matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
                   </div>
 
                   <div class="col-md-4 top_txt">
                     <label> Payment Type Required :</label>
-                    <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="paymenttype"
-                      name="paymenttype" formControlName="paymenttype">
-                      <mat-option style="text-align: left" *ngFor='let paymenttype of paymenttypes'
-                        [value]='paymenttype' formControlName="paymenttype">
-                        {{paymenttype}}</mat-option>
+                    <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="pName"
+                      name="pName" formControlName="pName">
+                      <mat-option style="text-align: left" *ngFor='let pName of paymenttypes'
+                        [value]="pName" >
+                        {{pName}}</mat-option>
                     </mat-select>
                   </div>
 
 
                   <div class="col-md-2">
-                    <button mat-raised-button class="search_btn" (click)="myProgress()"><img
+                    <button mat-raised-button class="search_btn" (click)="searchPayment()"><img
                         src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Search</button>
                   </div>
 
@@ -173,20 +173,20 @@
                       <tr>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
                           ID</th>
+                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student Name
+                          </th>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Payment
                           Year</th>
-                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
-                          Class</th>
                         <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Payment
                           Type</th>
                       </tr>
                     </thead>
-                    <tbody *ngFor="let stdata of csNames">
-                      <tr (click)="studentProgress()">
-                        <td class="stid">{{stdata.userid}}</td>
-                        <td class="stname">{{stdata.name}}</td>
-                        <td style="margin: auto;">{{stdata.marks}}</td>
-                        <td style="margin: auto;">{{stdata.position}}</td>
+                    <tbody *ngFor="let pdata of paymentdata">
+                      <tr>
+                        <td class="stid">{{pdata.sId}}</td>
+                        <td class="stname">{{pdata.sName}}</td>
+                        <td style="margin: auto;">{{pdata.pYear}}</td>
+                        <td style="margin: auto;">{{pdata.pName}</td>
                       </tr>
                     </tbody>
                   </table>

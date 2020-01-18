@@ -11,7 +11,7 @@ import {CookieService} from 'ngx-cookie-service';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  
   userid: String;
   password: String;
 
@@ -29,14 +29,12 @@ export class LoginComponent implements OnInit {
     private ngcookie:CookieService,
 
   ) { }
-  ngOnInit() { 
-    if (!localStorage.getItem('foo')) { 
-      localStorage.setItem('foo', 'no reload') 
-      location.reload() 
-    } else {
-      localStorage.removeItem('foo'); 
+  ngOnInit() {
+    if(this.cookies.logingstatus===true){
+      var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+      this.router.navigate([myCookie.userid,'menu']);
     }
-  }
+   }
 
   userLogin() {
     const user = {
@@ -63,16 +61,12 @@ export class LoginComponent implements OnInit {
         if (res.state == true) {
           this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
           var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-          this.ngcookie.set("userid",res.user.userid);
-          this.ngcookie.set("name",res.user.name);
-          this.ngcookie.set("usertype",res.user.usertype);
-          // this.ngcookie.set("userid",res.user.userid);
-          // this.ngcookie.set("userid",res.user.userid);
           console.log(myCookie.userid);
           var id = myCookie.userid;
           
           if(id){
             this.router.navigate([myCookie.userid,'menu']);
+            console.log(this.cookies.getCookie(""));
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
@@ -80,9 +74,6 @@ export class LoginComponent implements OnInit {
           else{
             this.router.navigate(['/login']);
           }
-
-          
-          
         }
         else {
           console.log(res.msg);

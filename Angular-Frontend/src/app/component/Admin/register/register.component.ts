@@ -7,6 +7,8 @@ import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
+
+
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',

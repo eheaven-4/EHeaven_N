@@ -1,16 +1,27 @@
 import { Injectable } from '@angular/core';
+import {CookieData} from './CookieData';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MycookiesService {
 
-  constructor() { }
+export class MycookiesService {
+  logingstatus=false;
+  userData:CookieData=null;
+  constructor() { 
+    // var temp=localStorage.getItem("exd");
+    if(this.getCookie("userAuth")!=''){
+      this.logingstatus=true;
+    }else{
+      this.logingstatus=false;
+    }
+  }
 
   setCookie(name: string, value: string, expireDays: number, path: string = '') {
+    this.logingstatus=true;
     let d: Date = new Date();
     d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-    let expires: string = `expires=${d.toUTCString()}`;
+    let expires: string = `[expires]=${d.toUTCString()}`;
     let cpath: string = path ? `; path=${path}` : '';
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
@@ -24,9 +35,12 @@ export class MycookiesService {
     for (let i: number = 0; i < caLen; i += 1) {
       c = ca[i].replace(/^\s+/g, '');
       if (c.indexOf(cookieName) == 0) {
+        console.log(c.substring(cookieName.length, c.length))
         return c.substring(cookieName.length, c.length);
       }
     }
     return '';
   }
+  
+  
 }
