@@ -12,6 +12,13 @@ interface subjectsArray {
 interface yearArrray {
   year: String
 }
+interface classStudents {
+  _id: String,
+  userid: String,
+  name: String,
+  marks: String,
+  position: String
+}
 
 @Component({
   selector: 'app-student-progress',
@@ -32,10 +39,18 @@ export class StudentProgressComponent implements OnInit {
   cookie
   submitted = false;
 
+  year;
+  subject;
+  term;
+  className;
+
+
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
-  myTerm = ['1st Term', '2nd Term', '3rd Term',]
+  myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load years to the combo-box
+  stuClzList: classStudents[] = [];
 
+  /*bar chart options*/
   barChartOptions: ChartOptions = {
     responsive: true,
   };
@@ -58,13 +73,17 @@ export class StudentProgressComponent implements OnInit {
       pointHoverBorderColor: 'rgba(225,10,24,0.2)'
     }
   ];
-
-  StudentProgressForm = this.fb.group({
+  /************************************************************* */
+  DataForm = this.fb.group({
     year: ['', Validators.required],
     subject: ['', Validators.required],
     term: ['', Validators.required],
     className: [''],
   });
+
+
+
+  /************************************************************ */
 
   ngOnInit() {
 
@@ -88,48 +107,41 @@ export class StudentProgressComponent implements OnInit {
   }
 
   get f() {
-    return this.StudentProgressForm.controls;
+    return this.DataForm.controls;
   }
 
   onReset() {
     this.submitted = false;
-    this.StudentProgressForm.reset();
+    this.DataForm.reset();
   }
 
-  myProgress() {
-    this.submitted = true;
+  /*student data*/
 
-    // stop here if form is invalid
-    if (this.StudentProgressForm.invalid) {
-      return;
-    }
-    else {
-      const formData = new FormData();
 
-      formData.append('subject', this.StudentProgressForm.value.year)
-      formData.append('year', this.StudentProgressForm.value.subject)
-      formData.append('semester', this.StudentProgressForm.value.term)
 
-      var url = "http://localhost:3000/student_progress/userAsStudent"
+  /*teacher page data*/
+  classStudentData() {
+    if (this.DataForm.value.term == '1st Term') { this.term = 1 }
+    else if (this.DataForm.value.term == '2nd Term') { this.term = 2 }
+    else if (this.DataForm.value.term == '3rd Term') { this.term = 3 }
 
-      this.http.post<any>(url, formData).subscribe(res => {
-        console.log(res.msg);
-      });
-    }
+    // this.year = this.DataForm.value.year
+    // this.subject = this.DataForm.value.subject
+    // this.className = this.DataForm.value.classname
+
+    const Studata = {
+      term: this.term,
+      classname: this.DataForm.value.className,
+      year: this.DataForm.value.year,
+    };
+
+    const url = 'http://localhost:3000/student_marks/studentAverages'
+
+    this.http.post<any>(url,Studata).subscribe(res => {
+      // this.stuClzList = res;
+      console.log(res)
+    })
   }
-  studentProgress() {
-    const formData = new FormData();
 
-    formData.append('subject', this.StudentProgressForm.value.year)
-    formData.append('year', this.StudentProgressForm.value.subject)
-    formData.append('semester', this.StudentProgressForm.value.term)
-    formData.append('semester', this.StudentProgressForm.value.className)
-
-    var url = "http://localhost:3000/student_progress/userAsTeacher"
-
-    this.http.post<any>(url, formData).subscribe(res => {
-      console.log(res.msg);
-    });
-  }
 
 }
