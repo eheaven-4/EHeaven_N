@@ -29,7 +29,7 @@ router.post("/addLog", function (request, response) {
 });
 
 
-//find one student data
+//find one student data (student position, and the avarage)
 router.post("/studentAverage", function (req, res) {
     const year = req.body.year
     const term = req.body.term
@@ -70,17 +70,17 @@ router.post("/studentAverage", function (req, res) {
             }
             res.send({
                 state: true,
-                data :{
-                stuPosition: stuPosition,
-                stuAverage: stuAverage,
-                classname : classname
+                data: {
+                    stuPosition: stuPosition,
+                    stuAverage: stuAverage,
+                    classname: classname
                 }
             })
         });
 })
 
 
-//find all students marks data with final marks
+//find all students marks data with final marks(for teacher)
 router.post("/classAverages", function (req, res) {
     const year = req.body.year
     const term = req.body.term
@@ -88,7 +88,7 @@ router.post("/classAverages", function (req, res) {
     const classname = req.body.classname
 
     var arr2 = new Array();
-    
+
     mark.aggregate([
         {
             $match: { "year": year, "term": term, "classname": classname }
@@ -113,12 +113,44 @@ router.post("/classAverages", function (req, res) {
 
             var j = 0
             for (j = 0; j < arr2.length; j++) {
-                console.log(arr2[j]);   
+                console.log(arr2[j]);
             }
             res.send(arr2)
         });
 })
 
-//search with subject teacher
+//search subjects with marks
+router.get("/subjectMarks/:id", function (req, res) {
+    const userid = req.params.id;
+
+    var date = new Date();
+    const thisYear = date.getFullYear();
+    const lastYear = thisYear - 1;
+
+    var arr2 = new Array();
+
+    mark.find({year:{$gte: lastYear}})
+        .exec()
+        .then(docs => {
+            var i = 0;
+            for (i = 0; i < docs.length; i++) {
+                arr2.push(docs[i])
+            }
+
+            var j = 0
+            for (j = 0; j < arr2.length; j++) {
+                console.log(JSON.stringify(arr2[j].marks))
+                // if(arr2[j].marks.userid == userid){
+                    // res.send(arr2[j])
+                // }
+            }            
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 module.exports = router;
