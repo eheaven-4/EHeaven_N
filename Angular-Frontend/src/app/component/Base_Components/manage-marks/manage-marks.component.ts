@@ -37,7 +37,7 @@ export class ManageMarksComponent implements OnInit {
   dataform: Boolean = false;  //sata division default didn't show
   submitted = false;
   myYear: yearArrray[] = [];
-  mySubject: subjectsArray[] = [];  
+  mySubject: subjectsArray[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -125,7 +125,7 @@ export class ManageMarksComponent implements OnInit {
             this.csNames = res.data
             console.log(res);
           })
-          console.log(res)
+          console.log(res);
         }
       });
 
