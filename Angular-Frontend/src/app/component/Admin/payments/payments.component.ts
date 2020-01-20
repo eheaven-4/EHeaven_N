@@ -12,16 +12,13 @@ interface YearArray {
 }
 
 interface paymentdetaile {
+  _id: String;
   sId: string;
   sName: string;
   sClass: string;
   pName: string;
   pYear: string;
   payemnt: string;
-
-
-
-
 }
 
 @Component({
@@ -151,11 +148,10 @@ searchPayment() {
       config.duration = true ? 2000 : 0;
       this.snackBar.open('Error find in payments..! ', true ? 'Retry' : undefined, config);
     } else {
-      this.paymentdata = res.data;
-     // console.log(res.data.sName);
-      console.log('sbakas');
+      this.paymentdata = res;
       this.dataform = true;
-      console.log(res);
+      console.log(this.paymentdata);
+      //console.log(this.pName);
     }
   });
 
