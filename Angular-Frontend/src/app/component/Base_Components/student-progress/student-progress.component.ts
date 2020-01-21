@@ -13,12 +13,20 @@ interface yearArrray {
   year: String
 }
 interface classStudents {
-  _id: String,
-  userid: String,
-  name: String,
-  marks: String,
+  _id: String
+  userid: String
+  name: String
+  marks: String
   position: String
 }
+
+class subjectsFilter {
+  year: String
+  term: String
+  subject: String
+  mark: String
+}
+
 
 @Component({
   selector: 'app-student-progress',
@@ -38,17 +46,17 @@ export class StudentProgressComponent implements OnInit {
   usertype
   cookie
   submitted = false;
-
-  year;
-  subject;
-  term;
-  className;
-
+  userid
+  term
+  year
+  subject
+  className
 
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
   myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load years to the combo-box
   stuClzList: classStudents[] = [];
+  stuSubMarks : subjectsFilter[] = [];
 
   /*bar chart options*/
   barChartOptions: ChartOptions = {
@@ -88,7 +96,8 @@ export class StudentProgressComponent implements OnInit {
   ngOnInit() {
 
     this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    this.usertype = this.cookie.usertype;   // load user type to the userType array
+    this.usertype = this.cookie.usertype; // load user type to the userType array
+    this.userid = this.cookie.userid;
 
     var year = new Date().getFullYear();
     var years = [];
@@ -99,9 +108,22 @@ export class StudentProgressComponent implements OnInit {
       this.myYear[i] = years[i]
     }
 
-    /*get all th subject names*/
-    const url = "http://localhost:3000/class_management/getSubjects"
-    this.http.get<any>(url).subscribe(res => {
+    // /*get one student position and average */
+    // const url1 = "http://localhost:3000/student_marks/studentAverage"
+
+    /*find all students marks data with final marks(for teacher)*/
+    const url2 = "http://localhost:3000/student_marks/classAverages"
+
+    //search subjects with marks to list the subject marks in student portal
+    const url3 = "http://localhost:3000/student_marks/subjectMarks"
+    this.http.get<any>(url3 + "/" + this.userid).subscribe(res => {
+      this.stuSubMarks = res
+      console.log(this.stuSubMarks);
+    })
+
+    /*get all the subject names for the subject serchin combo box*/
+    const url4 = "http://localhost:3000/class_management/getSubjects"
+    this.http.get<any>(url4).subscribe(res => {
       this.mySubject = res.data;
     });
   }
@@ -115,10 +137,6 @@ export class StudentProgressComponent implements OnInit {
     this.DataForm.reset();
   }
 
-  /*student data*/
-
-
-
   /*teacher page data*/
   classStudentData() {
     if (this.DataForm.value.term == '1st Term') { this.term = 1 }
@@ -126,18 +144,18 @@ export class StudentProgressComponent implements OnInit {
     else if (this.DataForm.value.term == '3rd Term') { this.term = 3 }
 
     // this.year = this.DataForm.value.year
-    // this.subject = this.DataForm.value.subject
     // this.className = this.DataForm.value.classname
 
     const Studata = {
       term: this.term,
       classname: this.DataForm.value.className,
       year: this.DataForm.value.year,
+      userid: this.userid
     };
 
-    const url = 'http://localhost:3000/student_marks/studentAverages'
+    const url = 'http://localhost:3000/student_marks/studentAverage'
 
-    this.http.post<any>(url,Studata).subscribe(res => {
+    this.http.post<any>(url, Studata).subscribe(res => {
       // this.stuClzList = res;
       console.log(res)
     })
