@@ -13,7 +13,6 @@
 ##### Contact-us - done
 ##### academics - done
 ##### News feeds - done   
-##### Marks Add - in progress
 ##### Class registraton - done  
 ##### Time table registration - done
 ##### Notification - done
@@ -25,3 +24,4 @@
 ##### Event Handling - awiting
 ##### Admin - inprogress
 ##### UI designing - inprogress
+##### Marks Add - in progress
