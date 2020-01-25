@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
+// import { Mark } from './mark-bulk-add/mark-bulk-add.component';
+import { Mark} from './mark';
+import { Marksheet} from './mark';
+
 
 interface classTeacher {
   _id: String,
@@ -23,6 +27,7 @@ interface subjectsArray {
   subName: String,
 }
 
+
 @Component({
   selector: 'app-manage-marks',
   templateUrl: './manage-marks.component.html',
@@ -37,7 +42,9 @@ export class ManageMarksComponent implements OnInit {
   dataform: Boolean = false;  //sata division default didn't show
   submitted = false;
   myYear: yearArrray[] = [];
-  mySubject: subjectsArray[] = [];  
+  mySubject: subjectsArray[] = [];
+  FinalMark=new Marksheet();
+  students=[];  
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +64,7 @@ export class ManageMarksComponent implements OnInit {
     semester: ['', Validators.required],
     studentId: ['', Validators.required],
     studentName: ['', Validators.required],
-    subjectMark: ['', Validators.required],
+    subjectMark: ['', Validators.required],  
   });
 
   ngOnInit() {
@@ -79,6 +86,7 @@ export class ManageMarksComponent implements OnInit {
     const url = "http://localhost:3000/class_management/getSubjects"
     this.http.get<any>(url).subscribe(res => {
       this.mySubject = res.data;
+
     });
 
 
@@ -90,14 +98,18 @@ export class ManageMarksComponent implements OnInit {
   get f2() {
     return this.StudentMarksForm.controls;
   }
+  setMark(i,event){
+    console.log(event);
 
+
+  }
   onReset() {
     this.submitted = false;
     this.ClassSearchForm.reset();
     this.StudentMarksForm.reset();
   }
 
-  searchStudents(event, className) {
+  searchStudents(event,className) {
     this.submitted = true;
 
     // stop here if form is invalid
@@ -107,6 +119,8 @@ export class ManageMarksComponent implements OnInit {
     else {
 
       const cName = className;
+      this.FinalMark.classname=cName;
+      
 
       var url1 = "http://localhost:3000/class_management/getClassTeacherName"
       var url2 = "http://localhost:3000/users/getStudentsNames/"
@@ -118,12 +132,20 @@ export class ManageMarksComponent implements OnInit {
           this.snackBar.open("Error find in data..! ", true ? "Retry" : undefined, config);
         }
         else {
-          this.dataform = true;
+          
 
           this.ctName = res.data
           this.http.get<any>(url2 + cName).subscribe(res => {
             this.csNames = res.data
-            console.log(res);
+           for(var i=0;i<this.csNames.length;i++){
+              var temp=new Mark();
+              temp.name=this.csNames[i].name.toString();
+              temp.userid=this.csNames[i].userid.toString();
+              console.log(temp);
+              this.students.push(temp);
+              this.dataform = true;
+            }
+            console.log(res.data);
           })
           console.log(res)
         }
@@ -135,9 +157,10 @@ export class ManageMarksComponent implements OnInit {
   submitMarks() {
     const formData = new FormData();
 
-    formData.append('subject', this.StudentMarksForm.value.subject)
-    formData.append('year', this.StudentMarksForm.value.year)
-    formData.append('semester', this.StudentMarksForm.value.semester)
+    console.log(this.StudentMarksForm.value.subject)
+    // formData.append('year', this.StudentMarksForm.value.year)
+    // formData.append('semester', this.StudentMarksForm.value.semester)
+    // console.log(formData.get('subject'));
 
     // for (var i = 0; i < this.csNames.length; i++) {
     //   formData.append('marks', this.csNames[i].name.value.);

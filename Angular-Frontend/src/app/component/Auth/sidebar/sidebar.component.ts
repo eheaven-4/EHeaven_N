@@ -29,9 +29,6 @@ export class SidebarComponent implements OnInit {
   userAcademics() {
 
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/academic_subject' + '/' + id]);
       this.router.navigate(['../',this.userDetail.userid,'academic_subject']);
     }
     else {
@@ -45,8 +42,6 @@ export class SidebarComponent implements OnInit {
   userNotification() {
 
     if (this.myCookie) {
-      // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      // var id = userCookie.userid;
       this.router.navigate(['../',this.userDetail.userid,'notifications']);
     }
     else {
@@ -58,9 +53,7 @@ export class SidebarComponent implements OnInit {
   }
   userCertification() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/certification'],{relativeTo:this.route});
+     
       this.router.navigate(['../',this.userDetail.userid,'certification']);
     }
     else {
@@ -72,9 +65,7 @@ export class SidebarComponent implements OnInit {
   }
   userPrepCertification() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/prepare_certification'],{relativeTo:this.route});
+      
       this.router.navigate(['../',this.userDetail.userid,'prepare_certification']);
     }
     else {
@@ -87,10 +78,7 @@ export class SidebarComponent implements OnInit {
 
   userAttendence() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-
-      // this.router.navigate(['/attendance'],{relativeTo:this.route});
+     
       this.router.navigate(['../',this.userDetail.userid,'attendance']);
     }
     else {
@@ -103,9 +91,7 @@ export class SidebarComponent implements OnInit {
 
   userExtraCur() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/extra_curricular'],{relativeTo:this.route});
+      
       this.router.navigate(['../',this.userDetail.userid,'extra_curricular']);
     }
     else {
@@ -118,9 +104,7 @@ export class SidebarComponent implements OnInit {
 
   userStudentMarks() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/manage_marks'],{relativeTo:this.route});
+      
       this.router.navigate(['../',this.userDetail.userid,'manage_marks']);
     }
     else {
@@ -133,9 +117,7 @@ export class SidebarComponent implements OnInit {
 
   userStudentProg() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/student_progress'],{relativeTo:this.route});
+     
       this.router.navigate(['../',this.userDetail.userid,'student_progress']);
     }
     else {
@@ -147,9 +129,7 @@ export class SidebarComponent implements OnInit {
   }
   adminDashboard() {
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['/admin_dashboard'],{relativeTo:this.route});
+     
       this.router.navigate(['../',this.userDetail.userid,'admin_dashboard']);
     }
     else {

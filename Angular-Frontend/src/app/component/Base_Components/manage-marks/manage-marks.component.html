@@ -81,11 +81,11 @@
                                                     <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject Marks</th>
                                                 </tr>
                                             </thead>
-                                            <tbody *ngFor = "let stdata of csNames">
+                                            <tbody *ngFor = "let stdata of csNames; i as index;">
                                                 <tr>
                                                     <td class="stid">{{stdata.userid}}</td>
                                                     <td class="stname">{{stdata.name}}</td>
-                                                    <td style="margin: auto;"><input type="text" class="form-control box_border stmarks" ></td>
+                                                    <td style="margin: auto;"><input type="text" class="form-control box_border stmarks" name="{{i}}"  (blur)="setMark(i,$event.target.value)"></td>
                                                 </tr>
                                             </tbody>
                                         </table>

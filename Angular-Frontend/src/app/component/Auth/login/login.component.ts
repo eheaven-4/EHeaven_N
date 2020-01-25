@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import {CookieService} from 'ngx-cookie-service';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
 @Component({
   selector: 'app-login',
@@ -14,11 +14,9 @@ export class LoginComponent implements OnInit {
   
   userid: String;
   password: String;
-
   user_id: any;
   user: any;
   authtoken: any;
-
   mySubscription: any;
 
   constructor(
@@ -26,7 +24,6 @@ export class LoginComponent implements OnInit {
     private http: HttpClient,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
-    private ngcookie:CookieService,
 
   ) { }
   ngOnInit() {
@@ -56,20 +53,18 @@ export class LoginComponent implements OnInit {
     }
     else{
       this.http.post<any>(url, user).subscribe(res => {
-        console.log(res.user);
+        
         
         if (res.state == true) {
           this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
           var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-          console.log(myCookie.userid);
           var id = myCookie.userid;
           
           if(id){
             this.router.navigate([myCookie.userid,'menu']);
-            console.log(this.cookies.getCookie(""));
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
-            this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
+            this.snackBar.open("Successfully Logged In..! ", true ? "Don e" : undefined, config);
           }
           else{
             this.router.navigate(['/login']);
