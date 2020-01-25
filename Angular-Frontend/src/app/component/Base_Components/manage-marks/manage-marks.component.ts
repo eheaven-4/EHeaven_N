@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
-// import { Mark } from './mark-bulk-add/mark-bulk-add.component';
 import { Mark} from './mark';
 import { Marksheet} from './mark';
+
 
 
 interface classTeacher {
@@ -44,7 +44,7 @@ export class ManageMarksComponent implements OnInit {
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
   FinalMark=new Marksheet();
-  students=[];  
+  students:Array<Mark>=[];  
 
   constructor(
     private fb: FormBuilder,
@@ -52,16 +52,12 @@ export class ManageMarksComponent implements OnInit {
     private http: HttpClient,
   ) { }
 
-  mySemester = [
-    '1 st Semester',
-    '2 nd Semester',
-    '3 rd Semester'
-  ];
+  myTerm = [1,2,3];
 
   StudentMarksForm = this.fb.group({
     subject: ['', Validators.required],
     year: ['', Validators.required],
-    semester: ['', Validators.required],
+    term: ['', Validators.required],
     studentId: ['', Validators.required],
     studentName: ['', Validators.required],
     subjectMark: ['', Validators.required],  
@@ -98,8 +94,11 @@ export class ManageMarksComponent implements OnInit {
   get f2() {
     return this.StudentMarksForm.controls;
   }
-  setMark(i,event){
-    console.log(event);
+  setMark(i,mark){
+    
+    
+    
+    this.students[i].mark=mark;
 
 
   }
@@ -158,6 +157,25 @@ export class ManageMarksComponent implements OnInit {
     const formData = new FormData();
 
     console.log(this.StudentMarksForm.value.subject)
+    this.FinalMark.subject=this.StudentMarksForm.value.subject;
+    this.FinalMark.term=this.StudentMarksForm.value.term;
+    this.FinalMark.year=this.StudentMarksForm.value.year;
+    this.FinalMark.marks=this.students;
+    console.log(this.FinalMark);
+    this.http.post<any>('http://localhost:3000/student_marks/addLog',this.FinalMark)
+    .subscribe(
+      data => {
+        console.log('Success', data)
+        window.location.reload();
+      },
+      error =>{ 
+        console.error('Error!', error)
+        
+      
+      }
+    );
+    
+
     // formData.append('year', this.StudentMarksForm.value.year)
     // formData.append('semester', this.StudentMarksForm.value.semester)
     // console.log(formData.get('subject'));

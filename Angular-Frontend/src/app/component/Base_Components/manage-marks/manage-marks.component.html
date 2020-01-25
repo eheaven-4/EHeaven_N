@@ -66,9 +66,9 @@
                                                 </mat-select>
                                             </div>
                                             <div class="col-md-3">
-                                                <p class="top_txt">Semester : </p>
-                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="semester" [(ngModel)]="semester" name="semester">
-                                                    <mat-option style="text-align: left" *ngFor='let semester of mySemester' [value]="semester">{{ semester }}
+                                                <p class="top_txt">Term : </p>
+                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="term" [(ngModel)]="term" name="term">
+                                                    <mat-option style="text-align: left" *ngFor='let term of myTerm' [value]="term">{{ term+" Term" }}
                                                     </mat-option>
                                                 </mat-select>
                                             </div>
@@ -81,7 +81,7 @@
                                                     <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject Marks</th>
                                                 </tr>
                                             </thead>
-                                            <tbody *ngFor = "let stdata of csNames; i as index;">
+                                            <tbody *ngFor = "let stdata of csNames; index as i;">
                                                 <tr>
                                                     <td class="stid">{{stdata.userid}}</td>
                                                     <td class="stname">{{stdata.name}}</td>
