@@ -29,18 +29,21 @@ router.post("/addLog", function (request, response) {
 });
 
 
-//find student average
-router.get("/studentAverage/:userid/:term/:year/:class", function (req, res) {
-    const userid = req.params.userid
-    const term = req.params.term
-    const year = req.params.year
-    // const subject = req.params.userid
-    const classname = req.params.class
+//find one student data (student position, and the avarage)
+router.post("/studentAverage", function (req, res) {
+    const year = req.body.year
+    const term = req.body.term
+    const userid = req.body.userid
+    const classname = req.body.classname
 
-    let marks = []
+    console.log(year + term + userid + classname);
+
+    var stuPosition;
+    var stuAverage;
+    var arr1 = new Array();
     mark.aggregate([
         {
-            $match: { "year": year, "term": term }
+            $match: { "year": year, "term": term, "classname": classname }
         },
         {
             $unwind: "$marks"
@@ -48,7 +51,6 @@ router.get("/studentAverage/:userid/:term/:year/:class", function (req, res) {
         {
             $group: {
                 _id: "$marks.userid",
-                sum: { $sum: { $toInt: "$marks.mark" } },
                 avg: { $avg: { $toInt: "$marks.mark" } },
             }
         }
@@ -56,16 +58,112 @@ router.get("/studentAverage/:userid/:term/:year/:class", function (req, res) {
         .sort({ _id: 1 })
         .exec()
         .then(function (resp) {
-            res.send(resp)
-            st = resp
-            // marks.push(resp)
+            var i = 0;
+            for (i = 0; i < resp.length; i++) {
+                arr1.push(resp[i])
+            }
+
+            var j = 0
+            for (j = 0; j < arr1.length; j++) {
+                if (arr1[j]._id == userid) {
+                    stuPosition = j + 1
+                    stuAverage = Math.floor(arr1[j].avg).toFixed(4)
+                }
+            }
+            res.send({
+                state: true,
+                data: {
+                    stuPosition: stuPosition,
+                    stuAverage: stuAverage,
+                    classname: classname
+                }
+            })
         });
-
-    // marks.forEach(function(item, index, array) {
-    //     console.log(item, index);
-    // })
-  
-
 })
+
+
+//find all students marks data with final marks(for teacher)
+router.post("/classAverages", function (req, res) {
+    const year = req.body.year
+    const term = req.body.term
+    // const subject = req.params.subject
+    const classname = req.body.classname
+
+    var arr2 = new Array();
+
+    mark.aggregate([
+        {
+            $match: { "year": year, "term": term, "classname": classname }
+        },
+        {
+            $unwind: "$marks"
+        },
+        {
+            $group: {
+                _id: "$marks.userid",
+                avg: { $avg: { $toInt: "$marks.mark" } }
+            }
+        }
+    ])
+        .sort({ _id: 1 })
+        .exec()
+        .then(function (resp) {
+            var i = 0;
+            for (i = 0; i < resp.length; i++) {
+                arr2.push(resp[i])
+            }
+
+            var j = 0
+            for (j = 0; j < arr2.length; j++) {
+                console.log(arr2[j]);
+            }
+            res.send(arr2)
+        });
+})
+class stuSubMarks {
+    constructor(year, term, subject, marks) {
+        this.year = year;
+        this.term = term;
+        this.subject = subject;
+        this.marks = marks
+    }
+}
+//search subjects with marks
+router.get("/subjectMarks/:id", function (req, res) {
+    const userid = req.params.id;
+
+    var date = new Date();
+    const thisYear = date.getFullYear();
+    const lastYear = thisYear - 1;
+
+    var arr2 = new Array();   //all data push to this array
+    var arr1 = new Array();
+
+    mark.find({ year: { $gte: lastYear } })
+        .exec()
+        .then(docs => {
+            var i = 0;
+            for (i = 0; i < docs.length; i++) {
+                arr2.push(docs[i])
+            }
+            var j = 0
+
+            for (j = 0; j < arr2.length; j++) {
+                arr2[j].marks.forEach(element => {
+                    if (element.userid == userid) {
+                        var st = new stuSubMarks(arr2[j].year, arr2[j].term, arr2[j].subject, element.mark)
+                        arr1.push(st)
+                    }
+                });
+            }
+            res.send(arr1)
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 module.exports = router;

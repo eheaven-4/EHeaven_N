@@ -74,9 +74,9 @@ router.get("/notAttachment/:filename", function (req, res) {
 
 //Approve botton status update 
 router.get('/approve/:_id', (req, res, next) => {
-    console.log("Hello world");
+    // console.log("Hello world");
     const id = req.params._id;
-    console.log(id);
+    // console.log(id);
     Notification.update({ _id: id }, {
         $set: {
             state: "Approved"

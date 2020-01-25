@@ -7,182 +7,600 @@
                         <h2 class="topic">My Progress</h2>
                         <hr>
                     </div>
-                    <div style="text-align: center;">
-                        <img src="../../../assets/logo/logo.png" class="logo">
+
+                    <div style="padding-left: 50px; padding-right: 50px; padding-bottom: 50px">
+                        <mat-tab-group>
+
+                            <mat-tab label="Student Portal">
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="container" style="margin-bottom: 50px;margin-top: 50px; ">
+                                                <div class="row">
+                                                    <div class="chart-wrapper">
+                                                        <canvas baseChart [datasets]="barChartData"
+                                                            [labels]="barChartLabels" [options]="barChartOptions"
+                                                            [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                                            [chartType]="barChartType" [colors]="chartColors">
+                                                        </canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form [formGroup]="DataForm" style="margin-top: 80px;width: 90%;">
+                                                <div class="row top_txt">
+                                                    <label>Year Required :</label>
+                                                    <mat-select #t class="browser-default custom-select mb-4 border"
+                                                        [(ngModel)]="year" name="year" formControlName="year">
+
+                                                        <mat-option style="text-align: left" *ngFor='let year of myYear'
+                                                            [value]='year' [value]="year">{{ year }}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </div>
+                                                <div class="row top_txt">
+                                                    <label>Term Required :</label>
+                                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                                        [(ngModel)]="term" name="term" formControlName="term">
+                                                        <mat-option style="text-align: left" *ngFor='let term of myTerm'
+                                                            [value]="term">
+                                                            {{term}}</mat-option>
+                                                    </mat-select>
+                                                </div>
+                                                <div class="row top_txt">
+                                                    <label>Class Name Required :</label>
+
+                                                    <input type="text" class="form-control box_border"
+                                                        formControlName="className" name="className"
+                                                        matTooltip="Enter in block letters (i.e: 1A)"
+                                                        style="text-align: left">
+
+                                                </div>
+                                                <div class="row top_txt" style="margin-top:10px;">
+                                                    <button mat-raised-button class="search_btn"
+                                                        (click)="classStudentData()">
+                                                        <img src="../../../../assets/icons/searchengin-brands.svg"
+                                                            style="width: 20px">Search</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid" style="margin-bottom: 30px;">
+                                    <div class="row" style="margin: auto;">
+                                        <div class="col-md-6" *ngFor="let stmarks of stuSubMarks">
+                                            <mat-card style="height: 55px; margin-bottom: 10px;">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        {{stmarks.year}} - Term {{stmarks.term}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{stmarks.subject}}
+                                                    </div>
+                                                    <div class="col-md-2 ">
+                                                        {{stmarks.marks}}
+                                                    </div>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
+
+
+
+                                <!--Student View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row box1" matTooltip="Your {position} of {2019} {term}">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class position</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">19</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box2">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class name</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5D</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box3"
+                                                matTooltip="Your {subject} average whthin your class ">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in class</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1383</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="row box4"
+                                                matTooltip="Your {subject} average from all the section">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in school</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1733</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="container" style="margin-bottom: 50px; ">
+                                    <div class="row">
+                                        <div class="chart-wrapper">
+                                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                                [options]="barChartOptions" [plugins]="barChartPlugins"
+                                                [legend]="barChartLegend" [chartType]="barChartType"
+                                                [colors]="chartColors">
+                                            </canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <!--Teacher View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student
+                                                    ID</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student
+                                                    Name</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Average</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Position</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let stdata of stuClzList">
+                                            <tr (click)="studentProgress()">
+                                                <td class="stid">{{stdata._id}}</td>
+                                                <td class="stname">{{stdata.name}}</td>
+                                                <td style="margin: auto;">{{stdata.avg}}</td>
+                                                <td style="margin: auto;">{{stdata.position}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+
+
+                            </mat-tab>
+
+                            <mat-tab label="Teacher Class">
+                                <form [formGroup]="DataForm">
+                                    <div class="container">
+                                        <div class="row"
+                                            style="text-align: center;margin-bottom: 50px;margin-top: 50px;">
+                                            <div class="col-md-3 top_txt">
+                                                <label>Year Required :</label>
+                                                <mat-select #t class="browser-default custom-select mb-4 border"
+                                                    [(ngModel)]="year" name="year" formControlName="year">
+
+                                                    <mat-option style="text-align: left" *ngFor='let year of myYear'
+                                                        [value]='year' [value]="year">{{ year }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </div>
+
+
+
+                                            <div class="col-md-3 top_txt">
+                                                <label>Term Required :</label>
+                                                <mat-select class="browser-default custom-select mb-4 box_border"
+                                                    [(ngModel)]="term" name="term" formControlName="term">
+                                                    <mat-option style="text-align: left" *ngFor='let term of myTerm'
+                                                        [value]="term">
+                                                        {{term}}</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="col-md-3 top_txt">
+                                                <label>Class Name Required :</label>
+
+                                                <input type="text" class="form-control box_border"
+                                                    formControlName="className" name="className"
+                                                    matTooltip="Enter in block letters (i.e: 1A)"
+                                                    style="text-align: left">
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <button mat-raised-button class="search_btn"
+                                                    (click)="classStudentData()">
+                                                    <img src="../../../../assets/icons/searchengin-brands.svg"
+                                                        style="width: 20px">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
+
+
+                                <!--Teacher View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student
+                                                    ID</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student
+                                                    Name</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Average</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Position</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let stdata of stuClzList">
+                                            <tr (click)="studentProgress()">
+                                                <td class="stid">{{stdata._id}}</td>
+                                                <td class="stname">{{stdata.name}}</td>
+                                                <td style="margin: auto;">{{stdata.avg}}</td>
+                                                <td style="margin: auto;">{{stdata.position}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--Student View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row box1" matTooltip="Your {position} of {2019} {term}">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class position</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">19</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box2">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class name</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5D</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box3"
+                                                matTooltip="Your {subject} average whthin your class ">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in class</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1383</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="row box4"
+                                                matTooltip="Your {subject} average from all the section">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in school</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1733</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="container" style="margin-bottom: 50px; ">
+                                    <div class="row">
+                                        <div class="chart-wrapper">
+                                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                                [options]="barChartOptions" [plugins]="barChartPlugins"
+                                                [legend]="barChartLegend" [chartType]="barChartType"
+                                                [colors]="chartColors">
+                                            </canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </mat-tab>
+
+
+
+
+
+
+                            <mat-tab label="Serach by subject">
+                                <form [formGroup]="DataForm">
+                                    <div class="container">
+                                        <div class="row"
+                                            style="text-align: center;margin-bottom: 50px;margin-top: 50px;">
+                                            <div class="col-md-3 top_txt">
+                                                <label>Year Required :</label>
+                                                <mat-select #t class="browser-default custom-select mb-4 border"
+                                                    [(ngModel)]="year" name="year" formControlName="year">
+
+                                                    <mat-option style="text-align: left" *ngFor='let year of myYear'
+                                                        [value]='year' [value]="year">{{ year }}
+                                                    </mat-option>
+                                                </mat-select>
+                                            </div>
+
+
+
+                                            <div class="col-md-3 top_txt">
+                                                <label>Term Required :</label>
+                                                <mat-select class="browser-default custom-select mb-4 box_border"
+                                                    [(ngModel)]="term" name="term" formControlName="term">
+                                                    <mat-option style="text-align: left" *ngFor='let term of myTerm'
+                                                        [value]="term">
+                                                        {{term}}</mat-option>
+                                                </mat-select>
+                                            </div>
+                                            <div class="col-md-3 top_txt">
+                                                <label>Class Name Required :</label>
+
+                                                <input type="text" class="form-control box_border"
+                                                    formControlName="className" name="className"
+                                                    matTooltip="Enter in block letters (i.e: 1A)"
+                                                    style="text-align: left">
+
+                                            </div>
+                                            <div class="col-md-3">
+
+                                                <button mat-raised-button class="search_btn"
+                                                    (click)="classStudentData()">
+                                                    <img src="../../../../assets/icons/searchengin-brands.svg"
+                                                        style="width: 20px">Search</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
+
+
+                                <!--Teacher View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <table class="table table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student ID</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Student Name</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Average</th>
+                                                <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">
+                                                    Position</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody *ngFor="let stdata of stuClzList">
+                                            <tr (click)="studentProgress()">
+                                                <td class="stid">{{stdata._id}}</td>
+                                                <td class="stname">{{stdata.name}}</td>
+                                                <td style="margin: auto;">{{stdata.avg}}</td>
+                                                <td style="margin: auto;">{{stdata.position}}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <!--Student View-->
+                                <div class="container" style="margin-bottom: 50px;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row box1" matTooltip="Your {position} of {2019} {term}">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class position</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">19</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box2">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Class name</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5D</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box3"
+                                                matTooltip="Your {subject} average whthin your class ">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in class</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1383</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="col-md-3">
+                                            <div class="row box4"
+                                                matTooltip="Your {subject} average from all the section">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">~ Average in school</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">5.1733</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+
+
+                                <div class="container" style="margin-bottom: 50px; ">
+                                    <div class="row">
+                                        <div class="chart-wrapper">
+                                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
+                                                [options]="barChartOptions" [plugins]="barChartPlugins"
+                                                [legend]="barChartLegend" [chartType]="barChartType"
+                                                [colors]="chartColors">
+                                            </canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                            </mat-tab>
+                        </mat-tab-group>
                     </div>
 
-                    <form [formGroup]="StudentProgressForm">
-                        <div class="container">
-                            <div class="row" style="text-align: center;margin-bottom: 50px;">
-                                <div class="col-md-2 top_txt">
-                                    <label>Year Required :</label>
-                                    <mat-select #t class="browser-default custom-select mb-4 border" [(ngModel)]="year"
-                                        name="year" formControlName="year">
-
-                                        <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'
-                                            [value]="year" >{{ year }}
-                                        </mat-option>
-                                    </mat-select>
-                                </div>
-
-                                <div class="col-md-4 top_txt">
-                                    <label>Subject Required :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                        [(ngModel)]="subject" name="subject" formControlName="subject">
-                                        <mat-option style="text-align: left" *ngFor='let subject of mySubject'
-                                            [value]='subject.subName'  >{{subject.subName}}</mat-option>
-                                    </mat-select>
-                                </div>
-
-                                <div class="col-md-2 top_txt">
-                                    <label>Term Required :</label>
-                                    <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="term"
-                                        name="term" formControlName="term">
-                                        <mat-option style="text-align: left" *ngFor='let term of myTerm' [value]='term'  formControlName="year">
-                                            {{term}}</mat-option>
-                                    </mat-select>
-                                </div>
-                                <div class="col-md-2 top_txt">
-                                    <label>Class Name Required :</label>
-
-                                    <input type="text" class="form-control box_border" formControlName="className" name="className"
-                                        matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
-
-                                </div>
-                                <div class="col-md-2">
-                                    <button mat-raised-button class="search_btn" (click)="myProgress()"><img
-                                            src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
-                                        Search</button>
-                                </div>
-                            </div>
-                            <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
-                        </div>
-
-                        <!--Teacher View-->
-                        <div class="container" style="margin-bottom: 50px;">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
-                                            ID</th>
-                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Student
-                                            Name</th>
-                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject
-                                            Marks</th>
-                                        <th style="text-align: left;font-weight: 500; color: rgb(71, 71, 71);">Subject
-                                            Position</th>
-                                    </tr>
-                                </thead>
-                                <tbody *ngFor="let stdata of csNames">
-                                    <tr (click)="studentProgress()">  
-                                        <td class="stid">{{stdata.userid}}</td>
-                                        <td class="stname">{{stdata.name}}</td>
-                                        <td style="margin: auto;">{{stdata.marks}}</td>
-                                        <td style="margin: auto;">{{stdata.position}}</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <!--Student View-->
-                        <div class="container" style="margin-bottom: 50px;">
-                            <div class="row">
-                                <div class="col-md-3">
-                                    <div class="row box1" matTooltip="Your {position} of {2019} {term}">
-                                        <div class="container">
-                                            <div class="row">
-                                                <p class="box_smtext">~ Class position</p>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row" style="margin-top: -30px;">
-                                                <span class="box_bigtext">19</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row box2">
-                                        <div class="container">
-                                            <div class="row">
-                                                <p class="box_smtext">~ Class name</p>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row" style="margin-top: -30px;">
-                                                <span class="box_bigtext">5D</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-3">
-                                    <div class="row box3" matTooltip="Your {subject} average whthin your class ">
-                                        <div class="container">
-                                            <div class="row">
-                                                <p class="box_smtext">~ Average in class</p>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <hr style="width: 92%; background-color: white; margin-top: -25px;">
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row" style="margin-top: -30px;">
-                                                <span class="box_bigtext">5.1383</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    <div class="row box4" matTooltip="Your {subject} average from all the section">
-                                        <div class="container">
-                                            <div class="row">
-                                                <p class="box_smtext">~ Average in school</p>
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row">
-                                                <hr style="width: 92%; background-color: white; margin-top: -25px">
-                                            </div>
-                                        </div>
-                                        <div class="container">
-                                            <div class="row" style="margin-top: -30px;">
-                                                <span class="box_bigtext">5.1733</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            </div>
-                        </div>
-
-
-                        <div class="container" style="margin-bottom: 50px; ">
-                            <div class="row">
-                                <div class="chart-wrapper">
-                                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                        [options]="barChartOptions" [plugins]="barChartPlugins"
-                                        [legend]="barChartLegend" [chartType]="barChartType" [colors]="chartColors">
-                                    </canvas>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </form>
 
                 </div>
             </div>
