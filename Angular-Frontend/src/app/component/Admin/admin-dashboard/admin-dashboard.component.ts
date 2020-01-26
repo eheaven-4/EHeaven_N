@@ -24,7 +24,7 @@ export class AdminDashboardComponent implements OnInit {
     const url1 = 'http://localhost:3000/admin/mailCount'
 
     this.myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    console.log(this.myCookie.userid);
+    
     if(this.myCookie.usertype!="Administrator"){
       this.router.navigate(["/404"]);
     }

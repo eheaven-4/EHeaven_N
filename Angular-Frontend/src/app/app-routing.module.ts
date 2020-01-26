@@ -91,12 +91,12 @@ const routes: Routes = [
     {path: 'academic_subject', component:AcademicSubjectComponent},
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
-    {path: '', component: ProfileComponent},
     {path: 'mail_box', component: MailBoxComponent},
+    {path: '', component: ProfileComponent},
 
   ]},
 
-  {path:'**',redirectTo:'/404',pathMatch:'full'},
+  {path:'**',component:PageNotFoundComponent},
 ];
 
 @NgModule({
