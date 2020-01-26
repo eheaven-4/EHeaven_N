@@ -13,7 +13,7 @@ router.post("/addLog", function (request, response) {
         year: request.body.year,
         term: request.body.term,
         marks: request.body.marks,
-        subject: request.body.subject
+        subId: request.body.subId
     });
     // console.log(newmarksheet);
     mark.addMark(newmarksheet, function (err, req) {
@@ -36,7 +36,7 @@ router.post("/studentAverage", function (req, res) {
     const userid = req.body.userid
     const classname = req.body.classname
 
-    console.log(year + term + userid + classname);
+    console.log(year + " " + term + " " + userid + " " + classname);
 
     var stuPosition;
     var stuAverage;
@@ -70,13 +70,10 @@ router.post("/studentAverage", function (req, res) {
                     stuAverage = Math.floor(arr1[j].avg).toFixed(4)
                 }
             }
-            res.send({
-                state: true,
-                data: {
-                    stuPosition: stuPosition,
-                    stuAverage: stuAverage,
-                    classname: classname
-                }
+            res.send({ 
+                stuPosition: stuPosition,
+                stuAverage: stuAverage,
+                classname: classname
             })
         });
 })
@@ -120,11 +117,14 @@ router.post("/classAverages", function (req, res) {
             res.send(arr2)
         });
 })
+
+
 class stuSubMarks {
-    constructor(year, term, subject, marks) {
+    constructor(year, term, subject, subId, marks) {
         this.year = year;
         this.term = term;
         this.subject = subject;
+        this.subId = subId;
         this.marks = marks
     }
 }
@@ -147,11 +147,55 @@ router.get("/subjectMarks/:id", function (req, res) {
                 arr2.push(docs[i])
             }
             var j = 0
+            // res.send(arr2)
+            for (j = 0; j < arr2.length; j++) {
+                arr2[j].marks.forEach(element => {
+                    if (element.userid == userid) {
+                        var subMarks = new stuSubMarks(arr2[j].year, arr2[j].term, arr2[j].subject, arr2[j].subId, element.mark)
+                        arr1.push(subMarks)
+                    }
+                });
+            }
+            // console.log(arr1);
+            
+            res.send(arr1)
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
+//get subject details to the student clicking subject
+class stuYearMarks {
+    constructor(term, marks) {
+        this.term = term
+        this.marks = marks
+    }
+}
+router.post("/subjectData", function(req,res){
+    const subId = req.body.subId
+    const year = req.body.year
+    const userid = req.body.userid
+    
+    var arr2 = new Array();   //all data push to this array
+    var arr1 = new Array();
+    mark.find({ year: year, subId: subId })
+        .exec()
+        .then(docs => {
+            var i = 0;
+            for (i = 0; i < docs.length; i++) {
+                arr2.push(docs[i])
+            }
+            var j = 0
 
             for (j = 0; j < arr2.length; j++) {
                 arr2[j].marks.forEach(element => {
                     if (element.userid == userid) {
-                        var st = new stuSubMarks(arr2[j].year, arr2[j].term, arr2[j].subject, element.mark)
+                        var st = new stuYearMarks(arr2[j].term,element.mark)
                         arr1.push(st)
                     }
                 });
@@ -164,6 +208,6 @@ router.get("/subjectMarks/:id", function (req, res) {
                 error: error
             });
         });
-});
+})
 
 module.exports = router;

@@ -1,7 +1,7 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <div class="container-fluid" style="background-color:white">
+            <div class="container-fluid" style="background-color:#F8F9FA">
                 <div>
                     <div class="container">
                         <h2 class="topic">My Progress</h2>
@@ -12,86 +12,8 @@
                         <mat-tab-group>
 
                             <mat-tab label="Student Portal">
-                                <div class="container-fluid">
-                                    <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="container" style="margin-bottom: 50px;margin-top: 50px; ">
-                                                <div class="row">
-                                                    <div class="chart-wrapper">
-                                                        <canvas baseChart [datasets]="barChartData"
-                                                            [labels]="barChartLabels" [options]="barChartOptions"
-                                                            [plugins]="barChartPlugins" [legend]="barChartLegend"
-                                                            [chartType]="barChartType" [colors]="chartColors">
-                                                        </canvas>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <form [formGroup]="DataForm" style="margin-top: 80px;width: 90%;">
-                                                <div class="row top_txt">
-                                                    <label>Year Required :</label>
-                                                    <mat-select #t class="browser-default custom-select mb-4 border"
-                                                        [(ngModel)]="year" name="year" formControlName="year">
-
-                                                        <mat-option style="text-align: left" *ngFor='let year of myYear'
-                                                            [value]='year' [value]="year">{{ year }}
-                                                        </mat-option>
-                                                    </mat-select>
-                                                </div>
-                                                <div class="row top_txt">
-                                                    <label>Term Required :</label>
-                                                    <mat-select class="browser-default custom-select mb-4 box_border"
-                                                        [(ngModel)]="term" name="term" formControlName="term">
-                                                        <mat-option style="text-align: left" *ngFor='let term of myTerm'
-                                                            [value]="term">
-                                                            {{term}}</mat-option>
-                                                    </mat-select>
-                                                </div>
-                                                <div class="row top_txt">
-                                                    <label>Class Name Required :</label>
-
-                                                    <input type="text" class="form-control box_border"
-                                                        formControlName="className" name="className"
-                                                        matTooltip="Enter in block letters (i.e: 1A)"
-                                                        style="text-align: left">
-
-                                                </div>
-                                                <div class="row top_txt" style="margin-top:10px;">
-                                                    <button mat-raised-button class="search_btn"
-                                                        (click)="classStudentData()">
-                                                        <img src="../../../../assets/icons/searchengin-brands.svg"
-                                                            style="width: 20px">Search</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="container-fluid" style="margin-bottom: 30px;">
-                                    <div class="row" style="margin: auto;">
-                                        <div class="col-md-6" *ngFor="let stmarks of stuSubMarks">
-                                            <mat-card style="height: 55px; margin-bottom: 10px;">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        {{stmarks.year}} - Term {{stmarks.term}}
-                                                    </div>
-                                                    <div class="col-md-6">
-                                                        {{stmarks.subject}}
-                                                    </div>
-                                                    <div class="col-md-2 ">
-                                                        {{stmarks.marks}}
-                                                    </div>
-                                                </div>
-                                            </mat-card>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
-
-
-
-                                <!--Student View-->
-                                <div class="container" style="margin-bottom: 50px;">
+                                 <!--Student View-->
+                                 <div class="container sex" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="row box1" matTooltip="Your {position} of {2019} {term}">
@@ -108,7 +30,7 @@
                                                 </div>
                                                 <div class="container">
                                                     <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">19</span>
+                                                        <span class="box_bigtext">{{stuClzAve.stuPosition}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -128,7 +50,7 @@
                                                 </div>
                                                 <div class="container">
                                                     <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">5D</span>
+                                                        <span class="box_bigtext">{{stuClzAve.classname}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -149,7 +71,7 @@
                                                 </div>
                                                 <div class="container">
                                                     <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">5.1383</span>
+                                                        <span class="box_bigtext">{{stuClzAve.stuAverage}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -182,6 +104,85 @@
                                 </div>
 
 
+                                <div class="container-fluid">
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <div class="container" style="margin-bottom: 50px;margin-top: 50px; ">
+                                                <div class="row">
+                                                    <div class="chart-wrapper">
+                                                        <canvas baseChart [datasets]="barChartData"
+                                                            [labels]="barChartLabels" [options]="barChartOptions"
+                                                            [plugins]="barChartPlugins" [legend]="barChartLegend"
+                                                            [chartType]="barChartType" [colors]="chartColors">
+                                                        </canvas>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <form [formGroup]="DataForm1" style="margin-top: 80px;width: 90%;">
+                                                <div class="row top_txt">
+                                                    <label>Year Required :</label>
+                                                    <mat-select #t class="browser-default custom-select mb-4 border"
+                                                        [(ngModel)]="year" name="year" formControlName="year">
+
+                                                        <mat-option style="text-align: left" *ngFor='let year of myYear'
+                                                            [value]='year' [value]="year">{{ year }}
+                                                        </mat-option>
+                                                    </mat-select>
+                                                </div>
+                                                <div class="row top_txt">
+                                                    <label>Term Required :</label>
+                                                    <mat-select class="browser-default custom-select mb-4 box_border"
+                                                        [(ngModel)]="term" name="term" formControlName="term">
+                                                        <mat-option style="text-align: left" *ngFor='let term of myTerm'
+                                                            [value]="term">
+                                                            {{term}}</mat-option>
+                                                    </mat-select>
+                                                </div>
+                                                <div class="row top_txt">
+                                                    <label>Class Name Required :</label>
+
+                                                    <input type="text" class="form-control box_border"
+                                                        formControlName="className" name="className"
+                                                        matTooltip="Enter in block letters (i.e: 1A)"
+                                                        style="text-align: left">
+
+                                                </div>
+                                                <div class="row top_txt" style="margin-top:10px;">
+                                                    <button mat-raised-button ld-ext-right running class="search_btn"
+                                                        (click)="classStudentData()">
+                                                        <img src="../../../../assets/icons/searchengin-brands.svg"
+                                                            style="width: 20px">Search</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container-fluid" style="margin-bottom: 30px;">
+                                    <div class="row" style="margin: auto;">
+                                        <div class="col-md-6" *ngFor="let stmarks of stuSubMarks">
+                                            <mat-card style="height: 55px; margin-bottom: 10px;">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        {{stmarks.year}} - Term {{stmarks.term}}
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        {{stmarks.subject}}
+                                                    </div>
+                                                    <div class="col-md-2 ">
+                                                        {{stmarks.marks}}
+                                                    </div>
+                                                </div>
+                                            </mat-card>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
+
+
+
+                               
                                 <div class="container" style="margin-bottom: 50px; ">
                                     <div class="row">
                                         <div class="chart-wrapper">
@@ -228,7 +229,7 @@
                             </mat-tab>
 
                             <mat-tab label="Teacher Class">
-                                <form [formGroup]="DataForm">
+                                <form [formGroup]="DataForm1">
                                     <div class="container">
                                         <div class="row"
                                             style="text-align: center;margin-bottom: 50px;margin-top: 50px;">
@@ -417,7 +418,7 @@
 
 
                             <mat-tab label="Serach by subject">
-                                <form [formGroup]="DataForm">
+                                <form [formGroup]="DataForm1">
                                     <div class="container">
                                         <div class="row"
                                             style="text-align: center;margin-bottom: 50px;margin-top: 50px;">

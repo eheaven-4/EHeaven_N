@@ -12,12 +12,10 @@ interface subjectsArray {
 interface yearArrray {
   year: String
 }
-interface classStudents {
-  _id: String
-  userid: String
-  name: String
-  marks: String
-  position: String
+interface StudentsAverage {
+  stuPosition: String
+  stuAverage: String
+  classname: String
 }
 
 class subjectsFilter {
@@ -25,6 +23,7 @@ class subjectsFilter {
   term: String
   subject: String
   mark: String
+  subId: String
 }
 
 
@@ -45,6 +44,7 @@ export class StudentProgressComponent implements OnInit {
 
   usertype
   cookie
+  studentAverageDiv : boolean = false;
   submitted = false;
   userid
   term
@@ -55,8 +55,8 @@ export class StudentProgressComponent implements OnInit {
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
   myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load years to the combo-box
-  stuClzList: classStudents[] = [];
-  stuSubMarks : subjectsFilter[] = [];
+  stuClzAve: StudentsAverage[] = [];
+  stuSubMarks: subjectsFilter[] = []; //
 
   /*bar chart options*/
   barChartOptions: ChartOptions = {
@@ -82,9 +82,8 @@ export class StudentProgressComponent implements OnInit {
     }
   ];
   /************************************************************* */
-  DataForm = this.fb.group({
+  DataForm1 = this.fb.group({
     year: ['', Validators.required],
-    subject: ['', Validators.required],
     term: ['', Validators.required],
     className: [''],
   });
@@ -108,9 +107,6 @@ export class StudentProgressComponent implements OnInit {
       this.myYear[i] = years[i]
     }
 
-    // /*get one student position and average */
-    // const url1 = "http://localhost:3000/student_marks/studentAverage"
-
     /*find all students marks data with final marks(for teacher)*/
     const url2 = "http://localhost:3000/student_marks/classAverages"
 
@@ -129,35 +125,37 @@ export class StudentProgressComponent implements OnInit {
   }
 
   get f() {
-    return this.DataForm.controls;
+    return this.DataForm1.controls;
   }
 
   onReset() {
     this.submitted = false;
-    this.DataForm.reset();
+    this.DataForm1.reset();
   }
 
   /*teacher page data*/
   classStudentData() {
-    if (this.DataForm.value.term == '1st Term') { this.term = 1 }
-    else if (this.DataForm.value.term == '2nd Term') { this.term = 2 }
-    else if (this.DataForm.value.term == '3rd Term') { this.term = 3 }
+    this.studentAverageDiv = true
+    
+    if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
+    else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
+    else if (this.DataForm1.value.term == '3rd Term') { this.term = 3 }
 
     // this.year = this.DataForm.value.year
     // this.className = this.DataForm.value.classname
 
     const Studata = {
       term: this.term,
-      classname: this.DataForm.value.className,
-      year: this.DataForm.value.year,
+      classname: this.DataForm1.value.className,
+      year: this.DataForm1.value.year,
       userid: this.userid
     };
 
     const url = 'http://localhost:3000/student_marks/studentAverage'
 
     this.http.post<any>(url, Studata).subscribe(res => {
-      // this.stuClzList = res;
       console.log(res)
+      this.stuClzAve = res;
     })
   }
 

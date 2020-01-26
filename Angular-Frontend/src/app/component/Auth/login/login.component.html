@@ -4,40 +4,60 @@
             <!-- <div class="col-md-2">
                 <app-sidebar></app-sidebar>
             </div> -->
-            <div class="container-fluid " style="background-color:white">
+            <div class="container-fluid bg-grd">
                 <div class="container">
-                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px">Login</h2>
-                    <hr>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group" style="padding-top: 50px">
+                                <form class="text-center border border p-5  login-frm">
 
-                    <div class="form-group" style="padding-top: 50px">
-                        <form class="text-center border border p-5  login-frm">
+                                    <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 30px">
+                                    <!-- <p>User Login Portal</p> -->
+                                    <!-- <input type="text" class="form-control mb-4 box_border" placeholder="User ID"
+                                        name="userid" [(ngModel)]="userid"> -->
+                                    <!-- <p
+                                        style="text-align: left; margin-top: -20px; font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
+                                        &nbsp;&nbsp;&nbsp; i.e : 17001112</p> -->
+                                    <p >
+                                        <mat-form-field appearance="standard"  style="width:100%">
+                                            <mat-label>User ID</mat-label>
+                                            <input matInput name="userid" [(ngModel)]="userid" placeholder=" i.e : 17001112">
+                                            <mat-icon matSuffix>person</mat-icon>
+                                            <!-- <mat-hint>Hint</mat-hint> -->
+                                        </mat-form-field>
+                                    </p>
+                                    <div *ngIf="submitted && f.name.errors" class="err_msg">
+                                        <div *ngIf="f.name.errors.required">UserId is required</div>
+                                    </div>
+<!-- 
+                                    <input type="password" class="form-control mb-4 box_border" placeholder="Password"
+                                        name="password" [(ngModel)]="password">
+                                    <p
+                                        style="text-align: left; margin-top: -20px; margin-bottom: 30px;font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
+                                        &nbsp;&nbsp;&nbsp;i.e : abc@123</p> -->
+                                    <p class="fieldtxt">
+                                        <mat-form-field appearance="standard" style="width:100%;margin-top: -20px;">
+                                            <mat-label>Password</mat-label>
+                                            <input matInput type="password" name="password" [(ngModel)]="password" placeholder="i.e : abc@123">
+                                            <mat-icon matSuffix>lock</mat-icon>
+                                            <!-- <mat-hint>Hint</mat-hint> -->
+                                        </mat-form-field>
+                                    </p>
+                                    <div *ngIf="submitted && f.name.errors" class="err_msg">
+                                        <div *ngIf="f.name.errors.required">Password is required</div>
+                                    </div>
 
-                            <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 30px">
+                                    <button mat-button class="btn btn-info btn-block login_btn box_border" type="submit"
+                                        (click)="userLogin()">Sign in</button>
+                                    <p style="padding-top: 20px">Not a Member? <a routerLink="/">Contact_Admin</a> </p>
 
-                            <input type="text" class="form-control mb-4 box_border" placeholder="User ID" name="userid"
-                                [(ngModel)]="userid">
-                            <p
-                                style="text-align: left; margin-top: -20px; font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
-                                &nbsp;&nbsp;&nbsp; i.e : 17001112</p>
-                            <div *ngIf="submitted && f.name.errors" class="err_msg">
-                                <div *ngIf="f.name.errors.required">UserId is required</div>
+                                </form>
                             </div>
+                        </div>
+                        <div class="col-md-6"></div>
 
-                            <input type="password" class="form-control mb-4 box_border" placeholder="Password"
-                                name="password" [(ngModel)]="password">
-                            <p
-                                style="text-align: left; margin-top: -20px; margin-bottom: 30px;font-size:10px; font-weight: bold; color: rgb(182, 182, 182)">
-                                &nbsp;&nbsp;&nbsp;i.e : abc@123</p>
-                            <div *ngIf="submitted && f.name.errors" class="err_msg">
-                                <div *ngIf="f.name.errors.required">Password is required</div>
-                            </div>
-
-                            <button mat-button class="btn btn-info btn-block login_btn box_border" type="submit"
-                                (click)="userLogin()">Sign in</button>
-                            <p style="padding-top: 20px">Not a Member? <a routerLink="/">Contact_Admin</a> </p>
-
-                        </form>
                     </div>
+
                 </div>
             </div>
         </div>

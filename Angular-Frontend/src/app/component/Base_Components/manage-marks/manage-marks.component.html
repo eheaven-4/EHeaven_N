@@ -4,7 +4,7 @@
             <!-- <div class="col-md-2">
                 <app-sidebar></app-sidebar>
             </div> -->
-            <div class="container-fluid" style="background-color:white">
+            <div class="container-fluid" style="background-color:#F8F9FA">
                 
                 <div>
                     <div class="container">
@@ -50,11 +50,11 @@
                                         <div class="row" *ngIf="ctName">
                                             <p style="color: rgb(115, 115, 115)">Class Teacher Name : </p><p> &nbsp;&nbsp;{{ctName.classTeacher}}</p>
                                         </div>
-                                        <div class="row">
+                                        <div class="row" style="text-align:left">
                                             <div class="col-md-6">
                                                 <p class="top_txt">Subject : </p>
                                                 <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
-                                                    <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subName'>{{subject.subName}}</mat-option>
+                                                    <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subId'>{{subject.subId}} - {{subject.subName}}</mat-option>
                                                 </mat-select>
                                             
                                             </div>
