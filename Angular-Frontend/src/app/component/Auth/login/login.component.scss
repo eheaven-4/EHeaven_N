@@ -4,7 +4,7 @@
 // linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 .bg-grd {
   background-color: #f8f9fa;
-  background: url("../../../../assets/backgrounds/matese-fields-pvHma684eEI-unsplash.jpg");
+  background: url("../../../../assets/backgrounds/element5-digital-OyCl7Y4y0Bk-unsplash.jpg");
   min-height: 600px;
   width: 100%;
   background-size: cover;
@@ -14,9 +14,12 @@
 }
 
 .login-frm {
-  margin-top: 25px;
+  float: right;
+  margin-top: 100px;
+  margin-bottom: 100px;
   width: 70%;
   text-align: center;
+  animation: animate 1s linear ;
   //   margin: auto;
   border-radius: 5px;
   background-color: #fff;
@@ -45,3 +48,58 @@
 // .fieldtxt{
 //     width: 1000px;
 // }
+
+
+body {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #000;
+}
+
+.ehaeaven {
+  margin-top: 130px;
+  margin-left: 20px;
+  position: relative;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  // text-transform: uppercase;
+  font-size: 100px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgb(26, 26, 26), rgb(24, 24, 24));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 1s linear ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+@keyframes animate {
+  0% {
+    background-position: -500%;
+  }
+  100% {
+    background-position: 0%;
+  }
+}
+.subEheaven{
+  margin-top: -25px;
+  margin-left: 20px;
+  position: relative;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  // text-transform: uppercase;
+  font-size: 30px;
+  font-weight: 550;
+  // letter-spacing: 2px;
+  overflow: hidden;
+  background: linear-gradient(90deg, rgb(26, 26, 26), rgb(24, 24, 24));
+  background-repeat: no-repeat;
+  background-size: 80%;
+  animation: animate 1s linear ;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
