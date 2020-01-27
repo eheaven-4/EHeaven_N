@@ -4,9 +4,12 @@
 }
 
 .back_gr {
-  background-color:#F8F9FA;
-  min-height: 600px;
+  // background-color:#F8F9FA;
+  position: relative;
+  margin-top: -64px;
+  min-height: 670px;
   width: 100%;
+  background: url("../../../../assets/backgrounds/1772242.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
@@ -58,7 +61,7 @@
   height: 70px;
   border-radius: 5px;
   // border: 1px rgb(117, 117, 117) solid;
-  box-shadow: 0px 0px 8px rgb(138, 138, 138);
+  box-shadow: 0px 0px 8px rgb(19, 19, 19);
   margin-bottom: 30px;
 }
 .menu_div:hover{

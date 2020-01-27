@@ -3,9 +3,11 @@
 }
 // linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
 .bg-grd {
+  margin-top: -65px;
+  position: relative;
   background-color: #f8f9fa;
-  background: url("../../../../assets/backgrounds/element5-digital-OyCl7Y4y0Bk-unsplash.jpg");
-  min-height: 600px;
+  background: url("../../../../assets/backgrounds/1775117.jpg");
+  height: 740px;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
@@ -23,7 +25,7 @@
   //   margin: auto;
   border-radius: 5px;
   background-color: #fff;
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
+  box-shadow: 0px 5px 5px rgb(36, 36, 36);
 }
 
 .login_btn {
@@ -70,7 +72,7 @@ body {
   font-weight: bold;
   letter-spacing: 2px;
   overflow: hidden;
-  background: linear-gradient(90deg, rgb(26, 26, 26), rgb(24, 24, 24));
+  background: linear-gradient(90deg, rgb(252, 252, 252), rgb(245, 245, 245));
   background-repeat: no-repeat;
   background-size: 80%;
   animation: animate 1s linear ;
@@ -96,10 +98,27 @@ body {
   font-weight: 550;
   // letter-spacing: 2px;
   overflow: hidden;
-  background: linear-gradient(90deg, rgb(26, 26, 26), rgb(24, 24, 24));
+  background: linear-gradient(90deg, rgb(245, 245, 245), rgb(245, 245, 245));
   background-repeat: no-repeat;
   background-size: 80%;
   animation: animate 1s linear ;
   -webkit-background-clip: text;
   -webkit-text-fill-color: rgba(255, 255, 255, 0);
+}
+
+.quotesTop{
+  margin-left: 20px;
+  margin-top: 60px;
+  font-family: cursive;
+  color: rgb(255, 255, 255);
+  font-size: 20px;
+}
+.quotesSub{
+  margin-left: 350px;
+  margin-top: -10px;
+  font-weight: bold;
+  font-style: italic;
+  font-family: cursive;
+  color: rgb(255, 255, 255);
+  font-size: 20px; 
 }

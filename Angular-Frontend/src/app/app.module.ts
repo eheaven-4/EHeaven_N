@@ -54,6 +54,7 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
 import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/mark-bulk-add/mark-bulk-add.component';
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
+import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
 
 
 
@@ -95,6 +96,7 @@ import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
     MarkBulkAddComponent,
     ContactUsComponent,
     MailBoxComponent,
+    Navbar2Component,
   ],
 
   imports: [

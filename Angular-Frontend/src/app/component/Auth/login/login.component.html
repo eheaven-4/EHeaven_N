@@ -1,10 +1,7 @@
-<div class="row" style="margin-top: -100px;position: relative;">
+<div class="row">
     <div class="container-fluid">
+        <!-- <app-navbar2></app-navbar2> -->
         <div class="row">
-
-            <!-- <div class="col-md-2">
-                <app-sidebar></app-sidebar>
-            </div> -->
             <div class="container-fluid bg-grd">
 
                 <div class="container">
@@ -13,18 +10,21 @@
                             <p class="ehaeaven">EHeaven</p>
                             <p class="subEheaven">Student Management &</p>
                             <p class="subEheaven">Learning Platform</p>
-
+                            
+                            <p class="quotesTop">“Education is the passport to the future, for tomorrow belongs to those who prepare for it today.”</p>
+                            <p class="quotesSub">- Malcolm X</p>
                         </div>
                         <div class="col-md-6">
                             <div class="form-group" style="padding-top: 50px;">
                                 <form class="text-center border border p-5  login-frm">
 
                                     <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 30px">
-                                    
-                                    <p >
-                                        <mat-form-field appearance="standard"  style="width:100%">
+
+                                    <p>
+                                        <mat-form-field appearance="standard" style="width:100%">
                                             <mat-label>User ID</mat-label>
-                                            <input matInput name="userid" [(ngModel)]="userid" placeholder=" i.e : 17001112">
+                                            <input matInput name="userid" [(ngModel)]="userid"
+                                                placeholder=" i.e : 17001112">
                                             <mat-icon matSuffix>person</mat-icon>
                                             <!-- <mat-hint>Hint</mat-hint> -->
                                         </mat-form-field>
@@ -36,7 +36,8 @@
                                     <p class="fieldtxt">
                                         <mat-form-field appearance="standard" style="width:100%;margin-top: -20px;">
                                             <mat-label>Password</mat-label>
-                                            <input matInput type="password" name="password" [(ngModel)]="password" placeholder="i.e : abc@123">
+                                            <input matInput type="password" name="password" [(ngModel)]="password"
+                                                placeholder="i.e : abc@123">
                                             <mat-icon matSuffix>lock</mat-icon>
                                             <!-- <mat-hint>Hint</mat-hint> -->
                                         </mat-form-field>

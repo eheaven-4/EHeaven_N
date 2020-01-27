@@ -1,12 +1,14 @@
 .back_gr {
   background: linear-gradient(rgb(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
     url("../../../assets/backgrounds/green-chameleon-s9CC2SKySJM-unsplash.jpg");
-  min-height: 700px;
+  min-height: 750px;
   width: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
   background-position: center;
+  position: relative;
+  margin-top: -64px;
 }
 
 @font-face {
@@ -65,6 +67,7 @@
 .news_feeds {
   padding-top: 20px;
   padding-bottom: 20px;
+  margin-bottom: 70px;
 }
 
 .flip-box-front {
