@@ -4,7 +4,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 interface subjectsArray {
   subject: String
@@ -88,6 +88,11 @@ export class StudentProgressComponent implements OnInit {
     className: [''],
   });
 
+  SubjectForm = this.fb.group({   //click one subject and perfornm this form
+    stMark_year: ['', Validators.required],
+    stMark_subId: ['', Validators.required],
+    stMark_term: ['', Validators.required],
+  })
 
 
   /************************************************************ */
@@ -132,6 +137,19 @@ export class StudentProgressComponent implements OnInit {
     this.submitted = false;
     this.DataForm1.reset();
   }
+
+  /*get all subject data specific subject clickin subject*/
+  subjectData(){
+    // console.log(this.stMark_year);
+    console.log( this.SubjectForm.value.stMark_year);
+    // const SubData = {
+    //   // classname: this.SubjectForm.value.className,
+    //   year: this.SubjectForm.value.year,
+    // };
+    
+    
+  }
+
 
   /*teacher page data*/
   classStudentData() {

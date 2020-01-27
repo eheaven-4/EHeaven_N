@@ -12,8 +12,8 @@
                         <mat-tab-group>
 
                             <mat-tab label="Student Portal">
-                                 <!--Student View-->
-                                 <div class="container sex" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
+                                <!--Student View-->
+                                <div class="container sex" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
                                     <div class="row">
                                         <div class="col-md-3">
                                             <div class="row box1" matTooltip="Your {position} of {2019} {term}">
@@ -161,28 +161,36 @@
                                 </div>
                                 <div class="container-fluid" style="margin-bottom: 30px;">
                                     <div class="row" style="margin: auto;">
-                                        <div class="col-md-6" *ngFor="let stmarks of stuSubMarks">
-                                            <mat-card style="height: 55px; margin-bottom: 10px;">
-                                                <div class="row">
-                                                    <div class="col-md-4">
-                                                        {{stmarks.year}} - Term {{stmarks.term}}
+                                            <div class="col-md-6" *ngFor="let stmarks of stuSubMarks" [formGroup]="SubjectForm">
+                                                <mat-card style="height: 55px; margin-bottom: 10px;" 
+                                                    (click)="subjectData()">
+                                                    <div class="row">
+                                                        <div class="col-md-2">
+                                                           <p value ="stmarks.year" name="stMark_year" FormControlName= "stMark_year">
+                                                            {{stmarks.year}}</p>
+                                                        </div>
+                                                        <!-- <div class="col-md-2" 
+                                                            name="stMark_term" value="stMark_term">
+                                                            Term {{stmarks.term}}
+                                                        </div>
+                                                        <div class="col-md-6"
+                                                            name="stMark_subId" value="stMark_subId">
+                                                            {{stmarks.subId}} - {{stmarks.subject}}
+                                                        </div>
+                                                        <div class="col-md-2" 
+                                                            name="stMark_year" value="stMark_year">
+                                                            {{stmarks.marks}}
+                                                        </div> -->
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        {{stmarks.subject}}
-                                                    </div>
-                                                    <div class="col-md-2 ">
-                                                        {{stmarks.marks}}
-                                                    </div>
-                                                </div>
-                                            </mat-card>
-                                        </div>
+                                                </mat-card>
+                                            </div>
                                     </div>
                                 </div>
                                 <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
 
 
 
-                               
+
                                 <div class="container" style="margin-bottom: 50px; ">
                                     <div class="row">
                                         <div class="chart-wrapper">
