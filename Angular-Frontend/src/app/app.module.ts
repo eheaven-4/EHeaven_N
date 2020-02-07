@@ -17,6 +17,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 
+
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './component/Auth/navbar/navbar.component';
 import { LoginComponent } from './component/Auth/login/login.component';
@@ -53,9 +54,7 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
 import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/mark-bulk-add/mark-bulk-add.component';
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
-import {Component} from '@angular/core';
-import {animate, state, style, transition, trigger} from '@angular/animations';
-
+import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
 
 
 
@@ -97,9 +96,11 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     MarkBulkAddComponent,
     ContactUsComponent,
     MailBoxComponent,
+    Navbar2Component,
   ],
 
   imports: [
+    MDBBootstrapModule.forRoot() ,
     BrowserModule,
     SlideshowModule,
     AppRoutingModule,
@@ -112,7 +113,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
     MatDatepickerModule,
     BrowserAnimationsModule,
     FlexLayoutModule,
-    MDBBootstrapModule,
+    // MDBBootstrapModule,
     FontAwesomeModule,
     MatButtonModule,
     MatGridListModule,

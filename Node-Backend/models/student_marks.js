@@ -6,6 +6,7 @@ const markSchema=mongoose.Schema({
     year :{type:String,require:true},
     term:{type:String,require:true},
     subject:{type:String,require:true},
+    subId:{type:String,require:true},
     marks:[{
         name:String,
         userid:String,
@@ -20,9 +21,3 @@ module.exports.addMark=function(newmark,callback){
     console.log(newmark);
     newmark.save(callback);
 };
-// module.exports.updateAttendance=function(datalog,callback){
-//     //con
-// }
-// module.exports.retriveUsers(callback){
-//     users.find(callback);
-// }

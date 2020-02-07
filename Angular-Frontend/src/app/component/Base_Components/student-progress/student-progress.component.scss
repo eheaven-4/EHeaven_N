@@ -15,7 +15,7 @@
   color: white;
   background-color: rgb(0, 140, 255);
   border-color: rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
+  // box-shadow: 0px 5px 5px rgb(134, 132, 245);
   margin-top: 23px;
   width: 100%;
 }
@@ -41,7 +41,7 @@
 /***************************graph view*********************************/
 
 .chart-wrapper{
-  width: 70%;
+  width: 95%;
   text-align: center;
   margin: auto;
 }
@@ -121,4 +121,9 @@
 .stmarks {
   text-align: center;
   width: 100px;
+}
+
+/**********************subject list***************************************/
+.sex{
+  transition-delay: 1s;
 }
