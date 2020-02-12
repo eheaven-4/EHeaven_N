@@ -119,7 +119,7 @@ export class StudentProgressComponent implements OnInit {
     const url3 = "http://localhost:3000/student_marks/subjectMarks"
     this.http.get<any>(url3 + "/" + this.userid).subscribe(res => {
       this.stuSubMarks = res
-      console.log(this.stuSubMarks);
+      // console.log(this.stuSubMarks);
     })
 
     /*get all the subject names for the subject serchin combo box*/
@@ -152,8 +152,7 @@ export class StudentProgressComponent implements OnInit {
 
 
   /*teacher page data*/
-  classStudentData() {
-    this.studentAverageDiv = true
+  async classStudentData() {
     
     if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
     else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
@@ -161,17 +160,18 @@ export class StudentProgressComponent implements OnInit {
 
     // this.year = this.DataForm.value.year
     // this.className = this.DataForm.value.classname
-
+    
     const Studata = {
       term: this.term,
       classname: this.DataForm1.value.className,
       year: this.DataForm1.value.year,
       userid: this.userid
     };
-
+    
     const url = 'http://localhost:3000/student_marks/studentAverage'
-
+    
     this.http.post<any>(url, Studata).subscribe(res => {
+      this.studentAverageDiv = true
       console.log(res)
       this.stuClzAve = res;
     })

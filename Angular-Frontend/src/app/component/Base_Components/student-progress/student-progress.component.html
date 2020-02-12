@@ -20,7 +20,7 @@
                                             <div class="row box1" matTooltip="Your {position} of {2019} {term}">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <p class="box_smtext">~ Class position</p>
+                                                        <p class="box_smtext">* Class position</p>
                                                     </div>
                                                 </div>
                                                 <div class="container">
@@ -40,7 +40,7 @@
                                             <div class="row box2">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <p class="box_smtext">~ Class name</p>
+                                                        <p class="box_smtext">* Class name</p>
                                                     </div>
                                                 </div>
                                                 <div class="container">
@@ -61,7 +61,7 @@
                                                 matTooltip="Your {subject} average whthin your class ">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <p class="box_smtext">~ Average in class</p>
+                                                        <p class="box_smtext">* Average in class</p>
                                                     </div>
                                                 </div>
                                                 <div class="container">
@@ -83,7 +83,7 @@
                                                 matTooltip="Your {subject} average from all the section">
                                                 <div class="container">
                                                     <div class="row">
-                                                        <p class="box_smtext">~ Average in school</p>
+                                                        <p class="box_smtext">* Average in school</p>
                                                     </div>
                                                 </div>
                                                 <div class="container">
@@ -107,10 +107,13 @@
 
                                 <div class="container-fluid">
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <div class="container" style="margin-bottom: 50px;margin-top: 50px; ">
-                                                <div class="row">
-                                                    <div class="chart-wrapper">
+                                        <div class="col-md-8">
+                                            <div class="container"
+                                                style="margin-bottom: 50px;margin-top: 50px;margin-left: 16px; ">
+                                                <div class="row"
+                                                    style="background-color: rgb(255, 255, 255);border-radius: 4px;border: rgb(231, 231, 231) solid 1px">
+                                                    <div class="chart-wrapper"
+                                                        style="padding-bottom: 30px;padding-top: 30px;width: 90%;">
                                                         <canvas baseChart [datasets]="barChartData"
                                                             [labels]="barChartLabels" [options]="barChartOptions"
                                                             [plugins]="barChartPlugins" [legend]="barChartLegend"
@@ -120,8 +123,10 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <div class="col-md-1"></div>
                                         <div class="col-md-3">
-                                            <form [formGroup]="DataForm1" style="margin-top: 80px;width: 90%;">
+                                            <form [formGroup]="DataForm1"
+                                                style="margin-top: 80px;width: 100%;margin-left: -30px;">
                                                 <div class="row top_txt">
                                                     <label>Year Required :</label>
                                                     <mat-select #t class="browser-default custom-select mb-4 border"
@@ -162,15 +167,17 @@
                                 </div>
                                 <div class="container-fluid" style="margin-bottom: 30px;">
                                     <div class="row" style="margin: auto;">
-                                            <div class="col-md-6" *ngFor="let stmarks of stuSubMarks" [formGroup]="SubjectForm">
-                                                <mat-card style="height: 55px; margin-bottom: 10px;" 
-                                                    (click)="subjectData()">
-                                                    <div class="row">
-                                                        <div class="col-md-2">
-                                                           <p value ="stmarks.year" name="stMark_year" FormControlName= "stMark_year">
+                                        <div class="col-md-6" *ngFor="let stmarks of stuSubMarks"
+                                            [formGroup]="SubjectForm">
+                                            <mat-card style="height: 55px; margin-bottom: 10px;"
+                                                (click)="subjectData()">
+                                                <div class="row">
+                                                    <div class="col-md-2">
+                                                        <p value="stmarks.year" name="stMark_year"
+                                                            FormControlName="stMark_year">
                                                             {{stmarks.year}}</p>
-                                                        </div>
-                                                        <!-- <div class="col-md-2" 
+                                                    </div>
+                                                    <!-- <div class="col-md-2" 
                                                             name="stMark_term" value="stMark_term">
                                                             Term {{stmarks.term}}
                                                         </div>
@@ -182,9 +189,9 @@
                                                             name="stMark_year" value="stMark_year">
                                                             {{stmarks.marks}}
                                                         </div> -->
-                                                    </div>
-                                                </mat-card>
-                                            </div>
+                                                </div>
+                                            </mat-card>
+                                        </div>
                                     </div>
                                 </div>
                                 <!-- *ngIf="usertype == 'Teacher' || usertype == 'Principal'" -->
