@@ -138,10 +138,10 @@ router.post("/bulkUserRegistration", function (req, res) {
             filepath: req.body.image,
         
         });
-        console.log("hi"+newUser);
+        // console.log("hi"+newUser);
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(newUser.password, salt, function (err, hash) {
-                console.log(hash);
+                // console.log(hash);
                 newUser.password = hash;
 
                 if (err) {

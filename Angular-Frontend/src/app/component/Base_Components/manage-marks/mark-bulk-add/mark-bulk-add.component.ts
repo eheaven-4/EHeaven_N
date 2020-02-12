@@ -4,19 +4,9 @@ import { Component, OnInit } from '@angular/core';
 import { AttendenceService } from '../../attendance/attendence.service';
 import { ClassRoom } from '../../../Admin/class-registration/Classroom';
 import { HttpClient } from '@angular/common/http';
+import { Mark} from '../mark';
+import { Marksheet} from '../mark';
 
-export class Mark {
-  userid: string;
-  mark: Number;
-  name:string;
-}
-export class Marksheet {
-  classname: string;
-  year: string;
-  term: string;
-  subject:string;
-  marks: Array<Mark>;
-}
 
 
 @Component({

@@ -4,15 +4,12 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
 @Component({
-  selector: 'app-navbar',
-  templateUrl: './navbar.component.html',
-  styleUrls: ['./navbar.component.scss']
+  selector: 'app-navbar2',
+  templateUrl: './navbar2.component.html',
+  styleUrls: ['./navbar2.component.scss']
 })
-
-export class NavbarComponent implements OnInit {
-  
-  
-  
+export class Navbar2Component implements OnInit {
+ 
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;
 

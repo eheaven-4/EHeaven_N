@@ -4,7 +4,7 @@ import { ChartOptions, ChartType, ChartDataSets } from 'chart.js';
 import { Label } from 'ng2-charts';
 import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatDialog, MatSnackBar } from '@angular/material';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 interface subjectsArray {
   subject: String
@@ -12,13 +12,20 @@ interface subjectsArray {
 interface yearArrray {
   year: String
 }
-interface classStudents {
-  _id: String,
-  userid: String,
-  name: String,
-  marks: String,
-  position: String
+interface StudentsAverage {
+  stuPosition: String
+  stuAverage: String
+  classname: String
 }
+
+class subjectsFilter {
+  year: String
+  term: String
+  subject: String
+  mark: String
+  subId: String
+}
+
 
 @Component({
   selector: 'app-student-progress',
@@ -37,18 +44,19 @@ export class StudentProgressComponent implements OnInit {
 
   usertype
   cookie
+  studentAverageDiv : boolean = false;
   submitted = false;
-
-  year;
-  subject;
-  term;
-  className;
-
+  userid
+  term
+  year
+  subject
+  className
 
   myYear: yearArrray[] = [];
   mySubject: subjectsArray[] = [];
   myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load years to the combo-box
-  stuClzList: classStudents[] = [];
+  stuClzAve: StudentsAverage[] = [];
+  stuSubMarks: subjectsFilter[] = []; //
 
   /*bar chart options*/
   barChartOptions: ChartOptions = {
@@ -74,13 +82,17 @@ export class StudentProgressComponent implements OnInit {
     }
   ];
   /************************************************************* */
-  DataForm = this.fb.group({
+  DataForm1 = this.fb.group({
     year: ['', Validators.required],
-    subject: ['', Validators.required],
     term: ['', Validators.required],
     className: [''],
   });
 
+  SubjectForm = this.fb.group({   //click one subject and perfornm this form
+    stMark_year: ['', Validators.required],
+    stMark_subId: ['', Validators.required],
+    stMark_term: ['', Validators.required],
+  })
 
 
   /************************************************************ */
@@ -88,7 +100,8 @@ export class StudentProgressComponent implements OnInit {
   ngOnInit() {
 
     this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    this.usertype = this.cookie.usertype;   // load user type to the userType array
+    this.usertype = this.cookie.usertype; // load user type to the userType array
+    this.userid = this.cookie.userid;
 
     var year = new Date().getFullYear();
     var years = [];
@@ -99,47 +112,68 @@ export class StudentProgressComponent implements OnInit {
       this.myYear[i] = years[i]
     }
 
-    /*get all th subject names*/
-    const url = "http://localhost:3000/class_management/getSubjects"
-    this.http.get<any>(url).subscribe(res => {
+    /*find all students marks data with final marks(for teacher)*/
+    const url2 = "http://localhost:3000/student_marks/classAverages"
+
+    //search subjects with marks to list the subject marks in student portal
+    const url3 = "http://localhost:3000/student_marks/subjectMarks"
+    this.http.get<any>(url3 + "/" + this.userid).subscribe(res => {
+      this.stuSubMarks = res
+      // console.log(this.stuSubMarks);
+    })
+
+    /*get all the subject names for the subject serchin combo box*/
+    const url4 = "http://localhost:3000/class_management/getSubjects"
+    this.http.get<any>(url4).subscribe(res => {
       this.mySubject = res.data;
     });
   }
 
   get f() {
-    return this.DataForm.controls;
+    return this.DataForm1.controls;
   }
 
   onReset() {
     this.submitted = false;
-    this.DataForm.reset();
+    this.DataForm1.reset();
   }
 
-  /*student data*/
-
+  /*get all subject data specific subject clickin subject*/
+  subjectData(){
+    // console.log(this.stMark_year);
+    console.log( this.SubjectForm.value.stMark_year);
+    // const SubData = {
+    //   // classname: this.SubjectForm.value.className,
+    //   year: this.SubjectForm.value.year,
+    // };
+    
+    
+  }
 
 
   /*teacher page data*/
-  classStudentData() {
-    if (this.DataForm.value.term == '1st Term') { this.term = 1 }
-    else if (this.DataForm.value.term == '2nd Term') { this.term = 2 }
-    else if (this.DataForm.value.term == '3rd Term') { this.term = 3 }
+  async classStudentData() {
+    
+    if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
+    else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
+    else if (this.DataForm1.value.term == '3rd Term') { this.term = 3 }
 
     // this.year = this.DataForm.value.year
-    // this.subject = this.DataForm.value.subject
     // this.className = this.DataForm.value.classname
-
+    
     const Studata = {
       term: this.term,
-      classname: this.DataForm.value.className,
-      year: this.DataForm.value.year,
+      classname: this.DataForm1.value.className,
+      year: this.DataForm1.value.year,
+      userid: this.userid
     };
-
-    const url = 'http://localhost:3000/student_marks/studentAverages'
-
-    this.http.post<any>(url,Studata).subscribe(res => {
-      // this.stuClzList = res;
+    
+    const url = 'http://localhost:3000/student_marks/studentAverage'
+    
+    this.http.post<any>(url, Studata).subscribe(res => {
+      this.studentAverageDiv = true
       console.log(res)
+      this.stuClzAve = res;
     })
   }
 

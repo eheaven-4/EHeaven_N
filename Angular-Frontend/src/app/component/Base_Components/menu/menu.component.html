@@ -1,11 +1,92 @@
 <div class="row" *ngIf="flag" style="display: block;">
     <div class="container-fluid back_gr">
+        <app-navbar2></app-navbar2>
+        
         <div class="row">
             <div class="container-fluid col-md-12 col-xs-12">
-                <div class="text-center container" style="padding-top: 80px;">
-                    <img src="../../../assets/logo/logo_Outline.png" style="width:40%; margin-bottom: 50px;">
+                <div class="text-center container" style="margin-top: 100px;margin-bottom: 130px;">
+                    <div class="row">
+                        <div class="col-md-6" style="margin-top: 20px;">
+                            <div class="row menu_div" (click)="adminDashboard()">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #004d40;">
+                                    <i class="material-icons menu_icon">person</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Admin Portal</p>
+                                </div>
+                            </div>
 
-                    <div class="row" style="margin: auto; padding-top: 50px;">
+                            <div class="row menu_div" (click)="userAcademics()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #d50000;">
+                                    <i class="material-icons menu_icon">school</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Academics</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userCertification()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #880e4f;">
+                                    <i class="material-icons menu_icon">receipt</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Certification</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userAttendence()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #1a237e;">
+                                    <i class="material-icons menu_icon">emoji_people</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Attendence</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userStudentProg()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #1b5e35;">
+                                    <i class="material-icons menu_icon">poll</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">My Progress</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userExtraCur()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #f57f17;">
+                                    <i class="material-icons menu_icon">sports_handball</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Extra Curricular</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userNotification()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #5d4037;">
+                                    <i class="material-icons menu_icon">notifications_active</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Notifications</p>
+                                </div>
+                            </div>
+                            <div class="row menu_div" (click)="userStudentMarks()" style="width: 70%;float: left;">
+                                <div class="col-md-2 menu_icon_back" style="background-color: #263238;">
+                                    <i class="material-icons menu_icon">score</i>
+                                </div>
+                                <div class="col-md-10 menu_text_back">
+                                    <p class="menu_text">Manage Marks</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+
+                            <p class="ehaeaven">EHeaven</p>
+                            <p class="subEheaven">Student Management &</p>
+                            <p class="subEheaven">Learning Platform</p>
+
+                            <p class="quotesTop">“The difference between school and life? In school, you're taught a lesson 
+                                and then given a test. In life, you're given a test that teaches you a lesson.”</p>
+                            <p class="quotesSub">- Tom Bodett</p>
+
+                        </div>
+                    </div>
+
+                    <!-- <div class="row" style="margin: auto; padding-top: 50px;">
                         <div class="col-md-3">
                             <div class="row menu_div" routerLink="/admin_dashboard" (click)="adminDashboard()">
                                 <div class="col-md-3 div_icn" style="background-color: #004d40;">
@@ -46,11 +127,10 @@
                                 </div>
                             </div>
                         </div>
-                    <!-- </div> -->
-                    <!-- <div class="row" style="margin: auto; padding-top: 50px;"> -->
+                  
                         <div class="col-md-3">
                             <div class="row menu_div" routerLink="/student_progress" (click)="userStudentProg()">
-                                <div class="col-md-3 div_icn" style="background-color: #1b5e20;">
+                                <div class="col-md-3 div_icn" style="background-color: #1b5e35;">
                                     <i class="material-icons icn">poll</i>
                                 </div>
                                 <div class="col-md-9 div_text">
@@ -88,7 +168,7 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> -->
                 </div>
 
             </div>

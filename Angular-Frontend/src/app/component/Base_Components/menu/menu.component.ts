@@ -30,10 +30,9 @@ export class MenuComponent implements OnInit {
   userAcademics() {
 
     if (this.myCookie) {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      // this.router.navigate(['../academic_subject']);
-      this.router.navigate(['/notifications'],{relativeTo:this.route});
+      
+      this.router.navigate(['../',this.userDetail.userid,'academic_subject']);
+      
     }
     else {
       let config = new MatSnackBarConfig();
@@ -46,9 +45,7 @@ export class MenuComponent implements OnInit {
   userNotification() {
 
     if (this.myCookie) {
-      // var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      // var id = userCookie.userid;
-      // this.router.navigate(['../notifications']);
+  
       this.router.navigate(['../',this.userDetail.userid,'notifications']);
     }
     else {
@@ -62,7 +59,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate(['../certification']);
       this.router.navigate(['../',this.userDetail.userid,'certification']);
     }
     else {
@@ -76,7 +72,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate(['../prepare_certification']);
       this.router.navigate(['../',this.userDetail.userid,'prepare_certification']);
     }
     else {
@@ -92,7 +87,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate([this.userDetail.userid,'../attendance']);
       this.router.navigate(['../',this.userDetail.userid,'attendance']);
     }
     else {
@@ -108,7 +102,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate(['../extra_curricular']);
       this.router.navigate(['../',this.userDetail.userid,'extra_curricular']);
     }
     else {
@@ -123,7 +116,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate(['../manage_marks']);
       this.router.navigate(['../',this.userDetail.userid,'manage_marks']);
     }
     else {
@@ -138,7 +130,6 @@ export class MenuComponent implements OnInit {
     if (this.myCookie) {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      // this.router.navigate(['../student_progress' + '/' + id]);
       this.router.navigate(['../',this.userDetail.userid,'student_progress']);
     }
     else {
@@ -154,7 +145,6 @@ export class MenuComponent implements OnInit {
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
       this.router.navigate(['../',this.userDetail.userid,'admin_dashboard']);
-      // this.router.navigate(['admin_dashboard',this.userDetail.userid],{relativeTo:this.route});
     }
     else {
       let config = new MatSnackBarConfig();
