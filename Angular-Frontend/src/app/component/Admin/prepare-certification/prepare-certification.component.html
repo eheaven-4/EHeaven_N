@@ -17,7 +17,7 @@
 
  <!-- ////////////////// PRINCIPAL  CERTIFICATION  //////////////////////////////////////////////////////////////////////// -->
 
-                    <mat-tab label="APPROVE CERTIFICATES">
+                    <mat-tab label="APPROVE CERTIFICATES" *ngIf=" userType == 'Administrator'">
                       <mat-card>
                         <mat-list>
                           <mat-list-item *ngFor="let cert of pendingCertList1">
@@ -36,7 +36,8 @@
 
   <!-- ////////////////// ADMIN  CERTIFICATION  //////////////////////////////////////////////////////////////////////// -->
 
-                    <mat-tab label="REQUESTED CERTIFICATES">
+                    <mat-tab label="REQUESTED CERTIFICATES" *ngIf=" userType == 'Administrator'">
+
                         <mat-card>
                             <mat-list>
                               <mat-list-item *ngFor="let cert of pendingCertList">
@@ -54,7 +55,7 @@
 
     <!-- ////////////////// ADMIN PREPARE CERTIFICATION - FORMS //////////////////////////////////////////////////////////////////////// -->
 
-                    <mat-tab label="PREPARE CERTIFICATES">
+                    <mat-tab label="PREPARE CERTIFICATES" *ngIf=" userType == 'Administrator'">
                       <mat-card >
                         <mat-accordion>
 
