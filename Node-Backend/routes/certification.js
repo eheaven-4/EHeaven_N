@@ -77,7 +77,25 @@ router.get("/issuedCert/:id", function (req, res) {
             });
         });
 });
-
+/************************get certification requests from users(Principal)******************************/
+router.get("/pendingCertList1", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Pending" })
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 /************************get certification requests from users(Admin comp)******************************/
 router.get("/pendingCertList", function (req, res) {
@@ -711,28 +729,14 @@ router.delete("/deleteCert/:_id", function(req,res) {
   })
 
   /*******************************accept certification requests****************************************/
-  router.post("/acceptCert/:_id", function (req, res) {  //hereeee
+  router.post("/acceptCert/:_id", function (req, res) {  
     console.log(req.params._id);
     const id = req.params._id;
-    // requestCertification.find({ _id: id })
-            
-    //     .update({certState: "Admin Approved"})
-    //     .exec()
-    //     .then(docs => {
-    //         console.log("Data Transfer Success.!");
-    //         console.log("hiiii")
-    //         res.status(200).json(docs);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         res.status(500).json({
-                
-    //         });
-    //     });
+   
     requestCertification.update(
         {_id:id},
         {
-            certState: "Admin Approved"
+            certState: "principalApproved"
         }
     ).exec()
 });

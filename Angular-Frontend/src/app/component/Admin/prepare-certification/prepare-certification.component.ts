@@ -477,7 +477,7 @@ submitOlCert() {
 
 }
 
-/***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
+/***********************************Accept/Reject Certificate Requests(Principal) ************************************/
 
 acceptCert(certRequest){
   // console.log(certRequest._id);
@@ -510,18 +510,25 @@ rejectCert(certRequest){
 
 }
 pendingCertList : certificateRequested [] = [];  //prepared certificates
-pendingCertList2 : certificateRequested [] = []; //prepared - principal approval not taken
+pendingCertList1 : certificateRequested [] = []; //prepared - principal approval not taken
   ngOnInit() {
 
 
-    var pendingUrl = "http://localhost:3000/certification/pendingCertList";
+    var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
+
+    this.http.get<any>(pendingUrl1).subscribe(res => {
+      console.log(res);
+      this.pendingCertList1   = res;
+
+    });
+
+    var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
 
     this.http.get<any>(pendingUrl).subscribe(res => {
       console.log(res);
       this.pendingCertList   = res;
 
     });
-    
 
   }
 
