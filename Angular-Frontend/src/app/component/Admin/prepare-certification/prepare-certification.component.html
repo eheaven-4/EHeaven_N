@@ -356,7 +356,7 @@
                             <mat-expansion-panel-header>Student Status Verification</mat-expansion-panel-header>
                             <mat-card>
                               <mat-list>
-                                <mat-list-item *ngFor="let cert of completedCertList">
+                                <mat-list-item *ngFor="let cert of completedCertList1">
                                   <mat-icon mat-list-icon>note</mat-icon>
                                   <h3 mat-line>User ID : {{cert.userid}} </h3>
                                   <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
@@ -370,27 +370,52 @@
                           </mat-expansion-panel>
                           <mat-expansion-panel>
                               <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
+                              <mat-card>
+                                <mat-list>
+                                  <mat-list-item *ngFor="let cert of completedCertList2">
+                                    <mat-icon mat-list-icon>note</mat-icon>
+                                    <h3 mat-line>User ID : {{cert.userid}} </h3>
+                                    <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                    <!-- <h3>{{cert._id}}</h3> -->
+                                    <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                    <mat-divider></mat-divider>
 
-                              <p>This is the primary content of the panel.</p>
-                              <button type="button" class="btn btn_1 ">Mark Complete</button>
+                                  </mat-list-item>
+                                </mat-list>
+                              </mat-card>
                           </mat-expansion-panel>
                           <mat-expansion-panel>
                                 <mat-expansion-panel-header>Leaving Certificate</mat-expansion-panel-header>
+                                <mat-card>
+                                  <mat-list>
+                                    <mat-list-item *ngFor="let cert of completedCertList3">
+                                      <mat-icon mat-list-icon>note</mat-icon>
+                                      <h3 mat-line>User ID : {{cert.userid}} </h3>
+                                      <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                      <!-- <h3>{{cert._id}}</h3> -->
+                                      <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                      <mat-divider></mat-divider>
 
-                                <p>This is the primary content of the panel.</p>
-                                <button type="button" class="btn btn_1 ">Mark Complete</button>
+                                    </mat-list-item>
+                                  </mat-list>
+                                </mat-card>
                           </mat-expansion-panel>
                           <mat-expansion-panel>
                                   <mat-expansion-panel-header>Academic Certificates</mat-expansion-panel-header>
 
-                                  <mat-expansion-panel>
-                                      <mat-expansion-panel-header>GCE(A/L)</mat-expansion-panel-header>
-                                      <button type="button" class="btn btn_1 ">Mark Complete</button>
-                                  </mat-expansion-panel>
-                                  <mat-expansion-panel>
-                                      <mat-expansion-panel-header>GCE(O/L)</mat-expansion-panel-header>
-                                      <button type="button" class="btn btn_1 ">Mark Complete</button>
-                                  </mat-expansion-panel>
+                                  <mat-card>
+                                    <mat-list>
+                                      <mat-list-item *ngFor="let cert of completedCertList4">
+                                        <mat-icon mat-list-icon>note</mat-icon>
+                                        <h3 mat-line>User ID : {{cert.userid}} </h3>
+                                        <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                        <!-- <h3>{{cert._id}}</h3> -->
+                                        <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                        <mat-divider></mat-divider>
+
+                                      </mat-list-item>
+                                    </mat-list>
+                                  </mat-card>
 
                           </mat-expansion-panel>
                         </mat-accordion>

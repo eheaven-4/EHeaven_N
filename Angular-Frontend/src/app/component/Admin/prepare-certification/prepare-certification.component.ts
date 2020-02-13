@@ -530,8 +530,10 @@ completeCert(certRequest){
 pendingCertList : certificateRequested [] = [];  //prepared certificates
 pendingCertList1 : certificateRequested [] = []; //prepared - principal approval not taken
 
-completedCertList : certificateRequested [] = []; //completed certification requests
-
+completedCertList1 : certificateRequested [] = []; //completed certification - student status
+completedCertList2 : certificateRequested [] = []; //completed certification - character
+completedCertList3 : certificateRequested [] = []; //completed certification - leaving
+completedCertList4 : certificateRequested [] = []; //completed certification - educational
 
   ngOnInit() {
 
@@ -553,11 +555,35 @@ completedCertList : certificateRequested [] = []; //completed certification requ
     });
 
 
-    var completedUrl = "http://localhost:3000/certification/completedCertList";   //for admin
+    var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
 
-    this.http.get<any>(completedUrl).subscribe(res => {
+    this.http.get<any>(completedUrl1).subscribe(res => {
       console.log(res);
-      this.completedCertList   = res;
+      this.completedCertList1   = res;
+
+    });
+
+    var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
+
+    this.http.get<any>(completedUrl2).subscribe(res => {
+      console.log(res);
+      this.completedCertList2   = res;
+
+    });
+
+    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //character
+
+    this.http.get<any>(completedUrl3).subscribe(res => {
+      console.log(res);
+      this.completedCertList3   = res;
+
+    });
+
+    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //character
+
+    this.http.get<any>(completedUrl4).subscribe(res => {
+      console.log(res);
+      this.completedCertList4   = res;
 
     });
 

@@ -118,9 +118,11 @@ router.get("/pendingCertList", function (req, res) {
 });
 
 /************************get completed certification requests from users(Admin comp)******************************/
-router.get("/completedCertList", function (req, res) {
+
+//student status certificates
+router.get("/completedCertList1", function (req, res) {
     // console.log("Hello");
-    requestCertification.find({ certState: "Completed" })
+    requestCertification.find({ certState: "Completed" , certType: "Student Status Verification Certificate"})
             
         .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState ')
@@ -136,6 +138,69 @@ router.get("/completedCertList", function (req, res) {
             });
         });
 });
+
+//character certificates
+router.get("/completedCertList2", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Character Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+//leaving certificates
+router.get("/completedCertList3", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Leaving Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+//educational certificates
+router.get("/completedCertList4", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Educational Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
+
 
 /*******************************generate student status certificate pdf ******************************/
 
