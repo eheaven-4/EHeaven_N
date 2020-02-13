@@ -31,15 +31,13 @@ router.post("/addLog", function (request, response) {
 
 //find one student data (student position, and the avarage)
 router.post("/studentAverage", function (req, res) {
-    const year = req.body.year
-    const term = req.body.term
-    const userid = req.body.userid
-    const classname = req.body.classname
-
-    console.log(year + " " + term + " " + userid + " " + classname);
-
-    var stuPosition;
-    var stuAverage;
+    var year = (req.body.year).toString();
+    var term = (req.body.term).toString();
+    var classname = req.body.classname
+    var userid = (req.body.userid).toString();
+    
+    var stuPosition = 0;
+    var stuAverage =0;
     var arr1 = new Array();
     mark.aggregate([
         {
@@ -175,7 +173,7 @@ class stuYearMarks {
         this.term = term
         this.marks = marks
     }
-}
+}   
 router.post("/subjectData", function(req,res){
     const subId = req.body.subId
     const year = req.body.year
