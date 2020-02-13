@@ -55,6 +55,7 @@ import { MarkBulkAddComponent } from './component/Base_Components/manage-marks/m
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
+import { UpcomingEventComponent } from './component/Admin/upcoming-event/upcoming-event.component';
 
 
 
@@ -97,6 +98,7 @@ import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
     ContactUsComponent,
     MailBoxComponent,
     Navbar2Component,
+    UpcomingEventComponent,
   ],
 
   imports: [
