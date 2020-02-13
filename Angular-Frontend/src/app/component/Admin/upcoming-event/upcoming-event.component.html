@@ -1,0 +1,40 @@
+<div class="row">
+  <div class="container-fluid">
+    <div class="row">
+
+      <div class="container-fluid" style="background-color:#F8F9FA ;">
+        <div class="container">
+          <h2 class="topic">Event Handling</h2>
+          <hr>
+        </div>
+
+        <div style="padding-top:50px; padding-bottom: 50px;">
+
+          <!-- form start -->
+          <form class="border text-center p-5 reg-frm" [formGroup]="EventForm">
+
+            <div class="form-group">
+              <p style="text-align: left;">Head :</p>
+              <input type="text" class="form-control box_border" aria-describedby="textHelp" name="head" formControlName="head">
+            </div>
+
+
+            <div class="form-group">
+              <p style="text-align: left;">Event Details :</p>
+              <textarea type="text" class="form-control box_border" aria-describedby="textHelp" name="eventdetail" formControlName="eventdetail"  id="textbox1"></textarea>
+            </div>
+
+            <div class="form-group">
+              <p style="text-align: left;">Date :</p>
+              <input type="date" class="form-control box_border" aria-describedby="textHelp" name="day" formControlName="day">
+            </div>
+
+          </form>
+
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

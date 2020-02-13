@@ -24,21 +24,21 @@ router.post('/add',(req,res)=>{
     })
 });
 
-router.get("/view", (req, res, next) => { 
-    payment.find()
-        .select('sName sId sClass pYear pName payment')
-        .exec()
-        .then(docs => {
-            console.log("Data Transfer Success.!");
-            res.status(200).json(docs);
-        })
-        .catch(error => {
-            console.log(error);
-            res.status(500).json({
-                error: error
-            });
-        });
-});
+// router.get("/view", (req, res, next) => { 
+//     payment.find()
+//         .select('sName sId sClass pYear pName payment')
+//         .exec()
+//         .then(docs => {
+//             console.log("Data Transfer Success.!");
+//             res.status(200).json(docs);
+//         })
+//         .catch(error => {
+//             console.log(error);
+//             res.status(500).json({
+//                 error: error
+//             });
+//         });
+// });
 
 
 router.get("/searchPayment/:pYear/:sClass/:pName", function (req, res) {
