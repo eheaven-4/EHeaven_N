@@ -5,7 +5,7 @@
               <app-sidebar></app-sidebar>
           </div> -->
           <div class="container-fluid" style="background-color:#F8F9FA">
-              
+
               <div>
 
                 <div class="container">
@@ -14,6 +14,24 @@
                 </div>
                 <div style="padding-left: 50px; padding-right: 50px">
                   <mat-tab-group>
+                    
+            <!-- Approve Certification requests from the students - only principal can view -->
+                    <mat-tab label="APPROVE CERTIFICATES">
+                      <mat-card>
+                        <mat-list>
+                          <mat-list-item *ngFor="let cert of pendingCertList">
+                            <mat-icon mat-list-icon>note</mat-icon>
+                            <h3 mat-line>User ID : {{cert.userid}} </h3>
+                            <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                            <!-- <h3>{{cert._id}}</h3> -->
+                            <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                            <button type="button" class="btn btn_1" (click)="acceptCert(cert)">Accept</button>
+                            <button type="button" class="btn btn_2" (click)="rejectCert(cert)">Reject</button>
+                            <mat-divider></mat-divider>
+                          </mat-list-item>
+                        </mat-list>
+                      </mat-card>
+                    </mat-tab>
                     <mat-tab label="REQUESTED CERTIFICATES">
                         <mat-card>
                             <mat-list>
@@ -326,15 +344,27 @@
                       </mat-card>
                     </mat-tab>
 
-    <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW PREPARED CERTIFICATES //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="PENDING CERTIFICATES" >
+
+    <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW CERTIFICATION HISTORY //////////////////////////////////////////////////////////////////////// -->
+                    <mat-tab label="CERTIFICATION HISTORY" >
                       <mat-card>
                         <mat-accordion>
                           <mat-expansion-panel>
                             <mat-expansion-panel-header>Student Status Verification</mat-expansion-panel-header>
+                            <mat-card>
+                              <mat-list>
+                                <mat-list-item *ngFor="let cert of pendingCertList2">
+                                  <mat-icon mat-list-icon>note</mat-icon>
+                                  <h3 mat-line>User ID : {{cert.userid}} </h3>
+                                  <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
+                                  <!-- <h3>{{cert._id}}</h3> -->
+                                  <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
+                                  <button type="button" class="btn btn_1" (click)="acceptCert(cert)">Mark As Completed</button>
+                                  <mat-divider></mat-divider>
 
-                            <p>This is the primary content of the panel.</p>
-                            <button type="button" class="btn btn_1 ">Mark Complete</button>
+                                </mat-list-item>
+                              </mat-list>
+                            </mat-card>
                           </mat-expansion-panel>
                           <mat-expansion-panel>
                               <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
@@ -364,10 +394,7 @@
                         </mat-accordion>
                       </mat-card>
                     </mat-tab>
-    <!-- ////////////////// ADMIN PREPARE CERTIFICATION - VIEW CERTIFICATION HISTORY //////////////////////////////////////////////////////////////////////// -->
-                    <mat-tab label="CERTIFICATION HISTORY">
-                      History
-                    </mat-tab>
+
                   </mat-tab-group>
 
                 </div>

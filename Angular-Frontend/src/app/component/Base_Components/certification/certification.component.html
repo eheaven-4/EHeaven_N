@@ -83,8 +83,7 @@
                                 <h3 mat-line>{{cert.certType}}</h3>
                                 <h3 mat-line>Requested On :</h3>
                                 <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
-                                <h2 mat-line style="color: rgb(0, 20, 36)">Admin Approval : {{cert.certState}}</h2>
-                                <h3 mat-line style="color: rgb(0, 20, 36)">Principal Approval : {{cert.prinapprovState}} </h3>
+                                <h2 mat-line style="color: rgb(0, 20, 36)">Certificate Status : {{cert.certState}}</h2>
                               </mat-list-item>
                             </mat-list>
                           </mat-card>

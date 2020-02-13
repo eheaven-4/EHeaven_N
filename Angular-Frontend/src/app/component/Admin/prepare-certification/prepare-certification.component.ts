@@ -509,7 +509,8 @@ rejectCert(certRequest){
   window.location.reload();
 
 }
-pendingCertList : certificateRequested [] = [];
+pendingCertList : certificateRequested [] = [];  //prepared certificates
+pendingCertList2 : certificateRequested [] = []; //prepared - principal approval not taken
   ngOnInit() {
 
 
@@ -519,8 +520,8 @@ pendingCertList : certificateRequested [] = [];
       console.log(res);
       this.pendingCertList   = res;
 
-    })
-
+    });
+    
 
   }
 

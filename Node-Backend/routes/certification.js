@@ -20,7 +20,7 @@ router.post("/requestCert", function (req, res) {
         examYear: req.body.examYear,
         examIndex: req.body.examIndex,
         reqDate: req.body.reqDate,
-        prinapprovState: req.body.prinapprovState,
+        // prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
      console.log(newRequest);
@@ -37,14 +37,14 @@ router.post("/requestCert", function (req, res) {
 });
 
 /************************get certification requests from students*****************************/
-//get pending certificate requests to be issued to the user
+//pending certification requests of students
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({$or:[{ certState: "Pending", userid: id } , { prinapprovState: "Pending", userid: id }]})
+    requestCertification.find({userid : id} )
     // { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -64,7 +64,7 @@ router.get("/issuedCert/:id", function (req, res) {
     const id = req.params.id;
     requestCertification.find({ certState: "Issued", userid: id })
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -82,10 +82,10 @@ router.get("/issuedCert/:id", function (req, res) {
 /************************get certification requests from users(Admin comp)******************************/
 router.get("/pendingCertList", function (req, res) {
     // console.log("Hello");
-    requestCertification.find({ certState: "Pending" })
+    requestCertification.find({ certState: "principalApproved" })
             
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -109,7 +109,6 @@ router.post("/studentstatus", async function (req, res) {
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
         description: req.body.description,
-        prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     // console.log(newRequest);
@@ -183,7 +182,6 @@ router.post("/charactercert", async function (req, res) {
         leadership: req.body.leadership,
         societies: req.body.societies,
         sports: req.body.sports,
-        prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
@@ -319,7 +317,7 @@ router.post("/leavingcert", async function (req, res) {
         cause: req.body.cause,
         lastClass: req.body.lastClass,
         subjects: req.body.subjects,
-        prinapprovState: req.body.prinapprovState,
+        // prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
@@ -473,7 +471,7 @@ router.post("/alcert", async function (req, res) {
         zscore: req.body.zscore,
         districtrank: req.body.districtrank,
         islandrank: req.body.islandrank,
-        prinapprovState: req.body.prinapprovState,
+        //prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     
@@ -599,7 +597,7 @@ router.post("/olcert", async function (req, res) {
         centerNo: req.body.centerNo,
         indexNo: req.body.indexNo,
         subjectsOl: req.body.subjectsOl,
-        prinapprovState: req.body.prinapprovState,
+        //prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
