@@ -509,8 +509,30 @@ rejectCert(certRequest){
   window.location.reload();
 
 }
+
+completeCert(certRequest){
+  // console.log(certRequest._id);
+  var objId = certRequest._id;
+  console.log(objId);
+  var url = "http://localhost:3000/certification/completeCert/"+certRequest._id; //accept certification requests
+
+  this.http.post(url,null).subscribe(res => {
+    alert('Successful');
+  }, (err) => {
+    console.log(err);
+  });
+
+  window.location.reload();
+
+}
+
+
 pendingCertList : certificateRequested [] = [];  //prepared certificates
 pendingCertList1 : certificateRequested [] = []; //prepared - principal approval not taken
+
+completedCertList : certificateRequested [] = []; //completed certification requests
+
+
   ngOnInit() {
 
 
@@ -527,6 +549,15 @@ pendingCertList1 : certificateRequested [] = []; //prepared - principal approval
     this.http.get<any>(pendingUrl).subscribe(res => {
       console.log(res);
       this.pendingCertList   = res;
+
+    });
+
+
+    var completedUrl = "http://localhost:3000/certification/completedCertList";   //for admin
+
+    this.http.get<any>(completedUrl).subscribe(res => {
+      console.log(res);
+      this.completedCertList   = res;
 
     });
 

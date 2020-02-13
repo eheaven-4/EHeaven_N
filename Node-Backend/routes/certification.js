@@ -117,6 +117,25 @@ router.get("/pendingCertList", function (req, res) {
         });
 });
 
+/************************get completed certification requests from users(Admin comp)******************************/
+router.get("/completedCertList", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" })
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
 
 /*******************************generate student status certificate pdf ******************************/
 
@@ -737,6 +756,19 @@ router.delete("/deleteCert/:_id", function(req,res) {
         {_id:id},
         {
             certState: "principalApproved"
+        }
+    ).exec()
+});
+
+
+router.post("/completeCert/:_id", function (req, res) {  
+    console.log(req.params._id);
+    const id = req.params._id;
+   
+    requestCertification.update(
+        {_id:id},
+        {
+            certState: "Completed"
         }
     ).exec()
 });
