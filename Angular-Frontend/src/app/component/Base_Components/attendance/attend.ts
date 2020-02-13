@@ -2,8 +2,12 @@ export class Attend{
     userid:string;
     username:string;
     attend:boolean;
+
+}
+export class AttendList{
     class:string;
-    marked:string;
+    markedby:string;
+    atendList:Array<Attend>;
 }
 export class Attendreturn{
     username:string;

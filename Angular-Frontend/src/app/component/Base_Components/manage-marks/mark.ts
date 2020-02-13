@@ -8,5 +8,6 @@ export class Mark {
     year: string;
     term: string;
     subject:string;
+    subId:string;
     marks: Array<Mark>;
   }

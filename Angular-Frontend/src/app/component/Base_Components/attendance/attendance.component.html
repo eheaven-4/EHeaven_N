@@ -6,23 +6,50 @@
                     <h2 class="topic">Attendance</h2>
                     <hr>
                 </div>
+
                 <div class="container">
                     <mat-card style="margin-bottom: 30px">
                         <div class="row">
                             <img src="../../../assets/logo/logo.png" class="img_logo">
                         </div>
+                        
+                        
+                            
+                                
+                           
+                                <!-- <div class="container" style="padding-top: 50px">
+                                    <h3 style="color: red; font-weight: bold">Class List</h3>
+                                    <mat-card *ngFor="let class of classlist" style="padding-top: 50px; color: brown;">
+                                       <button (click)="goTo(class.classname)"><mat-icon >home_work</mat-icon> {{class.classname}}</button>
+                                    </mat-card>
+                                </div> -->
                         <div class="container" style="padding-top: 50px">
                             <h3 style="color: red; font-weight: bold">Class List</h3>
-                            <mat-card *ngFor="let class of classlist" style="padding-top: 50px; color: brown;">
-                               <button (click)="goTo(class.classname)"><mat-icon >home_work</mat-icon> {{class.classname}}</button>
-                            </mat-card>
+                            <div class="text-center container" style="margin-top: 100px;margin-bottom: 130px;">
+                                <div class="row" *ngFor="let class of classlist">
+                                    <div class="col-md-6" style="margin-top: 20px;">
+                                        <div class="row menu_div" (click)="goTo(class.classname)">
+                                            <div class="col-md-2 menu_icon_back" style="background-color: #1a237e;">
+                                                <i class="material-icons menu_icon">home_work</i>
+                                            </div>
+                                            <div class="col-md-10 menu_text_back" style="background-color:white;">
+                                                <p>{{class.classname}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </mat-card>
                 </div>
             </div>
         </div>
     </div>
+    
 </div>
+
+
+
 <div *ngIf="!flag">
     <button (click)="showclass()">classlist</button >
     <app-attendance-list [parentData]="class"></app-attendance-list>

@@ -3,22 +3,22 @@ const router = express.Router();
 const attendance = require('../models/attendance');
 const config = require('../config/database');
 const users=require('../models/users');
+const classroom = require('../models/class');
 
 router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
-    var year=today.getFullYear();
-    var date=today.getDate();
-    var month=today.getMonth()+1;
+    // var year=today.getFullYear();
+    // var date=today.getDate();
+    // var month=today.getMonth()+1;
     
-    var todaystr=month+"/"+date+"/"+year;
+    // var todaystr=month+"/"+date+"/"+year;
     const stu=new attendance({
-        name:request.body.username,
-        userid:request.body.userid,
-        attend:request.body.attend,
-        date:todaystr,
+        
+        date:today,
         class:request.body.class,
-        markedBy:request.body.marked
+        markedBy:request.body.marked,
+        attendList:request.body.atendList
     });
     console.log(stu);
     attendance.addAttendance(stu,function (err,req){
@@ -26,6 +26,7 @@ router.post("/addLog",function(request,response){
             response.json({state:false,msg:"Did not insert new attendance"});
         }
         if(req){
+            console.log(req);
             response.json({state:true,msg:"New Attendence inserted"});
         }
     });
@@ -83,6 +84,40 @@ router.get("/searchStu/:stu/:month", function (req, res){
     });
     
 });
+router.get("/getstatus",function(req,res){
+    console.log("searchdate");
+    var output=[];
+    classroom.find({})
+    .exec(function(err,data){
+        if(err){
+            console.log("Error");
+        }else{
+            var nowDate=new Date();
+            var date=(nowDate.getMonth()+1).toString()+nowDate.getDate().toString()+nowDate.getFullYear().toString();
+            data.forEach(element=>{
+                attendance.find({$and:[{date:date},{class:element.classname}]})
+                .exec(function(err,data){
+                    if(err){
+                        console.log("Error");
+                    }else{
+                        var newdata={
+                            classname:element.classname,
+                            status:true
+                        };
+                        output.push(newdata);
+                        console.log("hihihi")
+                    }
+                }).then(da=>{
+                    console
+                    console.log(output);
+                });
+            });
+            
+        }
+    });
+
+    
+})
 
 
 module.exports = router;

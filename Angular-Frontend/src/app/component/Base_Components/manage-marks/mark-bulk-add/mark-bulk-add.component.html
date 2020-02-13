@@ -36,7 +36,7 @@
               <mat-label>Select Subject</mat-label>
               <mat-select #subject>
                 <mat-option>None</mat-option>
-                <mat-option *ngFor="let sub of mySubject" [value]="sub.subName">{{sub.subName}}</mat-option>
+                <mat-option *ngFor="let sub of mySubject;i as index" [value]="sub.subName">{{sub.subName}}</mat-option>
               </mat-select>
             </mat-form-field>
             <p>{{subject.value}}</p>

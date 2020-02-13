@@ -13,7 +13,8 @@ router.post("/addLog", function (request, response) {
         year: request.body.year,
         term: request.body.term,
         marks: request.body.marks,
-        subId: request.body.subId
+        subId: request.body.subId,
+        subject:request.body.subject    
     });
     // console.log(newmarksheet);
     mark.addMark(newmarksheet, function (err, req) {

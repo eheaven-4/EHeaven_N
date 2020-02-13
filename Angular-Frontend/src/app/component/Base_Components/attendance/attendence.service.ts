@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core'; 
 import{HttpClient} from '@angular/common/http';
-
-import {User} from './../../../user';
 import {Attend} from './attend';
-import {Attendreturn} from './attend'
-import {ClassRoom} from '../../Admin/class-registration/Classroom';
+import {AttendList} from './attend';
+
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +14,7 @@ export class AttendenceService {
 
   
   constructor(private _http:HttpClient) { }
-  logAdd(stu:Attend){
+  logAdd(stu:AttendList){
     return this._http.post<Attend>(this.post_url,stu);
   }
   retriveUsers(classname){
@@ -38,10 +36,16 @@ export class AttendenceService {
     return this._http.get<any>(get_Students);
 
   }
+  getStatus(){
+    var _url="http://localhost:3000/attendance/getstatus";
+    // return this._http.get(_url);
+  }
   getclass(){
     var _url="http://localhost:3000/classroom/getdata";
     return this._http.get(_url);
+    this.getStatus();
   }
+  
 
 
 }

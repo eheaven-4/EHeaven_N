@@ -2,6 +2,7 @@ import { Component, OnInit,Input } from '@angular/core';
 import {AttendenceService} from '../attendence.service';
 import {Returnuser} from '../attend';
 import {Attend} from '../attend';
+import {AttendList} from '../attend';
 import {Attendreturn} from '../attend';
 import {FormBuilder,Validators,FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
@@ -64,13 +65,7 @@ stu = new FormControl('', [Validators.required]);
   }
   
  
-  addData(stu:Attend){
-    this.attendanceservice.logAdd(stu)
-       .subscribe(
-          data=>console.log('Success',data),
-          error=>console.error('Error!',error) 
-    );
-  }
+  
   count(index){
     if(this.toggle[index]=="Present"){
       this.presentStu--;
@@ -82,15 +77,15 @@ stu = new FormControl('', [Validators.required]);
     }
   }
   onSubmit(userForm){
-    
+    var attendList=[];
     this.mainflag=false;
     const student = Object.entries(userForm.value);
     for (const [i,attend] of student) {
       var newRec=new Attend();
       newRec.username=this.students[i].name;
       newRec.userid=this.students[i].userid;
-      newRec.class=this.classname;
-      newRec.marked=this.usercookie.userid;
+      // newRec.class=this.classname;
+      // newRec.marked=this.usercookie.userid;
       
       if(attend==""){
 
@@ -104,10 +99,19 @@ stu = new FormControl('', [Validators.required]);
         newRec.attend=false;
       }
       console.log(newRec);
-      this.addData(newRec);
+      attendList.push(newRec);
       
     }
-    
+    var FinalList=new AttendList();
+    FinalList.class=this.classname;
+    FinalList.markedby=this.usercookie.userid;
+    FinalList.atendList=attendList;
+    console.log(FinalList);
+    this.attendanceservice.logAdd(FinalList)
+       .subscribe(
+          data=>console.log('Success',data),
+          error=>console.error('Error!',error)
+       )
     
   }
   searchStu(month:string,stu:string){

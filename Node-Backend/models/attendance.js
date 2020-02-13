@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.schema;
 
 const attendanceSchema=mongoose.Schema({
-    name:{type:String,require:true},
-    userid :{type:String,require:true},
-    attend:{type:Boolean,require:true},
-    date:{type:String,require:true},
     class:{type:String,require:true},
-    markedBy:{type:String,require:true}
+    date:{type:Date,require:true},
+    markedBy:{type:String,require:true},
+    attendList:[{
+        name:{type:String,require:true},
+        userid :{type:String,require:true},
+        attend:{type:Boolean,require:true},
+    }]
 });
 const attendance=module.exports=mongoose.model("attendance",attendanceSchema);
 
