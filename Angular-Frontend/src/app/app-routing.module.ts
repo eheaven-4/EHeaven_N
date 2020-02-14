@@ -16,6 +16,8 @@ import { AddTeacherTimetableComponent } from './component/Admin/add-teacher-time
 import { PrepareCertificationComponent } from './component/Admin/prepare-certification/prepare-certification.component';
 import { NewsComponent } from './component/Admin/news/news.component';
 import { PaymentsComponent } from './component/Admin/payments/payments.component';
+import {UpcomingEventComponent} from './component/Admin/upcoming-event/upcoming-event.component';
+
 
 
 import { NotificationComponent } from './component/Base_Components/notification/notification.component';
@@ -82,6 +84,7 @@ const routes: Routes = [
     {path: 'admin_dashboard', component:AdminDashboardComponent},
     {path: 'news_feeds', component:NewsComponent},
     {path: 'payments', component:PaymentsComponent},
+    {path: 'upcoming_event',component:UpcomingEventComponent},
     {path: 'student_progress', component: StudentProgressComponent},
     {path: 'manage_marks', component: ManageMarksComponent},
     {path: 'extra_curricular', component: ExtraCurricularComponent},

@@ -10,7 +10,7 @@ const requestCertificationSchema = mongoose.Schema({
     examYear: { type: String, require: true },
     examIndex: { type: String,  require: true },
     reqDate: {type: String, require: true},
-    prinapprovState: { type: String, require: true},
+    // prinapprovState: { type: String, require: true},
     certState: { type: String, require: true}
 });
 
@@ -22,7 +22,7 @@ const requestStudentstatusSchema = mongoose.Schema({
     dateofAdmission: { type: String, require: true },
     currentStatus: { type: String, require: true },
     description: { type: String, require: true },
-    prinapprovState: { type: String, require: true},
+    // prinapprovState: { type: String, require: true},
     certState: {type :String, require: true}
 });
 
@@ -40,7 +40,7 @@ const requestCharacterCertSchema = mongoose.Schema({
     leadership: {type :String, require: true},
     societies: {type :String, require: true},
     sports: {type :String, require: true},
-    prinapprovState: { type: String, require: true},
+    // prinapprovState: { type: String, require: true},
     certState: {type :String, require: true}
 });
 
@@ -60,7 +60,7 @@ const requestLeavingCertSchema = mongoose.Schema({
     cause: {type :String, require: true},
     lastClass: {type :String, require: true},
     subjects: {type :String, require: true},
-    prinapprovState: { type: String, require: true},
+    //prinapprovState: { type: String, require: true},
     certState: {type :String, require: true}
 });
 
@@ -75,7 +75,7 @@ const requestAlCertSchema = mongoose.Schema({
     districtrank: {type :String, require: true},
     islandrank: {type :String, require: true},
     subjects: {type :Array, require: true},
-    prinapprovState: { type: String, require: true},
+    //prinapprovState: { type: String, require: true},
     certState: {type :String, require: true}
     
 });
@@ -87,7 +87,7 @@ const requestOlCertSchema = mongoose.Schema({
     centerNo: { type: String, require: true },
     indexNo: { type: String, require: true },
     subjectsOl: {type :Array, require: true},
-    prinapprovState: { type: String, require: true},
+    //prinapprovState: { type: String, require: true},
     certState: {type :String, require: true}
 });
 
