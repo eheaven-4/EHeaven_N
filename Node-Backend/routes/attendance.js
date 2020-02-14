@@ -8,14 +8,13 @@ const classroom = require('../models/class');
 router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
-    // var year=today.getFullYear();
-    // var date=today.getDate();
-    // var month=today.getMonth()+1;
-    
-    // var todaystr=month+"/"+date+"/"+year;
+    var yyyy=today.getFullYear();
+    var mm=today.getMonth();
+    var dd=today.getDate()+1;
+    var inputDate=new Date(yyyy,mm,dd);
+
     const stu=new attendance({
-        
-        date:today,
+        date:inputDate,
         class:request.body.class,
         markedBy:request.body.marked,
         attendList:request.body.atendList
@@ -24,13 +23,14 @@ router.post("/addLog",function(request,response){
     attendance.addAttendance(stu,function (err,req){
         if(err){
             response.json({state:false,msg:"Did not insert new attendance"});
+            return;
         }
         if(req){
             console.log(req);
             response.json({state:true,msg:"New Attendence inserted"});
+            return;
         }
     });
-
 });
 
 
@@ -42,15 +42,23 @@ router.get("/received/:classname", function (req, res) {
         }else{
             res.json(data);
         }
-    });
-    
+    });  
 });
 
 router.get("/searchDate", function (req, res) {
     console.log("searchdate");
     var inputdate = req.query.date;
-    console.log(inputdate);
-    attendance.find({date:inputdate})
+    var dateee=inputdate.split("/");
+
+    console.log(dateee);
+    var yyyy=parseInt(dateee[2]);
+    var mm=parseInt(dateee[0])-1;
+    var dd=parseInt(dateee[1])+1;
+    var findDate=new Date(yyyy,mm,dd);
+
+   
+    console.log(findDate);
+    attendance.find({date:findDate})
     .exec(function(err,data){
         if(err){
             console.log("Error");
@@ -58,30 +66,36 @@ router.get("/searchDate", function (req, res) {
             console.log(data);
             res.json(data);
         }
-    });
-    
+    });   
 });
 
 router.get("/searchStu/:stu/:month", function (req, res){
     console.log(req.params.stu,req.params.month);
+    var Today=new Date();
+    var yyyy=Today.getFullYear();
+    var start=new Date(yyyy,parseInt(req.params.month)-1,2);
+    var end =new Date(yyyy,parseInt(req.params.month)-1,32);
+    console.log(start);
+    console.log(end);
     var date = new RegExp("^" + req.params.month);
     
     // ({$and:[{$or:[{userid:req.params.userid},{username:req.params.userid}]},{class:'1-A'}]})
-    attendance.find({
-        $and:[
-            {$or:[{userid:req.params.stu},{username:req.params.stu}]},
-            {date:date}
-        ]
-    })
+    // attendance.find({
+    //     $and:[
+    //         {$or:[{userid:req.params.stu},{username:req.params.stu}]},
+    //         {date:date}
+    //     ]
+    // })
     
-    .exec(function(err,data){
-        if(err){
-            console.log("Error");
-        }else{
-            console.log(data);
-            res.json(data);
-        }
-    });
+    // .exec(function(err,data){
+    //     if(err){
+    //         console.log("Error");
+    //     }else{
+    //         console.log(data);
+    //         res.json(data);
+    //     }
+    // });
+    return;
     
 });
 router.get("/getstatus",function(req,res){

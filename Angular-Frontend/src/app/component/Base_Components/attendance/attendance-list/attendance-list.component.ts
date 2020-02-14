@@ -128,7 +128,6 @@ stu = new FormControl('', [Validators.required]);
         this.searchStuResult=data;
         console.log(this.searchStuResult);
       }
-      
     });
   }
   searchDate(value:string){
