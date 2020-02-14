@@ -250,11 +250,22 @@ export class StudentProgressComponent implements OnInit {
       // this.studentAverageDiv = true
       this.allStudnetAverages = res;
       this.marksTable = true
-      console.log(this.allStudnetAverages)
     })
   }
 
-  studentDetails(stdata){
-    
+  studentDetails(stdata){    
+    console.log(stdata);
+    const studentObject= {
+      term : stdata.term,
+      year : stdata.year,
+      classname : stdata.classname,
+      userid : stdata.userid,
+      average : stdata.average,
+      username : stdata.username,
+    }
+    const url = "http://localhost:3000/student_marks/oneStudentData"
+    this.http.post<any>(url,studentObject).subscribe(res => {
+      console.log(res)
+    })    
   }
 }

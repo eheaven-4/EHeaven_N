@@ -214,10 +214,13 @@ router.post("/subjectAllStuData", function (req, res) {
 //teacher part ********************************************************************************
 //find all students marks data with final marks(for teacher)
 class allStuAverage {
-    constructor(userid,username, average) {
+    constructor(userid, username, average, year, term, classname) {
         this.userid = userid
         this.username = username
         this.average = average
+        this.year = year
+        this.term = term
+        this.classname = classname
     }
 }
 
@@ -247,24 +250,24 @@ router.post("/classAverages", function (req, res) {
                 });
             }
 
-            for (var i = 0; i < dataArray2.length/docs.length; i++) {
+            for (var i = 0; i < dataArray2.length / docs.length; i++) {
                 var total = 0
                 var average = 0;
-                
+
                 var userid = dataArray2[i].userid
                 var username = dataArray2[i].name
-                
+
                 for (var j = 0; j < dataArray2.length; j++) {
                     if (userid == dataArray2[j].userid) {
                         total = total + dataArray2[j].marks
                     }
                 }
-                average = parseFloat(total/docs.length).toFixed(4);
-                var st = new allStuAverage(userid,username, average)
+                average = parseFloat(total / docs.length).toFixed(4);
+                var st = new allStuAverage(userid, username, average, year, term,classname)
                 dataArray3.push(st)
-
             }
-            res.send(dataArray3.sort((a,b) =>(a))
+            dataArray3.sort(function (a, b) { return b.average - a.average });
+            res.send(dataArray3)
         });
 })
 
@@ -278,4 +281,10 @@ class stuSubMarks {
         this.marks = marks
     }
 }
+
+/*one student Data*/
+router.post("/oneStudentData",function(req,res){
+    console.log(req.body)
+    
+})
 module.exports = router;
