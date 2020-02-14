@@ -15,26 +15,6 @@
                                 <div class="container sex" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
                                     <div class="row">
                                         <div class="col-md-3">
-                                            <div class="row box1" matTooltip="Your {position} of {2019} {term}">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <p class="box_smtext">* Class position</p>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <hr
-                                                            style="width: 92%; background-color: white; margin-top: -25px;">
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">{{stuClzAve.stuPosition}}</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
                                             <div class="row box2">
                                                 <div class="container">
                                                     <div class="row">
@@ -55,6 +35,47 @@
                                             </div>
                                         </div>
                                         <div class="col-md-3">
+                                            <div class="row box4">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">* Term</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">{{stuClzAve.term}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="row box1" matTooltip="Your {position} of {2019} {term}">
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <p class="box_smtext">* Class position</p>
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row">
+                                                        <hr
+                                                            style="width: 92%; background-color: white; margin-top: -25px;">
+                                                    </div>
+                                                </div>
+                                                <div class="container">
+                                                    <div class="row" style="margin-top: -30px;">
+                                                        <span class="box_bigtext">{{stuClzAve.position}}</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-md-3">
                                             <div class="row box3"
                                                 matTooltip="Your {subject} average whthin your class ">
                                                 <div class="container">
@@ -70,33 +91,13 @@
                                                 </div>
                                                 <div class="container">
                                                     <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">{{stuClzAve.stuAverage}}</span>
+                                                        <span class="box_bigtext">{{stuClzAve.average}}</span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
 
-                                        <div class="col-md-3">
-                                            <div class="row box4"
-                                                matTooltip="Your {subject} average from all the section">
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <p class="box_smtext">* Average in school</p>
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row">
-                                                        <hr
-                                                            style="width: 92%; background-color: white; margin-top: -25px">
-                                                    </div>
-                                                </div>
-                                                <div class="container">
-                                                    <div class="row" style="margin-top: -30px;">
-                                                        <span class="box_bigtext">5.1733</span>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                        
                                     </div>
                                 </div>
 
@@ -343,7 +344,7 @@
                                                     </div>
                                                     <div class="col-md-2 tbodyContent" style="  text-align: center;">
                                                         {{stdata.average}}
-                                                    </div>
+                                                    </div>  
                                                     <div class="col-md-2 tbodyContent" style="  text-align: center;">
                                                         {{stdata.position}}
                                                     </div>

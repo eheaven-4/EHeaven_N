@@ -13,8 +13,12 @@ interface yearArrray {
   year: String
 }
 interface StudentsAverage {
-  stuPosition: String
-  stuAverage: String
+  position: String
+  userid:String
+  username: String
+  year: String
+  term:String
+  average: String
   classname: String
 }
 
@@ -94,7 +98,7 @@ export class StudentProgressComponent implements OnInit {
     responsive: true,
   };
   barChartLabels: Label[] = ['1st Term', '2nd Term', '3rd Term'];
-  barChartType: ChartType = 'line';
+  barChartType: ChartType = 'bar';
   barChartLegend = true;
   barChartPlugins = [];
 
@@ -222,8 +226,8 @@ export class StudentProgressComponent implements OnInit {
 
 
   /*student average and position div*/
-  async StudentData() {
-
+  StudentData() {
+    this.studentAverageDiv = false
     if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
     else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
     else if (this.DataForm1.value.term == '3rd Term') { this.term = 3 }

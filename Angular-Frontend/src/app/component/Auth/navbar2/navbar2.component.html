@@ -7,7 +7,13 @@
           </a>
         </span>
         <span class="example-spacer"></span>
-  
+
+        <span >
+          <p class="usertype">
+            ( {{usertype}} )
+          </p>
+        </span>
+
         <span class="nav-itm nav_item">
   
           <!-- <button mat-button routerLink="/" class="navbtn "> -->
@@ -24,7 +30,9 @@
         <div class="nav-itm nav_item" *ngIf="cookies.logingstatus">
           <button mat-button routerLink="/profile" (click)="userProfile()" class="btn ">
             <mat-icon>person</mat-icon>&nbsp;Profile
+            
           </button>
+          
         </div>
         <span class="nav-itm nav_item" *ngIf="!cookies.logingstatus">
           <button  mat-button routerLink="/login" class="btn ">Login</button>
