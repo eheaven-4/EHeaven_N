@@ -197,12 +197,14 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
 
 //get top 4 news in the DATABASE    
 router.get('/topNews', function (req, res) {
+
+   // console.log("dscjskjdks")
     News.find()
         .sort({ date: 1 })
         .limit(4)
         .exec()
         .then(result => {
-            console.log(result)
+            // console.log(result)
             res.json({ state: true, msg: "Data Transfer Successfully..!", data: result });
         })
         .catch(error => {

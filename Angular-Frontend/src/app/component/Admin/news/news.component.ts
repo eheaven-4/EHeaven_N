@@ -3,7 +3,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-import { MycookiesService } from '../../Admin/mycookies.service';
+// import { MycookiesService } from '../../Admin/mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
@@ -35,7 +35,6 @@ export class NewsComponent implements OnInit {
 
   topic: string;
   newsSumery: string;
-  // currentNews: string;
 
   news: newsClass[] = [];
   newsEdit: newsClass[] = [];
@@ -46,7 +45,7 @@ export class NewsComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    private cookies: MycookiesService,
+   // private cookies: MycookiesService,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
@@ -70,6 +69,8 @@ export class NewsComponent implements OnInit {
     });
   }
 
+
+// edit news select
   onEdit(event, news_id , filepath) {
     this.editform = true;
     window.scrollTo(0,0);
@@ -88,7 +89,7 @@ export class NewsComponent implements OnInit {
         this.newsEdit = res.data;
         this.dataform = true;
         this.newspicname = filepath;
-        //console.log('picname =' + this.newspicname);
+        // console.log('picname =' + this.newspicname);
       }
     });
 
@@ -158,14 +159,14 @@ export class NewsComponent implements OnInit {
             if (res.state) {
               const config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
-              this.snackBar.open('News Successfully Added..! ', true ? 'Done' : undefined, config);
+              this.snackBar.open('News Successfully Updated..! ', true ? 'Done' : undefined, config);
 
               window.location.reload();
 
             } else {
               const config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
-              this.snackBar.open('News is not Added..! ', true ? 'Retry' : undefined, config);
+              this.snackBar.open('News is not updated..! ', true ? 'Retry' : undefined, config);
               this.router.navigate(['/news']);
             }
           });
@@ -183,13 +184,8 @@ export class NewsComponent implements OnInit {
     // stop here if form is invalid
     if (this.NewsForm.invalid) {
       return;
+
     } else {
-
-      // tslint:disable-next-line: prefer-const
-      const myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-      const userid = myCookie.userid;
-
-
       this.date = Date();
 
       const formData = new FormData();
