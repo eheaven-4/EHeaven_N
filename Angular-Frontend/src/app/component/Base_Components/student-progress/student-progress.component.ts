@@ -70,6 +70,7 @@ export class StudentProgressComponent implements OnInit {
   usertype
   cookie
   studentAverageDiv: boolean = false;
+  eachStuDataDiv : boolean = false;
   submitted = false;
   subjectGraph = false;
   marksTable = false;
@@ -284,6 +285,7 @@ export class StudentProgressComponent implements OnInit {
       console.log(res)
       this.eachStudentData = res
       console.log(this.eachStudentData);
+      this.eachStuDataDiv = true
       
     })    
   }
