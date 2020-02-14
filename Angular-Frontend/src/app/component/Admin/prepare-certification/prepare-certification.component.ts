@@ -573,7 +573,7 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
 
     });
 
-    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //character
+    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
 
     this.http.get<any>(completedUrl3).subscribe(res => {
       console.log(res);
@@ -581,7 +581,7 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
 
     });
 
-    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //character
+    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
 
     this.http.get<any>(completedUrl4).subscribe(res => {
       console.log(res);

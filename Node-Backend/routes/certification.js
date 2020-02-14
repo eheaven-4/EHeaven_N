@@ -41,7 +41,7 @@ router.post("/requestCert", function (req, res) {
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({userid : id} )
+    requestCertification.find({certState: "Pending", userid : id} )
     // { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
         .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState')
@@ -62,7 +62,7 @@ router.get("/pendingCert/:id", function (req, res) {
 router.get("/issuedCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({ certState: "Issued", userid: id })
+    requestCertification.find({ certState: "Completed", userid: id })
         .sort({ _id: 1 })
         .select('userid certName certType examName examYear examIndex reqDate certState ')
         .exec()
