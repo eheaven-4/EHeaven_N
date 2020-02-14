@@ -1,8 +1,7 @@
 <div class="row">
-
     <div class="container-fluid">
         <div class="row">
-            <div class="container-fluid" style="background-color:#F8F9FA">
+            <div class="container-fluid" style="background-color:#F8F9FA; min-height: 450px;">
                 <div>
                     <div class="container">
                         <h2 class="topic">My Progress</h2>
@@ -114,10 +113,12 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Year Required :</label>
-                                                            <mat-select #t class="browser-default custom-select mb-4 border"
+                                                            <mat-select #t
+                                                                class="browser-default custom-select mb-4 border"
                                                                 [(ngModel)]="year" name="year" formControlName="year">
-                                                                <mat-option style="text-align: left" *ngFor='let year of myYear'
-                                                                    [value]='year' [value]="year">{{ year }}
+                                                                <mat-option style="text-align: left"
+                                                                    *ngFor='let year of myYear' [value]='year'
+                                                                    [value]="year">{{ year }}
                                                                 </mat-option>
                                                             </mat-select>
                                                         </div>
@@ -125,10 +126,11 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Term Required :</label>
-                                                            <mat-select class="browser-default custom-select mb-4 box_border"
+                                                            <mat-select
+                                                                class="browser-default custom-select mb-4 box_border"
                                                                 [(ngModel)]="term" name="term" formControlName="term">
-                                                                <mat-option style="text-align: left" *ngFor='let term of myTerm'
-                                                                    [value]="term">
+                                                                <mat-option style="text-align: left"
+                                                                    *ngFor='let term of myTerm' [value]="term">
                                                                     {{term}}</mat-option>
                                                             </mat-select>
                                                         </div>
@@ -136,23 +138,23 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Class Name Required :</label>
-        
+
                                                             <input type="text" class="form-control box_border"
                                                                 formControlName="className" name="className"
                                                                 matTooltip="Enter in block letters (i.e: 1A)"
                                                                 style="text-align: left">
-        
+
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
-                                                            <button mat-raised-button ld-ext-right running class="search_btn"
-                                                                (click)="StudentData()">
+                                                            <button mat-raised-button ld-ext-right running
+                                                                class="search_btn" (click)="StudentData()">
                                                                 <img src="../../../../assets/icons/searchengin-brands.svg"
                                                                     style="width: 20px">Search</button>
                                                         </div>
-                                                    </div>                                                
-                                                </div>                                               
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -206,7 +208,7 @@
                                 </div>
 
                                 <div class="container" *ngIf="marksTable == true">
-                                    <div class="table" >
+                                    <div class="table">
                                         <div class="row tableheader">
                                             <div class="col-md-3 theaderContent">
                                                 Student Id
@@ -267,7 +269,8 @@
 
 
 
-                            <mat-tab label="Teacher/Principle Portal"  *ngIf="usertype == 'Teacher'  || usertype == 'Principle'">
+                            <mat-tab label="Teacher/Principle Portal"
+                                *ngIf="usertype == 'Teacher'  || usertype == 'Principle'">
                                 <!-- <div class="container" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -368,10 +371,12 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Year Required :</label>
-                                                            <mat-select #t class="browser-default custom-select mb-4 border"
+                                                            <mat-select #t
+                                                                class="browser-default custom-select mb-4 border"
                                                                 [(ngModel)]="year" name="year" formControlName="year">
-                                                                <mat-option style="text-align: left" *ngFor='let year of myYear'
-                                                                    [value]='year' [value]="year">{{ year }}
+                                                                <mat-option style="text-align: left"
+                                                                    *ngFor='let year of myYear' [value]='year'
+                                                                    [value]="year">{{ year }}
                                                                 </mat-option>
                                                             </mat-select>
                                                         </div>
@@ -379,10 +384,11 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Term Required :</label>
-                                                            <mat-select class="browser-default custom-select mb-4 box_border"
+                                                            <mat-select
+                                                                class="browser-default custom-select mb-4 box_border"
                                                                 [(ngModel)]="term" name="term" formControlName="term">
-                                                                <mat-option style="text-align: left" *ngFor='let term of myTerm'
-                                                                    [value]="term">
+                                                                <mat-option style="text-align: left"
+                                                                    *ngFor='let term of myTerm' [value]="term">
                                                                     {{term}}</mat-option>
                                                             </mat-select>
                                                         </div>
@@ -390,23 +396,23 @@
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
                                                             <label>Class Name Required :</label>
-        
+
                                                             <input type="text" class="form-control box_border"
                                                                 formControlName="className" name="className"
                                                                 matTooltip="Enter in block letters (i.e: 1A)"
                                                                 style="text-align: left">
-        
+
                                                         </div>
                                                     </div>
                                                     <div class="col-md-3">
                                                         <div class="row top_txt">
-                                                            <button mat-raised-button ld-ext-right running class="search_btn"
-                                                                (click)="classStudentData()">
+                                                            <button mat-raised-button ld-ext-right running
+                                                                class="search_btn" (click)="classStudentData()">
                                                                 <img src="../../../../assets/icons/searchengin-brands.svg"
                                                                     style="width: 20px">Search</button>
                                                         </div>
-                                                    </div>                                                
-                                                </div>                                               
+                                                    </div>
+                                                </div>
                                             </form>
                                         </div>
                                     </div>
@@ -445,44 +451,38 @@
 
 
 
-
-                                <div class="container" style="margin-bottom: 50px; " *ngIf="subjectGraph == true">
-                                    <div class="row"
-                                        style="margin: auto;width: 97%;background-color: rgb(255, 255, 255);border-radius: 4px;border: rgb(231, 231, 231) solid 1px">
-                                        <div class="chart-wrapper">
-                                            <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels"
-                                                [options]="barChartOptions" [plugins]="barChartPlugins"
-                                                [legend]="barChartLegend" [chartType]="barChartType"
-                                                [colors]="chartColors">
-                                            </canvas>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="container" *ngIf="marksTable == true">
-                                    <div class="table" >
+                                <div class="container" *ngIf="marksTable == true" style="margin-bottom: 40px;">
+                                    <div class="table">
                                         <div class="row tableheader">
-                                            <div class="col-md-3 theaderContent">
+                                            <div class="col-md-2 theaderContent">
                                                 Student Id
                                             </div>
                                             <div class="col-md-6 theaderContent">
                                                 Student Name
                                             </div>
-                                            <div class="col-md-3 theaderContent" style="  text-align: center;">
+                                            <div class="col-md-2 theaderContent" style="  text-align: center;">
                                                 Student Average
                                             </div>
+                                            <div class="col-md-2 theaderContent" style="  text-align: center;">
+                                                Student Position
+                                            </div>
+
 
                                         </div>
 
-                                        <div class="row tablebody" *ngFor="let stdata of allStudnetAverages" (click)="studentDetails(stdata)">
-                                            <div class="col-md-3 tbodyContent">
+                                        <div class="row tablebody" *ngFor="let stdata of allStudnetAverages"
+                                            (click)="studentDetails(stdata)">
+                                            <div class="col-md-2 tbodyContent">
                                                 {{stdata.userid}}
                                             </div>
                                             <div class="col-md-6 tbodyContent">
                                                 {{stdata.username}}
                                             </div>
-                                            <div class="col-md-3 tbodyContent" style="  text-align: center;">
+                                            <div class="col-md-2 tbodyContent" style="  text-align: center;">
                                                 {{stdata.average}}
+                                            </div>
+                                            <div class="col-md-2 tbodyContent" style="  text-align: center;">
+                                                {{stdata.position}}
                                             </div>
 
                                         </div>
@@ -490,6 +490,88 @@
 
                                 </div>
 
+                                <div class="container" style="width: 94%;">
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <div class="row">
+                                                <div style="width: 100%;margin-bottom: 10px;">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+                                                        <p class="teacherStuData">
+                                                            {{eachStudentData.userid}}
+                                                        </p>
+                                                    </mat-card>
+                                                </div>
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData">
+                                                            {{eachStudentData.username}}</p>
+                                                    </mat-card>
+                                                </div >
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData">
+                                                            {{eachStudentData.year}}</p>
+                                                    </mat-card>
+                                                </div>
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData">
+                                                            {{eachStudentData.term}}</p>
+                                                    </mat-card>
+                                                </div>
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData"> {{eachStudentData.classname}}</p>
+                                                    </mat-card>
+                                                </div>
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData">{{eachStudentData.position}}</p>
+                                                    </mat-card>
+                                                </div>
+                                                <div style="width: 100%;margin-bottom: 10px">
+                                                    <mat-card>
+                                                        <p class="teacherStuDataSub" >User Id</p>
+
+                                                        <p class="teacherStuData"> {{eachStudentData.average}}</p>
+                                                    </mat-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <div class="row">
+                                                <div class="col-md-12"
+                                                    *ngFor="let echstuData of eachStudentData.dataArray2">
+                                                    <mat-card
+                                                        style="height: 55px; margin-bottom: 10px;cursor: pointer;">
+                                                        <div class="row">
+                                                            <div class="col-md-2">
+                                                                {{echstuData.subId}}
+                                                            </div>
+                                                            <div class="col-md-6">
+                                                                {{echstuData.subject}}
+                                                            </div>
+                                                            <div class="col-md-2">
+                                                                {{echstuData.marks}}
+                                                            </div>
+                                                        </div>
+                                                    </mat-card>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </mat-tab>
                         </mat-tab-group>
                     </div>

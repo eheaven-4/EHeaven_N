@@ -223,6 +223,18 @@ class allStuAverage {
         this.classname = classname
     }
 }
+/*this class is use to enter data with position of the student in to the dataArray4()*/
+class allStuSortAve {
+    constructor(position,userid, username, average, year, term, classname) {
+        this.position = position
+        this.userid = userid
+        this.username = username
+        this.average = average
+        this.year = year
+        this.term = term
+        this.classname = classname
+    }
+}
 
 router.post("/classAverages", function (req, res) {
     const year = req.body.year
@@ -232,6 +244,7 @@ router.post("/classAverages", function (req, res) {
     var dataArray1 = new Array();
     var dataArray2 = new Array();
     var dataArray3 = new Array();
+    var dataArray4 = new Array();
 
     mark.find({ "year": year, "term": term, "classname": classname })
         .select()
@@ -266,16 +279,20 @@ router.post("/classAverages", function (req, res) {
                 var st = new allStuAverage(userid, username, average, year, term,classname)
                 dataArray3.push(st)
             }
+            //sorting dataArray3  
             dataArray3.sort(function (a, b) { return b.average - a.average });
-            res.send(dataArray3)
+
+            //add data to dataArray4 with student positions
+            for(var i =0; i<dataArray3.length; i++){
+                var st = new allStuSortAve(i+1,dataArray3[i].userid, dataArray3[i].username, dataArray3[i].average, dataArray3[i].year, dataArray3[i].term,dataArray3[i].classname)
+                dataArray4.push(st)
+            }
+            res.send(dataArray4)
         });
 })
 
 class stuSubMarks {
-    constructor(classname, year, term, subject, subId, marks) {
-        this.classname = classname;
-        this.year = year;
-        this.term = term;
+    constructor( subject, subId, marks) {
         this.subject = subject;
         this.subId = subId;
         this.marks = marks
@@ -285,6 +302,40 @@ class stuSubMarks {
 /*one student Data*/
 router.post("/oneStudentData",function(req,res){
     console.log(req.body)
-    
+    const year = req.body.year
+    const term = req.body.term
+    const classname = req.body.classname
+    const userid = req.body.userid
+    const average = req.body.average
+    const username = req.body.username
+    const position = req.body.position
+
+    var dataArray1 = new Array();   //all data push to this array
+    var dataArray2 = new Array();
+
+    mark.find({ year: year, term :term, classname:classname })
+        .exec()
+        .then(docs => {
+            var i = 0;
+            for (i = 0; i < docs.length; i++) {
+                dataArray1.push(docs[i])
+            }
+            var j = 0
+            for (j = 0; j < dataArray1.length; j++) {
+                dataArray1[j].marks.forEach(element => {
+                    if (element.userid == userid) {
+                        var subMarks = new stuSubMarks( dataArray1[j].subject, dataArray1[j].subId, element.mark)
+                        dataArray2.push(subMarks)
+                    }
+                });
+            }
+            res.send({position,average,username,term,year,classname,userid,dataArray2})
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
 })
 module.exports = router;

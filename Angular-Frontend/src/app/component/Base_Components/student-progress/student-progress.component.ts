@@ -38,6 +38,20 @@ interface allStudnetAverages{
   username : String
   average : String
 }
+interface eachStudentData{
+  userid: String
+  username: String
+  term: String
+  year: String
+  classname: String
+  position: String
+  average: String
+  dataArray : {
+    subject : String
+    subId: String
+    marks: String
+  }
+}
 @Component({
   selector: 'app-student-progress',
   templateUrl: './student-progress.component.html',
@@ -72,6 +86,7 @@ export class StudentProgressComponent implements OnInit {
   stuSubMarks: subjectsFilter[] = []; //
   allStuMarks : allStudentMarks[] = [];
   allStudnetAverages : allStudnetAverages[] = []
+  eachStudentData : eachStudentData [] = []
 
   /*bar chart options*/
   barChartOptions: ChartOptions = {
@@ -262,10 +277,14 @@ export class StudentProgressComponent implements OnInit {
       userid : stdata.userid,
       average : stdata.average,
       username : stdata.username,
+      position : stdata.position
     }
     const url = "http://localhost:3000/student_marks/oneStudentData"
     this.http.post<any>(url,studentObject).subscribe(res => {
       console.log(res)
+      this.eachStudentData = res
+      console.log(this.eachStudentData);
+      
     })    
   }
 }
