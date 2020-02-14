@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
+import { MycookiesService } from '../../Admin/mycookies.service';
 
 interface certificateRequested {
   userid: String,
@@ -20,12 +21,15 @@ interface certificateRequested {
   styleUrls: ['./prepare-certification.component.scss']
 })
 export class PrepareCertificationComponent implements OnInit {
+  cookie = JSON.parse(this.cookies.getCookie('userAuth'));
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
+    private cookies: MycookiesService,
   ) { }
 
+userType
 
 // examination Medium
 mediums = [
@@ -305,8 +309,7 @@ addSubjectOl() {
       admissionNum: this.StudentStatusForm.value.admissionNum,
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
       description: this.StudentStatusForm.value.description,
-      certState : 'Pending',
-      prinapprovState: 'Pending',
+      certState : 'Pending'
     };
 
     var url = 'http://localhost:3000/certification/studentstatus'
@@ -345,8 +348,7 @@ submitCharacterCert() {
     leadership: this.CharacterCertForm.value.leadership,
     societies: this.CharacterCertForm.value.societies,
     sports: this.CharacterCertForm.value.sports,
-    certState : 'Pending',
-    prinapprovState: 'Pending',
+    certState : 'Pending'
   };
   var url = 'http://localhost:3000/certification/charactercert'
 
@@ -386,8 +388,7 @@ submitLeavingCert() {
     cause: this.LeavingCertForm.value.cause,
     lastClass: this.LeavingCertForm.value.lastClass,
     subjects: this.LeavingCertForm.value.subjects,
-    certState : 'Pending',
-    prinapprovState: 'Pending',
+    certState : 'Pending'
   };
   var url = 'http://localhost:3000/certification/leavingcert'
 
@@ -423,7 +424,6 @@ submitAlCert() {
     districtrank: this.AlCertForm.value.districtrank,
     islandrank: this.AlCertForm.value.islandrank,
     certState : 'Pending',
-    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/alcert';
 
@@ -455,7 +455,6 @@ submitOlCert() {
     indexNo: this.OlCertForm.value.certDetails.indexNo,
     subjectsOl: this.OlCertForm.value.subjectsOl,
     certState : 'Pending',
-    prinapprovState: 'Pending',
   };
   var url = 'http://localhost:3000/certification/olcert'
 
@@ -477,7 +476,7 @@ submitOlCert() {
 
 }
 
-/***********************************Accept/Reject Certificate Requests(Admin comp) ************************************/
+/***********************************Accept/Reject Certificate Requests(Principal) ************************************/
 
 acceptCert(certRequest){
   // console.log(certRequest._id);
@@ -509,19 +508,90 @@ rejectCert(certRequest){
   window.location.reload();
 
 }
-pendingCertList : certificateRequested [] = [];
+
+completeCert(certRequest){
+  // console.log(certRequest._id);
+  var objId = certRequest._id;
+  console.log(objId);
+  var url = "http://localhost:3000/certification/completeCert/"+certRequest._id; //accept certification requests
+
+  this.http.post(url,null).subscribe(res => {
+    alert('Successful');
+  }, (err) => {
+    console.log(err);
+  });
+
+  window.location.reload();
+
+}
+
+
+pendingCertList : certificateRequested [] = [];  //prepared certificates
+pendingCertList1 : certificateRequested [] = []; //prepared - principal approval not taken
+
+completedCertList1 : certificateRequested [] = []; //completed certification - student status
+completedCertList2 : certificateRequested [] = []; //completed certification - character
+completedCertList3 : certificateRequested [] = []; //completed certification - leaving
+completedCertList4 : certificateRequested [] = []; //completed certification - educational
+
   ngOnInit() {
 
+    let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
 
-    var pendingUrl = "http://localhost:3000/certification/pendingCertList";
+    this.userType = myCookie.usertype;
+
+    var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
+
+    this.http.get<any>(pendingUrl1).subscribe(res => {
+      console.log(res);
+      this.pendingCertList1   = res;
+
+    });
+
+    var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
 
     this.http.get<any>(pendingUrl).subscribe(res => {
       console.log(res);
       this.pendingCertList   = res;
 
-    })
+    });
 
 
-  }
+    var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
+
+    this.http.get<any>(completedUrl1).subscribe(res => {
+      console.log(res);
+      this.completedCertList1   = res;
+
+    });
+
+    var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
+
+    this.http.get<any>(completedUrl2).subscribe(res => {
+      console.log(res);
+      this.completedCertList2   = res;
+
+    });
+
+    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
+
+    this.http.get<any>(completedUrl3).subscribe(res => {
+      console.log(res);
+      this.completedCertList3   = res;
+
+    });
+
+    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
+
+    this.http.get<any>(completedUrl4).subscribe(res => {
+      console.log(res);
+      this.completedCertList4   = res;
+
+    });
+
+
+    }
+
+
 
 }

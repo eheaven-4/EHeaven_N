@@ -72,7 +72,9 @@ app.get("/", function(req,res) {
 });
 
 app.listen(3000, function() {
-    console.log("listning to port 3000");
+    console.log("listening to port 3000");
 });
+
+global.CronJob = require('./cron.js');      //backup cron job 
 
 module.exports = app;  
