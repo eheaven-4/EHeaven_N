@@ -9,11 +9,11 @@ const path = require('path');
 // save to data on database
 router.post("/addevent",(req,res)=>{
 
-
+console.log('Ashan');
     const newEvent = new Event({
         userid:req.params.userid,
         head: req.body.head,
-        eventdetails: req.body.eventdetails,
+        eventdetail: req.body.eventdetail,
         day: req.body.day
     });
 
@@ -32,8 +32,8 @@ router.post("/addevent",(req,res)=>{
 
 // view data function
 router.get("/viewevent",(req,res)=>{
-    Event.find().sort({date: -1})
-        .select('head eventdetails day')
+    Event.find().sort({day: -1})
+        .select('head eventdetail day')
         .exec()
         .then(docs =>{
             console.log("Data Transfer Success...");
@@ -68,14 +68,14 @@ router.delete('/deleteevent/:_id', (req,res) => {
 });
 
 router.get('/editevent/:id' , (req,res)=>{
-    const id = req.params.id;
-    Event.findById(id , (err, event)=>{
+    const eventid = req.params.id;
+    Event.findById(eventid , (err, event)=>{
     if(err)throw err;
     if(!event){
         res.json({state:false,msg:'No event found'});
         return;
     }
-    Event.findOne({_id :id})
+    Event.findOne({_id :eventid})
         .select()
         .exec()
         .then(data =>{
@@ -87,4 +87,44 @@ router.get('/editevent/:id' , (req,res)=>{
     });
 });
 
+
+router.post('/updateEvent/:_id',(req,res)=>{
+    const eventid = req.param._id;
+
+    const input = {
+        head:req.body.head,
+        eventdetail:req.body.eventdetail,
+        day:req.body.day,
+    }
+
+    for (const [key, value] of Object.entries(input)) {
+        console.log(key, value);
+    }
+    Event.update({_id:eventid}, {$set:input})
+        .exec()
+        .then(data =>{
+            console.log('Event Updated Successfuly..!')
+            Response.json({ state:true , msg:'Event Update Successfuly..!'})
+        })
+        .catch(error =>{
+            res.json({state:fale , msg:'Event Updating Unsuccesful..!'})
+        });
+});
+
+
+// get top 4 event for show in home
+router.get('/topEvent' , (req,res)=>{
+    console.log("nsdkcnsdklc");
+    Event.find()
+    .sort({date:1})
+    .limit(4)
+    .then(result =>{
+        console.log(result)
+        res.json({state:true , msg: "Data Transfer Success..!",data: result})
+    })
+    .catch(error=>{
+        console.log(error)
+        res.json({state:false , msg: "Data Transfer Unuccessfull..!"})
+    })
+})
 module.exports = router ;

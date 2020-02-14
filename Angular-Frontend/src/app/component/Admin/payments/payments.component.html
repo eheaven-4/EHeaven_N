@@ -26,7 +26,7 @@
 
               <form class="border text-center p-5 reg-frm" [formGroup]="PaymentForm">
                 <!-- {{PaymentForm.value | json}} -->
-
+                <h4 class="topic" style="text-align: center; margin-top: -80px;">New Payment Add  </h4>
                 <div class="form-row mb-4">
                   <p style="text-align: left">Student Name :</p>
                   <input type="text" class="form-control box_border" name="sName" formControlName="sName">
@@ -58,7 +58,7 @@
                     [(ngModel)]="pYear" name="pYear" formControlName="pYear">
                     <mat-option style="text-align:left" *ngFor='let pYear of myYears' [value]='pYear'
                       formControlName="pYear">
-                      
+
                       {{pYear}}
                     </mat-option>
 
@@ -109,7 +109,7 @@
 
                 <div class="row" style="text-align: center;margin-bottom: 50px;">
                   <div class="col-md-2 top_txt">
-                    <label>Year Required :</label>
+                    <label style="font-size:15px ;">Year Required :</label>
                     <mat-select  class="browser-default custom-select mb-4 box_border" [(ngModel)]="pYear" name="pYear"
                       formControlName="pYear">
 
@@ -120,14 +120,14 @@
                   </div>
 
                   <div class="col-md-2 top_txt">
-                    <label>Class Name Required :</label>
+                    <label style="font-size:15px ;">Class Name Required :</label>
 
                     <input type="text" class="form-control box_border" formControlName="sClass" name="sClass"
                       placeholder="1A" matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
                   </div>
 
                   <div class="col-md-4 top_txt">
-                    <label> Payment Type Required :</label>
+                    <label style="font-size:15px ;"> Payment Type Required :</label>
                     <mat-select class="browser-default custom-select mb-4 box_border" [(ngModel)]="pName"
                       name="pName" formControlName="pName">
                       <mat-option style="text-align: left" *ngFor='let pName of paymenttypes'
