@@ -10,9 +10,9 @@ import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 })
 
 export class NavbarComponent implements OnInit {
-  
-  
-  
+
+
+
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;
 
@@ -22,30 +22,34 @@ export class NavbarComponent implements OnInit {
     public snackBar: MatSnackBar,
   ) { }
 
-  ngOnInit() {  }
-
+  usertype
+  cookie
+  ngOnInit() {
+    this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    this.usertype = this.cookie.usertype; // load user type to the userType array 
+  }
   logoutUser() {
 
-    this.cookies.setCookie("userAuth","",-1);
+    this.cookies.setCookie("userAuth", "", -1);
     let config = new MatSnackBarConfig();
     config.duration = true ? 2000 : 0;
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
-    this.cookies.logingstatus=false;
+    this.cookies.logingstatus = false;
     this.router.navigate(['/login']);
 
   }
 
   userProfile() {
-   
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      var id = userCookie.userid;
-      
-      this.router.navigate(['../', id]);
-    
+
+    var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    var id = userCookie.userid;
+
+    this.router.navigate(['../', id]);
+
   }
   menu() {
-      var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-      this.router.navigate([userCookie.userid, 'menu']);
+    var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    this.router.navigate([userCookie.userid, 'menu']);
   }
 
 }

@@ -1,12 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-// import { NgFlashMessageService } from 'ng-flash-messages';
-// import { FormBuilder, Validators } from '@angular/forms';
 import { AttendenceService } from '../../attendance/attendence.service';
 import { ClassRoom } from '../../../Admin/class-registration/Classroom';
 import { HttpClient } from '@angular/common/http';
 import { Mark} from '../mark';
 import { Marksheet} from '../mark';
-
 
 
 @Component({
@@ -39,6 +36,7 @@ export class MarkBulkAddComponent implements OnInit {
       const url = "http://localhost:3000/class_management/getSubjects"
       this._http.get<any>(url).subscribe(res => {
         this.mySubject = res.data;
+        console.log(this.mySubject)
       });
   }
   handleFileInput(files: FileList) {
@@ -76,9 +74,18 @@ export class MarkBulkAddComponent implements OnInit {
       temp.term = term;
       temp.year = year;
       temp.marks = this.marks;
+      for(var i=0;i<this.mySubject.length;i++){
+        if(this.mySubject[i].subName==subje){
+          temp.subId=this.mySubject[i].subid;
+        }
+      }
+      var result = this.mySubject.find(obj => {
+        return obj.subName == subje 
+      })
       temp.subject=subje;
+      temp.subId=result.subId;
       console.log(temp);
-      this._http.post<any>('http://localhost:3000/mark/addLog',temp)
+      this._http.post<any>('http://localhost:3000/student_marks/addLog',temp)
         .subscribe(
           data => console.log('Success', data),
           error => console.error('Error!', error)
@@ -87,6 +94,3 @@ export class MarkBulkAddComponent implements OnInit {
     }
   }
 }
-
-
-
