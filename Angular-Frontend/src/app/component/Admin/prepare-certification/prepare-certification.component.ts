@@ -15,6 +15,11 @@ interface certificateRequested {
   state: String
 }
 
+interface subjectsArray {
+  subId: String,
+  subName: String,
+}
+
 @Component({
   selector: 'app-prepare-certification',
   templateUrl: './prepare-certification.component.html',
@@ -30,6 +35,8 @@ export class PrepareCertificationComponent implements OnInit {
   ) { }
 
 userType
+subjectnamesAl: subjectsArray[] = []
+
 
 // examination Medium
 mediums = [
@@ -132,71 +139,71 @@ schooltypes = [
 // ********************* A/L Certificate Form ****************************************************************************
 
 // subject names and numbers a-level
-subjectnamesAl = [
-  '01   Physics',
-  '02   Chemistry',
-  '07   Mathematics',
-  '08   Agricultural Science',
-  '09   Biology',
-  '10   Combine Mathematics',
-  '11   Higher Mathematics',
-  '*12  Common Genaral Test',
-  '**13   General English',
-  '14   Civil Technology',
-  '15   Mechanical Technology',
-  '16   Electrical,Electronic and Information Technolgy',
-  '17   Food Technology',
-  '18   Agro Technology',
-  '19   Bio-Resource Technolgy',
-  '20   Information and Communication Technology',
-  '21   Economics',
-  '22   Geography',
-  '23   Political Science',
-  '24   Logic and Scientific Method',
-  '25A   History of India',
-  '25B   History of Europe',
-  '25C   History of Modern World',
-  '28   Home Economics',
-  '29   Cpmmunication and Media Studies',
-  '31   Business Statistics',
-  '32   Business Studies',
-  '33   Accounting',
-  '41   Buddhism',
-  '42   Hinduism',
-  '43   Christianity',
-  '44   Islam',
-  '45   Buddhist Civilization',
-  '46   Hindu Civilization',
-  '47   Islamic Civilization',
-  '48   Greek and Roman Civilization',
-  '49   Christian Civilization',
-  '51   Art',
-  '52   Dancing(Indigenous)',
-  '53   Dancing(Bharatha)',
-  '54   Oriental Music',
-  '55   Carnatic Music',
-  '56   Western Music',
-  '57   Drama and Theatre(Sinhala)',
-  '58   Drama and Theatre(Tamil)',
-  '59   Drama and Theatre(English)',
-  '65   Engineering Technology',
-  '66   Bio Systems Technology',
-  '67   Science for Technology',
-  '71   Sinhala',
-  '72   Tamil',
-  '73   English',
-  '74   Pali',
-  '75   Sanskrit',
-  '78   Arabic',
-  '79   Malay',
-  '81   French',
-  '82   German',
-  '83   Russian',
-  '84   Hindi',
-  '86   Chinese',
-  '87   Japanese',
+// subjectnamesAl = [
+//   '01   Physics',
+//   '02   Chemistry',
+//   '07   Mathematics',
+//   '08   Agricultural Science',
+//   '09   Biology',
+//   '10   Combine Mathematics',
+//   '11   Higher Mathematics',
+//   '*12  Common Genaral Test',
+//   '**13   General English',
+//   '14   Civil Technology',
+//   '15   Mechanical Technology',
+//   '16   Electrical,Electronic and Information Technolgy',
+//   '17   Food Technology',
+//   '18   Agro Technology',
+//   '19   Bio-Resource Technolgy',
+//   '20   Information and Communication Technology',
+//   '21   Economics',
+//   '22   Geography',
+//   '23   Political Science',
+//   '24   Logic and Scientific Method',
+//   '25A   History of India',
+//   '25B   History of Europe',
+//   '25C   History of Modern World',
+//   '28   Home Economics',
+//   '29   Cpmmunication and Media Studies',
+//   '31   Business Statistics',
+//   '32   Business Studies',
+//   '33   Accounting',
+//   '41   Buddhism',
+//   '42   Hinduism',
+//   '43   Christianity',
+//   '44   Islam',
+//   '45   Buddhist Civilization',
+//   '46   Hindu Civilization',
+//   '47   Islamic Civilization',
+//   '48   Greek and Roman Civilization',
+//   '49   Christian Civilization',
+//   '51   Art',
+//   '52   Dancing(Indigenous)',
+//   '53   Dancing(Bharatha)',
+//   '54   Oriental Music',
+//   '55   Carnatic Music',
+//   '56   Western Music',
+//   '57   Drama and Theatre(Sinhala)',
+//   '58   Drama and Theatre(Tamil)',
+//   '59   Drama and Theatre(English)',
+//   '65   Engineering Technology',
+//   '66   Bio Systems Technology',
+//   '67   Science for Technology',
+//   '71   Sinhala',
+//   '72   Tamil',
+//   '73   English',
+//   '74   Pali',
+//   '75   Sanskrit',
+//   '78   Arabic',
+//   '79   Malay',
+//   '81   French',
+//   '82   German',
+//   '83   Russian',
+//   '84   Hindi',
+//   '86   Chinese',
+//   '87   Japanese',
 
-];
+// ];
 
 AlCertForm = this.fb.group({
   certDetails: this.fb.group({
@@ -537,9 +544,7 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
   ngOnInit() {
 
     let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-
     this.userType = myCookie.usertype;
-
     var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
 
     this.http.get<any>(pendingUrl1).subscribe(res => {
@@ -589,9 +594,15 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
 
     });
 
+    const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
+    this.http.get<any>(alUrl).subscribe(res => {
+      this.subjectnamesAl = res.data;
+    });
+  }
+
 
     }
 
 
 
-}
+

@@ -28,7 +28,7 @@
                             <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
                             <button type="button" class="btn btn_1" (click)="acceptCert(cert)">Accept</button>
                             <button type="button" class="btn btn_2" (click)="rejectCert(cert)">Reject</button>
-                            <mat-divider></mat-divider> 
+                            <mat-divider></mat-divider>
                           </mat-list-item>
                         </mat-list>
                       </mat-card>
@@ -254,7 +254,7 @@
                                     <mat-label>Subject</mat-label>
                                       <mat-select formControlName="subjectName">
                                           <mat-option style="text-align: left" *ngFor="let sub of subjectnamesAl" [value]="sub">
-                                            {{ sub }}
+                                            {{ sub.subName }}
                                           </mat-option>
                                       </mat-select>
                                   </mat-form-field>

@@ -51,9 +51,9 @@ export class AcademicSubjectComponent implements OnInit {
   ngOnInit() {
     const url = "http://localhost:3000/class_management/getSubjects"
     this.http.get<any>(url).subscribe(res => {
-      this.mySubject = res.data; 
+      this.mySubject = res.data;
     });
-    var userCookies = JSON.parse(this.cookies.getCookie("userAuth"))
+    var userCookies = JSON.parse(this.cookies.getCookie("userAuth")) 
     this.userType = userCookies.usertype
   }
   // load the image as the button event and asign to  the images variable
