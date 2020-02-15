@@ -2,11 +2,12 @@ import { Component, OnInit,Input } from '@angular/core';
 import {AttendenceService} from '../attendence.service';
 import {Returnuser} from '../attend';
 import {Attend} from '../attend';
+import {AttendList} from '../attend';
 import {Attendreturn} from '../attend';
 import {FormBuilder,Validators,FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
-import { templateJitUrl } from '@angular/compiler';
 import { MycookiesService} from '../../../Admin/mycookies.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-attendance-list',
@@ -17,25 +18,25 @@ export class AttendanceListComponent implements OnInit {
 
 @Input('parentData') public classname;
 
+
 public usercookie=JSON.parse(this.cookie.getCookie("userAuth"));
 public students:Array<Returnuser>;
 public attendRecord:Attend[];
 
-public searchStuResult:Attendreturn[];
-public searchDateResult:Attendreturn[];
+
 public i=0;
 public numberOfStudent=0;
 public presentStu=0;
 public mainflag=true;
-public historyflagD=true;
-public historyflagS=true;
-public data=new Attendreturn();
+// public historyflagD=true;
+// public historyflagS=true;
+// public data=new Attendreturn();
 public today=new Date();
-public spanflageD=false;
-public spanflageS=false;
+// public spanflageD=false;
+// public spanflageS=false;
 public c_url=null;
 public toggle;
-public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+// public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 stu = new FormControl('', [Validators.required]);
 
   
@@ -50,6 +51,7 @@ stu = new FormControl('', [Validators.required]);
     
   })
   ngOnInit() {
+    
     this.attendanceservice.retriveUsers(this.classname)
     .subscribe((data:Returnuser[])=>{
       this.students=data;
@@ -57,20 +59,12 @@ stu = new FormControl('', [Validators.required]);
       this.toggle=new Array(this.numberOfStudent);
       for (var j=0;j<this.numberOfStudent;j++){
         this.toggle[j]="Absent";
-        
-
       }
     });
   }
   
  
-  addData(stu:Attend){
-    this.attendanceservice.logAdd(stu)
-       .subscribe(
-          data=>console.log('Success',data),
-          error=>console.error('Error!',error) 
-    );
-  }
+  
   count(index){
     if(this.toggle[index]=="Present"){
       this.presentStu--;
@@ -82,15 +76,14 @@ stu = new FormControl('', [Validators.required]);
     }
   }
   onSubmit(userForm){
-    
+    var attendList=[];
     this.mainflag=false;
     const student = Object.entries(userForm.value);
     for (const [i,attend] of student) {
       var newRec=new Attend();
-      newRec.username=this.students[i].name;
+      newRec.name=this.students[i].name;
       newRec.userid=this.students[i].userid;
-      newRec.class=this.classname;
-      newRec.marked=this.usercookie.userid;
+      
       
       if(attend==""){
 
@@ -104,42 +97,51 @@ stu = new FormControl('', [Validators.required]);
         newRec.attend=false;
       }
       console.log(newRec);
-      this.addData(newRec);
+      attendList.push(newRec);
       
     }
-    
-    
-  }
-  searchStu(month:string,stu:string){
-    this.historyflagS=false;
-    var temp=parseInt(month)
-    temp+=1;
-    console.log(stu,temp);
-    this.attendanceservice.retriveStu(temp,stu)
-    .subscribe((data:Attendreturn[])=>{
-      if(data.length==0){
-        this.historyflagS=true;
-        this.spanflageS=true;
-      }else{
-        this.searchStuResult=data;
-        console.log(this.searchStuResult);
-      }
-      
-    });
-  }
-  searchDate(value:string){
-    console.log(value);
-    this.historyflagD=false;
-    this.attendanceservice.retriveDate(value)
-    .subscribe((data:Attendreturn[])=>{
-      if(data.length==0){
-        this.historyflagD=true;
-        this.spanflageD=true;
-      }else{
-        this.searchDateResult=data;
-      }
-    });
+    var FinalList=new AttendList();
+    FinalList.class=this.classname;
+    FinalList.markedby=this.usercookie.userid;
+    FinalList.atendList=attendList;
+    console.log(FinalList);
+    this.attendanceservice.logAdd(FinalList)
+       .subscribe(
+          data=>console.log('Success',data),
+          error=>console.error('Error!',error)
+       )
     
   }
+  // searchStu(month:string,stu:string){
+  //   this.historyflagS=false;
+  //   var temp=parseInt(month)
+  //   temp+=1;
+  //   console.log(stu,temp);
+  //   this.attendanceservice.retriveStu(temp,stu)
+  //   .subscribe((data)=>{
+  //     if(data.length==0){
+  //       this.historyflagS=true;
+  //       this.spanflageS=true;
+  //     }else{
+  //       this.searchStuResult=data;
+  //       console.log(this.searchStuResult);
+  //     }
+  //   });
+  // }
+  // searchDate(value:string,classnm:string){
+  //   var params=value+";"+classnm;
+  //   this.historyflagD=false;
+  //   this.attendanceservice.retriveDate(params)
+  //   .subscribe((data)=>{
+  //     if(data.length==0){
+  //       this.historyflagD=true;
+  //       this.spanflageD=true;
+  //     }else{
+  //       console.log(this.searchDateResult);
+  //       this.searchDateResult=data;
+  //     }
+  //   });
+    
+  // }
 
 }

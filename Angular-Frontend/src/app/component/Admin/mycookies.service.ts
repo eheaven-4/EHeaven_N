@@ -8,22 +8,38 @@ import {CookieData} from './CookieData';
 export class MycookiesService {
   logingstatus=false;
   userData:CookieData=null;
+  profile;
+ 
+    
+  
   constructor() { 
     // var temp=localStorage.getItem("exd");
     if(this.getCookie("userAuth")!=''){
+      
+      var data=JSON.parse(this.getCookie("userAuth"));
+      var name=data.name+"("+data.usertype+")";
+      console.log(name);
+      this.profile=name;
       this.logingstatus=true;
     }else{
       this.logingstatus=false;
     }
   }
-
+  
   setCookie(name: string, value: string, expireDays: number, path: string = '') {
-    this.logingstatus=true;
+    
+    
     let d: Date = new Date();
     d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
     let expires: string = `[expires]=${d.toUTCString()}`;
     let cpath: string = path ? `; path=${path}` : '';
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
+    if(expireDays!=-1){
+      var data=JSON.parse(value);
+      var name=data.name+"("+data.usertype+")";
+      this.logingstatus=true;
+    }
+    
   }
 
   getCookie(name: string) {
