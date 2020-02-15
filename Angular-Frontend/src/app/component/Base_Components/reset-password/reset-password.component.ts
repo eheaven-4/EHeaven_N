@@ -59,27 +59,27 @@ export class ResetPasswordComponent implements OnInit {
           }
         }
       });
-      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-        if (confirmed) {
+      // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      //   if (confirmed) {
 
-          this.http.post<any>(url + this.userid + "/" + this.propicName, formData).subscribe(res => {
-            if (res.state) {
-              console.log(res.msg);
-              let config = new MatSnackBarConfig();
-              config.duration = true ? 2000 : 0;
-              this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
-              // this.router.navigate(['/login']);
-            }
-            else {
-              let config = new MatSnackBarConfig();
-              config.duration = true ? 2000 : 0;
-              this.snackBar.open("Error in Update User..! ", true ? "Retry" : undefined, config);
-              // this.router.navigate(['/register']);
-            }
-          });
-          window.location.reload();
-        }
-      })
+      //     this.http.post<any>(url + this.userid + "/" + this.propicName, formData).subscribe(res => {
+      //       if (res.state) {
+      //         console.log(res.msg);
+      //         let config = new MatSnackBarConfig();
+      //         config.duration = true ? 2000 : 0;
+      //         this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
+      //         // this.router.navigate(['/login']);
+      //       }
+      //       else {
+      //         let config = new MatSnackBarConfig();
+      //         config.duration = true ? 2000 : 0;
+      //         this.snackBar.open("Error in Update User..! ", true ? "Retry" : undefined, config);
+      //         // this.router.navigate(['/register']);
+      //       }
+      //     });
+      //     window.location.reload();
+      //   }
+      // })
     }
   }
 }
