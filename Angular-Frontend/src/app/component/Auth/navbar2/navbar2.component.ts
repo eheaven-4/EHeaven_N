@@ -22,10 +22,7 @@ export class Navbar2Component implements OnInit {
     
   ) { }
 
-  ngOnInit() { 
-    this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    this.usertype = this.cookie.usertype; // load user type to the userType array
-   }
+  ngOnInit() { }
 
   logoutUser() {
 
@@ -42,7 +39,6 @@ export class Navbar2Component implements OnInit {
    
       var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var id = userCookie.userid;
-      
       this.router.navigate(['../', id]);
     
   }

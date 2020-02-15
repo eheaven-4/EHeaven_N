@@ -21,10 +21,10 @@
                                     </ng-template>
                                     <div class="row" *ngIf="flag">
                                         <div class="container" style="width: 1000px;">
-                                            <div class="row">
+                                            <div class="row" style="padding-top:100px;">
                                                 <!-- <div class="container" style="background-color:white"> -->
                                                     <h3 style="color: red; font-weight: bold">Class List</h3>
-                                                        <div class="text-center container" style="margin-top: 100px;margin-bottom: 130px;">
+                                                        <div class="text-center container" style="margin-top: 30px;margin-bottom: 130px;">
                                                             <div class="row" *ngFor="let class of classlist;index as i">
                                                                         
                                                                 <div class="col-md-6" style="margin-top: 20px;">
@@ -40,18 +40,18 @@
                                                                      
                                                                 <div class="col-md-6" style="margin-top: 20px;">
                                                                     <div class="row menu_div" *ngIf="status[i]">
-                                                                        <div class="col-md-2 menu_icon_back" style="background-color: rgb(113, 145, 170);">
+                                                                        <div class="col-md-2 menu_icon_back" style="background-color: red;">
                                                                             <i class="material-icons menu_icon">contact_support</i>
                                                                         </div>
-                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  rgb(113, 145, 170);">
-                                                                        <p style="margin-top: 10px;margin-right: 15px;">Have to mark</p>
+                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  red;">
+                                                                        <p style="margin-top: 10px;margin-right: 15px;">Not mark</p>
                                                                     </div>
                                                                 </div>
                                                                 <div class="row menu_div" *ngIf="!status[i]">
-                                                                    <div class="col-md-2 menu_icon_back" style="background-color: green;">
+                                                                    <div class="col-md-2 menu_icon_back" style="background-color:rgb(76, 204, 128);">
                                                                         <i class="material-icons menu_icon">assignment_turned_in</i>
                                                                     </div>
-                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  green;">
+                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  rgb(76, 204, 128);">
                                                                         <p style="margin-top: 10px;margin-right: 15px;">Marked</p>
                                                                     </div>
                                                                 </div>
