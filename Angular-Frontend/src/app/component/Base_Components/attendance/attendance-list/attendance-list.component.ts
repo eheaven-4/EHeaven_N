@@ -17,27 +17,26 @@ import { HttpParams } from '@angular/common/http';
 export class AttendanceListComponent implements OnInit {
 
 @Input('parentData') public classname;
-@Input('classList') public classList;
+
 
 public usercookie=JSON.parse(this.cookie.getCookie("userAuth"));
 public students:Array<Returnuser>;
 public attendRecord:Attend[];
 
-public searchStuResult:[];
-public searchDateResult:[];
+
 public i=0;
 public numberOfStudent=0;
 public presentStu=0;
 public mainflag=true;
-public historyflagD=true;
-public historyflagS=true;
-public data=new Attendreturn();
+// public historyflagD=true;
+// public historyflagS=true;
+// public data=new Attendreturn();
 public today=new Date();
-public spanflageD=false;
-public spanflageS=false;
+// public spanflageD=false;
+// public spanflageS=false;
 public c_url=null;
 public toggle;
-public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+// public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
 stu = new FormControl('', [Validators.required]);
 
   
@@ -52,7 +51,7 @@ stu = new FormControl('', [Validators.required]);
     
   })
   ngOnInit() {
-    console.log(this.classList);
+    
     this.attendanceservice.retriveUsers(this.classname)
     .subscribe((data:Returnuser[])=>{
       this.students=data;
@@ -84,8 +83,7 @@ stu = new FormControl('', [Validators.required]);
       var newRec=new Attend();
       newRec.name=this.students[i].name;
       newRec.userid=this.students[i].userid;
-      // newRec.class=this.classname;
-      // newRec.marked=this.usercookie.userid;
+      
       
       if(attend==""){
 
@@ -114,36 +112,36 @@ stu = new FormControl('', [Validators.required]);
        )
     
   }
-  searchStu(month:string,stu:string){
-    this.historyflagS=false;
-    var temp=parseInt(month)
-    temp+=1;
-    console.log(stu,temp);
-    this.attendanceservice.retriveStu(temp,stu)
-    .subscribe((data)=>{
-      if(data.length==0){
-        this.historyflagS=true;
-        this.spanflageS=true;
-      }else{
-        this.searchStuResult=data;
-        console.log(this.searchStuResult);
-      }
-    });
-  }
-  searchDate(value:string,classnm:string){
-    var params=value+";"+classnm;
-    this.historyflagD=false;
-    this.attendanceservice.retriveDate(params)
-    .subscribe((data)=>{
-      if(data.length==0){
-        this.historyflagD=true;
-        this.spanflageD=true;
-      }else{
-        console.log(this.searchDateResult);
-        this.searchDateResult=data;
-      }
-    });
+  // searchStu(month:string,stu:string){
+  //   this.historyflagS=false;
+  //   var temp=parseInt(month)
+  //   temp+=1;
+  //   console.log(stu,temp);
+  //   this.attendanceservice.retriveStu(temp,stu)
+  //   .subscribe((data)=>{
+  //     if(data.length==0){
+  //       this.historyflagS=true;
+  //       this.spanflageS=true;
+  //     }else{
+  //       this.searchStuResult=data;
+  //       console.log(this.searchStuResult);
+  //     }
+  //   });
+  // }
+  // searchDate(value:string,classnm:string){
+  //   var params=value+";"+classnm;
+  //   this.historyflagD=false;
+  //   this.attendanceservice.retriveDate(params)
+  //   .subscribe((data)=>{
+  //     if(data.length==0){
+  //       this.historyflagD=true;
+  //       this.spanflageD=true;
+  //     }else{
+  //       console.log(this.searchDateResult);
+  //       this.searchDateResult=data;
+  //     }
+  //   });
     
-  }
+  // }
 
 }
