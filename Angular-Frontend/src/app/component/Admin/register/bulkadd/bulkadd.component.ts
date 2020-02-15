@@ -4,6 +4,7 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 import { FormBuilder, Validators } from '@angular/forms';
 
 import {RegisterService} from '../register.service'; 
+import { MatSnackBarConfig ,MatSnackBar} from '@angular/material';
 
 
 export class  User{
@@ -34,7 +35,7 @@ export class BulkaddComponent {
   users=[];
   userVisibale;
   imageUrls;
-  constructor(private register:RegisterService){ }
+  constructor(private register:RegisterService,public snackBar: MatSnackBar){ }
 
   
   
@@ -141,9 +142,29 @@ export class BulkaddComponent {
     
 
   }
-  addUser(i){
+  addUser(i,reload){
     
-    this.register.addUser(this.users[i]);
+    return this.register.addUser(this.users[i]).subscribe(res => {
+      if (res.state) {
+        console.log(res.msg);
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
+        if(reload){
+          window.location.reload();
+        }
+        // this.ngProgress.done();
+        return true;
+        
+      }
+      else {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
+        // this.router.navigate(['/register']);
+        return false;
+      }
+    });
     this.userVisibale[i]=false;
 
       
@@ -154,10 +175,15 @@ export class BulkaddComponent {
   addAll(){
     for(var i=0;i<this.users.length;i++){
       if(this.userVisibale[i]){
-        this.addUser(i);
+        if( i == this.users.length-1){
+          this.addUser(i,1);
+        }else{
+          this.addUser(i,0);
+        }
+        
       }
     }
-    window.location.reload();
+    
   }
   removeAll(){
     window.location.reload();
