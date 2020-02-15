@@ -63,8 +63,9 @@
                                         </div>  
                                     </div>
                                     <div *ngIf="!flag">
-                                        <button (click)="showclass()">classlist</button >
+                                        
                                         <app-attendance-list [parentData]="class" [classList]="classlist"></app-attendance-list>
+                                        <div align="right"><button (click)="showclass()" class="btn my-4 reg_btn box_border" style="color: black;"><mat-icon>arrow_back</mat-icon>Back to the classlist</button ></div>
                                     </div>
                                     
                                 </mat-tab>
@@ -107,7 +108,7 @@
                                                                 <mat-label>Select Class</mat-label>
                                                                 <mat-select #class>
                                                                   <mat-option>None</mat-option>
-                                                                  <mat-option *ngFor="let class of classList" [value]="class.classname">{{class.classname}}</mat-option>
+                                                                  <mat-option *ngFor="let class of classlist" [value]="class.classname">{{class.classname}}</mat-option>
                                                                 </mat-select>
                                                               </mat-form-field>
                                                         </div>
@@ -122,17 +123,17 @@
                                                         </button>
                                                     </div>
                                                     <div>
-                                                        <p *ngIf="spanflageD" style="color: red;">May
+                                                        <!-- <p *ngIf="spanflageD" style="color: red;">May
                                                             be you entered date was a holiday.Please Enter valid
-                                                            date.</p>
+                                                            date.</p> -->
                                                     </div>
                                                 </form>
                                             </div>
                                             <div *ngIf="!historyflagD">
                                                 <div style="text-align: center; margin-top: 40px">
-                                                    <h5 style="color:  rgb(0, 140, 255)">{{searchDateResult[0].date}} -
+                                                    <h5 style="color:  rgb(0, 140, 255)">{{searchdate}} -
                                                         Attendence List</h5>
-                                                    <h5 style="color:  rgb(0, 140, 255)">{{classname}}</h5>
+                                                    <h5 style="color:  rgb(0, 140, 255)">{{class}} Class</h5>
                                                 </div>
 
                                                 <div class="container" style="margin-top: 40px">
@@ -152,7 +153,7 @@
                                                 </div>
                                                 <hr>
                                                 <div class="container">
-                                                    <div class="row" *ngFor="let result of searchDateResult;">
+                                                    <div class="row" *ngFor="let result of searchDateResult.attendList;">
                                                         <div class="col-md-1"></div>
                                                         <div class="col-md-2">
                                                             <p>{{result.userid}}</p>
@@ -225,7 +226,7 @@
                                             
                                             <div *ngIf="!historyflagS" style="padding-top:40px; padding-bottom: 40px">
                                                 <div style="text-align:center;">
-                                                    <h5>{{searchStuResult.name}} Student Attendence List</h5>
+                                                    <h5>{{searchStuResult.name}}  Attendence List</h5>
                                                 </div>
                                                 <div class="container">
                                                     <div class="row">

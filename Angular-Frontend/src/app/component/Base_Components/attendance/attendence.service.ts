@@ -49,7 +49,7 @@ export class AttendenceService {
   getclass(){
     var _url="http://localhost:3000/classroom/getdata";
     return this._http.get(_url);
-    this.getStatus();
+    // this.getStatus();
   }
   
 

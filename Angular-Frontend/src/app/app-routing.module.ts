@@ -66,11 +66,11 @@ import { ContactUsComponent } from './component/Auth/contact-us/contact-us.compo
 // ];
 const routes: Routes = [
 
-  {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
+  {path: '',component: HomeComponent},
+  {path: 'login',component: LoginComponent},
   {path:'404',component:PageNotFoundComponent},
   {path:':id/menu',component:MenuComponent},
-  {path: 'contact_us', component:ContactUsComponent},
+  {path: 'contact_us',component:ContactUsComponent},
 
   {path:':id',component:UserRootComponent,children:[
     {path: 'register',component:RegisterComponent},
