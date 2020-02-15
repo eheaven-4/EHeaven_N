@@ -100,6 +100,7 @@ router.post('/updateEvent/:_id',(req,res)=>{
     for (const [key, value] of Object.entries(input)) {
         console.log(key, value);
     }
+    
     Event.update({_id:eventid}, {$set:input})
         .exec()
         .then(data =>{

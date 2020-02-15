@@ -75,8 +75,7 @@
                   <p style="text-align: left">Payment Type:</p>
                   <mat-select style="text-align: left;" class="browser-default custom-select mb-4 box_border "
                     [(ngModel)]="pName" name="pName" formControlName="pName">
-                    <mat-option style="text-align: left" *ngFor='let pName of   paymenttypes' [value]='pName'
-                      >
+                    <mat-option style="text-align: left" *ngFor='let pName of   paymenttypes' [value]='pName'>
                       {{pName}}</mat-option>
                   </mat-select>
                   <div *ngIf="submitted && f.pName.errors" class="err_msg">
@@ -127,6 +126,8 @@
                       </mat-option>
                     </mat-select>
                   </div>
+
+
 
                   <div class="col-md-2 top_txt">
                     <label style="font-size:15px ;">Class Name Required :</label>

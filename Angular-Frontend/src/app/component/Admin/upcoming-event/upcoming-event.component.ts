@@ -82,49 +82,48 @@ export class UpcomingEventComponent implements OnInit {
     });
   }
 
-//   UpdateEvent() {
-//     this.submitted = true;
-//     const form1 = this.EventForm;
-//     // const id = this.eventid;
+  UpdateEvent(form) {
+    this.submitted = true;
+    console.log(form);
+    if (this.EventForm.invalid) {
+      return;
 
-//     if (this.EventForm.invalid) {
-//       return;
-
-//     } else {
-//       const url = 'http://localhost:3000/upcoming_event/updateEvent';
+    } else {
+      const url = 'http://localhost:3000/upcoming_event/updateEvent';
 
 
-//       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-//         data: {
-//           message: 'Are you sure want to Add?',
-//           buttonText: {
-//             ok: 'Yes',
-//             cancel: 'No'
-//           }
-//         }
-//       });
-//       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-//         if (confirmed) {
-//           console.log(form1);
-//           this.http.post<any>(url  + '/' + this.eventid ,  form1).subscribe(res => {
-//             console.log(res.msg);
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to Add?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          console.log(form);
+          this.http.post<any>(url  + '/' + this.eventid ,  form).subscribe(res => {
+            console.log(res.msg);
 
-//             if (res.state) {
-//                 const config = new MatSnackBarConfig();
-//                 config.duration = true ? 2000 : 0;
-//                 this.snackBar.open('News Successfully Added..!', true ? 'Done' : undefined , config);
-//                 window.location.reload();
-//               } else {
-//                 const config = new MatSnackBarConfig();
-//                 config.duration = true ? 2000 : 0;
-//                 this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
-//                // this.router.navigate('/upcoming-event');
-//               }
-//           });
-//         }
-//       });
-//   }
-// }
+            if (res.state) {
+                const config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open('News Successfully Added..!', true ? 'Done' : undefined , config);
+                window.location.reload();
+              } else {
+                const config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
+                this.router.navigate(['/upcoming_event']);
+
+              }
+          });
+        }
+      });
+  }
+ }
 
 
 
@@ -159,7 +158,7 @@ export class UpcomingEventComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
-          console.log(form);
+          // console.log(form);
           this.http.post<any>(url, form).subscribe(res => {
             console.log(res.msg);
 
@@ -172,7 +171,7 @@ export class UpcomingEventComponent implements OnInit {
                 const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
-               // this.router.navigate('/upcoming-event');
+                this.router.navigate(['/upcoming-event']);
               }
           });
         }
