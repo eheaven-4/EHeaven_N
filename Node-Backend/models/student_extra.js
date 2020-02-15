@@ -14,8 +14,8 @@ const requestExtracurrSchema = mongoose.Schema({
     compName: { type: String, require: true},
     dateofAchv: { type: String, require: true},
     achv: { type: String, require: true},
-    micapprovState: { type: String, require: true},
-    state: { type: String, require: true}
+    state: { type: String, require: true},
+    filapath: { type: String, require: true}
 });
 
 

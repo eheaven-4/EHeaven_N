@@ -48,21 +48,27 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
-    this.id = myCookie.userid;
     
-    var url = "http://localhost:3000/users/profile";
+    if(this.cookies.getCookie("userAuth")!=""){
 
-    this.http.get<any>(url + '/' + this.id).subscribe(res => {
-      this.profiledata = res;
-    }, (err) => {
-      console.log(err);
-    });
-   
-    if(this.router.url!='/'+this.id){
-      this.router.navigate(['/404']);
-      
-    }
     
+      var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
+      this.id = myCookie.userid;
+      
+      var url = "http://localhost:3000/users/profile";
+
+      this.http.get<any>(url + '/' + this.id).subscribe(res => {
+        this.profiledata = res;
+      }, (err) => {
+        console.log(err);
+      });
+    
+      if(this.router.url!='/'+this.id){
+        this.router.navigate(['/404']);
+        
+      }
+    }else{
+      this.router.navigate(['/login']);
+    } 
   }
 }

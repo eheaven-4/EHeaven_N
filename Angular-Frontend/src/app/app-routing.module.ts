@@ -37,6 +37,7 @@ import { PageNotFoundComponent } from './component/page-not-found/page-not-found
 import { AttendanceListComponent } from './component/Base_Components/attendance/attendance-list/attendance-list.component';
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
+import { ResetPasswordComponent } from './component/Base_Components/reset-password/reset-password.component';
 
 // const routes: Routes = [
 //   {path: '', component: HomeComponent},
@@ -66,11 +67,11 @@ import { ContactUsComponent } from './component/Auth/contact-us/contact-us.compo
 // ];
 const routes: Routes = [
 
-  {path: '', component: HomeComponent},
-  {path: 'login', component: LoginComponent},
+  {path: '',component: HomeComponent},
+  {path: 'login',component: LoginComponent},
   {path:'404',component:PageNotFoundComponent},
   {path:':id/menu',component:MenuComponent},
-  {path: 'contact_us', component:ContactUsComponent},
+  {path: 'contact_us',component:ContactUsComponent},
 
   {path:':id',component:UserRootComponent,children:[
     {path: 'register',component:RegisterComponent},
@@ -95,6 +96,7 @@ const routes: Routes = [
     {path: 'search_user', component:SearchUserComponent},
     {path: 'subjects', component: SubjectsComponent},
     {path: 'mail_box', component: MailBoxComponent},
+    {path: 'reset_password', component: ResetPasswordComponent},
     {path: '', component: ProfileComponent},
 
   ]},

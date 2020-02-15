@@ -1,4 +1,4 @@
- const express = require('express');
+const express = require('express');
 const app = express();
 const path = require('path');
 const mongoose = require('mongoose');
@@ -75,6 +75,6 @@ app.listen(3000, function() {
     console.log("listening to port 3000");
 });
 
-global.CronJob = require('./cron.js');      //backup cron job 
+//global.CronJob = require('./cron.js');      //backup cron job 
 
 module.exports = app;  

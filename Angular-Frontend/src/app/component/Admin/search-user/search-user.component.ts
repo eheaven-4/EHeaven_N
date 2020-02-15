@@ -40,7 +40,7 @@ export class SearchUserComponent implements OnInit {
   userdata: user[] = [];
   UserForm: FormGroup;
   UserDataForm: FormGroup;
-  submitted = false;
+  submitted = false;  
   images;
   filename;
   userid;

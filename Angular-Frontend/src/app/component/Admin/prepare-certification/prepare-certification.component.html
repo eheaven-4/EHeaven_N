@@ -254,7 +254,7 @@
                                     <mat-label>Subject</mat-label>
                                       <mat-select formControlName="subjectName">
                                           <mat-option style="text-align: left" *ngFor="let sub of subjectnamesAl" [value]="sub">
-                                            {{ sub }}
+                                            {{ sub.subName }}
                                           </mat-option>
                                       </mat-select>
                                   </mat-form-field>
@@ -316,7 +316,7 @@
                                         <mat-label>Subject</mat-label>
                                           <mat-select formControlName="subjectName">
                                               <mat-option style="text-align: left" *ngFor="let sub of subjectnamesOl" [value]="sub">
-                                                {{ sub }}
+                                                {{ sub.subName }}
                                               </mat-option>
                                           </mat-select>
                                       </mat-form-field>

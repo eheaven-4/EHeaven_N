@@ -15,7 +15,8 @@ export class AttendanceComponent implements OnInit {
   flag=true;
   class:string;
   status;
-  public searchStuResult:[];
+  searchdate;
+  public searchStuResult;
   public searchDateResult:[];
   public historyflagD=true;
   public historyflagS=true;
@@ -75,6 +76,9 @@ export class AttendanceComponent implements OnInit {
     });
   }
   searchDate(value:string,classnm:string){
+    this.class=classnm;
+    this.searchdate=value;
+
     var params=value+";"+classnm;
     this.historyflagD=false;
     this.attendanceservice.retriveDate(params)
@@ -83,8 +87,9 @@ export class AttendanceComponent implements OnInit {
         this.historyflagD=true;
         this.spanflageD=true;
       }else{
+        console.log(data)
+        this.searchDateResult=data[0];
         console.log(this.searchDateResult);
-        this.searchDateResult=data;
       }
     });
     

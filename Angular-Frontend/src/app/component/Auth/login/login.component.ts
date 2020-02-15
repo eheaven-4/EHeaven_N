@@ -58,15 +58,16 @@ export class LoginComponent implements OnInit {
         if (res.state == true) {
           this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
           var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-          var id = myCookie.userid;
+          var id = myCookie.usertype;
           
-          if(id){
-            this.router.navigate([myCookie.userid,'menu']);
+          if(id=="Administrator"){
+            this.router.navigate([myCookie.userid,'admin_dashboard']);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
-          }
-          else{
+          }else if(id){
+            this.router.navigate([myCookie.userid,'menu']);
+          }else{
             this.router.navigate(['/login']);
           }
         }

@@ -12,6 +12,7 @@ export class AdminDashboardComponent implements OnInit {
 
   myCookie;
   mailCount;
+  preparecertCount;
 
   constructor(
     private cookies: MycookiesService,
@@ -22,16 +23,30 @@ export class AdminDashboardComponent implements OnInit {
   ngOnInit() {
 
     const url1 = 'http://localhost:3000/admin/mailCount'
+    var temp=this.cookies.getCookie("userAuth");
+    if(temp!=""){
+      this.myCookie = JSON.parse(temp);
 
-    this.myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+        // if(this.myCookie.usertype!="Administrator"){
+        //   this.router.navigate(["/404"]);
+        // }
+
+        this.http.get<any>(url1).subscribe(res => {
+          this.mailCount = res.data;
+        })
+
+        const url2 = 'http://localhost:3000/admin/preparecertCount'
+
+        this.myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+
+        this.http.get<any>(url2).subscribe(res => {
+          this.preparecertCount = res.data;
+        })
+
+    }else{
+      this.router.navigate(['/login'])
+    }
     
-    // if(this.myCookie.usertype!="Administrator"){
-    //   this.router.navigate(["/404"]);
-    // }
-
-    this.http.get<any>(url1).subscribe(res => {
-      this.mailCount = res.data;
-    })
 
   }
 
