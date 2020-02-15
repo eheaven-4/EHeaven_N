@@ -13,22 +13,41 @@ export class AttendanceComponent implements OnInit {
 
   flag=true;
   class:string;
+  status;
   
   constructor(private attendanceservice:AttendenceService){}
 
   ngOnInit(){
+    
     this.attendanceservice.getclass()
     .subscribe((data:ClassRoom[])=>{
       this.classlist=data;
+      this.status=new Array(this.classlist.length);
+      this.attendanceservice.getStatus().subscribe((data:[])=>{
+        console.log(data);
+        for(var i=0;i<this.classlist.length;i++){
+          this.status[i]=true;
+        }
+        for(var i=0;i<this.classlist.length;i++){
+          for(var j=0;j<data.length;j++){
+            if(data[j] == this.classlist[i].classname){
+              this.status[i]=false;
+            }
+          } 
+        }
+      });
       console.log(this.classlist);
     });
   }
-  goTo(name){
-    console.log(name);
-    this.flag=false;
-    this.class=name; 
+  goTo(name,i){
+    if(this.status[i]){
+      
+      this.flag=false;
+      this.class=name; 
+    }
   }
   showclass(){
     this.flag=true;
   }
+
 }

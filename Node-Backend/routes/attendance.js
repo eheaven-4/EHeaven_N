@@ -130,7 +130,7 @@ router.get("/getstatus",function(req,res){
     var today=new Date();
     var yyyy=today.getFullYear();
     var mm=today.getMonth();
-    var dd=today.getDate()+1;
+    var dd=today.getDate();
     var searchDate=new Date(yyyy,mm,dd);
     attendance.find({date:searchDate}).exec(function(err,data){
         if(err){
@@ -139,7 +139,7 @@ router.get("/getstatus",function(req,res){
         }else{
             data.forEach(element=>{
                 output.push(element.class);
-            })
+            });
             console.log(output);
             res.json(output);
 
