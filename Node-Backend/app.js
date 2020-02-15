@@ -26,7 +26,6 @@ const admin = require('./routes/admin');
 const upcoming_event = require('./routes/upcoming_event');
 
 app.use(cors());
-// saskaojsaoijao
 const connection = mongoose.connect("mongodb+srv://sachin:sachin21@@ehven-fm9lu.gcp.mongodb.net/Eheaven?retryWrites=true&w=majority",
 {
     useNewUrlParser : true,

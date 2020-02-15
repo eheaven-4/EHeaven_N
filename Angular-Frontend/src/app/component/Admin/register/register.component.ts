@@ -133,6 +133,7 @@ export class RegisterComponent implements OnInit {
                 window.location.reload();
               }
               else {
+                console.log(res.msg);
                 let config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
