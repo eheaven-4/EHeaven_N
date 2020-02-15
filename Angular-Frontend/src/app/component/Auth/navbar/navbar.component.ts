@@ -15,27 +15,24 @@ export class NavbarComponent implements OnInit {
 
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;
-
+  usertype;
+  cookie;
   constructor(
     private router: Router,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
   ) { }
 
-  usertype
-  cookie
-  ngOnInit() {
-    this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
-    this.usertype = this.cookie.usertype; // load user type to the userType array 
-  }
+ 
+  ngOnInit() { }
   logoutUser() {
 
-    this.cookies.setCookie("userAuth", "", -1);
+    this.cookies.setCookie("userAuth", "",-1);
     let config = new MatSnackBarConfig();
     config.duration = true ? 2000 : 0;
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
     this.cookies.logingstatus = false;
-    this.router.navigate(['/login']);
+    this.router.navigate(['/']);
 
   }
 

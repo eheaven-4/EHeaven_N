@@ -25,9 +25,9 @@ export class AdminDashboardComponent implements OnInit {
 
     this.myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
     
-    if(this.myCookie.usertype!="Administrator"){
-      this.router.navigate(["/404"]);
-    }
+    // if(this.myCookie.usertype!="Administrator"){
+    //   this.router.navigate(["/404"]);
+    // }
 
     this.http.get<any>(url1).subscribe(res => {
       this.mailCount = res.data;
