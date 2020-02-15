@@ -55,7 +55,7 @@ router.delete('/deleteevent/:_id', (req,res) => {
     Event.remove({_id: id})
     .exec()
     .then(result =>{
-        res.json(200).json({state:true , msg: 'Deleted Successfully'
+        res.status(200).json({state:true , msg: 'Deleted Successfully'
         });
     })
     .catch(error =>{
@@ -116,10 +116,10 @@ router.post('/updateEvent/:_id',(req,res)=>{
 router.get('/topEvent' , (req,res)=>{
     console.log("nsdkcnsdklc");
     Event.find()
-    .sort({date:1})
+    .sort({date:-1})
     .limit(4)
     .then(result =>{
-        console.log(result)
+        //console.log(result)
         res.json({state:true , msg: "Data Transfer Success..!",data: result})
     })
     .catch(error=>{

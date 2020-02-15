@@ -45,8 +45,8 @@ export class UpcomingEventComponent implements OnInit {
   ) { }
 
   EventForm = new FormGroup({
-    head: new FormControl('' , Validators.required),
-    eventdetail: new FormControl ('' , Validators.required),
+    head: new FormControl('' , Validators.maxLength(30) && Validators.required),
+    eventdetail: new FormControl ('' , Validators.maxLength(150) && Validators.required),
     day: new FormControl('' , Validators.required),
 
   });
