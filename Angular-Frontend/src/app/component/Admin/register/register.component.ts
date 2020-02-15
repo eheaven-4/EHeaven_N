@@ -15,7 +15,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
+  myCookie;
   submitted = false;
   images;
   filename;
@@ -33,23 +33,27 @@ export class RegisterComponent implements OnInit {
   // registratin form attributes
 
   ngOnInit() {
-    this.RegistrationForm = this.fb.group({
-      usertype: ['', Validators.required],
-      userid: ['', Validators.required],
-      selectclass: [''],
-      name: ['', [Validators.required, Validators.maxLength(60)]],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      birthday: ['', Validators.required],
-      mobilenumber: [''],
-      homenumber: [''],
-      gender: ['', Validators.required],
-      nationality: ['', Validators.required],
-      nicnumber: [''],
-      father: [''],
-      mother: [''],
-      address: ['', Validators.required],
-    });
+    if(this.cookies.getCookie("userAuth") != ""){
+      this.myCookie=JSON.parse(this.cookies.getCookie("userAuth"));
+      this.RegistrationForm = this.fb.group({
+        usertype: ['', Validators.required],
+        userid: ['', Validators.required],
+        selectclass: [''],
+        name: ['', [Validators.required, Validators.maxLength(60)]],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', [Validators.required, Validators.minLength(8)]],
+        birthday: ['', Validators.required],
+        mobilenumber: [''],
+        homenumber: [''],
+        gender: ['', Validators.required],
+        nationality: ['', Validators.required],
+        nicnumber: [''],
+        father: [''],
+        mother: [''],
+        address: ['', Validators.required],
+      });
+    }
+    
   }
   // load the image as the button event and asign to  the images variable
   selectImage(event) {

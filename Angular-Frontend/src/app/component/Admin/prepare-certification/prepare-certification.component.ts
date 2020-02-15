@@ -26,16 +26,21 @@ interface subjectsArray {
   styleUrls: ['./prepare-certification.component.scss']
 })
 export class PrepareCertificationComponent implements OnInit {
-  cookie = JSON.parse(this.cookies.getCookie('userAuth'));
+  cookie ;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
     private cookies: MycookiesService,
-  ) { }
+  ) {
+    if(this.cookies.getCookie('userAuth')!=""){
+      this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
+    }
+   }
 
 userType
 subjectnamesAl: subjectsArray[] = []
+subjectnamesOl: subjectsArray[] = []
 
 
 // examination Medium
@@ -165,59 +170,6 @@ addSubject() {
 }
 
 // ********************* O/L Certificate Form ****************************************************************************
-
-// subject names and numbers o-level
-// tslint:disable-next-line: member-ordering
-subjectnamesOl = [
-  '11   Buddhism',
-  '12   Saivanery',
-  '14   Catholicism',
-  '15   Christianity',
-  '16   Islam',
-  '21   Sinhala Language & Lit.',
-  '22   Tamil Lanuage & Lit.',
-  '31   English',
-  '32   Mathematics',
-  '33   History',
-  '34   Science',
-  '60   Business & Accounting Studies',
-  '61   Geography',
-  '62   Citizenship Education & Governance',
-  '63   Entrepreneurship Studies',
-  '64   Second Langusge(Sinhala)',
-  '65   Second Langusge(Tamil)',
-  '66   Pali',
-  '67   Sanskrit',
-  '68   French',
-  '69   German',
-  '70   Hindi',
-  '71   Japanese',
-  '72   Arabic',
-  '40   Music (Oriental)',
-  '41   Music (Western)',
-  '42   Music (Carnatic)',
-  '43   Art',
-  '44   Dancing (Oriental)',
-  '45   Dancing (Bharatha)',
-  '46   Appreciation of English Literary Texts',
-  '47   Appreciation of Sinhala Literary Texts',
-  '48   Appreciation of Tamil Literary Texts',
-  '49   Appreciation of Arabic Literary Texts',
-  '50   Drama & Theatre (Sinhala)',
-  '51   Drama & Theatre (Tamil)',
-  '52   Drama & Theatre (English)',
-  '80   Information & Communication Technology',
-  '81   Agriculture & Food Technology',
-  '82   Fisheries & Food Technology',
-  '83   Design & Technology',
-  '84   Arts & Crafts',
-  '85   Home Economics',
-  '86   Health & Physical Education',
-  '87   Communication & Media Studies',
-  '92   Electronic Writing & Shorthand (Sinhala)',
-  '93   Electronic Writing & Shorthand (Tamil)',
-  '94   Electronic Writing & Shorthand (English)',
-];
 
 // tslint:disable-next-line: member-ordering
 OlCertForm = this.fb.group({
@@ -476,60 +428,76 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
 
   ngOnInit() {
 
-    let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-    this.userType = myCookie.usertype;
-    var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
+    if(this.cookies.getCookie("userAuth")!=""){
+      this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
+      let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+      this.userType = myCookie.usertype;
+      var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
 
-    this.http.get<any>(pendingUrl1).subscribe(res => {
-      console.log(res);
-      this.pendingCertList1   = res;
+      this.http.get<any>(pendingUrl1).subscribe(res => {
+        console.log(res);
+        this.pendingCertList1   = res;
 
-    });
+      });
 
-    var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
+      var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
 
-    this.http.get<any>(pendingUrl).subscribe(res => {
-      console.log(res);
-      this.pendingCertList   = res;
+      this.http.get<any>(pendingUrl).subscribe(res => {
+        console.log(res);
+        this.pendingCertList   = res;
 
-    });
+      });
 
 
-    var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
+      var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
 
-    this.http.get<any>(completedUrl1).subscribe(res => {
-      console.log(res);
-      this.completedCertList1   = res;
+      this.http.get<any>(completedUrl1).subscribe(res => {
+        console.log(res);
+        this.completedCertList1   = res;
 
-    });
+      });
 
-    var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
+      var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
 
-    this.http.get<any>(completedUrl2).subscribe(res => {
-      console.log(res);
-      this.completedCertList2   = res;
+      this.http.get<any>(completedUrl2).subscribe(res => {
+        console.log(res);
+        this.completedCertList2   = res;
 
-    });
+      });
 
-    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
+      var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
 
-    this.http.get<any>(completedUrl3).subscribe(res => {
-      console.log(res);
-      this.completedCertList3   = res;
+      this.http.get<any>(completedUrl3).subscribe(res => {
+        console.log(res);
+        this.completedCertList3   = res;
 
-    });
+      });
 
-    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
+      var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
 
-    this.http.get<any>(completedUrl4).subscribe(res => {
-      console.log(res);
-      this.completedCertList4   = res;
+      this.http.get<any>(completedUrl4).subscribe(res => {
+        console.log(res);
+        this.completedCertList4   = res;
 
-    });
+      });
+
+      const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
+      this.http.get<any>(alUrl).subscribe(res => {
+        this.subjectnamesAl = res.data;
+      });
+
+    }else{
+      this.router.navigate(['./login']);
+    }
 
     const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
     this.http.get<any>(alUrl).subscribe(res => {
       this.subjectnamesAl = res.data;
+    });
+
+    const olUrl = "http://localhost:3000/certification/getOL"           //OL subjects list
+    this.http.get<any>(olUrl).subscribe(res => {
+      this.subjectnamesOl = res.data;
     });
   }
 

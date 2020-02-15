@@ -7,7 +7,7 @@ import {CookieData} from './CookieData';
 
 export class MycookiesService {
   logingstatus=false;
-  userData:CookieData=null;
+  userData:CookieData={userid:"",usertype:""};
   profile;
  
     
@@ -18,11 +18,15 @@ export class MycookiesService {
       
       
       var data=JSON.parse(this.getCookie("userAuth"));
+      this.userData.userid=data.userid;
+      this.userData.usertype=data.usertype;
       var name=data.name.split(" ");
       this.profile=name[0] + " ("+data.usertype+")";
       this.logingstatus=true;
     }else{
       this.logingstatus=false;
+      this.userData.userid="";
+      this.userData.usertype="";
     }
   }
   
@@ -51,6 +55,8 @@ export class MycookiesService {
       var name=data.name.split(" ");
       this.profile=name[0] + " ("+data.usertype+")";
       console.log(name);
+      this.userData.userid=data.userid;
+      this.userData.usertype=data.usertype;
       // this.profile=name;
       this.logingstatus=true;
     }

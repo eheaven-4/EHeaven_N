@@ -36,6 +36,7 @@ router.post("/requestExtracurr", function (req, res) {
             dateofAchv: req.body.dateofAchv,
             achv: req.body.achv,
             state: req.body.state,
+            filepath: filePath,
         });
 
         requestExtracurr.addLog(newRequest, function (err, request) {

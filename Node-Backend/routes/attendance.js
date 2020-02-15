@@ -48,27 +48,29 @@ router.get("/received/:classname", function (req, res) {
 
 router.get("/searchDate",function (req, res) {
     // console.log(req.body.data);
-    var inputdate = req.params.date;
-    // var dateee=inputdate.split("/");
+    var inputdate = req.query.date;
+    var temp=inputdate.split(";");
+    var date=temp[0].split("/");
 
     console.log(inputdate);
-    // var yyyy=parseInt(dateee[2]);
-    // var mm=parseInt(dateee[0])-1;
-    // var dd=parseInt(dateee[1]);
-    // var findDate=new Date(yyyy,mm,dd);
+    var yyyy=parseInt(date[2]);
+    var mm=parseInt(date[0])-1;
+    var dd=parseInt(date[1]);
+    var findDate=new Date(yyyy,mm,dd);
 
    
-    // console.log(findDate,req.body.classname);
-    // attendance.find({$and:[{date:findDate},{class:req.body.classname}]})
-    // .exec(function(err,data){
-    //     if(err){
-    //         console.log("Error");
-    //         res.json({state:false,msg:"Can't Find this date at this moment"});
-    //     }else{
-    //         console.log(data);
-    //         res.json(data);
-    //     }
-    // });   
+    console.log(findDate,req.body.classname);
+    attendance.find({$and:[{date:findDate},{class:temp[1]}]})
+    .exec(function(err,data){
+        if(err){
+            console.log("Error");
+            res.json({state:false,msg:"Can't Find this date at this moment"});
+        }else{
+            console.log(data);
+            // data.date=data.date.toDateString();
+            res.json(data);
+        }
+    });   
 });
 
 router.get("/searchStu/:stu/:month", function (req, res){
@@ -94,6 +96,10 @@ router.get("/searchStu/:stu/:month", function (req, res){
             console.log("Error");
             response.json({state:false,msg:"Can't Find this student at this moment"});
         }else{
+            if(data.length==0){
+                res.json([]);
+                return;
+            }
             console.log(data);
             var output={
                 class:data[0].class,
