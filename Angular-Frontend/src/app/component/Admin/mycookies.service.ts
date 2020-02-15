@@ -46,12 +46,15 @@ export class MycookiesService {
     d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
     var expires = "expires="+d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-    var data=JSON.parse(this.getCookie("userAuth"));
-    var name=data.name.split(" ");
-    this.profile=name[0] + " ("+data.usertype+")";
-    console.log(name);
-    // this.profile=name;
-    this.logingstatus=true;
+    if(exdays!=-1){
+      var data=JSON.parse(this.getCookie("userAuth"));
+      var name=data.name.split(" ");
+      this.profile=name[0] + " ("+data.usertype+")";
+      console.log(name);
+      // this.profile=name;
+      this.logingstatus=true;
+    }
+    
   }
   
 
