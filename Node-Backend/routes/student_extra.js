@@ -10,7 +10,7 @@ var storage = multer.diskStorage({
         cb(null, 'local_storage/extracurr_Attachment/')
     },
     filename: function (req, file, cb) {
-        cb(null, "NOT_FILE - " + file.originalname)
+        cb(null, "EC_FILE - " + file.originalname)
     }
 });
 
@@ -38,7 +38,7 @@ router.post("/requestExtracurr", function (req, res) {
             state: req.body.state,
         });
 
-        requestExtracurr.save(newRequest, function (err, request) {
+        requestExtracurr.addLog(newRequest, function (err, request) {
             if (err) {
                 res.json({ state: false, msg: "New record insertion failed" });
             }

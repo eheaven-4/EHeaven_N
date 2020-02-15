@@ -56,6 +56,7 @@ import { ContactUsComponent } from './component/Auth/contact-us/contact-us.compo
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
 import { UpcomingEventComponent } from './component/Admin/upcoming-event/upcoming-event.component';
+import { ResetPasswordComponent } from './component/Base_Components/reset-password/reset-password.component';
 
 
 
@@ -99,6 +100,7 @@ import { UpcomingEventComponent } from './component/Admin/upcoming-event/upcomin
     MailBoxComponent,
     Navbar2Component,
     UpcomingEventComponent,
+    ResetPasswordComponent,
   ],
 
   imports: [
