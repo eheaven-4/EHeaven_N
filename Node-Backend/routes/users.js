@@ -218,7 +218,7 @@ router.get("/searchUsers/:userid", function (req, res, next) {
             })
             .catch(error => {
                 console.log("Data Transfer Unsuccessfull..!")
-                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" }); 
             })
     })
 })

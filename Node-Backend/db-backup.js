@@ -3,15 +3,14 @@ const _ = require('lodash');
 const exec = require('child_process').exec;
 const path = require('path');
 
-
 const backupDirPath = path.join(__dirname, 'database-backup');
 
 const dbOptions = {
   user: '',
   pass: '',
-  host: 'mongodb+srv://sachin:sachin21@@ehven-fm9lu.gcp.mongodb.net/Eheaven?retryWrites=true&w=majority',
-  port: '',
-  database: 'Ehven',
+  host: 'localhost',
+  port: '27017',
+  database: 'admin',
   autoBackup: true,
   removeOldBackup: true,
   keepLastDaysBackup: 2,
