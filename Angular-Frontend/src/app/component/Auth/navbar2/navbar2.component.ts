@@ -13,13 +13,19 @@ export class Navbar2Component implements OnInit {
   public approve_show: boolean = false;
   public disapprove_show: boolean = false;
 
+  usertype
+  cookie
   constructor(
     private router: Router,
     private cookies: MycookiesService,
     public snackBar: MatSnackBar,
+    
   ) { }
 
-  ngOnInit() {  }
+  ngOnInit() { 
+    this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    this.usertype = this.cookie.usertype; // load user type to the userType array
+   }
 
   logoutUser() {
 

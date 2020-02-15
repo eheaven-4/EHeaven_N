@@ -20,7 +20,7 @@ router.post("/requestCert", function (req, res) {
         examYear: req.body.examYear,
         examIndex: req.body.examIndex,
         reqDate: req.body.reqDate,
-        prinapprovState: req.body.prinapprovState,
+        // prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
      console.log(newRequest);
@@ -37,14 +37,14 @@ router.post("/requestCert", function (req, res) {
 });
 
 /************************get certification requests from students*****************************/
-//get pending certificate requests to be issued to the user
+//pending certification requests of students
 router.get("/pendingCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({$or:[{ certState: "Pending", userid: id } , { prinapprovState: "Pending", userid: id }]})
+    requestCertification.find({certState: "Pending", userid : id} )
     // { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -62,9 +62,9 @@ router.get("/pendingCert/:id", function (req, res) {
 router.get("/issuedCert/:id", function (req, res) {
     // console.log("Hello");
     const id = req.params.id;
-    requestCertification.find({ certState: "Issued", userid: id })
+    requestCertification.find({ certState: "Completed", userid: id })
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -77,15 +77,13 @@ router.get("/issuedCert/:id", function (req, res) {
             });
         });
 });
-
-
-/************************get certification requests from users(Admin comp)******************************/
-router.get("/pendingCertList", function (req, res) {
+/************************get certification requests from users(Principal)******************************/
+router.get("/pendingCertList1", function (req, res) {
     // console.log("Hello");
     requestCertification.find({ certState: "Pending" })
             
         .sort({ _id: 1 })
-        .select('userid certName certType examName examYear examIndex reqDate certState prinapprovState')
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -98,6 +96,110 @@ router.get("/pendingCertList", function (req, res) {
             });
         });
 });
+
+/************************get certification requests from users(Admin comp)******************************/
+router.get("/pendingCertList", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "principalApproved" })
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+/************************get completed certification requests from users(Admin comp)******************************/
+
+//student status certificates
+router.get("/completedCertList1", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Student Status Verification Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+//character certificates
+router.get("/completedCertList2", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Character Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+//leaving certificates
+router.get("/completedCertList3", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Leaving Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+//educational certificates
+router.get("/completedCertList4", function (req, res) {
+    // console.log("Hello");
+    requestCertification.find({ certState: "Completed" , certType: "Educational Certificate"})
+            
+        .sort({ _id: 1 })
+        .select('userid certName certType examName examYear examIndex reqDate certState ')
+        .exec()
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+        })
+        .catch(error => {
+            console.log(error);
+            res.status(500).json({
+                error: error
+            });
+        });
+});
+
+
 
 
 /*******************************generate student status certificate pdf ******************************/
@@ -109,7 +211,6 @@ router.post("/studentstatus", async function (req, res) {
         admissionNum: req.body.admissionNum,
         dateofAdmission: req.body.dateofAdmission,
         description: req.body.description,
-        prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     // console.log(newRequest);
@@ -183,7 +284,6 @@ router.post("/charactercert", async function (req, res) {
         leadership: req.body.leadership,
         societies: req.body.societies,
         sports: req.body.sports,
-        prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
@@ -319,7 +419,7 @@ router.post("/leavingcert", async function (req, res) {
         cause: req.body.cause,
         lastClass: req.body.lastClass,
         subjects: req.body.subjects,
-        prinapprovState: req.body.prinapprovState,
+        // prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
@@ -473,7 +573,7 @@ router.post("/alcert", async function (req, res) {
         zscore: req.body.zscore,
         districtrank: req.body.districtrank,
         islandrank: req.body.islandrank,
-        prinapprovState: req.body.prinapprovState,
+        //prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     
@@ -599,7 +699,7 @@ router.post("/olcert", async function (req, res) {
         centerNo: req.body.centerNo,
         indexNo: req.body.indexNo,
         subjectsOl: req.body.subjectsOl,
-        prinapprovState: req.body.prinapprovState,
+        //prinapprovState: req.body.prinapprovState,
         certState: req.body.certState
     });
     console.log(newRequest);
@@ -713,28 +813,27 @@ router.delete("/deleteCert/:_id", function(req,res) {
   })
 
   /*******************************accept certification requests****************************************/
-  router.post("/acceptCert/:_id", function (req, res) {  //hereeee
+  router.post("/acceptCert/:_id", function (req, res) {  
     console.log(req.params._id);
     const id = req.params._id;
-    // requestCertification.find({ _id: id })
-            
-    //     .update({certState: "Admin Approved"})
-    //     .exec()
-    //     .then(docs => {
-    //         console.log("Data Transfer Success.!");
-    //         console.log("hiiii")
-    //         res.status(200).json(docs);
-    //     })
-    //     .catch(error => {
-    //         console.log(error);
-    //         res.status(500).json({
-                
-    //         });
-    //     });
+   
     requestCertification.update(
         {_id:id},
         {
-            certState: "Admin Approved"
+            certState: "principalApproved"
+        }
+    ).exec()
+});
+
+
+router.post("/completeCert/:_id", function (req, res) {  
+    console.log(req.params._id);
+    const id = req.params._id;
+   
+    requestCertification.update(
+        {_id:id},
+        {
+            certState: "Completed"
         }
     ).exec()
 });

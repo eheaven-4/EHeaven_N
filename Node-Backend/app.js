@@ -23,6 +23,7 @@ const payment = require('./routes/payment');
 const student_extra=require('./routes/student_extra');
 const contact_us = require('./routes/contact_us');
 const admin = require('./routes/admin');
+const upcoming_event = require('./routes/upcoming_event');
 
 app.use(cors());
 // saskaojsaoijao
@@ -64,13 +65,16 @@ app.use('/payment', payment);
 app.use('/student_extra',student_extra);
 app.use('/contact_us', contact_us);
 app.use('/admin', admin);
+app.use('/upcoming_event',upcoming_event)
 
 app.get("/", function(req,res) {
     // res.send("Hello world");
 });
 
 app.listen(3000, function() {
-    console.log("listning to port 3000");
+    console.log("listening to port 3000");
 });
+
+global.CronJob = require('./cron.js');      //backup cron job 
 
 module.exports = app;  
