@@ -1,6 +1,6 @@
 export class Attend{
     userid:string;
-    username:string;
+    name:string;
     attend:boolean;
 
 }
@@ -19,3 +19,7 @@ export class Returnuser{
     userid:string;
     name:string;
 }
+export class dateSearch{
+    date:string;
+    classname:string;
+  }

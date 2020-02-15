@@ -28,10 +28,12 @@ export class  User{
 })
 export class BulkaddComponent {
   flag=false;
+  images:FileList=null;
   fileToUpload: File = null;
   Stringdata='';
   users=[];
   userVisibale;
+  imageUrls;
   constructor(private register:RegisterService){ }
 
   
@@ -39,6 +41,16 @@ export class BulkaddComponent {
   handleFileInput(files: FileList) {
     
     this.fileToUpload = files.item(0);
+  }
+  handleImages(files:FileList){
+    // if(this.images==null){
+      this.images=files;
+    // }else{
+      
+    // }/
+    console.log(files.length)
+    this.images=files;
+    console.log(this.images.item(0).name);
   }
 
 
@@ -94,38 +106,61 @@ export class BulkaddComponent {
         // console.log(user);
       }
       this.userVisibale=new Array(this.users.length);
+
       for(var i=0;i<this.users.length;i++){
         this.userVisibale[i]=true;
       }
+      this.imageUrls=new Array(this.users.length);
+      // for(var i=0;i<this.users.length;i++){
+      //   for(var j=0;j<this.images.length;j++){
+      //     var temp=this.images.item(j).name.split(".");
+      //     console.log("hi")
+      //     if(this.users[i].image == temp[0]){
+      //       var reader = new FileReader();
+            
+      //       reader.readAsDataURL(this.images[j]); 
+            
+      //       reader.onload = (_event) => { 
+      //         console.log("hooo")
+      //         this.imageUrls[i] =reader.result; 
+      //         if(i==this.images.length-1){
+      //           this.flag=true;
+      //         }
+      //       }
+
+      //     }
+      //   }
+      // }
+      this.flag=true;
       console.log(this.users);
       
-      this.flag=true;
+      
 
     }
+
     
 
   }
   addUser(i){
-    // const formData = new FormData();
     
-
-    // formData.append('usertype', this.users[i].usertype)
-    // formData.append('userid', this.users[i].userid)
-    // formData.append('name', this.users[i].name)
-    // formData.append('email', this.users[i].email)
-    // formData.append('password', this.users[i].password)
-    // formData.append('birthday', this.users[i].birthday)
-    // formData.append('profileImage', this.users[i].image)
-    // formData.append('gender', this.users[i].gender)
-    // formData.append('nationality', this.users[i].nationality)
-    // formData.append('nicnumber', this.users[i].NIC)
-    // formData.append('address', this.users[i].address)
-    // console.log(formData);
     this.register.addUser(this.users[i]);
-    
     this.userVisibale[i]=false;
 
       
+  }
+  remove(i){
+    this.userVisibale[i]=false;
+  }
+  addAll(){
+    for(var i=0;i<this.users.length;i++){
+      if(this.userVisibale[i]){
+        this.addUser(i);
+      }
+    }
+    window.location.reload();
+  }
+  removeAll(){
+    window.location.reload();
   }
 
 }

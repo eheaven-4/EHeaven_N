@@ -113,18 +113,14 @@
                                                 <mat-icon class="example-tab-icon">calendar_today</mat-icon>
                                                 &nbsp;By Date
                                             </ng-template>
-                                            <div style="padding-top:50px ; padding-bottom: 50px" *ngIf="historyflagD">
-                                                <form class="example-form" (ngSubmit)="searchDate(dateid.value)">
-                                                    <div>
-                                                        <p *ngIf="spanflageD" style="color: red;">May
-                                                            be you entered date was a holiday.Please Enter valid
-                                                            date.</p>
-                                                    </div>
+                                            <div style="padding-top:200px;padding-bottom: 200px ; padding-bottom: 50px" *ngIf="historyflagD">
+                                                <form class="example-form" (ngSubmit)="searchDate(dateid.value,class.value)">
+                                                    
 
-                                                    <div class="row"
+                                                    <div align="center" class="row"
                                                         style="margin-bottom: 20px ; margin-left: 30px;margin-right: 30px">
-                                                        <div class="col-md-5"></div>
-                                                        <div class="col-md-2">
+                                                        <!-- <div class="col-md-5"></div> -->
+                                                        <div class="col-md-5">
                                                             <input matInput [matDatepicker]="picker"
                                                                 placeholder="Choose a date" appearance="outline" #dateid
                                                                 required disabled>
@@ -136,14 +132,33 @@
                                                             <mat-datepicker #picker disabled="false">
                                                             </mat-datepicker>
                                                         </div>
-                                                        <div class="col-md-3"></div>
+                                                        <div class="col">
+
+
+                                                        </div>
+                                                        <div class="col-5" style="margin-top: -20px;">
+                                                            <mat-form-field>
+                                                                <mat-label>Select Class</mat-label>
+                                                                <mat-select #class>
+                                                                  <mat-option>None</mat-option>
+                                                                  <mat-option *ngFor="let class of classList" [value]="class.classname">{{class.classname}}</mat-option>
+                                                                </mat-select>
+                                                              </mat-form-field>
+                                                        </div>
+                                                        <!-- <div class="col-md-3"></div> -->
 
                                                     </div>
-                                                    <div class="row" style="margin-left: 30px;margin-right: 30px">
+                                                    
+                                                    <div class="row" style="margin-left: 30px;margin-right: 30px;margin-top: 50px;">
                                                         <button mat-raised-button class="reg_btn"
                                                             style="margin: auto; width: 20%">
                                                             <mat-icon>search</mat-icon>Search
                                                         </button>
+                                                    </div>
+                                                    <div>
+                                                        <p *ngIf="spanflageD" style="color: red;">May
+                                                            be you entered date was a holiday.Please Enter valid
+                                                            date.</p>
                                                     </div>
                                                 </form>
                                             </div>
@@ -244,7 +259,7 @@
                                             
                                             <div *ngIf="!historyflagS" style="padding-top:40px; padding-bottom: 40px">
                                                 <div style="text-align:center;">
-                                                    <h5>{{searchStuResult[8].username}} Student Attendence List</h5>
+                                                    <h5>{{searchStuResult.name}} Student Attendence List</h5>
                                                 </div>
                                                 <div class="container">
                                                     <div class="row">
@@ -260,7 +275,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="container">
-                                                    <mat-card *ngFor="let result of searchStuResult" class="my_mat">
+                                                    <mat-card *ngFor="let result of searchStuResult.attend" class="my_mat">
                                                         <div class="row" style="margin-top: -13px">
                                                             <div class="col-md-2"></div>
                                                             <div class="col-md-4" style="text-align: center">

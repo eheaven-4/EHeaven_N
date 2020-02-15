@@ -29,7 +29,17 @@
                                 <div class="row" *ngFor="let class of classlist">
                                     <div class="col-md-6" style="margin-top: 20px;">
                                         <div class="row menu_div" (click)="goTo(class.classname)">
-                                            <div class="col-md-2 menu_icon_back" style="background-color: #1a237e;">
+                                            <div class="col-md-2 menu_icon_back" style="background-color: rgb(0, 140, 255);">
+                                                <i class="material-icons menu_icon">home_work</i>
+                                            </div>
+                                            <div class="col-md-10 menu_text_back" style="background-color:white;">
+                                                <p>{{class.classname}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6" style="margin-top: 20px;">
+                                        <div class="row menu_div" (click)="goTo(class.classname)">
+                                            <div class="col-md-2 menu_icon_back" style="background-color: rgb(0, 140, 255);">
                                                 <i class="material-icons menu_icon">home_work</i>
                                             </div>
                                             <div class="col-md-10 menu_text_back" style="background-color:white;">
@@ -52,5 +62,5 @@
 
 <div *ngIf="!flag">
     <button (click)="showclass()">classlist</button >
-    <app-attendance-list [parentData]="class"></app-attendance-list>
+    <app-attendance-list [parentData]="class" [classList]="classlist"></app-attendance-list>
 </div>

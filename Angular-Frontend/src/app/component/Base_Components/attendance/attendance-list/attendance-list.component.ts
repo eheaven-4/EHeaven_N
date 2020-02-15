@@ -6,8 +6,8 @@ import {AttendList} from '../attend';
 import {Attendreturn} from '../attend';
 import {FormBuilder,Validators,FormControl} from '@angular/forms';
 import { Router } from '@angular/router';
-import { templateJitUrl } from '@angular/compiler';
 import { MycookiesService} from '../../../Admin/mycookies.service';
+import { HttpParams } from '@angular/common/http';
 
 @Component({
   selector: 'app-attendance-list',
@@ -17,13 +17,14 @@ import { MycookiesService} from '../../../Admin/mycookies.service';
 export class AttendanceListComponent implements OnInit {
 
 @Input('parentData') public classname;
+@Input('classList') public classList;
 
 public usercookie=JSON.parse(this.cookie.getCookie("userAuth"));
 public students:Array<Returnuser>;
 public attendRecord:Attend[];
 
-public searchStuResult:Attendreturn[];
-public searchDateResult:Attendreturn[];
+public searchStuResult:[];
+public searchDateResult:[];
 public i=0;
 public numberOfStudent=0;
 public presentStu=0;
@@ -51,6 +52,7 @@ stu = new FormControl('', [Validators.required]);
     
   })
   ngOnInit() {
+    console.log(this.classList);
     this.attendanceservice.retriveUsers(this.classname)
     .subscribe((data:Returnuser[])=>{
       this.students=data;
@@ -58,8 +60,6 @@ stu = new FormControl('', [Validators.required]);
       this.toggle=new Array(this.numberOfStudent);
       for (var j=0;j<this.numberOfStudent;j++){
         this.toggle[j]="Absent";
-        
-
       }
     });
   }
@@ -82,7 +82,7 @@ stu = new FormControl('', [Validators.required]);
     const student = Object.entries(userForm.value);
     for (const [i,attend] of student) {
       var newRec=new Attend();
-      newRec.username=this.students[i].name;
+      newRec.name=this.students[i].name;
       newRec.userid=this.students[i].userid;
       // newRec.class=this.classname;
       // newRec.marked=this.usercookie.userid;
@@ -120,7 +120,7 @@ stu = new FormControl('', [Validators.required]);
     temp+=1;
     console.log(stu,temp);
     this.attendanceservice.retriveStu(temp,stu)
-    .subscribe((data:Attendreturn[])=>{
+    .subscribe((data)=>{
       if(data.length==0){
         this.historyflagS=true;
         this.spanflageS=true;
@@ -130,15 +130,16 @@ stu = new FormControl('', [Validators.required]);
       }
     });
   }
-  searchDate(value:string){
-    console.log(value);
+  searchDate(value:string,classnm:string){
+    var params=value+";"+classnm;
     this.historyflagD=false;
-    this.attendanceservice.retriveDate(value)
-    .subscribe((data:Attendreturn[])=>{
+    this.attendanceservice.retriveDate(params)
+    .subscribe((data)=>{
       if(data.length==0){
         this.historyflagD=true;
         this.spanflageD=true;
       }else{
+        console.log(this.searchDateResult);
         this.searchDateResult=data;
       }
     });
