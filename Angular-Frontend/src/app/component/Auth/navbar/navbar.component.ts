@@ -48,5 +48,9 @@ export class NavbarComponent implements OnInit {
     var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
     this.router.navigate([userCookie.userid, 'menu']);
   }
+  portal() {
+    var userCookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    this.router.navigate([userCookie.userid, 'admin_dashboard']);
+  }
 
 }

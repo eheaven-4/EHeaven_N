@@ -17,9 +17,14 @@
         </button>
       </span>
 
-      <span class="nav-itm nav_item" *ngIf="cookies.logingstatus">
-        <button mat-button routerLink="/menu" (click)="menu()" class="btn ">
+      <span class="nav-itm nav_item" *ngIf="cookies.logingstatus && cookies.userData.usertype != 'Administrator'" >
+        <button mat-button routerLink="/menu" (click)="menu()" class="btn">
           <mat-icon>menu</mat-icon>&nbsp;Menu
+        </button>
+      </span>
+      <span class="nav-itm nav_item" *ngIf="cookies.logingstatus && cookies.userData.usertype == 'Administrator'" >
+        <button mat-button routerLink="/menu" (click)="portal()" class="btn">
+          <mat-icon>menu</mat-icon>&nbsp;Portal
         </button>
       </span>
       <div class="nav-itm nav_item" *ngIf="cookies.logingstatus">

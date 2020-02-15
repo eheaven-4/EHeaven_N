@@ -26,13 +26,17 @@ interface subjectsArray {
   styleUrls: ['./prepare-certification.component.scss']
 })
 export class PrepareCertificationComponent implements OnInit {
-  cookie = JSON.parse(this.cookies.getCookie('userAuth'));
+  cookie ;
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private http: HttpClient,
     private cookies: MycookiesService,
-  ) { }
+  ) {
+    if(this.cookies.getCookie('userAuth')!=""){
+      this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
+    }
+   }
 
 userType
 subjectnamesAl: subjectsArray[] = []
@@ -424,56 +428,67 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
 
   ngOnInit() {
 
-    let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
-    this.userType = myCookie.usertype;
-    var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
+    if(this.cookies.getCookie("userAuth")!=""){
+      this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
+      let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
+      this.userType = myCookie.usertype;
+      var pendingUrl1 = "http://localhost:3000/certification/pendingCertList1";   //for principal
 
-    this.http.get<any>(pendingUrl1).subscribe(res => {
-      console.log(res);
-      this.pendingCertList1   = res;
+      this.http.get<any>(pendingUrl1).subscribe(res => {
+        console.log(res);
+        this.pendingCertList1   = res;
 
-    });
+      });
 
-    var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
+      var pendingUrl = "http://localhost:3000/certification/pendingCertList";   //for admin
 
-    this.http.get<any>(pendingUrl).subscribe(res => {
-      console.log(res);
-      this.pendingCertList   = res;
+      this.http.get<any>(pendingUrl).subscribe(res => {
+        console.log(res);
+        this.pendingCertList   = res;
 
-    });
+      });
 
 
-    var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
+      var completedUrl1 = "http://localhost:3000/certification/completedCertList1";   //student status
 
-    this.http.get<any>(completedUrl1).subscribe(res => {
-      console.log(res);
-      this.completedCertList1   = res;
+      this.http.get<any>(completedUrl1).subscribe(res => {
+        console.log(res);
+        this.completedCertList1   = res;
 
-    });
+      });
 
-    var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
+      var completedUrl2 = "http://localhost:3000/certification/completedCertList2";   //character
 
-    this.http.get<any>(completedUrl2).subscribe(res => {
-      console.log(res);
-      this.completedCertList2   = res;
+      this.http.get<any>(completedUrl2).subscribe(res => {
+        console.log(res);
+        this.completedCertList2   = res;
 
-    });
+      });
 
-    var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
+      var completedUrl3 = "http://localhost:3000/certification/completedCertList3";   //leaving
 
-    this.http.get<any>(completedUrl3).subscribe(res => {
-      console.log(res);
-      this.completedCertList3   = res;
+      this.http.get<any>(completedUrl3).subscribe(res => {
+        console.log(res);
+        this.completedCertList3   = res;
 
-    });
+      });
 
-    var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
+      var completedUrl4 = "http://localhost:3000/certification/completedCertList4";   //educational
 
-    this.http.get<any>(completedUrl4).subscribe(res => {
-      console.log(res);
-      this.completedCertList4   = res;
+      this.http.get<any>(completedUrl4).subscribe(res => {
+        console.log(res);
+        this.completedCertList4   = res;
 
-    });
+      });
+
+      const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
+      this.http.get<any>(alUrl).subscribe(res => {
+        this.subjectnamesAl = res.data;
+      });
+
+    }else{
+      this.router.navigate(['./login']);
+    }
 
     const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
     this.http.get<any>(alUrl).subscribe(res => {

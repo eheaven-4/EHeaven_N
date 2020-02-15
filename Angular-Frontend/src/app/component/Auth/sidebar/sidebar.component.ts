@@ -4,6 +4,7 @@ import { MycookiesService } from '../../Admin/mycookies.service';
 import { CookieService } from 'ngx-cookie-service';
 import { NgFlashMessageService } from 'ng-flash-messages';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
+import { UserDetail } from '../../Userdetail';
 
 @Component({
   selector: 'app-sidebar',
@@ -14,8 +15,8 @@ export class SidebarComponent implements OnInit {
 
   userid: String;
   user: any;
-  myCookie: String = this.cookies.getCookie("userAuth")
-  userDetail=JSON.parse(this.cookies.getCookie("userAuth"));;
+  myCookie: string ;
+  userDetail:UserDetail={usertype:"",id:"",name:"",email:"",selectclass:"",userid:""};
   constructor(
     private router: Router,
     private cookies: MycookiesService,
@@ -24,7 +25,14 @@ export class SidebarComponent implements OnInit {
     public route:ActivatedRoute,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.myCookie = this.cookies.getCookie("userAuth")
+    if(this.myCookie == ""){
+      this.router.navigate(['/login']);
+    }else{
+      this.userDetail=JSON.parse(this.myCookie);
+    }
+   }
 
   userAcademics() {
 
