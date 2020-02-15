@@ -4,6 +4,8 @@
       <div class="container-fluid " style="background-color:#F8F9FA">
 
         <div>
+
+          <!-- top of the form begin -->
           <div class="container" style="padding-top: 50px">
 
             <div class="row">
@@ -21,12 +23,14 @@
             </div>
             <hr>
           </div>
+
+          <!-- form brgin -->
           <div class="container">
             <div *ngIf="addnew">
 
               <form class="border text-center p-5 reg-frm" [formGroup]="PaymentForm">
-                <!-- {{PaymentForm.value | json}} -->
                 <h4 class="topic" style="text-align: center; margin-top: -80px;">New Payment Add  </h4>
+
                 <div class="form-row mb-4">
                   <p style="text-align: left">Student Name :</p>
                   <input type="text" class="form-control box_border" name="sName" formControlName="sName">
@@ -57,12 +61,13 @@
                   <mat-select style="text-align: left;" class="browser-default custom-select mb-4 box_border"
                     [(ngModel)]="pYear" name="pYear" formControlName="pYear">
                     <mat-option style="text-align:left" *ngFor='let pYear of myYears' [value]='pYear'
-                      formControlName="pYear">
-
-                      {{pYear}}
+                      formControlName="pYear">{{pYear}}
                     </mat-option>
-
+                    <div *ngIf="submitted && f.pYear.errors" class="err_msg">
+                      <div *ngIf="f.pYear.errors.required">Payment year is requied</div>
+                    </div>
                   </mat-select>
+
 
                 </div>
 
@@ -74,6 +79,10 @@
                       >
                       {{pName}}</mat-option>
                   </mat-select>
+                  <div *ngIf="submitted && f.pName.errors" class="err_msg">
+                    <div *ngIf="f.pName.errors.required">Payment type is requied</div>
+                  </div>
+
                 </div>
 
 
@@ -83,7 +92,7 @@
 
                   <input type="number" class="form-control box_border" name="payment" formControlName="payment">
                   <div *ngIf="submitted && f.payment.errors" class="err_msg">
-                    <div *ngIf="f.payment.errors.required">payment is required</div>
+                    <div *ngIf="f.payment.errors.required">Payment is required</div>
                   </div>
                 </div>
                 <p>&nbsp;</p>
@@ -106,7 +115,7 @@
             <div *ngIf="!addnew">
               <form [formGroup]="PaymentForm" style="margin-top: 50px;">
 
-
+                <h4 class="topic1">Search Paied Students</h4>
                 <div class="row" style="text-align: center;margin-bottom: 50px;">
                   <div class="col-md-2 top_txt">
                     <label style="font-size:15px ;">Year Required :</label>
@@ -141,15 +150,11 @@
                     <button mat-raised-button class="search_btn" (click)="searchPayment()"><img
                         src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Search</button>
                   </div>
-
-
-
-
                 </div>
 
                 <!-- tbale view for details -->
 
-                <div class="container" style="margin-bottom: 50px;">
+                <div class="container" style="margin-bottom: 50px;" *ngIf=tableshow>
                   <table class="table table-striped">
                     <thead>
                       <tr>
@@ -173,19 +178,9 @@
                     </tbody>
                   </table>
                 </div>
-
-
               </form>
             </div>
           </div>
-
-
-
-
-
-
-
-
         </div>
       </div>
     </div>

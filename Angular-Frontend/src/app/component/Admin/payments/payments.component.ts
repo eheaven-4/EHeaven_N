@@ -30,6 +30,7 @@ export class PaymentsComponent implements OnInit {
 
   addnew = false;
 
+  tableshow = false;
   submitted = false;
   dataform: boolean = false;
   pYear;
@@ -52,7 +53,7 @@ export class PaymentsComponent implements OnInit {
 
 
   PaymentForm = new FormGroup({
-    sName: new FormControl('', Validators.required),
+    sName: new FormControl('', Validators.required ),
     sId: new FormControl('', Validators.required),
     sClass: new FormControl('', Validators.required),
     pName: new FormControl('', Validators.required),
@@ -70,7 +71,7 @@ export class PaymentsComponent implements OnInit {
     /*load the last 5 years in to the mat select*/
     for (let i = 0; i < 5; i++) {
       years.push(year - i);
-      this.myYears[i] = years[i]
+      this.myYears[i] = years[i];
     }
   }
   get f() {
@@ -133,6 +134,8 @@ export class PaymentsComponent implements OnInit {
 
 
 searchPayment() {
+
+  this.tableshow = true;
 
 
   this.pYear = this.PaymentForm.value.pYear;
