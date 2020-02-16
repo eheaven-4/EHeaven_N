@@ -7,7 +7,7 @@
       <div class="container-fluid" style="background-color:#F8F9FA">
         <div>
           <div class="container">
-            <h2 class="topic">News</h2>
+            <h2 class="topic">News Feeds</h2>
             <hr>
           </div>
           <div style="padding-top:50px ; padding-bottom:50px">
@@ -23,7 +23,7 @@
                     formControlName="topic">
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">News topic is required</div>
-                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 50 characters</div>
+                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 30 characters</div>
                   </div>
                 </div>
 
@@ -132,7 +132,7 @@
               <div class="container">
                 <div class="row">
                   <div class="col-md-10">
-                    <h2 class="topic" style="color:  rgb(0, 140, 255); padding-top: 50px;">NewsView
+                    <h2 class="topic" style="color:  rgb(0, 140, 255); padding-top: 50px;">News List
                     </h2>
                   </div>
                 </div>
@@ -156,7 +156,7 @@
                     <p>{{new.news}}</p>
                   </mat-card-content>
 
-                  <mat-card-subtitle *ngIf="new.filePath" style="padding-right: 20px"><a
+                  <mat-card-subtitle *ngIf="new.filePath" style="padding-right: 20px"><a 
                       href="http://localhost:3000/news/newsAttachment/{{new.filePath}}"><img
                         src="../../../../assets/icons/paperclip-solid.svg"
                         class="attachment_icn">&nbsp;&nbsp;Attachment</a>

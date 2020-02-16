@@ -19,7 +19,7 @@ export class AddNotificationComponent implements OnInit {
   filename;
   submitted = false;
   Mycookie=JSON.parse(this.cookies.getCookie("userAuth"));
-  
+
   constructor(
     private router: Router,
     private http: HttpClient,
@@ -62,11 +62,11 @@ export class AddNotificationComponent implements OnInit {
     else {
       var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       var userid = myCookie.userid;
-      
+
       this.date = Date();
       this.state = "Pending"
       const formData = new FormData();
-      
+
       formData.append('notificationAttachment', this.attachment)
       formData.append('userid', userid)
       formData.append('date', this.date)
@@ -74,9 +74,9 @@ export class AddNotificationComponent implements OnInit {
       formData.append('message', this.NotificationForm.value.message)
       formData.append('state', this.state)
           console.log(this.NotificationForm.value.subject);
-          
+
       var url = "http://localhost:3000/notification/add";
-      
+
       //send request to  the server
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
@@ -95,7 +95,6 @@ export class AddNotificationComponent implements OnInit {
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Notification Successfully Added..! ", true ? "Done" : undefined, config);
-              
               this.router.navigate(['../',this.Mycookie.userid,'notifications']);
             }
             else {

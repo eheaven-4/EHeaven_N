@@ -88,7 +88,9 @@ router.get('/editevent/:id' , (req,res)=>{
 
 
 router.post('/updateEvent/:_id',(req,res)=>{
-    const eventid = req.param._id;
+    const eventid = req.params._id;
+
+    console.log(eventid);
 
     const input = {
         head:req.body.head,
@@ -96,9 +98,10 @@ router.post('/updateEvent/:_id',(req,res)=>{
         day:req.body.day,
     }
 
-    for (const [key, value] of Object.entries(input)) {
-        console.log(key, value);
-    }
+    // for (const [key, value] of Object.entries(input)) {
+    //     console.log(key, value);
+    // }
+    
     Event.update({_id:eventid}, {$set:input})
         .exec()
         .then(data =>{
@@ -106,7 +109,7 @@ router.post('/updateEvent/:_id',(req,res)=>{
             Response.json({ state:true , msg:'Event Update Successfuly..!'})
         })
         .catch(error =>{
-            res.json({state:fale , msg:'Event Updating Unsuccesful..!'})
+            res.json({state:false , msg:'Event Updating Unsuccesful..!'})
         });
 });
 

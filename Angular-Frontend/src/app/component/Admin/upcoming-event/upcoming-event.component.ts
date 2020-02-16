@@ -26,7 +26,7 @@ export class UpcomingEventComponent implements OnInit {
   day;
 
   addnew = false;
-  editform= false;
+  editform = false;
   submitted = false;
   eventid: String;
   dataform: Boolean = false;
@@ -39,7 +39,7 @@ export class UpcomingEventComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    //private cookies: MycookiesService,
+    // private cookies: MycookiesService,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
@@ -66,6 +66,7 @@ export class UpcomingEventComponent implements OnInit {
     this.editform = true;
     window.scrollTo(0,0);
     this.eventid = event_id ;
+    console.log(this.eventid);
     const url = 'http://localhost:3000/upcoming_event/editevent';
 
     this.http.get<any>(url + '/' + this.eventid).subscribe(res=> {
@@ -82,49 +83,49 @@ export class UpcomingEventComponent implements OnInit {
     });
   }
 
-//   UpdateEvent() {
-//     this.submitted = true;
-//     const form1 = this.EventForm;
-//     // const id = this.eventid;
+  UpdateEvent(form) {
+    this.submitted = true;
+    window.scrollTo(0,0);
+    console.log(form);
+    console.log(this.eventid);
+    if (this.EventForm.invalid) {
+      return;
 
-//     if (this.EventForm.invalid) {
-//       return;
-
-//     } else {
-//       const url = 'http://localhost:3000/upcoming_event/updateEvent';
+    } else {
+      const url = 'http://localhost:3000/upcoming_event/updateEvent';
 
 
-//       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-//         data: {
-//           message: 'Are you sure want to Add?',
-//           buttonText: {
-//             ok: 'Yes',
-//             cancel: 'No'
-//           }
-//         }
-//       });
-//       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-//         if (confirmed) {
-//           console.log(form1);
-//           this.http.post<any>(url  + '/' + this.eventid ,  form1).subscribe(res => {
-//             console.log(res.msg);
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to Update?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          console.log(form);
+          this.http.post<any>(url  + '/' + this.eventid ,  form).subscribe(res => {
+            console.log(res.msg);
 
-//             if (res.state) {
-//                 const config = new MatSnackBarConfig();
-//                 config.duration = true ? 2000 : 0;
-//                 this.snackBar.open('News Successfully Added..!', true ? 'Done' : undefined , config);
-//                 window.location.reload();
-//               } else {
-//                 const config = new MatSnackBarConfig();
-//                 config.duration = true ? 2000 : 0;
-//                 this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
-//                // this.router.navigate('/upcoming-event');
-//               }
-//           });
-//         }
-//       });
-//   }
-// }
+            if (res.state) {
+                const config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open('Event is not Added...!', true ? 'Done' : undefined , config);
+                this.router.navigate(['/upcoming-event']);
+              } else {
+                const config = new MatSnackBarConfig();
+                config.duration = true ? 2000 : 0;
+                this.snackBar.open('Event Successfully Added..!' , true ? 'Retry' : undefined , config);
+                window.location.reload();
+              }
+          });
+        }
+      });
+  }
+ }
 
 
 
@@ -159,7 +160,7 @@ export class UpcomingEventComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
-          console.log(form);
+          // console.log(form);
           this.http.post<any>(url, form).subscribe(res => {
             console.log(res.msg);
 
@@ -172,7 +173,7 @@ export class UpcomingEventComponent implements OnInit {
                 const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
-               // this.router.navigate('/upcoming-event');
+                this.router.navigate(['/upcoming-event']);
               }
           });
         }

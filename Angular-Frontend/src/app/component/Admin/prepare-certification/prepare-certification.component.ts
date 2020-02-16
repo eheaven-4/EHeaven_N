@@ -26,6 +26,8 @@ interface subjectsArray {
   styleUrls: ['./prepare-certification.component.scss']
 })
 export class PrepareCertificationComponent implements OnInit {
+
+  student_id;
   cookie ;
   constructor(
     private router: Router,
@@ -69,6 +71,7 @@ grades = [
   // ********************* Student Status Form ****************************************************************************
 
   StudentStatusForm = this.fb.group({
+    studentId: ['', Validators.required],
     studentName: ['', Validators.required],
     admissionNum: ['', Validators.required],
     dateofAdmission: ['', Validators.required],
@@ -79,6 +82,7 @@ grades = [
  // ********************* Character Certificate Form **********************************************************************
 
  CharacterCertForm = this.fb.group({
+  studentId: ['', Validators.required],
   studentName: ['', Validators.required],
   admissionNum: ['', Validators.required],
   dateofAdmission: ['', Validators.required],
@@ -111,6 +115,7 @@ moralConduct = [
 // ********************* Leaving Certificate Form ************************************************************************
 
 LeavingCertForm = this.fb.group({
+  studentId: ['', Validators.required],
   studentName: ['', Validators.required],
   admissionNum: ['', Validators.required],
   dateofAdmission: ['', Validators.required],
@@ -145,6 +150,7 @@ schooltypes = [
 
 AlCertForm = this.fb.group({
   certDetails: this.fb.group({
+    studentId: ['', Validators.required],
     studentName: ['', Validators.required],
     examYear: ['', Validators.required],
     centerNo: ['', Validators.required],
@@ -174,6 +180,7 @@ addSubject() {
 // tslint:disable-next-line: member-ordering
 OlCertForm = this.fb.group({
   certDetails: this.fb.group({
+    studentId: ['', Validators.required],
     studentName: ['', Validators.required],
     examYear: ['', Validators.required],
     centerNo: ['', Validators.required],
@@ -196,31 +203,42 @@ addSubjectOl() {
 // ******************************** Submit student status ****************************************************************
   submitStudentstatus() {
 
+
     const studentStatusApproval = {
+      studentId: this.StudentStatusForm.value.studentId,
       studentName: this.StudentStatusForm.value.studentName,
       admissionNum: this.StudentStatusForm.value.admissionNum,
       dateofAdmission: this.StudentStatusForm.value.dateofAdmission,
       description: this.StudentStatusForm.value.description,
-      certState : 'Pending'
+      certState : 'Prepared',
     };
+    this.student_id =this.StudentStatusForm.value.studentId;
 
     var url = 'http://localhost:3000/certification/studentstatus'
 
     this.http.post<any>(url, studentStatusApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-            alert('Successful');
+
             this.StudentStatusForm.reset();
-            this.router.navigate(['/prepare_certification']);
+            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+
+              this.http.get(url2).subscribe(res => {
+                alert('Successful');
+                this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+              }, (err) => {
+                console.log(err);
+              });
+
           } else {
             console.log(res.msg);
             alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
+            this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
           }
         });
-    console.log(studentStatusApproval);
-
+    //console.log(studentStatusApproval);
     window.location.reload();
+
 
   }
 
@@ -228,6 +246,7 @@ addSubjectOl() {
 submitCharacterCert() {
 
   const characterCertApproval = {
+    studentId: this.StudentStatusForm.value.studentId,
     studentName: this.CharacterCertForm.value.studentName,
     admissionNum: this.CharacterCertForm.value.admissionNum,
     dateofAdmission: this.CharacterCertForm.value.dateofAdmission,
@@ -240,20 +259,29 @@ submitCharacterCert() {
     leadership: this.CharacterCertForm.value.leadership,
     societies: this.CharacterCertForm.value.societies,
     sports: this.CharacterCertForm.value.sports,
-    certState : 'Pending'
+    certState : 'Completed'
   };
+  this.student_id =this.StudentStatusForm.value.studentId;
   var url = 'http://localhost:3000/certification/charactercert'
 
   this.http.post<any>(url, characterCertApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-            alert('Successful');
+            //alert('Successful');
             this.CharacterCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
+            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+
+              this.http.get(url2).subscribe(res => {
+                alert('Successful');
+                this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+              }, (err) => {
+                console.log(err);
+              });
+
           } else {
             console.log(res.msg);
             alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
+            this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
           }
         });
   console.log(characterCertApproval);
@@ -266,6 +294,7 @@ submitCharacterCert() {
 submitLeavingCert() {
 
   const leavingCertApproval = {
+    studentId: this.StudentStatusForm.value.studentId,
     studentName: this.LeavingCertForm.value.studentName,
     admissionNum: this.LeavingCertForm.value.admissionNum,
     dateofAdmission: this.LeavingCertForm.value.dateofAdmission,
@@ -280,20 +309,28 @@ submitLeavingCert() {
     cause: this.LeavingCertForm.value.cause,
     lastClass: this.LeavingCertForm.value.lastClass,
     subjects: this.LeavingCertForm.value.subjects,
-    certState : 'Pending'
+    certState : 'Completed'
   };
   var url = 'http://localhost:3000/certification/leavingcert'
 
   this.http.post<any>(url, leavingCertApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-            alert('Successful');
+            //alert('Successful');
             this.LeavingCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
+            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+
+              this.http.get(url2).subscribe(res => {
+                alert('Successful');
+                this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+              }, (err) => {
+                console.log(err);
+              });
+
           } else {
             console.log(res.msg);
             alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
+            this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
           }
         });
   console.log(leavingCertApproval);
@@ -306,6 +343,7 @@ submitLeavingCert() {
 submitAlCert() {
 
   const alCertApproval = {
+    studentId: this.StudentStatusForm.value.studentId,
     studentName: this.AlCertForm.value.certDetails.studentName,
     examYear: this.AlCertForm.value.certDetails.examYear,
     centerNo: this.AlCertForm.value.certDetails.centerNo,
@@ -315,20 +353,27 @@ submitAlCert() {
     zscore: this.AlCertForm.value.zscore,
     districtrank: this.AlCertForm.value.districtrank,
     islandrank: this.AlCertForm.value.islandrank,
-    certState : 'Pending',
+    certState : 'Completed',
   };
   var url = 'http://localhost:3000/certification/alcert';
 
   this.http.post<any>(url, alCertApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-            alert('Successful');
+            //alert('Successful');
             this.AlCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
+            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+
+            this.http.get(url2).subscribe(res => {
+              alert('Successful');
+              this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+            }, (err) => {
+              console.log(err);
+            });
           } else {
             console.log(res.msg);
             alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
+            this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
           }
         });
   console.log(alCertApproval);
@@ -341,25 +386,33 @@ submitAlCert() {
 submitOlCert() {
 
   const olCertApproval = {
+    studentId: this.StudentStatusForm.value.studentId,
     studentName: this.OlCertForm.value.certDetails.studentName,
     examYear: this.OlCertForm.value.certDetails.examYear,
     centerNo: this.OlCertForm.value.certDetails.centerNo,
     indexNo: this.OlCertForm.value.certDetails.indexNo,
     subjectsOl: this.OlCertForm.value.subjectsOl,
-    certState : 'Pending',
+    certState : 'Completed',
   };
   var url = 'http://localhost:3000/certification/olcert'
 
   this.http.post<any>(url, olCertApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-            alert('Successful');
+            //alert('Successful');
             this.OlCertForm.reset();
-            this.router.navigate(['/prepare_certification']);
+            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+
+            this.http.get(url2).subscribe(res => {
+              alert('Successful');
+              this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+            }, (err) => {
+              console.log(err);
+            });
           } else {
             console.log(res.msg);
             alert('Error!! Try Again');
-            this.router.navigate(['/prepare_certification']);
+            this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
           }
         });
   console.log(olCertApproval);
@@ -401,21 +454,6 @@ rejectCert(certRequest){
 
 }
 
-completeCert(certRequest){
-  // console.log(certRequest._id);
-  var objId = certRequest._id;
-  console.log(objId);
-  var url = "http://localhost:3000/certification/completeCert/"+certRequest._id; //accept certification requests
-
-  this.http.post(url,null).subscribe(res => {
-    alert('Successful');
-  }, (err) => {
-    console.log(err);
-  });
-
-  window.location.reload();
-
-}
 
 
 pendingCertList : certificateRequested [] = [];  //prepared certificates

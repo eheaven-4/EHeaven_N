@@ -28,7 +28,7 @@ export class AttendanceComponent implements OnInit {
   constructor(private attendanceservice:AttendenceService){}
 
   ngOnInit(){
-    
+
     this.attendanceservice.getclass()
     .subscribe((data:ClassRoom[])=>{
       this.classlist=data;
@@ -43,7 +43,7 @@ export class AttendanceComponent implements OnInit {
             if(data[j] == this.classlist[i].classname){
               this.status[i]=false;
             }
-          } 
+          }
         }
       });
       console.log(this.classlist);
@@ -51,12 +51,13 @@ export class AttendanceComponent implements OnInit {
   }
   goTo(name,i){
     if(this.status[i]){
-      
+
       this.flag=false;
-      this.class=name; 
+      this.class=name;
     }
   }
   showclass(){
+    window.scrollTo(0,5);
     this.ngOnInit();
     this.flag=true;
   }
@@ -93,7 +94,7 @@ export class AttendanceComponent implements OnInit {
         console.log(this.searchDateResult);
       }
     });
-    
+
   }
 
 }

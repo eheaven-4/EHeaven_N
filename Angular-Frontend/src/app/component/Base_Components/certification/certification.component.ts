@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
-//import {Component} from '@angular/core';
-//import {animate, state, style, transition, trigger} from '@angular/animations';
+// import {Component} from '@angular/core';
+// import {animate, state, style, transition, trigger} from '@angular/animations';
 
 interface Certificate {
   _id: String;
@@ -16,8 +16,8 @@ interface Certificate {
   examYear: String;
   examIndex: String;
   reqDate: String;
-  prinapprovState: String;
   certState: String;
+  filePath: String;
 }
 
 @Component({
@@ -31,10 +31,16 @@ export class CertificationComponent implements OnInit {
   value: String = '';
   flag = false;
   userid: String;
+  filePath: String;
   cookie=JSON.parse(this.cookies.getCookie('userAuth'));
 
   pendingCert: Certificate [] = [];
   issuedCert: Certificate [] = [];
+  stustatusCert: Certificate [] = [];
+  characCert: Certificate [] = [];
+  leavCert: Certificate [] = [];
+  alCert: Certificate [] = [];
+  olCert: Certificate [] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -80,6 +86,14 @@ export class CertificationComponent implements OnInit {
     let pendingUrl = 'http://localhost:3000/certification/pendingCert';
     let issuedUrl = 'http://localhost:3000/certification/issuedCert';
 
+    //approved and completed certificates of a particular student
+
+    let stustatusUrl = 'http://localhost:3000/certification_completed/viewstuStatus';
+    let characterUrl = 'http://localhost:3000/certification_completed/viewcharacStatus';
+    let leavingUrl = 'http://localhost:3000/certification_completed/viewleavStatus';
+    let alUrl = 'http://localhost:3000/certification_completed/viewalStatus';
+    let olUrl = 'http://localhost:3000/certification_completed/viewolStatus';
+
     this.http.get<any>(pendingUrl + '/' + id).subscribe(res => {
       console.log(res);
       this.pendingCert = res;
@@ -90,6 +104,33 @@ export class CertificationComponent implements OnInit {
       console.log(res);
       this.issuedCert = res;
     });
+
+    this.http.get<any>(stustatusUrl + '/' + id).subscribe(res => {
+      console.log(res);
+      this.stustatusCert = res;
+
+    });
+    this.http.get<any>(characterUrl + '/' + id).subscribe(res => {
+      console.log(res);
+      this.characCert = res;
+
+    });
+    this.http.get<any>(leavingUrl + '/' + id).subscribe(res => {
+      console.log(res);
+      this.leavCert = res;
+
+    });
+    this.http.get<any>(alUrl + '/' + id).subscribe(res => {
+      console.log(res);
+      this.alCert = res;
+
+    });
+    this.http.get<any>(olUrl + '/' + id).subscribe(res => {
+      console.log(res);
+      this.olCert = res;
+
+    });
+
   }
 
   submitToApproval() {
@@ -148,6 +189,12 @@ export class CertificationComponent implements OnInit {
       this.flag = false;
     }
   }
+
+  viewCert(x){
+    console.log(x);
+  }
+
+
 
 }
 

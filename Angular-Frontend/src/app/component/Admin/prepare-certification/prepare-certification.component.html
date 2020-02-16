@@ -12,7 +12,7 @@
                   <h2 class="topic">Admin - Certification</h2>
                   <hr>
                 </div>
-                <div style="padding-left: 50px; padding-right: 50px">
+                <div style="padding-left: 50px; padding-right: 50px; margin-bottom: 50px;">
                   <mat-tab-group>
 
  <!-- ////////////////// PRINCIPAL  CERTIFICATION  //////////////////////////////////////////////////////////////////////// -->
@@ -46,7 +46,6 @@
                                 <h3 mat-line>Certificate Type : {{cert.certType}}</h3>
                                 <!-- <h3>{{cert._id}}</h3> -->
                                 <p mat-line style="color: rgb(117, 117, 117)"> Requested On : {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
-                                <button type="button" class="btn btn_1" (click)="completeCert(cert)">Mark As Completed</button>
                                 <mat-divider></mat-divider>
                               </mat-list-item>
                             </mat-list>
@@ -64,6 +63,9 @@
                             <mat-expansion-panel-header>Student Status Verification Certificate</mat-expansion-panel-header>
                             <mat-action-row>
                               <div class="container">
+                                <mat-form-field>
+                                  <input matInput formControlName="studentId" placeholder="Student ID">
+                                </mat-form-field>
                                 <mat-form-field>
                                   <input matInput formControlName="studentName" placeholder="Name of the Student">
                                 </mat-form-field>
@@ -92,6 +94,9 @@
                             <mat-expansion-panel-header>Character Certificate</mat-expansion-panel-header>
                             <mat-action-row>
                                 <div class="container">
+                                  <mat-form-field>
+                                    <input matInput formControlName="studentId" placeholder="Student ID">
+                                  </mat-form-field>
                                     <mat-form-field>
                                       <input matInput formControlName="studentName" placeholder="Name of the Student">
                                     </mat-form-field>
@@ -151,6 +156,9 @@
                             <mat-expansion-panel-header>Leaving Certificate</mat-expansion-panel-header>
                             <mat-action-row>
                               <div class="container">
+                                <mat-form-field>
+                                  <input matInput formControlName="studentId" placeholder="Student ID">
+                                </mat-form-field>
                                 <mat-form-field>
                                   <textarea matInput formControlName="studentName" placeholder="Name of the Student in Full"></textarea>
                                 </mat-form-field>
@@ -222,6 +230,9 @@
                               <div class="container" >
                                 <div class="form-header" formGroupName="certDetails">
                                   <mat-form-field>
+                                    <input matInput formControlName="studentId" placeholder="Student ID">
+                                  </mat-form-field>
+                                  <mat-form-field>
                                       <textarea matInput formControlName="studentName" placeholder="Name of the Student"></textarea>
                                   </mat-form-field>
                                   <mat-form-field>
@@ -291,6 +302,9 @@
                               <mat-action-row>
                                 <div class="container" >
                                   <div class="form-header" formGroupName="certDetails">
+                                    <mat-form-field>
+                                      <input matInput formControlName="studentId" placeholder="Student ID">
+                                    </mat-form-field>
                                     <mat-form-field>
                                       <textarea matInput formControlName="studentName" placeholder="Name of the Student"></textarea>
                                     </mat-form-field>
