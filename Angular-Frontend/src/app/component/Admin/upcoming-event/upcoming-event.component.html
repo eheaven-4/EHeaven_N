@@ -22,7 +22,7 @@
             <div *ngIf="addnew">
 
           <!-- form start -->
-          <form class="border text-center p-5 reg-frm" [formGroup]="EventForm">
+          <form class="border text-center p-5 reg-frm" [formGroup]="EventForm" style="background-color: white;">
 
             <h4 class="topic" style="text-align: center; margin-top: -80px;">New Event Add  </h4>
             <div class="form-row mb-4">
@@ -55,7 +55,7 @@
             <p>&nbsp;</p>
 
             <button (click)="addevent(EventForm.value)" type="submit"
-                  class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Upload</button>
+                  class="btn btn-info my-4 btn-block reg_btn box_border upload_btn" upload_btn>Submit</button>
           </form>
         </div>
       </div>
@@ -72,7 +72,7 @@
           <div *ngIf="editform">
 
 
-          <form class="border text-center p-5 reg-frm" [formGroup]="EventForm">
+          <form class="border text-center p-5 reg-frm" [formGroup]="EventForm" style="background-color: white;">
             <h4 class="topic" style="text-align: center; margin-top: -80px;">Event Edit Form </h4>
 
             <div class="form-row mb-4">
@@ -121,9 +121,9 @@
             <div *ngIf="!editform">
             <div class="container">
               <div class="row">
-                <div class="col-md-10">
+                <div class="col-md-10" style="margin: auto;">
                   <mat-card class="event-card" *ngFor="let event of events">
-                  <mat-card-header>
+                  <mat-card-header style="margin-left: -15px;">
                     <mat-card-title>{{event.head}}</mat-card-title>
                     <mat-card-subtitle style="margin-top: -15px;">{{event.day | date: 'yyyy-MM-dd'}}</mat-card-subtitle>
                   </mat-card-header>
