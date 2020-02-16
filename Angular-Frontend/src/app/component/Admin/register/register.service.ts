@@ -20,24 +20,7 @@ export class RegisterService {
   addUser(formData){
     const url = 'http://localhost:3000/users/bulkUserRegistration';
 
-    this.http.post<any>(url,formData).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        let config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
-        // this.ngProgress.done();
-        return true;
-        
-      }
-      else {
-        let config = new MatSnackBarConfig();
-        config.duration = true ? 2000 : 0;
-        this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
-        // this.router.navigate(['/register']);
-        return false;
-      }
-    });
+    return this.http.post<any>(url,formData);
   }
 
 }
