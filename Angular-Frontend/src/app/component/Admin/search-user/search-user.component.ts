@@ -40,12 +40,14 @@ export class SearchUserComponent implements OnInit {
   userdata: user[] = [];
   UserForm: FormGroup;
   UserDataForm: FormGroup;
-  submitted = false;  
+  submitted = false;
+  resetPasswordDiv = false
   images;
   filename;
   userid;
   dataform: Boolean = false;  //sata division default didn't show
   propicName; //profile picture name variable
+  ResetPasswordForm: FormGroup;
 
   ngOnInit() {
     this.UserForm = this.fb.group({
@@ -69,7 +71,10 @@ export class SearchUserComponent implements OnInit {
       mother: [''],
       address: ['', Validators.required],
     });
-
+    this.ResetPasswordForm = this.fb.group({
+      newpw: ['', [Validators.required, Validators.minLength(8)]],
+      renewpw: ['', [Validators.required, Validators.minLength(8)]],
+    });
   }
 
   searchUser() {
@@ -219,5 +224,54 @@ export class SearchUserComponent implements OnInit {
         window.location.reload();
       }
     });
+  }
+
+  resetPassword() {
+    this.resetPasswordDiv = true;
+  }
+
+  resetPasswordbtn() {
+    if (this.ResetPasswordForm.value.newpw == this.ResetPasswordForm.value.renewpw) {
+
+      const resetData = {
+        newPassword: this.ResetPasswordForm.value.newpw,
+        userid: this.userid
+      }
+      
+      const url = 'http://localhost:3000/users/adminResetPassword';
+      /****************************************************** */
+
+      const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+        data: {
+          message: 'Are you sure want to update?',
+          buttonText: {
+            ok: 'Yes',
+            cancel: 'No'
+          }
+        }
+      });
+      dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+        if (confirmed) {
+          this.http.post<any>(url, resetData).subscribe(res => {
+            if (res.state) {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
+            }
+            else {
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Error in Update Password..! ", true ? "Retry" : undefined, config);
+            }
+          });
+        }
+      })
+    }
+    else {
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      this.snackBar.open("Password does not matched..! ", true ? "Retry" : undefined, config);
+    }
   }
 }
