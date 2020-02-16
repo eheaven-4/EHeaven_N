@@ -40,7 +40,7 @@ export class PaymentsComponent implements OnInit {
 
   paymentdata: paymentdetaile[] = [];
   myYears: YearArray[] = [];
-  paymenttypes = ['School Devolopment founds', '2nd Term', 'Others',]
+  paymenttypes = ['School Devolopment founds', 'Facilities fees', 'Welfare fees',]
 
   constructor(
     private router: Router,
