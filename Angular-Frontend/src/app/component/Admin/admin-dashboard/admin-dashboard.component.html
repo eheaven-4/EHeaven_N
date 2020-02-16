@@ -4,9 +4,9 @@
             <!-- <div class="col-md-2">
                 <app-sidebar></app-sidebar>
             </div> -->
-            <div class="container-fluid" style="background-color:#424242; padding-bottom: 10px">
+            <div class="container-fluid" style="background-color:#F8F9FA; padding-bottom: 10px">
 
-                <div class="container-fluid tct">
+                <mat-card class="container-fluid tct">
                     <div class="row">
 
                         <div class="col-md-3">
@@ -57,7 +57,8 @@
                                     <i class="material-icons btn_icn">touch_app</i>
                                 </div>
                                 <div class="col-md-9">
-                                    <p class="btn_txt">Prepare Certification <label class="notice_label">{{preparecertCount}}
+                                    <p class="btn_txt">Prepare Certification <label
+                                            class="notice_label">{{preparecertCount}}
                                         </label></p>
                                 </div>
                             </div>
@@ -80,16 +81,16 @@
                                 </div>
                                 <div class="col-md-9">
                                     <p class="btn_txt">Mail Box<label class="notice_label"> {{mailCount}}
-                                    </label></p>
+                                        </label></p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </mat-card>
 
 
 
-                <div class="container-fluid tct">
+                <mat-card class="container-fluid tct">
                     <div class="row">
                         <div class="col-md-3" routerLinkActive="router-link-active">
                             <div class="row frist_div" [routerLink]="['../register']">
@@ -123,16 +124,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="row frist_div" routerLink="../class_registration">
-                                <div class="col-md-3">
-                                    <i class="material-icons btn_icn">add</i>
-                                </div>
-                                <div class="col-md-9">
-                                    <p class="btn_txt">Class Registration</p>
-                                </div>
-                            </div>
-                        </div>
+
                         <div class="col-md-3">
                             <div class="row frist_div" routerLink="../subjects">
                                 <div class="col-md-3">
@@ -146,17 +138,34 @@
                         </div>
 
                     </div>
-                </div>
+                </mat-card>
 
 
 
-                <div class="container-fluid tct">
-                    <div class="row">
+
+
+                <mat-card class="container-fluid tct">
+                    <div class="row notice_div">
+                        <mat-card class="container notice_matCard" *ngFor="let nts of notices">
+                            <div class="row">
+                                <div class="col-md-1">
+                                    <i *ngIf="nts.state == 'Approved'" class="material-icons circle_read">
+                                        check_circle
+                                    </i>
+                                    <i *ngIf="nts.state == 'Pending'" class="material-icons circle_not_read">
+                                        check_circle
+                                    </i>
+                                </div>
+                                <div class="col-md-2" style="margin-left: -40px;font-weight: 500;color: rgb(97, 97, 97);">
+                                    {{nts.date | date:'yyyy-MM-dd HH:mm:ss'}}
+                                </div>
+                                <div class="col-md-8" style="margin-left: -10px;font-weight: 500;color: rgb(95, 95, 95)">
+                                    {{nts.subject}}
+                                </div>
+                            </div>
+                        </mat-card>
                     </div>
-                </div>
-
-                <div class="container-fluid tct" style="height: 310px">
-                </div>
+                </mat-card>
 
 
             </div>

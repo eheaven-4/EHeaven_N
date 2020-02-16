@@ -3,6 +3,15 @@ import { MycookiesService } from '../mycookies.service';
 import { Router} from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 
+interface notification {  //decalare interface class for load notification attributes.
+  _id: String;
+  userid: String;
+  subject: String;
+  message: String;
+  date: String;
+  state: String;
+}
+
 @Component({
   selector: 'app-admin-dashboard',
   templateUrl: './admin-dashboard.component.html',
@@ -13,6 +22,7 @@ export class AdminDashboardComponent implements OnInit {
   myCookie;
   mailCount;
   preparecertCount;
+  notices: notification[] = [];
 
   constructor(
     private cookies: MycookiesService,
@@ -46,6 +56,14 @@ export class AdminDashboardComponent implements OnInit {
     }else{
       this.router.navigate(['/login'])
     }
+
+    const url2 = 'http://localhost:3000/notification/view';
+    this.http.get<any>(url2).subscribe(res => {
+      this.notices = res;
+      console.log(res)
+    }, (err) => {
+      console.log(err);
+    });
     
 
   }
