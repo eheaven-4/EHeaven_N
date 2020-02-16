@@ -61,7 +61,7 @@ yearofExam = [
 grades = [
   'A DISTINCTION PASS',
   'B VERY GOOD PASS',
-  'C CREDI PASS',
+  'C CREDIT PASS',
   'S ORDINARY PASS',
   'W WEAK',
   '+ ABSENT',
@@ -221,7 +221,7 @@ addSubjectOl() {
             console.log(res.msg);
 
             //this.StudentStatusForm.reset();
-            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+            var url2 = "http://localhost:3000/certification/completeCert_studentStatus/"+this.student_id;
 
               this.http.get(url2).subscribe(res => {
                 alert('Successful');
@@ -270,7 +270,7 @@ submitCharacterCert() {
           if (res.state) {
             console.log(res.msg);
             //alert('Successful');
-            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+            var url2 = "http://localhost:3000/certification/completeCert_character/"+this.student_id;
 
 
 
@@ -323,7 +323,7 @@ submitLeavingCert() {
             console.log(res.msg);
             //alert('Successful');
             this.LeavingCertForm.reset();
-            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+            var url2 = "http://localhost:3000/certification/completeCert_leaving/"+this.student_id;
 
               this.http.get(url2).subscribe(res => {
                 alert('Successful');
@@ -370,13 +370,14 @@ submitAlCert() {
           if (res.state) {
             console.log(res.msg);
             //alert('Successful');
-            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+            var url2 = "http://localhost:3000/certification/ompleteCert_education_al/"+this.student_id;
 
 
 
             this.http.get(url2).subscribe(res => {
               alert('Successful');
               this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+              this.AlCertForm.reset();
               window.location.reload();
             }, (err) => {
               console.log(err);
@@ -386,6 +387,7 @@ submitAlCert() {
             console.log(res.msg);
             alert('Error!! Try Again');
             this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+            window.location.reload();
           }
         });
   console.log(alCertApproval);
@@ -415,7 +417,7 @@ submitOlCert() {
             console.log(res.msg);
             //alert('Successful');
 
-            var url2 = "http://localhost:3000/certification/completeCert/"+this.student_id;
+            var url2 = "http://localhost:3000/certification/completeCert_education_ol/"+this.student_id;
             this.OlCertForm.reset();
             this.http.get(url2).subscribe(res => {
               alert('Successful');

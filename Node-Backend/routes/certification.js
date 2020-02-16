@@ -721,17 +721,19 @@ router.post("/acceptCert/:_id", function(req, res) {
     )
     .exec();
 });
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-router.get("/completeCert/:_id", function(req, res) {
+router.get("/completeCert_studentStatus/:_id", function(req, res) {
   console.log(req.params._id);
   const id = req.params._id;
 
   requestCertification
     .update(
-      { userid: id },
+        { $and: [ { userid: id }, { certType: "Student Status Verification Certificate" } ] },
       {
         certState: "Completed"
       }
+      
     )
     .exec()
     .then(docs => {
@@ -744,6 +746,98 @@ router.get("/completeCert/:_id", function(req, res) {
     });
 });
 
+router.get("/completeCert_character/:_id", function(req, res) {
+    console.log(req.params._id);
+    const id = req.params._id;
+  
+    requestCertification
+      .update(
+          { $and: [ { userid: id }, { certType: "Character Certificate" } ] },
+        {
+          certState: "Completed"
+        }
+        
+      )
+      .exec()
+      .then(docs => {
+        console.log("Data Transfer Success.!");
+        res.status(200).json({ msg: "Updated..!" });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: error });
+      });
+  });
+
+  router.get("/completeCert_leaving/:_id", function(req, res) {
+    console.log(req.params._id);
+    const id = req.params._id;
+  
+    requestCertification
+      .update(
+          { $and: [ { userid: id }, { certType: "Leaving Certificate" } ] },
+        {
+          certState: "Completed"
+        }
+        
+      )
+      .exec()
+      .then(docs => {
+        console.log("Data Transfer Success.!");
+        res.status(200).json({ msg: "Updated..!" });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: error });
+      });
+  });
+
+  router.get("/completeCert_education_al/:_id", function(req, res) {
+    console.log(req.params._id);
+    const id = req.params._id;
+  
+    requestCertification
+      .update(
+          { $and: [ { userid: id }, { certType: "Educational Certificate" }, { examName: "Advanced Level ( G.C.E. A/L ) Examination" } ] },
+        {
+          certState: "Completed"
+        }
+        
+      )
+      .exec()
+      .then(docs => {
+        console.log("Data Transfer Success.!");
+        res.status(200).json({ msg: "Updated..!" });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: error });
+      });
+  });
+
+  router.get("/completeCert_education_ol/:_id", function(req, res) {
+    console.log(req.params._id);
+    const id = req.params._id;
+  
+    requestCertification
+      .update(
+          { $and: [ { userid: id }, { certType: "Educational Certificate" }, { examName: "Ordinary Level ( G.C.E. O/L ) Examination" } ] },
+        {
+          certState: "Completed"
+        }
+        
+      )
+      .exec()
+      .then(docs => {
+        console.log("Data Transfer Success.!");
+        res.status(200).json({ msg: "Updated..!" });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(500).json({ error: error });
+      });
+  });
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //get a-level subjects list
 router.get("/getAL", function(req, res) {
   academicSubject
