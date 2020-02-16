@@ -16,7 +16,7 @@ export class MenuComponent implements OnInit {
   user: any;
   myCookie: string = this.cookies.getCookie("userAuth");
   // userDetail:=JSON.parse(this.cookies.getCookie("userAuth"));
-  userdetail:UserDetail={usertype:"",id:"",name:"",email:"",selectclass:"",userid:""};
+  userdeatail:UserDetail={usertype:"",id:"",name:"",email:"",selectclass:"",userid:""};
   flag=true;
   
   constructor(
@@ -28,7 +28,7 @@ export class MenuComponent implements OnInit {
 
   ngOnInit() { 
     if(this.myCookie!=""){
-      this.userdetail=JSON.parse(this.myCookie);
+      this.userdeatail=JSON.parse(this.myCookie);
     }else{
       this.router.navigate(['/login']);
     }
