@@ -1,5 +1,4 @@
 <div class="row">
-<<<<<<< HEAD
   <div class="container-fluid">
     <div class="row">
       <div class="container-fluid" style="background-color:#F8F9FA">
@@ -43,69 +42,6 @@
                                   <div class="col-md-1 ">
                                     <div class="row menu_div" style="padding-top: 2px;" *ngIf="status[i]" class="material-icons circle_read">
                                       check_circle
-=======
-    <div class="container-fluid">
-        <div class="row">
-            <div class="container-fluid" style="background-color:#F8F9FA">
-                <div class="container" style="padding-top: 50px">
-                    <h2 style="color:  rgb(0, 140, 255); font-weight: bold">Attendance</h2>
-                    <hr>
-                </div>
-                <div class="container">
-                    <mat-card style="margin-bottom: 30px">
-                        <!-- <div class="row">
-                            <img src="../../../assets/logo/logo.png" class="img_logo">
-                        </div> -->
-                        <div class="container" style="padding-top: 50px">
-                            <mat-tab-group>
-                                <mat-tab>
-                                    <ng-template mat-tab-label>
-                                        <mat-icon class="example-tab-icon">people</mat-icon>
-                                        &nbsp;Student List
-                                    </ng-template>
-                                    <div class="row" *ngIf="flag">
-                                        <div class="container" style="width: 1000px;">
-                                            <div class="row" style="padding-top:100px;">
-                                                <!-- <div class="container" style="background-color:white"> -->
-                                                    <h3 style="color: red; font-weight: bold">Class List</h3>
-                                                        <div class="text-center container" style="margin-top: 30px;margin-bottom: 130px;">
-                                                            <div class="row" *ngFor="let class of classlist;index as i">
-                                                                        
-                                                                <div class="col-md-6" style="margin-top: 20px;">
-                                                                    <div class="row menu_div" (click)="goTo(class.classname,i)" >
-                                                                        <div class="col-md-2 menu_icon_back" style="background-color: rgb(0, 140, 255);">
-                                                                            <i class="material-icons menu_icon">home_work</i>
-                                                                        </div>
-                                                                        <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  rgb(0, 140, 255);">
-                                                                            <p style="margin-top: 10px;">{{class.classname}}</p>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                                     
-                                                                <div class="col-md-6" style="margin-top: 20px;">
-                                                                    <div class="row menu_div" *ngIf="status[i]">
-                                                                        <div class="col-md-2 menu_icon_back" style="background-color: red;">
-                                                                            <i class="material-icons menu_icon">contact_support</i>
-                                                                        </div>
-                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  red;">
-                                                                        <p style="margin-top: 10px;margin-right: 15px;">Not mark</p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row menu_div" *ngIf="!status[i]">
-                                                                    <div class="col-md-2 menu_icon_back" style="background-color:rgb(76, 204, 128);">
-                                                                        <i class="material-icons menu_icon">assignment_turned_in</i>
-                                                                    </div>
-                                                                    <div class="col-md-10 menu_text_back" style="background-color:white;border: 1px solid  rgb(76, 204, 128);">
-                                                                        <p style="margin-top: 10px;margin-right: 15px;">Marked</p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                <!-- </div> -->
-                                            </div>
-                                        </div>  
->>>>>>> af8a6658a864c65696f255569f0f12a659fe55a8
                                     </div>
                                     <div class="row menu_div" style="padding-top: 2px;" *ngIf="!status[i]" class="material-icons circle_not_read">
                                       check_circle
