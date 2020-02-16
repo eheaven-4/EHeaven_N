@@ -96,7 +96,7 @@
 
             <div class="form-row mb-4">
               <p style="text-align: left;">Date :</p>
-              <input type="date" class="form-control box_border"  name="day" formControlName="day" [(ngModel)]="eventEdit.date">
+              <input type="date" class="form-control box_border"  name="day" formControlName="day" [(ngModel)]="eventEdit.day">
               <div *ngIf="submitted && f.day.errors" class="err_msg">
                 <div *ngIf="f.day.errors.required">Date is required</div>
               </div>

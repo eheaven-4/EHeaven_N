@@ -85,6 +85,7 @@ export class UpcomingEventComponent implements OnInit {
 
   UpdateEvent(form) {
     this.submitted = true;
+    window.scrollTo(0,0);
     console.log(form);
     console.log(this.eventid);
     if (this.EventForm.invalid) {
@@ -112,14 +113,13 @@ export class UpcomingEventComponent implements OnInit {
             if (res.state) {
                 const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open('Event Successfully Added..!', true ? 'Done' : undefined , config);
-                window.location.reload();
+                this.snackBar.open('Event is not Added...!', true ? 'Done' : undefined , config);
+                this.router.navigate(['/upcoming-event']);
               } else {
                 const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open('Event is not Added...!' , true ? 'Retry' : undefined , config);
-                this.router.navigate(['/upcoming_event']);
-
+                this.snackBar.open('Event Successfully Added..!' , true ? 'Retry' : undefined , config);
+                window.location.reload();
               }
           });
         }
