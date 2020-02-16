@@ -26,7 +26,7 @@ export class UpcomingEventComponent implements OnInit {
   day;
 
   addnew = false;
-  editform= false;
+  editform = false;
   submitted = false;
   eventid: String;
   dataform: Boolean = false;
@@ -39,7 +39,7 @@ export class UpcomingEventComponent implements OnInit {
     private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
-    //private cookies: MycookiesService,
+    // private cookies: MycookiesService,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
@@ -66,6 +66,7 @@ export class UpcomingEventComponent implements OnInit {
     this.editform = true;
     window.scrollTo(0,0);
     this.eventid = event_id ;
+    console.log(this.eventid);
     const url = 'http://localhost:3000/upcoming_event/editevent';
 
     this.http.get<any>(url + '/' + this.eventid).subscribe(res=> {
@@ -85,6 +86,7 @@ export class UpcomingEventComponent implements OnInit {
   UpdateEvent(form) {
     this.submitted = true;
     console.log(form);
+    console.log(this.eventid);
     if (this.EventForm.invalid) {
       return;
 
@@ -94,7 +96,7 @@ export class UpcomingEventComponent implements OnInit {
 
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
-          message: 'Are you sure want to Add?',
+          message: 'Are you sure want to Update?',
           buttonText: {
             ok: 'Yes',
             cancel: 'No'
@@ -110,7 +112,7 @@ export class UpcomingEventComponent implements OnInit {
             if (res.state) {
                 const config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open('News Successfully Added..!', true ? 'Done' : undefined , config);
+                this.snackBar.open('Event Successfully Added..!', true ? 'Done' : undefined , config);
                 window.location.reload();
               } else {
                 const config = new MatSnackBarConfig();
