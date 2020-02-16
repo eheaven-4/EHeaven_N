@@ -136,8 +136,9 @@
                     </div>
                 </mat-card>
                 <mat-card class="container-fluid tct">
-                    <div class="row notice_div">
-                        <mat-card class="container notice_matCard" *ngFor="let nts of notices">
+                    <p style="color: rgb(0, 120, 218);font-size: 20px;">Notifications</p>
+                    <div class="row ">
+                        <div class="container notice_matCard" *ngFor="let nts of notices">
                             <div class="row">
                                 <div class="col-md-1">
                                     <i *ngIf="nts.state == 'Approved'" class="material-icons circle_read">
@@ -154,7 +155,7 @@
                                     {{nts.subject}}
                                 </div>
                             </div>
-                        </mat-card>
+                        </div>
                     </div>
                 </mat-card>
 
