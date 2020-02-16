@@ -176,7 +176,7 @@ export class CertificationComponent implements OnInit {
       alert('Please Login First..!');
       this.router.navigate(['/login']);
     }
-     window.location.reload();     //reload the page
+    //  window.location.reload();     //reload the page
   }
 
 

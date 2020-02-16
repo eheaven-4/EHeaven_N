@@ -73,7 +73,7 @@ export class AcademicSubjectComponent implements OnInit {
     console.log(this.sbjName);
 
 
-    this.router.navigate(['../'+id + '/academics/' + this.sbjName]);
+    this.router.navigate(['../' + id+'/academics/' + this.sbjName]);
 
   }
 
