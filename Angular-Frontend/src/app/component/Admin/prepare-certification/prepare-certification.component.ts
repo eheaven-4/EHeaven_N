@@ -40,6 +40,7 @@ export class PrepareCertificationComponent implements OnInit {
 
 userType
 subjectnamesAl: subjectsArray[] = []
+subjectnamesOl: subjectsArray[] = []
 
 
 // examination Medium
@@ -169,59 +170,6 @@ addSubject() {
 }
 
 // ********************* O/L Certificate Form ****************************************************************************
-
-// subject names and numbers o-level
-// tslint:disable-next-line: member-ordering
-subjectnamesOl = [
-  '11   Buddhism',
-  '12   Saivanery',
-  '14   Catholicism',
-  '15   Christianity',
-  '16   Islam',
-  '21   Sinhala Language & Lit.',
-  '22   Tamil Lanuage & Lit.',
-  '31   English',
-  '32   Mathematics',
-  '33   History',
-  '34   Science',
-  '60   Business & Accounting Studies',
-  '61   Geography',
-  '62   Citizenship Education & Governance',
-  '63   Entrepreneurship Studies',
-  '64   Second Langusge(Sinhala)',
-  '65   Second Langusge(Tamil)',
-  '66   Pali',
-  '67   Sanskrit',
-  '68   French',
-  '69   German',
-  '70   Hindi',
-  '71   Japanese',
-  '72   Arabic',
-  '40   Music (Oriental)',
-  '41   Music (Western)',
-  '42   Music (Carnatic)',
-  '43   Art',
-  '44   Dancing (Oriental)',
-  '45   Dancing (Bharatha)',
-  '46   Appreciation of English Literary Texts',
-  '47   Appreciation of Sinhala Literary Texts',
-  '48   Appreciation of Tamil Literary Texts',
-  '49   Appreciation of Arabic Literary Texts',
-  '50   Drama & Theatre (Sinhala)',
-  '51   Drama & Theatre (Tamil)',
-  '52   Drama & Theatre (English)',
-  '80   Information & Communication Technology',
-  '81   Agriculture & Food Technology',
-  '82   Fisheries & Food Technology',
-  '83   Design & Technology',
-  '84   Arts & Crafts',
-  '85   Home Economics',
-  '86   Health & Physical Education',
-  '87   Communication & Media Studies',
-  '92   Electronic Writing & Shorthand (Sinhala)',
-  '93   Electronic Writing & Shorthand (Tamil)',
-  '94   Electronic Writing & Shorthand (English)',
-];
 
 // tslint:disable-next-line: member-ordering
 OlCertForm = this.fb.group({
@@ -479,7 +427,7 @@ completedCertList3 : certificateRequested [] = []; //completed certification - l
 completedCertList4 : certificateRequested [] = []; //completed certification - educational
 
   ngOnInit() {
-   
+
     if(this.cookies.getCookie("userAuth")!=""){
       this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
       let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));
@@ -542,7 +490,15 @@ completedCertList4 : certificateRequested [] = []; //completed certification - e
       this.router.navigate(['./login']);
     }
 
-    
+    const alUrl = "http://localhost:3000/certification/getAL"           //AL subjects list
+    this.http.get<any>(alUrl).subscribe(res => {
+      this.subjectnamesAl = res.data;
+    });
+
+    const olUrl = "http://localhost:3000/certification/getOL"           //OL subjects list
+    this.http.get<any>(olUrl).subscribe(res => {
+      this.subjectnamesOl = res.data;
+    });
   }
 
 

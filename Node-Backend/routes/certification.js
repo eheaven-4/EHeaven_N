@@ -854,6 +854,21 @@ router.get("/getAL", function(req,res) {
     });
 })
 
+//get o-level subjects list
+router.get("/getOL", function(req,res) {
+    academicSubject.find().sort({ subId: 1 })
+    .select('subId subName')
+    .exec()
+    .then(docs => {
+        console.log("Data Transfer Success.!");
+        res.status(200).json({data : docs})
+    })
+    .catch(error => {
+        console.log(error);
+        res.status(500).json({error: error });
+    });
+})
+
 
 
 module.exports = router; 

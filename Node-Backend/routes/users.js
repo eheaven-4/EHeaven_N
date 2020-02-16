@@ -75,8 +75,8 @@ router.post("/register", function (req, res) {
         var newUser = new User({
             usertype: req.body.usertype,
             userid: req.body.userid,
-            selectclass: req.body.selectclass,        
-            name: req.body.name,          
+            selectclass: req.body.selectclass,
+            name: req.body.name,
             email: req.body.email,
             password: req.body.password,
             birthday: req.body.birthday,
@@ -91,11 +91,8 @@ router.post("/register", function (req, res) {
             filepath: fullPath,
         });
 
-        // var newUser = new acad(document);
-        console.log(newUser);
         bcrypt.genSalt(10, function (err, salt) {
             bcrypt.hash(newUser.password, salt, function (err, hash) {
-                console.log(hash);
                 newUser.password = hash;
 
                 if (err) {
@@ -118,49 +115,49 @@ router.post("/register", function (req, res) {
 });
 
 router.post("/bulkUserRegistration", function (req, res) {
-        console.log("hello");
-        var newUser = new User({
-            usertype: req.body.usertype,
-            userid: req.body.userid,
-            selectclass: (req.body.selectclass),        
-            name: req.body.name,          
-            email: req.body.email,
-            password: req.body.password,
-            birthday: req.body.birthday,
-            mobilenumber: req.body.mobilenumber,
-            homenumber: req.body.homenumber,
-            gender: req.body.gender,
-            nationality: req.body.nationality,
-            nicnumber: req.body.NIC,
-            father: req.body.father,
-            mother: req.body.mother,
-            address: req.body.address,
-            filepath: req.body.image,
-        
-        });
-        // console.log("hi"+newUser);
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(newUser.password, salt, function (err, hash) {
-                // console.log(hash);
-                newUser.password = hash;
+    console.log("hello");
+    var newUser = new User({
+        usertype: req.body.usertype,
+        userid: req.body.userid,
+        selectclass: (req.body.selectclass),
+        name: req.body.name,
+        email: req.body.email,
+        password: req.body.password,
+        birthday: req.body.birthday,
+        mobilenumber: req.body.mobilenumber,
+        homenumber: req.body.homenumber,
+        gender: req.body.gender,
+        nationality: req.body.nationality,
+        nicnumber: req.body.NIC,
+        father: req.body.father,
+        mother: req.body.mother,
+        address: req.body.address,
+        filepath: req.body.image,
 
-                if (err) {
-                    throw err;
-                }
-                else{
-                    newUser.save()
-                        .then(result =>{
-                            console.log(result);
-                            res.json({ state: true, msg: "Data Inserted Successfully..!" });
-                        })
-                        .catch(error =>{
-                            console.log(error);
-                            res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
-                        });
-                }
-            });
+    });
+    // console.log("hi"+newUser);
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(newUser.password, salt, function (err, hash) {
+            // console.log(hash);
+            newUser.password = hash;
+
+            if (err) {
+                throw err;
+            }
+            else {
+                newUser.save()
+                    .then(result => {
+                        console.log(result);
+                        res.json({ state: true, msg: "Data Inserted Successfully..!" });
+                    })
+                    .catch(error => {
+                        console.log(error);
+                        res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+                    });
+            }
         });
-    
+    });
+
 });
 
 //specific user profile data retrive
@@ -218,7 +215,7 @@ router.get("/searchUsers/:userid", function (req, res, next) {
             })
             .catch(error => {
                 console.log("Data Transfer Unsuccessfull..!")
-                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" }); 
+                res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
             })
     })
 })
@@ -335,4 +332,56 @@ router.delete("/profImage/:filename", function (req, res) {
     }
 });
 
+/*reset password option*/
+router.post("/resetPassword", function (req, res) {
+    const oldPassword = req.body.oldPassword
+    var newPassword = req.body.newPassword
+    const userid = req.body.userid
+    User.findByUserid(userid, function (err, user) {
+        if (err) throw err;
+        User.passwordCheck(oldPassword, user.password, function (err, match) {
+            console.log(userid, oldPassword);
+            if (err) {
+                throw err;
+            }
+            if (match) {
+                console.log("Userid and Password match...!");
+                bcrypt.genSalt(10, function (err, salt) {
+                    bcrypt.hash(newPassword, salt, function (err, hash) {
+                        console.log(hash);
+                        newPassword = hash;
+
+                        if (err) {
+                            throw err;
+                        }
+                        else {
+                            console.log(newPassword)
+                            User.update({ userid: userid }, {
+                                $set: {
+                                    password: newPassword
+                                }
+                            })
+                                .exec()
+                                .then(data => {
+                                    console.log("Data Update Success..!")
+                                    res.json({ state: true, msg: "Data Update Success..!" });
+
+                                })
+                                .catch(error => {
+                                    console.log("Data Updating Unsuccessfull..!")
+                                    res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
+                                })
+                        }
+                    });
+                });
+            }
+            else {
+                res.json({
+                    state: false,
+                    msg: "Password Incorrect..!"
+                });
+            }
+        });
+    });
+})
 module.exports = router;  
