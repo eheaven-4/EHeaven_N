@@ -1,52 +1,78 @@
-<div class="container">
-    <div class="row" *ngIf="!flag">
-        
-        <form style="padding-top: 100px; margin: auto;">
-            <div class="row">
+<div class="container" >
+    <div class="row" style="padding-top: 100px;" *ngIf="!flag">
+        <mat-card class="mydiv" align="center" >
+            <div class="row" style="margin-left:30px;" >
                 <div class="col-6">
-                    <label for="file">Choose File</label><hr>
-                    <input type="file" id="file" (change)="handleFileInput($event.target.files)" accept="text/*">
-        
+                    <p style="color: rgb(165, 165, 165);font-size: 12px;">Choose File</p>
+
+                    
+                    <input type="file" name="file" id="file" style="display: none"
+                        (change)="handleFileInput($event.target.files)" accept="text/*"
+                        [uploader]="uploader" #fileInput>
+                    <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+                        (click)="fileInput.click()" accept="text/*">Choose File</button>
+                        <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;" *ngIf="fileToUpload">
+                            {{fileToUpload.name}}
+                        </small>
                 </div>
                 <div class="col-6">
-                    <label for="file">Choose All Images</label><hr>
-                    <input type="file" id="file" (change)="handleImages($event.target.files)" accept="text/*" multiple="multiple">
-                
+                    <p style="color: rgb(165, 165, 165);font-size: 12px;">Choose Profile Images</p>
+                    
+                    <input type="file" id="file" style="display: none"
+                        (change)="handleImages($event.target.files)" accept="image/*" multiple="multiple"
+                        [uploader]="uploader" #imageInput>
+                    <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+                        (click)="imageInput.click()" accept="image/*">Choose Image</button>
+                        <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;" *ngIf="images">
+                            <span *ngFor="let image of images">{{image.name}},</span>
+                        </small>
+                        
                 </div>
             </div>
             <span style="color: red;">Note:</span>
-            <div class="row" style="margin-top: 20px;">
+            <div class="row">
                 
-                <div class="col-6" style="border: 1px solid red;height: auto">
+                <div class="col-5" style="border: 1px solid rgb(0, 140, 255);;height: auto;border-radius: 5px;padding: 20px;">
                     <span>
                         <small style="color: red;">
                             You should follow following format in your Uploading file
                         </small>
-                        <img src="../../../../../assets/icons/sample.PNG" alt="" style="width: 500px;margin-top: 20px;" >
+                        <img src="../../../../../assets/icons/sample.PNG"  style="width: 400px; margin:auto" >
 
                     </span>
         
                 </div>
-                
-                <div class="col-5" style="border: 1px solid red;height: auto;margin-left: 5px;">
+                <!-- <div class="col-5"></div> -->
+                <div class="col-5" style="border: 1px solid rgb(0, 140, 255);;height: auto;border-radius: 5px;margin-left: 10px;padding: 20px;">
                         <span>
-                            <small style="color: red;">
+                            <small style="color: red;" class="row">
                                 Select all profile images belong to the users
                             </small>
+                            <span class="row">
+                                <img src="../../../../../assets/avatar/1.png" style="width: 120px;margin: auto" class="col">
+                                <img src="../../../../../assets/avatar/2.jpg" style="width: 100px;margin: auto" class="col">
+                                <img src="../../../../../assets/avatar/3.jpg" style="width: 100px;margin: auto;" class="col">
+                            </span>
+                            <span class="row" style="margin-left: 20px;">
+                                <small class="col" >00000001.png</small>
+                                <small class="col">00000002.png</small>
+                                <small class="col">00000003.png</small>
+                            </span>
+                            
                            
     
                         </span>
             
-                    
-                
                 </div>
+                
+                <!-- </div> -->
             </div>
-            <div class="row" align="center">
+            <div class="row" align="center" style="padding-left: 100px;padding-right: 100px;">
                 <button class="btn btn-info my-4 btn-block" type="submit"
                 (click)="bulkRegistration()">Submit
                 Now</button>
             </div>
-        </form>
+        </mat-card>
     </div>
     <div *ngIf="flag">
  
@@ -157,11 +183,27 @@
                                             </div>
                     </mat-card-content>
                     <mat-card-actions align="right">
-                    <button type="button" (click)="addUser(i,0)" class="btn btn-primary" style="margin-right:10px">Add User</button>
+                    <button type="button" (click)="addUser(i)" class="btn btn-primary" style="margin-right:10px">Add User</button>
                     <button type="button" (click)="remove(i)" class="btn btn-danger">Cancel</button>
                     </mat-card-actions>
                 </mat-card>
                 <div style="height: 50px;"></div>
+            </div>
+            
+                
+                    
+
+
+        </div>
+        </div>
+    </div>
+</div>
+
+
+ 
+
+  <!-- <div class="container">
+    <div class="row" *ngIf="!flag">
         <div style="margin-top: 30px;margin-bottom: 30px;">
             <mat-card class="mydiv">
                 <div class="row">
@@ -336,4 +378,6 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
+
+
