@@ -231,7 +231,7 @@ router.get("/completedCertList4", function(req, res) {
 
 router.post("/studentstatus", async function(req, res) {
   // console.log("hello at server ");
-  const x = `./local_storage/certificates_completed/student_status/${req.body.admissionNum}.pdf`; //file path of the pdf generated
+  const x = `./local_storage/certificates_completed/student_status/${req.body.studentId}.pdf`; //file path of the pdf generated
   const newRequest = new requestStudentstatus({
     studentId: req.body.studentId,
     studentName: req.body.studentName,
@@ -288,7 +288,9 @@ router.post("/studentstatus", async function(req, res) {
 
 router.post("/charactercert", async function(req, res) {
   // console.log("hello at server ");
+  const x = `./local_storage/certificates_completed/character/${req.body.studentId}.pdf`; //file path of the pdf generated
   const newRequest = new requestCharacterCert({
+    studentId: req.body.studentId,
     studentName: req.body.studentName,
     admissionNum: req.body.admissionNum,
     dateofAdmission: req.body.dateofAdmission,
@@ -303,6 +305,7 @@ router.post("/charactercert", async function(req, res) {
     sports: req.body.sports,
     certState: req.body.certState
   });
+  newRequest.filePath = x;
   console.log(newRequest);
   const uint8Array = fs.readFileSync(__dirname + "/certificates/Character.pdf");
 
@@ -369,10 +372,7 @@ router.post("/charactercert", async function(req, res) {
   });
   const pdfBytes = await doc.save();
 
-  fs.writeFileSync(
-    `./local_storage/certificates_completed/character/${newRequest.admissionNum}.pdf`,
-    pdfBytes
-  );
+  fs.writeFileSync(x,pdfBytes);
 
   newRequest
     .save()
@@ -389,8 +389,11 @@ router.post("/charactercert", async function(req, res) {
 /*******************************generate leaving certificate pdf *************************************/
 
 router.post("/leavingcert", async function(req, res) {
+
   // console.log("hello at server ");
+  const x = `./local_storage/certificates_completed/leaving/${req.body.studentId}.pdf`; //file path of the pdf generated
   const newRequest = new requestLeavingCert({
+    studentId: req.body.studentId,
     studentName: req.body.studentName,
     admissionNum: req.body.admissionNum,
     dateofAdmission: req.body.dateofAdmission,
@@ -408,6 +411,7 @@ router.post("/leavingcert", async function(req, res) {
     // prinapprovState: req.body.prinapprovState,
     certState: req.body.certState
   });
+  newRequest.filePath = x;
   console.log(newRequest);
   const uint8Array = fs.readFileSync(__dirname + "/certificates/Leaving.pdf");
   var doc = await pdfDoc.PDFDocument.load(uint8Array);
@@ -488,10 +492,7 @@ router.post("/leavingcert", async function(req, res) {
   });
   const pdfBytes = await doc.save();
 
-  fs.writeFileSync(
-    `./local_storage/certificates_completed/leaving/${newRequest.admissionNum}.pdf`,
-    pdfBytes
-  );
+  fs.writeFileSync(x,pdfBytes);
 
   newRequest
     .save()
@@ -509,7 +510,9 @@ router.post("/leavingcert", async function(req, res) {
 
 router.post("/alcert", async function(req, res) {
   // console.log("hello at server ");
+  const x = `./local_storage/certificates_completed/alevel/${req.body.studentId}.pdf`; //file path of the pdf generated
   const newRequest = new requestAlCert({
+    studentId: req.body.studentId,
     studentName: req.body.studentName,
     examYear: req.body.examYear,
     centerNo: req.body.centerNo,
@@ -519,9 +522,9 @@ router.post("/alcert", async function(req, res) {
     zscore: req.body.zscore,
     districtrank: req.body.districtrank,
     islandrank: req.body.islandrank,
-    //prinapprovState: req.body.prinapprovState,
     certState: req.body.certState
   });
+  newRequest.filePath = x;
 
   console.log(newRequest);
   const uint8Array = fs.readFileSync(__dirname + "/certificates/A-Level.pdf");
@@ -590,10 +593,7 @@ router.post("/alcert", async function(req, res) {
 
   const pdfBytes = await doc.save();
 
-  fs.writeFileSync(
-    `./local_storage/certificates_completed/alevel/${newRequest.indexNo}.pdf`,
-    pdfBytes
-  );
+  fs.writeFileSync(x,pdfBytes);
 
   newRequest
     .save()
@@ -611,15 +611,17 @@ router.post("/alcert", async function(req, res) {
 
 router.post("/olcert", async function(req, res) {
   // console.log("hello at server ");
+  const x = `./local_storage/certificates_completed/olevel/${req.body.studentId}.pdf`; //file path of the pdf generated
   const newRequest = new requestOlCert({
+    studentId: req.body.studentId,
     studentName: req.body.studentName,
     examYear: req.body.examYear,
     centerNo: req.body.centerNo,
     indexNo: req.body.indexNo,
     subjectsOl: req.body.subjectsOl,
-    //prinapprovState: req.body.prinapprovState,
     certState: req.body.certState
   });
+  newRequest.filePath = x;
   console.log(newRequest);
   const uint8Array = fs.readFileSync(__dirname + "/certificates/O-Level.pdf");
   var doc = await pdfDoc.PDFDocument.load(uint8Array);
@@ -674,10 +676,7 @@ router.post("/olcert", async function(req, res) {
     c = c - 19;
   }
   const pdfBytes = await doc.save();
-  fs.writeFileSync(
-    `./local_storage/certificates_completed/olevel/${newRequest.indexNo}.pdf`,
-    pdfBytes
-  );
+  fs.writeFileSync(x,pdfBytes);
 
   newRequest
     .save()
