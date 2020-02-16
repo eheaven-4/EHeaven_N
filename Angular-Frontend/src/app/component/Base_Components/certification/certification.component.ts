@@ -164,6 +164,7 @@ export class CertificationComponent implements OnInit {
             alert('Successfully Requested..!');
             this.CertificationForm.reset();
             this.router.navigate(['../',this.cookie.userid,'certification']);
+            window.location.reload();
           } else {
             console.log(res.msg);
             alert('Certificate Requesting Unsuccessfull..!');
