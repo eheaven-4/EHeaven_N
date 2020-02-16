@@ -2,8 +2,8 @@
     margin-top: 10px;
     margin-bottom: 10px;
     margin-left: 0px;
-    color: #2bb5f5;
-    border: 1.15px solid #2bb5f5;
+    color: rgb(0, 140, 255);
+    border: 1.55px solid rgb(0, 140, 255);
     padding-top: 15px;
     padding-bottom: 13px;
     border-radius: 5px;
@@ -12,7 +12,7 @@
 }
 
 .frist_div:hover{
-    background-color: #525252;
+    background-color: #e0e0e0;
     transition: 0.5s;
 }
 
@@ -23,13 +23,13 @@
 }
 
 .btn_txt{
-    color: #2bb5f5;
+    color: rgb(0, 140, 255);
     font-size: 17px;
     padding-top: 10px;
     // margin-left: -20px;
 }
 .tct{
-    background-color: #353535;
+    background-color: rgb(255, 255, 255);
     margin-top: 10px;
     border-radius:5px;
     // padding-left: 10px;
@@ -45,3 +45,16 @@
     text-align: center;
     margin-left: 3px;
 }
+
+.circle_read {
+    color: #008b23;
+  }
+  
+  .circle_not_read {
+    color: rgb(219, 0, 0);
+  }
+
+  .notice_matCard{
+      height: 50px;
+      margin-bottom: 10px;
+  }

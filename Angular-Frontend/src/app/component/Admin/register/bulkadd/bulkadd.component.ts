@@ -51,6 +51,7 @@ export class BulkaddComponent {
   handleFileInput(files: FileList) {
 
     this.fileToUpload = files.item(0);
+    console.log(files[0].name);
   }
   handleImages(files: FileList) {
     // if(this.images==null){
@@ -58,9 +59,9 @@ export class BulkaddComponent {
     // }else{
 
     // }/
-    console.log(files.length)
+    // console.log(files.length)
     this.images = files;
-    console.log(this.images.item(0).name);
+    // console.log(this.images.item(0).name);
   }
 
 

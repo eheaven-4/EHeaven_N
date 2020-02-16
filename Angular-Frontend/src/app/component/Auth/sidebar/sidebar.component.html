@@ -1,108 +1,110 @@
 <div class="side-bar container-fluid" >
-    <div class="sidebar_button2" routerLink="./admin_dashboard" 
-        routerLinkActive="nav-link active " *ngIf="userDetail.usertype=='Administrator'">
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">person</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Admin Portal</p>
+    <span *ngIf="userDetail.usertype!='Administrator'">
+        <div class="sidebar_button2" routerLink="./admin_dashboard" 
+            routerLinkActive="nav-link active " *ngIf="userDetail.usertype=='Administrator'">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">person</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;Admin Portal</p>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="sidebar_button" routerLink="./academic_subject" 
-        routerLinkActive="nav-link active ">
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">school</i>
-            </div>
-            <div class="col-md-9 name">
+        <div class="sidebar_button" routerLink="./academic_subject" 
+            routerLinkActive="nav-link active ">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">school</i>
+                </div>
+                <div class="col-md-9 name">
 
-                <p class="sidebar_links">&nbsp;Academics</p>
+                    <p class="sidebar_links">&nbsp;Academics</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="sidebar_button2" routerLink="./notifications" 
-        routerLinkActive="nav-link active ">
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">notifications_active</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Notifications</p>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar_button2" routerLink="./certification" 
-        routerLinkActive="nav-link active ">
-        <div class="row">
-            <div class="col-md-1 icn" style="margin-left: -5px">
-                <i class="material-icons">&nbsp;receipt</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;&nbsp;Certification</p>
+        <div class="sidebar_button2" routerLink="./notifications" 
+            routerLinkActive="nav-link active ">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">notifications_active</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;Notifications</p>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="sidebar_button2" routerLink="./certification" 
+            routerLinkActive="nav-link active ">
+            <div class="row">
+                <div class="col-md-1 icn" style="margin-left: -5px">
+                    <i class="material-icons">&nbsp;receipt</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;&nbsp;Certification</p>
+                </div>
+            </div>
+        </div>
 
 
-    <div class="sidebar_button2" routerLink="./attendance" 
-        routerLinkActive="nav-link active " >
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">emoji_people</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Attendence</p>
-            </div>
-        </div>
-    </div>
-    <!-- <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
+        <div class="sidebar_button2" routerLink="./attendance" 
+            routerLinkActive="nav-link active " >
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons">emoji_people</i>
                 </div>
                 <div class="col-md-9 name">
-                    <p class="sidebar_links">Register</p>
+                    <p class="sidebar_links">&nbsp;Attendence</p>
                 </div>
             </div>
-        </div> -->
+        </div>
+        <!-- <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
+                <div class="row">
+                    <div class="col-md-1 icn">
+                        <i class="material-icons">emoji_people</i>
+                    </div>
+                    <div class="col-md-9 name">
+                        <p class="sidebar_links">Register</p>
+                    </div>
+                </div>
+            </div> -->
 
-    <div class="sidebar_button2" routerLink="./extra_curricular" routerLinkActive="nav-link active "
-        >
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">sports_handball</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Extra Curricular</p>
+        <div class="sidebar_button2" routerLink="./extra_curricular" routerLinkActive="nav-link active "
+            >
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">sports_handball</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;Extra Curricular</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <div class="sidebar_button2" routerLink="./manage_marks" routerLinkActive="nav-link active "
-         *ngIf="userDetail.usertype=='Administrator'">
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">score</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Manage Marks</p>
-            </div>
-        </div>
-    </div>
-    <div class="sidebar_button2" routerLink="./student_progress" routerLinkActive="nav-link active "
-        >
-        <div class="row">
-            <div class="col-md-1 icn">
-                <i class="material-icons">poll</i>
-            </div>
-            <div class="col-md-9 name">
-                <p class="sidebar_links">&nbsp;Student Progress</p>
+        <div class="sidebar_button2" routerLink="./manage_marks" routerLinkActive="nav-link active "
+            *ngIf="userDetail.usertype=='Administrator'">
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">score</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;Manage Marks</p>
+                </div>
             </div>
         </div>
-    </div>
+        <div class="sidebar_button2" routerLink="./student_progress" routerLinkActive="nav-link active "
+            >
+            <div class="row">
+                <div class="col-md-1 icn">
+                    <i class="material-icons">poll</i>
+                </div>
+                <div class="col-md-9 name">
+                    <p class="sidebar_links">&nbsp;Student Progress</p>
+                </div>
+            </div>
+        </div>
+    </span>
     <span *ngIf="userDetail.usertype=='Administrator'">
         <div class="sidebar_button2" routerLink="./search_user" routerLinkActive="nav-link active "
             >

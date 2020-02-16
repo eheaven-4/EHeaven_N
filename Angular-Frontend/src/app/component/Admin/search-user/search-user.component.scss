@@ -2,7 +2,6 @@
   color: aliceblue;
   background-color: rgb(0, 140, 255);
   border-color: rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
   height: 37px;
   width: 100%;
 }
@@ -31,7 +30,6 @@
 }
 
 .reg-frm {
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
   padding-top: 40px;
   width: 70%;
   text-align: center;
@@ -42,13 +40,11 @@
   color: aliceblue;
   background-color: rgb(0, 140, 255);
   border-color: rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
 }
 .del_btn {
   color: aliceblue;
   background-color: rgb(202, 0, 0);
   border-color: rgb(202, 0, 0);
-  box-shadow: 0px 5px 5px rgb(135, 0, 0);
 }
 .box_border {
   border-radius: 3px;
@@ -78,9 +74,11 @@
   height: 320px;
 }
 
-.flashMessage {
-  padding-top: 5px;
-  height: 20px;
-  margin-bottom: -10px;
-  width: 100%;
+.reset_btn {
+  margin-top: 20px;
+  color: aliceblue;
+  background-color: rgb(0, 140, 255);
+  border-color: rgb(0, 140, 255);
+  height: 37px;
+  // width: 100%;
 }

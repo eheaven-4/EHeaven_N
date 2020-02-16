@@ -233,7 +233,6 @@ router.post("/updateUser/:userid/:imagename", function (req, res, next) {
                 selectclass: req.body.selectclass,
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password,
                 birthday: req.body.birthday,
                 mobilenumber: req.body.mobilenumber,
                 homenumber: req.body.homenumber,
@@ -266,7 +265,6 @@ router.post("/updateUser/:userid/:imagename", function (req, res, next) {
                 selectclass: req.body.selectclass,
                 name: req.body.name,
                 email: req.body.email,
-                password: req.body.password,
                 birthday: req.body.birthday,
                 mobilenumber: req.body.mobilenumber,
                 homenumber: req.body.homenumber,
@@ -384,4 +382,40 @@ router.post("/resetPassword", function (req, res) {
         });
     });
 })
+
+/*reset password by admin option*/
+router.post("/adminResetPassword", function (req, res) {
+    var newPassword = req.body.newPassword
+    const userid = req.body.userid
+    console.log(userid, newPassword)
+    bcrypt.genSalt(10, function (err, salt) {
+        bcrypt.hash(newPassword, salt, function (err, hash) {
+            console.log(hash);
+            newPassword = hash;
+
+            if (err) {
+                throw err;
+            }
+            else {
+                console.log(newPassword)
+                User.update({ userid: userid }, {
+                    $set: {
+                        password: newPassword
+                    }
+                })
+                    .exec()
+                    .then(data => {
+                        console.log("Data Update Success..!")
+                        res.json({ state: true, msg: "Data Update Success..!" });
+
+                    })
+                    .catch(error => {
+                        console.log("Data Updating Unsuccessfull..!")
+                        res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
+                    })
+            }
+        });
+    });
+
+});
 module.exports = router;  

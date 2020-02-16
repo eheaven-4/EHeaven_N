@@ -60,23 +60,20 @@
                   <p style="text-align: left">Select Year:</p>
                   <mat-select style="text-align: left;" class="browser-default custom-select mb-4 box_border"
                     [(ngModel)]="pYear" name="pYear" formControlName="pYear">
-                    <mat-option style="text-align:left" *ngFor='let pYear of myYears' [value]='pYear'
-                      formControlName="pYear">{{pYear}}
+                    <mat-option style="text-align:left" *ngFor='let pYear of myYears' [value]='pYear'>
+                      {{pYear}}
                     </mat-option>
                     <div *ngIf="submitted && f.pYear.errors" class="err_msg">
                       <div *ngIf="f.pYear.errors.required">Payment year is requied</div>
                     </div>
                   </mat-select>
-
-
                 </div>
 
                 <div class=" form-row md-4">
                   <p style="text-align: left">Payment Type:</p>
                   <mat-select style="text-align: left;" class="browser-default custom-select mb-4 box_border "
                     [(ngModel)]="pName" name="pName" formControlName="pName">
-                    <mat-option style="text-align: left" *ngFor='let pName of   paymenttypes' [value]='pName'
-                      >
+                    <mat-option style="text-align: left" *ngFor='let pName of  paymenttypes' [value]='pName'>
                       {{pName}}</mat-option>
                   </mat-select>
                   <div *ngIf="submitted && f.pName.errors" class="err_msg">
@@ -115,7 +112,7 @@
             <div *ngIf="!addnew">
               <form [formGroup]="PaymentForm" style="margin-top: 50px;">
 
-                <h4 class="topic1">Search Paied Students</h4>
+                <h4 class="topic1">Search Paid Students</h4>
                 <div class="row" style="text-align: center;margin-bottom: 50px;">
                   <div class="col-md-2 top_txt">
                     <label style="font-size:15px ;">Year Required :</label>
@@ -128,11 +125,17 @@
                     </mat-select>
                   </div>
 
+
+
                   <div class="col-md-2 top_txt">
                     <label style="font-size:15px ;">Class Name Required :</label>
 
                     <input type="text" class="form-control box_border" formControlName="sClass" name="sClass"
                       placeholder="1A" matTooltip="Enter in block letters (i.e: 1A)" style="text-align: left">
+                      <div *ngIf="submitted && f.sClass.errors " class="err_msg">
+                        <div *ngIf="f.sClass.errors.required">Payment type is requied</div>
+
+                      </div>
                   </div>
 
                   <div class="col-md-4 top_txt">
