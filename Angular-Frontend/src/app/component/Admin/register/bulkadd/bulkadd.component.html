@@ -1,10 +1,6 @@
-<div class="container" >
+<div class="container">
     <div class="row" *ngIf="!flag">
-        <div class="row" style="padding-top: 100px;" align="center">
-            <div class="col"><img src="../../../../../assets/icons/sample.PNG" alt="" style="height: 45px;width: auto;margin-left: 80px;"></div>
-            <hr>
-            <p style="margin-left: 80px;">Hiii</p>
-        </div>
+        
         <form style="padding-top: 100px; margin: auto;">
             <div class="row">
                 <div class="col-6">
@@ -15,6 +11,33 @@
                 <div class="col-6">
                     <label for="file">Choose All Images</label><hr>
                     <input type="file" id="file" (change)="handleImages($event.target.files)" accept="text/*" multiple="multiple">
+                
+                </div>
+            </div>
+            <span style="color: red;">Note:</span>
+            <div class="row" style="margin-top: 20px;">
+                
+                <div class="col-6" style="border: 1px solid red;height: auto">
+                    <span>
+                        <small style="color: red;">
+                            You should follow following format in your Uploading file
+                        </small>
+                        <img src="../../../../../assets/icons/sample.PNG" alt="" style="width: 500px;margin-top: 20px;" >
+
+                    </span>
+        
+                </div>
+                
+                <div class="col-5" style="border: 1px solid red;height: auto;margin-left: 5px;">
+                        <span>
+                            <small style="color: red;">
+                                Select all profile images belong to the users
+                            </small>
+                           
+    
+                        </span>
+            
+                    
                 
                 </div>
             </div>
@@ -134,21 +157,183 @@
                                             </div>
                     </mat-card-content>
                     <mat-card-actions align="right">
-                    <button type="button" (click)="addUser(i)" class="btn btn-primary" style="margin-right:10px">Add User</button>
+                    <button type="button" (click)="addUser(i,0)" class="btn btn-primary" style="margin-right:10px">Add User</button>
                     <button type="button" (click)="remove(i)" class="btn btn-danger">Cancel</button>
                     </mat-card-actions>
                 </mat-card>
                 <div style="height: 50px;"></div>
-            </div>
-            
-                
-                    
+        <div style="margin-top: 30px;margin-bottom: 30px;">
+            <mat-card class="mydiv">
+                <div class="row">
+                    <p style="color: rgb(165, 165, 165);margin-left: 30px;font-size: 12px;">Sample file structure</p>
+                    <div>
+                        <img src="../../../../../assets/icons/sample.PNG"
+                            style="width: 95%;margin-left: 30px;margin-top: -10px;"></div>
+                    <hr>
+                </div>
+                <form style="margin: auto;">
+                    <div class="container">
 
+                        <div class="row">
+                            <div class="col-6">
+                                <p style="color: rgb(165, 165, 165);font-size: 12px;">Choose File</p>
 
+                                <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;">
+                                    {{fileToUpload}}
+                                </small>
+                                <input type="file" name="file" id="file" style="display: none"
+                                    (change)="handleFileInput($event.target.files)" accept="text/*"
+                                    [uploader]="uploader" #fileInput>
+                                <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+                                    (click)="fileInput.click()" accept="text/*">Choose File</button>
+                            </div>
+                            <div class="col-6">
+                                <p style="color: rgb(165, 165, 165);font-size: 12px;">Choose Profile Images</p>
+                                <small class="form-text text-muted mb-4" style=" text-align: left; margin-top: -18px;">
+                                    {{images}}
+                                </small>
+                                <input type="file" id="file" style="display: none"
+                                    (change)="handleImages($event.target.files)" accept="image/*" multiple="multiple"
+                                    [uploader]="uploader" #imageInput>
+                                <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn" type="button"
+                                    (click)="imageInput.click()" accept="image/*">Choose Image</button>
+                            </div>
+                        </div>
+                        <div class="row" align="center">
+                            <button class="btn btn-info my-4 btn-block" type="submit"  style="width: 98%;margin: auto;"
+                                (click)="bulkRegistration()">Submit
+                                Now</button>
+                        </div>
+                    </div>
+                </form>
+            </mat-card>
         </div>
+    </div>
+    <div *ngIf="flag">
+
+        <div style="height: 50px;"></div>
+        <div align="center">
+            <div align="right">
+                <button type="button" (click)="addAll()" class="btn btn-primary" style="margin-right:10px">Add All
+                </button>
+                <button type="button" (click)="removeAll()" class="btn btn-danger">Revoke All</button>
+            </div>
+            <div *ngFor="let user of users;index as i">
+                <div class="col-6" *ngIf="userVisibale[i]">
+                    <mat-card class="example-card" style="padding-top: 30px;">
+                        <mat-card-header>
+                            <div mat-card-avatar class="example-header-image">
+                                <mat-icon>person</mat-icon>
+                            </div>
+                            <mat-card-title>{{user.name}} </mat-card-title>
+
+                        </mat-card-header>
+
+                        <mat-card-content>
+
+                            <div class="row">
+                                <div class="col">
+                                    UserType:
+                                </div>
+                                <div class="col">
+                                    {{user.usertype}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Name:
+                                </div>
+                                <div class="col">
+                                    {{user.name}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Email:
+                                </div>
+                                <div class="col">
+                                    {{user.email}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    UserID:
+                                </div>
+                                <div class="col">
+                                    {{user.userid}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    NIC:
+                                </div>
+                                <div class="col">
+                                    {{user.NIC}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Birthday:
+                                </div>
+                                <div class="col">
+                                    {{user.birthday}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Password:
+                                </div>
+                                <div class="col">
+                                    {{user.password}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Gender
+                                </div>
+                                <div class="col">
+                                    {{user.gender}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Nationality:
+                                </div>
+                                <div class="col">
+                                    {{user.nationality}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    address:
+                                </div>
+                                <div class="col">
+                                    {{user.address}}
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col">
+                                    Image:
+                                </div>
+                                <div class="col">
+                                    {{user.image}}
+                                </div>
+                            </div>
+                        </mat-card-content>
+                        <mat-card-actions align="right">
+                            <button type="button" (click)="addUser(i)" class="btn btn-primary"
+                                style="margin-right:10px">Add User</button>
+                            <button type="button" (click)="remove(i)" class="btn btn-danger">Cancel</button>
+                        </mat-card-actions>
+                    </mat-card>
+                    <div style="height: 50px;"></div>
+                </div>
+
+
+
+
+
+            </div>
         </div>
     </div>
 </div>
-
-
- 

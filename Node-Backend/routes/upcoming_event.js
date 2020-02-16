@@ -50,7 +50,6 @@ router.get("/viewevent",(req,res)=>{
 // event delete option
 
 router.delete('/deleteevent/:_id', (req,res) => { 
-   // Console.log("JDBWKSDKCJKSDJXZ")
     const id = req.params._id;
     Event.remove({_id: id})
     .exec()
@@ -117,7 +116,6 @@ router.post('/updateEvent/:_id',(req,res)=>{
 
 // get top 4 event for show in home
 router.get('/topEvent' , (req,res)=>{
-    console.log("nsdkcnsdklc");
     Event.find()
     .sort({date:-1})
     .limit(4)

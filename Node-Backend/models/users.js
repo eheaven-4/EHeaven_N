@@ -4,7 +4,7 @@ const Schema = mongoose.schema;
 
 const userSchema = mongoose.Schema({
     usertype: { type: String, require: true },
-    userid: { type: String, require: true },
+    userid: { type: String, require: true, index: true, unique: true },
     selectclass: { type: String, require: true },
     name: { type: String, require: true },
     email: { type: String, require: true },
