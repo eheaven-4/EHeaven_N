@@ -1,10 +1,10 @@
-<div class="row">
+<div class="row" >
   <div class="container-fluid">
       <div class="row">
           <!-- <div class="col-md-2">
               <app-sidebar></app-sidebar>
           </div> -->
-          <div class="container-fluid" style="background-color:#F8F9FA">
+          <div class="container-fluid" style="background-color:#F8F9FA;min-height: 750px">
 
               <div>
 
@@ -264,7 +264,7 @@
                                   <mat-form-field appearance="outline">
                                     <mat-label>Subject</mat-label>
                                       <mat-select formControlName="subjectName">
-                                          <mat-option style="text-align: left" *ngFor="let sub of subjectnamesAl" [value]="sub">
+                                          <mat-option style="text-align: left" *ngFor="let sub of subjectnamesAl" [value]="sub.subName">
                                             {{ sub.subName }}
                                           </mat-option>
                                       </mat-select>
@@ -329,7 +329,7 @@
                                       <mat-form-field appearance="outline">
                                         <mat-label>Subject</mat-label>
                                           <mat-select formControlName="subjectName">
-                                              <mat-option style="text-align: left" *ngFor="let sub of subjectnamesOl" [value]="sub">
+                                              <mat-option style="text-align: left" *ngFor="let sub of subjectnamesOl" [value]="sub.subName">
                                                 {{ sub.subName }}
                                               </mat-option>
                                           </mat-select>
