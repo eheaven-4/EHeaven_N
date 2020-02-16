@@ -11,6 +11,7 @@ const attendanceSchema=mongoose.Schema({
         attend:{type:Boolean,require:true},
     }]
 });
+attendanceSchema.index({class: 1, date: 1}, {unique: true});
 const attendance=module.exports=mongoose.model("attendance",attendanceSchema);
 
 

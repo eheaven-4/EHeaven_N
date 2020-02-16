@@ -3,22 +3,23 @@ import { NgFlashMessageService } from 'ng-flash-messages';
 
 import { FormBuilder, Validators } from '@angular/forms';
 
-import { RegisterService } from '../register.service';
+import {RegisterService} from '../register.service'; 
+import { MatSnackBarConfig ,MatSnackBar} from '@angular/material';
 
 
-export class User {
-  usertype: string;
-  name: string;
-  userid: string;
-  email: string;
-  password: string;
-  birthday: string;
-  gender: string;
-  nationality: string;
-  NIC: string;
-  address: string;
-  image: string;
-  selectclass: string;
+export class  User{
+  usertype:string;
+  name:string;
+  userid:string;
+  email:string;
+  password:string;
+  birthday:string;
+  gender:string;
+  nationality:string;
+  NIC:string;
+  address:string;
+  image:string;
+  selectclass:string;
 }
 
 @Component({
@@ -27,6 +28,7 @@ export class User {
   styleUrls: ['./bulkadd.component.scss']
 })
 export class BulkaddComponent {
+  filename;
   flag = false;
   images: FileList = null;
   fileToUpload: File = null;
@@ -34,8 +36,7 @@ export class BulkaddComponent {
   users = [];
   userVisibale;
   imageUrls;
-  filename;
-  constructor(private register: RegisterService) { }
+  constructor(private register:RegisterService,public snackBar: MatSnackBar){ }
 
 
   // load the image as the button event and asign to  the images variable
@@ -150,23 +151,47 @@ export class BulkaddComponent {
 
 
   }
-  addUser(i) {
-
-    this.register.addUser(this.users[i]);
-    this.userVisibale[i] = false;
-
+  addUser(i,reload){
+    
+    return this.register.addUser(this.users[i]).subscribe(res => {
+      if (res.state) {
+        console.log(res.msg);
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
+        if(reload){
+          window.location.reload();
+        }
+        // this.ngProgress.done();
+        return true;
+        
+      }
+      else {
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
+        // this.router.navigate(['/register']);
+        return false;
+      }
+    });
+    this.userVisibale[i]=false;
 
   }
   remove(i) {
     this.userVisibale[i] = false;
   }
-  addAll() {
-    for (var i = 0; i < this.users.length; i++) {
-      if (this.userVisibale[i]) {
-        this.addUser(i);
+  addAll(){
+    for(var i=0;i<this.users.length;i++){
+      if(this.userVisibale[i]){
+        if( i == this.users.length-1){
+          this.addUser(i,1);
+        }else{
+          this.addUser(i,0);
+        }
+        
       }
     }
-    window.location.reload();
+    
   }
   removeAll() {
     window.location.reload();

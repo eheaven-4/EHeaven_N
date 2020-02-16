@@ -57,6 +57,7 @@ export class AttendanceComponent implements OnInit {
     }
   }
   showclass(){
+    this.ngOnInit();
     this.flag=true;
   }
   searchStu(month:string,stu:string){

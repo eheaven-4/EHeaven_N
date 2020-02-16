@@ -7,16 +7,9 @@
                 <div class="text-center container" style="margin-top: 100px;margin-bottom: 130px;">
                     <div class="row">
                         <div class="col-md-6" style="margin-top: 20px;">
-                            <div class="row menu_div" (click)="adminDashboard()">
-                                <div class="col-md-2 menu_icon_back" style="background-color: #004d40;">
-                                    <i class="material-icons menu_icon">person</i>
-                                </div>
-                                <div class="col-md-10 menu_text_back">
-                                    <p class="menu_text">Admin Portal</p>
-                                </div>
-                            </div>
+                            
 
-                            <div class="row menu_div" (click)="userAcademics()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../academic_subject" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #d50000;">
                                     <i class="material-icons menu_icon">school</i>
                                 </div>
@@ -24,7 +17,7 @@
                                     <p class="menu_text">Academics</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userCertification()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../certification" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #880e4f;">
                                     <i class="material-icons menu_icon">receipt</i>
                                 </div>
@@ -32,7 +25,7 @@
                                     <p class="menu_text">Certification</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userAttendence()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../attendance" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #1a237e;">
                                     <i class="material-icons menu_icon">emoji_people</i>
                                 </div>
@@ -40,7 +33,7 @@
                                     <p class="menu_text">Attendence</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userStudentProg()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../student_progress" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #1b5e35;">
                                     <i class="material-icons menu_icon">poll</i>
                                 </div>
@@ -48,7 +41,7 @@
                                     <p class="menu_text">My Progress</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userExtraCur()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../extra_curricular" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #f57f17;">
                                     <i class="material-icons menu_icon">sports_handball</i>
                                 </div>
@@ -56,7 +49,7 @@
                                     <p class="menu_text">Extra Curricular</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userNotification()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../notifications" style="width: 70%;float: left;">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #5d4037;">
                                     <i class="material-icons menu_icon">notifications_active</i>
                                 </div>
@@ -64,7 +57,7 @@
                                     <p class="menu_text">Notifications</p>
                                 </div>
                             </div>
-                            <div class="row menu_div" (click)="userStudentMarks()" style="width: 70%;float: left;">
+                            <div class="row menu_div" routerLink="../manage_marks" style="width: 70%;float: left;" *ngIf="userdetail.usertype == 'Administrator' || userdetail.usertype == 'Teacher' || userdetail.usertype == 'Pricipale' ">
                                 <div class="col-md-2 menu_icon_back" style="background-color: #263238;">
                                     <i class="material-icons menu_icon">score</i>
                                 </div>
