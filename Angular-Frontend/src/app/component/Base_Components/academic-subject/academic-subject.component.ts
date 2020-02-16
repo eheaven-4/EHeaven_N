@@ -74,7 +74,7 @@ export class AcademicSubjectComponent implements OnInit {
     console.log(this.sbjName);
 
 
-    this.router.navigate(['/academics' + '/' + this.sbjName]);
+    this.router.navigate(['../academics' + '/' + this.sbjName]);
 
   }
 
