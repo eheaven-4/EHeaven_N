@@ -6,10 +6,23 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatModule } from './material.theme';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatButtonModule, MatGridListModule } from '@angular/material';
+import { MatButtonModule, MatGridListModule, MatFormFieldModule, MatDialogModule } from '@angular/material';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { ChartsModule } from 'ng2-charts';
+import {MatSnackBarModule} from '@angular/material/snack-bar'; 
+
+
+import { 
+  MatToolbarModule, 
+  MatSidenavModule,
+  MatIconModule,
+  MatListModule ,
+  MatStepperModule,
+  MatInputModule,
+
+} from '@angular/material';
+
 
 import {SlideshowModule} from 'ng-simple-slideshow';
 import { FlexLayoutModule } from '@angular/flex-layout';
@@ -101,6 +114,7 @@ import { ResetPasswordComponent } from './component/Base_Components/reset-passwo
     Navbar2Component,
     UpcomingEventComponent,
     ResetPasswordComponent,
+    
   ],
 
   imports: [
@@ -122,6 +136,10 @@ import { ResetPasswordComponent } from './component/Base_Components/reset-passwo
     MatButtonModule,
     MatGridListModule,
     MatSlideToggleModule,
+    MatToolbarModule,
+    MatSnackBarModule,
+    MatSidenavModule,
+    MatDialogModule
   ],
 
   providers: [
@@ -138,7 +156,8 @@ import { ResetPasswordComponent } from './component/Base_Components/reset-passwo
 
   exports: [
     ConfirmationDialogComponent,
-    AlertDialogComponent
+    AlertDialogComponent,
+    
   ],
 
   entryComponents: [
