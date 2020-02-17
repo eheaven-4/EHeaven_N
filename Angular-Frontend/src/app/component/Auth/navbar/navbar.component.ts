@@ -32,7 +32,7 @@ export class NavbarComponent implements OnInit {
     config.duration = true ? 2000 : 0;
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
     this.cookies.logingstatus = false;
-    this.router.navigate(['/']);
+    this.router.navigate(['/login']);
 
   }
 

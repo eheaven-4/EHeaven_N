@@ -35,7 +35,7 @@ router.post("/addLog",function(request,response){
 
 
 router.get("/received/:classname", function (req, res) {
-    users.find({selectclass:req.params.classname},{userid:1,name:1,_id:0})
+    users.find({selectclass:req.params.classname},{userid:1,name:1,_id:0}).sort({userid:1})
     .exec(function(err,data){
         if(err){
             console.log("Error");
