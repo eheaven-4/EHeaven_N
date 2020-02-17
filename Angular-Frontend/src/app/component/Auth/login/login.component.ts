@@ -12,8 +12,8 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 })
 export class LoginComponent implements OnInit {
   
-  userid: String;
-  password: String;
+  userid: String="";
+  password: String="";
   user_id: any;
   user: any;
   authtoken: any;
@@ -45,11 +45,13 @@ export class LoginComponent implements OnInit {
       let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
           this.snackBar.open("User ID is empty..! ", true ? "Retry" : undefined, config);
+          return "userid empty";
     }
     else if(user.password == ''){
       let config = new MatSnackBarConfig();
       config.duration = true ? 2000 : 0;
       this.snackBar.open("Password is Empty..! ", true ? "Retry" : undefined, config);
+      return "password empty";
     }
     else{
       this.http.post<any>(url, user).subscribe(res => {
@@ -65,10 +67,13 @@ export class LoginComponent implements OnInit {
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
+            return "Log as admin";
           }else if(id){
             this.router.navigate([myCookie.userid,'menu']);
+            return "Log as normal user";
           }else{
             this.router.navigate(['/login']);
+            return "You are not a user"
           }
         }
         else {
@@ -77,8 +82,10 @@ export class LoginComponent implements OnInit {
           config.duration = true ? 2000 : 0;
           this.snackBar.open("Username or Password Incorrect..! ", true ? "Retry" : undefined, config);
           this.router.navigate(['/login']);
+          return "userid or password wrong";
         }
       });
     }
+    return " ";
   }
 }

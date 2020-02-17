@@ -13,7 +13,7 @@
           <div style="padding-top:50px ; padding-bottom:50px">
 
             <div *ngIf="!editform">
-              <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
+              <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm" style="background-color: white;">
 
                 <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
@@ -23,7 +23,7 @@
                     formControlName="topic">
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">News topic is required</div>
-                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 30 characters</div>
+                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 35 characters</div>
                   </div>
                 </div>
 
@@ -67,7 +67,7 @@
             <!-- edit form -->
 
             <div *ngIf="editform" >
-              <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm">
+              <form class="border text-center p-5 reg-frm" [formGroup]="NewsForm" style="background-color: white ;">
 
                 <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
 
@@ -82,7 +82,7 @@
 
                   <div *ngIf="submitted && f.topic.errors" class="err_msg">
                     <div *ngIf="f.topic.errors.required">News topic is required</div>
-                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 30 characters</div>
+                    <div *ngIf="f.topic.errors.maxlength">News topic must less than 35 characters</div>
                   </div>
                 </div>
 
@@ -156,17 +156,17 @@
                     <p>{{new.news}}</p>
                   </mat-card-content>
 
-                  <mat-card-subtitle *ngIf="new.filePath" style="padding-right: 20px"><a
-                      href="http://localhost:3000/news/newsAttachment/{{new.filePath}}"><img
+                  <mat-card-subtitle *ngIf="new.filepath" style="padding-right: 20px"><a
+                      href="http://localhost:3000/news/newsAttachment/{{new.filepath}}"><img
                         src="../../../../assets/icons/paperclip-solid.svg"
                         class="attachment_icn">&nbsp;&nbsp;Attachment</a>
                   </mat-card-subtitle>
 
                   <mat-card-actions style="text-align: right">
 
-                    <button mat-raised-button class="edit_btn" (click)=" onEdit($event , new._id ,new.filePath)">Edit</button>
+                    <button mat-raised-button class="edit_btn" (click)=" onEdit($event , new._id ,new.filepath)">Edit</button>
                     <button mat-raised-button class="delete_btn"
-                      (click)="delete($event, new._id, new.filePath)">Delete</button>
+                      (click)="delete($event, new._id, new.filepath)">Delete</button>
                   </mat-card-actions>
                 </mat-card>
               </div>

@@ -13,7 +13,6 @@
 .topic1{
   color: rgb(0, 140, 255);;
   font-weight:500 ;
-  padding: 20px;
   font-family: topic_font;
 }
 .err_msg{
@@ -34,7 +33,6 @@
 
 .border{
   border-style: ridge;
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
   width: 1000px;
 
 }
@@ -43,7 +41,6 @@
 }
 
 .reg-frm{
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
   padding-top: 40px;
   width: 90%;
   text-align: center;
@@ -59,7 +56,6 @@
   color: aliceblue;
   background-color: rgb(0, 140, 255);
   border-color:  rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
   margin-top: 25px;
   width: 100%;
 }
@@ -92,10 +88,8 @@
   color: white;
   background-color: rgb(0, 140, 255);
   border-color: rgb(0, 140, 255);
-  box-shadow: 0px 5px 5px rgb(134, 132, 245);
-  margin-top: 23px;
+  margin-top: 30px;
   width: 100%;
-
 }
 .search_btn:hover {
   background-color: rgb(0, 89, 162);
@@ -103,11 +97,6 @@
 
 .top_txt {
   font-size: 10px;
-  color: rgb(155, 155, 155);
+  color: rgb(88, 88, 88);
   text-align: left;
 }
-
-// .p_btn{
-
-//   width: 250px;
-// }

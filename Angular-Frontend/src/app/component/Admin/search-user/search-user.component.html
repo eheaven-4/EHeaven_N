@@ -1,10 +1,7 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <!-- <div class="col-md-2">
-                <app-sidebar></app-sidebar>
-            </div> -->
-            <div class="container-fluid" style="background-color:#F8F9FA">
+            <div class="container-fluid" style="background-color:#F8F9FA; min-height: 750px;" >
 
                 <div>
                     <div class="container">
@@ -18,7 +15,7 @@
 
                             <div class="row">
                                 <div class="col-md-9">
-                                    <input type="text" class="form-control box_border" placeholder="User ID"
+                                    <input type="text" class="form-control box_border" placeholder="User ID : S000001"
                                         name="userid" formControlName="userid">
                                 </div>
                                 <div class="col-md-3">
@@ -62,11 +59,15 @@
                                             name="userid" formControlName="userid"
                                             [ngClass]="{ 'is-invalid': submitted && f.userid.errors }"
                                             [(ngModel)]="userdata.userid">
+                                        <small class="form-text text-muted mb-4" style=" text-align: left">User ID
+                                            *</small>
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control box_border" placeholder="Selected Class"
                                             name="selectclass" formControlName="selectclass"
                                             [(ngModel)]="userdata.selectclass">
+                                        <small class="form-text text-muted mb-4" style=" text-align: left">Selected
+                                            Class</small>
                                     </div>
                                 </div>
 
@@ -75,6 +76,7 @@
                                         name="name" formControlName="name" style="margin-top:-30px"
                                         [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
                                         [(ngModel)]="userdata.name">
+                                    <small class="form-text text-muted mb-4" style=" text-align: left">Full Name</small>
                                     <div *ngIf="submitted && f.name.errors" class="err_msg">
                                         <div *ngIf="f.name.errors.required">Name is required</div>
                                         <div *ngIf="f.name.errors.maxlength">Name must less than 60 characters</div>
@@ -86,6 +88,7 @@
                                         name="email" formControlName="email"
                                         [ngClass]="{ 'is-invalid': submitted && f.email.errors }"
                                         [(ngModel)]="userdata.email">
+                                    <small class="form-text text-muted mb-4" style=" text-align: left">Email</small>
                                     <div *ngIf="submitted && f.email.errors" class="err_msg">
                                         <div *ngIf="f.email.errors.required">Email is required</div>
                                         <div *ngIf="f.email.errors.email">Email must be a valid email address</div>
@@ -106,11 +109,15 @@
                                         <input type="number" class="form-control box_border" placeholder="Home Number"
                                             name="homenumber" formControlName="homenumber"
                                             [(ngModel)]="userdata.homenumber">
+                                        <small class="form-text text-muted mb-4" style=" text-align: left">Home
+                                            Number</small>
                                     </div>
                                     <div class="col">
                                         <input type="number" class="form-control box_border" placeholder="Mobile Number"
                                             name="mobilenumber" formControlName="mobilenumber"
                                             [(ngModel)]="userdata.mobilenumber">
+                                        <small class="form-text text-muted mb-4" style=" text-align: left">Mobile
+                                            Number</small>
                                     </div>
                                 </div>
 
@@ -133,34 +140,40 @@
                                             formControlName="nationality"
                                             [ngClass]="{ 'is-invalid': submitted && f.nationality.errors }"
                                             [(ngModel)]="userdata.nationality">
-                                            <option value="" disabled>Nationality</option>
+                                            <option value="" disabled>Race</option>
                                             <option value="Sinhala">Sinhala</option>
                                             <option value="Tamil">Tamil</option>
                                             <option value="Muslim">Muslim</option>
                                             <option value="Cristian">Cristian</option>
                                         </select>
                                         <small class="form-text text-muted mb-4"
-                                            style="margin-top:-20px; text-align: left">Nationality *</small>
+                                            style="margin-top:-20px; text-align: left">Race *</small>
 
                                     </div>
                                     <div class="col">
                                         <input type="text" class="form-control box_border" placeholder="NIC Number"
                                             name="nicnumber" formControlName="nicnumber"
                                             [(ngModel)]="userdata.nicnumber">
+                                        <small class="form-text text-muted mb-4" style=" text-align: left">NIC
+                                            Number</small>
                                     </div>
                                 </div>
 
                                 <textarea style="margin-top: -30px; margin-bottom: 30px;" type="text"
                                     class="form-control box_border" placeholder="Address *" name="address"
                                     formControlName="address" [(ngModel)]="userdata.address"></textarea>
+                                <small class="form-text text-muted mb-4" style="margin-top: -20px; text-align: left">Address</small>
 
                                 <input *ngIf="usertype == 'Student'" style="margin-bottom: 30px;" type="text"
                                     class="form-control box_border" placeholder="Father Name" name="father"
                                     formControlName="father" [(ngModel)]="userdata.father">
-
+                                <small *ngIf="usertype == 'Student'" class="form-text text-muted mb-4"
+                                    style=" text-align: left">Father Name</small>
                                 <input *ngIf="usertype == 'Student'" type="text" class="form-control box_border"
                                     placeholder="Mother Name" name="mother" formControlName="mother"
                                     [(ngModel)]="userdata.mother">
+                                <small *ngIf="usertype == 'Student'" class="form-text text-muted mb-4"
+                                    style=" text-align: left">Mother Name</small>
 
                                 <input type="file" class="file_upload" style="display: none" name="profilepic"
                                     accept="image/*" [uploader]="uploader" (change)="selectImage($event)" #fileInput>
@@ -182,7 +195,7 @@
                                             Picture</button>
                                         <small class="form-text text-muted mb-4"
                                             style=" text-align: left; margin-top: -18px;">
-                                            Resolution : (320 x 280)p / 8 : 7 {{filename}}
+                                            {{filename}}
                                         </small>
                                     </div>
                                 </div>
@@ -210,28 +223,26 @@
             <div class="container-fluid" style="background-color:#F8F9FA" *ngIf="resetPasswordDiv == true">
 
                 <div>
-                    <div class="container">
-                        <h2 class="topic">Reset Password</h2>
-                        <hr>
-                    </div>
-                    <div class="container" style="padding-top:50px ; padding-bottom:50px">
+                 
+                    <div class="container" style=" padding-bottom:50px">
                         <form style="background-color: White;" class="text-center border p-5 reg-frm"
                             [formGroup]="ResetPasswordForm">
-                           
+
                             <div class="row">
                                 <p class="passwordTag">New Password *</p>
                                 <input type="password" class="form-control box_border" placeholder="***************"
-                                    name="userid" formControlName="newpw">
-                                
+                                    name="userid" formControlName="newpw" style="margin-top: -10px;">
+
                             </div>
-                            <div class="row">
+                            <div class="row" style="margin-top: 20px;">
                                 <p class="passwordTag">Re-enter your New Password *</p>
                                 <input type="password" class="form-control box_border" placeholder="***************"
-                                    name="userid" formControlName="renewpw">
-                                
+                                    name="userid" formControlName="renewpw" style="margin-top: -10px;">
+
                             </div>
                             <div style="margin: auto;">
-                                <button class="btn reset_btn box_border" style="margin-top: 20px;" type="submit" (click)="resetPasswordbtn()">
+                                <button class="btn reset_btn box_border" style="margin-top: 20px;" type="submit"
+                                    (click)="resetPasswordbtn()">
                                     <p style="color: white;">Reset Password</p>
                                 </button>
 

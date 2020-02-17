@@ -48,7 +48,7 @@ router.post("/add", (req, res) => {
 });
 
 router.get("/view", (req, res, next) => { // news get methord
-    News.find().sort({ date: 1 })
+    News.find().sort({ date: -1 })
         .select('topic newsSumery news date filePath')
         .exec()
         .then(docs => {
@@ -71,7 +71,7 @@ router.get("/newsAttachment/:filename", function (req, res) {
 
 
 router.delete('/delete/:_id', (req, res, next) => {// news delete methord
-    // console.log("Hello");
+    console.log("Hello");
     const id = req.params._id;
     News.remove({ _id: id })
         .exec()
@@ -193,7 +193,7 @@ router.get('/topNews', function (req, res) {
 
    // console.log("dscjskjdks")
     News.find()
-        .sort({ date: 1 })
+        .sort({ date: -1 })
         .limit(4)
         .exec()
         .then(result => {

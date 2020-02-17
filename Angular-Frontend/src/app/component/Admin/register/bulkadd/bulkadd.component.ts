@@ -122,26 +122,7 @@ export class BulkaddComponent {
         this.userVisibale[i] = true;
       }
       this.imageUrls = new Array(this.users.length);
-      // for(var i=0;i<this.users.length;i++){
-      //   for(var j=0;j<this.images.length;j++){
-      //     var temp=this.images.item(j).name.split(".");
-      //     console.log("hi")
-      //     if(this.users[i].image == temp[0]){
-      //       var reader = new FileReader();
-
-      //       reader.readAsDataURL(this.images[j]); 
-
-      //       reader.onload = (_event) => { 
-      //         console.log("hooo")
-      //         this.imageUrls[i] =reader.result; 
-      //         if(i==this.images.length-1){
-      //           this.flag=true;
-      //         }
-      //       }
-
-      //     }
-      //   }
-      // }
+      
       this.flag = true;
       console.log(this.users);
 
@@ -160,11 +141,12 @@ export class BulkaddComponent {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
-        if(reload){
+        if(reload==1){
           window.location.reload();
         }
         // this.ngProgress.done();
         return true;
+        this.userVisibale[i]=false;
         
       }
       else {
@@ -175,7 +157,7 @@ export class BulkaddComponent {
         return false;
       }
     });
-    this.userVisibale[i]=false;
+    
 
   }
   remove(i) {

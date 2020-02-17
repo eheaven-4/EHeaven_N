@@ -54,7 +54,7 @@ export class NewsComponent implements OnInit {
 
   ngOnInit() {
     this.NewsForm = this.fb.group({
-      topic: ['', [Validators.required, Validators.maxLength(30)]],
+      topic: ['', [Validators.required, Validators.maxLength(35)]],
       newsSumery: ['', [Validators.required, Validators.maxLength(400)]],
       news: ['', [Validators.required, Validators.maxLength(800)]],
 
@@ -242,12 +242,13 @@ export class NewsComponent implements OnInit {
 
   delete(event, news_id, file_path) {
 
-    // console.log(news_id);
+    console.log(news_id);
     const mybtnId = news_id;
-    let mybtnFile = file_path;
+    const mybtnFile = file_path;
+
 
     const url = 'http://localhost:3000/news/delete';
-    let urlDelete = 'http://localhost:3000/news/newsAttachment'; // notification attachment delete url
+    const urlDelete = 'http://localhost:3000/news/newsAttachment'; // notification attachment delete url
 
     // if there is a file in attachment call atachment file delteing request
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
