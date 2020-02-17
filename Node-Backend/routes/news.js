@@ -61,7 +61,7 @@ router.get("/view", (req, res, next) => { // news get methord
                 error: error
             });
         });
-});
+}); 
 //Get news attchment  
 router.get("/newsAttachment/:filename", function (req, res) {
     const filename = req.params.filename;

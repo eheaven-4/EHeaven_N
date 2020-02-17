@@ -98,7 +98,7 @@
                                 <mat-icon mat-list-icon>note</mat-icon>
                                 <h3 mat-line>{{cert.certType}}</h3>
                                 <p mat-line style="color: rgb(117, 117, 117)"> {{cert.reqDate | date:'yyyy-MM-dd HH:mm:ss'}} </p>
-                                <!-- <button type="button" class="btn btn_1" (click)="viewCert('cert')"  >View</button> -->
+                                <button type="button" class="btn btn_1" (click)="viewCert('cert')"  >View</button>
                               </mat-list-item>
                             </mat-list>
 
@@ -108,8 +108,8 @@
                         </mat-tab>
 
                         <!-- /*****************************************************************************************************************************/ -->
-                        <mat-tab label="VIEW CERTIFICATES">
-                          <mat-card>
+                        <!-- <mat-tab label="VIEW CERTIFICATES">
+                          <mat-card> -->
                             <!-- {{issuedCert | json}} -->
                              <!-- <mat-list>
                               <mat-list-item *ngFor="let cert of issuedCert">
@@ -209,9 +209,9 @@
                             </mat-accordion> -->
 
 
-
+<!--
                           </mat-card>
-                        </mat-tab>
+                        </mat-tab> -->
                       </mat-tab-group>
                     </div>
 

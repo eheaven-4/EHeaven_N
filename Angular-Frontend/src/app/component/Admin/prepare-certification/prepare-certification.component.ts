@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormControl, FormGroup, FormArray, Form } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
+import { MatDialog, MatSnackBar, MatSnackBarConfig } from '@angular/material';
+import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
 interface certificateRequested {
   userid: String,
@@ -34,6 +36,8 @@ export class PrepareCertificationComponent implements OnInit {
     private fb: FormBuilder,
     private http: HttpClient,
     private cookies: MycookiesService,
+    public snackBar: MatSnackBar,
+    private dialog: MatDialog,
   ) {
     if(this.cookies.getCookie('userAuth')!=""){
       this.cookie=JSON.parse(this.cookies.getCookie('userAuth'));
@@ -230,6 +234,33 @@ addSubjectOl() {
               }, (err) => {
                 console.log(err);
               });
+              // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+              //   data: {
+              //     message: 'Are you sure want to update?',
+              //     buttonText: {
+              //       ok: 'Yes',
+              //       cancel: 'No'
+              //     }
+              //   }
+              // });
+              // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+              //   if (confirmed) {
+              //     this.http.get(url2).subscribe(res => {
+              //       if (res.state) {
+              //         console.log(res.msg);
+              //         let config = new MatSnackBarConfig();
+              //         config.duration = true ? 2000 : 0;
+              //         this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
+              //       }
+              //       else {
+              //         let config = new MatSnackBarConfig();
+              //         config.duration = true ? 2000 : 0;
+              //         this.snackBar.open("Error in processing request", true ? "Retry" : undefined, config);
+              //       }
+              //     });
+              //     // window.location.reload();
+              //   }
+              // })
 
           } else {
             console.log(res.msg);
