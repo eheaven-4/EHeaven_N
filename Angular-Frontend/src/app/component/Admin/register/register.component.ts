@@ -7,8 +7,6 @@ import { MatSnackBar, MatSnackBarConfig, MatDialog } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
-
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -19,10 +17,9 @@ export class RegisterComponent implements OnInit {
   submitted = false;
   images;
   filename;
-  RegistrationForm: FormGroup;
+  RegistrationForm: FormGroup;    //create a form called RegistrationForm
 
   constructor(
-    private router: Router,
     private http: HttpClient,
     private fb: FormBuilder,
     public snackBar: MatSnackBar,
@@ -53,7 +50,6 @@ export class RegisterComponent implements OnInit {
         address: ['', Validators.required],
       });
     }
-    
   }
   // load the image as the button event and asign to  the images variable
   selectImage(event) {
@@ -61,12 +57,11 @@ export class RegisterComponent implements OnInit {
       const file = event.target.files[0];
       this.images = file;
       this.filename = file.name;
-      console.log(this.filename)
     }
   }
+
   /**************************************************** */
-
-
+  //validation functions
   get f() {
     return this.RegistrationForm.controls;
   }
@@ -75,7 +70,6 @@ export class RegisterComponent implements OnInit {
     this.submitted = false;
     this.RegistrationForm.reset();
   }
-
 
   /**************************************************** */
   registerUser() {
@@ -86,8 +80,8 @@ export class RegisterComponent implements OnInit {
     }
     else {
       const formData = new FormData();
-
-      formData.append('profileImage', this.images)
+      //append the data to the form
+      formData.append('profileImage', this.images)  
       formData.append('usertype', this.RegistrationForm.value.usertype)
       formData.append('userid', this.RegistrationForm.value.userid)
       formData.append('selectclass', this.RegistrationForm.value.selectclass)
@@ -113,6 +107,7 @@ export class RegisterComponent implements OnInit {
         this.snackBar.open("Please select a profile picture..! ", true ? "Ok" : undefined, config);
       }
       else {
+        //popping dialog box to confirmaration
         const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
           data: {
             message: 'Are you sure want to Register?',
@@ -123,28 +118,19 @@ export class RegisterComponent implements OnInit {
           }
         });
         dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-          if (confirmed) {
-            this.http.post<any>(url, formData).subscribe(res => {
+          if (confirmed) {    //if confirm message box'yes' then execute folowing 
+            this.http.post<any>(url, formData).subscribe(res => {   //send form data to the database
               if (res.state) {
-                console.log(res.msg);
                 let config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open("Registration Successfull..! ", true ? "Done" : undefined, config);
-                // this.ngProgress.done();
-                
                 window.location.reload();
               }
               else {
-                console.log(res.msg);
                 let config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
-                this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
-                // this.router.navigate(['/register']);
-                // this.router.navigate(['../',this.myCookie.userid,'notification']);
-                // window.location.reload();
-                
+                this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);                
               }
-              // this.router.navigate(['../',this.myCookie.userid,'register']);
             });
           }
         });

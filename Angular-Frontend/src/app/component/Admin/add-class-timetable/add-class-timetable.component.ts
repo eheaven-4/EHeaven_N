@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { MycookiesService } from '../mycookies.service';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 
@@ -12,6 +10,7 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
 })
 export class AddClassTimetableComponent implements OnInit {
 
+  //declare all the varialbles 
   className: String;
   classTeacher: String;
   M1: String; M2: String; M3: String; M4: String; M5: String; M6: String; M7: String; M8: String;
@@ -22,9 +21,7 @@ export class AddClassTimetableComponent implements OnInit {
 
 
   constructor(
-    private router: Router,
     private http: HttpClient,
-    private cookies: MycookiesService, // import Mycookies Service files
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
   ) { }
@@ -34,6 +31,7 @@ export class AddClassTimetableComponent implements OnInit {
 
   addTimeTable() {
 
+    //create time table object and assigged vlues 
     const timeTable = {
       className: this.className,
       classTeacher: this.classTeacher,
@@ -88,10 +86,10 @@ export class AddClassTimetableComponent implements OnInit {
         eight: this.F8
       }],
     }
-
+    // backend url
     var url = "http://localhost:3000/class_management/timeTableRegistration";
 
-    console.log(timeTable)
+    // popping dialog box before send the request
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: 'Are you sure want to Add?',
@@ -103,10 +101,8 @@ export class AddClassTimetableComponent implements OnInit {
     });
     dialogRef.afterClosed().subscribe((confirmed: boolean) => {
       if (confirmed) {
-        console.log(timeTable)
-        this.http.post<any>(url, timeTable).subscribe(res => {
+        this.http.post<any>(url, timeTable).subscribe(res => {  //call the backend request
           if (res.state) {
-            console.log(res.msg);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Successfully Added..! ", true ? "Done" : undefined, config);
@@ -114,7 +110,6 @@ export class AddClassTimetableComponent implements OnInit {
             window.location.reload();
           }
           else {
-            console.log(res.msg);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Adding Unsuccessfull..! ", true ? "Retry" : undefined, config);

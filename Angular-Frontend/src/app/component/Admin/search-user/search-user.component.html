@@ -29,8 +29,7 @@
                         </form>
                     </div>
 
-                    <!-- {{userdata | json}} -->
-
+                    <!-- load data form with respect to mentioned userid -->
 
                     <div class="container" *ngIf="dataform == true">
                         <div style="padding-bottom: 50px">
@@ -193,6 +192,8 @@
                             </form>
                         </div>
                     </div>
+
+                    <!-- profile picture updating div -->
                     <div class="container" *ngIf="dataform == true">
                         <div style="padding-bottom: 50px">
                             <form class="text-center border p-5 reg-frm" [formGroup]="UserDataForm"

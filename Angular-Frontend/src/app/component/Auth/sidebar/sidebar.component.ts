@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router,ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
 // import { CookieService } from 'ngx-cookie-service';
 import { NgFlashMessageService } from 'ng-flash-messages';
@@ -15,29 +15,29 @@ export class SidebarComponent implements OnInit {
 
   userid: String;
   user: any;
-  myCookie: string ;
-  userDetail:UserDetail={usertype:"",id:"",name:"",email:"",selectclass:"",userid:""};
+  myCookie: string;
+  userDetail: UserDetail = { usertype: "", id: "", name: "", email: "", selectclass: "", userid: "" };
   constructor(
     private router: Router,
     private cookies: MycookiesService,
     // private cookieService: CookieService,
     public snackBar: MatSnackBar,
-    public route:ActivatedRoute,
+    public route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
     this.myCookie = this.cookies.getCookie("userAuth")
-    if(this.myCookie == ""){
-      this.router.navigate(['/login']);
-    }else{
-      this.userDetail=JSON.parse(this.myCookie);
+    if (this.myCookie == "") {
+      this.router.navigate(['/login']); //if cookie null, then redirected to the login page
+    } else {
+      this.userDetail = JSON.parse(this.myCookie);  //get the user details from the cookies
     }
-   }
+  }
 
   userAcademics() {
 
     if (this.myCookie) {
-      this.router.navigate(['../',this.userDetail.userid,'academic_subject']);
+      this.router.navigate(['../', this.userDetail.userid, 'academic_subject']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -50,7 +50,7 @@ export class SidebarComponent implements OnInit {
   userNotification() {
 
     if (this.myCookie) {
-      this.router.navigate(['../',this.userDetail.userid,'notifications']);
+      this.router.navigate(['../', this.userDetail.userid, 'notifications']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -61,8 +61,8 @@ export class SidebarComponent implements OnInit {
   }
   userCertification() {
     if (this.myCookie) {
-     
-      this.router.navigate(['../',this.userDetail.userid,'certification']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -73,8 +73,8 @@ export class SidebarComponent implements OnInit {
   }
   userPrepCertification() {
     if (this.myCookie) {
-      
-      this.router.navigate(['../',this.userDetail.userid,'prepare_certification']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'prepare_certification']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -86,8 +86,8 @@ export class SidebarComponent implements OnInit {
 
   userAttendence() {
     if (this.myCookie) {
-     
-      this.router.navigate(['../',this.userDetail.userid,'attendance']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'attendance']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -99,8 +99,8 @@ export class SidebarComponent implements OnInit {
 
   userExtraCur() {
     if (this.myCookie) {
-      
-      this.router.navigate(['../',this.userDetail.userid,'extra_curricular']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'extra_curricular']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -112,8 +112,8 @@ export class SidebarComponent implements OnInit {
 
   userStudentMarks() {
     if (this.myCookie) {
-      
-      this.router.navigate(['../',this.userDetail.userid,'manage_marks']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'manage_marks']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -125,8 +125,8 @@ export class SidebarComponent implements OnInit {
 
   userStudentProg() {
     if (this.myCookie) {
-     
-      this.router.navigate(['../',this.userDetail.userid,'student_progress']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'student_progress']);
     }
     else {
       let config = new MatSnackBarConfig();
@@ -137,8 +137,8 @@ export class SidebarComponent implements OnInit {
   }
   adminDashboard() {
     if (this.myCookie) {
-     
-      this.router.navigate(['../',this.userDetail.userid,'admin_dashboard']);
+
+      this.router.navigate(['../', this.userDetail.userid, 'admin_dashboard']);
     }
     else {
       let config = new MatSnackBarConfig();

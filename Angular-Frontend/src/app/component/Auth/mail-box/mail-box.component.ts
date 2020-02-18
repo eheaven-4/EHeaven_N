@@ -45,29 +45,35 @@ export class MailBoxComponent implements OnInit {
 
   ) { }
 
+  //declaring variables and arrays
   mails: mail[] = [];
-  msg : message[] = [];
+  msg: message[] = [];
 
   public delete;
   usertype
   notice_id: String;
   cookie;
-  viewBox : boolean = false; 
+  viewBox: boolean = false;
 
-  _id;name;email;mobile;date;subject;message;
+  //declare variables on full message view
+  _id; 
+  name; 
+  email; 
+  mobile; 
+  date; 
+  subject; 
+  message;
 
   ngOnInit() {
 
     var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));    // get cookie data from cookies
-    this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
+    // this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
     this.usertype = myCookie.usertype;   // load user type to the userType array
 
     if (myCookie) {
       var url = 'http://localhost:3000/contact_us/allMessages';
       this.http.get<any>(url).subscribe(res => {
         this.mails = res;
-        console.log(res);
-
       }, (err) => {
         console.log(err);
       });
@@ -78,8 +84,10 @@ export class MailBoxComponent implements OnInit {
     }
   }
 
-  deleteMail(delEvent, notice_id) {
 
+  //delete the mail function
+  deleteMail(delEvent, notice_id) {
+    // confirmaration message box
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: 'Are you sure want to Disapprove?',
@@ -105,17 +113,21 @@ export class MailBoxComponent implements OnInit {
     })
   }
 
+  //calling this function we can see
   readMail(event, notice_id) {
     this.viewBox = true;
-  
+
     var url = 'http://localhost:3000/contact_us/viewMessage';
     var url2 = 'http://localhost:3000/contact_us/readMessage';
 
-    this.http.get<any>(url+'/'+notice_id).subscribe(res =>{
+    //get spesific mail-details 
+    this.http.get<any>(url + '/' + notice_id).subscribe(res => {
       this.msg = res;
       console.log(res);
     });
-    this.http.get<any>(url2+'/'+notice_id).subscribe(res =>{
+
+    //update message reading state
+    this.http.get<any>(url2 + '/' + notice_id).subscribe(res => {
       console.log(res);
     });
   }

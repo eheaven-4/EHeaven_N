@@ -13,28 +13,27 @@ import { HttpClient } from '@angular/common/http';
 export class ContactUsComponent implements OnInit {
 
   constructor(
-    private fb: FormBuilder,
     public snackBar: MatSnackBar,
     private dialog: MatDialog,
     private router: Router,
     private http: HttpClient
   ) { }
 
-  submitted = false;
+  submitted = false;    //initialize submitted as false
 
   ContactusForm = new FormGroup({
-    name:new FormControl('', [Validators.required, Validators.maxLength(100)]),
-    email:new FormControl('', Validators.required),
-    mobile:new FormControl('', [Validators.required,Validators.maxLength(10)]),
-    // nic:new FormControl('', Validators.maxLength(13)),
-    subject:new FormControl('', [Validators.required,Validators.maxLength(70)]),
-    message:new FormControl('', [Validators.required,Validators.maxLength(1200)]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(100)]),
+    email: new FormControl('', Validators.required),
+    mobile: new FormControl('', [Validators.required, Validators.maxLength(10)]),
+    subject: new FormControl('', [Validators.required, Validators.maxLength(70)]),
+    message: new FormControl('', [Validators.required, Validators.maxLength(1200)]),
   })
 
   ngOnInit() {
   }
 
 
+  //validation function 
   get f() {
     return this.ContactusForm.controls;
   }
@@ -52,10 +51,10 @@ export class ContactUsComponent implements OnInit {
       return;
     }
     else {
-     
-      var url = "http://localhost:3000/contact_us/sendMessage";
 
-      // send request to  the server
+      var url = "http://localhost:3000/contact_us/sendMessage" //request url
+
+      //confiremaration message box
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
           message: 'Are you sure want to send message?',
@@ -67,27 +66,28 @@ export class ContactUsComponent implements OnInit {
       });
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
-      console.log("in");
-      this.http.post<any>(url, form).subscribe(res => {
-        console.log("out");
+          console.log("in");
+          // send request to  the server
+          this.http.post<any>(url, form).subscribe(res => {
+            console.log("out");
 
-        if (res.state) {
-          console.log(res.msg);
-          let config = new MatSnackBarConfig();
-          config.duration = true ? 2000 : 0;
-          this.snackBar.open("Message Successfully Sent..! ", true ? "Done" : undefined, config);
+            if (res.state) {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Message Successfully Sent..! ", true ? "Done" : undefined, config);
 
-          this.router.navigate(['../contact_us']);
+              this.router.navigate(['../contact_us']);
+            }
+            else {
+              console.log(res.msg);
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              this.snackBar.open("Message is not send..! ", true ? "Done" : undefined, config);
+              this.router.navigate(['../contact_us']);
+            }
+          });
         }
-        else {
-          console.log(res.msg);
-          let config = new MatSnackBarConfig();
-          config.duration = true ? 2000 : 0;
-          this.snackBar.open("Message is not send..! ", true ? "Done" : undefined, config);
-          this.router.navigate(['../contact_us']);
-        }
-      });
-      }
       })
     }
   }
