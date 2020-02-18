@@ -80,8 +80,6 @@ export class RegisterComponent implements OnInit {
   /**************************************************** */
   registerUser() {
     this.submitted = true;
-    console.log("hello");
-
     // stop here if form is invalid
     if (this.RegistrationForm.invalid) {
       return;
@@ -109,7 +107,7 @@ export class RegisterComponent implements OnInit {
       /****************************************************** */
       const url = 'http://localhost:3000/users/register';
 
-      if (this.images == null) {
+      if (this.images == null) {  //check profile image select or not
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Please select a profile picture..! ", true ? "Ok" : undefined, config);

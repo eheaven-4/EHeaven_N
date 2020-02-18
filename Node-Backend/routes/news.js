@@ -17,7 +17,7 @@ var storage = multer.diskStorage({
 
 const upload = multer({ storage: storage }).single('newsImage');
 
-/*save date to  data on databade */
+// send data to database
 router.post("/add", (req, res) => {
 
     upload(req, res, (err) => {
@@ -26,6 +26,7 @@ router.post("/add", (req, res) => {
             var filePath = "NEWS_FILE - " + req.file.originalname;    //send data to the database
             //get file name 
         }
+
         const newNews = new News({
             userid: req.body.userid,
             topic: req.body.topic,
@@ -47,15 +48,16 @@ router.post("/add", (req, res) => {
     })
 });
 
+// use this data get from database
 router.get("/view", (req, res, next) => { // news get methord
     News.find().sort({ date: -1 })
-        .select('topic newsSumery news date filePath')
+        .select('topic newsSumery news date filePath') 
         .exec()
-        .then(docs => {
-            console.log("Data Transfer Success.!");
+        .then(docs => {  // result hadling
+            console.log("Data Transfer Successss.!");
             res.status(200).json(docs);
         })
-        .catch(error => {
+        .catch(error => { // error hadling
             console.log(error);
             res.status(500).json({
                 error: error
@@ -65,14 +67,16 @@ router.get("/view", (req, res, next) => { // news get methord
 //Get news attchment  
 router.get("/newsAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
-    // console.log(filename)x
+    // console.log(filename)
     res.sendFile(path.join(__dirname, '../local_storage/news_Attachment/' + filename));
 });
 
 
+// use this delete the data in database
 router.delete('/delete/:_id', (req, res, next) => {// news delete methord
     console.log("Hello");
     const id = req.params._id;
+    // console.log('rrrrrrrrrr' , id);
     News.remove({ _id: id })
         .exec()
         .then(result => {
@@ -83,14 +87,14 @@ router.delete('/delete/:_id', (req, res, next) => {// news delete methord
         .catch(error => {
             console.log(error);
             res.status(500).json({
-                error: error
+                msg : 'Deleted unsuccessfull'
             });
         });
 });
 
 router.delete("/newsAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
-    console.log(filename)
+    // console.log('djankv' , filename)
     const path = 'local_storage/news_Attachment/' + filename;
     try {
         fs.unlinkSync(path)
@@ -101,12 +105,12 @@ router.delete("/newsAttachment/:filename", function (req, res) {
     } catch (err) {
         console.error(err);
         res.status(500).json({
-            error: error
+            msg:'deleted unsuccessful..'
         });
     }
 });
 
-
+// use this get data from database when prass the edit button
 router.get('/editnews/:id', (req, res, next) => {
     const newsid = req.params.id;
     News.findById(newsid , (err, news) => {
@@ -119,7 +123,7 @@ router.get('/editnews/:id', (req, res, next) => {
             .select()
             .exec()
             .then(data => {
-                console.log('News Transfer Success..');
+                //console.log('News Transfer Successfull..');
                 res.json({ state: true, msg: 'News Transfer success..', data: data });
             })
             .catch(error => {
@@ -130,19 +134,19 @@ router.get('/editnews/:id', (req, res, next) => {
 })
 
 
-router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord 
+router.post('/updateNews/:_id', (req, res) => {  // update methord 
     const newsid = req.params._id;
-    const newspicname = req.params.newspicname;
    // console.log(newspicname)
-    upload(req, res, (err) => {
+   
+   upload(req, res, (err) => {
+    const fullPath = "NEWS_FILE - " + req.file.originalname;
         if (req.file) {
-            fullPath = "NEWS_FILE - " + req.file.originalname;
 
-            const input = {
+            const input = {   
                 topic: req.body.topic,
                 newsSumery: req.body.newsSumery,
                 news: req.body.news,
-                filPath: fullPath,
+                filePath: fullPath,
                 date: req.body.date,
             }
             for (const [key, value] of Object.entries(input)) {
@@ -152,7 +156,7 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 )
                 .exec()
                 .then(data => {
-                    console.log('News update success..')
+                    console.log('News update successe.')
                     res.json({ state: true, msg: 'News update success..' });
                 })
                 .catch(error => {
@@ -170,13 +174,13 @@ router.post('/updateNews/:_id/:newspicname', (req, res) => {  // update methord
                 filePath: newspicname,
                 date: req.body.date,
             }
-            for (const [key, value] of Object.entries(input)) {
-                console.log(key, value);
-            }
+            // for (const [key, value] of Object.entries(input)) {
+            //     console.log(key, value);
+            // }
             News.update({ _id: newsid },{ $set: input })
                 .exec()
                 .then(data => {
-                    console.log('News update success..')
+                    console.log('News update successssssss..')
                     res.json({ state: true, msg: 'News update success..' });
                 })
                 .catch(error => {

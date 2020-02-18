@@ -61,13 +61,14 @@ router.get("/getClassTeacherName/:cName", function (req, res) {
     })
 });
 
+/*Subject registration in to the database*/
 router.post("/registerSubject", function (req, res, next) {
     const subid = req.body.subId;
 
     const newData = req.body
     const newSubject = new academicSubject(newData);
 
-    academicSubject.findOne({ subId: subid }, function (err, subId) {
+    academicSubject.findOne({ subId: subid }, function (err, subId) {   //check subject already register or not
         if (subId) {
             res.json({ state: false, msg: "Subject Id Already Exist..!" });
             return;
@@ -87,6 +88,7 @@ router.post("/registerSubject", function (req, res, next) {
 
 })
 
+//retrive all the subject 
 router.get("/getSubjects", function(req,res) {
     academicSubject.find().sort({ subId: 1 })
     .select('_id subId subName')
@@ -101,6 +103,7 @@ router.get("/getSubjects", function(req,res) {
     });
 })
 
+/*delete already added subject*/
 router.delete('/deleteSubject/:_id', function(req, res) {
     const id = req.params._id;
     
@@ -115,4 +118,18 @@ router.delete('/deleteSubject/:_id', function(req, res) {
         });
 })
 
+//get class time table details
+router.get('/getTimetable/:id', function (req, res) {
+    const id = req.params.id
+    classTimeTable.findOne({ className: id })
+        .exec()
+        .then(docs => {
+            console.log("Data Transer Success..!")
+            res.json(docs);
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
+        })
+})
 module.exports = router; 

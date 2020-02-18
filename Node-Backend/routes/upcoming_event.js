@@ -19,7 +19,7 @@ console.log('Ashan');
 
     newEvent.save()
         .then(result =>{
-            console.log(result)
+            //console.log(result)
             res.json({ state: true, msg : "Data inserted Successfully..."});
 
         })
@@ -117,7 +117,7 @@ router.post('/updateEvent/:_id',(req,res)=>{
 // get top 4 event for show in home
 router.get('/topEvent' , (req,res)=>{
     Event.find()
-    .sort({date:-1})
+    .sort({day:-1})
     .limit(4)
     .then(result =>{
         //console.log(result)

@@ -19,4 +19,18 @@ router.post("/timeTableRegistration", function (req, res) {
         })
 });
 
+//get teacher time table details
+router.get('/getTimetable/:id', function (req, res) {
+    const id = req.params.id
+    teacherTimeTable.findOne({ teacherId: id })
+        .exec()
+        .then(docs => {
+            console.log("Data Transer Success..!")
+            res.json(docs);
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
+        })
+})
 module.exports = router; 

@@ -38,6 +38,7 @@ import { AttendanceListComponent } from './component/Base_Components/attendance/
 import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 import { ContactUsComponent } from './component/Auth/contact-us/contact-us.component';
 import { ResetPasswordComponent } from './component/Base_Components/reset-password/reset-password.component';
+import { ViewTimeTablesComponent } from './component/Base_Components/view-time-tables/view-time-tables.component';
 
 // const routes: Routes = [
 //   {path: '', component: HomeComponent},
@@ -97,6 +98,7 @@ const routes: Routes = [
     {path: 'subjects', component: SubjectsComponent},
     {path: 'mail_box', component: MailBoxComponent},
     {path: 'reset_password', component: ResetPasswordComponent},
+    {path: 'view_time_table', component: ViewTimeTablesComponent},
     {path: '', component: ProfileComponent},
 
   ]},
