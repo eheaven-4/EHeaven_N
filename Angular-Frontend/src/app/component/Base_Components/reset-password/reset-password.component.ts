@@ -26,6 +26,7 @@ export class ResetPasswordComponent implements OnInit {
   cookie
 
   ngOnInit() {
+    // dataform with validaion
     this.ResetPasswordForm = this.fb.group({
       oldpw: ['', [Validators.required, Validators.minLength(8)]],
       newpw: ['', [Validators.required, Validators.minLength(8)]],
@@ -34,6 +35,7 @@ export class ResetPasswordComponent implements OnInit {
   }
 
   /**************************************************** */
+  //validation functions
   get f() {
     return this.ResetPasswordForm.controls;
   }
@@ -43,19 +45,18 @@ export class ResetPasswordComponent implements OnInit {
     this.ResetPasswordForm.reset();
   }
   /**************************************************** */
-
+  //reset passorw function
   resetPassword() {
     this.submitted = true;
 
     // stop here if form is invalid
-    if (this.ResetPasswordForm.invalid) {
+    if (this.ResetPasswordForm.invalid) { //check password form valid or not
       return;
     } else {
-
       this.cookie = JSON.parse(this.cookies.getCookie("userAuth"));
       this.userid = this.cookie.userid;
-      if (this.ResetPasswordForm.value.newpw == this.ResetPasswordForm.value.renewpw) {
-        const resetData = {
+      if (this.ResetPasswordForm.value.newpw == this.ResetPasswordForm.value.renewpw) { //check new two passwords
+        const resetData = {   //send old password and new passwor to server
           oldPassword: this.ResetPasswordForm.value.oldpw,
           newPassword: this.ResetPasswordForm.value.newpw,
           userid: this.userid
@@ -76,7 +77,6 @@ export class ResetPasswordComponent implements OnInit {
           if (confirmed) {
             this.http.post<any>(url, resetData).subscribe(res => {
               if (res.state) {
-                console.log(res.msg);
                 let config = new MatSnackBarConfig();
                 config.duration = true ? 2000 : 0;
                 this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
@@ -96,8 +96,6 @@ export class ResetPasswordComponent implements OnInit {
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Password does not matched..! ", true ? "Retry" : undefined, config);
       }
-
-
     }
   }
 }

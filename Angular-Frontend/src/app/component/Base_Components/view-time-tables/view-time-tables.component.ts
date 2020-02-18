@@ -77,8 +77,8 @@ export class ViewTimeTablesComponent implements OnInit {
   ) { }
 
   classTT: classTimeTable[] = [];
-  resetPasswordDiv = false
-  id
+  resetPasswordDiv = false    //set table div false
+  id  
   submitted = false;
   dataform
   classTimeTableDiv = false
@@ -87,6 +87,8 @@ export class ViewTimeTablesComponent implements OnInit {
   SearchForm = this.fb.group({
     id: ['', Validators.required]
   });
+
+  //validation function
   get f() {
     return this.SearchForm.controls;
   }
@@ -98,6 +100,8 @@ export class ViewTimeTablesComponent implements OnInit {
 
   ngOnInit() {
   }
+  
+  //search and get classrooms time table
 
   searchclassTimeTable() {
     this.submitted = true;
@@ -116,6 +120,7 @@ export class ViewTimeTablesComponent implements OnInit {
     }
   }
 
+  //search and get teachers time table
   searchTeacherTimeTable() {
     this.submitted = true;
     // stop here if form is invalid

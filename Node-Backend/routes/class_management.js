@@ -4,6 +4,7 @@ const { classTimeTable } = require('../models/class_management')
 const { academicSubject } = require('../models/class_management')
 const config = require('../config/database')
 
+//register new time table class
 router.post("/timeTableRegistration", function (req, res) {
     const newData = req.body
     // console.log(newTimeTabl)
@@ -19,6 +20,21 @@ router.post("/timeTableRegistration", function (req, res) {
             res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
         })
 });
+
+//get class time table details
+router.get('/getTimetable/:id', function (req, res) {
+    const id = req.params.id
+    classTimeTable.findOne({ className: id })
+        .exec()
+        .then(docs => {
+            console.log("Data Transer Success..!")
+            res.json(docs);
+        })
+        .catch(error => {
+            console.log(error)
+            res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
+        })
+})
 
 //get all the names and class teachers names of class rooms 
 router.get("/classRoomsNames", function (req, res) {
@@ -64,7 +80,6 @@ router.get("/getClassTeacherName/:cName", function (req, res) {
 /*Subject registration in to the database*/
 router.post("/registerSubject", function (req, res, next) {
     const subid = req.body.subId;
-
     const newData = req.body
     const newSubject = new academicSubject(newData);
 
@@ -89,47 +104,34 @@ router.post("/registerSubject", function (req, res, next) {
 })
 
 //retrive all the subject 
-router.get("/getSubjects", function(req,res) {
+router.get("/getSubjects", function (req, res) {
     academicSubject.find().sort({ subId: 1 })
-    .select('_id subId subName')
-    .exec()
-    .then(docs => {
-        console.log("Data Transfer Success.!");
-        res.status(200).json({data : docs})
-    })
-    .catch(error => {
-        console.log(error);
-        res.status(500).json({error: error });
-    });
-})
-
-/*delete already added subject*/
-router.delete('/deleteSubject/:_id', function(req, res) {
-    const id = req.params._id;
-    
-    academicSubject.remove({ _id: id })
+        .select('_id subId subName')
         .exec()
-        .then(result => {
-            res.status(200).json({state: true, msg: 'Deleted Successfully..!' });
+        .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json({ data: docs })
         })
         .catch(error => {
             console.log(error);
-            res.status(500).json({state: false, msg: 'Delete Unsuccessfull..!' });
+            res.status(500).json({ error: error });
         });
 })
 
-//get class time table details
-router.get('/getTimetable/:id', function (req, res) {
-    const id = req.params.id
-    classTimeTable.findOne({ className: id })
+/*delete already added subject*/
+router.delete('/deleteSubject/:_id', function (req, res) {
+    const id = req.params._id;
+
+    academicSubject.remove({ _id: id })
         .exec()
-        .then(docs => {
-            console.log("Data Transer Success..!")
-            res.json(docs);
+        .then(result => {
+            res.status(200).json({ state: true, msg: 'Deleted Successfully..!' });
         })
         .catch(error => {
-            console.log(error)
-            res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
-        })
+            console.log(error);
+            res.status(500).json({ state: false, msg: 'Delete Unsuccessfull..!' });
+        });
 })
+
+
 module.exports = router; 

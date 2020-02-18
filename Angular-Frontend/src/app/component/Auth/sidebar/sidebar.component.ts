@@ -20,7 +20,6 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private cookies: MycookiesService,
-    // private cookieService: CookieService,
     public snackBar: MatSnackBar,
     public route: ActivatedRoute,
   ) { }
@@ -34,6 +33,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //calling Academics button function
   userAcademics() {
 
     if (this.myCookie) {
@@ -47,6 +47,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //calling NOtification button function
   userNotification() {
 
     if (this.myCookie) {
@@ -59,6 +60,8 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+
+  //calling Certification  button function
   userCertification() {
     if (this.myCookie) {
 
@@ -71,6 +74,8 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  //calling Prepare certification button function
+
   userPrepCertification() {
     if (this.myCookie) {
 
@@ -83,6 +88,7 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  //calling Attendence button function
 
   userAttendence() {
     if (this.myCookie) {
@@ -96,6 +102,7 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  //calling Extra Curricular button function
 
   userExtraCur() {
     if (this.myCookie) {
@@ -110,6 +117,7 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //callingmanage Marks  button function
   userStudentMarks() {
     if (this.myCookie) {
 
@@ -123,6 +131,8 @@ export class SidebarComponent implements OnInit {
     }
   }
 
+  //calling Student progress button function
+
   userStudentProg() {
     if (this.myCookie) {
 
@@ -135,6 +145,8 @@ export class SidebarComponent implements OnInit {
       this.router.navigate(['/login']);
     }
   }
+  //calling Admin dashboard button function
+
   adminDashboard() {
     if (this.myCookie) {
 

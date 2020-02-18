@@ -12,6 +12,7 @@
                         <mat-tab-group>
                             <mat-tab label="Student Portal" *ngIf="usertype == 'Student'  || usertype == 'Parent'">
                                 <!--Student View-->
+                                <!-- top one student position and average 4 boxes/ -->
                                 <div class="container sex" *ngIf="studentAverageDiv == true" style="margin-top: 50px;">
                                     <div class="row">
                                         <div class="col-md-3">
@@ -100,6 +101,7 @@
                                     </div>
                                 </div>
 
+                                <!-- search student data to get 4 boxes data -->
                                 <div class="container-fluid">
                                     <div class="row">
                                         <div class="container" style="margin-top: 30px;">
@@ -154,6 +156,8 @@
                                         </div>
                                     </div>
                                 </div>
+
+                                <!-- show one student subjects data  -->
                                 <div class="container-fluid" style="margin-bottom: 30px;">
                                     <div class="row" style="margin: auto;">
                                         <div class="col-md-6" *ngFor="let stmarks of stuSubMarks"
@@ -185,6 +189,7 @@
                                     </div>
                                 </div>
                             
+                                <!-- one subject data graph in student view -->
                                 <div class="container" style="margin-bottom: 50px; " *ngIf="subjectGraph == true">
                                     <div class="row"
                                         style="margin: auto;width: 97%;background-color: rgb(255, 255, 255);border-radius: 4px;border: rgb(231, 231, 231) solid 1px">
@@ -197,7 +202,8 @@
                                         </div>
                                     </div>
                                 </div>
-
+                                <!-- table -->
+                                <!-- load all student details specific subject ,term, year clicking subject data mat card -->
                                 <div class="container" *ngIf="marksTable == true">
                                     <div class="table">
                                         <div class="row tableheader">
@@ -230,6 +236,8 @@
                             <mat-tab label="Teacher/Principle Portal" *ngIf="usertype == 'Teacher'  || usertype == 'Principle'">
                                 <div class="container-fluid">
                                     <div class="row">
+
+                                        <!-- search class deails to get table -->
                                         <div class="container" style="margin-top: 30px;">
                                             <form [formGroup]="DataForm1"
                                                 style="margin-top: 80px;width: 97%; margin: auto;">
@@ -283,37 +291,39 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="container-fluid" style="margin-bottom: 30px;">
+
+                                <!-- <div class="container-fluid" style="margin-bottom: 30px;">
                                     <div class="row" style="margin: auto;">
                                         <div class="col-md-6" *ngFor="let stmarks of stuSubMarks"
-                                            [formGroup]="SubjectForm">
-                                            <mat-card style="height: 55px; margin-bottom: 10px;cursor: pointer;"
-                                                (click)="subjectData(stmarks,userid)">
-                                                <div class="row">
-                                                    <div class="col-md-1">
+                                        [formGroup]="SubjectForm">
+                                        <mat-card style="height: 55px; margin-bottom: 10px;cursor: pointer;"
+                                        (click)="subjectData(stmarks,userid)">
+                                        <div class="row">
+                                            <div class="col-md-1">
                                                         <p value="stmarks.year" name="stMark_year"
-                                                            FormControlName="stMark_year">
-                                                            {{stmarks.year}}</p>
+                                                        FormControlName="stMark_year">
+                                                        {{stmarks.year}}</p>
                                                     </div>
                                                     <div style="display: block;" class="col-md-1"
-                                                        name="stMark_classname" value="stMark_classname">
-                                                        -{{stmarks.classname}}
-                                                    </div>
-                                                    <div class="col-md-2" name="stMark_term" value="stMark_term">
-                                                        Term {{stmarks.term}}
-                                                    </div>
-                                                    <div class="col-md-6" name="stMark_subId" value="stMark_subId">
-                                                        {{stmarks.subId}} - {{stmarks.subject}}
-                                                    </div>
-                                                    <div class="col-md-2" name="stMark_year" value="stMark_year">
-                                                        {{stmarks.marks}}
-                                                    </div>
+                                                    name="stMark_classname" value="stMark_classname">
+                                                    -{{stmarks.classname}}
+                                                </div>
+                                                <div class="col-md-2" name="stMark_term" value="stMark_term">
+                                                    Term {{stmarks.term}}
+                                                </div>
+                                                <div class="col-md-6" name="stMark_subId" value="stMark_subId">
+                                                    {{stmarks.subId}} - {{stmarks.subject}}
+                                                </div>
+                                                <div class="col-md-2" name="stMark_year" value="stMark_year">
+                                                    {{stmarks.marks}}
+                                                </div>
                                                 </div>
                                             </mat-card>
                                         </div>
                                     </div>
-                                </div>
-
+                                </div> -->
+                                
+                                <!-- get class student table -->
                                 <div class="container" *ngIf="marksTable == true" style="margin-bottom: 40px;">
                                     <div class="row">
                                         <div class="col-md-7">
@@ -350,6 +360,8 @@
                                                 </div>
                                             </div>
                                         </div>
+
+                                        <!-- get each student data clickin table -->
                                         <div class="col-md-5" *ngIf="eachStuDataDiv == true">
                                             <div style="width: 100%;margin-bottom: 10px">
                                                 <mat-card style="background-color: #f57f17;">
@@ -423,6 +435,7 @@
                                                 </div>
                                             </div>
 
+                                            <!-- subject details -->
                                             <mat-card *ngFor="let echstuData of eachStudentData.dataArray2"
                                                 style="height: 55px; margin-bottom: 10px;cursor: pointer; border-top: 4px rgb(0, 119, 255) solid;width: 100%;">
                                                 <div class="row">

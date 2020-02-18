@@ -11,41 +11,40 @@ const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'local_storage/profile_Images/')
+        cb(null, 'local_storage/profile_Images/')    //user profile pictures saving destination folder
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname)
+        cb(null, file.originalname)   //set the file neme
     }
 });
 
 
 const upload = multer({ storage: storage }).single('profileImage');
 
-//user login scope
+//user login url 
 router.post("/login", function (req, res, next) {
     const userid = req.body.userid;
     const password = req.body.password;
-    User.findByUserid(userid, function (err, user) {
+    User.findByUserid(userid, function (err, user) {    //user first find by userid
         if (err) throw err;
-        if (!user) {
-            res.json({ state: false, msg: "No user found..!" });
+        if (!user) {    //if there is not user in same userid
+            res.json({ state: false, msg: "No user found..!" });   //the response error
             return;
         }
-        User.passwordCheck(password, user.password, function (err, match) {
-            console.log(userid, password);
+        User.passwordCheck(password, user.password, function (err, match) { //if has a user the check the user psssword calling passwordCkech function
             if (err) {
                 throw err;
             }
 
-            if (match) {
+            if (match) {    //if userid and password matched
                 console.log("Userid and Password match!");
-                const token = jwt.sign(user.toJSON(), config.secret, { expiresIn: 86400 });
+                // const token = jwt.sign(user.toJSON(), config.secret, { expiresIn: 86400 });
 
                 res.json({
                     state: true,
-                    token: "JWT" + token,
+                    // token: "JWT" + token,
                     // cookie: password,
-                    user: {
+                    user: { //send user data to client server
                         id: user._id,
                         name: user.name,
                         userid: user.userid,
@@ -70,7 +69,7 @@ router.post("/login", function (req, res, next) {
 router.post("/register", function (req, res) {
     upload(req, res, (err) => {
         // console.log(req.file.filename)
-        var fullPath = req.file.originalname;
+        var fullPath = req.file.originalname;    //get userprofile image original name as the fullpath
 
         var newUser = new User({
             usertype: req.body.usertype,
@@ -91,15 +90,15 @@ router.post("/register", function (req, res) {
             filepath: fullPath,
         });
 
-        bcrypt.genSalt(10, function (err, salt) {
-            bcrypt.hash(newUser.password, salt, function (err, hash) {
+        bcrypt.genSalt(10, function (err, salt) {   //generate password salt
+            bcrypt.hash(newUser.password, salt, function (err, hash) {  //hach the password 
                 newUser.password = hash;
 
                 if (err) {
                     throw err;
                 }
                 else {
-                    newUser.save()
+                    newUser.save()      //save the userdata 
                         .then(result => {
                             console.log(result)
                             res.json({ state: true, msg: "Data Inserted Successfully..!" });
@@ -114,6 +113,7 @@ router.post("/register", function (req, res) {
     });
 });
 
+//bulk user regitration
 router.post("/bulkUserRegistration", function (req, res) {
     console.log("hello");
     var newUser = new User({
@@ -169,7 +169,7 @@ router.get("/profile/:id", function (req, res) {
     });
 });
 
-//send profile image to progile.component.html
+//send profile image to profile.component.html
 router.get("/profileImage/:filename", function (req, res) {
     const filename = req.params.filename;
     console.log(filename)
@@ -181,7 +181,7 @@ router.get("/profileImage/:filename", function (req, res) {
 //get users ids names using select class name
 router.get("/getStudentsNames/:cName", function (req, res, next) {
     const cName = req.params.cName;
-    User.find({ selectclass: cName })
+    User.find({ selectclass: cName })       //find by selected name
         .select('userid name')
         .exec()
         .then(data => {
@@ -196,16 +196,15 @@ router.get("/getStudentsNames/:cName", function (req, res, next) {
 })
 
 /*searth user function*/
-
 router.get("/searchUsers/:userid", function (req, res, next) {
     const userid = req.params.userid;
     User.findByUserid(userid, function (err, user) {
         if (err) throw err;
-        if (!user) {
+        if (!user) {    //check the user available or not
             res.json({ state: false, msg: "No user found..!" });
             return;
         }
-        User.findOne({ userid: userid })
+        User.findOne({ userid: userid })    //find user using userid
             .select()
             .exec()
             .then(data => {
@@ -221,7 +220,6 @@ router.get("/searchUsers/:userid", function (req, res, next) {
 })
 
 //update user data function
-
 router.post("/updateUser/:userid", function (req, res) {
     const userid = req.params.userid;
 
@@ -240,7 +238,7 @@ router.post("/updateUser/:userid", function (req, res) {
         mother: req.body.mother,
         address: req.body.address,
     }
-    User.update({ userid: userid }, { $set: input })
+    User.update({ userid: userid }, { $set: input })    //update user data with correspond to userid
         .exec()
         .then(data => {
             console.log("Data Update Success..!")
@@ -252,16 +250,18 @@ router.post("/updateUser/:userid", function (req, res) {
             res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
         })
 })
+
+//updation user profile picture
 router.post("/updateUserImage/:userid", function (req, res) {
     upload(req, res, (err) => {
 
     });
-
 })
+
 //delete userdata function
 router.delete("/deleteUser/:userid", function (req, res, next) {
     const userid = req.params.userid;
-    User.findOneAndRemove({ userid: userid })
+    User.findOneAndRemove({ userid: userid })       //find userid and delete user
         .exec()
         .then(data => {
             console.log("Data Delete Success..!")
@@ -298,26 +298,22 @@ router.post("/resetPassword", function (req, res) {
     const oldPassword = req.body.oldPassword
     var newPassword = req.body.newPassword
     const userid = req.body.userid
-    User.findByUserid(userid, function (err, user) {
+    User.findByUserid(userid, function (err, user) {    //find the user with respect to the userid
         if (err) throw err;
-        User.passwordCheck(oldPassword, user.password, function (err, match) {
-            console.log(userid, oldPassword);
+        User.passwordCheck(oldPassword, user.password, function (err, match) {  //check the old password with database password
             if (err) {
                 throw err;
             }
-            if (match) {
+            if (match) {    //if userid and password mached
                 console.log("Userid and Password match...!");
                 bcrypt.genSalt(10, function (err, salt) {
-                    bcrypt.hash(newPassword, salt, function (err, hash) {
-                        console.log(hash);
+                    bcrypt.hash(newPassword, salt, function (err, hash) {   //hash the new password
                         newPassword = hash;
-
                         if (err) {
                             throw err;
                         }
                         else {
-                            console.log(newPassword)
-                            User.update({ userid: userid }, {
+                            User.update({ userid: userid }, {   //save the new password to the database
                                 $set: {
                                     password: newPassword
                                 }
@@ -352,16 +348,14 @@ router.post("/adminResetPassword", function (req, res) {
     const userid = req.body.userid
     console.log(userid, newPassword)
     bcrypt.genSalt(10, function (err, salt) {
-        bcrypt.hash(newPassword, salt, function (err, hash) {
-            console.log(hash);
+        bcrypt.hash(newPassword, salt, function (err, hash) {   //hash the new password
             newPassword = hash;
 
             if (err) {
                 throw err;
             }
             else {
-                console.log(newPassword)
-                User.update({ userid: userid }, {
+                User.update({ userid: userid }, {   //update new hash password with database
                     $set: {
                         password: newPassword
                     }

@@ -8,10 +8,10 @@ const fs = require('fs');
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, 'local_storage/notification_attachment/')
+        cb(null, 'local_storage/notification_attachment/')    //notification attachment saving destination folder
     },
     filename: function (req, file, cb) {
-        cb(null, "NOT_FILE - " + file.originalname)
+        cb(null, "NOT_FILE - " + file.originalname)   //set the file neme
     }
 });
 
@@ -50,7 +50,7 @@ router.post("/add", function (req, res) {
 //GET all notices
 router.get("/view", (req, res, next) => {
     Notification.find().sort({ date: -1 })
-        .select('userid subject message date state usertype filepath')
+        .select('userid subject message date state usertype filepath')  //get notification thease details
         .exec()
         .then(docs => {
             console.log("Data Transfer Success.!");
@@ -67,7 +67,6 @@ router.get("/view", (req, res, next) => {
 //Get notification attchment 
 router.get("/notAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
-    // console.log(filename)x
     res.sendFile(path.join(__dirname, '../local_storage/notification_Attachment/' + filename));
 });
 
@@ -84,7 +83,7 @@ router.get('/approve/:_id', (req, res, next) => {
     })
         .exec()
         .then(result => {
-            console.log(    );
+            // console.log(    );
             res.status(200).json(result);
         })
         .catch(error => {
@@ -113,6 +112,7 @@ router.delete('/delete/:_id', (req, res, next) => {
         });
 });
 
+//delete notification attachment from the local storage
 router.delete("/notAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
     console.log(filename)

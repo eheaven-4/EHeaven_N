@@ -1,11 +1,8 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <!-- <div class="col-md-2">
-                <app-sidebar></app-sidebar>
-            </div> -->
-            <div class="container-fluid" style="background-color:#F8F9FA">
 
+            <div class="container-fluid" style="background-color:#F8F9FA">
                 <div>
                     <div class="container">
                         <h2 class="topic">Academics</h2>
@@ -18,13 +15,15 @@
                         <div class="row">
                             <p class="select_subject">SELECT YOUR SUBJECT</p>
                         </div>
+
+                        <!-- serach subject div -->
                         <form [formGroup]="subjectForm">
                             <div class="container">
                                 <div class="row" style="width: 80%; margin: auto">
                                     <div class="col-md-9 src_box">
                                         <mat-select class="browser-default custom-select mb-4 "
                                             formControlName="subject" [(ngModel)]="subject" name="subject">
-                                            <mat-option style="text-align: left" *ngFor='let subject of mySubject' 
+                                            <mat-option style="text-align: left" *ngFor='let subject of mySubject'
                                                 [value]="subject.subName">
                                                 {{subject.subName}}
                                             </mat-option>
@@ -37,6 +36,8 @@
                                 </div>
                             </div>
                         </form>
+
+                        <!-- adding subject div, this id only see teacher and admin -->
                         <div *ngIf="userType == 'Administrator' || userType == 'Teacher'">
                             <div class="container" style="padding-top: 40px;padding-left: 30px;padding-right: 30px;">
                                 <p style="font-size: 20px; font-weight: 500; color: rgb(0, 165, 0);">Add Subject</p>

@@ -4,9 +4,9 @@ const mark = require('../models/student_marks');
 const config = require('../config/database');
 // const users=require('../models/users');
 
-
+//bulk add marks
 router.post("/addLog", function (request, response) {
-    console.log("hello");
+    // console.log("hello");
 
     const newmarksheet = new mark({
         classname: request.body.classname,
@@ -36,9 +36,9 @@ router.post("/studentAverage", function (req, res) {
     var term = (req.body.term).toString();
     var classname = req.body.classname
 
-    var dataArray1 = new Array();
-    var dataArray2 = new Array();
-    var dataArray3 = new Array();
+    var dataArray1 = new Array();   //user to geta all the data in marks
+    var dataArray2 = new Array();   //add userid, marks and name 
+    var dataArray3 = new Array();   //store the userid and the average
 
     mark.find({ "year": year, "term": term, "classname": classname })
         .select()
@@ -47,16 +47,17 @@ router.post("/studentAverage", function (req, res) {
             var i = 0;
 
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i])    //push data to the dataArray1
             }
             var j = 0
             for (j = 0; j < dataArray1.length; j++) {
                 dataArray1[j].marks.forEach(element => {
                     var st = new allStuMarks(element.userid, element.mark, element.name)
-                    dataArray2.push(st)
+                    dataArray2.push(st) //push data to the dataArray2
                 });
             }
 
+            // this loop running only marks doucuments size only
             for (var i = 0; i < dataArray2.length / docs.length; i++) {
                 var total = 0
                 var average = 0;
@@ -66,12 +67,12 @@ router.post("/studentAverage", function (req, res) {
 
                 for (var j = 0; j < dataArray2.length; j++) {
                     if (userid == dataArray2[j].userid) {
-                        total = total + dataArray2[j].marks
+                        total = total + dataArray2[j].marks     //get the tatle marks of one user
                     }
                 }
-                average = parseFloat(total / docs.length).toFixed(4);
+                average = parseFloat(total / docs.length).toFixed(4);   //take the avrage
                 var st = new allStuAverage(userid, username, average, year, term, classname)
-                dataArray3.push(st)
+                dataArray3.push(st) //store the avrage into the array3
             }
             //sorting dataArray3  
             dataArray3.sort(function (a, b) { return b.average - a.average });
@@ -79,7 +80,7 @@ router.post("/studentAverage", function (req, res) {
             userid = req.body.userid  //initalize again userid 
             //add data to dataArray4 with student positions
             for (var i = 0; i < dataArray3.length; i++) {
-                if(dataArray3[i].userid == userid){
+                if(dataArray3[i].userid == userid){ //get same userid data and that data to client server
                     var st = new allStuSortAve(i + 1, dataArray3[i].userid, dataArray3[i].username, dataArray3[i].average, dataArray3[i].year, dataArray3[i].term, dataArray3[i].classname)
                     res.send(st)
                 }
@@ -87,7 +88,7 @@ router.post("/studentAverage", function (req, res) {
         });
 })
 
-//search subjects with marks
+//search subjects with marks of one student
 class stuAllSubMarks {
     constructor(classname, year, term, subject, subId, marks) {
         this.classname = classname
@@ -108,21 +109,20 @@ router.get("/subjectMarks/:id", function (req, res) {
     var dataArray1 = new Array();   //all data push to this array
     var dataArray2 = new Array();
 
-    mark.find({ year: { $gte: lastYear } })
+    mark.find({ year: { $gte: lastYear } }) //find marks last two years
         .exec()
         .then(docs => {
             var i = 0;
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i]) //push data to the dataArray1
             }
             var j = 0
             // res.send(dataArray1)
             for (j = 0; j < dataArray1.length; j++) {
-
                 dataArray1[j].marks.forEach(element => {
                     if (element.userid == userid) {
                         var subMarks = new stuAllSubMarks(dataArray1[j].classname, dataArray1[j].year, dataArray1[j].term, dataArray1[j].subject, dataArray1[j].subId, element.mark)
-                        dataArray2.push(subMarks)
+                        dataArray2.push(subMarks)   //push subjects data to the dataArray2
                     }
                 });
             }
@@ -141,7 +141,7 @@ router.get("/subjectMarks/:id", function (req, res) {
 });
 
 
-//get subject details to the student clicking subject
+//get subject details to the student clicking subject to the 'graph'
 class stuYearMarks {
     constructor(term, marks) {
         this.term = term
@@ -156,24 +156,24 @@ router.post("/subjectData", function (req, res) {
 
     var dataArray1 = new Array();   //all data push to this array
     var dataArray2 = new Array();
-    mark.find({ year: year, subId: subId })
+    mark.find({ year: year, subId: subId }) //find year and subject Id
         .exec()
         .then(docs => {
             var i = 0;
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i]) //push data to the dataArray1
             }
             var j = 0
 
             for (j = 0; j < dataArray1.length; j++) {
                 dataArray1[j].marks.forEach(element => {
                     if (element.userid == userid) {
-                        var st = new stuYearMarks(dataArray1[j].term, element.mark)
-                        dataArray2.push(st)
+                        var st = new stuYearMarks(dataArray1[j].term, element.mark) //get term and mark
+                        dataArray2.push(st) //push to the array2
                     }
                 });
             }
-            res.send(dataArray2)
+            res.send(dataArray2)     //send array2 data
         })
         .catch(error => {
             console.log(error);
@@ -183,7 +183,7 @@ router.post("/subjectData", function (req, res) {
         });
 })
 
-//get all student data and marks table for spesific subject
+//get all student data and marks table for spesific subject in student section
 class allStuMarks {
     constructor(userid, marks, name) {
         this.userid = userid
@@ -212,7 +212,7 @@ router.post("/subjectAllStuData", function (req, res) {
         .then(docs => {
             var i = 0;
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i]) //push data to the dataArray1
             }
             var j = 0
             for (j = 0; j < dataArray1.length; j++) {
@@ -261,9 +261,9 @@ router.post("/classAverages", function (req, res) {
     const term = req.body.term
     const classname = req.body.classname
 
-    var dataArray1 = new Array();
-    var dataArray2 = new Array();
-    var dataArray3 = new Array();
+    var dataArray1 = new Array();   //user to geta all the data in marks
+    var dataArray2 = new Array();   //add userid, marks and name 
+    var dataArray3 = new Array();   //store the userid and the average
     var dataArray4 = new Array();
 
     mark.find({ "year": year, "term": term, "classname": classname })
@@ -273,13 +273,13 @@ router.post("/classAverages", function (req, res) {
             var i = 0;
 
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i]) //push data to the dataArray1
             }
             var j = 0
             for (j = 0; j < dataArray1.length; j++) {
                 dataArray1[j].marks.forEach(element => {
                     var st = new allStuMarks(element.userid, element.mark, element.name)
-                    dataArray2.push(st)
+                    dataArray2.push(st)//push data to the dataArray2
                 });
             }
 
@@ -292,24 +292,25 @@ router.post("/classAverages", function (req, res) {
 
                 for (var j = 0; j < dataArray2.length; j++) {
                     if (userid == dataArray2[j].userid) {
-                        total = total + dataArray2[j].marks
+                        total = total + dataArray2[j].marks //get the total marks spesific user 
                     }
                 }
-                average = parseFloat(total / docs.length).toFixed(4);
+                average = parseFloat(total / docs.length).toFixed(4); //et the avrage 
                 var st = new allStuAverage(userid, username, average, year, term, classname)
                 dataArray3.push(st)
             }
             //sorting dataArray3  
-            dataArray3.sort(function (a, b) { return b.average - a.average });
+            dataArray3.sort(function (a, b) { return b.average - a.average });  //sore the arraay desending order
 
             //add data to dataArray4 with student positions
             for (var i = 0; i < dataArray3.length; i++) {
                 var st = new allStuSortAve(i + 1, dataArray3[i].userid, dataArray3[i].username, dataArray3[i].average, dataArray3[i].year, dataArray3[i].term, dataArray3[i].classname)
-                dataArray4.push(st)
+                dataArray4.push(st) //add data int to the array4 with student position
             }
-            res.send(dataArray4)
+            res.send(dataArray4)    //send respose
         });
 })
+
 
 class stuSubMarks {
     constructor(subject, subId, marks) {
@@ -319,9 +320,9 @@ class stuSubMarks {
     }
 }
 
-/*one student Data*/
+/*one student Data clicking teacher student table row*/
 router.post("/oneStudentData", function (req, res) {
-    console.log(req.body)
+    // console.log(req.body)
     const year = req.body.year
     const term = req.body.term
     const classname = req.body.classname
@@ -331,21 +332,21 @@ router.post("/oneStudentData", function (req, res) {
     const position = req.body.position
 
     var dataArray1 = new Array();   //all data push to this array
-    var dataArray2 = new Array();
+    var dataArray2 = new Array();   
 
-    mark.find({ year: year, term: term, classname: classname })
+    mark.find({ year: year, term: term, classname: classname }) //serch by these attributes
         .exec()
         .then(docs => {
             var i = 0;
             for (i = 0; i < docs.length; i++) {
-                dataArray1.push(docs[i])
+                dataArray1.push(docs[i])    //all data into array1
             }
             var j = 0
             for (j = 0; j < dataArray1.length; j++) {
                 dataArray1[j].marks.forEach(element => {
                     if (element.userid == userid) {
                         var subMarks = new stuSubMarks(dataArray1[j].subject, dataArray1[j].subId, element.mark)
-                        dataArray2.push(subMarks)
+                        dataArray2.push(subMarks)   //push nessasery dat to array 2
                     }
                 });
             }

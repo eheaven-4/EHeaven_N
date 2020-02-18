@@ -51,8 +51,8 @@ export class SubjectsComponent implements OnInit {
     
   }
 
+  //one by one subject registration function
   regSubject() {
-    // const formData  = new FormData();
 
     const subjectData = {
       subId: this.SubjectRegForm.value.sbid,
@@ -92,6 +92,7 @@ export class SubjectsComponent implements OnInit {
     })
   }
 
+  //delete a subject 
   delSubject(event, subid) {
     const subId = subid;
 
