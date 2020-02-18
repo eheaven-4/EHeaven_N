@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router,ActivatedRoute} from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
-// import { CookieService } from 'ngx-cookie-service';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { UserDetail } from '../../Userdetail';
 
@@ -20,7 +18,6 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     private cookies: MycookiesService,
-    // private cookieService: CookieService,
     public snackBar: MatSnackBar,
     public route:ActivatedRoute,
   ) { }
