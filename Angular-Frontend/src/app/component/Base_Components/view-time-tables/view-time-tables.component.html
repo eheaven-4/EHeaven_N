@@ -1,0 +1,85 @@
+<div class="row">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="container-fluid" style="background-color:#F8F9FA; min-height: 750px;">
+
+                <div>
+                    <div class="container">
+                        <h2 class="topic">Search User</h2>
+                        <hr>
+                    </div>
+                    <div class="container" style="padding-top:50px ; padding-bottom:50px">
+                        <form class="text-center border p-5 reg-frm" [formGroup]="SearchForm"
+                            style="background-color: white;">
+                            <img src="../../../assets/logo/logo.png" style="width:60%; margin-bottom: 50px">
+
+                            <div class="row">
+                                <div class="col-md-9">
+                                    <input type="text" class="form-control box_border" placeholder="i.e : 1A" name="id" [(ngModel)]="id"
+                                        formControlName="id" [ngClass]="{ 'is-invalid': submitted && f.id.errors }">
+                                    <div *ngIf="submitted && f.id.errors" class="err_msg">
+                                        <div *ngIf="f.id.errors.required">Class Name is required</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <button class="btn src_btn box_border" type="submit"
+                                        (click)="searchTeacherTimeTable()">
+                                        <p style="margin-left: -20px;">Search &nbsp; <i
+                                                class="material-icons src_icon">search</i></p>
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="container">
+                        <div class="row">
+                            <form class="text-center border p-5 reg-frm"
+                                style="background-color: white;margin-bottom: 20px;">
+                                <div class="row">
+                                    <p>{{classTT.className}}</p>
+                                </div>
+                                <div class="row">
+                                    <p>{{classTT.classTeacher}}</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-1">
+
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div>
+                                            <mat-card class="mt_card">
+                                                <p></p>
+                                            </mat-card>
+                                            <mat-card class="mt_card"> <p>{{classTT.monday}}</p></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                            <mat-card class="mt_card"></mat-card>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <div class="col-md-2">
+
+                                    </div>
+                                    <div class="col-md-1">
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
