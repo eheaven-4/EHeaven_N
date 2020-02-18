@@ -183,7 +183,6 @@ export class PrepareCertificationComponent implements OnInit {
 
   // ********************* O/L Certificate Form ****************************************************************************
 
-  // tslint:disable-next-line: member-ordering
   OlCertForm = this.fb.group({
     certDetails: this.fb.group({
       studentId: ["", Validators.required],
@@ -222,7 +221,7 @@ export class PrepareCertificationComponent implements OnInit {
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
-        message: "Are you sure want to update?",
+        message: "Are you sure want to submit?",
         buttonText: {
           ok: "Yes",
           cancel: "No"
@@ -234,16 +233,13 @@ export class PrepareCertificationComponent implements OnInit {
         this.http.post<any>(url, studentStatusApproval).subscribe(res => {
           if (res.state) {
             console.log(res.msg);
-
-            // this.StudentStatusForm.reset();
             var url2 =
               "http://localhost:3000/generate_certification/completeCert_studentStatus/" +
               this.student_id;
 
             this.http.get(url2).subscribe(
               res => {
-                
-                alert("Successful");
+
                 this.router.navigate([
                   "../",
                   this.cookie.userid,
@@ -295,28 +291,44 @@ export class PrepareCertificationComponent implements OnInit {
     //console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/charactercert";
 
-    this.http.post<any>(url, characterCertApproval).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        // alert('Successful');
-        var url2 =
-          "http://localhost:3000/generate_certification/completeCert_character/" +
-          this.student_id;
 
-        this.http.get(url2).subscribe(
-          res => {
-            alert("Successful");
-            this.router.navigate([
-              "../",
-              this.cookie.userid,
-              "prepare_certification"
-            ]);
-            window.location.reload();
-          },
-          err => {
-            console.log(err);
-          }
-        );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: "Are you sure want to submit?",
+        buttonText: {
+          ok: "Yes",
+          cancel: "No"
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.http.post<any>(url, characterCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+
+            // this.StudentStatusForm.reset();
+            var url2 =
+              "http://localhost:3000/generate_certification/completeCert_character/" +
+              this.student_id;
+
+            this.http.get(url2).subscribe(
+              res => {
+
+                //alert("Successful");
+                this.router.navigate([
+                  "../",
+                  this.cookie.userid,
+                  "prepare_certification"
+                ]);
+                window.location.reload();
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
+
       } else {
         console.log(res.msg);
         alert("Error!! Try Again");
@@ -328,7 +340,8 @@ export class PrepareCertificationComponent implements OnInit {
       }
     });
     console.log(characterCertApproval);
-
+  }
+});
     // window.location.reload();
   }
 
@@ -355,29 +368,42 @@ export class PrepareCertificationComponent implements OnInit {
     this.student_id = this.LeavingCertForm.value.studentId;
     var url = "http://localhost:3000/generate_certification/leavingcert";
 
-    this.http.post<any>(url, leavingCertApproval).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        // alert('Successful');
-        this.LeavingCertForm.reset();
-        var url2 =
-          "http://localhost:3000/generate_certification/completeCert_leaving/" +
-          this.student_id;
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: "Are you sure want to submit?",
+        buttonText: {
+          ok: "Yes",
+          cancel: "No"
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.http.post<any>(url, leavingCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
 
-        this.http.get(url2).subscribe(
-          res => {
-            alert("Successful");
-            this.router.navigate([
-              "../",
-              this.cookie.userid,
-              "prepare_certification"
-            ]);
-            window.location.reload();
-          },
-          err => {
-            console.log(err);
-          }
-        );
+            // this.StudentStatusForm.reset();
+            var url2 =
+              "http://localhost:3000/generate_certification/completeCert_leaving/" +
+              this.student_id;
+
+            this.http.get(url2).subscribe(
+              res => {
+
+                //alert("Successful");
+                this.router.navigate([
+                  "../",
+                  this.cookie.userid,
+                  "prepare_certification"
+                ]);
+                window.location.reload();
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
       } else {
         console.log(res.msg);
         alert("Error!! Try Again");
@@ -389,7 +415,8 @@ export class PrepareCertificationComponent implements OnInit {
       }
     });
     console.log(leavingCertApproval);
-
+    }
+  });
     // window.location.reload();
   }
 
@@ -413,29 +440,43 @@ export class PrepareCertificationComponent implements OnInit {
     console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/alcert";
 
-    this.http.post<any>(url, alCertApproval).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        // alert('Successful');
-        var url2 =
-          "http://localhost:3000/generate_certification/ompleteCert_education_al/" +
-          this.student_id;
 
-        this.http.get(url2).subscribe(
-          res => {
-            alert("Successful");
-            this.router.navigate([
-              "../",
-              this.cookie.userid,
-              "prepare_certification"
-            ]);
-            this.AlCertForm.reset();
-            window.location.reload();
-          },
-          err => {
-            console.log(err);
-          }
-        );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: "Are you sure want to submit?",
+        buttonText: {
+          ok: "Yes",
+          cancel: "No"
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.http.post<any>(url, alCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+
+            // this.StudentStatusForm.reset();
+            var url2 =
+              "http://localhost:3000/generate_certification/completeCert_education_al/" +
+              this.student_id;
+
+            this.http.get(url2).subscribe(
+              res => {
+
+                //alert("Successful");
+                this.router.navigate([
+                  "../",
+                  this.cookie.userid,
+                  "prepare_certification"
+                ]);
+                window.location.reload();
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
       } else {
         console.log(res.msg);
         alert("Error!! Try Again");
@@ -448,7 +489,8 @@ export class PrepareCertificationComponent implements OnInit {
       }
     });
     console.log(alCertApproval);
-
+    }
+  });
     // window.location.reload();
   }
 
@@ -467,29 +509,43 @@ export class PrepareCertificationComponent implements OnInit {
     console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/olcert";
 
-    this.http.post<any>(url, olCertApproval).subscribe(res => {
-      if (res.state) {
-        console.log(res.msg);
-        // alert('Successful');
 
-        var url2 =
-          "http://localhost:3000/generate_certification/completeCert_education_ol/" +
-          this.student_id;
-        this.OlCertForm.reset();
-        this.http.get(url2).subscribe(
-          res => {
-            alert("Successful");
-            this.router.navigate([
-              "../",
-              this.cookie.userid,
-              "prepare_certification"
-            ]);
-            window.location.reload();
-          },
-          err => {
-            console.log(err);
-          }
-        );
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: "Are you sure want to submit?",
+        buttonText: {
+          ok: "Yes",
+          cancel: "No"
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.http.post<any>(url, olCertApproval).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+
+            // this.StudentStatusForm.reset();
+            var url2 =
+              "http://localhost:3000/generate_certification/completeCert_education_ol/" +
+              this.student_id;
+
+            this.http.get(url2).subscribe(
+              res => {
+
+                //alert("Successful");
+                this.router.navigate([
+                  "../",
+                  this.cookie.userid,
+                  "prepare_certification"
+                ]);
+                window.location.reload();
+              },
+              err => {
+                console.log(err);
+              }
+            );
+
       } else {
         console.log(res.msg);
         alert("Error!! Try Again");
@@ -501,7 +557,8 @@ export class PrepareCertificationComponent implements OnInit {
       }
     });
     console.log(olCertApproval);
-
+    }
+  });
     // window.location.reload();
   }
 
