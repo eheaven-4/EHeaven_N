@@ -156,10 +156,11 @@
                       <p mat-line style="color: rgb(117, 117, 117)">
                         {{ cert.reqDate | date: "yyyy-MM-dd HH:mm:ss" }}
                       </p>
+                      <!-- {{cert._id}} -->
                       <button
                         type="button"
                         class="btn btn_1"
-                        (click)="viewCert('cert')"
+                        (click)="viewCert(cert._id)"
                       >
                         View
                       </button>

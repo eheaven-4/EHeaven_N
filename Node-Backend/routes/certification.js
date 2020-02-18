@@ -42,8 +42,7 @@ router.get("/pendingCert/:id", function(req, res) {
   // console.log("Hello");
   const id = req.params.id;
   requestCertification
-    .find({ certState: "Pending", userid: id })
-    // { $or: [ { <expression1> }, { <expression2> }, ... , { <expressionN> } ] }
+    .find({ $or: [ { certState: "Pending" }, { certState: "principalApproved" } ], userid: id })
     .sort({ _id: 1 })
     .select(
       "userid certName certType examName examYear examIndex reqDate certState"

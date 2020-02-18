@@ -239,7 +239,6 @@ export class PrepareCertificationComponent implements OnInit {
 
             this.http.get(url2).subscribe(
               res => {
-
                 this.router.navigate([
                   "../",
                   this.cookie.userid,
@@ -291,7 +290,6 @@ export class PrepareCertificationComponent implements OnInit {
     //console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/charactercert";
 
-
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: "Are you sure want to submit?",
@@ -314,7 +312,6 @@ export class PrepareCertificationComponent implements OnInit {
 
             this.http.get(url2).subscribe(
               res => {
-
                 //alert("Successful");
                 this.router.navigate([
                   "../",
@@ -327,21 +324,19 @@ export class PrepareCertificationComponent implements OnInit {
                 console.log(err);
               }
             );
-
-
-      } else {
-        console.log(res.msg);
-        alert("Error!! Try Again");
-        this.router.navigate([
-          "../",
-          this.cookie.userid,
-          "prepare_certification"
-        ]);
+          } else {
+            console.log(res.msg);
+            alert("Error!! Try Again");
+            this.router.navigate([
+              "../",
+              this.cookie.userid,
+              "prepare_certification"
+            ]);
+          }
+        });
+        console.log(characterCertApproval);
       }
     });
-    console.log(characterCertApproval);
-  }
-});
     // window.location.reload();
   }
 
@@ -390,7 +385,6 @@ export class PrepareCertificationComponent implements OnInit {
 
             this.http.get(url2).subscribe(
               res => {
-
                 //alert("Successful");
                 this.router.navigate([
                   "../",
@@ -403,20 +397,19 @@ export class PrepareCertificationComponent implements OnInit {
                 console.log(err);
               }
             );
-
-      } else {
-        console.log(res.msg);
-        alert("Error!! Try Again");
-        this.router.navigate([
-          "../",
-          this.cookie.userid,
-          "prepare_certification"
-        ]);
+          } else {
+            console.log(res.msg);
+            alert("Error!! Try Again");
+            this.router.navigate([
+              "../",
+              this.cookie.userid,
+              "prepare_certification"
+            ]);
+          }
+        });
+        console.log(leavingCertApproval);
       }
     });
-    console.log(leavingCertApproval);
-    }
-  });
     // window.location.reload();
   }
 
@@ -440,7 +433,6 @@ export class PrepareCertificationComponent implements OnInit {
     console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/alcert";
 
-
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
         message: "Are you sure want to submit?",
@@ -463,7 +455,6 @@ export class PrepareCertificationComponent implements OnInit {
 
             this.http.get(url2).subscribe(
               res => {
-
                 //alert("Successful");
                 this.router.navigate([
                   "../",
@@ -476,21 +467,20 @@ export class PrepareCertificationComponent implements OnInit {
                 console.log(err);
               }
             );
-
-      } else {
-        console.log(res.msg);
-        alert("Error!! Try Again");
-        this.router.navigate([
-          "../",
-          this.cookie.userid,
-          "prepare_certification"
-        ]);
-        window.location.reload();
+          } else {
+            console.log(res.msg);
+            alert("Error!! Try Again");
+            this.router.navigate([
+              "../",
+              this.cookie.userid,
+              "prepare_certification"
+            ]);
+            window.location.reload();
+          }
+        });
+        console.log(alCertApproval);
       }
     });
-    console.log(alCertApproval);
-    }
-  });
     // window.location.reload();
   }
 
@@ -508,7 +498,6 @@ export class PrepareCertificationComponent implements OnInit {
     this.student_id = this.OlCertForm.value.certDetails.studentId;
     console.log(this.student_id);
     var url = "http://localhost:3000/generate_certification/olcert";
-
 
     const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
       data: {
@@ -532,7 +521,6 @@ export class PrepareCertificationComponent implements OnInit {
 
             this.http.get(url2).subscribe(
               res => {
-
                 //alert("Successful");
                 this.router.navigate([
                   "../",
@@ -545,20 +533,19 @@ export class PrepareCertificationComponent implements OnInit {
                 console.log(err);
               }
             );
-
-      } else {
-        console.log(res.msg);
-        alert("Error!! Try Again");
-        this.router.navigate([
-          "../",
-          this.cookie.userid,
-          "prepare_certification"
-        ]);
+          } else {
+            console.log(res.msg);
+            alert("Error!! Try Again");
+            this.router.navigate([
+              "../",
+              this.cookie.userid,
+              "prepare_certification"
+            ]);
+          }
+        });
+        console.log(olCertApproval);
       }
     });
-    console.log(olCertApproval);
-    }
-  });
     // window.location.reload();
   }
 
@@ -571,16 +558,47 @@ export class PrepareCertificationComponent implements OnInit {
     var url =
       "http://localhost:3000/certification/acceptCert/" + certRequest._id; // accept certification requests
 
+      // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      //   data: {
+      //     message: "Are you sure want to submit?",
+      //     buttonText: {
+      //       ok: "Yes",
+      //       cancel: "No"
+      //     }
+      //   }
+      // });
+      // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      //   if (confirmed) {
+      //     this.http.post<any>(url, null).subscribe(res => {
+      //       if (res.state) {
+      //         console.log(res.msg);
+      //           err => {
+      //             console.log(err);
+      //           }
+      //         );
+      //       } else {
+      //         console.log(res.msg);
+      //         alert("Error!! Try Again");
+      //         this.router.navigate([
+      //           "../",
+      //           this.cookie.userid,
+      //           "prepare_certification"
+      //         ]);
+      //       }
+      //     });
+      //   }
+      // });
     this.http.post(url, null).subscribe(
       res => {
         alert("Successful");
+        window.location.reload();
       },
       err => {
         console.log(err);
       }
     );
 
-    window.location.reload();
+
   }
 
   rejectCert(certRequest) {
@@ -589,7 +607,9 @@ export class PrepareCertificationComponent implements OnInit {
     var url = "http://localhost:3000/certification/deleteCert"; // reject certification requests
 
     this.http.delete(url + "/" + objId).subscribe(
-      res => {},
+      res => {
+
+      },
       err => {
         console.log(err);
       }

@@ -202,7 +202,8 @@ export class CertificationComponent implements OnInit {
     }
   }
 
-  viewCert(x) {
-    console.log(x);
+  viewCert(certId) {
+    console.log(certId);
+    
   }
 }
