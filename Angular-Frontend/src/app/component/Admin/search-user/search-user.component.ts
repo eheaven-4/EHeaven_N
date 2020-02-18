@@ -120,36 +120,30 @@ export class SearchUserComponent implements OnInit {
   /**************************************************** */
   updateUser() {
     this.submitted = true;
-    console.log("error");
-    
     // stop here if form is invalid
     if (this.UserDataForm.invalid) {
-      console.log("error");
       return;
-    } else {
-      console.log("sa");
-
-      const formData = new FormData();
-
-      formData.append('profileImage', this.images)
-      formData.append('usertype', this.UserDataForm.value.usertype)
-      formData.append('userid', this.UserDataForm.value.userid)
-      formData.append('selectclass', this.UserDataForm.value.selectclass)
-      formData.append('name', this.UserDataForm.value.name)
-      formData.append('email', this.UserDataForm.value.email)
-      formData.append('password', this.UserDataForm.value.password)
-      formData.append('birthday', this.UserDataForm.value.birthday)
-      formData.append('mobilenumber', this.UserDataForm.value.mobilenumber)
-      formData.append('homenumber', this.UserDataForm.value.homenumber)
-      formData.append('gender', this.UserDataForm.value.gender)
-      formData.append('nationality', this.UserDataForm.value.nationality)
-      formData.append('nicnumber', this.UserDataForm.value.nicnumber)
-      formData.append('father', this.UserDataForm.value.father)
-      formData.append('mother', this.UserDataForm.value.mother)
-      formData.append('address', this.UserDataForm.value.address)
+    }
+    else {
+      const formData = {
+        usertype: this.UserDataForm.value.usertype,
+        userid: this.UserDataForm.value.userid,
+        selectclass: this.UserDataForm.value.selectclass,
+        name: this.UserDataForm.value.name,
+        email: this.UserDataForm.value.email,
+        password: this.UserDataForm.value.password,
+        birthday: this.UserDataForm.value.birthday,
+        mobilenumber: this.UserDataForm.value.mobilenumber,
+        homenumber: this.UserDataForm.value.homenumber,
+        gender: this.UserDataForm.value.gender,
+        nationality: this.UserDataForm.value.nationality,
+        nicnumber: this.UserDataForm.value.nicnumber,
+        father: this.UserDataForm.value.father,
+        mother: this.UserDataForm.value.mother,
+        address: this.UserDataForm.value.address,
+      }
 
       /****************************************************** */
-      console.log(this.UserDataForm.value.usertype);
       const url = 'http://localhost:3000/users/updateUser/';
 
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
@@ -164,19 +158,17 @@ export class SearchUserComponent implements OnInit {
       dialogRef.afterClosed().subscribe((confirmed: boolean) => {
         if (confirmed) {
 
-          this.http.post<any>(url + this.userid + "/" + this.propicName, formData).subscribe(res => {
+          this.http.post<any>(url + this.userid, formData).subscribe(res => {
             if (res.state) {
               console.log(res.msg);
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
-              // this.router.navigate(['/login']);
             }
             else {
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Error in Update User..! ", true ? "Retry" : undefined, config);
-              // this.router.navigate(['/register']);
             }
           });
           window.location.reload();
@@ -184,6 +176,46 @@ export class SearchUserComponent implements OnInit {
       })
     }
   }
+
+  //update profile picture function
+  updatePhoto() {
+    const formData = new FormData();
+
+    formData.append('profileImage', this.images)
+
+    /****************************************************** */
+    const url = 'http://localhost:3000/users/updateUserImage/';
+
+    const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {
+        message: 'Are you sure want to update?',
+        buttonText: {
+          ok: 'Yes',
+          cancel: 'No'
+        }
+      }
+    });
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+
+        this.http.post<any>(url + this.userid, formData).subscribe(res => {
+          if (res.state) {
+            console.log(res.msg);
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
+          }
+          else {
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            this.snackBar.open("Error in Update User..! ", true ? "Retry" : undefined, config);
+          }
+        });
+        window.location.reload();
+      }
+    })
+  }
+
 
   deleteUser() {
 
@@ -236,7 +268,7 @@ export class SearchUserComponent implements OnInit {
         newPassword: this.ResetPasswordForm.value.newpw,
         userid: this.userid
       }
-      
+
       const url = 'http://localhost:3000/users/adminResetPassword';
       /****************************************************** */
 

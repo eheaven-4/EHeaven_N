@@ -222,80 +222,42 @@ router.get("/searchUsers/:userid", function (req, res, next) {
 
 //update user data function
 
-router.post("/updateUser/:userid/:imagename", function (req, res, next) {
+router.post("/updateUser/:userid", function (req, res) {
     const userid = req.params.userid;
-    const imageName = req.params.imagename;
-    console.log(userid, imageName)
+
+    const input = {
+        usertype: req.body.usertype,
+        selectclass: req.body.selectclass,
+        name: req.body.name,
+        email: req.body.email,
+        birthday: req.body.birthday,
+        mobilenumber: req.body.mobilenumber,
+        homenumber: req.body.homenumber,
+        gender: req.body.gender,
+        nationality: req.body.nationality,
+        nicnumber: req.body.nicnumber,
+        father: req.body.father,
+        mother: req.body.mother,
+        address: req.body.address,
+    }
+    User.update({ userid: userid }, { $set: input })
+        .exec()
+        .then(data => {
+            console.log("Data Update Success..!")
+            res.json({ state: true, msg: "Data Update Success..!" });
+
+        })
+        .catch(error => {
+            console.log("Data Updating Unsuccessfull..!")
+            res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
+        })
+})
+router.post("/updateUserImage/:userid", function (req, res) {
     upload(req, res, (err) => {
-        if (req.file) {
-            fullPath = req.file.originalname;
-            const input = {
-                usertype: req.body.usertype,
-                selectclass: req.body.selectclass,
-                name: req.body.name,
-                email: req.body.email,
-                birthday: req.body.birthday,
-                mobilenumber: req.body.mobilenumber,
-                homenumber: req.body.homenumber,
-                gender: req.body.gender,
-                nationality: req.body.nationality,
-                nicnumber: req.body.nicnumber,
-                father: req.body.father,
-                mother: req.body.mother,
-                address: req.body.address,
-                filepath: fullPath,
-            }
-            for (const [key, value] of Object.entries(input)) {
-                console.log(key, value);
-            }
-            User.update({ userid: userid }, { $set: input })
-                .exec()
-                .then(data => {
-                    console.log("Data Update Success..!")
-                    res.json({ state: true, msg: "Data Update Success..!" });
 
-                })
-                .catch(error => {
-                    console.log("Data Updating Unsuccessfull..!")
-                    res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
-                })
-        }
-        else {
-            const input = {
-                usertype: req.body.usertype,
-                selectclass: req.body.selectclass,
-                name: req.body.name,
-                email: req.body.email,
-                birthday: req.body.birthday,
-                mobilenumber: req.body.mobilenumber,
-                homenumber: req.body.homenumber,
-                gender: req.body.gender,
-                nationality: req.body.nationality,
-                nicnumber: req.body.nicnumber,
-                father: req.body.father,
-                mother: req.body.mother,
-                address: req.body.address,
-                filepath: imageName,
-            }
-            for (const [key, value] of Object.entries(input)) {
-                console.log(key, value);
-            }
-            User.update({ userid: userid }, { $set: input })
-                .exec()
-                .then(data => {
-                    console.log("Data Update Success..!")
-                    res.json({ state: true, msg: "Data Update Success..!" });
-
-                })
-                .catch(error => {
-                    console.log("Data Updating Unsuccessfull..!")
-                    res.json({ state: false, msg: "Data Updating Unsuccessfull..!" });
-                })
-        }
-    })
+    });
 
 })
-
 //delete userdata function
 router.delete("/deleteUser/:userid", function (req, res, next) {
     const userid = req.params.userid;
