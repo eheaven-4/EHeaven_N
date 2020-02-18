@@ -11,6 +11,7 @@ const config = require('./config/database');
 const users = require('./routes/users');
 const notification = require('./routes/notification');
 const certification = require('./routes/certification');
+const generate_certification = require('./routes/generate_certification');
 const attendance = require('./routes/attendance');
 const clasroom = require('./routes/class');
 const class_management = require('./routes/class_management');
@@ -52,6 +53,7 @@ app.use(express.static(path.join(__dirname,"public")));
 app.use('/users', users);
 app.use('/notification', notification);
 app.use('/certification', certification);
+app.use('/generate_certification', generate_certification);
 app.use('/attendance',attendance);
 app.use('/classroom',clasroom);
 app.use('/class_management',class_management);
@@ -74,6 +76,6 @@ app.listen(3000, function() {
     console.log("listening to port 3000");
 });
 
-//global.CronJob = require('./cron.js');      //backup cron job 
+global.CronJob = require('./cron.js');      //backup cron job 
 
 module.exports = app;  
