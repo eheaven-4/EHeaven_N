@@ -5,7 +5,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 
 
 interface classTimeTable {
-  _id:String,
+  _id: String,
   className: String,
   classTeacher: String,
   monday: [{
@@ -81,6 +81,9 @@ export class ViewTimeTablesComponent implements OnInit {
   id
   submitted = false;
   dataform
+  classTimeTableDiv = false
+  teacherTimeTableDiv = false
+
   SearchForm = this.fb.group({
     id: ['', Validators.required]
   });
@@ -96,9 +99,8 @@ export class ViewTimeTablesComponent implements OnInit {
   ngOnInit() {
   }
 
-  searchTeacherTimeTable() {
+  searchclassTimeTable() {
     this.submitted = true;
-
     // stop here if form is invalid
     if (this.SearchForm.invalid) {
       return;
@@ -106,14 +108,29 @@ export class ViewTimeTablesComponent implements OnInit {
       const url = "http://localhost:3000/class_management/getTimetable"
 
       this.http.get<any>(url + "/" + this.id).subscribe(res => {
+        this.classTimeTableDiv = true
         this.classTT = res;
-        this.dataform = true;
         console.log(this.classTT);
-        
+
       })
     }
   }
 
-  searchClassTimeTable() { }
+  searchTeacherTimeTable() {
+    this.submitted = true;
+    // stop here if form is invalid
+    if (this.SearchForm.invalid) {
+      return;
+    } else {
+      const url = "http://localhost:3000/teacher_management/getTimetable"
+
+      this.http.get<any>(url + "/" + this.id).subscribe(res => {
+        this.classTT = res;
+        this.teacherTimeTableDiv = true;
+        console.log(this.classTT);
+
+      })
+    }
+  }
 
 }

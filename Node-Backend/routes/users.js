@@ -225,6 +225,7 @@ router.get("/searchUsers/:userid", function (req, res, next) {
 router.post("/updateUser/:userid/:imagename", function (req, res, next) {
     const userid = req.params.userid;
     const imageName = req.params.imagename;
+    console.log(userid, imageName)
     upload(req, res, (err) => {
         if (req.file) {
             fullPath = req.file.originalname;

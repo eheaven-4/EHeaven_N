@@ -109,14 +109,14 @@ export class AddTeacherTimetableComponent implements OnInit {
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Successfully Added..! ", true ? "Done" : undefined, config);
-            this.router.navigate(['/add_techr_tt']);
+            window.location.reload();
           }
           else {
             console.log(res.msg);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Adding Unsuccessfull..! ", true ? "Retry" : undefined, config);
-            this.router.navigate(['/add_techr_tt']);
+            // window.location.reload();
           }
         })
       }

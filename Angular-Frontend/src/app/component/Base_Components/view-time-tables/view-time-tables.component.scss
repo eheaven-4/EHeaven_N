@@ -24,14 +24,49 @@
   width: 10px;
   position: absolute;
 }
-.reg-form {
+.src-form {
   padding-top: 40px;
   padding-bottom: 50px;
 }
 
-.reg-frm {
+.src-frm {
   padding-top: 40px;
-  width: 90%;
   text-align: center;
   margin: auto;
+}
+.err_msg {
+  // margin-top: -15px;
+  color: red;
+  text-align: left;
+}
+.mt_card{
+  width: 100%;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.mt_head{
+  width: 100%;
+  margin-bottom: 10px;
+  height: 50px;
+  background-color: #1b5e35;
+}
+.mt_time{
+  width: 100%;
+  margin-bottom: 10px;
+  height: 50px;
+  background-color: #263238;
+}
+.data_head{
+  color: white;
+  font-weight: 500;
+}
+.data_time{
+  color: white;
+  font-weight: 500;
+}
+
+.clzName_teacher{
+  margin-left: 30px;
+  font-size: 30px;
+  color: rgb(0, 140, 255);
 }

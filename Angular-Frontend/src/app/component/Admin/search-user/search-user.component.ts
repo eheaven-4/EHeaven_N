@@ -114,18 +114,20 @@ export class SearchUserComponent implements OnInit {
       const file = event.target.files[0];
       this.images = file;
       this.filename = file.name;
-      console.log(this.filename);
     }
   }
 
   /**************************************************** */
   updateUser() {
     this.submitted = true;
-
+    console.log("error");
+    
     // stop here if form is invalid
     if (this.UserDataForm.invalid) {
+      console.log("error");
       return;
     } else {
+      console.log("sa");
 
       const formData = new FormData();
 
@@ -149,9 +151,6 @@ export class SearchUserComponent implements OnInit {
       /****************************************************** */
       console.log(this.UserDataForm.value.usertype);
       const url = 'http://localhost:3000/users/updateUser/';
-
-
-
 
       const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
         data: {
