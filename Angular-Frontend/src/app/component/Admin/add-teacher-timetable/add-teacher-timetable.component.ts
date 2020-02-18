@@ -13,6 +13,7 @@ import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/conf
 export class AddTeacherTimetableComponent implements OnInit {
 
   teacherName: String;
+  teacherId: String;
   M1: String; M2: String; M3: String; M4: String; M5: String; M6: String; M7: String; M8: String;
   T1: String; T2: String; T3: String; T4: String; T5: String; T6: String; T7: String; T8: String;
   W1: String; W2: String; W3: String; W4: String; W5: String; W6: String; W7: String; W8: String;
@@ -35,6 +36,7 @@ export class AddTeacherTimetableComponent implements OnInit {
 
     const timeTable = {
       teacherName: this.teacherName,
+      teacherId: this.teacherId,
       monday: [{
         one: this.M1,
         two: this.M2,
@@ -107,18 +109,17 @@ export class AddTeacherTimetableComponent implements OnInit {
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Successfully Added..! ", true ? "Done" : undefined, config);
-            this.router.navigate(['/add_techr_tt']);
+            window.location.reload();
           }
           else {
             console.log(res.msg);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Time table Adding Unsuccessfull..! ", true ? "Retry" : undefined, config);
-            this.router.navigate(['/add_techr_tt']);
+            // window.location.reload();
           }
         })
       }
     })
   }
-
 }

@@ -70,6 +70,7 @@ import { MailBoxComponent } from './component/Auth/mail-box/mail-box.component';
 import { Navbar2Component } from './component/Auth/navbar2/navbar2.component';
 import { UpcomingEventComponent } from './component/Admin/upcoming-event/upcoming-event.component';
 import { ResetPasswordComponent } from './component/Base_Components/reset-password/reset-password.component';
+import { ViewTimeTablesComponent } from './component/Base_Components/view-time-tables/view-time-tables.component';
 
 
 
@@ -114,6 +115,7 @@ import { ResetPasswordComponent } from './component/Base_Components/reset-passwo
     Navbar2Component,
     UpcomingEventComponent,
     ResetPasswordComponent,
+    ViewTimeTablesComponent,
     
   ],
 

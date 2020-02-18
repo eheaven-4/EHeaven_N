@@ -3,6 +3,7 @@ const Schema = mongoose.schema;
 
 const teacherTimeTableSchema = mongoose.Schema({
     teacherName: { type : String, require: true},
+    teacherId: { type : String, require: true},
     monday: [{ 
         one: {type: String, require: true},
         two: {type: String, require: true},

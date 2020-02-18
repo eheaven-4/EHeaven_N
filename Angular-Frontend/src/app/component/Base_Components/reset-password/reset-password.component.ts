@@ -90,7 +90,7 @@ export class ResetPasswordComponent implements OnInit {
             // window.location.reload();
           }
         })
-      }
+      }   
       else {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
