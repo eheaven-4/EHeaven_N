@@ -9,25 +9,25 @@ var fs = require('fs');
 
 var storage = multer.diskStorage({ 
   destination: function (req, file, cb) {
-    cb(null, 'local_storage/academic_Stuff/')
+    cb(null, 'local_storage/academic_Stuff/')   //acdemic stuff saving destinaltion
   },
   filename: function (req, file, cb) {
     let date_ob = new Date();
     let date = date_ob.getFullYear()+date_ob.getMonth()+date_ob.getHours() + date_ob.getMinutes()    
-    cb(null, date +file.originalname)
+    cb(null, date +file.originalname)   //set the file neme
   }
 });
 
 
-var upload = multer({ storage: storage }).single('academic_stuff');
+var upload = multer({ storage: storage }).single('academic_stuff');   
 
 //Add the academic lecture notes function
 router.post('/addStuff', function (req, res) {
   upload(req, res, (err) => {
     let date_ob = new Date();
     let date = date_ob.getFullYear()+date_ob.getMonth()+date_ob.getHours() + date_ob.getMinutes()    
-    var fullPath = date+req.file.originalname;
-    var document = {
+    var fullPath = date+req.file.originalname;    //set the full path to save data to database
+    var document = {    //deatabase saving object
       userid: req.body.userid,
       teachername: req.body.teachername,
       subject: req.body.subject,
@@ -38,7 +38,7 @@ router.post('/addStuff', function (req, res) {
     };
     // console.log(res)
     
-    var photo = new academicStuff(document);
+    var photo = new academicStuff(document);  //create new object
     photo.save()
       .then(result => {
         res.json({ state: true, msg: "Data Inserted Successfully..!" });
@@ -55,7 +55,7 @@ router.post('/addStuff', function (req, res) {
 router.get("/acad&stu&attachment/:class/:subName", function(req, res) {
   const className = req.params.class
   const subjectName = req.params.subName
-  academicStuff.find({class : className, subject: subjectName})
+  academicStuff.find({class : className, subject: subjectName})   //find by classname and subject name in databse
         .select('userid teachername subject attachmenttype class showname path')
         .exec()
         .then(docs => {
@@ -90,7 +90,7 @@ router.get("/acad&other&attachment/:userid/:subName", function(req, res) {
         });
 })
 
-//get attachment 
+//get attachment from the local storage
 router.get("/academicAttachment/:filename", function(req, res) {
   const filename = req.params.filename;
   res.sendFile(path.join(__dirname, '../local_storage/academic_Stuff/' + filename));
@@ -99,7 +99,7 @@ router.get("/academicAttachment/:filename", function(req, res) {
 //delete academic attachment details
 router.delete("/deleteAcademic/:_id", function(req,res) {
   const id = req.params._id;
-  academicStuff.remove({ _id: id })
+  academicStuff.remove({ _id: id }) //delete by document _id
       .exec()
       .then(result => {
           res.status(200).json({ state: true,

@@ -13,15 +13,11 @@
                         <h2 style="color:  rgb(0, 140, 255); font-weight: bold; padding-top: 50px">My Profile</h2>
                         <hr>
                     </div>
-<!-- 
-                    <div class="profile-pic">
-                        <mat-card *ngIf="profiledata">
-                            <img src="http://localhost:3000/users/profileImage/{{profiledata.filepath}}"
-                                class="profile_matcard">
-                        </mat-card>
-                    </div> -->
+
                     <div class="profile_data" style="padding-bottom: 50px">
                         <mat-card *ngIf="profiledata" style="margin-top: 50px;">
+
+                            <!-- profile picture div -->
                             <div class="profile-pic">
                                 <mat-card *ngIf="profiledata">
                                     <img src="http://localhost:3000/users/profileImage/{{profiledata.filepath}}"

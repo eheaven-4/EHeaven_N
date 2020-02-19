@@ -6,7 +6,6 @@ const { requestCertification } = require('../models/certification');
 
 
 //get unreaded mail count to the admin dashboard
-
 router.get("/mailCount", function (req, res) {
     ContactUs.find({ state: "pending" })
         .count()
@@ -25,7 +24,6 @@ router.get("/mailCount", function (req, res) {
 });
 
 //get count of certification requests accepted by the principal to the admin dashboard
-
 router.get("/preparecertCount", function (req, res) {
     requestCertification.find({ certState: "principalApproved" })
         .count()

@@ -34,54 +34,52 @@ export class LoginComponent implements OnInit {
    }
 
   userLogin() {
+    // get user login details
     const user = {
       userid: this.userid,
       password: this.password
     };
 
+    //login backend url
     var url = "http://localhost:3000/users/login";
 
-    if(user.userid == ''){
+    if(user.userid == ''){  //check users userid null or not
       let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
           this.snackBar.open("User ID is empty..! ", true ? "Retry" : undefined, config);
           return "userid empty";
     }
-    else if(user.password == ''){
+    else if(user.password == ''){ //check users password null or not
       let config = new MatSnackBarConfig();
       config.duration = true ? 2000 : 0;
       this.snackBar.open("Password is Empty..! ", true ? "Retry" : undefined, config);
       return "password empty";
     }
     else{
-      this.http.post<any>(url, user).subscribe(res => {
-        
-        
+      this.http.post<any>(url, user).subscribe(res => { //requested to data to the server to login
+    
         if (res.state == true) {
-          // 
-          // if user has loged successfully,response has user object it contain 
-          // user _id,userid,name,usertype this whole object set cookie as in our localstorage 
-          // with cookie name=userAuth and expire date =1
-          this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
-          var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
-          var id = myCookie.usertype;
+          this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);  //set cookeis, user data
+          var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));  //userdata convert to  JSON array
+          var id = myCookie.usertype;   //get user type from the cookies
           
-          if(id=="Administrator"){
+          /*here user type equal to the administrator redirected to the admin panel directlt*/
+          if(id=="Administrator"){  
             this.router.navigate([myCookie.userid,'admin_dashboard']);
             let config = new MatSnackBarConfig();
             config.duration = true ? 2000 : 0;
             this.snackBar.open("Successfully Logged In..! ", true ? "Done" : undefined, config);
             return "Log as admin";
-          }else if(id){
+          }else if(id){   //if other user logd in redirecto the menu 
             this.router.navigate([myCookie.userid,'menu']);
             return "Log as normal user";
-          }else{
+          }else{    //else redirected to the login form again
             this.router.navigate(['/login']);
             return "You are not a user"
           }
         }
         else {
-          console.log(res.msg);
+          //user login state false shows error message 
           let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
           this.snackBar.open("Username or Password Incorrect..! ", true ? "Retry" : undefined, config);

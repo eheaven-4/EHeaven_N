@@ -9,7 +9,7 @@ router.post("/sendMessage", function (req, res) {
 
     console.log(req.body);
 
-    const newData = new ContactUs({
+    const newData = new ContactUs({ //craete new object to add new mail data
         name: req.body.name,
         email: req.body.email,
         mobile: req.body.mobile,
@@ -18,10 +18,10 @@ router.post("/sendMessage", function (req, res) {
         date: Date(),
         state: "pending"
     })
-    console.log(newData);
+    // console.log(newData);
 
     const newMesage = new ContactUs(newData)
-    console.log(newMesage)
+    // console.log(newMesage)    
     newMesage.save()
         .then(result => {
             console.log(result)

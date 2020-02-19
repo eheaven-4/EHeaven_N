@@ -23,4 +23,23 @@ describe('CertificationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('is form valid when empty', () => {
+    let name = component.CertificationForm.controls["certName"];
+    name.setValue('TestName');
+
+    let type = component.CertificationForm.controls["certType"];
+    type.setValue('TestType');
+
+    let year = component.CertificationForm.controls["examYear"];
+    year.setValue('2015');
+
+    let eName = component.CertificationForm.controls["examName"];
+    eName.setValue('TesteName');
+
+    let index = component.CertificationForm.controls["examIndex"];
+    index.setValue('TestIndex');
+
+    expect(component.CertificationForm.valid).toBeTruthy();
+  });
 });

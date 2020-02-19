@@ -34,18 +34,18 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
 
+    //get event data
     const eventurl = 'http://localhost:3000/upcoming_event/topEvent';
     this.http.get<any>(eventurl).subscribe(res => {
       this.events = res.data;
-      console.log(res.data)
     }, (err) => {
     console.log(err);
     });
 
+    //get news feed data
     const url = 'http://localhost:3000/news/topNews';
     this.http.get<any>(url).subscribe(res => {
       this.news = res.data;
-      console.log(res.data)
     }, (err) => {
       console.log(err);
     });

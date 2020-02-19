@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ConfirmationDialogComponent } from '../../Auth/confirmation-dialog/confirmation-dialog.component';
 import { MatSnackBarConfig, MatSnackBar, MatDialog } from '@angular/material';
 
-interface lecSlide {
+interface lecSlide {    //one attachement detils class
   _id: String,
   userid: String,
   teachername: String,
@@ -39,16 +39,16 @@ export class AcademicsComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    var subject = this.route.snapshot.paramMap.get("sbjName")
-    var userCookies = JSON.parse(this.cookies.getCookie("userAuth"))
+    var subject = this.route.snapshot.paramMap.get("sbjName") //get the subject name from the url
+    var userCookies = JSON.parse(this.cookies.getCookie("userAuth"))    //get cookies
     this.userType = userCookies.usertype
     var userId = userCookies.userid
-    var className = userCookies.selectclass
-    console.log(className);
+    var className = userCookies.selectclass   //get class name
 
     const url1 = "http://localhost:3000/academics/acad&other&attachment/"
     const url2 = "http://localhost:3000/academics/acad&stu&attachment/"
 
+    //if the usertype Admin or teache call  request url1
     if (this.userType == 'Administrator' || this.userType == 'Teacher') {
       this.http.get<any>(url1 + userId + '/' + subject).subscribe(res => {
         this.lecSlide = res.data
@@ -56,6 +56,8 @@ export class AcademicsComponent implements OnInit {
 
       })
     }
+
+    //if usertype is studetnt or parent request url2
     if (this.userType == 'Student' || this.userType == 'Parent') {
       this.http.get<any>(url2 + className + '/' + subject).subscribe(res => {
         this.lecSlide = res.data
@@ -65,6 +67,7 @@ export class AcademicsComponent implements OnInit {
     }
   }
 
+  //delete the academic attachment
   deleteStuff(event, acad_id, file_path){
     var mybtnId = acad_id;
     var mybtnFile = file_path;

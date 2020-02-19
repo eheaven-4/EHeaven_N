@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router} from '@angular/router';
+import { Router } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
-import { faAt, faPhone, faMap , faMobile, faBirthdayCake, faVenusMars, faGlobeEurope} from '@fortawesome/free-solid-svg-icons';
+import { faAt, faPhone, faMap, faMobile, faBirthdayCake, faVenusMars, faGlobeEurope } from '@fortawesome/free-solid-svg-icons';
 
+//profile data class
 interface profile {
   usertype: String;
   userid: String;
@@ -28,13 +29,14 @@ interface profile {
 })
 export class ProfileComponent implements OnInit {
 
-  faVenusMars =faVenusMars
+  // decalre icons
+  faVenusMars = faVenusMars
   faAt = faAt
   faGlobeEurope = faGlobeEurope
   faPhone = faPhone
-  faBirthdayCake =faBirthdayCake
+  faBirthdayCake = faBirthdayCake
   faMap = faMap
-  faMobile  = faMobile
+  faMobile = faMobile
   profiledata: profile[] = []
 
   authtoken: any;
@@ -44,31 +46,30 @@ export class ProfileComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private cookies: MycookiesService,
-    private router:Router,
+    private router: Router,
   ) { }
 
   ngOnInit() {
-    
-    if(this.cookies.getCookie("userAuth")!=""){
 
-    
+    if (this.cookies.getCookie("userAuth") != "") { //check correct cookies availeble in the cookie storage And its null or not
+
       var myCookie = JSON.parse(this.cookies.getCookie("userAuth"))
-      this.id = myCookie.userid;
-      
+      this.id = myCookie.userid;    //TAKE userid 
+
       var url = "http://localhost:3000/users/profile";
 
       this.http.get<any>(url + '/' + this.id).subscribe(res => {
-        this.profiledata = res;
+        this.profiledata = res; //get profile data in to the profile dat array
       }, (err) => {
-        console.log(err);
+        console.log(err); //consloe log if error loading profile
       });
-    
-      if(this.router.url!='/'+this.id){
+
+      if (this.router.url != '/' + this.id) { //if router url have some problem. redirected to the oops page
         this.router.navigate(['/404']);
-        
+
       }
-    }else{
-      this.router.navigate(['/login']);
-    } 
+    } else {
+      this.router.navigate(['/login']);   //if has not cookies available redirect to the login page
+    }
   }
 }

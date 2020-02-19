@@ -14,35 +14,35 @@ interface yearArrray {
 }
 interface StudentsAverage {
   position: String
-  userid:String
+  userid: String
   username: String
   year: String
-  term:String
+  term: String
   average: String
   classname: String
 }
 
 class subjectsFilter {
-  classname:String
+  classname: String
   year: String
   term: String
   subject: String
   mark: String
   subId: String
 }
-interface allStudentMarks{
-  userid : String
-  mark : String
+interface allStudentMarks {
+  userid: String
+  mark: String
   name: String
 }
 
 /*teacher page*/
-interface allStudnetAverages{
+interface allStudnetAverages {
   userid: String
-  username : String
-  average : String
+  username: String
+  average: String
 }
-interface eachStudentData{
+interface eachStudentData {
   userid: String
   username: String
   term: String
@@ -50,8 +50,8 @@ interface eachStudentData{
   classname: String
   position: String
   average: String
-  dataArray : {
-    subject : String
+  dataArray: {
+    subject: String
     subId: String
     marks: String
   }
@@ -74,7 +74,7 @@ export class StudentProgressComponent implements OnInit {
   usertype
   cookie
   studentAverageDiv: boolean = false;
-  eachStuDataDiv : boolean = false;
+  eachStuDataDiv: boolean = false;
   submitted = false;
   subjectGraph = false;
   marksTable = false;
@@ -84,14 +84,14 @@ export class StudentProgressComponent implements OnInit {
   subject
   className
 
-  myYear: yearArrray[] = [];
-  mySubject: subjectsArray[] = [];
-  myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load years to the combo-box
-  stuClzAve: StudentsAverage[] = [];
-  stuSubMarks: subjectsFilter[] = []; //
-  allStuMarks : allStudentMarks[] = [];
-  allStudnetAverages : allStudnetAverages[] = []
-  eachStudentData : eachStudentData [] = []
+  myYear: yearArrray[] = []; //load the last 5 years in to the mat select*
+  mySubject: subjectsArray[] = [];    //load the all subject names
+  myTerm = ['1st Term', '2nd Term', '3rd Term',]  //load terms to the combo-box
+  stuClzAve: StudentsAverage[] = [];  //load sudent data with position and averages
+  stuSubMarks: subjectsFilter[] = []; //load all the marks of one subject
+  allStuMarks: allStudentMarks[] = [];  //load the all subject details of the student
+  allStudnetAverages: allStudnetAverages[] = [] //get all the student averages
+  eachStudentData: eachStudentData[] = []
 
   /*bar chart options*/
   barChartOptions: ChartOptions = {
@@ -178,7 +178,7 @@ export class StudentProgressComponent implements OnInit {
   subjectData(val) {
     /*Set all zeros to barChartData array in graph */
     for (var i = 0; i < 3; i++) {
-      this.barChartData[0].data[i]= 0
+      this.barChartData[0].data[i] = 0
     }
 
     this.subjectGraph = false;    //set bar graph to false
@@ -204,36 +204,29 @@ export class StudentProgressComponent implements OnInit {
       }
       this.barChartData[0].label = val.subject
       this.subjectGraph = true;     //set graph display
-      
-      
-      const objectData2 = {    //set data to the backend
-        term:val.term,
+
+
+      const objectData2 = {    //sent data to the backend
+        term: val.term,
         year: val.year,
         subId: val.subId,
-        classname :val.classname
+        classname: val.classname
       }
 
-      this.http.post<any>(url2,objectData2).subscribe(res=>{
-        
+      this.http.post<any>(url2, objectData2).subscribe(res => {
         this.allStuMarks = res;
-        console.log(this.allStuMarks);
-        
-        
       })
       this.marksTable = true
     })
   }
 
 
-  /*student average and position div*/
+  /*one student average and position div*/
   StudentData() {
     this.studentAverageDiv = false
     if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
     else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
     else if (this.DataForm1.value.term == '3rd Term') { this.term = 3 }
-
-    // this.year = this.DataForm.value.year
-    // this.className = this.DataForm.value.classname
 
     const Studata = {
       term: this.term,
@@ -246,13 +239,12 @@ export class StudentProgressComponent implements OnInit {
 
     this.http.post<any>(url, Studata).subscribe(res => {
       this.studentAverageDiv = true
-      console.log(res)
       this.stuClzAve = res;
     })
   }
 
   /*load all the student data into the page within that class*/
-  classStudentData(){
+  classStudentData() {
 
     if (this.DataForm1.value.term == '1st Term') { this.term = 1 }
     else if (this.DataForm1.value.term == '2nd Term') { this.term = 2 }
@@ -273,24 +265,23 @@ export class StudentProgressComponent implements OnInit {
     })
   }
 
-  studentDetails(stdata){    
+  // get one student data clicking tabele
+  studentDetails(stdata) {
     console.log(stdata);
-    const studentObject= {
-      term : stdata.term,
-      year : stdata.year,
-      classname : stdata.classname,
-      userid : stdata.userid,
-      average : stdata.average,
-      username : stdata.username,
-      position : stdata.position
+    const studentObject = {
+      term: stdata.term,
+      year: stdata.year,
+      classname: stdata.classname,
+      userid: stdata.userid,
+      average: stdata.average,
+      username: stdata.username,
+      position: stdata.position
     }
     const url = "http://localhost:3000/student_marks/oneStudentData"
-    this.http.post<any>(url,studentObject).subscribe(res => {
+    this.http.post<any>(url, studentObject).subscribe(res => {
       console.log(res)
       this.eachStudentData = res
-      console.log(this.eachStudentData);
-      this.eachStuDataDiv = true
-      
-    })    
+      this.eachStuDataDiv = true    //set data dive visual
+    })
   }
 }

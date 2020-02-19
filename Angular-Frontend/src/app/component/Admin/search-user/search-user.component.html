@@ -1,7 +1,7 @@
 <div class="row">
     <div class="container-fluid">
         <div class="row">
-            <div class="container-fluid" style="background-color:#F8F9FA; min-height: 750px;" >
+            <div class="container-fluid" style="background-color:#F8F9FA; min-height: 750px;">
 
                 <div>
                     <div class="container">
@@ -29,15 +29,13 @@
                         </form>
                     </div>
 
-                    <!-- {{userdata | json}} -->
-
+                    <!-- load data form with respect to mentioned userid -->
 
                     <div class="container" *ngIf="dataform == true">
                         <div style="padding-bottom: 50px">
                             <form class="text-center border p-5 reg-frm" [formGroup]="UserDataForm"
                                 style="background-color: white;">
                                 <div class="form-row mb-4">
-                                    <!-- {{UserDataForm.value | json}} -->
                                     <div class="col">
                                         <select class="browser-default custom-select mb-4 box_border" name="usertype"
                                             formControlName="usertype"
@@ -162,7 +160,8 @@
                                 <textarea style="margin-top: -30px; margin-bottom: 30px;" type="text"
                                     class="form-control box_border" placeholder="Address *" name="address"
                                     formControlName="address" [(ngModel)]="userdata.address"></textarea>
-                                <small class="form-text text-muted mb-4" style="margin-top: -20px; text-align: left">Address</small>
+                                <small class="form-text text-muted mb-4"
+                                    style="margin-top: -20px; text-align: left">Address</small>
 
                                 <input *ngIf="usertype == 'Student'" style="margin-bottom: 30px;" type="text"
                                     class="form-control box_border" placeholder="Father Name" name="father"
@@ -175,30 +174,7 @@
                                 <small *ngIf="usertype == 'Student'" class="form-text text-muted mb-4"
                                     style=" text-align: left">Mother Name</small>
 
-                                <input type="file" class="file_upload" style="display: none" name="profilepic"
-                                    accept="image/*" [uploader]="uploader" (change)="selectImage($event)" #fileInput>
-                                <!-- 
-                                <input #file type="file" accept='image/*' (change)="preview(file.files)" />
-                                <img [src]="imgURL" height="200" *ngIf="imgURL"> -->
 
-                                <div class="row">
-                                    <div class="col-md-4 profile-pic">
-                                        <mat-card *ngIf="userdata.filepath"><img
-                                                src="http://localhost:3000/users/profileImage/{{userdata.filepath}}"
-                                                class="profile_matcard">
-                                        </mat-card>
-                                        <!-- <p>{{userdata.filepath}}</p> -->
-                                    </div>
-                                    <div class="col-md-8" style="padding-top: 100px;">
-                                        <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
-                                            type="button" (click)="fileInput.click()" accept="image/*">Update Profile
-                                            Picture</button>
-                                        <small class="form-text text-muted mb-4"
-                                            style=" text-align: left; margin-top: -18px;">
-                                            {{filename}}
-                                        </small>
-                                    </div>
-                                </div>
                                 <div class="row">
                                     <div class="col-md-4">
                                         <button class="btn btn-info my-4 btn-block del_btn box_border" type="submit"
@@ -215,15 +191,50 @@
                                 </div>
                             </form>
                         </div>
+                    </div>
 
+                    <!-- profile picture updating div -->
+                    <div class="container" *ngIf="dataform == true">
+                        <div style="padding-bottom: 50px">
+                            <form class="text-center border p-5 reg-frm" [formGroup]="UserDataForm"
+                                style="background-color: white;">
+                                <input type="file" class="file_upload" style="display: none" name="profilepic"
+                                    accept="image/*" [uploader]="uploader" (change)="selectImage($event)" #fileInput>
+
+
+                                <div class="row">
+                                    <div class="col-md-4 profile-pic">
+                                        <mat-card *ngIf="userdata.filepath"><img
+                                                src="http://localhost:3000/users/profileImage/{{userdata.filepath}}"
+                                                class="profile_matcard">
+                                        </mat-card>
+                                        <!-- <p>{{userdata.filepath}}</p> -->
+                                    </div>
+                                    <div class="col-md-8" style="padding-top: 50px;">
+
+                                        <button class="btn btn-outline-primary my-4 btn-block box_border pick_btn"
+                                            type="button" (click)="fileInput.click()" accept="image/*">Select
+                                            Picture</button>
+                                        <small class="form-text text-muted mb-4"
+                                            style=" text-align: left; margin-top: -18px;">*Image file name should be followig format (userid.jpg)
+                                        </small>
+                                        <small class="form-text text-muted mb-4"
+                                            style=" text-align: left; margin-top: -18px;">
+                                            {{filename}}
+                                        </small>
+                                    </div>
+                                </div>
+                                <button class="btn btn-info my-4 btn-block reg_btn box_border" type="submit"
+                                    (click)="updatePhoto()">Update Profile Picture</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>
 
+            <!-- password reset div -->
             <div class="container-fluid" style="background-color:#F8F9FA" *ngIf="resetPasswordDiv == true">
-
                 <div>
-                 
                     <div class="container" style=" padding-bottom:50px">
                         <form style="background-color: White;" class="text-center border p-5 reg-frm"
                             [formGroup]="ResetPasswordForm">
@@ -249,9 +260,6 @@
                             </div>
                         </form>
                     </div>
-
-                    <!-- {{userdata | json}} -->
-
                 </div>
             </div>
         </div>
