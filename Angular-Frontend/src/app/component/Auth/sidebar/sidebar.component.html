@@ -11,7 +11,7 @@
                 </div>
             </div>
         </div>
-        <div class="sidebar_button" routerLink="./academic_subject" routerLinkActive="nav-link active ">
+        <div class="sidebar_button" routerLink="./academic_subject" routerLinkActive="nav-link active " >
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons">school</i>
@@ -45,7 +45,7 @@
         </div>
 
 
-        <div class="sidebar_button2" routerLink="./attendance" routerLinkActive="nav-link active ">
+        <div class="sidebar_button2" routerLink="./attendance" routerLinkActive="nav-link active" *ngIf="userDetail.usertype!='Teacher' ||userDetail.usertype!='Principal'">
             <div class="row">
                 <div class="col-md-1 icn">
                     <i class="material-icons">emoji_people</i>
@@ -55,16 +55,7 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="sidebar_button2" routerLink="/register"  routerLinkActive="nav-link active ">
-                <div class="row">
-                    <div class="col-md-1 icn">
-                        <i class="material-icons">emoji_people</i>
-                    </div>
-                    <div class="col-md-9 name">
-                        <p class="sidebar_links">Register</p>
-                    </div>
-                </div>
-            </div> -->
+        
 
         <div class="sidebar_button2" routerLink="./extra_curricular" routerLinkActive="nav-link active ">
             <div class="row">

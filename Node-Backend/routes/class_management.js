@@ -1,22 +1,20 @@
-const express = require('express')
-const router = express.Router()
-const { classTimeTable } = require('../models/class_management')
-const { academicSubject } = require('../models/class_management')
-const config = require('../config/database')
+const express = require('express');
+const router = express.Router();
+const { classTimeTable } = require('../models/class_management');
+const { academicSubject } = require('../models/class_management');
+const config = require('../config/database');
 
 //register new time table class
 router.post("/timeTableRegistration", function (req, res) {
-    const newData = req.body
-    // console.log(newTimeTabl)
-    const newTimeTable = new classTimeTable(newData)
-    console.log(newTimeTable)
+    const newData = req.body;
+    const newTimeTable = new classTimeTable(newData);
     newTimeTable.save()
         .then(result => {
-            console.log(result)
+            console.log(result);
             res.json({ state: true, msg: "Data Inserted Successfully..!" });
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
             res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
         })
 });
@@ -38,8 +36,8 @@ router.get('/getTimetable/:id', function (req, res) {
 
 //get all the names and class teachers names of class rooms 
 router.get("/classRoomsNames", function (req, res) {
-    console.log("Hello ")
-    classTimeTable.find()
+    
+    classTimeTable.find().sort({className : 1})
         .select('className classTeacher')
         .exec()
         .then(docs => {
@@ -47,34 +45,25 @@ router.get("/classRoomsNames", function (req, res) {
             res.json({ state: true, msg: "Data Transfered Successfully..!", data: docs });
         })
         .catch(error => {
-            console.log(error)
+            console.log(error);
             res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
 
-        })
+        });
 });
 
-//get Teachers name using class name 
+//geting Teacher name given class 
 router.get("/getClassTeacherName/:cName", function (req, res) {
     const cName = req.params.cName;
-    classTimeTable.findOne({ className: cName }, function (err, className) {
-        if (!className) {
-            res.json({ state: false, msg: "No class found..!" });
-            return;
-        }
-        if (className) {
-            classTimeTable.findOne({ className: cName })
-                .select('classTeacher')
-                .exec()
-                .then(docs => {
-                    console.log("Data Transer Success..!")
-                    res.json({ state: true, msg: "Data Transfered Successfully..!", data: docs });
+    classTimeTable.findOne({className:cName})
+        .select('classTeacher')
+            .exec()
+                .then(doc=>{
+                    res.json({ state: true, msg: "Data Transfered Successfully..!", data: doc });
                 })
-                .catch(error => {
-                    console.log(error)
+                .catch(error=>{
                     res.json({ state: false, msg: "Data Transfer Unsuccessfull..!" });
-                })
-        }
-    })
+                });
+    
 });
 
 /*Subject registration in to the database*/

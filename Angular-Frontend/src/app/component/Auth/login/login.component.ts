@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ) { }
   ngOnInit() {
-    if(this.cookies.logingstatus===true){
+    if(this.cookies.logingStatus===true){
       var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       this.router.navigate([myCookie.userid,'menu']);
     }

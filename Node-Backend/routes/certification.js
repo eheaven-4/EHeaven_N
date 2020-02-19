@@ -61,7 +61,7 @@ router.get("/pendingCert/:id", function(req, res) {
 });
 
 //get issued all certificates issued to a particular user
-router.get("/issuedCert/:id", function(req, res) {
+router.get("/issuedCert/:id", function(req, res) { 
   // console.log("Hello");
   const id = req.params.id;
   requestCertification

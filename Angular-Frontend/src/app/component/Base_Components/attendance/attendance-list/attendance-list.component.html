@@ -14,7 +14,7 @@
                         </div>
                         <div class="container" style="padding-top: 50px">
                             
-                            <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit(userForm)" novalidate *ngIf="mainflag">
+                            <form #userForm="ngForm" class="text-center border p-5 reg-frm " (ngSubmit)="onSubmit(userForm)" novalidate *ngIf="mainFlag">
                                 <div class="container">
                                     <div class="row" style="padding-top: 20px">
                                         <div class="col-md-2">
@@ -41,7 +41,7 @@
                                                 <mat-card-content>
                                                     <div class="row">
                                                         <div class="col-md-6" style="text-align: right">
-                                                            <mat-slide-toggle id="{{student.name}}" color="primary" value="{{i}}" name="{{i}}" (click)="count(i)" ngModel></mat-slide-toggle>
+                                                            <mat-slide-toggle id="{{student.name}}" color="primary"   name="{{i}}" (click)="count(i)" ngModel></mat-slide-toggle>
                                                         </div>
                                                         <div class="col-md-6" style="text-align: left">
                                                             <div>

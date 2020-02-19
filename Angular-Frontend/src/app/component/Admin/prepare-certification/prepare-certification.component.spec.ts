@@ -22,4 +22,20 @@ describe('PrepareCertificationComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('is form valid when empty', () => {
+    let name = component.StudentStatusForm.controls["studentId"];
+    name.setValue('S001');
+
+    let year = component.StudentStatusForm.controls["dateofAdmission"];
+    year.setValue('2015-01-01');
+
+    let eName = component.StudentStatusForm.controls["description"];
+    eName.setValue('TestDes');
+
+    let index = component.StudentStatusForm.controls["admissionNum"];
+    index.setValue('TestNum');
+
+    expect(component.StudentStatusForm.valid).toBeTruthy();
+  });
 });

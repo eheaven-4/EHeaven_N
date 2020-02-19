@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MycookiesService } from '../../Admin/mycookies.service';
-// import { CookieService } from 'ngx-cookie-service';
-import { NgFlashMessageService } from 'ng-flash-messages';
 import { MatSnackBar, MatDialog, MatSnackBarConfig } from '@angular/material';
 import { UserDetail } from '../../Userdetail';
 

@@ -163,7 +163,6 @@ export class CertificationComponent implements OnInit {
           examYear: this.CertificationForm.value.exam.examYear,
           examIndex: this.CertificationForm.value.exam.examIndex,
           reqDate: date,
-          // prinapprovState: 'Pending',
           certState: "Pending"
         };
 
@@ -204,6 +203,6 @@ export class CertificationComponent implements OnInit {
 
   viewCert(certId) {
     console.log(certId);
-    
+
   }
 }

@@ -28,14 +28,14 @@
                         </h3>
                         <div class="container" style="margin-top: 30px;margin-bottom: 130px;">
                           <div class="row" style="margin: auto;">
-                              <mat-card class="clsmatCard" *ngFor="let class of classlist; index as i" >
-                                <div class="row" (click)="goTo(class.classname, i)">
+                              <mat-card class="clsmatCard" *ngFor="let class of classList; index as i" >
+                                <div class="row" (click)="goTo(class.className, i)">
                                   <div class="col-md-2 ">
                                     <i class="material-icons" style="padding-top: 2px;">home_work</i>
                                   </div>
                                   <div class="col-md-8 ">
                                     <p style="margin-top: 2px; font-size: 18px; font-weight: 500;color:rgb(87, 86, 86) ">
-                                      {{ class.classname }}
+                                      {{ class.className }}
                                     </p>
                                   </div>
 
@@ -79,27 +79,40 @@
                           <div align="center" class="row"
                             style="margin-bottom: 20px ; margin-left: 30px;margin-right: 30px">
                             <div class="col-md-5">
-                              <input matInput [matDatepicker]="picker" placeholder="Choose a date" appearance="outline"
-                                #dateid required disabled />
+                              <input matInput [matDatepicker]="picker" placeholder="Choose a date" 
+                                #dateid  />
                             </div>
                             <div class="col-md-2" style="margin-top: -9px; margin-left: -55px">
                               <mat-datepicker-toggle matSuffix [for]="picker">
                               </mat-datepicker-toggle>
                               <mat-datepicker #picker disabled="false">
+                              
                               </mat-datepicker>
+                              <p align="left">
+                                <small *ngIf="dateErrFlag" style="color: red;">{{dateErro}}</small>
+                              </p>
                             </div>
+                            
+                            
                             <div class="col"></div>
                             <div class="col-5" style="margin-top: -20px;">
                               <mat-form-field>
                                 <mat-label>Select Class</mat-label>
-                                <mat-select #class>
+                                <mat-select #class required [formControl]="classControl">
                                   <mat-option>None</mat-option>
-                                  <mat-option *ngFor="let class of classlist" [value]="class.classname">
-                                    {{ class.classname }}</mat-option>
+                                  <mat-option *ngFor="let class of classList" [value]="class.className">
+                                    {{ class.className }}</mat-option>
                                 </mat-select>
+                                <mat-error *ngIf="classControl.hasError('required')">
+                                  This field is required
+                                </mat-error>
                               </mat-form-field>
                             </div>
-                            <!-- <div class="col-md-3"></div> -->
+                          </div>
+                          <div class="row" *ngIf="spanflageD" align="center" style="margin-left: 450px;margin-top: 1  0px;">
+                            <small  style="color: red;">
+                              No records found
+                            </small>
                           </div>
 
                           <div class="row" style="margin-left: 30px;margin-right: 30px;margin-top: 50px;">
@@ -107,11 +120,7 @@
                               <mat-icon>search</mat-icon>Search
                             </button>
                           </div>
-                          <div>
-                            <!-- <p *ngIf="spanflageD" style="color: red;">May
-                                                            be you entered date was a holiday.Please Enter valid
-                                                            date.</p> -->
-                          </div>
+          
                         </form>
                       </div>
                       <div *ngIf="!historyflagD">
@@ -175,29 +184,31 @@
                         &nbsp;By Student
                       </ng-template>
                       <div style="padding-bottom: 20px" *ngIf="historyflagS">
-                        <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStu(selected, user.value.stud)"
+                        <form class="text-center border p-5 reg-frm" (ngSubmit)="searchStudent(selected, user.value.stud)"
                           #user="ngForm">
                           <div class="container">
                             <div class="row">
                               <div class="col-md-6">
-                                <mat-form-field class="example-full-width">
-                                  <input matInput placeholder="Student ID or Name" name="stud" required ngModel />
-                                  <!-- <mat-error *ngIf="stu.invalid">{{getErrorMessage()}}</mat-error> -->
-                                  <mat-error></mat-error>
+                                <mat-form-field class="example-full-width" required>
+                                  <input matInput placeholder="Student ID" name="stud" required  ngModel />
+                                  <mat-error>You must enter a valid userid</mat-error>
                                 </mat-form-field>
                               </div>
                               <div class="col-md-4">
                                 <mat-form-field #month>
                                   <mat-label>Month</mat-label>
-                                  <mat-select [(value)]="selected">
+                                  <mat-select [(value)]="selected" required [formControl]="monthControl">
                                     <mat-option>None</mat-option>
                                     <mat-option *ngFor="let month of months; index as i" value="{{ i }}">{{ month }}
                                     </mat-option>
                                   </mat-select>
+                                  <mat-error *ngIf="monthControl.hasError('required')">
+                                    This field is required
+                                  </mat-error>
                                 </mat-form-field>
                               </div>
                               <div class="col-md-2">
-                                <button mat-raised-button class="reg_btn" style="width: 100%;margin-top: 10px">
+                                <button mat-raised-button class="reg_btn" style="width: 100%;margin-top: 10px" >
                                   <mat-icon>search</mat-icon>Search
                                 </button>
                               </div>

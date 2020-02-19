@@ -10,48 +10,48 @@ import {dateSearch} from './attend';
 })
 
 export class AttendenceService {
-  post_url='http://localhost:3000/attendance/addLog';
-  get_url='http://localhost:3000/attendance/received';
-  update_url='http://localhost:3000/attendance/update';
+
+  /**********  url using in http request **********/ 
+  postUrl='http://localhost:3000/attendance/addLog';
+  getUrl='http://localhost:3000/attendance/received';
+  
 
   
-  constructor(private _http:HttpClient) { }
+  constructor(private http:HttpClient) { }
+
+  /**********  Add new attedence sheet to database **********/ 
   logAdd(stu:AttendList){
-    return this._http.post<Attend>(this.post_url,stu);
+    return this.http.post<Attend>(this.postUrl,stu);
   }
-  retriveUsers(classname){
-    return this._http.get(this.get_url+'/'+classname);
+
+  /**********  retrive all users given class **********/ 
+  retriveUsers(className){
+    return this.http.get(this.getUrl+'/'+className);
   }
-  logUpdate(stu:Attend){
-    return this._http.post<Attend>(this.update_url,stu);
-  }
+
+  /**********  get   attendance sheet given date and given class **********/ 
   retriveDate(data:string){
-  
-  console.log(data);
 
-  // var temp=new dateSearch();
-  // temp.classname=classnm;
-  // temp.date=date;
-   var  get_date='http://localhost:3000/attendance/searchDate';
-   return this._http.get<any>(get_date,{params:{date:data}});
+    var  getDate='http://localhost:3000/attendance/searchDate';
+    return this.http.get<any>(getDate,{params:{date:data}});
 
   }
-  retriveStu(month:Number,stu:string){
-    console.log(stu+month);
-    var  get_Students='http://localhost:3000/attendance/searchStu/'+stu+'/'+month;
-    return this._http.get<any>(get_Students);
+
+  /**********  retrive list of attendance given student given month **********/ 
+  retriveStudent(month:Number,stu:string){
+    
+    var  getStudents='http://localhost:3000/attendance/searchStu/'+stu+'/'+month;
+    return this.http.get<any>(getStudents);
 
   }
+  /**********  getting list of class have marked attendance today **********/ 
   getStatus(){
-    var _url="http://localhost:3000/attendance/getstatus";
-    return this._http.get(_url);
+    var url="http://localhost:3000/attendance/getstatus";
+    return this.http.get(url);
   }
-  getclass(){
-    var _url="http://localhost:3000/classroom/getdata";
-    return this._http.get(_url);
-    // this.getStatus();
+  /**********  getting list of all classes existing database **********/ 
+  getClass(){
+    var url="http://localhost:3000/class_management/classRoomsNames";
+    return this.http.get<any>(url);
   }
-  
-
-
 }

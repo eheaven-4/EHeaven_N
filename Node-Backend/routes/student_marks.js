@@ -2,11 +2,10 @@ const express = require('express');
 const router = express.Router();
 const mark = require('../models/student_marks');
 const config = require('../config/database');
-// const users=require('../models/users');
 
-//bulk add marks
+
+// Adding new Mark sheet for databse
 router.post("/addLog", function (request, response) {
-    // console.log("hello");
 
     const newmarksheet = new mark({
         classname: request.body.classname,
@@ -16,14 +15,13 @@ router.post("/addLog", function (request, response) {
         subId: request.body.subId,
         subject:request.body.subject    
     });
-    // console.log(newmarksheet);
+    
     mark.addMark(newmarksheet, function (err, req) {
         if (err) {
-            console.log(err);
-            response.json({ state: false, msg: "Did not insert new attendance" });
+            response.json({ state: false, msg: "Did not insert new Marksheet" });
         }
         if (req) {
-            response.json({ state: true, msg: "New Attendence inserted" });
+            response.json({ state: true, msg: "New Marksheet inserted" });
         }
     });
 
@@ -34,7 +32,7 @@ router.post("/addLog", function (request, response) {
 router.post("/studentAverage", function (req, res) {
     var year = (req.body.year).toString();
     var term = (req.body.term).toString();
-    var classname = req.body.classname
+    var classname = req.body.classname;
 
     var dataArray1 = new Array();   //user to geta all the data in marks
     var dataArray2 = new Array();   //add userid, marks and name 

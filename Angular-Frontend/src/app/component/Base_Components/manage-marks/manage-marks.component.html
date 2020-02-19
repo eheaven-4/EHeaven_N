@@ -34,7 +34,7 @@
     
                                             <!-- {{CertificationForm.value | json}} -->
                                             <div class="col-md-4">
-                                                <button mat-raised-button class="search_btn" (click)="searchStudents($event, className)"><img
+                                                <button mat-raised-button class="search_btn" (click)="searchStudents(className)"><img
                                                         src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">
                                                     Search</button>
                                             </div>
@@ -51,21 +51,21 @@
                                         <div class="row" style="text-align:left">
                                             <div class="col-md-6">
                                                 <p class="top_txt">Subject : </p>
-                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject">
+                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="subject" [(ngModel)]="subject" name="subject" required>
                                                     <mat-option style="text-align: left" *ngFor='let subject of mySubject' [value]='subject.subId'>{{subject.subId}} - {{subject.subName}}</mat-option>
                                                 </mat-select>
                                             
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="top_txt">Year : </p>
-                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="year" [(ngModel)]="year" name="year">
+                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="year" [(ngModel)]="year" name="year" required>
                                                     <mat-option style="text-align: left" *ngFor='let year of myYear' [value]='year'>{{ year }}
                                                     </mat-option>
                                                 </mat-select>
                                             </div>
                                             <div class="col-md-3">
                                                 <p class="top_txt">Term : </p>
-                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="term" [(ngModel)]="term" name="term">
+                                                <mat-select class="browser-default custom-select mb-4 box_border" formControlName="term" [(ngModel)]="term" name="term" required>
                                                     <mat-option style="text-align: left" *ngFor='let term of myTerm' [value]="term">{{ term+" Term" }}
                                                     </mat-option>
                                                 </mat-select>
@@ -88,7 +88,7 @@
                                             </tbody>
                                         </table>
                                         <div class="row">
-                                            <button mat-raised-button class="search_btn" style="width:30%; margin: auto"  (click)="submitMarks()">
+                                            <button mat-raised-button class="search_btn" style="width:30%; margin: auto"  (click)="submitMarks()" [disabled]="StudentMarksForm.valid">
                                                 <img src="../../../../assets/icons/searchengin-brands.svg" style="width: 20px">Submit</button>
                                         </div>
                                     </mat-card>

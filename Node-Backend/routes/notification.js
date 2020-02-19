@@ -94,7 +94,7 @@ router.get('/approve/:_id', (req, res, next) => {
         });
 });
 
-//Delete a user by ID
+//Delete From database Notification
 router.delete('/delete/:_id', (req, res, next) => {
     const id = req.params._id;
     Notification.remove({ _id: id })
@@ -111,14 +111,13 @@ router.delete('/delete/:_id', (req, res, next) => {
             });
         });
 });
-
-//delete notification attachment from the local storage
+// delete attachment from local storage
 router.delete("/notAttachment/:filename", function (req, res) {
     const filename = req.params.filename;
-    console.log(filename)
+    console.log(filename);
     const path = 'local_storage/notification_attachment/' + filename;
     try {
-        fs.unlinkSync(path)
+        fs.unlinkSync(path);
         res.status(200).json({
             message: 'Delete the file successfully..!'
         })

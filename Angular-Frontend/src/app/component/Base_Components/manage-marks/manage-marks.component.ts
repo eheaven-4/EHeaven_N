@@ -34,7 +34,7 @@ interface subjectsArray {
   styleUrls: ['./manage-marks.component.scss']
 })
 export class ManageMarksComponent implements OnInit {
-
+// variable declaration I'm going to use
   className: String;
   ctName: classTeacher[] = [];
   csNames: students[] = [];
@@ -94,22 +94,24 @@ export class ManageMarksComponent implements OnInit {
   get f2() {
     return this.StudentMarksForm.controls;
   }
+  // setting mark for ith student in the students array this function bind for blur event
   setMark(i,mark){
+    if(mark!=""){
+      this.students[i].mark=mark;
+    }
     
-    
-    
-    this.students[i].mark=mark;
-
 
   }
+  // this function for reset forms
   onReset() {
     this.submitted = false;
     this.ClassSearchForm.reset();
     this.StudentMarksForm.reset();
   }
-
-  searchStudents(event,className) {
+  // this function run when user click find class without valid class it will nothing do
+  searchStudents(className) {
     this.submitted = true;
+    this.students=[];
 
     // stop here if form is invalid
     if (this.ClassSearchForm.invalid) {
@@ -121,68 +123,122 @@ export class ManageMarksComponent implements OnInit {
       this.FinalMark.classname=cName;
       
 
-      var url1 = "http://localhost:3000/class_management/getClassTeacherName"
-      var url2 = "http://localhost:3000/users/getStudentsNames/"
+      var url1 = "http://localhost:3000/class_management/getClassTeacherName";
+      var url2 = "http://localhost:3000/users/getStudentsNames/";
 
+      // sent get http request to express server
       this.http.get<any>(url1 + '/' + cName).subscribe(res => {
-        if (res.state == false) {
+        // if get false response it will show to the user 
+        if (!res.state) {
           let config = new MatSnackBarConfig();
           config.duration = true ? 2000 : 0;
+          config.verticalPosition='top';
           this.snackBar.open("Error find in data..! ", true ? "Retry" : undefined, config);
+          this.dataform=false;
         }
         else {
-          
+          // If entered class is exist , then send another get http request to express server  get all list of student who belongs to enterd class
 
           this.ctName = res.data
           this.http.get<any>(url2 + cName).subscribe(res => {
-            this.csNames = res.data
-           for(var i=0;i<this.csNames.length;i++){
-              var temp=new Mark();
-              temp.name=this.csNames[i].name.toString();
-              temp.userid=this.csNames[i].userid.toString();
-              console.log(temp);
-              this.students.push(temp);
-              this.dataform = true;
+            // if status is true
+            if(res.state){
+              // initialize to csNames variable data in respose 
+              // response data contain given class students names and userid's
+              this.csNames = res.data
+
+
+              for(var i=0;i<this.csNames.length;i++){
+                // for every student creatin mark object and stored names and userid's that variable and then push to our main array which is students
+                  var temp=new Mark();
+                  temp.name=this.csNames[i].name.toString();
+                  temp.userid=this.csNames[i].userid.toString();
+                  temp.mark=-1;
+                  
+                  this.students.push(temp);
+                  this.dataform = true;
+                }
+                
+            }else{
+              // this will show error ocured in backend
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              config.verticalPosition='top';
+              this.snackBar.open(res.msg, true ? "Retry" : undefined, config);
+              this.dataform=false;
             }
-            console.log(res.data);
+            
           })
-          console.log(res);
+          
         }
       });
 
     }
   }
-
+// Storing in database  mark sheet  
   submitMarks() {
-    const formData = new FormData();
-
-    console.log(this.StudentMarksForm.value.subject)
-    this.FinalMark.subject=this.StudentMarksForm.value.subject;
-    this.FinalMark.term=this.StudentMarksForm.value.term;
-    this.FinalMark.year=this.StudentMarksForm.value.year;
-    this.FinalMark.marks=this.students;
-    console.log(this.FinalMark);
-    this.http.post<any>('http://localhost:3000/student_marks/addLog',this.FinalMark)
-    .subscribe(
-      data => {
-        console.log('Success', data)
-        window.location.reload();
-      },
-      error =>{ 
-        console.error('Error!', error)
-        
-      
+    // validation checker
+    // for all student should be assign a mark
+    if (this.students.filter(e => e.mark === -1).length == 0 ) {
+    //  check year is inserted or no
+      if(this.StudentMarksForm.value.subject==null){
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        config.verticalPosition='top';
+        this.snackBar.open("Please select Subject", true ? "Ok" : undefined, config);
+        return;
       }
-    );
+      //  check year is inserted or no
+      if(this.StudentMarksForm.value.year==null){
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        config.verticalPosition='top';
+        this.snackBar.open("Please select year", true ? "Ok" : undefined, config);
+        return;
+      }
+      //  check year is inserted or no
+      if(this.StudentMarksForm.value.term==null){
+        let config = new MatSnackBarConfig();
+        config.duration = true ? 2000 : 0;
+        config.verticalPosition='top';
+        this.snackBar.open("Please select term", true ? "Ok" : undefined, config);
+        return;
+      }
+       // Add inserted data to database 
+      const formData = new FormData();
+      this.FinalMark.subject=this.StudentMarksForm.value.subject;
+      this.FinalMark.term=this.StudentMarksForm.value.term;
+      this.FinalMark.year=this.StudentMarksForm.value.year;
+      this.FinalMark.marks=this.students;
+      
+      // calling http post request  to the with marksheet
+      this.http.post<any>('http://localhost:3000/student_marks/addLog',this.FinalMark)
+      .subscribe(
+        data => {
+              let config = new MatSnackBarConfig();
+              config.duration = true ? 2000 : 0;
+              config.verticalPosition='top';
+              this.snackBar.open("Successfully data inserted", true ? "Ok" : undefined, config);
+              this.dataform=false;
+              window.location.reload();
+        },
+        error =>{ 
+          let config = new MatSnackBarConfig();
+          config.duration = true ? 10000 : 0;
+          config.verticalPosition='top';
+          this.snackBar.open("Data did't inserte. Somthing going wrong, please try again", true ? "Retry" : undefined, config);
+          
+        }
+      );
+    }else{
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 10000 : 0;
+      config.verticalPosition='top';
+      this.snackBar.open("You must enterd every field ", true ? "Ok" : undefined, config);
+
+    }
     
-
-    // formData.append('year', this.StudentMarksForm.value.year)
-    // formData.append('semester', this.StudentMarksForm.value.semester)
-    // console.log(formData.get('subject'));
-
-    // for (var i = 0; i < this.csNames.length; i++) {
-    //   formData.append('marks', this.csNames[i].name.value.);
-    // }
+    
 
   }
 }

@@ -19,7 +19,7 @@ const upload = multer({ storage: storage }).single('newsImage');
 
 // send data to database
 router.post("/add", (req, res) => {
-
+ 
     upload(req, res, (err) => {
 
         if (req.file) {

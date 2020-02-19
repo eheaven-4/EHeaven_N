@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { NgFlashMessageService } from 'ng-flash-messages';
-
-import { FormBuilder, Validators } from '@angular/forms';
-
 import {RegisterService} from '../register.service'; 
 import { MatSnackBarConfig ,MatSnackBar} from '@angular/material';
 
-
+ /********** This is template for one user(Class)  **********/
 export class  User{
   usertype:string;
   name:string;
@@ -30,60 +26,36 @@ export class  User{
 export class BulkaddComponent {
   filename;
   flag = false;
-  images: FileList = null;
   fileToUpload: File = null;
   Stringdata = '';
   users = [];
   userVisibale;
-  imageUrls;
+  imageUrls=[];
+  
   constructor(private register:RegisterService,public snackBar: MatSnackBar){ }
-
-
-  // load the image as the button event and asign to  the images variable
-  selectImage(event) {
-    if (event.target.files.length > 0) {  // check the file is select or not.
-      const file = event.target.files[0];
-      this.images = file;
-      this.filename = file.name;
-      console.log(this.filename)
-    }
-  }
+  
+  /**********  load the image as the button event and asign to  the images variable  **********/  
+ 
   handleFileInput(files: FileList) {
 
     this.fileToUpload = files.item(0);
-    console.log(files[0].name);
+   
   }
-  handleImages(files: FileList) {
-    // if(this.images==null){
-    this.images = files;
-    // }else{
+  
 
-    // }/
-    // console.log(files.length)
-    this.images = files;
-    // console.log(this.images.item(0).name);
-  }
-
-
+  /**********  Read input file and extratc each user one by one then display to user  **********/  
   bulkRegistration() {
     let fileReader = new FileReader();
     fileReader.readAsText(this.fileToUpload);
 
-
     fileReader.onload = (e) => {
       this.Stringdata = fileReader.result.toString();
-      // console.log(this.Stringdata);
       var Stringusers = this.Stringdata.split('\n');
       console.log(Stringusers.length);
 
-      // console.log(users);
       for (var i = 0; i < Stringusers.length; i++) {
 
-
-        // console.log(userstr);
         if (Stringusers[i] == '\n') {
-          console.log(Stringusers[i]);
-          // console.log(users);
           break;
         }
         var userstr = Stringusers[i].split(',');
@@ -114,7 +86,6 @@ export class BulkaddComponent {
         var temp = userstr[11].split(':');
         user.selectclass = temp[1];
         this.users.push(user);
-        // console.log(user);
       }
       this.userVisibale = new Array(this.users.length);
 
@@ -125,14 +96,9 @@ export class BulkaddComponent {
       
       this.flag = true;
       console.log(this.users);
-
-
-
     }
-
-
-
   }
+  /**********  Add users one by one.After this function call it will add to database ith position data in users object array   **********/ 
   addUser(i,reload){
     
     return this.register.addUser(this.users[i]).subscribe(res => {
@@ -144,7 +110,6 @@ export class BulkaddComponent {
         if(reload==1){
           window.location.reload();
         }
-        // this.ngProgress.done();
         return true;
         this.userVisibale[i]=false;
         
@@ -153,16 +118,17 @@ export class BulkaddComponent {
         let config = new MatSnackBarConfig();
         config.duration = true ? 2000 : 0;
         this.snackBar.open("Registration Unsuccessfull..! ", true ? "Retry" : undefined, config);
-        // this.router.navigate(['/register']);
         return false;
       }
     });
     
 
   }
+  /********** Remove user from array  **********/ 
   remove(i) {
     this.userVisibale[i] = false;
   }
+  /********** Add all  user from array  **********/
   addAll(){
     for(var i=0;i<this.users.length;i++){
       if(this.userVisibale[i]){
@@ -171,11 +137,11 @@ export class BulkaddComponent {
         }else{
           this.addUser(i,0);
         }
-        
       }
     }
     
   }
+   /********** Just reaload page  **********/
   removeAll() {
     window.location.reload();
   }

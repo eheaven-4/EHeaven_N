@@ -92,7 +92,7 @@ export class PrepareCertificationComponent implements OnInit {
   ];
   // ********************* Student Status Form ****************************************************************************
 
-  StudentStatusForm = this.fb.group({
+  StudentStatusForm = this.fb.group({ 
     studentId: ["", Validators.required],
     studentName: ["", Validators.required],
     admissionNum: ["", Validators.required],
@@ -558,36 +558,6 @@ export class PrepareCertificationComponent implements OnInit {
     var url =
       "http://localhost:3000/certification/acceptCert/" + certRequest._id; // accept certification requests
 
-      // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      //   data: {
-      //     message: "Are you sure want to submit?",
-      //     buttonText: {
-      //       ok: "Yes",
-      //       cancel: "No"
-      //     }
-      //   }
-      // });
-      // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-      //   if (confirmed) {
-      //     this.http.post<any>(url, null).subscribe(res => {
-      //       if (res.state) {
-      //         console.log(res.msg);
-      //           err => {
-      //             console.log(err);
-      //           }
-      //         );
-      //       } else {
-      //         console.log(res.msg);
-      //         alert("Error!! Try Again");
-      //         this.router.navigate([
-      //           "../",
-      //           this.cookie.userid,
-      //           "prepare_certification"
-      //         ]);
-      //       }
-      //     });
-      //   }
-      // });
     this.http.post(url, null).subscribe(
       res => {
         alert("Successful");
@@ -598,7 +568,7 @@ export class PrepareCertificationComponent implements OnInit {
       }
     );
 
-
+    window.location.reload();
   }
 
   rejectCert(certRequest) {
