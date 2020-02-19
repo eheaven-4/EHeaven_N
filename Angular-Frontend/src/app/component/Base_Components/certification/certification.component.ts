@@ -48,7 +48,7 @@ export class CertificationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient,
+    private http: HttpClient, 
     private cookies: MycookiesService
   ) {}
 
@@ -204,6 +204,6 @@ export class CertificationComponent implements OnInit {
 
   viewCert(certId) {
     console.log(certId);
-    
+
   }
 }

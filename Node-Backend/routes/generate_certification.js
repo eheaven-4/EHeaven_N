@@ -594,5 +594,10 @@ router.get("/completeCert_character/:_id", function(req, res) {
       });
   });
 
+  router.get("/view/:id", function (req, res) {
+    const certId = req.params.id;
+    console.log(certId);
+    // res.sendFile(path.join(__dirname, '../local_storage/notification_Attachment/' + filename));
+});
 
 module.exports = router;

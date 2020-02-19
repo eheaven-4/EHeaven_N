@@ -74,7 +74,7 @@ export class ExtraCurricularComponent implements OnInit {
   submitToApproval() {
     let myCookie = JSON.parse(this.cookies.getCookie('userAuth'));  // get userdate cookies from cookies
     this.userid = myCookie.userid;     // get userid from cookies
-    let date = Date(); // get todays date and time
+    let date = Date();
     //console.log('Hello at ');
     //console.log(this.extracurrForm.value , myCookie.usertype)
     if (this.userid) {
@@ -95,7 +95,7 @@ export class ExtraCurricularComponent implements OnInit {
         formData.append('achv', this.extracurrForm.value.sportclubs.achv)
         formData.append('date', date)
         formData.append('state', 'Pending')
-      
+ 
 
         let url = 'http://localhost:3000/student_extra/requestExtracurr';
 
