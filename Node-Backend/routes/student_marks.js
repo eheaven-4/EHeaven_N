@@ -129,7 +129,6 @@ router.get("/subjectMarks/:id", function (req, res) {
             // for(var i=0; i<dataArray2.length; i++){
             //     console.log(dataArray1.length);
             // }
-
             res.send(dataArray2)
         })
         .catch(error => {
