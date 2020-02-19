@@ -168,16 +168,12 @@
               <mat-tab label="PENDING APPROVAL">
                 <mat-card>
                   <mat-list>
-                    <mat-list-item *ngFor="let curr of extras">
+                    <mat-list-item *ngFor="let curr of pendingExtra">
                       <mat-icon mat-list-icon>note</mat-icon>
+                      <h3 mat-line>{{ curr.extracurrCat }}</h3>
+                      <h3 mat-line>{{ curr.extracurrname }}</h3>
                       <h3 mat-line>{{ curr.achv }}</h3>
-                      <h3 mat-line>Requested On :</h3>
-                      <p mat-line style="color: rgb(117, 117, 117)">
-                        {{ curr.date | date: "yyyy-MM-dd HH:mm:ss" }}
-                      </p>
-                      <h2 mat-line style="color: rgb(0, 20, 36)">
-                        Certificate Status : {{ curr.state }}
-                      </h2>
+
                     </mat-list-item>
                   </mat-list>
                 </mat-card>

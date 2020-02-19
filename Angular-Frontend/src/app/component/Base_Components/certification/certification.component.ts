@@ -48,7 +48,7 @@ export class CertificationComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private http: HttpClient, 
+    private http: HttpClient,
     private cookies: MycookiesService
   ) {}
 
@@ -163,7 +163,6 @@ export class CertificationComponent implements OnInit {
           examYear: this.CertificationForm.value.exam.examYear,
           examIndex: this.CertificationForm.value.exam.examIndex,
           reqDate: date,
-          // prinapprovState: 'Pending',
           certState: "Pending"
         };
 

@@ -46,7 +46,32 @@ router.post("/requestExtracurr", function (req, res) {
             if (request) {
                 res.json({ state: true, msg: "New record inserted" });
             }
-        });
+        }); 
     });
+
+    //extra_curricular requests from student
+
+    router.get("/pendingExtra/:id", function(req, res) {
+        // console.log("Hello");
+        const id = req.params.id;
+        requestExtracurr
+          .find({  userid: id })
+          .sort({ _id: 1 })
+          .select(
+            "userid extracurrCat desp extracurrname achv dateofAchv "
+          )
+          .exec()
+          .then(docs => {
+            console.log("Data Transfer Success.!");
+            res.status(200).json(docs);
+          })
+          .catch(error => {
+            console.log(error);
+            res.status(500).json({
+              error: error
+            });
+          });
+      });
+
 });
 module.exports = router;

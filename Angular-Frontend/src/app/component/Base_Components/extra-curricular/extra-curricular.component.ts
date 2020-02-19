@@ -4,11 +4,32 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { MycookiesService } from '../../Admin/mycookies.service';
 
+
+interface Extra {
+  _id: String;
+  userid: String;
+  extracurrCat: String;
+  desp: String;
+  dateofMembership: String;
+  extracurrname: String;
+  type: String;
+  reqDate: String;
+  compName: String;
+  dateofAchv: String;
+  achv: String;
+  state: String;
+  filapath: String;
+}
+
 @Component({
   selector: 'app-extra-curricular',
   templateUrl: './extra-curricular.component.html',
   styleUrls: ['./extra-curricular.component.scss']
 })
+
+
+
+
 export class ExtraCurricularComponent implements OnInit {
 
   flag = false;
@@ -17,6 +38,8 @@ export class ExtraCurricularComponent implements OnInit {
   value: String = '';
   userid: String;
   cookie = JSON.parse(this.cookies.getCookie('userAuth'));
+
+  pendingExtra: Extra[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -49,9 +72,9 @@ export class ExtraCurricularComponent implements OnInit {
   extras = [
     'Chess',
     'Cricket',
-    'bla',
-    'bla',
-    'bla'
+    'Rugby',
+    'Badminton',
+    'Squash'
   ];
 
   type = [
@@ -62,6 +85,17 @@ export class ExtraCurricularComponent implements OnInit {
     'International',
   ];
   ngOnInit() {
+    let date = Date();
+    let myCookie = JSON.parse(this.cookies.getCookie("userAuth")); // get userdate cookies from cookies
+    let id = myCookie.userid;
+
+    //pending extra-curr requests
+    let pendingUrl = "http://localhost:3000/student_extra/pendingExtra";
+
+    this.http.get<any>(pendingUrl + "/" + id).subscribe(res => {
+      console.log(res);
+      this.pendingExtra = res;
+    });
   }
   selectImage(event) {
     if (event.target.files.length > 0) {  // check the file is select or not.
@@ -95,7 +129,7 @@ export class ExtraCurricularComponent implements OnInit {
         formData.append('achv', this.extracurrForm.value.sportclubs.achv)
         formData.append('date', date)
         formData.append('state', 'Pending')
- 
+
 
         let url = 'http://localhost:3000/student_extra/requestExtracurr';
 
@@ -103,11 +137,13 @@ export class ExtraCurricularComponent implements OnInit {
           if (res.state) {
             console.log(res.msg);
             alert('Successfully Requested..!');
+            window.location.reload();
             this.extracurrForm.reset();
             this.router.navigate(['../', this.cookie.userid, 'extra_curricular']);
           } else {
             console.log(res.msg);
             alert('Unsuccessfull..!');
+            window.location.reload();
             this.router.navigate(['../', this.cookie.userid, 'extra_curricular']);
           }
         });
