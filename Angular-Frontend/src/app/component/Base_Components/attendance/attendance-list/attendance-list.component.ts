@@ -3,11 +3,8 @@ import {AttendenceService} from '../attendence.service';
 import {Returnuser} from '../attend';
 import {Attend} from '../attend';
 import {AttendList} from '../attend';
-import {Attendreturn} from '../attend';
-import {FormBuilder,Validators,FormControl} from '@angular/forms';
-import { Router } from '@angular/router';
 import { MycookiesService} from '../../../Admin/mycookies.service';
-import { HttpParams } from '@angular/common/http';
+import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'app-attendance-list',
@@ -16,55 +13,47 @@ import { HttpParams } from '@angular/common/http';
 })
 export class AttendanceListComponent implements OnInit {
 
-@Input('parentData') public classname;
 
-
-public usercookie=JSON.parse(this.cookie.getCookie("userAuth"));
-public students:Array<Returnuser>;
-public attendRecord:Attend[];
-
-
-public i=0;
-public numberOfStudent=0;
-public presentStu=0;
-public mainflag=true;
-// public historyflagD=true;
-// public historyflagS=true;
-// public data=new Attendreturn();
-public today=new Date();
-// public spanflageD=false;
-// public spanflageS=false;
-public c_url=null;
-public toggle;
-// public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
-stu = new FormControl('', [Validators.required]);
-
+  /**********  variable declaration **********/ 
+  @Input('parentData') public className; //get selected class from parent component which is attendance component 
+  public userCookie=JSON.parse(this.cookie.getCookie("userAuth"));
+  public students:Array<Returnuser>;
+  public attendRecord:Attend[];
+  public i=0;
+  public numberOfStudent=0;
+  public presentStu=0;
+  public mainFlag=true;
+  public today=new Date();
+  public toggle;
   
-
-
-  constructor(private attendanceservice:AttendenceService,
-    private inputs:FormBuilder,
-    private router : Router,
-    private cookie:MycookiesService
-    ) { }
-  public attendacelist=this.inputs.group({
-    
-  })
+  
+  constructor(
+              private attendanceService:AttendenceService,
+              private cookie:MycookiesService,
+              private snackBar:MatSnackBar
+              ) { }
+  
   ngOnInit() {
-    
-    this.attendanceservice.retriveUsers(this.classname)
+
+    /**********  retrive all students belongs to selcted className **********/ 
+    this.attendanceService.retriveUsers(this.className)
     .subscribe((data:Returnuser[])=>{
       this.students=data;
       this.numberOfStudent=data.length;
       this.toggle=new Array(this.numberOfStudent);
+
+      /**********  make an array for display in frontend show relevant student has presenet or absent **********/ 
+     /**********  default it present **********/  
       for (var j=0;j<this.numberOfStudent;j++){
         this.toggle[j]="Absent";
+        
       }
     });
   }
   
  
-  
+  /**********  this function occur when the toggle button click **********/ 
+  /**********  Just change the value after clicked student **********/ 
   count(index){
     if(this.toggle[index]=="Present"){
       this.presentStu--;
@@ -75,10 +64,15 @@ stu = new FormControl('', [Validators.required]);
       this.toggle[index]="Present";
     }
   }
+  
+  /**********  creating attendance sheet and stroring attendance sheet in database **********/ 
   onSubmit(userForm){
     var attendList=[];
-    this.mainflag=false;
+    this.mainFlag=false;
+    window.scrollTo(0,5);
     const student = Object.entries(userForm.value);
+    
+    /**********  creating each student attendance separatly **********/ 
     for (const [i,attend] of student) {
       var newRec=new Attend();
       newRec.name=this.students[i].name;
@@ -100,48 +94,32 @@ stu = new FormControl('', [Validators.required]);
       attendList.push(newRec);
       
     }
+
+    /**********  make final attendance sheet **********/ 
     var FinalList=new AttendList();
-    FinalList.class=this.classname;
-    FinalList.markedby=this.usercookie.userid;
+    FinalList.class=this.className;
+    FinalList.markedby=this.userCookie.userid;
     FinalList.atendList=attendList;
-    console.log(FinalList);
-    this.attendanceservice.logAdd(FinalList)
+    
+    /**********  store in database **********/ 
+    this.attendanceService.logAdd(FinalList)
        .subscribe(
-          data=>console.log('Success',data),
-          error=>console.error('Error!',error)
+          data=>{
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            config.verticalPosition='top';
+            this.snackBar.open("Attendance sheet successfully entered!!!!!!!!", true ? "Ok" : undefined, config);
+          },
+          error=>{
+            let config = new MatSnackBarConfig();
+            config.duration = true ? 2000 : 0;
+            config.verticalPosition='top';
+            this.snackBar.open("Attendance sheet not entered!!!!!!!!", true ? "Retry" : undefined, config);
+            this.mainFlag=true;
+          }
        )
     
   }
-  // searchStu(month:string,stu:string){
-  //   this.historyflagS=false;
-  //   var temp=parseInt(month)
-  //   temp+=1;
-  //   console.log(stu,temp);
-  //   this.attendanceservice.retriveStu(temp,stu)
-  //   .subscribe((data)=>{
-  //     if(data.length==0){
-  //       this.historyflagS=true;
-  //       this.spanflageS=true;
-  //     }else{
-  //       this.searchStuResult=data;
-  //       console.log(this.searchStuResult);
-  //     }
-  //   });
-  // }
-  // searchDate(value:string,classnm:string){
-  //   var params=value+";"+classnm;
-  //   this.historyflagD=false;
-  //   this.attendanceservice.retriveDate(params)
-  //   .subscribe((data)=>{
-  //     if(data.length==0){
-  //       this.historyflagD=true;
-  //       this.spanflageD=true;
-  //     }else{
-  //       console.log(this.searchDateResult);
-  //       this.searchDateResult=data;
-  //     }
-  //   });
-    
-  // }
+  
 
 }

@@ -114,6 +114,9 @@ router.post("/register", function (req, res) {
     });
 });
 
+// user Bulk registration function 
+// but it will come to backend one by one it handle on frontend
+
 router.post("/bulkUserRegistration", function (req, res) {
     console.log("hello");
     var newUser = new User({
@@ -178,22 +181,26 @@ router.get("/profileImage/:filename", function (req, res) {
 
 
 
-//get users ids names using select class name
+//get users ids names using given class name
 router.get("/getStudentsNames/:cName", function (req, res, next) {
     const cName = req.params.cName;
     User.find({ selectclass: cName })
-        .select('userid name')
-        .exec()
-        .then(data => {
-            console.log("Data Transfer Success..!")
-            res.json({ state: true, msg: "Data Transfer Success..!", data: data });
+            .select('userid name')
+                .exec()
+                    .then(data => {
+                        if(data.length>0){
+                            res.json({ state: true, msg: "Data Transfer Success..!", data: data });
+                        }else{
+                            res.json({ state: false, msg: "This class hasn't any student!"});
+                        }
+            
 
-        })
-        .catch(error => {
-            console.log("Data Transfer Unsuccessfull..!")
-            res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
-        })
-})
+                })
+                .catch(error => {
+                    
+                    res.json({ state: false, msg: "Data Inserting Unsuccessfull..!" });
+                });
+});
 
 /*searth user function*/
 

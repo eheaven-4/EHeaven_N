@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {ClassRoom} from '../../Admin/class-registration/Classroom';
 import {AttendenceService} from './attendence.service';
 import { Attendreturn } from './attend';
+import { MatSnackBarConfig, MatSnackBar } from '@angular/material';
+import { FormControl, Validators } from '@angular/forms';
 
 
 @Component({
@@ -9,89 +11,143 @@ import { Attendreturn } from './attend';
   templateUrl: './attendance.component.html',
   styleUrls: ['./attendance.component.scss']
 })
+ /********** Main attendance component **********/
 export class AttendanceComponent implements OnInit {
-  classlist:Array<ClassRoom>;
-
+   /********** public variables declaration  **********/
+  classList:Array<ClassRoom>;
   flag=true;
   class:string;
   status;
   searchdate;
-  public searchStuResult;
-  public searchDateResult:[];
-  public historyflagD=true;
-  public historyflagS=true;
-  public data=new Attendreturn();
-  public spanflageD=false;
-  public spanflageS=false;
-  public months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  searchStuResult;
+  searchDateResult:[];
+  historyflagD=true;
+  historyflagS=true;
+  data=new Attendreturn();
+  spanflageD=false;
+  spanflageS=false;
+  dateErrFlag=false;
+  dateErro;
+  months=['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'];
+  classControl = new FormControl('', Validators.required);
+  monthControl = new FormControl('', Validators.required);
 
-  constructor(private attendanceservice:AttendenceService){}
+  constructor(private attendanceService:AttendenceService,private snackBar:MatSnackBar){}
 
   ngOnInit(){
+    /********** retrive all classes **********/ 
+    this.attendanceService.getClass()
+      .subscribe((response)=>{
+        this.classList=response.data;
+        this.status=new Array(this.classList.length);
 
-    this.attendanceservice.getclass()
-    .subscribe((data:ClassRoom[])=>{
-      this.classlist=data;
-      this.status=new Array(this.classlist.length);
-      this.attendanceservice.getStatus().subscribe((data:[])=>{
-        console.log(data);
-        for(var i=0;i<this.classlist.length;i++){
-          this.status[i]=true;
+        /********** this function return array of classnames which already has marked attendance **********/ 
+        this.attendanceService.getStatus().subscribe((marked:[])=>{
+
+        /********** getting status array to check wether relevent class attendance has marked or not **********/ 
+        /********** set default all classes status as true **********/ 
+        for(var i=0;i<this.classList.length;i++){
+            this.status[i]=true;
         }
-        for(var i=0;i<this.classlist.length;i++){
-          for(var j=0;j<data.length;j++){
-            if(data[j] == this.classlist[i].classname){
+        /********** then compare with marked array class list an set false as status which is already marked **********/ 
+        for(var i=0;i<this.classList.length;i++){
+          for(var j=0;j<marked.length;j++){
+            if(marked[j] == this.classList[i].className){
               this.status[i]=false;
             }
           }
         }
       });
-      console.log(this.classlist);
     });
   }
+
+  /**********  this function will locate clicked class student name list to mark attendance **********/ 
+  /**********  if and only if that clicked classe status true which is not marked yet **********/ 
   goTo(name,i){
     if(this.status[i]){
 
       this.flag=false;
       this.class=name;
+    }else{
+      let config = new MatSnackBarConfig();
+      config.duration = true ? 2000 : 0;
+      config.verticalPosition='top';
+      this.snackBar.open("This class already marked!!!!!!!!", true ? "Retry" : undefined, config);
+          
     }
   }
+
+  /**********  back to the classList again **********/ 
   showclass(){
     window.scrollTo(0,5);
     this.ngOnInit();
     this.flag=true;
   }
-  searchStu(month:string,stu:string){
-    this.historyflagS=false;
+
+  /**********  finding list of attendance given student of given month **********/ 
+  searchStudent(month:string,stu:string){
+
+    console.log(month);
+    console.log(stu);
     var temp=parseInt(month)
     temp+=1;
-    console.log(stu,temp);
-    this.attendanceservice.retriveStu(temp,stu)
-    .subscribe((data)=>{
-      if(data.length==0){
-        this.historyflagS=true;
-        this.spanflageS=true;
-      }else{
-        this.searchStuResult=data;
-        console.log(this.searchStuResult);
-      }
-    });
+    if(month == null || stu.length==0){
+      return;
+    }else{
+        this.attendanceService.retriveStudent(temp,stu)
+        .subscribe((data)=>{
+          if(data.length==0){
+            this.spanflageS=true;
+          }else{
+            this.historyflagS=false;
+            this.searchStuResult=data;
+            console.log(this.searchStuResult);
+          }
+        });
+    }
+    
   }
-  searchDate(value:string,classnm:string){
-    this.class=classnm;
-    this.searchdate=value;
 
-    var params=value+";"+classnm;
-    this.historyflagD=false;
-    this.attendanceservice.retriveDate(params)
+  /********** Finding Attendance sheet given class ,given date **********/ 
+  searchDate(date:string,classNm:string){
+    this.class=classNm;
+    this.searchdate=date;
+  /**********validating given two field **********/ 
+    if(date.length==0){
+      this.dateErro="Please select a date";
+      this.dateErrFlag=true;
+    }else{
+      var temp=date.split("/");
+      var dateObject=new Date(parseInt(temp[2]),parseInt(temp[1])-1,parseInt(temp[0]));
+      var today=new Date();
+      var todayStart=new Date(today.getFullYear(),today.getMonth(),today.getDate());
+      console.log(today.getMonth());
+      console.log(today);
+      console.log(dateObject)
+      if(dateObject>todayStart){
+        // this.dateErrFlag=true;
+        // this.dateErro="Insert valid date";
+        // return;
+      }else{
+        this.dateErrFlag=false;
+      }
+      
+    }
+    if(classNm==null){
+      return;
+    }
+     /**********  create params variable which is contain search date and class in a one variable separating ';'**********/
+      /********** It will pass in get request paramiter **********/  
+    var params=date+";"+classNm;
+    this.attendanceService.retriveDate(params)
     .subscribe((data)=>{
       if(data.length==0){
-        this.historyflagD=true;
         this.spanflageD=true;
       }else{
-        console.log(data)
+        
         this.searchDateResult=data[0];
-        console.log(this.searchDateResult);
+        this.spanflageD=false;
+        this.historyflagD=false;
       }
     });
 

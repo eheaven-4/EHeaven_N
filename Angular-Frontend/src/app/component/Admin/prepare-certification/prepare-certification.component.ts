@@ -227,40 +227,40 @@ addSubjectOl() {
             //this.StudentStatusForm.reset();
             var url2 = "http://localhost:3000/certification/completeCert_studentStatus/"+this.student_id;
 
-              this.http.get(url2).subscribe(res => {
-                alert('Successful');
-                this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
-                window.location.reload();
-              }, (err) => {
-                console.log(err);
-              });
-              // const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
-              //   data: {
-              //     message: 'Are you sure want to update?',
-              //     buttonText: {
-              //       ok: 'Yes',
-              //       cancel: 'No'
-              //     }
-              //   }
+              // this.http.get(url2).subscribe(res => {
+              //   alert('Successful');
+              //   this.router.navigate(['../',this.cookie.userid,'prepare_certification']);
+              //   window.location.reload();
+              // }, (err) => {
+              //   console.log(err);
               // });
-              // dialogRef.afterClosed().subscribe((confirmed: boolean) => {
-              //   if (confirmed) {
-              //     this.http.get(url2).subscribe(res => {
-              //       if (res.state) {
-              //         console.log(res.msg);
-              //         let config = new MatSnackBarConfig();
-              //         config.duration = true ? 2000 : 0;
-              //         this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
-              //       }
-              //       else {
-              //         let config = new MatSnackBarConfig();
-              //         config.duration = true ? 2000 : 0;
-              //         this.snackBar.open("Error in processing request", true ? "Retry" : undefined, config);
-              //       }
-              //     });
-              //     // window.location.reload();
-              //   }
-              // })
+              const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+                data: {
+                  message: 'Are you sure want to update?',
+                  buttonText: {
+                    ok: 'Yes',
+                    cancel: 'No'
+                  }
+                }
+              });
+              dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+                if (confirmed) {
+                  this.http.get(url2).subscribe(res => {
+                    if (res) {
+                      console.log(res);
+                      let config = new MatSnackBarConfig();
+                      config.duration = true ? 2000 : 0;
+                      this.snackBar.open("Successfully Updated..! ", true ? "Done" : undefined, config);
+                    }
+                    else {
+                      let config = new MatSnackBarConfig();
+                      config.duration = true ? 2000 : 0;
+                      this.snackBar.open("Error in processing request", true ? "Retry" : undefined, config);
+                    }
+                  });
+                  // window.location.reload();
+                }
+              })
 
           } else {
             console.log(res.msg);

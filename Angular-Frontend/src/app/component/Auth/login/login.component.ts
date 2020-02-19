@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
 
   ) { }
   ngOnInit() {
-    if(this.cookies.logingstatus===true){
+    if(this.cookies.logingStatus===true){
       var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
       this.router.navigate([myCookie.userid,'menu']);
     }
@@ -58,6 +58,10 @@ export class LoginComponent implements OnInit {
         
         
         if (res.state == true) {
+          // 
+          // if user has loged successfully,response has user object it contain 
+          // user _id,userid,name,usertype this whole object set cookie as in our localstorage 
+          // with cookie name=userAuth and expire date =1
           this.cookies.setCookie("userAuth", JSON.stringify(res.user), 1);
           var myCookie = JSON.parse(this.cookies.getCookie("userAuth"));
           var id = myCookie.usertype;

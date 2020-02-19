@@ -11,15 +11,17 @@ import { Marksheet} from '../mark';
   templateUrl: './mark-bulk-add.component.html',
   styleUrls: ['./mark-bulk-add.component.scss']
 })
+// adding a marksheet to database using text file
 export class MarkBulkAddComponent implements OnInit {
+  // variable declaration which I use
   flag = false;
   fileToUpload: File = null;
-  Stringdata = '';
+  stringData = '';
   marks = [];
   userVisibale;
   mySubject;
-  classlist: Array<ClassRoom>;
-  years = [2018, 2019, 2020, 2021];
+  classList: Array<ClassRoom>;
+  years = [];
   terms = [1, 2, 3]
   constructor(
     private attendanceservice: AttendenceService,
@@ -27,11 +29,18 @@ export class MarkBulkAddComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    var year = new Date().getFullYear();
+    
+    this.years=[];
+    /*load the last 5 years in to the mat select*/
+    for (var i = 0; i < 5; i++) {
+      this.years.push(year - i);
+    }
 
-    this.attendanceservice.getclass()
+    this.attendanceservice.getClass()
       .subscribe((data: ClassRoom[]) => {
-        this.classlist = data;
-        console.log(this.classlist);
+        this.classList = data;
+        console.log(this.classList);
       });
       const url = "http://localhost:3000/class_management/getSubjects"
       this._http.get<any>(url).subscribe(res => {
@@ -49,9 +58,9 @@ export class MarkBulkAddComponent implements OnInit {
     fileReader.readAsText(this.fileToUpload);
 
     fileReader.onload = (e) => {
-      this.Stringdata = fileReader.result.toString();
-      console.log(this.Stringdata);
-      var Stringmark = this.Stringdata.split('\n');
+      this.stringData = fileReader.result.toString();
+      console.log(this.stringData);
+      var Stringmark = this.stringData.split('\n');
       console.log(Stringmark.length);
 
       console.log(Stringmark);

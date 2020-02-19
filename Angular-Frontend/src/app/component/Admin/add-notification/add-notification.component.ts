@@ -102,7 +102,6 @@ export class AddNotificationComponent implements OnInit {
               let config = new MatSnackBarConfig();
               config.duration = true ? 2000 : 0;
               this.snackBar.open("Notification is not Added..! ", true ? "Done" : undefined, config);
-              // this.router.navigate(['/add_notification']);
               this.router.navigate(['../',this.Mycookie.userid,'/add_notification']);
             }
           });

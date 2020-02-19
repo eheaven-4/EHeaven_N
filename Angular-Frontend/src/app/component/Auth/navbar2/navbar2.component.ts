@@ -30,7 +30,7 @@ export class Navbar2Component implements OnInit {
     let config = new MatSnackBarConfig();
     config.duration = true ? 2000 : 0;
     this.snackBar.open("Logout Successfully..! ", true ? "Done" : undefined, config);
-    this.cookies.logingstatus=false;
+    this.cookies.logingStatus=false;
     this.router.navigate(['/login']);
 
   }

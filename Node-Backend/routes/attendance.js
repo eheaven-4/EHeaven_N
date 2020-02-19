@@ -5,6 +5,8 @@ const config = require('../config/database');
 const users=require('../models/users');
 const classroom = require('../models/class');
 
+
+// adding new attendance sheet to database
 router.post("/addLog",function(request,response){
     console.log("hello");
     var today=new Date();
@@ -33,7 +35,7 @@ router.post("/addLog",function(request,response){
     });
 });
 
-
+// Return all students userid's and names given class
 router.get("/received/:classname", function (req, res) {
     users.find({selectclass:req.params.classname},{userid:1,name:1,_id:0}).sort({userid:1})
     .exec(function(err,data){
@@ -45,9 +47,9 @@ router.get("/received/:classname", function (req, res) {
         }
     });  
 });
-
+// Given date given class attendance sheet will return
 router.get("/searchDate",function (req, res) {
-    // console.log(req.body.data);
+    
     var inputdate = req.query.date;
     var temp=inputdate.split(";");
     var date=temp[0].split("/");
@@ -67,23 +69,18 @@ router.get("/searchDate",function (req, res) {
             res.json({state:false,msg:"Can't Find this date at this moment"});
         }else{
             console.log(data);
-            // data.date=data.date.toDateString();
             res.json(data);
         }
     });   
 });
-
+// given month given student attendance will return 
 router.get("/searchStu/:stu/:month", function (req, res){
     console.log(req.params.stu,req.params.month);
     var Today=new Date();
     var yyyy=Today.getFullYear();
     var start=new Date(yyyy,parseInt(req.params.month)-1,1);
     var end =new Date(yyyy,parseInt(req.params.month)-1,31);
-    // console.log(start);
-    // console.log(end);
-    
-    
-    // ({$and:[{$or:[{userid:req.params.userid},{username:req.params.userid}]},{class:'1-A'}]})
+
     attendance.find({
         $and:[
             {$or:[{"attendList.userid":req.params.stu},{"attendList.name":req.params.stu}]},
@@ -130,6 +127,8 @@ router.get("/searchStu/:stu/:month", function (req, res){
     return;
     
 });
+
+// getting list of class which is allready marked today
 router.get("/getstatus",function(req,res){
     console.log("searchdate");
     var output=[];
