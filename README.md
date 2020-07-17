@@ -2,26 +2,6 @@
 ![logo_login](https://user-images.githubusercontent.com/43057523/57566988-52341100-73f0-11e9-92aa-85fab3f67144.png)
 
 
-## works done -> 
+EHeaven is a web-based student management platform to inspect and monitor academic and non-academic progress of students over the years. Basically, this is a platform that will allow a more interactive way to connect teachers, students, a principal with parents.
 
-##### Home - done
-##### Login - done
-##### Registartion - done
-##### User Update - done
-##### User Profile - done
-##### Certification - done
-##### Contact-us - done
-##### academics - done
-##### News feeds - done   
-##### Class registraton - done  
-##### Time table registration - done
-##### Notification - done
-
-## works in progress -> 
-
-##### Attendence -  in progress
-##### Student progress - in Progress
-##### Event Handling - awiting
-##### Admin - inprogress
-##### UI designing - inprogress
-##### Marks Add - in progress
+Here, we build an effortless way of student-teacher-parent communication covering almost all academic and non-academic related aspects over the years.
